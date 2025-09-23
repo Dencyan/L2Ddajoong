@@ -6,6 +6,15 @@
   --card-bg:#fff;
   --accent-color:#ff6b6b;
   --muted:#666;
+  --price-border: #9EEAE1;
+  --price-inner: #F3FFF9;         /* 연한 청록 내부 색 */
+  --price-border-hover: #7fe0d3;
+  --background: #f6fbf9;         /* 페이지 전체 배경 (쿨 틸과 조화) */
+}
+
+/* 페이지 배경 대비 개선 */
+body{
+  background: var(--background);
 }
 
 /* 기본 리셋 */
@@ -16,7 +25,7 @@ body{
   font-family: "Poppins", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif;
   color:#222;
   line-height:1.5;
-  background:#fbfbfb;
+  background:var(--background);
 }
 
 /* 컨테이너 중앙 정렬 */
@@ -28,21 +37,33 @@ header, .hero, section, footer{
 
 /* 헤더 */
 header{
+  font-family: "Poppins", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
   padding:18px 20px;
+  max-width:var(--max-width);
+  margin:0 auto;
 }
-header h1{margin:0;font-size:1.2rem;font-weight:600}
-nav{display:flex;gap:12px}
-nav a{text-decoration:none;color:var(--accent);padding:6px 8px;border-radius:4px}
+header h1{margin:0;font-size:1.2rem;font-weight:600;line-height:1}
+header h1 a{color:inherit;text-decoration:none}
+nav{display:flex;gap:12px;align-items:center}
+nav a{
+  text-decoration:none;
+  color:var(--accent);
+  padding:6px 8px;
+  border-radius:4px;
+  font-size:0.95rem;
+  font-weight:600;
+}
 nav a:hover{background:#f0f0f0}
+nav a[aria-current="page"]{font-weight:700;box-shadow:inset 0 -2px 0 var(--accent-color);}
 
 /* 히어로 */
 .hero{text-align:center;padding:40px 20px}
 .hero h2{margin:0 0 8px;font-size:1.8rem;font-weight:600}
-.hero p{margin:0;color:var(--muted)}
+.hero p, .hero .hero-sub{margin:0;color:var(--muted);font-size:1rem}
 
 /* About 섹션: 두 칼럼 레이아웃 */
 .about-inner{
@@ -265,6 +286,71 @@ footer{text-align:center;padding:20px 0;color:#666;font-size:0.9rem}
 .contact-links{display:flex;gap:10px;flex-wrap:wrap}
 footer{text-align:center;padding:20px 0;color:#666;font-size:0.9rem}
 
+/* 가격 카드 그리드 */
+.price-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  margin-top:14px;
+}
+.price-card{
+  background:var(--price-inner);
+  border-radius:10px;
+  padding:16px;
+  box-shadow:0 6px 18px rgba(10,10,10,0.04);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  min-height:180px;
+  border:1px solid var(--price-border);
+  transition:transform .14s ease, box-shadow .14s ease, border-color .14s ease;
+}
+.price-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 40px rgba(10,10,10,0.06);
+  border-color:var(--price-border-hover);
+}
+
+/* 강조 버튼(빠른 문의용) — 기존 .contact-cta 스타일 업데이트 (아이콘 포함 정렬) */
+.price-card .contact-cta,
+.contact-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:700;
+  color:#111;
+  background:linear-gradient(180deg,#f7f7f8,#efefef);
+  border:1px solid #e6e6e6;
+  box-shadow:0 6px 18px rgba(10,10,10,0.04);
+  transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.contact-cta svg{
+  width:16px;
+  height:16px;
+  flex:0 0 16px;
+  display:inline-block;
+  vertical-align:middle;
+  fill:currentColor;
+}
+.contact-cta:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(10,10,10,0.06);
+  background:linear-gradient(180deg,#fff,#f2f2f2);
+}
+.contact-cta:focus{
+  outline:3px solid rgba(0,0,0,0.06);
+  outline-offset:3px;
+}
+
+/* price-note 내 링크 기본 스타일이 남아있다면 덮어쓰기(회색톤 유지) */
+.price-note a, .price-note a:visited{
+  color:#4b4b4b;
+  text-decoration:none;
+}
+
 /* 반응형 */
 @media (max-width:900px){
   .about-inner{flex-direction:column}
@@ -280,6 +366,8 @@ footer{text-align:center;padding:20px 0;color:#666;font-size:0.9rem}
   .controls{flex-direction:column;align-items:stretch}
   .filter-group{flex-wrap:wrap;gap:6px}
   .filter-btn{padding:8px 10px}
+  .price-card{min-height:auto;padding:14px}
+  .price-card-head{flex-direction:column;align-items:flex-start;gap:6px}
 }
 
 
