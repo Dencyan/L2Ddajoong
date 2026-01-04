@@ -12,6 +12,17 @@
   --shadow: 0 8px 20px rgba(20,20,40,0.06);
 }
 
+/* --- 섹션별 테마 컬러 (버튼 & 도트에 상속) --- */
+[data-type-buttons] button[data-switch="LD"] { --main-color: #bf8496; --main-grad: linear-gradient(135deg,#bf8496,#ffb7cf); }
+[data-type-buttons] button[data-switch="SD"] { --main-color: #5da7ff; --main-grad: linear-gradient(135deg,#5da7ff,#8fd1ff); }
+[data-type-buttons] button[data-switch="BG"] { --main-color: #7be3a7; --main-grad: linear-gradient(135deg,#7be3a7,#c7ffd7); }
+[data-type-buttons] button[data-switch="FAN"]{ --main-color: #f6b64b; --main-grad: linear-gradient(135deg,#f6b64b,#ffd99b); }
+
+section[data-type="LD"] { --main-color: #bf8496; --main-grad: linear-gradient(135deg,#bf8496,#ffb7cf); }
+section[data-type="SD"] { --main-color: #5da7ff; --main-grad: linear-gradient(135deg,#5da7ff,#8fd1ff); }
+section[data-type="BG"] { --main-color: #7be3a7; --main-grad: linear-gradient(135deg,#7be3a7,#c7ffd7); }
+section[data-type="FAN"]{ --main-color: #f6b64b; --main-grad: linear-gradient(135deg,#f6b64b,#ffd99b); }
+
 /* --- 상단 타입 전환 버튼 (트렌디 디자인) --- */
 [data-type-buttons] {
   display:flex;
@@ -134,7 +145,7 @@ div[data-root] > div[data-dots] {
 }
 [data-dots] > button[data-dot]::after{
   content:""; position:absolute; inset:3px; border-radius:inherit;
-  background:linear-gradient(90deg,var(--main-color), #ffb7cf);
+  background: var(--main-grad);
   opacity:0; transform:scale(0.6); transition:opacity .18s ease, transform .18s ease;
 }
 [data-dots] > button[data-dot]:hover{ transform:translateY(-4px); box-shadow:0 6px 18px rgba(20,20,40,0.08); }
