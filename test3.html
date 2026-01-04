@@ -16,6 +16,7 @@
 [data-type-buttons] button[data-switch="SD"] { --main-color: #5da7ff; --main-grad: linear-gradient(135deg,#5da7ff,#8fd1ff); }
 [data-type-buttons] button[data-switch="MEM"] { --main-color: #7be3a7; --main-grad: linear-gradient(135deg,#7be3a7,#c7ffd7); }
 [data-type-buttons] button[data-switch="FAN"]{ --main-color: #f6b64b; --main-grad: linear-gradient(135deg,#f6b64b,#ffd99b); }
+[data-type-buttons] button[data-switch="ALL"]{ --main-color: #9b9b9b; --main-grad: linear-gradient(135deg,#9b9b9b,#cfcfcf); }
 
 section[data-type="LD"] { --main-color: #bf8496; --main-grad: linear-gradient(135deg,#bf8496,#ffb7cf); }
 section[data-type="SD"] { --main-color: #5da7ff; --main-grad: linear-gradient(135deg,#5da7ff,#8fd1ff); }
@@ -220,6 +221,17 @@ const videoData = {
     }
 };
 
+// 자동으로 '모두' 탭 생성 (모든 섹션을 순서대로 병합)
+(function addAllTab(){
+  const merged = [];
+  Object.keys(videoData).forEach(k => {
+    // 안전성: 리스트가 존재할 때만 병합
+    if (videoData[k] && Array.isArray(videoData[k].list)) merged.push(...videoData[k].list);
+  });
+  // 'ALL' 키 추가 (나중에 buildAllTypes에서 우선적으로 배치)
+  videoData.ALL = { title: '전체', list: merged };
+})();
+
 
 // ------------------- HTML 자동 생성 -------------------
 function buildAllTypes() {
@@ -229,7 +241,11 @@ function buildAllTypes() {
     typeButtons.innerHTML = "";
     container.innerHTML = "";
 
-    Object.keys(videoData).forEach((typeKey, idx) => {
+    // 키 순서: ALL(있으면) 우선, 그 다음 기존 순서
+    let typeKeys = Object.keys(videoData);
+    if (videoData.ALL) typeKeys = ['ALL', ...typeKeys.filter(k => k !== 'ALL')];
+
+    typeKeys.forEach((typeKey, idx) => {
         const item = videoData[typeKey];
 
         // 1. 버튼 생성
