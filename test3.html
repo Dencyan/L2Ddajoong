@@ -22,7 +22,7 @@ section[data-type="SD"] { --main-color: #5da7ff; --main-grad: linear-gradient(13
 section[data-type="BG"] { --main-color: #7be3a7; --main-grad: linear-gradient(135deg,#7be3a7,#c7ffd7); }
 section[data-type="FAN"]{ --main-color: #f6b64b; --main-grad: linear-gradient(135deg,#f6b64b,#ffd99b); }
 
-/* --- 상단 타입 전환 버튼 (트렌디 디자인) --- */
+/* Type buttons */
 [data-type-buttons] {
   display:flex;
   justify-content:center;
@@ -70,11 +70,9 @@ section[data-type][data-active="true"] {
 
 
 
-/* ----------------------------------------------------------
-   ↓↓↓ 기존 당신의 유튜브 슬라이더 CSS 그대로 적용 ↓↓↓
------------------------------------------------------------*/
+/* Slider styles */
 
-/* 전체 레이아웃 - 클래스/아이디 없이 요소/속성 선택자 사용 */
+/* Layout */
 html,body {
   height:100%; margin:0;
    max-width:1150px;
@@ -297,9 +295,7 @@ function generateSliderHTML(list) {
 buildAllTypes();
 
 
-/* ------------------------------------------------------------------
-   타입 전환 (A/B/C 버튼)
------------------------------------------------------------------- */
+// 타입 전환 (타입 버튼)
 const typeButtons = document.querySelectorAll('[data-type-buttons] button');
 const typeSections = document.querySelectorAll('section[data-type]');
 
@@ -343,9 +339,7 @@ typeButtons.forEach(btn=>{
 
 
 
-/* ------------------------------------------------------------------
-   기존 슬라이더 스크립트 (당신이 주신 코드)
------------------------------------------------------------------- */
+// Slider core
 
 (function(){
 
@@ -409,7 +403,7 @@ typeButtons.forEach(btn=>{
 
       const activeThumb = thumbButtons[current];
       if(activeThumb){
-        //activeThumb.scrollIntoView({behavior:'smooth', inline:'center'});
+        // scrollIntoView intentionally disabled (kept for future use)
       }
     }
 
