@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -149,18 +148,9 @@ div[data-root] > div[data-dots] {
   opacity:0; transform:scale(0.6); transition:opacity .18s ease, transform .18s ease;
 }
 [data-dots] > button[data-dot]:hover{ transform:translateY(-4px); box-shadow:0 6px 18px rgba(20,20,40,0.08); }
-[data-dots] > button[data-dot][data-active="true"]{
-  transform:scale(1.25); box-shadow:0 12px 30px rgba(20,20,40,0.12); border-color:transparent;
-}
-[data-dots] > button[data-dot][data-active="true"]::after{
-  opacity:1; transform:scale(1);
-}
-
-
-/* 썸네일 */
-div[data-root] > div[data-thumbs-wrapper] {
-  margin-top:18px; display:flex; align-items:center; gap:10px;
-}
+[data-dots] > button[data-dot][data-active="true"] { box-shadow: 0 6px 30px rgba( var(--accent-rgb), 0.45 ); transform:scale(1.3); }
+[data-thumbs] > button[data-thumb] { border:2px solid rgba(255,255,255,0.04); transition: box-shadow .18s; }
+[data-thumbs] > button[data-thumb]:hover { box-shadow: 0 12px 30px rgba( color-mix(in srgb, var(--main-color) 30%, black), 0.12 ); }
 [data-thumbs-wrapper] > div[data-thumbs] {
   display:flex; gap:10px; overflow-x:auto; padding-bottom:10px;
   border-radius:8px; background:transparent; flex:1 1 auto;
@@ -475,12 +465,6 @@ typeButtons.forEach(btn=>{
       });
     }
 
-    // 초기 실행
-    resizeThumbs();
-
-    // 창 크기 변경 시 다시 계산
-    window.addEventListener('resize', resizeThumbs);
-
     function resizeStage() {
       const stage = root.querySelector('div[data-stage]');
       if (!stage) return;
@@ -490,9 +474,6 @@ typeButtons.forEach(btn=>{
 
       stage.style.height = height + 'px';
     }
-
-    resizeStage();
-        window.addEventListener('resize', resizeStage);
 
     function resizeIframe() {
       const iframes = root.querySelectorAll('[data-slide] iframe');
@@ -508,8 +489,22 @@ typeButtons.forEach(btn=>{
       });
     }
 
-    resizeIframe();
-    window.addEventListener("resize", resizeIframe);
+    // 초기 실행: resize 관련 계산을 한 번에 수행
+    function handleResize() {
+      resizeThumbs();
+      resizeStage();
+      resizeIframe();
+    }
+
+    // 디바운스 적용으로 과도한 이벤트 처리 방지
+    let _resizeTimer = null;
+    function scheduleResize() {
+      if (_resizeTimer) clearTimeout(_resizeTimer);
+      _resizeTimer = setTimeout(handleResize, 80);
+    }
+
+    handleResize();
+    window.addEventListener('resize', scheduleResize);
 
     buildDots();
     updateUI();
@@ -526,9 +521,6 @@ typeButtons.forEach(btn=>{
     if (hasSentHeight) return;
 
     const height = document.body.scrollHeight; // 로딩 무시, 바로 계산
-
-    // 콘솔에 출력
-    console.log("보낸 sliderHeight 값:", height);
 
     parent.postMessage(
       { type: "sliderHeight", value: height },
