@@ -518,6 +518,36 @@ div[data-root] > div[data-dots] {
   background:transparent; cursor:pointer; margin:0px; position:relative;
   transition: transform .18s ease, box-shadow .18s ease;
 }
+
+/* Page-specific styles moved from test2.html (#apply section) */
+/* 신청양식 전용(다른 영역 영향 없음) */
+#apply .apply-wrap{ margin-top: 14px; }
+#apply .apply-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+@media (max-width: 900px){ #apply .apply-grid{ grid-template-columns: 1fr; } }
+#apply .a-card{ border: 1px solid var(--line); border-radius: 18px; background: #fff; padding: 14px; box-shadow: none; }
+#apply .a-title{ margin: 0 0 10px; font-weight: 700; font-size: 15px; letter-spacing: -0.02em; color: var(--ink); }
+#apply .a-sub{ margin: 6px 0 8px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+#apply input, #apply textarea{ width: 100%; box-sizing: border-box; border: 1px solid var(--line); background-color: #fff; border-radius: 14px; padding: 12px 12px; font-size: 14px; color: var(--ink); outline: none; }
+#apply textarea{ min-height: 114px; }
+#apply select{ width: 100%; box-sizing: border-box; border: 1px solid var(--line); background-color: #fff; border-radius: 14px; padding: 12px 40px 12px 12px; font-size: 14px; color: var(--ink); outline: none; appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%236b645e' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 16px 16px; }
+#apply .opt-col{ display: flex; flex-direction: column; gap: 14px; }
+#apply .opt-block{ display: flex; flex-direction: column; gap: 10px; }
+#apply .opt-row{ display: grid; grid-template-columns: 1fr; gap: 8px; }
+#apply .opt-label{ font-weight: 650; font-size: 14px; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
+#apply .pkg-vertical{ display: flex; flex-direction: column; gap: 14px; flex-wrap: wrap; }
+#apply .pkg-vertical label{ display: inline-flex; align-items: center; gap: 8px; font-size: 13px; }
+#apply .pkg-vertical input{ width: 16px; height: 16px; }
+#apply .two-select{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: end; }
+@media (max-width: 520px){ #apply .two-select{ grid-template-columns: 1fr; } }
+#apply .opt-inner{ border: 1px dashed var(--line); border-radius: 14px; padding: 12px; background: #fff; }
+#apply .opt-inline.anim-inline{ display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+#apply .opt-inline.anim-inline label{ display: inline-flex; align-items: center; gap: 10px; font-size: 13px; white-space: nowrap; }
+#apply .opt-inline.anim-inline label:first-child{ margin-right: 18px; }
+#apply .opt-inline.anim-inline input{ width: 16px; height: 16px; margin: 0; padding: 0; flex-shrink: 0; }
+#apply .opt-inline.opt-grid{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px 1px; align-items: start; }
+#apply .opt-inline.opt-grid label{ display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--ink); cursor: pointer; user-select: none; white-space: nowrap; }
+#apply .opt-inline.opt-grid input{ width: 16px; }
+
 [data-dots] > button[data-dot]::after{
   content:""; position:absolute; inset:3px; border-radius:inherit;
   background: var(--main-grad);
