@@ -101,126 +101,123 @@
     <div data-type-buttons></div>
     <div id="type-container"></div>
 <script>
+// Wrap slider setup so it runs after DOM is parsed and ensures a consistent init order
+document.addEventListener('DOMContentLoaded', () => {
+  // ------------------- 데이터 정의 -------------------
+  const videoData = {
+    LD: { title: "LD", list: ["wML53bUKn1Q", "yvc0yN8uwqU", "w-eRgLmsgas", "zKRPxZ7pv58", "sJjhHG1gJcE"] },
+    SD: { title: "SD", list: ["BtvMd8yG80g", "SwGP1UFE424", "pH4GRAjcp2U", "b6DNOVjED9o"] },
+    FAN: { title: "오너캐", list: ["cOmUiWxkqfo", "FzIi9m1bKeI"] },
+    MEM: { title: "메모리얼", list: ["JLTUyPkfsj0", "lhVUjv1q-bw"] }
+  };
 
-// ------------------- 데이터 정의 -------------------
-const videoData = {
-    LD: {
-        title: "LD",
-        list: ["wML53bUKn1Q", "yvc0yN8uwqU", "w-eRgLmsgas", "zKRPxZ7pv58", "sJjhHG1gJcE"]
-    },
-    SD: {
-        title: "SD",
-        list: ["BtvMd8yG80g", "SwGP1UFE424", "pH4GRAjcp2U", "b6DNOVjED9o"]
-    },
-    FAN: {
-        title: "오너캐",
-        list: ["cOmUiWxkqfo", "FzIi9m1bKeI"]
-    },
-    MEM: {
-        title: "메모리얼",
-        list: ["JLTUyPkfsj0", "lhVUjv1q-bw"]
-    }
-};
+  // 자동으로 '모두' 탭 생성 (모든 섹션을 순서대로 병합)
+  (function addAllTab(){
+    const merged = [];
+    Object.keys(videoData).forEach(k => {
+      if (videoData[k] && Array.isArray(videoData[k].list)) merged.push(...videoData[k].list);
+    });
+    videoData.ALL = { title: '전체', list: merged };
+  })();
 
-// 자동으로 '모두' 탭 생성 (모든 섹션을 순서대로 병합)
-(function addAllTab(){
-  const merged = [];
-  Object.keys(videoData).forEach(k => {
-    // 안전성: 리스트가 존재할 때만 병합
-    if (videoData[k] && Array.isArray(videoData[k].list)) merged.push(...videoData[k].list);
-  });
-  // 'ALL' 키 추가 (나중에 buildAllTypes에서 우선적으로 배치)
-  videoData.ALL = { title: '전체', list: merged };
-})();
-
-
-// ------------------- HTML 자동 생성 -------------------
-function buildAllTypes() {
+  // ------------------- HTML 자동 생성 -------------------
+  function buildAllTypes() {
     const typeButtons = document.querySelector("[data-type-buttons]");
     const container = document.getElementById("type-container");
 
     typeButtons.innerHTML = "";
     container.innerHTML = "";
 
-    // 키 순서: ALL(있으면) 우선, 그 다음 기존 순서
     let typeKeys = Object.keys(videoData);
     if (videoData.ALL) typeKeys = ['ALL', ...typeKeys.filter(k => k !== 'ALL')];
 
     typeKeys.forEach((typeKey, idx) => {
-        const item = videoData[typeKey];
+      const item = videoData[typeKey];
 
-        // 1. 버튼 생성
-        const btn = document.createElement("button");
-        btn.textContent = item.title;
-        btn.setAttribute("data-switch", typeKey);
-        if (idx === 0) btn.setAttribute("data-active", "true");
-        typeButtons.appendChild(btn);
+      const btn = document.createElement("button");
+      btn.textContent = item.title;
+      btn.setAttribute("data-switch", typeKey);
+      if (idx === 0) btn.setAttribute("data-active", "true");
+      typeButtons.appendChild(btn);
 
-        // 2. 섹션 생성
-        const sec = document.createElement("section");
-        sec.setAttribute("data-type", typeKey);
-        if (idx === 0) sec.setAttribute("data-active", "true");
+      const sec = document.createElement("section");
+      sec.setAttribute("data-type", typeKey);
+      if (idx === 0) sec.setAttribute("data-active", "true");
 
-        // === 슬라이더 구조 전체 생성 ===
-        sec.innerHTML = generateSliderHTML(item.list);
-
-        container.appendChild(sec);
+      sec.innerHTML = generateSliderHTML(item.list);
+      container.appendChild(sec);
     });
-}
+  }
 
-
-// ------------------- 슬라이더 HTML 템플릿 생성 -------------------
-function generateSliderHTML(list) {
-    // 슬라이드들
+  // ------------------- 슬라이더 HTML 템플릿 생성 -------------------
+  function generateSliderHTML(list) {
     let slides = "";
     list.forEach((vid, i) => {
-        slides += `
+      slides += `
         <div data-slide data-video="${vid}" data-index="${i}" data-active="${i===0}">
-            <div class="video-wrapper">
-              <div class="image-placeholder">Loading…</div>
-              <iframe class="lazy-iframe" title="Video ${vid}" data-src="https://www.youtube.com/embed/${vid}" src="about:blank" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
+          <div class="video-wrapper">
+            <div class="image-placeholder">Loading…</div>
+            <iframe class="lazy-iframe" title="Video ${vid}" data-src="https://www.youtube.com/embed/${vid}" src="about:blank" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
         </div>`;
     });
 
-    // 썸네일들
     let thumbs = "";
     list.forEach((vid, i) => {
-        thumbs += `
+      thumbs += `
         <button data-thumb data-index="${i}" ${i===0 ? 'data-active="true"' : ''}>
-            <img src="https://img.youtube.com/vi/${vid}/hqdefault.jpg">
+          <img src="https://img.youtube.com/vi/${vid}/hqdefault.jpg">
         </button>`;
     });
 
-    // 전체 구조
     return `
-    <div data-root>
+      <div data-root>
         <div data-stage aria-roledescription="carousel" data-autoplay="false" data-interval="6000">
-            ${slides}
-            <button data-action="prev">❮</button>
-            <button data-action="next">❯</button>
+          ${slides}
+          <button data-action="prev">❮</button>
+          <button data-action="next">❯</button>
         </div>
 
         <div data-dots></div>
 
         <div data-thumbs-wrapper>
-            <div data-thumbs>${thumbs}</div>
+          <div data-thumbs>${thumbs}</div>
         </div>
-    </div>
-    `;
-}
+      </div>`;
+  }
 
+  // ------------------- 초기 실행 -------------------
+  buildAllTypes();
 
-// ------------------- 초기 실행 -------------------
-buildAllTypes();
+  // Initialize lazy-loading for iframes and click-to-load behavior
+  function initLazyIframes() {
+    const wrappers = Array.from(document.querySelectorAll('.video-wrapper'))
+      .filter(w => w.querySelector('iframe[data-src]'));
 
-// Initialize lazy-loading for iframes and click-to-load behavior
-(function initLazyIframes(){
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const wrapper = entry.target;
+    if (!wrappers.length) return;
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const wrapper = entry.target;
+          const iframe = wrapper.querySelector('iframe[data-src]');
+          const ph = wrapper.querySelector('.image-placeholder');
+          if (iframe && iframe.dataset.src) {
+            iframe.src = iframe.dataset.src;
+            iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
+            iframe.removeAttribute('data-src'); iframe.classList.remove('lazy-iframe');
+          }
+          obs.unobserve(wrapper);
+        });
+      }, { rootMargin: '300px 0px' });
+
+      wrappers.forEach(w => observer.observe(w));
+    }
+
+    // click-to-load fallback
+    wrappers.forEach(wrapper => {
+      wrapper.addEventListener('click', () => {
         const iframe = wrapper.querySelector('iframe[data-src]');
         const ph = wrapper.querySelector('.image-placeholder');
         if (iframe && iframe.dataset.src) {
@@ -228,214 +225,133 @@ buildAllTypes();
           iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
           iframe.removeAttribute('data-src'); iframe.classList.remove('lazy-iframe');
         }
-        obs.unobserve(wrapper);
       });
-    }, { rootMargin: '300px 0px' });
-
-    document.querySelectorAll('.video-wrapper').forEach(w => observer.observe(w));
+    });
   }
 
-  // click-to-load fallback
-  document.querySelectorAll('.video-wrapper').forEach(wrapper => {
-    wrapper.addEventListener('click', () => {
-      const iframe = wrapper.querySelector('iframe[data-src]');
-      const ph = wrapper.querySelector('.image-placeholder');
-      if (iframe && iframe.dataset.src) {
-        iframe.src = iframe.dataset.src;
-        iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
-        iframe.removeAttribute('data-src'); iframe.classList.remove('lazy-iframe');
-      }
+  initLazyIframes();
+
+  // 타입 전환 (타입 버튼)
+  const typeButtons = document.querySelectorAll('[data-type-buttons] button');
+  const typeSections = document.querySelectorAll('section[data-type]');
+
+  typeButtons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const target = btn.getAttribute('data-switch');
+
+      typeButtons.forEach(b=>b.removeAttribute('data-active'));
+      btn.setAttribute('data-active','true');
+
+      typeSections.forEach(sec=>{
+        if(sec.getAttribute('data-type') === target)
+          sec.setAttribute('data-active','true');
+        else
+          sec.removeAttribute('data-active');
+      });
+
+      // ★ 타입 전환 후 즉시 각 root의 사이즈 재계산 (CSS 기반 비율 사용)
+      setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 10);
     });
   });
-})();
 
+  // Slider core
+  (function(){
+    const roots = document.querySelectorAll('div[data-root]');
 
-// 타입 전환 (타입 버튼)
-const typeButtons = document.querySelectorAll('[data-type-buttons] button');
-const typeSections = document.querySelectorAll('section[data-type]');
-
-typeButtons.forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const target = btn.getAttribute('data-switch');
-
-    typeButtons.forEach(b=>b.removeAttribute('data-active'));
-    btn.setAttribute('data-active','true');
-
-    typeSections.forEach(sec=>{
-      if(sec.getAttribute('data-type') === target)
-        sec.setAttribute('data-active','true');
-      else
-        sec.removeAttribute('data-active');
-    });
-    
-    // ★ 타입 전환 후 즉시 각 root의 사이즈 재계산 (CSS 기반 비율 사용)
-    setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 10);
-
-  });
-});
-
-
-
-// Slider core
-
-(function(){
-
-  const roots = document.querySelectorAll('div[data-root]');
-
-  roots.forEach(root => {
-
-    const stage = root.querySelector('div[data-stage]');
-    const slides = Array.from(stage.querySelectorAll('div[data-slide]'));
-    const prevBtn = stage.querySelector('button[data-action="prev"]');
-    const nextBtn = stage.querySelector('button[data-action="next"]');
-    const dotsWrap = root.querySelector('div[data-dots]');
-    const thumbs = root.querySelector('div[data-thumbs]');
-    const thumbButtons = Array.from(
-      thumbs.querySelectorAll('button[data-thumb]')
-    );
-    const progressBar = root.querySelector('div[data-bar]');
-
-    let current = slides.find(s => s.getAttribute('data-active') === 'true')
-      ?.getAttribute('data-index') || 0;
-    current = Number(current);
-    const total = slides.length;
-
-    let autoplay = stage.getAttribute('data-autoplay') === 'true';
-    let interval = parseInt(stage.getAttribute('data-interval') || '5000', 10);
-    let timer = null;
-
-    function buildDots(){
-      dotsWrap.innerHTML = '';
-      for(let i=0;i<total;i++){
-        const b = document.createElement('button');
-        b.setAttribute('data-dot','');
-        if(i===current) b.setAttribute('data-active','true');
-        b.addEventListener('click', ()=> goTo(i));
-        dotsWrap.appendChild(b);
-      }
-    }
-
-    function updateUI(){
-      slides.forEach(s=>{
-        const idx = Number(s.getAttribute('data-index'));
-        const active = idx===current;
-        s.setAttribute('data-active', active?'true':'false');
-        s.setAttribute('aria-hidden', active?'false':'true');
-      });
-
-      const dotBtns = dotsWrap.querySelectorAll('button[data-dot]');
-      dotBtns.forEach((d,i)=>{
-        if(i===current) d.setAttribute('data-active','true');
-        else d.removeAttribute('data-active');
-      });
-
-      thumbButtons.forEach((t,i)=>{
-        if(i===current) t.setAttribute('data-active','true');
-        else t.removeAttribute('data-active');
-      });
-
-      if (progressBar) {
-        progressBar.style.width = ((current+1)/total*100)+'%';
-      }
-
-      const activeThumb = thumbButtons[current];
-      if(activeThumb){
-        // scrollIntoView intentionally disabled (kept for future use)
-      }
-    }
-
-    function goTo(i){
-      if(i<0) i=total-1;
-      if(i>=total) i=0;
-      current=i;
-      updateUI();
-      resetAutoplay();
-    }
-
-    function prev(){ goTo(current-1); }
-    function next(){ goTo(current+1); }
-
-    thumbButtons.forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const idx = Number(btn.getAttribute('data-index'));
-        goTo(idx);
-      });
-    });
-
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
-
-    window.addEventListener('keydown', e=>{
-      if(e.key==='ArrowLeft') prev();
-      if(e.key==='ArrowRight') next();
-    });
-
-    function startAutoplay(){
-      if(!autoplay) return;
-      stopAutoplay();
-      timer=setInterval(()=>next(), interval);
-    }
-    function stopAutoplay(){
-      if(timer){ clearInterval(timer); timer=null; }
-    }
-    function resetAutoplay(){
-      stopAutoplay();
-      startAutoplay();
-    }
-    function resizeThumbs() {
-      const thumbs = document.querySelectorAll('[data-thumbs] > button[data-thumb]');
-      if (!thumbs.length) return;
-
-      // 브라우저 너비의 30%
-      const width = window.innerWidth * 0.3;
-      const height = width * (9 / 16); // 16:9 비율
-
-      thumbs.forEach(btn => {
-        btn.style.width = width + 'px';
-        btn.style.height = height + 'px';
-      });
-    }
-
-    function resizeStage() {
+    roots.forEach(root => {
       const stage = root.querySelector('div[data-stage]');
-      if (!stage) return;
-      // rely on CSS padding-top for aspect ratio; clear any inline height
-      stage.style.height = '';
-    }
+      const slides = Array.from(stage.querySelectorAll('div[data-slide]'));
+      const prevBtn = stage.querySelector('button[data-action="prev"]');
+      const nextBtn = stage.querySelector('button[data-action="next"]');
+      const dotsWrap = root.querySelector('div[data-dots]');
+      const thumbs = root.querySelector('div[data-thumbs]');
+      const thumbButtons = Array.from(thumbs.querySelectorAll('button[data-thumb]'));
+      const progressBar = root.querySelector('div[data-bar]');
 
-    function resizeIframe() {
-      const iframes = root.querySelectorAll('[data-slide] iframe');
-      if (!iframes.length) return;
+      let current = slides.find(s => s.getAttribute('data-active') === 'true')
+        ?.getAttribute('data-index') || 0;
+      current = Number(current);
+      const total = slides.length;
 
-      iframes.forEach(iframe => {
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-      });
-    }
+      let autoplay = stage.getAttribute('data-autoplay') === 'true';
+      let interval = parseInt(stage.getAttribute('data-interval') || '5000', 10);
+      let timer = null;
 
-    // 초기 실행: resize 관련 계산을 한 번에 수행
-    function handleResize() {
-      resizeThumbs();
-      resizeStage();
-      resizeIframe();
-    }
+      function buildDots(){
+        dotsWrap.innerHTML = '';
+        for(let i=0;i<total;i++){
+          const b = document.createElement('button');
+          b.setAttribute('data-dot','');
+          if(i===current) b.setAttribute('data-active','true');
+          b.addEventListener('click', ()=> goTo(i));
+          dotsWrap.appendChild(b);
+        }
+      }
 
-    // 디바운스 적용으로 과도한 이벤트 처리 방지
-    let _resizeTimer = null;
-    function scheduleResize() {
-      if (_resizeTimer) clearTimeout(_resizeTimer);
-      _resizeTimer = setTimeout(handleResize, 80);
-    }
+      function updateUI(){
+        slides.forEach(s=>{
+          const idx = Number(s.getAttribute('data-index'));
+          const active = idx===current;
+          s.setAttribute('data-active', active?'true':'false');
+          s.setAttribute('aria-hidden', active?'false':'true');
+        });
 
-    handleResize();
-    window.addEventListener('resize', scheduleResize);
+        const dotBtns = dotsWrap.querySelectorAll('button[data-dot]');
+        dotBtns.forEach((d,i)=>{
+          if(i===current) d.setAttribute('data-active','true');
+          else d.removeAttribute('data-active');
+        });
 
-    buildDots();
-    updateUI();
-    startAutoplay();
-  });
+        thumbButtons.forEach((t,i)=>{
+          if(i===current) t.setAttribute('data-active','true');
+          else t.removeAttribute('data-active');
+        });
 
-})();
+        if (progressBar) progressBar.style.width = ((current+1)/total*100)+'%';
+      }
+
+      function goTo(i){
+        if(i<0) i=total-1;
+        if(i>=total) i=0;
+        current=i; updateUI(); resetAutoplay();
+      }
+
+      function prev(){ goTo(current-1); }
+      function next(){ goTo(current+1); }
+
+      thumbButtons.forEach(btn=> btn.addEventListener('click', ()=>{ const idx = Number(btn.getAttribute('data-index')); goTo(idx); }));
+
+      prevBtn.addEventListener('click', prev);
+      nextBtn.addEventListener('click', next);
+
+      window.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
+
+      function startAutoplay(){ if(!autoplay) return; stopAutoplay(); timer=setInterval(()=>next(), interval); }
+      function stopAutoplay(){ if(timer){ clearInterval(timer); timer=null; } }
+      function resetAutoplay(){ stopAutoplay(); startAutoplay(); }
+
+      function resizeThumbs() {
+        const thumbs = document.querySelectorAll('[data-thumbs] > button[data-thumb]');
+        if (!thumbs.length) return;
+        const width = window.innerWidth * 0.3;
+        const height = width * (9 / 16);
+        thumbs.forEach(btn => { btn.style.width = width + 'px'; btn.style.height = height + 'px'; });
+      }
+
+      function resizeStage() { const stage = root.querySelector('div[data-stage]'); if (!stage) return; stage.style.height = ''; }
+      function resizeIframe() { const iframes = root.querySelectorAll('[data-slide] iframe'); if (!iframes.length) return; iframes.forEach(iframe => { iframe.style.width = '100%'; iframe.style.height = '100%'; }); }
+
+      function handleResize() { resizeThumbs(); resizeStage(); resizeIframe(); }
+      let _resizeTimer = null; function scheduleResize() { if (_resizeTimer) clearTimeout(_resizeTimer); _resizeTimer = setTimeout(handleResize, 80); }
+
+      handleResize(); window.addEventListener('resize', scheduleResize);
+
+      buildDots(); updateUI(); startAutoplay();
+    });
+  })();
+
+});
+</script>
 </script>
 <script>
 (function() {
