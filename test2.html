@@ -5,7 +5,398 @@
         항목에 없는 모션이나 옵션도 신청 가능하니 편하게 문의해주세요.
       </p>
 
-      <!-- styles moved to style.css (#apply section) -->
+      <style>
+
+        /* 신청양식 전용(다른 영역 영향 없음) */
+        #apply .apply-wrap{
+          margin-top: 14px;
+        }
+
+        /* 2열 레이아웃(너무 커지지 않게) */
+        #apply .apply-grid{
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+          align-items: start;
+        }
+
+        @media (max-width: 900px){
+          #apply .apply-grid{
+            grid-template-columns: 1fr;
+          }
+        }
+
+        /* 섹션 안 카드 */
+        #apply .a-card{
+          border: 1px solid var(--line);
+          border-radius: 18px;
+          background: #fff;
+          padding: 14px;
+          box-shadow: none;
+        }
+
+        #apply .a-title{
+          margin: 0 0 10px;
+          font-weight: 700;
+          font-size: 15px;
+          letter-spacing: -0.02em;
+          color: var(--ink);
+        }
+
+        #apply .a-sub{
+          margin: 6px 0 8px;
+          color: var(--muted);
+          font-size: 13px;
+          line-height: 1.45;
+        }
+
+        #apply input,
+        #apply textarea{
+          width: 100%;
+          box-sizing: border-box;
+          border: 1px solid var(--line);
+          background-color: #fff;
+          border-radius: 14px;
+          padding: 12px 12px;
+          font-size: 14px;
+          color: var(--ink);
+          outline: none;
+        }
+
+        /* 추가설명란 길이조절 */
+        #apply textarea{
+          min-height: 114px;
+        }
+
+        /* 헤어 / 의상 드롭다운 - 커스텀 화살표 */
+        #apply select{
+          width: 100%;
+          box-sizing: border-box;
+          border: 1px solid var(--line);
+          background-color: #fff;
+          border-radius: 14px;
+
+          /* 텍스트 + 화살표 여백 */
+          padding: 12px 40px 12px 12px;
+
+          font-size: 14px;
+          color: var(--ink);
+          outline: none;
+
+          /* 기본 화살표 제거 */
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+
+          /* 커스텀 화살표 */
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%236b645e' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 16px center;
+          background-size: 16px 16px;
+        }
+
+
+
+        /* 공통 옵션 구조 */
+        #apply .opt-col{
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+
+        #apply .opt-block{
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        #apply .opt-row{
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        #apply .opt-label{
+          font-weight: 650;
+          font-size: 14px;
+          letter-spacing: -0.02em;
+          color: var(--ink);
+          margin: 0;
+        }
+
+        /* 패키지 선택 */
+        #apply .pkg-vertical{
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          flex-wrap: wrap;
+        }
+
+        #apply .pkg-vertical label{
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13px;
+        }
+
+        #apply .pkg-vertical input{
+          width: 16px;
+          height: 16px;
+        }
+
+        /* 헤어/의상 */
+        #apply .two-select{
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+          align-items: end;
+        }
+
+        @media (max-width: 520px){
+          #apply .two-select{
+            grid-template-columns: 1fr;
+          }
+        }
+
+        /* 옵션 안 점선 박스 */
+        #apply .opt-inner{
+          border: 1px dashed var(--line);
+          border-radius: 14px;
+          padding: 12px;
+          background: #fff;
+        }
+
+        /* 애니메이션 */
+        #apply .opt-inline.anim-inline{
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+
+        /* 체크박스 ☐ 와 글자 간격 (애니메이션 전용) */
+        #apply .opt-inline.anim-inline label{
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 13px;
+          white-space: nowrap;
+        }
+
+        /* 애니메이션: 첫번째 항목 오른쪽만 살짝 띄움 */
+        #apply .opt-inline.anim-inline label:first-child{
+          margin-right: 18px;
+        }
+
+        #apply .opt-inline.anim-inline input{
+          width: 16px;
+          height: 16px;
+          margin: 0;
+          padding: 0;
+          flex-shrink: 0;
+        }
+
+        /* 그 외 옵션: 한줄 4개 */
+        #apply .opt-inline.opt-grid{
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 8px 1px;              /* 세로 / 가로 간격 */
+          align-items: start;
+        }
+
+        /* 그 외 옵션모바일 */
+        #apply .opt-inline.opt-grid label{
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;                   /* 체크박스-글자 간격 */
+          font-size: 13px;
+          color: var(--ink);
+          cursor: pointer;
+          user-select: none;
+          white-space: nowrap;        /* 글자 줄바꿈 방지 */
+        }
+
+        #apply .opt-inline.opt-grid input{
+          width: 16px;
+          height: 16px;
+          margin: 0;
+          padding: 0;
+          flex-shrink: 0;
+        }
+
+        @media (max-width: 520px){
+          #apply .opt-inline.opt-grid{
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
+        /* 포트폴리오 비공개 */
+        #apply .opt-vertical{
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        #apply .opt-vertical label{
+          display: inline-flex;
+          align-items: flex-start;
+          gap: 8px;
+          font-size: 13px;
+          line-height: 1.35;
+        }
+
+        #apply .opt-vertical input{
+          width: 16px;
+          height: 16px;
+          margin-top: 2px;
+        }
+
+        /* ▼ 설명 글자 더 얇게 */
+        #apply .opt-help{
+          color: var(--muted);
+          opacity: .65;
+          font-size: 12px;
+          font-weight: 400;
+          letter-spacing: -0.02em;
+        }
+
+        /* 가격 */
+        #apply .price{
+          margin-top: 12px;
+          border-top: 1px solid var(--line);
+          padding-top: 12px;
+        }
+
+        #apply .price-note{
+          margin: 0 0 8px;
+          color: var(--muted);
+          opacity: .75;
+          font-size: 12.5px;
+        }
+
+        #apply .price-row{
+          display: flex;
+          justify-content: space-between;
+          padding: 6px 0;
+          font-size: 13px;
+        }
+
+        #apply .price-total{
+          font-weight: 700;
+          font-size: 14px;
+          letter-spacing: -0.01em;
+        }
+
+        #apply .actions{
+          margin-top: 12px;
+        }
+
+        #apply .copy-btn{
+          width: 100%;
+          border: 1px solid var(--line);
+          border-radius: 18px;
+          padding: 14px;
+          background: var(--soft2);
+          font-weight: 700;
+          font-size: 15px;
+          letter-spacing: -0.01em;
+          cursor: pointer;
+        }
+
+        /* ▼ 전역 text-shadow / filter / transform 영향 차단 */
+        #apply .copy-btn,
+        #apply .price-total,
+        #apply .price-total *{
+          text-shadow: none !important;
+          filter: none !important;
+          transform: none !important;
+        }
+
+        /* 버튼 글자 렌더링 더 또렷하게 */
+        #apply .copy-btn{
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+
+        #apply .hidden-copy{
+          position: absolute;
+          left: -9999px;
+        }
+
+        #apply .copy-toast{
+          position: fixed;
+          left: 50%;
+          bottom: 18px;
+          transform: translateX(-50%);
+          border: 1px solid var(--line);
+          background: rgba(255,255,255,0.96);
+          border-radius: 999px;
+          padding: 10px 14px;
+          font-size: 13px;
+          font-weight: 500;
+          opacity: 0;
+          transition: opacity .30s ease;
+        }
+
+        #apply .copy-toast.show{
+          opacity: 1;
+        }
+
+        #apply .apply-note{
+          margin: 1px 0 16px;      /* 제목 ↔ 박스 사이 살짝 띄움 */
+          font-size: 12.5px;      /* 작은 안내문구 */
+          color: var(--muted);
+          opacity: .75;
+          line-height: 1.5;
+        }
+
+        /* 협업작가만 한줄 가로 정렬(포폴 비공개는 기존 세로 유지) */
+        #apply .collab-inline{
+          flex-direction: row;
+          align-items: center;
+          gap: 14px;
+          flex-wrap: wrap; /* 화면 좁아지면 자연스럽게 다음줄 */
+        }
+
+        #apply .collab-inline label{
+          align-items: center;
+          line-height: 1.2;
+        }
+
+        #apply .collab-inline input{
+          margin-top: 0;
+        }
+
+
+      
+/* =========================
+   [ADD] 모바일 줄바꿈 예쁘게(한국어 기준)
+   - 단어 중간 깨짐 최소화
+   - 너무 긴 영문/링크는 넘치지 않게 보조
+   ========================= */
+.wrap{
+  word-break: keep-all;
+  line-break: strict;
+  overflow-wrap: break-word; /* 긴 영문/URL만 예외적으로 줄바꿈 */
+}
+
+/* 리스트/문단도 동일하게 적용(안전 보강) */
+.wrap p,
+.wrap li,
+.wrap .section-desc,
+.wrap .apply-note,
+.wrap .notice-lead,
+.wrap .notice-list > li,
+.wrap .notice-list .note{
+  word-break: keep-all;
+  line-break: strict;
+  overflow-wrap: break-word;
+}
+
+
+
+</style>
 
       <div class="apply-wrap">
         <div class="apply-grid">
