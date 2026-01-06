@@ -1,8 +1,103 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>Type Switch + Slider</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dajoong Live2D Portfolio</title>
+
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dajoong Live2D Portfolio" />
+  <meta property="og:description" content="Live2D 리거 다중의 포트폴리오입니다. 다양한 스타일의 리깅과 배경 애니메이션 작업을 확인해보세요." />
+  <!-- Primary (wide) -->
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="600" />
+  <!-- Fallback (square) -->
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="600" />
+  <meta property="og:url" content="https://dajoong.cloud/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dajoong Live2D Portfolio" />
+  <meta name="twitter:description" content="Live2D 리거 다중의 포트폴리오입니다." />
+  <meta name="twitter:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Dajoong</h1>
+    <nav>
+      <a href="#about">알아보기</a>
+      <a href="#works">작품</a>
+      <a href="#contact">문의하기</a>
+      <a href="price.html">가격</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Live2D Rigger Dajoong</h2>
+    <p>Live2D LD · SD · 메모리얼 포트폴리오</p>
+  <!-- About -->
+  <section id="about" class="about">
+    <div class="about-inner">
+      <div class="about-text">
+        <h2>알아보기</h2>
+        <p>
+          안녕하세요. Live2D Rigger 다중(Dajoong)입니다.<br>
+          LD·SD 버추얼 모델을 비롯해 배경 애니메이션과 월페이퍼 작업을 진행하며, 
+          섬세하고 부드러운 모션 구현에 집중하고 있습니다.<br><br>
+
+          모델의 매력을 극대화할 수 있는 리깅 방식을 연구하며, 
+          다양한 스타일의 모델 작업에 대응할 수 있습니다.<br>
+          또한 클라이언트의 요구에 맞춘 맞춤형 리깅 솔루션을 제공합니다.<br><br>
+
+          여러 작가님들과의 협업 및 상업 제작 경험을 통해 
+          의도에 맞는 결과물을 안정적이고 효율적으로 제작합니다.
+        </p>
+      </div>
+
+      <aside class="about-card" aria-hidden="false">
+        <ul>
+          <li>
+            <strong>전문 분야</strong>
+            <div class="about-list">
+              <div>·Live2D Rigging</div>
+              <div>·Live2D Animation</div>
+              <div>·Background Rigging</div>
+            </div>
+          </li>
+
+          <li>
+            <strong>툴</strong>
+            <div class="about-list">
+              <div>·Live2D Cubism</div>
+              <div>·CLIPSTUDIO</div>
+              <div>·Photoshop</div>
+            </div>
+          </li>
+
+          <li>
+            <strong>스타일</strong>
+            <div class="about-list">
+              <div>·자연스럽고 디테일한 리깅</div>
+              <div>·다양한 스타일의 모델 작업 대응</div>
+            </div>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Works -->
+  <section id="works" class="works">
+    <h2>작품</h2>
 <style>
 :root {
   --main-color: #bf8496;
@@ -192,10 +287,7 @@ div[data-root] > div[data-dots] {
   scrollbar-color: var(--main-color) #e8e8ec; /* thumb, track */
   scrollbar-width: thin;
 }
-
 </style>
-</head>
-<body>
     <div data-type-buttons></div>
     <div id="type-container"></div>
 <script>
@@ -548,6 +640,26 @@ typeButtons.forEach(btn=>{
 })();
 </script>
 
-</body>
+    <div class="more-btn">
+      <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer">더 많은 작업 보기 →</a>
+    <a href="https://dajoong.cloud/price.html" target="_blank" rel="noopener noreferrer">가격 확인하기 →</a>
+    </div>
+  </section>
 
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <h2>문의하기</h2>
+    <div class="contact-links">
+      <a href="https://x.com/_Dajoong" target="_blank" rel="noopener noreferrer" class="contact-btn">X (Twitter)</a>
+      <a href="https://www.foriio.com/DaJoong" target="_blank" rel="noopener noreferrer" class="contact-btn">Foriio</a>
+      <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer" class="contact-btn">YouTube</a>
+      <a href="https://artmug.kr/index.php?channel=list&field=brand&search=cW1qMTc3MA==" target="_blank" rel="noopener noreferrer" class="contact-btn">ArtMug</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>copyright(c)2025 All rights reserved by Dajoong</p>
+  </footer>
+</body>
 </html>
+

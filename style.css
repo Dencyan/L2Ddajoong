@@ -237,11 +237,11 @@ nav a[aria-current="page"]{font-weight:700;box-shadow:inset 0 -2px 0 var(--accen
 .image-placeholder img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:6px}
 
 /* 버튼/링크 스타일 */
-.more-btn{text-align:center;margin:16px 0}
+.more-btn{display:flex;justify-content:center;align-items:center;gap:12px;margin:16px 0;flex-wrap:wrap}
 .more-btn a, .contact-btn{
   display:inline-block;padding:10px 14px;background:#111;color:#fff;text-decoration:none;border-radius:6px;
 }
-.contact-links{display:flex;gap:10px;flex-wrap:wrap}
+.contact-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 
 /* 푸터 */
 footer{text-align:center;padding:20px 0;color:#666;font-size:0.9rem}
@@ -297,11 +297,11 @@ footer{text-align:center;padding:20px 0;color:#666;font-size:0.9rem}
 }
 
 /* More / contact / footer */
-.more-btn{text-align:center;margin:16px 0}
+.more-btn{display:flex;justify-content:center;align-items:center;gap:12px;margin:16px 0;flex-wrap:wrap}
 .more-btn a, .contact-btn{
   display:inline-block;padding:10px 14px;background:#111;color:#fff;text-decoration:none;border-radius:6px;
 }
-.contact-links{display:flex;gap:10px;flex-wrap:wrap}
+.contact-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 footer{text-align:center;padding:20px 0;color:#666;font-size:0.9rem}
 
 /* 가격 카드 그리드 */
@@ -386,6 +386,17 @@ footer{text-align:center;padding:20px 0;color:#666;font-size:0.9rem}
   .filter-btn{padding:8px 10px}
   .price-card{min-height:auto;padding:14px}
   .price-card-head{flex-direction:column;align-items:flex-start;gap:6px}
+  /* more-btn 모바일: 세로 스택 및 버튼 전체 너비 */
+  .more-btn{flex-direction:column;gap:10px}
+  .more-btn a{width:100%;text-align:center}
 }
 
+/* Fix: improve contrast for hero/about text and ensure page centers */
+.hero h2 { color: #111; }
+.hero p, .hero .hero-sub { color: #444; }
+.about-text p { color: #333; }
+
+/* Ensure main sections are centered and respect max-width */
+html, body { width:100%; }
+header, .hero, section, footer { width:100%; max-width:var(--max-width); margin:0 auto; box-sizing:border-box; }
 

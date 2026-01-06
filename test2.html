@@ -1,0 +1,931 @@
+<section class="section-card" id="apply">
+      <h2 class="section-title">신청 양식</h2>
+      <p class="apply-note">
+        단순 참고용 양식으로, 실제 작업 내용과 금액은 달라질 수 있습니다.
+        항목에 없는 모션이나 옵션도 신청 가능하니 편하게 문의해주세요.
+      </p>
+
+      <style>
+
+        /* 신청양식 전용(다른 영역 영향 없음) */
+        #apply .apply-wrap{
+          margin-top: 14px;
+        }
+
+        /* 2열 레이아웃(너무 커지지 않게) */
+        #apply .apply-grid{
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+          align-items: start;
+        }
+
+        @media (max-width: 900px){
+          #apply .apply-grid{
+            grid-template-columns: 1fr;
+          }
+        }
+
+        /* 섹션 안 카드 */
+        #apply .a-card{
+          border: 1px solid var(--line);
+          border-radius: 18px;
+          background: #fff;
+          padding: 14px;
+          box-shadow: none;
+        }
+
+        #apply .a-title{
+          margin: 0 0 10px;
+          font-weight: 700;
+          font-size: 15px;
+          letter-spacing: -0.02em;
+          color: var(--ink);
+        }
+
+        #apply .a-sub{
+          margin: 6px 0 8px;
+          color: var(--muted);
+          font-size: 13px;
+          line-height: 1.45;
+        }
+
+        #apply input,
+        #apply textarea{
+          width: 100%;
+          box-sizing: border-box;
+          border: 1px solid var(--line);
+          background-color: #fff;
+          border-radius: 14px;
+          padding: 12px 12px;
+          font-size: 14px;
+          color: var(--ink);
+          outline: none;
+        }
+
+        /* 추가설명란 길이조절 */
+        #apply textarea{
+          min-height: 114px;
+        }
+
+        /* 헤어 / 의상 드롭다운 - 커스텀 화살표 */
+        #apply select{
+          width: 100%;
+          box-sizing: border-box;
+          border: 1px solid var(--line);
+          background-color: #fff;
+          border-radius: 14px;
+
+          /* 텍스트 + 화살표 여백 */
+          padding: 12px 40px 12px 12px;
+
+          font-size: 14px;
+          color: var(--ink);
+          outline: none;
+
+          /* 기본 화살표 제거 */
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+
+          /* 커스텀 화살표 */
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%236b645e' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 16px center;
+          background-size: 16px 16px;
+        }
+
+
+
+        /* 공통 옵션 구조 */
+        #apply .opt-col{
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+
+        #apply .opt-block{
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        #apply .opt-row{
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        #apply .opt-label{
+          font-weight: 650;
+          font-size: 14px;
+          letter-spacing: -0.02em;
+          color: var(--ink);
+          margin: 0;
+        }
+
+        /* 패키지 선택 */
+        #apply .pkg-vertical{
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          flex-wrap: wrap;
+        }
+
+        #apply .pkg-vertical label{
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13px;
+        }
+
+        #apply .pkg-vertical input{
+          width: 16px;
+          height: 16px;
+        }
+
+        /* 헤어/의상 */
+        #apply .two-select{
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+          align-items: end;
+        }
+
+        @media (max-width: 520px){
+          #apply .two-select{
+            grid-template-columns: 1fr;
+          }
+        }
+
+        /* 옵션 안 점선 박스 */
+        #apply .opt-inner{
+          border: 1px dashed var(--line);
+          border-radius: 14px;
+          padding: 12px;
+          background: #fff;
+        }
+
+        /* 애니메이션 */
+        #apply .opt-inline.anim-inline{
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+
+        /* 체크박스 ☐ 와 글자 간격 (애니메이션 전용) */
+        #apply .opt-inline.anim-inline label{
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 13px;
+          white-space: nowrap;
+        }
+
+        /* 애니메이션: 첫번째 항목 오른쪽만 살짝 띄움 */
+        #apply .opt-inline.anim-inline label:first-child{
+          margin-right: 18px;
+        }
+
+        #apply .opt-inline.anim-inline input{
+          width: 16px;
+          height: 16px;
+          margin: 0;
+          padding: 0;
+          flex-shrink: 0;
+        }
+
+        /* 그 외 옵션: 한줄 4개 */
+        #apply .opt-inline.opt-grid{
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 8px 1px;              /* 세로 / 가로 간격 */
+          align-items: start;
+        }
+
+        /* 그 외 옵션모바일 */
+        #apply .opt-inline.opt-grid label{
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;                   /* 체크박스-글자 간격 */
+          font-size: 13px;
+          color: var(--ink);
+          cursor: pointer;
+          user-select: none;
+          white-space: nowrap;        /* 글자 줄바꿈 방지 */
+        }
+
+        #apply .opt-inline.opt-grid input{
+          width: 16px;
+          height: 16px;
+          margin: 0;
+          padding: 0;
+          flex-shrink: 0;
+        }
+
+        @media (max-width: 520px){
+          #apply .opt-inline.opt-grid{
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
+        /* 포트폴리오 비공개 */
+        #apply .opt-vertical{
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        #apply .opt-vertical label{
+          display: inline-flex;
+          align-items: flex-start;
+          gap: 8px;
+          font-size: 13px;
+          line-height: 1.35;
+        }
+
+        #apply .opt-vertical input{
+          width: 16px;
+          height: 16px;
+          margin-top: 2px;
+        }
+
+        /* ▼ 설명 글자 더 얇게 */
+        #apply .opt-help{
+          color: var(--muted);
+          opacity: .65;
+          font-size: 12px;
+          font-weight: 400;
+          letter-spacing: -0.02em;
+        }
+
+        /* 가격 */
+        #apply .price{
+          margin-top: 12px;
+          border-top: 1px solid var(--line);
+          padding-top: 12px;
+        }
+
+        #apply .price-note{
+          margin: 0 0 8px;
+          color: var(--muted);
+          opacity: .75;
+          font-size: 12.5px;
+        }
+
+        #apply .price-row{
+          display: flex;
+          justify-content: space-between;
+          padding: 6px 0;
+          font-size: 13px;
+        }
+
+        #apply .price-total{
+          font-weight: 700;
+          font-size: 14px;
+          letter-spacing: -0.01em;
+        }
+
+        #apply .actions{
+          margin-top: 12px;
+        }
+
+        #apply .copy-btn{
+          width: 100%;
+          border: 1px solid var(--line);
+          border-radius: 18px;
+          padding: 14px;
+          background: var(--soft2);
+          font-weight: 700;
+          font-size: 15px;
+          letter-spacing: -0.01em;
+          cursor: pointer;
+        }
+
+        /* ▼ 전역 text-shadow / filter / transform 영향 차단 */
+        #apply .copy-btn,
+        #apply .price-total,
+        #apply .price-total *{
+          text-shadow: none !important;
+          filter: none !important;
+          transform: none !important;
+        }
+
+        /* 버튼 글자 렌더링 더 또렷하게 */
+        #apply .copy-btn{
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+
+        #apply .hidden-copy{
+          position: absolute;
+          left: -9999px;
+        }
+
+        #apply .copy-toast{
+          position: fixed;
+          left: 50%;
+          bottom: 18px;
+          transform: translateX(-50%);
+          border: 1px solid var(--line);
+          background: rgba(255,255,255,0.96);
+          border-radius: 999px;
+          padding: 10px 14px;
+          font-size: 13px;
+          font-weight: 500;
+          opacity: 0;
+          transition: opacity .30s ease;
+        }
+
+        #apply .copy-toast.show{
+          opacity: 1;
+        }
+
+        #apply .apply-note{
+          margin: 1px 0 16px;      /* 제목 ↔ 박스 사이 살짝 띄움 */
+          font-size: 12.5px;      /* 작은 안내문구 */
+          color: var(--muted);
+          opacity: .75;
+          line-height: 1.5;
+        }
+
+        /* 협업작가만 한줄 가로 정렬(포폴 비공개는 기존 세로 유지) */
+        #apply .collab-inline{
+          flex-direction: row;
+          align-items: center;
+          gap: 14px;
+          flex-wrap: wrap; /* 화면 좁아지면 자연스럽게 다음줄 */
+        }
+
+        #apply .collab-inline label{
+          align-items: center;
+          line-height: 1.2;
+        }
+
+        #apply .collab-inline input{
+          margin-top: 0;
+        }
+
+
+      
+/* =========================
+   [ADD] 모바일 줄바꿈 예쁘게(한국어 기준)
+   - 단어 중간 깨짐 최소화
+   - 너무 긴 영문/링크는 넘치지 않게 보조
+   ========================= */
+.wrap{
+  word-break: keep-all;
+  line-break: strict;
+  overflow-wrap: break-word; /* 긴 영문/URL만 예외적으로 줄바꿈 */
+}
+
+/* 리스트/문단도 동일하게 적용(안전 보강) */
+.wrap p,
+.wrap li,
+.wrap .section-desc,
+.wrap .apply-note,
+.wrap .notice-lead,
+.wrap .notice-list > li,
+.wrap .notice-list .note{
+  word-break: keep-all;
+  line-break: strict;
+  overflow-wrap: break-word;
+}
+
+
+
+</style>
+
+      <div class="apply-wrap">
+        <div class="apply-grid">
+
+          <!-- 왼쪽 -->
+          <div class="opt-col">
+
+            <div class="a-card">
+              <p class="a-title">방송 플랫폼</p>
+              <input id="ap_stream" type="text" placeholder="예: 치지직 / SOOP">
+            </div>
+
+            <div class="a-card">
+              <p class="a-title">패키지 선택</p>
+              <div class="pkg-vertical" role="radiogroup" aria-label="패키지 선택">
+                <label>
+                  <input type="radio" name="ap_pkg" value="basic" checked="">
+                  베이직
+                </label>
+                <label>
+                  <input type="radio" name="ap_pkg" value="standard">
+                  스탠다드
+                </label>
+                <label>
+                  <input type="radio" name="ap_pkg" value="premium">
+                  프리미엄
+                </label>
+              </div>
+            </div>
+
+            <div class="a-card">
+              <p class="a-title">옵션 선택</p>
+
+              <div class="opt-block">
+
+                <div class="opt-inner">
+                  <div class="opt-row">
+                    <p class="opt-label">헤어 / 의상 추가</p>
+                    <div class="two-select">
+                      <div>
+                        <div class="a-sub" style="margin:0 0 6px;">헤어</div>
+                        <select id="ap_hair_select">
+                          <option value="none" selected="">선택 안 함</option>
+                          <option value="1">1개</option>
+                          <option value="2">2개</option>
+                          <option value="3">3개</option>
+                          <option value="over">4개 이상</option>
+                        </select>
+                      </div>
+                      <div>
+                        <div class="a-sub" style="margin:0 0 6px;">의상</div>
+                        <select id="ap_outfit_select">
+                          <option value="none" selected="">선택 안 함</option>
+                          <option value="1">1개</option>
+                          <option value="2">2개</option>
+                          <option value="3">3개</option>
+                          <option value="over">4개 이상</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="opt-inner">
+                  <div class="opt-row">
+                    <p class="opt-label">팔 파츠 추가</p>
+                    <div class="two-select">
+                      <div>
+                        <div class="a-sub" style="margin:0 0 6px;">한손</div>
+                        <select id="ap_arm_one_select">
+                          <option value="none" selected="">선택 안 함</option>
+                          <option value="1">1개</option>
+                          <option value="2">2개</option>
+                          <option value="3">3개</option>
+                          <option value="over">4개 이상</option>
+                        </select>
+                      </div>
+                      <div>
+                        <div class="a-sub" style="margin:0 0 6px;">양손</div>
+                        <select id="ap_arm_two_select">
+                          <option value="none" selected="">선택 안 함</option>
+                          <option value="1">1개</option>
+                          <option value="2">2개</option>
+                          <option value="3">3개</option>
+                          <option value="over">4개 이상</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="opt-inner">
+                  <div class="opt-row">
+                    <p class="opt-label">애니메이션(중복 선택 가능)</p>
+                    <div class="opt-inline anim-inline" aria-label="애니메이션(중복 선택 가능)">
+                      <label>
+                        <input type="checkbox" name="ap_anim" value="gamepad">
+                        게임패드
+                      </label>
+                      <label>
+                        <input type="checkbox" name="ap_anim" value="tears">
+                        눈물
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="opt-inner">
+                  <div class="opt-row">
+                    <p class="opt-label">그 외 옵션(중복 선택 가능)</p>
+                    <div class="opt-inline opt-grid" aria-label="그 외 옵션(중복 선택 가능)">
+                      <label>
+                        <input type="checkbox" name="ap_extra" value="outer_toggle">
+                        겉옷온오프
+                      </label>
+                      <label>
+                        <input type="checkbox" name="ap_extra" value="gachakoi">
+                        앞뒤기울기
+                      </label>
+                      <label>
+                        <input type="checkbox" name="ap_extra" value="vbridge">
+                        브이브릿지
+                      </label>
+                      <label>
+                        <input type="checkbox" name="ap_extra" value="wings">
+                        날개
+                      </label>
+
+                      <label>
+                        <input type="checkbox" name="ap_extra" value="cheek_puff">
+                        볼빵빵
+                      </label>
+                      <label>
+                        <input type="checkbox" name="ap_extra" value="pout">
+                        입삐죽
+                      </label>
+                      <label>
+                        <input type="checkbox" name="ap_extra" value="tongue">
+                        메롱
+                      </label>
+                      <label>
+                        <input type="checkbox" name="ap_extra" value="tail">
+                        꼬리
+                      </label>
+
+                      <label>
+                        <input type="checkbox" name="ap_extra" value="animal_ears">
+                        동물귀
+                      </label>
+                      <label>
+                        <input type="checkbox" name="ap_extra" value="mascot">
+                        마스코트 캐릭터
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 오른쪽 -->
+          <div class="opt-col">
+
+            <div class="a-card">
+              <p class="a-title">표정</p>
+              <p class="a-sub" style="margin:2px 0 6px;">신청하시려는 표정 전부 기재해주세요.</p>
+              <input id="ap_face_text" type="text" placeholder="예: 눈반짝, 눈하트, 정색">
+            </div>
+
+            <div class="a-card">
+              <p class="a-title">협업작가</p>
+              <div class="opt-vertical collab-inline" role="radiogroup" aria-label="협업작가">
+                <label>
+                  <input type="radio" name="ap_collab" value="nocollab" checked="">
+                  해당없음
+                </label>
+                <label>
+                  <input type="radio" name="ap_collab" value="1e">
+                  1E
+                </label>
+                <label>
+                  <input type="radio" name="ap_collab" value="miu">
+                  miu
+                </label>
+                <label>
+                  <input type="radio" name="ap_collab" value="rahee">
+                  라희
+                </label>
+                <label>
+                  <input type="radio" name="ap_collab" value="dalmyaeng">
+                  달먕
+                </label>
+                <label>
+                  <input type="radio" name="ap_collab" value="prana">
+                  프라나
+                </label>
+              </div>
+            </div>
+
+            <div class="a-card">
+              <p class="a-title">포트폴리오 비공개</p>
+              <div class="opt-vertical" role="radiogroup" aria-label="포트폴리오 비공개">
+                <label>
+                  <input type="radio" name="ap_port" value="public" checked="">
+                  공개 <span class="opt-help">작업과정이 라이브방송 송출 또는 트위터에 올라갈수 있습니다</span>
+                </label>
+                <label>
+                  <input type="radio" name="ap_port" value="predebut">
+                  데뷔전 비공개 <span class="opt-help">전체금액의 20%</span>
+                </label>
+                <label>
+                  <input type="radio" name="ap_port" value="private_forever">
+                  영구비공개 <span class="opt-help">전체금액의 50%</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="a-card">
+              <p class="a-title">추가 설명란</p>
+              <textarea id="ap_style" placeholder="원하는 분위기 / 포인트 컬러 / 참고 자료 설명 등 자유롭게 작성해주세요."></textarea>
+
+              <div class="price">
+                <p class="price-note">참고용 최소 금액입니다. 정확한금액은 문의주세요.</p>
+
+                <div class="price-row">
+                  <div class="k">기본 패키지 금액</div>
+                  <div class="v" id="ap_price_pkg">700,000원</div>
+                </div>
+                <div class="price-row">
+                  <div class="k">옵션 금액</div>
+                  <div class="v" id="ap_price_opt">0원</div>
+                </div>
+                <div class="price-row price-total">
+                  <div class="k">최종 가격</div>
+                  <div class="v" id="ap_price_total">700,000원</div>
+                </div>
+
+                <div class="actions">
+                  <button class="copy-btn" type="button" id="ap_copy_btn">복사하기</button>
+                </div>
+
+                <textarea class="hidden-copy" id="ap_copy_target" aria-hidden="true"></textarea>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="copy-toast" id="ap_copy_toast" role="status" aria-live="polite">클립보드에 복사되었습니다. 문의글에 붙여넣어주세요</div>
+
+      <script>
+        (function(){
+          /* 금액 설정: 여기만 수정하면 됨 */
+          const PRICE = {
+            pkg: {
+              basic: 700000,
+              standard: 1500000,
+              premium: 2200000
+            },
+
+            /* 헤어/의상 추가 단가 */
+            hair_unit: 300000,
+            outfit_unit: 500000,
+
+            /* 팔 파츠 추가 단가 */
+            arm_one_unit: 80000,
+            arm_two_unit: 150000,
+
+            /* 협업작가 할인 */
+            collab: {
+              nocollab: 0,
+              "1e": 0,
+              miu: -100000,
+              rahee: -100000,
+              dalmyaeng: -100000,
+              prana: -100000
+            },
+
+            /* 포트폴리오 비공개 */
+            portfolio: {
+              public: 0,
+              predebut: 0.2,
+              private_forever: 0.5
+            },
+
+            /* 애니메이션(중복 선택) */
+            anim: {
+              gamepad: 200000,
+              tears: 100000
+            },
+
+            /* 그 외 옵션(중복 선택) */
+            extra: {
+              outer_toggle: 50000,
+              gachakoi: 200000,
+              vbridge: 300000,
+              mascot: 150000,
+              wings: 80000,
+              cheek_puff: 50000,
+              pout: 30000,
+              tongue: 100000,
+              animal_ears: 150000,
+              tail: 100000
+            }
+          };
+
+          function won(n){
+            try{
+              return n.toLocaleString("ko-KR") + "원";
+            }catch(e){
+              return String(n) + "원";
+            }
+          }
+
+          function getRadio(name){
+            const el = document.querySelector('input[name="'+name+'"]:checked');
+            return el ? el.value : "";
+          }
+
+          function getChecks(name){
+            return Array.from(document.querySelectorAll('input[name="'+name+'"]:checked')).map(v => v.value);
+          }
+
+          function selectCount(val){
+            if(val === "none") return 0;
+            if(val === "over") return 4;
+            const n = parseInt(val, 10);
+            return isNaN(n) ? 0 : n;
+          }
+
+          function selectLabel(val){
+            if(val === "none") return "선택 안 함";
+            if(val === "over") return "4개 이상";
+            return val + "개";
+          }
+
+          function calc(){
+            const pkg = getRadio("ap_pkg") || "basic";
+            const pkgPrice = PRICE.pkg[pkg] || 0;
+
+            const hairVal = document.getElementById("ap_hair_select").value;
+            const outfitVal = document.getElementById("ap_outfit_select").value;
+
+            const armOneVal = document.getElementById("ap_arm_one_select").value;
+            const armTwoVal = document.getElementById("ap_arm_two_select").value;
+
+            const hair = selectCount(hairVal);
+            const outfit = selectCount(outfitVal);
+
+            const armOne = selectCount(armOneVal);
+            const armTwo = selectCount(armTwoVal);
+
+            /* 먼저: 체크/셀렉 금액 계산 */
+            const anims = getChecks("ap_anim");
+            const animPrice = anims.reduce((sum, k) => sum + (PRICE.anim[k] || 0), 0);
+
+            const extras = getChecks("ap_extra");
+            const extraPrice = extras.reduce((sum, k) => sum + (PRICE.extra[k] || 0), 0);
+
+            const hairPrice = Math.max(0, hair) * PRICE.hair_unit;
+            const outfitPrice = Math.max(0, outfit) * PRICE.outfit_unit;
+
+            const armOnePrice = Math.max(0, armOne) * PRICE.arm_one_unit;
+            const armTwoPrice = Math.max(0, armTwo) * PRICE.arm_two_unit;
+
+            /* 협업작가 할인 */
+            const collab = getRadio("ap_collab") || "nocollab";
+            const collabPrice = (PRICE.collab[collab] || 0);
+
+            /* 포트폴리오 비공개(퍼센트) */
+            const port = getRadio("ap_port") || "public";
+            const portRate = (PRICE.portfolio[port] || 0);
+
+            /* 포트폴리오 퍼센트 기준 소계(=패키지+옵션+협업할인, 포폴 제외) */
+            const subtotal =
+              pkgPrice
+              + hairPrice + outfitPrice
+              + armOnePrice + armTwoPrice
+              + animPrice + extraPrice
+              + collabPrice;
+
+            /* 퍼센트 추가금 */
+            const portPrice = Math.round(subtotal * portRate);
+
+            /* 최종 합계 */
+            const total = subtotal + portPrice;
+
+            /* 화면 표시용: 옵션금액(패키지 제외) */
+            const optPrice = total - pkgPrice;
+
+            document.getElementById("ap_price_pkg").textContent = won(pkgPrice);
+            document.getElementById("ap_price_opt").textContent = won(optPrice);
+            document.getElementById("ap_price_total").textContent = won(total);
+
+            return { pkg, pkgPrice, optPrice, total, hairVal, outfitVal, armOneVal, armTwoVal, port, anims, extras, portPrice, collab };
+          }
+
+
+          function pkgLabel(v){
+            if(v === "basic") return "베이직";
+            if(v === "standard") return "스탠다드";
+            if(v === "premium") return "프리미엄";
+            return v;
+          }
+
+          function collabLabel(v){
+            if(v === "nocllab") return "해당없음";
+            if(v === "1e") return "1E";
+            if(v === "miu") return "miu";
+            if(v === "rahee") return "라희";
+            if(v === "dalmyaeng") return "달먕";
+            if(v === "prana") return "프라나";
+            return v;
+          }
+
+          function portLabel(v){
+            if(v === "public") return "공개";
+            if(v === "predebut") return "데뷔전 비공개";
+            if(v === "private_forever") return "영구비공개";
+            return v;
+          }
+
+          function animLabel(k){
+            if(k === "gamepad") return "게임패드";
+            if(k === "tears") return "눈물";
+            return k;
+          }
+
+          function extraLabel(k){
+            if(k === "outer_toggle") return "겉옷온오프";
+            if(k === "gachakoi") return "가챠코이";
+            if(k === "vbridge") return "브이브릿지";
+            if(k === "mascot") return "마스코트캐릭터";
+            if(k === "wings") return "날개";
+            if(k === "cheek_puff") return "볼빵빵";
+            if(k === "pout") return "입삐죽";
+            if(k === "tongue") return "메롱";
+            if(k === "animal_ears") return "동물귀";
+            if(k === "tail") return "꼬리";
+            return k;
+          }
+
+          function buildText(){
+            const c = calc();
+
+            const stream = document.getElementById("ap_stream").value.trim();
+            const faceText = document.getElementById("ap_face_text").value.trim();
+            const style = document.getElementById("ap_style").value.trim();
+
+            const animText = c.anims.length ? c.anims.map(animLabel).join(", ") : "선택 없음";
+            const extraText = c.extras.length ? c.extras.map(extraLabel).join(", ") : "선택 없음";
+
+            const lines = [];
+            lines.push("[신청 양식]");
+            lines.push("");
+            lines.push("방송 플랫폼: " + (stream || "-"));
+            lines.push("패키지: " + pkgLabel(c.pkg));
+            lines.push("");
+            lines.push("헤어 추가: " + selectLabel(c.hairVal));
+            lines.push("의상 추가: " + selectLabel(c.outfitVal));
+            lines.push("팔 파츠(한손): " + selectLabel(c.armOneVal));
+            lines.push("팔 파츠(양손): " + selectLabel(c.armTwoVal));
+            lines.push("협업작가: " + collabLabel(c.collab));
+            lines.push("포트폴리오 비공개: " + portLabel(c.port));
+            lines.push("포트폴리오 추가금: " + won(c.portPrice || 0));
+            lines.push("애니메이션: " + animText);
+            lines.push("표정(텍스트): " + (faceText || "-"));
+            lines.push("그 외 옵션: " + extraText);
+            lines.push("");
+            lines.push("원하는 스타일: " + (style || "-"));
+            lines.push("");
+            lines.push("[가격]");
+            lines.push("기본 패키지 금액: " + won(c.pkgPrice));
+            lines.push("옵션 금액: " + won(c.optPrice));
+            lines.push("최종 가격: " + won(c.total));
+
+            return lines.join("\n");
+          }
+
+          function toast(msg){
+            const el = document.getElementById("ap_copy_toast");
+            if(!el) return;
+
+            el.textContent = msg;
+            el.classList.add("show");
+
+            if(el._t) clearTimeout(el._t);
+            el._t = setTimeout(() => {
+              el.classList.remove("show");
+            }, 1500);
+          }
+
+          function bind(){
+            const inputs = document.querySelectorAll('#apply input, #apply textarea, #apply select');
+            inputs.forEach(el => {
+              el.addEventListener("input", calc);
+              el.addEventListener("change", calc);
+            });
+
+            const btn = document.getElementById("ap_copy_btn");
+            const ta = document.getElementById("ap_copy_target");
+
+            btn.addEventListener("click", async () => {
+              const text = buildText();
+              ta.value = text;
+
+              try{
+                await navigator.clipboard.writeText(text);
+                btn.textContent = "복사 완료";
+                toast("클립보드에 복사되었습니다. 문의글에 붙여넣어주세요");
+                setTimeout(() => { btn.textContent = "복사하기"; }, 900);
+              }catch(e){
+                ta.focus();
+                ta.select();
+                const ok = document.execCommand("copy");
+                btn.textContent = ok ? "복사 완료" : "복사 실패";
+                toast(ok ? "클립보드에 복사되었습니다. 문의글에 붙여넣어주세요" : "복사에 실패했습니다. 다시 시도해주세요");
+                setTimeout(() => { btn.textContent = "복사하기"; }, 900);
+              }
+            });
+
+            calc();
+          }
+
+          bind();
+        })();
+      </script>
+    </section>
