@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>숨은 카도님 찾기 0/7</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- restored by Copilot: latest features applied -->
+  <style>
+    :root {
+      --accent: #ff7ab6;
+      --accent2: #66d7ff;
+      --bg: #0f1420;
+      --panel: #171c29;
+      --text: #e9f0ff;
+      --success: #7fff7a;
+      --warn: #ffcc66;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: linear-gradient(160deg, #0c1020, #1b2238);
+      color: var(--text); font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, Apple SD Gothic Neo, "Noto Sans KR", sans-serif;
+      display: grid; min-height: 100vh; grid-template-rows: auto 1fr;
+    }
+    header {
+      display: flex; gap: 12px; align-items: center; justify-content: space-between;
+      padding: 12px 16px; background: rgba(0,0,0,0.35); backdrop-filter: blur(6px); border-bottom: 1px solid #2a3248;
+    }
+    .hud { display: flex; gap: 12px; align-items: center; }
+    .pill {
+      padding: 8px 12px; border-radius: 999px; background: var(--panel); border: 1px solid #2a3248;
+      display: inline-flex; gap: 8px; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    }
+    .pill strong { color: var(--accent2); }
+    .btn {
+      padding: 8px 14px; border-radius: 999px; border: 1px solid #2a3248; background: #222945; color: var(--text);
+      cursor: pointer; transition: transform .08s ease, background .2s ease, box-shadow .2s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    }
+    .btn:hover { transform: translateY(-1px); background: #2a3156; }
+    .btn:active { transform: translateY(1px) scale(0.98); }
+    .btn.warn { background: #2c2630; border-color: #4a394f; }
+    .btn.success { background: #1d2e24; border-color: #2f4f40; }
+
+    main { display: grid; place-items: center; padding: 12px; }
+    .stage {
+      position: relative; width: min(1000px, 96vw); max-height: 78vh; border-radius: 16px; overflow: hidden;
+      border: 1px solid #2a3248; background: #0a0f22;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+    }
+    #gameImage {
+      display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; cursor: crosshair;
+    }
+
+    /* Found pulse marker */
+    .pulse {
+      position: absolute; width: 24px; height: 24px; border-radius: 50%; pointer-events: none;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle at 30% 30%, #fff8 0%, #ffec 40%, transparent 60%);
+      animation: pop .24s ease-out, pulse 1.6s ease-in-out infinite;
+      mix-blend-mode: screen;
+    }
+    @keyframes pop { from { transform: translate(-50%, -50%) scale(0.3); opacity: 0; } to { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255, 122, 182, 0.5); } 50% { box-shadow: 0 0 0 18px rgba(255, 122, 182, 0.0); } }
+
+    /* Sparkle burst on success */
+    .sparkle {
+      position: absolute; width: 6px; height: 6px; background: #fff; border-radius: 50%;
+      box-shadow: 0 0 8px #fff, 0 0 14px var(--accent);
+      animation: sparkle .8s ease-out forwards; pointer-events: none; mix-blend-mode: screen;
+    }
+    @keyframes sparkle {
+      0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(0.1); opacity: 0; }
+    }
+
+    /* Hint ping */
+    .hint-ring {
+      position: absolute; width: 64px; height: 64px; border: 2px dashed var(--warn); border-radius: 50%;
+      transform: translate(-50%, -50%); animation: hint 1.2s ease-out forwards;
+      pointer-events: none; mix-blend-mode: screen;
+    }
+    @keyframes hint {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+      20% { opacity: 1; }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.35); }
+    }
+
+    /* Edit-mode dot */
+    .edit-dot {
+      position: absolute; width: 12px; height: 12px; border-radius: 50%;
+      background: #ff6b6b; border: 2px solid #fff; transform: translate(-50%, -50%);
+      pointer-events: none; box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .edit-label {
+      position: absolute; transform: translate(-50%, -120%); font-size: 11px; background:#1a2036; padding:2px 6px; border-radius:8px; border:1px solid #2a3248; pointer-events:none;
+    }
+
+    /* Completion overlay */
+    .overlay {
+      position: fixed; inset: 0; display: none; place-items: center; background: rgba(10, 14, 28, 0.7); backdrop-filter: blur(4px);
+    }
+    .overlay.active { display: grid; }
+    .card {
+      background: linear-gradient(180deg, #1c2238, #141a2b);
+      border: 1px solid #2a3248; border-radius: 16px; padding: 24px; width: min(520px, 92vw); text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .title { font-size: 22px; margin: 0 0 6px; }
+    .subtitle { margin: 0 0 18px; color: #cfe2ff; }
+    .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+    /* Found list HUD */
+    .found-list {
+      display: flex; gap: 8px; flex-wrap: wrap; align-items: center; opacity: 0.9;
+    }
+    .chip {
+      padding: 6px 10px; border-radius: 999px; border: 1px solid #2a3248; background: #1a2036; font-size: 12px;
+    }
+
+    /* Mobile safety */
+    @media (max-width: 640px) {
+      header { flex-wrap: wrap; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hud">
+      <div class="pill" id="progressPill">찾은 고양이: <strong id="foundCount">0</strong>/7</div>
+      <div class="pill">남은 시간: <strong id="timeLabel">02:00</strong></div>
+      <div class="found-list" id="foundList"></div>
+    </div>
+    <div class="hud">
+      <button class="btn" id="hintBtn">힌트</button>
+      <button class="btn" id="editModeBtn">좌표 지정 모드</button>
+      <button class="btn warn" id="resetBtn">다시 시작</button>
+      <button class="btn success" id="pauseBtn">일시정지</button>
+    </div>
+  </header>
+
+  <div id="editPanel" style="display:none; padding:12px; text-align:left; max-width:1000px; margin:0 auto;">
+    <div class="pill">편집 모드: 이미지 클릭으로 좌표 추가 (최대 7개)</div>
+    <div style="margin-top:8px">
+      <button class="btn" id="saveBtn">저장 (게임에 적용)</button>
+      <button class="btn" id="undoBtn">되돌리기</button>
+      <button class="btn" id="exportBtn">좌표 내보내기</button>
+      <button class="btn warn" id="clearBtn">초기화</button>
+    </div>
+    <textarea id="exportArea" rows="4" style="width:100%; margin-top:8px; display:none;"></textarea>
+    <div id="editList" style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;"></div>
+  </div>
+
+  <main>
+    <div class="stage" id="stage">
+      <!-- 배경 이미지를 여기에 연결하세요 -->
+      <img id="gameImage" src="assets/kado.JPG" alt="숨은 고양이 찾기 배경" />
+      <!-- 동적 마커/애니메이션 컨테이너 -->
+    </div>
+  </main>
+
+  <div class="overlay" id="overlay">
+    <div class="card">
+      <h2 class="title">축하합니다! 7/7 모두 찾았어요 🐱🎉</h2>
+      <p class="subtitle" id="finalTime">클리어 타임: 00:00</p>
+      <div class="actions">
+        <button class="btn success" id="playAgainBtn">다시 플레이</button>
+        <button class="btn" id="resumeBtn">그냥 보기</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 고양이 좌표 세트 (예시). 실제 이미지에 맞춰 미세 조정하세요.
+    const cats = [
+      { id: 'boxBlue',    label: '상자 카도',     x: 120, y: 480, radius: 35, found: false },
+      { id: 'fishSuit',   label: '물고기 카도',   x: 240, y: 420, radius: 30, found: false },
+      { id: 'dessertHat', label: '호빵 카도',     x: 400, y: 360, radius: 30, found: false },
+      { id: 'chairCat',   label: '의자 위 카도',  x: 580, y: 300, radius: 30, found: false },
+      { id: 'frameCat',   label: '할로윈 카도',   x: 680, y: 180, radius: 25, found: false },
+      { id: 'giftHolder', label: '박스 옆 카도',  x: 320, y: 520, radius: 30, found: false },
+      { id: 'fireplace',  label: '뺴꼼 카도',    x: 500, y: 440, radius: 30, found: false }
+    ];
+
+    // 상태
+    let foundCount = 0;
+    let totalSeconds = 120;    // 2분
+    let remaining = totalSeconds;
+    let timer = null;
+    let paused = false;
+
+    const stage = document.getElementById('stage');
+    const img = document.getElementById('gameImage');
+    const foundCountEl = document.getElementById('foundCount');
+    const timeLabel = document.getElementById('timeLabel');
+    const hintBtn = document.getElementById('hintBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const foundListEl = document.getElementById('foundList');
+
+    const overlay = document.getElementById('overlay');
+    const finalTime = document.getElementById('finalTime');
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    const resumeBtn = document.getElementById('resumeBtn');
+
+    // Edit (coordinate) mode
+    const editModeBtn = document.getElementById('editModeBtn');
+    const editPanel = document.getElementById('editPanel');
+    const saveBtn = document.getElementById('saveBtn');
+    const undoBtn = document.getElementById('undoBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const exportArea = document.getElementById('exportArea');
+    const editList = document.getElementById('editList');
+
+    let editMode = false;
+    let editCats = [];
+    const MAX_CATS = 7;
+
+    // 유틸
+    function fmtTime(sec) {
+      const m = Math.floor(sec / 60).toString().padStart(2, '0');
+      const s = Math.floor(sec % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+    function setTimeLabel() { timeLabel.textContent = fmtTime(remaining); }
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => {
+        if (paused) return;
+        remaining--;
+        setTimeLabel();
+        if (remaining <= 0) {
+          remaining = 0;
+          setTimeLabel();
+          clearInterval(timer);
+          gameOver(false);
+        }
+      }, 1000);
+    }
+
+    function resetGame() {
+      // 초기화
+      cats.forEach(c => c.found = false);
+      foundCount = 0;
+      remaining = totalSeconds;
+      setTimeLabel();
+      foundCountEl.textContent = foundCount;
+      foundListEl.innerHTML = '';
+      paused = false;
+      pauseBtn.textContent = '일시정지';
+      overlay.classList.remove('active');
+      // 기존 마커 제거
+      [...stage.querySelectorAll('.pulse, .sparkle, .hint-ring')].forEach(el => el.remove());
+      startTimer();
+    }
+
+    function gameOver(won) {
+      paused = true;
+      overlay.classList.add('active');
+      finalTime.textContent = won ? `클리어 타임: ${fmtTime(totalSeconds - remaining)}` : `시간 초과! 찾은 수: ${foundCount}/7`;
+    }
+
+    function addFoundChip(cat) {
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.textContent = `✓ ${cat.label}`;
+      foundListEl.appendChild(chip);
+    }
+
+    // 페이지 클릭 -> 이미지의 natural(실제) 좌표로 변환
+    function pageToNatural(e) {
+      const rect = img.getBoundingClientRect();
+      const scaleX = img.naturalWidth / rect.width;
+      const scaleY = img.naturalHeight / rect.height;
+      const x = Math.round((e.clientX - rect.left) * scaleX);
+      const y = Math.round((e.clientY - rect.top) * scaleY);
+      return { x, y };
+    }
+
+    // natural 좌표 -> 이미지 표시 좌표
+    function natToDisplay(nx, ny) {
+      const rect = img.getBoundingClientRect();
+      const dx = (nx / img.naturalWidth) * rect.width;
+      const dy = (ny / img.naturalHeight) * rect.height;
+      return { x: dx, y: dy };
+    }
+
+    // 판정
+    function distance(ax, ay, bx, by) {
+      const dx = ax - bx, dy = ay - by;
+      return Math.hypot(dx, dy);
+    }
+
+    function createPulse(x, y) {
+      const el = document.createElement('div');
+      el.className = 'pulse';
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      stage.appendChild(el);
+      setTimeout(() => el.remove(), 3500);
+    }
+
+    function renderEditMarkers() {
+      [...stage.querySelectorAll('.edit-dot, .edit-label')].forEach(el => el.remove());
+      const rect = img.getBoundingClientRect();
+      editCats.forEach((c, i) => {
+        const dx = (c.x / img.naturalWidth) * rect.width;
+        const dy = (c.y / img.naturalHeight) * rect.height;
+        const dot = document.createElement('div'); dot.className = 'edit-dot';
+        dot.style.left = `${dx}px`; dot.style.top = `${dy}px`;
+        const label = document.createElement('div'); label.className = 'edit-label';
+        label.style.left = `${dx}px`; label.style.top = `${dy}px`;
+        label.textContent = `${i+1}`;
+        stage.appendChild(dot); stage.appendChild(label);
+      });
+    }
+
+    function updateEditList() {
+      editList.innerHTML = '';
+      editCats.forEach((c, i) => {
+        const item = document.createElement('div'); item.className = 'chip';
+        item.textContent = `${i+1}: ${c.label || '커스텀'} (${c.x}, ${c.y})`;
+        const del = document.createElement('button'); del.className = 'btn'; del.textContent = '삭제'; del.style.marginLeft = '8px';
+        del.addEventListener('click', () => { editCats.splice(i,1); renderEditMarkers(); updateEditList(); });
+        item.appendChild(del);
+        editList.appendChild(item);
+      });
+    }
+
+    function enterEditMode() {
+      editMode = true; paused = true; editPanel.style.display = 'block'; editModeBtn.textContent = '편집 종료';
+      editCats = cats.map(c => ({ id: c.id, label: c.label, x: c.x, y: c.y, radius: c.radius || 30 }));
+      renderEditMarkers(); updateEditList();
+    }
+    function exitEditMode(save=false) {
+      editMode = false; editPanel.style.display = 'none'; editModeBtn.textContent = '좌표 지정 모드';
+      [...stage.querySelectorAll('.edit-dot, .edit-label')].forEach(el => el.remove());
+      if (save) {
+        cats.length = 0;
+        editCats.forEach((c, idx) => cats.push({ id: c.id || ('custom'+idx), label: c.label || ('커스텀 '+(idx+1)), x: c.x, y: c.y, radius: c.radius || 30, found: false }));
+        resetGame();
+      } else { paused = false; }
+    }
+
+    // 이미지 클릭 처리: 편집 모드인지 게임 모드인지 분기
+    img.addEventListener('click', (event) => {
+      if (editMode) {
+        if (editCats.length >= MAX_CATS) { alert(`최대 ${MAX_CATS}개까지만 추가할 수 있습니다.`); return; }
+        const nat = pageToNatural(event);
+        const label = prompt('이 고양이의 이름을 입력하세요 (취소하면 기본 이름 사용):', `커스텀 ${editCats.length+1}`) || `커스텀 ${editCats.length+1}`;
+        editCats.push({ label, x: nat.x, y: nat.y, radius: 30 });
+        renderEditMarkers(); updateEditList();
+        return;
+      }
+
+      if (paused) return;
+      const nat = pageToNatural(event);
+      let hit = false;
+      cats.forEach(cat => {
+        if (!cat.found && distance(nat.x, nat.y, cat.x, cat.y) <= cat.radius) {
+          cat.found = true; hit = true; foundCount++; foundCountEl.textContent = foundCount;
+          const disp = natToDisplay(cat.x, cat.y);
+          createPulse(disp.x, disp.y); sparkleBurst(disp.x, disp.y);
+          addFoundChip(cat);
+        }
+      });
+      if (!hit) {
+        // display click position for feedback
+        const rect = img.getBoundingClientRect();
+        const clickDisplayX = event.clientX - rect.left;
+        const clickDisplayY = event.clientY - rect.top;
+        createPulse(clickDisplayX, clickDisplayY);
+      }
+      if (foundCount === cats.length) { gameOver(true); }
+    });
+
+    function sparkleBurst(x, y) {
+      const count = 12;
+      for (let i = 0; i < count; i++) {
+        const sp = document.createElement('div');
+        sp.className = 'sparkle';
+        sp.style.left = `${x}px`;
+        sp.style.top = `${y}px`;
+        const angle = (Math.PI * 2) * (i / count);
+        const dist = 60 + Math.random() * 40;
+        const dx = Math.cos(angle) * dist + 'px';
+        const dy = Math.sin(angle) * dist + 'px';
+        sp.style.setProperty('--dx', dx);
+        sp.style.setProperty('--dy', dy);
+        stage.appendChild(sp);
+        setTimeout(() => sp.remove(), 900);
+      }
+    }
+
+    function showHint() {
+      const candidates = cats.filter(c => !c.found);
+      if (candidates.length === 0) return;
+      const cat = candidates[Math.floor(Math.random() * candidates.length)];
+      const ring = document.createElement('div');
+      ring.className = 'hint-ring';
+      ring.style.left = `${cat.x}px`;
+      ring.style.top = `${cat.y}px`;
+      stage.appendChild(ring);
+      setTimeout(() => ring.remove(), 1400);
+    }
+
+    // 클릭 핸들러
+    img.addEventListener('click', (event) => {
+      if (paused) return;
+      const { x, y } = getRelativeClick(event);
+      let hit = false;
+      cats.forEach(cat => {
+        if (!cat.found && distance(x, y, cat.x, cat.y) <= cat.radius) {
+          cat.found = true;
+          hit = true;
+          foundCount++;
+          foundCountEl.textContent = foundCount;
+          createPulse(cat.x, cat.y);
+          sparkleBurst(cat.x, cat.y);
+          addFoundChip(cat);
+        }
+      });
+      if (!hit) {
+        createPulse(x, y);
+      }
+      if (foundCount === cats.length) {
+        gameOver(true);
+      }
+    });
+
+    // 컨트롤 바인딩
+    hintBtn.addEventListener('click', () => { if (paused) return; showHint(); });
+    editModeBtn.addEventListener('click', () => { if (editMode) { exitEditMode(false); } else { enterEditMode(); } });
+    saveBtn.addEventListener('click', () => { exitEditMode(true); });
+    undoBtn.addEventListener('click', () => { if (editCats.length) editCats.pop(); renderEditMarkers(); updateEditList(); });
+    clearBtn.addEventListener('click', () => { if (!confirm('모든 편집 좌표를 초기화하시겠습니까?')) return; editCats = []; renderEditMarkers(); updateEditList(); });
+    exportBtn.addEventListener('click', async () => { const json = JSON.stringify(editCats, null, 2); exportArea.style.display = 'block'; exportArea.value = json; try { await navigator.clipboard.writeText(json); alert('좌표 JSON을 클립보드에 복사했습니다.'); } catch (e) { /* ignore */ } });
+    resetBtn.addEventListener('click', resetGame);
+    pauseBtn.addEventListener('click', () => { paused = !paused; pauseBtn.textContent = paused ? '다시 시작' : '일시정지'; });
+
+    // 이미지 리사이즈에 따라 edit 마커 재계산
+    window.addEventListener('resize', () => { if (editMode) renderEditMarkers(); });
+    img.addEventListener('load', () => { if (editMode) renderEditMarkers(); });
+
+    playAgainBtn.addEventListener('click', () => {
+      resetGame();
+      overlay.classList.remove('active');
+    });
+    resumeBtn.addEventListener('click', () => {
+      overlay.classList.remove('active');
+      paused = false;
+      pauseBtn.textContent = '일시정지';
+    });
+
+    // 시작
+    img.addEventListener('load', () => {
+      resetGame();
+    });
+    if (img.complete) {
+      resetGame();
+    }
+  </script>
+</body>
+</html>
