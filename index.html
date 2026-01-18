@@ -48,7 +48,7 @@
   <section id="about" class="about">
     <div class="about-inner">
       <div class="about-text">
-        <h2>알아보기</h2>
+        <h2>About</h2>
         <p>
           안녕하세요. Live2D Rigger 다중(Dajoong)입니다.<br>
           LD·SD 버추얼 모델을 비롯해 배경 애니메이션과 월페이퍼 작업을 진행하며, 
@@ -97,246 +97,292 @@
 
   <!-- Works -->
   <section id="works" class="works">
-    <h2>작품</h2>
+    <h2>Portfolio</h2>
+    <div data-type-buttons></div>
+    <div id="type-container"></div>
+<script>
+// Wrap slider setup so it runs after DOM is parsed and ensures a consistent init order
+document.addEventListener('DOMContentLoaded', () => {
+  // ------------------- 데이터 정의 -------------------
+  const videoData = {
+    LD: { title: "LD", list: ["wML53bUKn1Q", "yvc0yN8uwqU", "w-eRgLmsgas", "zKRPxZ7pv58", "sJjhHG1gJcE"] },
+    SD: { title: "SD", list: ["BtvMd8yG80g", "SwGP1UFE424", "pH4GRAjcp2U", "b6DNOVjED9o"] },
+    FAN: { title: "오너캐", list: ["cOmUiWxkqfo", "FzIi9m1bKeI"] },
+    MEM: { title: "메모리얼", list: ["JLTUyPkfsj0", "lhVUjv1q-bw"] }
+  };
 
-    <!-- 필터 컨트롤 (design-b) -->
-    <div class="controls design-b" role="toolbar" aria-label="작품 필터">
-      <div class="filter-group" role="group" aria-label="보기 선택">
-        <button class="filter-btn active" data-filter="all" aria-pressed="true">
-          <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg>
-          <span class="btn-label">모두</span>
-        </button>
+  // 자동으로 '모두' 탭 생성 (모든 섹션을 순서대로 병합)
+  (function addAllTab(){
+    const merged = [];
+    Object.keys(videoData).forEach(k => {
+      if (videoData[k] && Array.isArray(videoData[k].list)) merged.push(...videoData[k].list);
+    });
+    videoData.ALL = { title: '전체', list: merged };
+  })();
 
-        <button class="filter-btn" data-filter="LD">
-          <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M12 2l2.9 6.26L21 9.27l-5 4.87L17.8 21 12 17.77 6.2 21 8 14.14 3 9.27l6.1-1.01L12 2z"/></svg>
-          <span class="btn-label">LD</span>
-        </button>
+  // ------------------- HTML 자동 생성 -------------------
+  function buildAllTypes() {
+    const typeButtons = document.querySelector("[data-type-buttons]");
+    const container = document.getElementById("type-container");
 
-        <button class="filter-btn" data-filter="SD">
-          <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-4 8a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm-6.5 4.5a4.5 4.5 0 019 0H7.5z"/></svg>
-          <span class="btn-label">SD</span>
-        </button>
+    typeButtons.innerHTML = "";
+    container.innerHTML = "";
 
-        <button class="filter-btn" data-filter="MEM">
-          <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14h18zM8.5 13.5l2.5 3.01L14.5 13l4.5 6H5l3.5-5.5z"/></svg>
-          <span class="btn-label">메모리얼</span>
-        </button>
+    let typeKeys = Object.keys(videoData);
+    if (videoData.ALL) typeKeys = ['ALL', ...typeKeys.filter(k => k !== 'ALL')];
 
-        <button class="filter-btn" data-filter="FAN">
-          <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M12 21s-8-5.33-10-8.5A5.5 5.5 0 0112 3a5.5 5.5 0 0110 9.5C20 15.67 12 21 12 21z"/></svg>
-          <span class="btn-label">오너캐</span>
-        </button>
-      </div>
-    </div>
+    typeKeys.forEach((typeKey, idx) => {
+      const item = videoData[typeKey];
 
-    <div id="filter-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+      const btn = document.createElement("button");
+      btn.textContent = item.title;
+      btn.setAttribute("data-switch", typeKey);
+      if (idx === 0) btn.setAttribute("data-active", "true");
+      typeButtons.appendChild(btn);
 
-    <!-- LD -->
-    <div class="category-wrapper" data-cat="LD">
-      <h3>LD</h3>
-        <div class="work-grid"></div>
-          <div class="work-item main">
-            <div class="video-wrapper">
-             <iframe class="lazy-iframe" title="LD - 양초님 협업 판매 모델" data-src="https://www.youtube.com/embed/wML53bUKn1Q?si=_IXaltZe_qpu-qE3" src="about:blank" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-          <p>[2025] 양초님 협업 판매 모델</p>
-        </div>
+      const sec = document.createElement("section");
+      sec.setAttribute("data-type", typeKey);
+      if (idx === 0) sec.setAttribute("data-active", "true");
 
-      <div class="work-grid">
-        <div class="work-item">
+      sec.innerHTML = generateSliderHTML(item.list);
+      container.appendChild(sec);
+    });
+  }
+
+  // ------------------- 슬라이더 HTML 템플릿 생성 -------------------
+  function generateSliderHTML(list) {
+    let slides = "";
+    list.forEach((vid, i) => {
+      slides += `
+        <div data-slide data-video="${vid}" data-index="${i}" data-active="${i===0}">
           <div class="video-wrapper">
-            <iframe class="lazy-iframe" title="다중님 LD 모델" data-src="https://www.youtube.com/embed/yvc0yN8uwqU?si=_oL6-w3zr2BTanaM" src="about:blank" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="image-placeholder">Loading…</div>
+            <iframe class="lazy-iframe" title="Video ${vid}" data-src="https://www.youtube.com/embed/${vid}" src="about:blank" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
-          <p>[2025] 다중님 LD 모델</p>
+        </div>`;
+    });
+
+    let thumbs = "";
+    list.forEach((vid, i) => {
+      thumbs += `
+        <button data-thumb data-index="${i}" ${i===0 ? 'data-active="true"' : ''}>
+          <img src="https://img.youtube.com/vi/${vid}/hqdefault.jpg">
+        </button>`;
+    });
+
+    return `
+      <div data-root>
+        <div data-stage aria-roledescription="carousel" data-autoplay="false" data-interval="6000">
+          ${slides}
+          <button data-action="prev">❮</button>
+          <button data-action="next">❯</button>
         </div>
 
-        <div class="work-item">
-          <div class="video-wrapper">
-            <iframe class="lazy-iframe" title="LD - 하노히님" data-src="https://www.youtube.com/embed/w-eRgLmsgas" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <p>[2025] 하노히님</p>
-        </div>
+        <div data-dots></div>
 
-        <div class="work-item">
-          <div class="video-wrapper">
-            <iframe class="lazy-iframe" title="LD - 올어바웃설이님" data-src="https://www.youtube.com/embed/zKRPxZ7pv58" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <p>[2025] 올어바웃설이님</p>
+        <div data-thumbs-wrapper>
+          <div data-thumbs>${thumbs}</div>
         </div>
+      </div>`;
+  }
 
-        <div class="work-item">
-          <div class="video-wrapper">
-            <iframe class="lazy-iframe" title="LD - Sister" data-src="https://www.youtube.com/embed/sJjhHG1gJcE" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <p>[2025] Sister</p>
-        </div>
-      </div>
-    </div>
+  // ------------------- 초기 실행 -------------------
+  buildAllTypes();
 
-    <!-- SD -->
-    <div class="category-wrapper" data-cat="SD">
-      <h3>SD</h3>
-      <div class="work-grid">
-        <div class="work-item">
-          <div class="video-wrapper">
-            <iframe class="lazy-iframe" title="SD - 설프라님" data-src="https://www.youtube.com/embed/BtvMd8yG80g" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <p>[2025] 설프라님</p>
-        </div>
+  // Initialize lazy-loading for iframes and click-to-load behavior
+  function initLazyIframes() {
+    const wrappers = Array.from(document.querySelectorAll('.video-wrapper'))
+      .filter(w => w.querySelector('iframe[data-src]'));
 
-        <div class="work-item">
-          <div class="video-wrapper">
-            <iframe class="lazy-iframe" title="SD - 다중 SD 협업모델" data-src="https://www.youtube.com/embed/SwGP1UFE424" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <p>[2025] 다중 SD 협업모델</p>
-        </div>
+    if (!wrappers.length) return;
 
-        <div class="work-item">
-          <div class="video-wrapper">
-            <iframe class="lazy-iframe" title="SD - 다중 SD" data-src="https://www.youtube.com/embed/pH4GRAjcp2U" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <p>[2025] 다중 SD</p>
-        </div>
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const wrapper = entry.target;
+          const iframe = wrapper.querySelector('iframe[data-src]');
+          const ph = wrapper.querySelector('.image-placeholder');
+          if (iframe && iframe.dataset.src) {
+            iframe.src = iframe.dataset.src;
+            iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
+            iframe.removeAttribute('data-src'); iframe.classList.remove('lazy-iframe');
+          }
+          obs.unobserve(wrapper);
+        });
+      }, { rootMargin: '300px 0px' });
 
-        <div class="work-item">
-          <div class="video-wrapper">
-            <iframe class="lazy-iframe" title="SD - 황구님 SD" data-src="https://www.youtube.com/embed/b6DNOVjED9o" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <p>[2025] 황구님 SD</p>
-        </div>
-      </div>
-    </div>
+      wrappers.forEach(w => observer.observe(w));
+    }
 
-    <!-- FAN -->
-    <div class="category-wrapper" data-cat="FAN">
-      <h3>오너캐</h3>
-      <div class="work-grid">
-        <div class="work-item">
-          <div class="video-wrapper">
-            <div class="image-placeholder">쵸요링님 팬캐릭터 삵이꾼</div>
-            <iframe class="lazy-iframe" title="쵸요링님 팬캐릭터 삵이꾼" data-src="https://www.youtube.com/embed/cOmUiWxkqfo" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <p>쵸요링님 팬캐릭터 삵이꾼</p>
-        </div>
+    // click-to-load fallback
+    wrappers.forEach(wrapper => {
+      wrapper.addEventListener('click', () => {
+        const iframe = wrapper.querySelector('iframe[data-src]');
+        const ph = wrapper.querySelector('.image-placeholder');
+        if (iframe && iframe.dataset.src) {
+          iframe.src = iframe.dataset.src;
+          iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
+          iframe.removeAttribute('data-src'); iframe.classList.remove('lazy-iframe');
+        }
+      });
+    });
+  }
 
-        <div class="work-item">
-          <div class="video-wrapper">
-            <div class="image-placeholder">코하로님</div>
-            <iframe class="lazy-iframe" title="코하로님" data-src="https://www.youtube.com/embed/FzIi9m1bKeI" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <p>코하로님</p>
-        </div>
-      </div>
-    </div>
+  initLazyIframes();
 
-    <!-- MEM -->
-    <div class="category-wrapper" data-cat="MEM">
-      <h3>메모리얼</h3>
-      <div class="work-grid">
-        <div class="work-item">
-          <div class="video-wrapper">
-            <iframe class="lazy-iframe" title="메모리얼 - 노릇 노릇 해변구이" data-src="https://www.youtube.com/embed/JLTUyPkfsj0" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <p>[2025] 노릇 노릇 해변구이</p>
-        </div>
+  // 타입 전환 (타입 버튼)
+  const typeButtons = document.querySelectorAll('[data-type-buttons] button');
+  const typeSections = document.querySelectorAll('section[data-type]');
 
-        <div class="work-item">
-          <div class="video-wrapper">
-            <iframe class="lazy-iframe" title="[2024] 팀 이심 할로윈 대기화면" data-src="https://www.youtube.com/embed/lhVUjv1q-bw" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <p>[2024] 팀 이심 할로윈 대기화면</p>
-        </div>
-      </div>
-    </div>
+  typeButtons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const target = btn.getAttribute('data-switch');
+
+      typeButtons.forEach(b=>b.removeAttribute('data-active'));
+      btn.setAttribute('data-active','true');
+
+      typeSections.forEach(sec=>{
+        if(sec.getAttribute('data-type') === target)
+          sec.setAttribute('data-active','true');
+        else
+          sec.removeAttribute('data-active');
+      });
+
+      // ★ 타입 전환 후 즉시 각 root의 사이즈 재계산 (CSS 기반 비율 사용)
+      setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 10);
+    });
+  });
+
+  // Slider core
+  (function(){
+    const roots = document.querySelectorAll('div[data-root]');
+
+    roots.forEach(root => {
+      const stage = root.querySelector('div[data-stage]');
+      const slides = Array.from(stage.querySelectorAll('div[data-slide]'));
+      const prevBtn = stage.querySelector('button[data-action="prev"]');
+      const nextBtn = stage.querySelector('button[data-action="next"]');
+      const dotsWrap = root.querySelector('div[data-dots]');
+      const thumbs = root.querySelector('div[data-thumbs]');
+      const thumbButtons = Array.from(thumbs.querySelectorAll('button[data-thumb]'));
+      const progressBar = root.querySelector('div[data-bar]');
+
+      let current = slides.find(s => s.getAttribute('data-active') === 'true')
+        ?.getAttribute('data-index') || 0;
+      current = Number(current);
+      const total = slides.length;
+
+      let autoplay = stage.getAttribute('data-autoplay') === 'true';
+      let interval = parseInt(stage.getAttribute('data-interval') || '5000', 10);
+      let timer = null;
+
+      function buildDots(){
+        dotsWrap.innerHTML = '';
+        for(let i=0;i<total;i++){
+          const b = document.createElement('button');
+          b.setAttribute('data-dot','');
+          if(i===current) b.setAttribute('data-active','true');
+          b.addEventListener('click', ()=> goTo(i));
+          dotsWrap.appendChild(b);
+        }
+      }
+
+      function updateUI(){
+        slides.forEach(s=>{
+          const idx = Number(s.getAttribute('data-index'));
+          const active = idx===current;
+          s.setAttribute('data-active', active?'true':'false');
+          s.setAttribute('aria-hidden', active?'false':'true');
+        });
+
+        const dotBtns = dotsWrap.querySelectorAll('button[data-dot]');
+        dotBtns.forEach((d,i)=>{
+          if(i===current) d.setAttribute('data-active','true');
+          else d.removeAttribute('data-active');
+        });
+
+        thumbButtons.forEach((t,i)=>{
+          if(i===current) t.setAttribute('data-active','true');
+          else t.removeAttribute('data-active');
+        });
+
+        if (progressBar) progressBar.style.width = ((current+1)/total*100)+'%';
+      }
+
+      function goTo(i){
+        if(i<0) i=total-1;
+        if(i>=total) i=0;
+        current=i; updateUI(); resetAutoplay();
+      }
+
+      function prev(){ goTo(current-1); }
+      function next(){ goTo(current+1); }
+
+      thumbButtons.forEach(btn=> btn.addEventListener('click', ()=>{ const idx = Number(btn.getAttribute('data-index')); goTo(idx); }));
+
+      prevBtn.addEventListener('click', prev);
+      nextBtn.addEventListener('click', next);
+
+      window.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
+
+      function startAutoplay(){ if(!autoplay) return; stopAutoplay(); timer=setInterval(()=>next(), interval); }
+      function stopAutoplay(){ if(timer){ clearInterval(timer); timer=null; } }
+      function resetAutoplay(){ stopAutoplay(); startAutoplay(); }
+
+      function resizeThumbs() {
+        const thumbs = document.querySelectorAll('[data-thumbs] > button[data-thumb]');
+        if (!thumbs.length) return;
+        const width = window.innerWidth * 0.3;
+        const height = width * (9 / 16);
+        thumbs.forEach(btn => { btn.style.width = width + 'px'; btn.style.height = height + 'px'; });
+      }
+
+      function resizeStage() { const stage = root.querySelector('div[data-stage]'); if (!stage) return; stage.style.height = ''; }
+      function resizeIframe() { const iframes = root.querySelectorAll('[data-slide] iframe'); if (!iframes.length) return; iframes.forEach(iframe => { iframe.style.width = '100%'; iframe.style.height = '100%'; }); }
+
+      function handleResize() { resizeThumbs(); resizeStage(); resizeIframe(); }
+      let _resizeTimer = null; function scheduleResize() { if (_resizeTimer) clearTimeout(_resizeTimer); _resizeTimer = setTimeout(handleResize, 80); }
+
+      handleResize(); window.addEventListener('resize', scheduleResize);
+
+      buildDots(); updateUI(); startAutoplay();
+    });
+  })();
+
+});
+</script>
+<script>
+(function() {
+  let hasSentHeight = false;
+
+  function sendHeightOnce() {
+    if (hasSentHeight) return;
+
+    const height = document.body.scrollHeight; // 로딩 무시, 바로 계산
+
+    parent.postMessage(
+      { type: "sliderHeight", value: height },
+      "*"
+    );
+
+    hasSentHeight = true;
+  }
+
+  // DOMContentLoaded 시점에 바로 실행
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", sendHeightOnce);
+  } else {
+    sendHeightOnce();
+  }
+})();
+</script>
 
     <div class="more-btn">
       <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer">더 많은 작업 보기 →</a>
     <a href="https://dajoong.cloud/price.html" target="_blank" rel="noopener noreferrer">가격 확인하기 →</a>
     </div>
   </section>
-
-  <script>
-    // 필터 + 접근성 + IntersectionObserver 기반 lazy-load
-    document.addEventListener('DOMContentLoaded', () => {
-      const btns = Array.from(document.querySelectorAll('.filter-btn[data-filter]'));
-      const wrappers = Array.from(document.querySelectorAll('.category-wrapper'));
-      const announcer = document.getElementById('filter-announcer');
-
-      function setFilter(filter) {
-        btns.forEach(b => {
-          const active = b.dataset.filter === filter;
-          b.classList.toggle('active', active);
-          b.setAttribute('aria-pressed', String(active));
-        });
-        wrappers.forEach(w => {
-          const cat = w.dataset.cat;
-          const show = filter === 'all' || cat === filter;
-          w.classList.toggle('hidden', !show);
-        });
-        if (announcer) announcer.textContent = filter === 'all' ? '모두 보기' : `${filter} 보기`;
-      }
-
-      btns.forEach(b => {
-        b.addEventListener('click', () => setFilter(b.dataset.filter));
-        b.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            b.click();
-          }
-        });
-      });
-
-      const lazyIframes = Array.from(document.querySelectorAll('iframe.lazy-iframe[data-src]'));
-      if ('IntersectionObserver' in window && lazyIframes.length) {
-        const io = new IntersectionObserver((entries, obs) => {
-          entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            const iframe = entry.target;
-            if (iframe.dataset && iframe.dataset.src) {
-              // load iframe and hide placeholder when ready
-              iframe.src = iframe.dataset.src;
-              iframe.addEventListener('load', () => {
-                const ph = iframe.parentElement.querySelector('.image-placeholder');
-                if (ph) ph.classList.add('hidden');
-              }, { once: true });
-              iframe.removeAttribute('data-src');
-              iframe.classList.remove('lazy-iframe');
-            }
-            obs.unobserve(iframe);
-          });
-        }, { rootMargin: '300px 0px' });
-        lazyIframes.forEach(ifr => io.observe(ifr));
-      } else {
-        lazyIframes.forEach(iframe => {
-          iframe.src = iframe.dataset.src;
-          iframe.addEventListener('load', () => {
-            const ph = iframe.parentElement.querySelector('.image-placeholder');
-            if (ph) ph.classList.add('hidden');
-          }, { once: true });
-          iframe.removeAttribute('data-src');
-          iframe.classList.remove('lazy-iframe');
-        });
-      }
-
-      // 클릭 시 즉시 로드(사용자 우선)
-      document.querySelectorAll('.video-wrapper').forEach(wrapper => {
-        wrapper.addEventListener('click', () => {
-          const iframe = wrapper.querySelector('iframe[data-src]');
-          if (iframe) {
-            iframe.src = iframe.dataset.src;
-            iframe.addEventListener('load', () => {
-              const ph = wrapper.querySelector('.image-placeholder');
-              if (ph) ph.classList.add('hidden');
-            }, { once: true });
-            iframe.removeAttribute('data-src');
-            iframe.classList.remove('lazy-iframe');
-          }
-        });
-      });
-
-      setFilter('all');
-    });
-  </script>
 
   <!-- Contact -->
   <section id="contact" class="contact">
