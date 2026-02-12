@@ -9,11 +9,6 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Dajoong Live2D Portfolio" />
   <meta property="og:description" content="Live2D 리거 다중의 포트폴리오입니다. 다양한 스타일의 리깅과 배경 애니메이션 작업을 확인해보세요." />
-  <!-- Primary (wide) -->
-  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
-  <meta property="og:image:width" content="600" />
-  <meta property="og:image:height" content="600" />
-  <!-- Fallback (square) -->
   <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
   <meta property="og:image:width" content="600" />
   <meta property="og:image:height" content="600" />
@@ -28,28 +23,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
+  <section class="works">
     <div data-type-buttons></div>
     <div id="type-container"></div>
+  </section>
+
 <script>
-// Wrap slider setup so it runs after DOM is parsed and ensures a consistent init order
 document.addEventListener('DOMContentLoaded', () => {
   // ------------------- 데이터 정의 -------------------
   const videoData = {
     LD: { title: "LD", list: ["8EabRx_ZFAI", "wML53bUKn1Q", "yvc0yN8uwqU", "w-eRgLmsgas", "zKRPxZ7pv58", "sJjhHG1gJcE"] },
     SD: { title: "SD", list: ["bdD1dhv6lI4", "BtvMd8yG80g", "SwGP1UFE424", "pH4GRAjcp2U", "b6DNOVjED9o"] },
-    FAN: { title: "오너캐", list: ["cOmUiWxkqfo", "FzIi9m1bKeI", "9XtIUiv314c"  ] },
+    FAN: { title: "오너캐", list: ["cOmUiWxkqfo", "FzIi9m1bKeI", "9XtIUiv314c"] },
     MEM: { title: "메모리얼", list: ["JLTUyPkfsj0", "lhVUjv1q-bw"] }
   };
-
-  // 자동으로 '모두' 탭 생성 (모든 섹션을 순서대로 병합)
-  (function addAllTab(){
-    const merged = [];
-    Object.keys(videoData).forEach(k => {
-      if (videoData[k] && Array.isArray(videoData[k].list)) merged.push(...videoData[k].list);
-    });
-    videoData.ALL = { title: '전체', list: merged };
-  })();
 
   // ------------------- HTML 자동 생성 -------------------
   function buildAllTypes() {
@@ -60,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     container.innerHTML = "";
 
     let typeKeys = Object.keys(videoData);
-    if (videoData.ALL) typeKeys = ['ALL', ...typeKeys.filter(k => k !== 'ALL')];
 
     typeKeys.forEach((typeKey, idx) => {
       const item = videoData[typeKey];
@@ -127,6 +115,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!wrappers.length) return;
 
+    // ✅ 첫 번째 활성 영상은 즉시 로드
+    const activeWrapper = document.querySelector('[data-slide][data-active="true"] .video-wrapper');
+    if (activeWrapper) {
+      const iframe = activeWrapper.querySelector('iframe[data-src]');
+      const ph = activeWrapper.querySelector('.image-placeholder');
+      if (iframe && iframe.dataset.src) {
+        iframe.src = iframe.dataset.src;
+        iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
+        iframe.removeAttribute('data-src');
+      }
+    }
+
+    // 나머지 영상들은 lazy-load...
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
@@ -137,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (iframe && iframe.dataset.src) {
             iframe.src = iframe.dataset.src;
             iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
-            iframe.removeAttribute('data-src'); iframe.classList.remove('lazy-iframe');
+            iframe.removeAttribute('data-src');
           }
           obs.unobserve(wrapper);
         });
@@ -146,17 +147,24 @@ document.addEventListener('DOMContentLoaded', () => {
       wrappers.forEach(w => observer.observe(w));
     }
 
-    // click-to-load fallback
+    // click-to-load fallback (video-wrapper만 감지)
     wrappers.forEach(wrapper => {
-      wrapper.addEventListener('click', () => {
+      wrapper.addEventListener('click', (e) => {
+        // 버튼을 클릭했으면 무시
+        if (e.target.closest('button')) return;
+        
         const iframe = wrapper.querySelector('iframe[data-src]');
         const ph = wrapper.querySelector('.image-placeholder');
+        
         if (iframe && iframe.dataset.src) {
           iframe.src = iframe.dataset.src;
-          iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
-          iframe.removeAttribute('data-src'); iframe.classList.remove('lazy-iframe');
+          iframe.addEventListener('load', () => { 
+            if (ph) ph.classList.add('hidden'); 
+          }, { once: true });
+          iframe.removeAttribute('data-src');
+          iframe.classList.remove('lazy-iframe');
         }
-      });
+      }, true); // useCapture: true로 설정
     });
   }
 
@@ -180,7 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
           sec.removeAttribute('data-active');
       });
 
-      // ★ 타입 전환 후 즉시 각 root의 사이즈 재계산 (CSS 기반 비율 사용)
       setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 10);
     });
   });
@@ -197,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const dotsWrap = root.querySelector('div[data-dots]');
       const thumbs = root.querySelector('div[data-thumbs]');
       const thumbButtons = Array.from(thumbs.querySelectorAll('button[data-thumb]'));
-      const progressBar = root.querySelector('div[data-bar]');
 
       let current = slides.find(s => s.getAttribute('data-active') === 'true')
         ?.getAttribute('data-index') || 0;
@@ -237,8 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
           if(i===current) t.setAttribute('data-active','true');
           else t.removeAttribute('data-active');
         });
-
-        if (progressBar) progressBar.style.width = ((current+1)/total*100)+'%';
       }
 
       function goTo(i){
@@ -282,31 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
 });
-</script>
-<script>
-(function() {
-  let hasSentHeight = false;
-
-  function sendHeightOnce() {
-    if (hasSentHeight) return;
-
-    const height = document.body.scrollHeight; // 로딩 무시, 바로 계산
-
-    parent.postMessage(
-      { type: "sliderHeight", value: height },
-      "*"
-    );
-
-    hasSentHeight = true;
-  }
-
-  // DOMContentLoaded 시점에 바로 실행
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", sendHeightOnce);
-  } else {
-    sendHeightOnce();
-  }
-})();
 </script>
 </body>
 </html>
