@@ -7,9 +7,9 @@
   --accent-color:#ff6b6b;
   --muted:#666;
   --price-border: #9EEAE1;
-  --price-inner: #F3FFF9;
+  --price-inner: #F3FFF9;         /* 연한 청록 내부 색 */
   --price-border-hover: #7fe0d3;
-  --background: #f6fbf9;
+  --background: #f6fbf9;         /* 페이지 전체 배경 (쿨 틸과 조화) */
 }
 
 /* 페이지 배경 대비 개선 */
@@ -73,11 +73,12 @@ nav a[aria-current="page"]{font-weight:700;box-shadow:inset 0 -2px 0 var(--accen
   margin-top:8px;
 }
 .about-text{
+  /* 기존 스타일 유지 + 수직 배치 제어 */
   display:flex;
   flex-direction:column;
-  justify-content:space-between;
+  justify-content:space-between; /* 제목/본문과 문의 링크 간 거리 자동 조절 */
   padding:22px;
-  min-height:140px;
+  min-height:140px; /* 필요시 값 조정 가능 */
 }
 .about-note{
   margin-top:12px;
@@ -106,6 +107,7 @@ nav a[aria-current="page"]{font-weight:700;box-shadow:inset 0 -2px 0 var(--accen
   opacity:.95;
   border-radius:2px;
 }
+/* hover / focus 시 밑줄 전개 */
 .about-note a:hover,
 .about-note a:focus{
   color:#333;
@@ -116,15 +118,18 @@ nav a[aria-current="page"]{font-weight:700;box-shadow:inset 0 -2px 0 var(--accen
   transform:scaleX(1);
   background:linear-gradient(90deg, rgba(0,0,0,0.12), rgba(0,0,0,0.04));
 }
+/* 키보드 접근성용 포커스 스타일 */
 .about-note a:focus{
   box-shadow:0 0 0 4px rgba(0,0,0,0.06);
   border-radius:4px;
 }
+/* 방문 링크 색상 약간 톤다운 */
 .about-note a:visited{
   color:#575757;
 }
 
 .about-card{
+  /* 너비는 고정하되 내용은 수직 가운데 정렬하여 비대칭 느낌 완화 */
   flex:0 0 280px;
   display:flex;
   flex-direction:column;
@@ -141,14 +146,15 @@ nav a[aria-current="page"]{font-weight:700;box-shadow:inset 0 -2px 0 var(--accen
   margin:0;
   display:flex;
   flex-direction:column;
-  gap:12px;
+  gap:12px; /* 항목 간격 */
 }
 
+/* 항목을 카드처럼 보이게 하고 텍스트 가독성 향상 */
 .about-card li{
   background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   padding:12px 14px;
   border-radius:8px;
-  border-left:4px solid rgba(255,255,255,0.04);
+  border-left:4px solid rgba(255,255,255,0.04); /* 왼쪽 액센트 바 */
   color:#e6e6e6;
   line-height:1.45;
   display:flex;
@@ -157,6 +163,7 @@ nav a[aria-current="page"]{font-weight:700;box-shadow:inset 0 -2px 0 var(--accen
   box-shadow: inset 0 -1px 0 rgba(0,0,0,0.06);
 }
 
+/* 제목을 더 도드라지게 */
 .about-card strong{
   display:block;
   font-weight:700;
@@ -165,7 +172,8 @@ nav a[aria-current="page"]{font-weight:700;box-shadow:inset 0 -2px 0 var(--accen
   font-size:0.98rem;
 }
 
-.about-card li > br { display:none; }
+/* 설명 텍스트(줄바꿈 후 부분) 톤 다운 */
+.about-card li > br { display:none; } /* 기존 br이 있더라도 layout 제어 */
 .about-card li{
   white-space:normal;
 }
@@ -175,9 +183,10 @@ nav a[aria-current="page"]{font-weight:700;box-shadow:inset 0 -2px 0 var(--accen
   font-size:0.92rem;
 }
 
-.about-card li:nth-child(1){ border-left-color: #ff6b6b; }
-.about-card li:nth-child(2){ border-left-color: #6bc1ff; }
-.about-card li:nth-child(3){ border-left-color: #9b8cff; }
+/* 항목별 다른 액센트 색(선택사항) */
+.about-card li:nth-child(1){ border-left-color: #ff6b6b; } /* 전문 분야 */
+.about-card li:nth-child(2){ border-left-color: #6bc1ff; } /* 툴 */
+.about-card li:nth-child(3){ border-left-color: #9b8cff; } /* 스타일 */
 
 /* 작품 그리드 (반응형) */
 .work-grid{
@@ -194,7 +203,7 @@ nav a[aria-current="page"]{font-weight:700;box-shadow:inset 0 -2px 0 var(--accen
   box-shadow:0 2px 8px rgba(0,0,0,0.04);
 }
 
-/* ==================== 범용 비디오 래퍼 (다른 페이지용) ==================== */
+/* 반응형 비디오 래퍼 (16:9) */
 .video-wrapper{
   position:relative;
   width:100%;
@@ -202,13 +211,14 @@ nav a[aria-current="page"]{font-weight:700;box-shadow:inset 0 -2px 0 var(--accen
   overflow:hidden;
   border-radius:6px;
   background:#000;
+  cursor:pointer;
 }
 .video-wrapper iframe{
   position:absolute;
   top:0;left:0;width:100%;height:100%;border:0;z-index:1;
 }
 
-/* 범용 이미지 플레이스홀더 */
+/* 이미지 플레이스홀더 (팬 샘플 등) */
 .image-placeholder{
   position:absolute;
   top:0;left:0;width:100%;height:100%;
@@ -225,24 +235,6 @@ nav a[aria-current="page"]{font-weight:700;box-shadow:inset 0 -2px 0 var(--accen
 }
 .image-placeholder.hidden{opacity:0;visibility:hidden;pointer-events:none}
 .image-placeholder img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:6px}
-
-/* ==================== 슬라이더 전용 스타일 ==================== */
-/* 슬라이더 내부의 video-wrapper는 클릭 불가 */
-[data-slide] .video-wrapper{
-  cursor:default;
-  pointer-events:none; /* wrapper 자체는 클릭 방지 */
-}
-
-/* 슬라이더 내부의 iframe은 상호작용 가능 */
-[data-slide] .video-wrapper iframe{
-  pointer-events:auto;
-}
-
-/* 슬라이더 내부의 placeholder만 클릭 가능 */
-[data-slide] .image-placeholder{
-  cursor:pointer;
-  pointer-events:auto; /* placeholder는 클릭 가능 */
-}
 
 /* 버튼/링크 스타일 */
 .more-btn{display:flex;justify-content:center;align-items:center;gap:12px;margin:16px 0;flex-wrap:wrap}
@@ -298,6 +290,7 @@ footer{text-align:center;padding:20px 0;color:#666;font-size:0.9rem}
   border-color:var(--price-border-hover);
 }
 
+/* 강조 버튼(빠른 문의용) — 기존 .contact-cta 스타일 업데이트 (아이콘 포함 정렬) */
 .price-card .contact-cta,
 .contact-cta{
   display:inline-flex;
@@ -331,6 +324,7 @@ footer{text-align:center;padding:20px 0;color:#666;font-size:0.9rem}
   outline-offset:3px;
 }
 
+/* price-note 내 링크 기본 스타일이 남아있다면 덮어쓰기(회색톤 유지) */
 .price-note a, .price-note a:visited{
   color:#4b4b4b;
   text-decoration:none;
@@ -350,21 +344,22 @@ footer{text-align:center;padding:20px 0;color:#666;font-size:0.9rem}
   header h1{font-size:1.1rem}
   .price-card{min-height:auto;padding:14px}
   .price-card-head{flex-direction:column;align-items:flex-start;gap:6px}
+  /* more-btn 모바일: 세로 스택 및 버튼 전체 너비 */
   .more-btn{flex-direction:column;gap:10px}
   .more-btn a{width:100%;text-align:center}
 }
 
+/* Fix: improve contrast for hero/about text and ensure page centers */
 .hero h2 { color: #111; }
 .hero p, .hero .hero-sub { color: #444; }
 .about-text p { color: #333; }
 
+/* Ensure main sections are centered and respect max-width */
 html, body { width:100%; }
 header, .hero, section, footer { width:100%; max-width:var(--max-width); margin:0 auto; box-sizing:border-box; }
 
-/* ==================== SLIDER STYLES (슬라이더 전용 스타일) ==================== */
-/* 다른 페이지에 영향을 주지 않도록 [data-*] 선택자 사용 */
-
-/* 섹션별 테마 컬러 */
+/* Slider CSS moved from test4.html */
+/* --- 섹션별 테마 컬러 (버튼 & 도트에 상속) --- */
 [data-type-buttons] button[data-switch="LD"] { --main-color: #bf8496; --main-grad: linear-gradient(135deg,#bf8496,#ffb7cf); }
 [data-type-buttons] button[data-switch="SD"] { --main-color: #5da7ff; --main-grad: linear-gradient(135deg,#5da7ff,#8fd1ff); }
 [data-type-buttons] button[data-switch="MEM"] { --main-color: #7be3a7; --main-grad: linear-gradient(135deg,#7be3a7,#c7ffd7); }
@@ -392,7 +387,7 @@ section[data-type="FAN"]{ --main-color: #f6b64b; --main-grad: linear-gradient(13
   background:var(--muted);
   transition: transform .18s ease, box-shadow .18s ease, color .18s ease, background .18s ease;
   display:inline-flex; align-items:center; gap:10px;
-  box-shadow:0 6px 18px rgba(20,20,40,0.04);
+  box-shadow:var(--shadow);
   color:#222;
   font-weight:600;
 }
@@ -414,6 +409,7 @@ section[data-type="FAN"]{ --main-color: #f6b64b; --main-grad: linear-gradient(13
   box-shadow:none;
 }
 
+/* --- 타입 컨텐츠 영역 --- */
 section[data-type] {
   display:none;
 }
@@ -421,9 +417,12 @@ section[data-type][data-active="true"] {
   display:block;
 }
 
-/* Slider container */
-body > div[data-root],
-section[data-type] > div[data-root] {
+
+
+/* Slider styles */
+
+/* 컨테이너 */
+body > div[data-root] {
   max-width:1180px; margin:36px auto;
   background:#fff; border-radius:16px;
   padding:22px; box-shadow:0 8px 30px rgba(20,20,40,0.08);
@@ -457,52 +456,29 @@ div[data-root] > div[data-stage] {
 [data-stage] > button[data-action="next"] {
   position:absolute; top:50%; transform:translateY(-50%);
   width:44px; height:44px; border-radius:999px;
-  border:0; background:rgba(255, 255, 255, 0.95);
+  border:0; background:rgba(255,255,255,0.95);
   box-shadow:0 6px 18px rgba(20,20,40,0.08);
   cursor:pointer; display:flex;
   align-items:center; justify-content:center;
   font-size:18px; user-select:none;
-  color:#111;
-  font-weight:600;
-  transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
 }
 [data-stage] > button[data-action="prev"] { left:14px; }
 [data-stage] > button[data-action="next"] { right:14px; }
 
-[data-stage] > button[data-action="prev"]:hover,
-[data-stage] > button[data-action="next"]:hover {
-  background:rgba(255,255,255,1);
-  box-shadow:0 10px 30px rgba(20,20,40,0.12);
-  transform:translateY(-50%) scale(1.08);
-}
-
-/* 도트 */
+/* 도트 (모던 스타일) */
 div[data-root] > div[data-dots] {
-  margin-top:14px; display:flex; gap:12px;
+  margin-top:14px; display:flex; gap:10px;
   justify-content:center; align-items:center;
 }
 [data-dots] > button[data-dot] {
-  width:12px; height:12px; border-radius:999px;
-  border:0; background:rgba(100,100,120,0.3);
-  cursor:pointer; transition:all .18s ease;
-  padding:0; display:inline-block;
-  box-shadow:0 2px 8px rgba(20,20,40,0.04);
-  position:relative;
-}
-[data-dots] > button[data-dot]:hover {
-  background:rgba(100,100,120,0.5);
-  transform:scale(1.2);
-  box-shadow:0 4px 12px rgba(20,20,40,0.08);
-}
-[data-dots] > button[data-dot][data-active="true"] {
-  width:14px; height:14px;
-  background:var(--main-color);
-  box-shadow:0 6px 20px rgba(139,92,246, 0.4);
-  transform:scale(1.4);
-  opacity:1;
+  width:14px; height:14px; border-radius:999px;
+  border:2px solid rgba(0,0,0,0.06);
+  background:transparent; cursor:pointer; margin:0px; position:relative;
+  transition: transform .18s ease, box-shadow .18s ease;
 }
 
-/* Apply section */
+/* Page-specific styles moved from test2.html (#apply section) */
+/* 신청양식 전용(다른 영역 영향 없음) */
 #apply .apply-wrap{ margin-top: 14px; }
 #apply .apply-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
 @media (max-width: 900px){ #apply .apply-grid{ grid-template-columns: 1fr; } }
@@ -536,110 +512,49 @@ div[data-root] > div[data-dots] {
   opacity:0; transform:scale(0.6); transition:opacity .18s ease, transform .18s ease;
 }
 [data-dots] > button[data-dot]:hover{ transform:translateY(-4px); box-shadow:0 6px 18px rgba(20,20,40,0.08); }
-[data-dots] > button[data-dot][data-active="true"] { box-shadow: 0 6px 30px rgba(139,92,246, 0.45); transform:scale(1.3); }
-
-/* ✅ 썸네일 컨테이너 및 버튼 - 고정 크기 사용 */
-[data-thumbs-wrapper] {
-  margin-top: 16px;
-}
-
+[data-dots] > button[data-dot][data-active="true"] { box-shadow: 0 6px 30px rgba( var(--accent-rgb), 0.45 ); transform:scale(1.3); }
+[data-thumbs] > button[data-thumb] { border:2px solid rgba(255,255,255,0.04); transition: box-shadow .18s; }
+[data-thumbs] > button[data-thumb]:hover { box-shadow: 0 12px 30px rgba( color-mix(in srgb, var(--main-color) 30%, black), 0.12 ); }
 [data-thumbs-wrapper] > div[data-thumbs] {
-  display:flex; 
-  gap:10px; 
-  overflow-x:auto; 
-  padding-bottom:10px;
-  border-radius:8px; 
-  background:transparent;
+  display:flex; gap:10px; overflow-x:auto; padding-bottom:10px;
+  border-radius:8px; background:transparent; flex:1 1 auto;
   scrollbar-width:thin;
 }
-
-/* ✅ 썸네일 버튼 - CSS에서 크기 완전히 고정 */
 [data-thumbs] > button[data-thumb] {
-  flex:0 0 auto; 
-  width:192px !important;  /* ✅ 고정 크기 강제 */
-  height:108px !important; /* ✅ 고정 크기 강제 */
-  min-width:192px;
-  min-height:108px;
-  max-width:192px;
-  max-height:108px;
-  border-radius:8px; 
-  border:3px solid transparent; 
-  padding:0;
-  background:#fff; 
-  box-shadow:0 6px 18px rgba(20,20,20,0.06);
-  cursor:pointer; 
-  overflow:hidden;
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  flex:0 0 auto; width:192px; height:108px; max-width:192px; max-height:108px;
+  border-radius:8px; border:3px solid transparent; padding:0px;
+  background:#fff; box-shadow:0 6px 18px rgba(20,20,20,0.06);
+  cursor:pointer; overflow:hidden;
 }
-
 [data-thumb] > img {
-  width:100%; 
-  height:100%; 
-  object-fit:cover;
+  width:100%; height:100%; object-fit:cover;
   display:block;
-  pointer-events:none; /* ✅ 이미지 클릭 방지 */
 }
-
-[data-thumbs] > button[data-thumb]:hover {
-  transform:translateY(-4px);
-  box-shadow: 0 12px 30px rgba(20,20,20,0.12);
-}
-
 [data-thumbs] > button[data-thumb][data-active="true"] {
-  border-color:var(--main-color); 
-  transform:translateY(-4px);
-  box-shadow: 0 12px 30px rgba(139,92,246,0.25);
+  border-color:var(--main-color); transform:translateY(-4px);
 }
 
-/* 썸네일 스크롤바 스타일 */
+/* 썸네일 스크롤바 스타일 (웹킷 기반 브라우저) */
 [data-thumbs]::-webkit-scrollbar {
-  height: 10px;
+  height: 10px; /* 스크롤바 두께 */
 }
 
 [data-thumbs]::-webkit-scrollbar-track {
-  background: #e8e8ec;
+  background: #e8e8ec;  /* 트랙(바탕) 색 */
   border-radius: 10px;
 }
 
 [data-thumbs]::-webkit-scrollbar-thumb {
-  background: var(--main-color);
+  background: var(--main-color);   /* 스크롤바 색상 */
   border-radius: 10px;
 }
 
 [data-thumbs]::-webkit-scrollbar-thumb:hover {
-  background: var(--main-color);
+  background: var(--main-color);   /* 호버 시 색상 */
 }
 
+/* Firefox 전용 */
 [data-thumbs] {
-  scrollbar-color: var(--main-color) #e8e8ec;
+  scrollbar-color: var(--main-color) #e8e8ec; /* thumb, track */
   scrollbar-width: thin;
-}
-
-/* ✅ 반응형 - 모바일에서 슬라이더 높이 조정 */
-@media (max-width: 768px) {
-  div[data-root] > div[data-stage] {
-    height: 400px;
-    max-height: 400px;
-  }
-  
-  [data-thumbs] > button[data-thumb] {
-    width: 140px !important;
-    height: 79px !important;
-    min-width: 140px;
-    min-height: 79px;
-  }
-}
-
-@media (max-width: 480px) {
-  div[data-root] > div[data-stage] {
-    height: 300px;
-    max-height: 300px;
-  }
-  
-  [data-thumbs] > button[data-thumb] {
-    width: 120px !important;
-    height: 68px !important;
-    min-width: 120px;
-    min-height: 68px;
-  }
 }

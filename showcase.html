@@ -77,13 +77,26 @@ document.addEventListener('DOMContentLoaded', () => {
   function generateSliderHTML(list) {
     let slides = "";
     list.forEach((vid, i) => {
-      slides += `
-        <div data-slide data-video="${vid}" data-index="${i}" data-active="${i===0}">
+      const isActive = i === 0;
+      if (isActive) {
+        // 활성 슬라이드: src 직접 로드
+        slides += `
+        <div data-slide data-video="${vid}" data-index="${i}" data-active="true">
           <div class="video-wrapper">
-            <div class="image-placeholder" data-clickable="true">Loading…</div>
-            <iframe class="lazy-iframe" title="Video ${vid}" data-src="https://www.youtube.com/embed/${vid}" src="about:blank" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="image-placeholder hidden" data-clickable="true">Loading…</div>
+            <iframe title="Video ${vid}" src="https://www.youtube.com/embed/${vid}?fs=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
           </div>
         </div>`;
+      } else {
+        // 비활성 슬라이드: data-src로 lazy loading
+        slides += `
+        <div data-slide data-video="${vid}" data-index="${i}" data-active="false">
+          <div class="video-wrapper">
+            <div class="image-placeholder" data-clickable="true">Loading…</div>
+            <iframe class="lazy-iframe" title="Video ${vid}" data-src="https://www.youtube.com/embed/${vid}?fs=0" src="about:blank" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+          </div>
+        </div>`;
+      }
     });
 
     let thumbs = "";
@@ -169,6 +182,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
+
+    // ✅ Wrapper 클릭도 반응하도록 (이미 로드된 iframe 클릭 시)
+    allSlides.forEach(slide => {
+      const wrapper = slide.querySelector('.video-wrapper');
+      if (wrapper) {
+        wrapper.addEventListener('click', (e) => {
+          // placeholder가 아닐 때만 처리 (placeholder는 위에서 이미 처리됨)
+          if (e.target !== slide.querySelector('.image-placeholder')) {
+            // iframe을 클릭한 경우 YouTube 플레이어가 자동으로 처리함
+            return;
+          }
+        }, { passive: true });
+      }
+    });
   }
 
   initLazyIframes();
@@ -191,7 +218,20 @@ document.addEventListener('DOMContentLoaded', () => {
           sec.removeAttribute('data-active');
       });
 
-      setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 10);
+      // 타입 전환 후 활성 슬라이드의 iframe 로드 보장
+      setTimeout(() => { 
+        const activeSlide = document.querySelector('section[data-type][data-active="true"] [data-slide][data-active="true"]');
+        if (activeSlide) {
+          const iframe = activeSlide.querySelector('iframe[data-src]');
+          const ph = activeSlide.querySelector('.image-placeholder');
+          if (iframe && iframe.dataset.src) {
+            iframe.src = iframe.dataset.src;
+            iframe.removeAttribute('data-src');
+            if (ph) ph.classList.add('hidden');
+          }
+        }
+        window.dispatchEvent(new Event('resize')); 
+      }, 10);
     });
   });
 
