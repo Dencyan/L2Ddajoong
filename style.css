@@ -456,25 +456,49 @@ div[data-root] > div[data-stage] {
 [data-stage] > button[data-action="next"] {
   position:absolute; top:50%; transform:translateY(-50%);
   width:44px; height:44px; border-radius:999px;
-  border:0; background:rgba(255,255,255,0.95);
+  border:0; background:rgba(255, 255, 255, 0.95);
   box-shadow:0 6px 18px rgba(20,20,40,0.08);
   cursor:pointer; display:flex;
   align-items:center; justify-content:center;
   font-size:18px; user-select:none;
+  color:#111;  /* ✅ 추가: 검은색 텍스트 */
+  font-weight:600;  /* ✅ 추가: 더 명확하게 */
+  transition:transform .12s ease, box-shadow .12s ease, background .12s ease;  /* ✅ hover 효과 */
 }
 [data-stage] > button[data-action="prev"] { left:14px; }
 [data-stage] > button[data-action="next"] { right:14px; }
 
+/* ✅ hover 상태 추가 */
+[data-stage] > button[data-action="prev"]:hover,
+[data-stage] > button[data-action="next"]:hover {
+  background:rgba(255,255,255,1);
+  box-shadow:0 10px 30px rgba(20,20,40,0.12);
+  transform:translateY(-50%) scale(1.08);
+}
+
 /* 도트 (모던 스타일) */
 div[data-root] > div[data-dots] {
-  margin-top:14px; display:flex; gap:10px;
+  margin-top:14px; display:flex; gap:12px;
   justify-content:center; align-items:center;
 }
 [data-dots] > button[data-dot] {
-  width:14px; height:14px; border-radius:999px;
-  border:2px solid rgba(0,0,0,0.06);
-  background:transparent; cursor:pointer; margin:0px; position:relative;
-  transition: transform .18s ease, box-shadow .18s ease;
+  width:12px; height:12px; border-radius:999px;
+  border:0; background:rgba(100,100,120,0.3);
+  cursor:pointer; transition:all .18s ease;
+  padding:0; display:inline-block;
+  box-shadow:0 2px 8px rgba(20,20,40,0.04);
+}
+[data-dots] > button[data-dot]:hover {
+  background:rgba(100,100,120,0.5);
+  transform:scale(1.2);
+  box-shadow:0 4px 12px rgba(20,20,40,0.08);
+}
+[data-dots] > button[data-dot][data-active="true"] {
+  width:14px; height:14px;
+  background:var(--main-color);
+  box-shadow:0 6px 20px rgba(var(--accent-rgb, 139,92,246), 0.4);
+  transform:scale(1.4);
+  opacity:1;
 }
 
 /* Page-specific styles moved from test2.html (#apply section) */
