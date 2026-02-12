@@ -9,6 +9,11 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Dajoong Live2D Portfolio" />
   <meta property="og:description" content="Live2D 리거 다중의 포트폴리오입니다. 다양한 스타일의 리깅과 배경 애니메이션 작업을 확인해보세요." />
+  <!-- Primary (wide) -->
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="600" />
+  <!-- Fallback (square) -->
   <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
   <meta property="og:image:width" content="600" />
   <meta property="og:image:height" content="600" />
@@ -75,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
       slides += `
         <div data-slide data-video="${vid}" data-index="${i}" data-active="${i===0}">
           <div class="video-wrapper">
-            <div class="image-placeholder">Loading…</div>
+            <div class="image-placeholder" data-clickable="true">Loading…</div>
             <iframe class="lazy-iframe" title="Video ${vid}" data-src="https://www.youtube.com/embed/${vid}" src="about:blank" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>`;
@@ -85,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     list.forEach((vid, i) => {
       thumbs += `
         <button data-thumb data-index="${i}" ${i===0 ? 'data-active="true"' : ''}>
-          <img src="https://img.youtube.com/vi/${vid}/hqdefault.jpg">
+          <img src="https://img.youtube.com/vi/${vid}/hqdefault.jpg" alt="Thumbnail ${i+1}">
         </button>`;
     });
 
@@ -108,82 +113,80 @@ document.addEventListener('DOMContentLoaded', () => {
   // ------------------- 초기 실행 -------------------
   buildAllTypes();
 
-  // Initialize lazy-loading for iframes and click-to-load behavior
+  // ✅ Iframe 로딩 헬퍼 함수
+  function loadIframe(wrapper) {
+    const iframe = wrapper.querySelector('iframe[data-src]');
+    const ph = wrapper.querySelector('.image-placeholder');
+    
+    if (iframe && iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      iframe.addEventListener('load', () => { 
+        if (ph) ph.classList.add('hidden'); 
+      }, { once: true });
+      iframe.removeAttribute('data-src');
+      iframe.classList.remove('lazy-iframe');
+      return true;
+    }
+    return false;
+  }
+
+  // Initialize lazy-loading for iframes
   function initLazyIframes() {
-    const wrappers = Array.from(document.querySelectorAll('.video-wrapper'))
-      .filter(w => w.querySelector('iframe[data-src]'));
-
-    if (!wrappers.length) return;
-
+    const allSlides = document.querySelectorAll('[data-slide]');
+    
     // ✅ 첫 번째 활성 영상은 즉시 로드
-    const activeWrapper = document.querySelector('[data-slide][data-active="true"] .video-wrapper');
-    if (activeWrapper) {
-      const iframe = activeWrapper.querySelector('iframe[data-src]');
-      const ph = activeWrapper.querySelector('.image-placeholder');
-      if (iframe && iframe.dataset.src) {
-        iframe.src = iframe.dataset.src;
-        iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
-        iframe.removeAttribute('data-src');
-      }
+    const activeSlide = document.querySelector('[data-slide][data-active="true"]');
+    if (activeSlide) {
+      const wrapper = activeSlide.querySelector('.video-wrapper');
+      if (wrapper) loadIframe(wrapper);
     }
 
-    // 나머지 영상들은 lazy-load...
+    // ✅ IntersectionObserver로 뷰포트 진입 시 로드
     if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries, obs) => {
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const wrapper = entry.target;
-          const iframe = wrapper.querySelector('iframe[data-src]');
-          const ph = wrapper.querySelector('.image-placeholder');
-          if (iframe && iframe.dataset.src) {
-            iframe.src = iframe.dataset.src;
-            iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
-            iframe.removeAttribute('data-src');
+          if (entry.isIntersecting) {
+            const slide = entry.target;
+            const wrapper = slide.querySelector('.video-wrapper');
+            if (wrapper && loadIframe(wrapper)) {
+              observer.unobserve(slide);
+            }
           }
-          obs.unobserve(wrapper);
         });
       }, { rootMargin: '300px 0px' });
 
-      wrappers.forEach(w => observer.observe(w));
+      allSlides.forEach(slide => observer.observe(slide));
     }
 
-    // click-to-load fallback (video-wrapper만 감지)
-    wrappers.forEach(wrapper => {
-      wrapper.addEventListener('click', (e) => {
-        // 버튼을 클릭했으면 무시
-        if (e.target.closest('button')) return;
-        
-        const iframe = wrapper.querySelector('iframe[data-src]');
-        const ph = wrapper.querySelector('.image-placeholder');
-        
-        if (iframe && iframe.dataset.src) {
-          iframe.src = iframe.dataset.src;
-          iframe.addEventListener('load', () => { 
-            if (ph) ph.classList.add('hidden'); 
-          }, { once: true });
-          iframe.removeAttribute('data-src');
-          iframe.classList.remove('lazy-iframe');
-        }
-      }, true); // useCapture: true로 설정
+    // ✅ Placeholder 클릭 시 로드 (placeholder만 반응)
+    allSlides.forEach(slide => {
+      const placeholder = slide.querySelector('.image-placeholder');
+      if (placeholder) {
+        placeholder.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const wrapper = slide.querySelector('.video-wrapper');
+          if (wrapper) loadIframe(wrapper);
+        });
+      }
     });
   }
 
   initLazyIframes();
 
-  // 타입 전환 (타입 버튼)
+  // ✅ 타입 전환 (타입 버튼)
   const typeButtons = document.querySelectorAll('[data-type-buttons] button');
   const typeSections = document.querySelectorAll('section[data-type]');
 
-  typeButtons.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
+  typeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
       const target = btn.getAttribute('data-switch');
 
-      typeButtons.forEach(b=>b.removeAttribute('data-active'));
-      btn.setAttribute('data-active','true');
+      typeButtons.forEach(b => b.removeAttribute('data-active'));
+      btn.setAttribute('data-active', 'true');
 
-      typeSections.forEach(sec=>{
-        if(sec.getAttribute('data-type') === target)
-          sec.setAttribute('data-active','true');
+      typeSections.forEach(sec => {
+        if (sec.getAttribute('data-type') === target)
+          sec.setAttribute('data-active', 'true');
         else
           sec.removeAttribute('data-active');
       });
@@ -192,8 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Slider core
-  (function(){
+  // ✅ Slider core
+  (function() {
     const roots = document.querySelectorAll('div[data-root]');
 
     roots.forEach(root => {
@@ -214,74 +217,104 @@ document.addEventListener('DOMContentLoaded', () => {
       let interval = parseInt(stage.getAttribute('data-interval') || '5000', 10);
       let timer = null;
 
-      function buildDots(){
+      function buildDots() {
         dotsWrap.innerHTML = '';
-        for(let i=0;i<total;i++){
+        for (let i = 0; i < total; i++) {
           const b = document.createElement('button');
-          b.setAttribute('data-dot','');
-          if(i===current) b.setAttribute('data-active','true');
-          b.addEventListener('click', ()=> goTo(i));
+          b.setAttribute('data-dot', '');
+          if (i === current) b.setAttribute('data-active', 'true');
+          b.addEventListener('click', () => goTo(i));
           dotsWrap.appendChild(b);
         }
       }
 
-      function updateUI(){
-        slides.forEach(s=>{
+      function updateUI() {
+        slides.forEach(s => {
           const idx = Number(s.getAttribute('data-index'));
-          const active = idx===current;
-          s.setAttribute('data-active', active?'true':'false');
-          s.setAttribute('aria-hidden', active?'false':'true');
+          const active = idx === current;
+          s.setAttribute('data-active', active ? 'true' : 'false');
+          s.setAttribute('aria-hidden', active ? 'false' : 'true');
         });
 
         const dotBtns = dotsWrap.querySelectorAll('button[data-dot]');
-        dotBtns.forEach((d,i)=>{
-          if(i===current) d.setAttribute('data-active','true');
+        dotBtns.forEach((d, i) => {
+          if (i === current) d.setAttribute('data-active', 'true');
           else d.removeAttribute('data-active');
         });
 
-        thumbButtons.forEach((t,i)=>{
-          if(i===current) t.setAttribute('data-active','true');
+        thumbButtons.forEach((t, i) => {
+          if (i === current) t.setAttribute('data-active', 'true');
           else t.removeAttribute('data-active');
         });
+
+        // ✅ 활성 슬라이드의 iframe을 자동 로드
+        const activeSlide = slides.find(s => Number(s.getAttribute('data-index')) === current);
+        if (activeSlide) {
+          const wrapper = activeSlide.querySelector('.video-wrapper');
+          if (wrapper) loadIframe(wrapper);
+        }
       }
 
-      function goTo(i){
-        if(i<0) i=total-1;
-        if(i>=total) i=0;
-        current=i; updateUI(); resetAutoplay();
+      function goTo(i) {
+        if (i < 0) i = total - 1;
+        if (i >= total) i = 0;
+        current = i;
+        updateUI();
+        resetAutoplay();
       }
 
-      function prev(){ goTo(current-1); }
-      function next(){ goTo(current+1); }
+      function prev() { goTo(current - 1); }
+      function next() { goTo(current + 1); }
 
-      thumbButtons.forEach(btn=> btn.addEventListener('click', ()=>{ const idx = Number(btn.getAttribute('data-index')); goTo(idx); }));
+      // ✅ 썸네일 클릭 - 이벤트 전파 완전 차단
+      thumbButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          const idx = Number(btn.getAttribute('data-index'));
+          goTo(idx);
+        }, true); // ✅ capture phase에서 먼저 처리
+      });
 
-      prevBtn.addEventListener('click', prev);
-      nextBtn.addEventListener('click', next);
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        prev();
+      });
 
-      window.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        next();
+      });
 
-      function startAutoplay(){ if(!autoplay) return; stopAutoplay(); timer=setInterval(()=>next(), interval); }
-      function stopAutoplay(){ if(timer){ clearInterval(timer); timer=null; } }
-      function resetAutoplay(){ stopAutoplay(); startAutoplay(); }
+      window.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+      });
 
-      function resizeThumbs() {
-        const thumbs = document.querySelectorAll('[data-thumbs] > button[data-thumb]');
-        if (!thumbs.length) return;
-        const width = window.innerWidth * 0.3;
-        const height = width * (9 / 16);
-        thumbs.forEach(btn => { btn.style.width = width + 'px'; btn.style.height = height + 'px'; });
+      function startAutoplay() {
+        if (!autoplay) return;
+        stopAutoplay();
+        timer = setInterval(() => next(), interval);
       }
 
-      function resizeStage() { const stage = root.querySelector('div[data-stage]'); if (!stage) return; stage.style.height = ''; }
-      function resizeIframe() { const iframes = root.querySelectorAll('[data-slide] iframe'); if (!iframes.length) return; iframes.forEach(iframe => { iframe.style.width = '100%'; iframe.style.height = '100%'; }); }
+      function stopAutoplay() {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      }
 
-      function handleResize() { resizeThumbs(); resizeStage(); resizeIframe(); }
-      let _resizeTimer = null; function scheduleResize() { if (_resizeTimer) clearTimeout(_resizeTimer); _resizeTimer = setTimeout(handleResize, 80); }
+      function resetAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+      }
 
-      handleResize(); window.addEventListener('resize', scheduleResize);
-
-      buildDots(); updateUI(); startAutoplay();
+      buildDots();
+      updateUI();
+      startAutoplay();
     });
   })();
 
