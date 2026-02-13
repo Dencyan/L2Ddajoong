@@ -9,7 +9,7 @@
   --price-border: #9EEAE1;
   --price-inner: #F3FFF9;         /* 연한 청록 내부 색 */
   --price-border-hover: #7fe0d3;
-  --background: #ebdcff;         /* 페이지 전체 배경 (쿨 틸과 조화) */
+  --background: #f2f0ff;         /* 페이지 전체 배경 (쿨 틸과 조화) */
 }
 
 /* 페이지 배경 대비 개선 */
@@ -424,7 +424,7 @@ section[data-type][data-active="true"] {
 /* 컨테이너 */
 body > div[data-root] {
   max-width:1180px; margin:36px auto;
-  background:#ebdcff; border-radius:16px;
+  background:#f2f0ff; border-radius:16px;
   padding:22px; box-shadow:0 8px 30px rgba(20,20,40,0.08);
   box-sizing:border-box;
 }
@@ -433,7 +433,7 @@ body > div[data-root] {
 div[data-root] > div[data-stage] {
   position:relative; width:100%; height:560px; max-height:560px;
   border-radius:12px; overflow:hidden;
-  background:#ebdcff;
+  background:#f2f0ff;
   display:flex; align-items:center; justify-content:center;
 }
 
