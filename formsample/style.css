@@ -31,20 +31,20 @@
             theme
 ============================== */
 :root{
-    --primary: #9FA8FF;
-    --primary-strong: #7C87FF;
-    --secondary: #CFE3FF;
+    --primary: #ff6b6b;
+    --primary-strong: #ff5252;
+    --secondary: #f6fbf9;
     --white: #FFFFFF;
-    --accent-pink: #FFC2E3;
-    --bg: linear-gradient(180deg, #EEF1FF 0%, #F6F8FF 40%, #FFFFFF 100%);
-    --panel: rgba(255,255,255,.7);
-    --panel-2: rgba(245,247,255,.7);
-    --text: #1F2A44;
-    --text-light: rgba(31,42,68,.65);
-    --border: rgba(150,160,255,.22);
-    --border-strong: rgba(150,160,255,.35);
-    --shadow-sm: 0 10px 24px rgba(40, 55, 140, .10);
-    --shadow-md: 0 20px 60px rgba(40, 55, 140, .14);
+    --accent-pink: #9EEAE1;
+    --bg: #f6fbf9;
+    --panel: rgba(255,255,255,.92);
+    --panel-2: rgba(245,247,255,.95);
+    --text: #111111;
+    --text-light: #666666;
+    --border: rgba(157, 234, 225, .25);
+    --border-strong: rgba(157, 234, 225, .4);
+    --shadow-sm: 0 10px 24px rgba(0, 0, 0, .06);
+    --shadow-md: 0 20px 60px rgba(0, 0, 0, .08);
     --r-md: 16px;
     --r-lg: 22px;
     --r-xl: 30px;
@@ -100,14 +100,14 @@ section{
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    border: 1px solid rgba(150,160,255,.18);
+    border: 1px solid rgba(157, 234, 225, .25);
     border-radius: var(--r-xl);
     padding: 22px;
     background:
-        radial-gradient(980px 520px at 12% 0%, rgba(207,227,255,.55), transparent 60%),
-        radial-gradient(820px 520px at 90% 18%, rgba(159,168,255,.35), transparent 60%),
-        radial-gradient(900px 520px at 60% 120%, rgba(255,194,227,.22), transparent 65%),
-        rgba(247,248,255,.92);
+        radial-gradient(980px 520px at 12% 0%, rgba(158, 234, 225, .3), transparent 60%),
+        radial-gradient(820px 520px at 90% 18%, rgba(157, 234, 225, .15), transparent 60%),
+        radial-gradient(900px 520px at 60% 120%, rgba(255, 107, 107, .1), transparent 65%),
+        rgba(247, 248, 255, .92);
     box-shadow: var(--shadow-md);
     display: grid;
     grid-template-columns: 1fr 0.9fr;
@@ -172,7 +172,7 @@ section{
     transform: translateY(-50%);
     border-radius: 99px;
     background: var(--primary);
-    box-shadow: 0 0 0 3px rgba(159,168,255,.12);
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, .12);
 }
 
 .card-title::after{
@@ -183,7 +183,7 @@ section{
     width: 72px;
     height: 10px;
     border-radius: 999px;
-    background: radial-gradient(closest-side, rgba(159,168,255,.28), transparent 70%);
+    background: radial-gradient(closest-side, rgba(255, 107, 107, .25), transparent 70%);
     filter: blur(1px);
 }
 
@@ -210,7 +210,7 @@ section{
     transform: translateY(-50%);
     border-radius: 99px;
     background: var(--primary);
-    box-shadow: 0 0 0 3px rgba(159,168,255,.12);
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, .12);
 }
 
 .intro-title::after{
@@ -221,7 +221,7 @@ section{
     width: 72px;
     height: 10px;
     border-radius: 999px;
-    background: radial-gradient(closest-side, rgba(159,168,255,.28), transparent 70%);
+    background: radial-gradient(closest-side, rgba(255, 107, 107, .25), transparent 70%);
     filter: blur(1px);
 }
 
@@ -247,8 +247,8 @@ section{
     align-items: center;
     padding: 6px 10px;
     border-radius: 999px;
-    border: 1px solid rgba(150,160,255,.18);
-    background: rgba(245,247,255,.90);
+    border: 1px solid rgba(157, 234, 225, .25);
+    background: rgba(158, 234, 225, .08);
     font-size: 12px;
 }
 
@@ -291,8 +291,8 @@ section{
     align-items: center;
     padding: 6px 10px;
     border-radius: 999px;
-    background: rgba(159,168,255,.22);
-    border: 1px solid rgba(159,168,255,.35);
+    background: rgba(255, 107, 107, .12);
+    border: 1px solid rgba(255, 107, 107, .25);
     color: var(--text);
     font-size: 12px;
     white-space: nowrap;
@@ -324,9 +324,9 @@ section{
     align-items: center;
     gap: 12px;
     padding: 10px 12px;
-    border: 1px solid rgba(150,160,255,.18);
+    border: 1px solid rgba(157, 234, 225, .2);
     border-radius: var(--r-md);
-    background: rgba(247,249,255,.85);
+    background: rgba(158, 234, 225, .05);
 }
 
 .slot-month {
@@ -376,14 +376,15 @@ section{
 }
 
 .hero-btn-primary {
-    background: linear-gradient(135deg, rgba(159,168,255,.98), rgba(207,227,255,.92));
+    background: linear-gradient(135deg, rgba(255, 107, 107, .95), rgba(255, 152, 152, .88));
     color: #fff;
-    box-shadow: 0 10px 22px rgba(120,130,255,.18);
+    box-shadow: 0 10px 22px rgba(255, 107, 107, .18);
 }
 
 .hero-btn-secondary {
-    background: rgba(255,255,255,.92);
+    background: rgba(158, 234, 225, .1);
     color: var(--text);
+    border: 1px solid rgba(158, 234, 225, .3);
 }
 
 .hero-btn:hover {
