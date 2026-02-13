@@ -424,7 +424,7 @@ section[data-type][data-active="true"] {
 /* 컨테이너 */
 body > div[data-root] {
   max-width:1180px; margin:36px auto;
-  background:#fff; border-radius:16px;
+  background:#ece4fa; border-radius:16px;
   padding:22px; box-shadow:0 8px 30px rgba(20,20,40,0.08);
   box-sizing:border-box;
 }
