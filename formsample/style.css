@@ -1,0 +1,397 @@
+/* ==============================
+            font
+============================== */
+@font-face {
+    font-family: 'Isamanru';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: 300;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Isamanru';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Isamanru';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicBold.woff') format('woff');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TMoneyDungunbaram';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindRegular.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+/* ==============================
+            theme
+============================== */
+:root{
+    --primary: #9FA8FF;
+    --primary-strong: #7C87FF;
+    --secondary: #CFE3FF;
+    --white: #FFFFFF;
+    --accent-pink: #FFC2E3;
+    --bg: linear-gradient(180deg, #EEF1FF 0%, #F6F8FF 40%, #FFFFFF 100%);
+    --panel: rgba(255,255,255,.7);
+    --panel-2: rgba(245,247,255,.7);
+    --text: #1F2A44;
+    --text-light: rgba(31,42,68,.65);
+    --border: rgba(150,160,255,.22);
+    --border-strong: rgba(150,160,255,.35);
+    --shadow-sm: 0 10px 24px rgba(40, 55, 140, .10);
+    --shadow-md: 0 20px 60px rgba(40, 55, 140, .14);
+    --r-md: 16px;
+    --r-lg: 22px;
+    --r-xl: 30px;
+}
+
+/* ==============================
+            base
+============================== */
+* { box-sizing: border-box; }
+
+html, body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Isamanru', Courier, monospace;
+    font-weight: 300;
+    color: var(--text);
+    scroll-behavior: smooth;
+}
+
+body{
+    background: #ffffff;
+    overflow-x: hidden;
+}
+
+main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 12px;
+    position: relative;
+    isolation: isolate;
+    background: var(--bg);
+}
+
+main > * {
+    position: relative;
+    z-index: 1;
+}
+
+.sec{
+    padding: 28px 0;
+}
+
+section{
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+/* ==============================
+            HERO layout
+============================== */
+.hero-wrap{
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid rgba(150,160,255,.18);
+    border-radius: var(--r-xl);
+    padding: 22px;
+    background:
+        radial-gradient(980px 520px at 12% 0%, rgba(207,227,255,.55), transparent 60%),
+        radial-gradient(820px 520px at 90% 18%, rgba(159,168,255,.35), transparent 60%),
+        radial-gradient(900px 520px at 60% 120%, rgba(255,194,227,.22), transparent 65%),
+        rgba(247,248,255,.92);
+    box-shadow: var(--shadow-md);
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    gap: 18px;
+}
+
+.hero-left{
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 16px;
+}
+
+.hero-right{
+    display: flex;
+}
+
+.hero-left, .hero-right, .hero-card{
+    position: relative;
+    z-index: 1;
+}
+
+/* ==============================
+            HERO cards
+============================== */
+.hero-card{
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    background: var(--panel);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+}
+
+.hero-slot{
+    flex: 1;
+    height: auto;
+}
+
+.card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px 10px;
+}
+
+.card-title {
+    position: relative;
+    margin: 0;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    padding-left: 14px;
+}
+
+.card-title::before{
+    content:"";
+    position:absolute;
+    left: 0;
+    top: 50%;
+    width: 6px;
+    height: 18px;
+    transform: translateY(-50%);
+    border-radius: 99px;
+    background: var(--primary);
+    box-shadow: 0 0 0 3px rgba(159,168,255,.12);
+}
+
+.card-title::after{
+    content:"";
+    position:absolute;
+    left: 14px;
+    bottom: -6px;
+    width: 72px;
+    height: 10px;
+    border-radius: 999px;
+    background: radial-gradient(closest-side, rgba(159,168,255,.28), transparent 70%);
+    filter: blur(1px);
+}
+
+.card-body{
+    padding: 0 16px 16px;
+}
+
+/* intro */
+.intro-title {
+    position: relative;
+    margin: 2px 0 10px;
+    font-size: 18px;
+    line-height: 1.35;
+    padding-left: 14px;
+}
+
+.intro-title::before{
+    content:"";
+    position:absolute;
+    left: 0;
+    top: 50%;
+    width: 6px;
+    height: 18px;
+    transform: translateY(-50%);
+    border-radius: 99px;
+    background: var(--primary);
+    box-shadow: 0 0 0 3px rgba(159,168,255,.12);
+}
+
+.intro-title::after{
+    content:"";
+    position:absolute;
+    left: 14px;
+    bottom: -6px;
+    width: 72px;
+    height: 10px;
+    border-radius: 999px;
+    background: radial-gradient(closest-side, rgba(159,168,255,.28), transparent 70%);
+    filter: blur(1px);
+}
+
+.intro-desc{
+    margin: 0;
+    line-height: 1.5;
+    color: var(--text);
+}
+
+.intro-text p + p {
+    margin-top: 8px;
+}
+
+.tag-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.tag{
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(150,160,255,.18);
+    background: rgba(245,247,255,.90);
+    font-size: 12px;
+}
+
+/* event */
+.event-title {
+    margin: 2px 0 6px;
+    font-size: 18px;
+    line-height: 1.35;
+    font-weight: 300;
+}
+
+.event-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 2px 0 2px;
+}
+
+.event-sub-inline{
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.35;
+}
+
+.event-top .badge{
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.event-desc{
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    color: var(--primary-strong);
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(159,168,255,.22);
+    border: 1px solid rgba(159,168,255,.35);
+    color: var(--text);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* slot */
+.slot-legend{
+    display: flex;
+    gap: 12px;
+    padding: 2px 0 10px;
+}
+
+.legend{
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.slot-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.slot-item{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border: 1px solid rgba(150,160,255,.18);
+    border-radius: var(--r-md);
+    background: rgba(247,249,255,.85);
+}
+
+.slot-month {
+    letter-spacing: -0.02em;
+}
+
+.slot-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.slot-icons {
+    font-family: 'TMoneyDungunbaram';
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+.slot-note {
+    margin: 12px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.muted {
+    color: var(--text-light);
+}
+
+.hero-actions {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.hero-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 12px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid rgba(150,160,255,.22);
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    user-select: none;
+}
+
+.hero-btn-primary {
+    background: linear-gradient(135deg, rgba(159,168,255,.98), rgba(207,227,255,.92));
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(120,130,255,.18);
+}
+
+.hero-btn-secondary {
+    background: rgba(255,255,255,.92);
+    color: var(--text);
+}
+
+.hero-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+    box-shadow: 0 14px 30px rgba(25,45,120,.12);
+}
+
+.fx-wrap {
+    position: relative;
+}
