@@ -331,7 +331,7 @@ footer{text-align:center;padding:20px 0;color:#666;font-size:0.9rem}
 }
 
 /* 반응형 */
-@media (max-width:900px){
+@media (max-width:890px){
   .about-inner{flex-direction:column}
   .about-card{
     flex:1 1 auto;
