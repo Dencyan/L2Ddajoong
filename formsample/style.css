@@ -36,7 +36,7 @@
     --secondary: #f6fbf9;
     --white: #FFFFFF;
     --accent-pink: #9EEAE1;
-    --bg: #f6fbf9;
+    --bg: #ffffff;
     --panel: rgba(255,255,255,.92);
     --panel-2: rgba(245,247,255,.95);
     --text: #111111;
@@ -66,7 +66,7 @@ html, body{
 }
 
 body{
-    background: #ffffff;
+    background: #FFFFFF;
     overflow-x: hidden;
 }
 
