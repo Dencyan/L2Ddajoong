@@ -1,6 +1,6 @@
 /* ====================================================================
    
-   🎬 Dajoong Live2D Portfolio - Slider Script
+   🎬 Dajoong Live2D - Slider Script
    
    이 코드는 Live2D Rigger "다중(Dajoong)"이 작성했습니다.
    

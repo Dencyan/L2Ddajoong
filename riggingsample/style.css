@@ -59,7 +59,7 @@ html, body{
 }
 
 body{
-    background: #ffffff;
+    background: #f2f0ff;
     overflow-x: hidden;
 }
 
@@ -98,7 +98,7 @@ section{
 .sp-wrap {
     border: 1px solid var(--border);
     border-radius: var(--r-xl);
-    background: rgba(247,248,255,.92);
+    background: #f2f0ff;
     box-shadow: var(--shadow-md);
     padding: 18px;
     overflow: hidden;
