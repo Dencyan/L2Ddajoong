@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>전기기능사 전기설비 문제집</title>
+<title>전기기능사 연습문제 (이론편)</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
 
@@ -31,11 +31,10 @@
     line-height: 1.7;
   }
 
-  /* HEADER */
   header {
     background: linear-gradient(135deg, #0d0f14 0%, #1a1f2e 50%, #0d0f14 100%);
     border-bottom: 1px solid var(--border);
-    padding: 32px 24px 24px;
+    padding: 28px 24px 20px;
     text-align: center;
     position: sticky;
     top: 0;
@@ -43,330 +42,137 @@
     backdrop-filter: blur(10px);
   }
 
-  header h1 {
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: var(--accent);
-    letter-spacing: -0.5px;
-    margin-bottom: 6px;
-  }
+  header h1 { font-size: 1.5rem; font-weight: 900; color: var(--accent); letter-spacing: -0.5px; margin-bottom: 4px; }
+  header p { color: var(--muted); font-size: 0.82rem; }
 
-  header p {
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-
-  /* STATS BAR */
   .stats-bar {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    padding: 14px 24px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
+    display: flex; gap: 16px; justify-content: center;
+    padding: 12px 24px; background: var(--surface);
+    border-bottom: 1px solid var(--border); flex-wrap: wrap;
   }
-
-  .stat {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.85rem;
-    font-weight: 700;
-  }
-
-  .stat-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-  }
-
+  .stat { display: flex; align-items: center; gap: 6px; font-size: 0.83rem; font-weight: 700; }
+  .stat-dot { width: 8px; height: 8px; border-radius: 50%; }
   .stat.total .stat-dot { background: var(--accent); }
   .stat.done .stat-dot { background: var(--accent2); }
   .stat.correct .stat-dot { background: var(--correct); }
   .stat.wrong .stat-dot { background: var(--wrong); }
 
-  /* FILTER */
   .filter-bar {
-    display: flex;
-    gap: 8px;
-    padding: 16px 24px;
-    flex-wrap: wrap;
-    justify-content: center;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
+    display: flex; gap: 8px; padding: 14px 24px;
+    flex-wrap: wrap; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
   }
-
   .filter-btn {
-    padding: 6px 14px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    background: transparent;
-    color: var(--muted);
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.2s;
+    padding: 5px 13px; border: 1px solid var(--border); border-radius: 20px;
+    background: transparent; color: var(--muted); font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.78rem; cursor: pointer; transition: all 0.2s;
   }
-
   .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
   .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 700; }
 
-  /* MAIN */
-  main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 24px 16px 60px;
-  }
+  main { max-width: 800px; margin: 0 auto; padding: 22px 16px 60px; }
 
-  /* PROGRESS */
-  .progress-wrap {
-    margin-bottom: 20px;
-  }
+  .progress-wrap { margin-bottom: 18px; }
+  .progress-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent)); border-radius: 2px; transition: width 0.4s ease; }
 
-  .progress-bar {
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent2), var(--accent));
-    border-radius: 2px;
-    transition: width 0.4s ease;
-  }
-
-  /* QUESTION CARD */
   .q-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    margin-bottom: 16px;
-    overflow: hidden;
-    transition: border-color 0.3s;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; margin-bottom: 12px; overflow: hidden; transition: border-color 0.3s;
   }
-
   .q-card.answered-correct { border-color: var(--correct); }
   .q-card.answered-wrong { border-color: var(--wrong); }
 
   .q-header {
-    padding: 16px 20px;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    cursor: pointer;
-    user-select: none;
+    padding: 14px 18px; display: flex; align-items: flex-start;
+    gap: 10px; cursor: pointer; user-select: none;
   }
-
   .q-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--accent);
-    background: rgba(240,165,0,0.1);
-    border: 1px solid rgba(240,165,0,0.3);
-    border-radius: 6px;
-    padding: 3px 8px;
-    white-space: nowrap;
-    margin-top: 2px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700;
+    color: var(--accent); background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3);
+    border-radius: 5px; padding: 2px 7px; white-space: nowrap; margin-top: 2px; flex-shrink: 0;
   }
-
+  .q-hot {
+    font-size: 0.68rem; color: #ef4444; background: rgba(239,68,68,0.12);
+    border: 1px solid rgba(239,68,68,0.3); border-radius: 4px;
+    padding: 2px 6px; white-space: nowrap; margin-top: 4px; flex-shrink: 0;
+  }
   .q-tag {
-    font-size: 0.7rem;
-    color: var(--muted);
-    background: var(--tag-bg);
-    border-radius: 4px;
-    padding: 2px 7px;
-    white-space: nowrap;
-    margin-top: 4px;
+    font-size: 0.68rem; color: var(--muted); background: var(--tag-bg);
+    border-radius: 4px; padding: 2px 7px; white-space: nowrap; margin-top: 4px; flex-shrink: 0;
   }
-
-  .q-text {
-    flex: 1;
-    font-size: 0.95rem;
-    font-weight: 500;
-    line-height: 1.6;
-  }
-
-  .q-arrow {
-    color: var(--muted);
-    font-size: 0.9rem;
-    margin-top: 3px;
-    transition: transform 0.3s;
-    flex-shrink: 0;
-  }
-
+  .q-text { flex: 1; font-size: 0.92rem; font-weight: 500; line-height: 1.6; }
+  .q-arrow { color: var(--muted); font-size: 0.85rem; margin-top: 3px; transition: transform 0.3s; flex-shrink: 0; }
   .q-card.open .q-arrow { transform: rotate(180deg); }
 
-  /* OPTIONS */
-  .q-options {
-    padding: 0 20px 4px;
-    display: none;
-  }
-
+  .q-options { padding: 0 18px 4px; display: none; }
   .q-card.open .q-options { display: block; }
 
   .option-btn {
-    width: 100%;
-    text-align: left;
-    padding: 11px 14px;
-    margin-bottom: 8px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: rgba(255,255,255,0.02);
-    color: var(--text);
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.88rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    line-height: 1.5;
+    width: 100%; text-align: left; padding: 10px 13px; margin-bottom: 7px;
+    border: 1px solid var(--border); border-radius: 8px;
+    background: rgba(255,255,255,0.02); color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif; font-size: 0.86rem;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: flex-start; gap: 9px; line-height: 1.5;
   }
-
-  .option-btn:hover:not(:disabled) {
-    border-color: var(--accent2);
-    background: rgba(59,130,246,0.08);
-  }
-
-  .option-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--muted);
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .option-btn.correct {
-    border-color: var(--correct);
-    background: rgba(34,197,94,0.1);
-    color: var(--correct);
-  }
-
+  .option-btn:hover:not(:disabled) { border-color: var(--accent2); background: rgba(59,130,246,0.08); }
+  .option-num { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 700; color: var(--muted); flex-shrink: 0; margin-top: 1px; }
+  .option-btn.correct { border-color: var(--correct); background: rgba(34,197,94,0.1); color: var(--correct); }
   .option-btn.correct .option-num { color: var(--correct); }
-
-  .option-btn.wrong {
-    border-color: var(--wrong);
-    background: rgba(239,68,68,0.1);
-    color: var(--wrong);
-  }
-
+  .option-btn.wrong { border-color: var(--wrong); background: rgba(239,68,68,0.1); color: var(--wrong); }
   .option-btn.wrong .option-num { color: var(--wrong); }
-
   .option-btn:disabled { cursor: default; }
 
-  /* ANSWER REVEAL */
   .answer-box {
-    display: none;
-    margin: 4px 0 16px;
-    padding: 14px 16px;
-    background: rgba(240,165,0,0.05);
-    border: 1px solid rgba(240,165,0,0.2);
-    border-radius: 8px;
-    font-size: 0.88rem;
-    line-height: 1.7;
+    display: none; margin: 4px 0 14px; padding: 13px 15px;
+    background: rgba(240,165,0,0.05); border: 1px solid rgba(240,165,0,0.2);
+    border-radius: 8px; font-size: 0.85rem; line-height: 1.75;
   }
-
   .answer-box.show { display: block; }
-
-  .answer-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-    text-transform: uppercase;
-  }
-
-  /* SHORT ANSWER (주관식) */
-  .short-input-wrap {
-    padding: 0 20px 12px;
-    display: none;
-  }
-
-  .q-card.open .short-input-wrap { display: block; }
-
-  .short-input {
-    width: 100%;
-    padding: 10px 14px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.9rem;
-    outline: none;
-    margin-bottom: 8px;
-    transition: border-color 0.2s;
-  }
-
-  .short-input:focus { border-color: var(--accent2); }
-
-  .check-btn {
-    padding: 8px 20px;
-    background: var(--accent2);
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
-
-  .check-btn:hover { opacity: 0.85; }
-
-  /* RESET BTN */
-  .reset-wrap {
-    text-align: center;
-    margin-top: 32px;
-  }
-
-  .reset-btn {
-    padding: 12px 32px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--muted);
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-  /* NO RESULT */
-  .no-result {
-    text-align: center;
-    color: var(--muted);
-    padding: 60px 0;
-    font-size: 0.95rem;
-    display: none;
-  }
+  .answer-label { font-size: 0.72rem; font-weight: 700; color: var(--accent); letter-spacing: 1px; margin-bottom: 5px; text-transform: uppercase; }
 
   .chapter-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin: 28px 0 12px;
-    padding: 0 4px;
+    font-size: 0.72rem; font-weight: 700; color: var(--muted); letter-spacing: 2px;
+    text-transform: uppercase; margin: 26px 0 10px; padding-left: 10px;
     border-left: 3px solid var(--accent);
-    padding-left: 10px;
   }
+
+  .reset-wrap { text-align: center; margin-top: 28px; }
+  .reset-btn {
+    padding: 11px 28px; background: transparent; border: 1px solid var(--border);
+    border-radius: 8px; color: var(--muted); font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.88rem; cursor: pointer; transition: all 0.2s;
+  }
+  .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .no-result { text-align: center; color: var(--muted); padding: 60px 0; font-size: 0.95rem; display: none; }
+
+  /* 핵심 암기 카드 */
+  .memo-section {
+    margin-top: 40px; padding: 24px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 12px;
+  }
+  .memo-title { font-size: 1rem; font-weight: 900; color: var(--accent); margin-bottom: 16px; }
+  .memo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width:600px){ .memo-grid { grid-template-columns: 1fr; } }
+  .memo-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px;
+  }
+  .memo-card h4 { font-size: 0.78rem; color: var(--accent); font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px; }
+  .memo-card p, .memo-card li { font-size: 0.82rem; color: var(--text); line-height: 1.8; }
+  .memo-card ul { padding-left: 14px; }
+  table.memo-tbl { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  table.memo-tbl th { background: rgba(240,165,0,0.1); color: var(--accent); padding: 5px 8px; text-align: center; }
+  table.memo-tbl td { padding: 5px 8px; text-align: center; border-top: 1px solid var(--border); color: var(--text); }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>⚡ 전기기능사 전기설비 문제집</h1>
-  <p>클릭하여 문제 확인 · 보기 선택으로 정답 체크</p>
+  <h1>⚡ 전기기능사 연습문제 (이론편)</h1>
+  <p>총 120문제 | 1장~6장 전범위 · 클릭하여 문제 확인</p>
 </header>
 
 <div class="stats-bar">
@@ -377,23 +183,74 @@
 </div>
 
 <div class="filter-bar">
-  <button class="filter-btn active" onclick="filterCategory('all')">전체</button>
-  <button class="filter-btn" onclick="filterCategory('개요')">설비 개요</button>
-  <button class="filter-btn" onclick="filterCategory('배선재료')">배선재료·공구</button>
-  <button class="filter-btn" onclick="filterCategory('전선접속')">전선접속</button>
-  <button class="filter-btn" onclick="filterCategory('옥내배선')">옥내배선공사</button>
-  <button class="filter-btn" onclick="filterCategory('보안')">기계기구 보안</button>
-  <button class="filter-btn" onclick="filterCategory('가공')">가공·배전반</button>
-  <button class="filter-btn" onclick="filterCategory('특수')">특수장소·조명</button>
+  <button class="filter-btn active" onclick="filterCat('all',this)">전체</button>
+  <button class="filter-btn" onclick="filterCat('1장',this)">1장. 기초 전기이론</button>
+  <button class="filter-btn" onclick="filterCat('2장',this)">2장. 열전·건전지</button>
+  <button class="filter-btn" onclick="filterCat('3장',this)">3장. 교류 회로</button>
+  <button class="filter-btn" onclick="filterCat('4장',this)">4장. 3상 전력</button>
+  <button class="filter-btn" onclick="filterCat('5장',this)">5장. 정전계</button>
+  <button class="filter-btn" onclick="filterCat('6장',this)">6장. 정자계</button>
 </div>
 
 <main>
   <div class="progress-wrap">
     <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
   </div>
-
   <div id="quiz-container"></div>
-  <div class="no-result" id="no-result">해당 카테고리에 문제가 없습니다.</div>
+  <div class="no-result" id="no-result">해당 챕터에 문제가 없습니다.</div>
+
+  <!-- 핵심 암기 섹션 -->
+  <div class="memo-section" id="memo-section">
+    <div class="memo-title">🎯 핵심 암기 사항</div>
+    <div class="memo-grid">
+      <div class="memo-card">
+        <h4>⚠️ 단위 환산 (빈출)</h4>
+        <ul>
+          <li>1kWh = <strong>860kcal</strong></li>
+          <li>1J = <strong>0.24cal</strong></li>
+          <li>1HP = <strong>746W</strong></li>
+        </ul>
+      </div>
+      <div class="memo-card">
+        <h4>파형률 / 파고율</h4>
+        <table class="memo-tbl">
+          <tr><th>파형</th><th>파형률</th><th>파고율</th></tr>
+          <tr><td>정현파</td><td>1.11</td><td>1.414</td></tr>
+          <tr><td>삼각파</td><td>1.15</td><td>1.732</td></tr>
+          <tr><td>구형파</td><td>1</td><td>1</td></tr>
+        </table>
+      </div>
+      <div class="memo-card">
+        <h4>역률 암기</h4>
+        <ul>
+          <li>cosθ = 0.8 → sinθ = <strong>0.6</strong></li>
+          <li>cosθ = 0.6 → sinθ = <strong>0.8</strong></li>
+        </ul>
+      </div>
+      <div class="memo-card">
+        <h4>⚠️ 비례상수 혼동 주의</h4>
+        <ul>
+          <li>전기(정전계): <strong>9 × 10⁹</strong></li>
+          <li>자기(정자계): <strong>6.33 × 10⁴</strong></li>
+        </ul>
+      </div>
+      <div class="memo-card">
+        <h4>자성체 3종류</h4>
+        <ul>
+          <li>강자성(μs≫1): <strong>철, 니켈, 코발트</strong></li>
+          <li>상자성(μs>1): <strong>알루미늄, 백금</strong></li>
+          <li>반자성(μs&lt;1): <strong>구리, 금, 물</strong></li>
+        </ul>
+      </div>
+      <div class="memo-card">
+        <h4>전기력선 vs 자기력선</h4>
+        <ul>
+          <li>전기력선: <strong>불연속</strong>, 도체 내부 ❌</li>
+          <li>자기력선: <strong>연속</strong>(폐곡선), 내부 ✅</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <div class="reset-wrap">
     <button class="reset-btn" onclick="resetAll()">🔄 전체 다시 풀기</button>
@@ -402,210 +259,150 @@
 
 <script>
 const questions = [
-  // ===== 설비 개요 =====
-  {cat:'개요', type:'mc', q:'전력 계통에서 명령 및 지시를 수행하는 곳은?',
-    opts:['발전소','변전소','급전소','개폐소'], ans:2,
-    ex:'급전소는 전력 계통 운용을 지시하고 급전 조작을 담당합니다.'},
-  {cat:'개요', type:'mc', q:'대지전압의 최대 허용 기준은?',
-    opts:['200V','250V','300V','400V'], ans:2,
-    ex:'대지전압 300V 이하, 사용전압 400V 이하가 기준입니다.'},
-  {cat:'개요', type:'mc', q:'교류 기준 전압의 구분에서 "고압"의 범위는?',
-    opts:['1kV 이하','1kV 초과 7kV 이하','7kV 초과 60kV 이하','60kV 초과'], ans:1,
-    ex:'고압은 AC 1kV 초과 ~ 7kV 이하, 특고압은 7kV 초과입니다.'},
-  {cat:'개요', type:'mc', q:'전압 밴드(특별저압) 기준으로 옳은 것은?',
-    opts:['교류 60V, 직류 150V','교류 50V, 직류 120V','교류 70V, 직류 100V','교류 100V, 직류 200V'], ans:1,
-    ex:'분수대·수영장 등 인체 밀접 장소에 적용하는 특별저압 기준입니다.'},
-  {cat:'개요', type:'mc', q:'저압 전로의 누설전류 허용 기준은?',
-    opts:['0.5mA 이하','1mA 이하','2mA 이하','5mA 이하'], ans:1,
-    ex:'저압 전로 누설전류는 1mA 이하여야 합니다.'},
-  {cat:'개요', type:'mc', q:'단상 3선식 설비 불평형률 기준은?',
-    opts:['20% 이하','30% 이하','40% 이하','50% 이하'], ans:2,
-    ex:'단상 3선식 40% 이하, 3상 3·4선식은 30% 이하입니다.'},
-  {cat:'개요', type:'mc', q:'7kV 이하 전로의 절연 내력 시험 배수는?',
-    opts:['1.1배 (최소 75kV)','1.25배 (최소 10,500V)','1.5배 (최소 500V)','2배 (최소 1,000V)'], ans:2,
-    ex:'절연 내력은 7kV 이하 → 1.5배(최소 500V), 60kV 이하 → 1.25배, 60kV 초과 → 1.1배입니다.'},
-  {cat:'개요', type:'mc', q:'건물 표준부하(W/㎡)로 주택·아파트에 적용하는 값은?',
-    opts:['10','20','30','40'], ans:3,
-    ex:'주택·아파트 40 / 사무실·상점 30 / 병원·학교 20 / 교회·극장 10 / 복도·계단 5'},
-  {cat:'개요', type:'mc', q:'전선 굵기 결정 시 고려하지 않는 것은?',
-    opts:['기계적 강도','허용 전류','전압 강하','절연 내력'], ans:3,
-    ex:'전선 굵기는 기계적 강도, 허용 전류, 전압 강하 3가지로 결정합니다.'},
-  {cat:'개요', type:'mc', q:'"제2차 접근 상태"의 정의로 옳은 것은?',
-    opts:['수평거리 1m 미만','수평거리 3m 미만','수평거리 5m 미만','수직거리 3m 미만'], ans:1,
-    ex:'제2차 접근 상태는 수평거리 3m 미만인 곳을 말합니다.'},
+  // 1장
+  {n:1,  cat:'1장', hot:false, q:'전자 1개의 전하량은 약 얼마인가?', opts:['1.602 × 10⁻¹⁹ C','9.109 × 10⁻³¹ C','6.24 × 10¹⁸ C','1.414 × 10⁻¹⁹ C'], ans:0, ex:'전자 1개의 전하량 = 1.602 × 10⁻¹⁹ C (기본 전하량)'},
+  {n:2,  cat:'1장', hot:false, q:'1C의 전하량은 전자 몇 개에 해당하는가?', opts:['1.602 × 10¹⁸개','6.24 × 10¹⁸개','9.109 × 10¹⁸개','3.14 × 10¹⁸개'], ans:1, ex:'1C = 6.24 × 10¹⁸개의 전자'},
+  {n:3,  cat:'1장', hot:false, q:'저항 R₁ = 10Ω, R₂ = 15Ω을 직렬 연결했을 때 합성저항은?', opts:['6Ω','12.5Ω','25Ω','150Ω'], ans:2, ex:'직렬 합성저항 = R₁ + R₂ = 10 + 15 = 25Ω'},
+  {n:4,  cat:'1장', hot:false, q:'저항 R₁ = 6Ω, R₂ = 3Ω을 병렬 연결했을 때 합성저항은?', opts:['2Ω','3Ω','4.5Ω','9Ω'], ans:0, ex:'병렬 합성저항 = (R₁×R₂)/(R₁+R₂) = (6×3)/(6+3) = 18/9 = 2Ω'},
+  {n:5,  cat:'1장', hot:false, q:'전압 100V, 전류 5A일 때 전력은?', opts:['20W','95W','105W','500W'], ans:3, ex:'P = VI = 100 × 5 = 500W'},
+  {n:6,  cat:'1장', hot:false, q:'전류 10A, 저항 5Ω일 때 전력은?', opts:['2W','50W','500W','5000W'], ans:2, ex:'P = I²R = 10² × 5 = 500W'},
+  {n:7,  cat:'1장', hot:false, q:'전압 200V, 저항 50Ω일 때 전력은?', opts:['4W','400W','800W','10000W'], ans:2, ex:'P = V²/R = 200²/50 = 40000/50 = 800W'},
+  {n:8,  cat:'1장', hot:false, q:'키르히호프 제1법칙(전류법칙)의 설명으로 옳은 것은?', opts:['폐회로 일주 시 전압강하의 합은 0이다','접속점에 들어오는 전류의 합 = 나가는 전류의 합','전압은 전류에 비례한다','전력은 전압과 전류의 곱이다'], ans:1, ex:'KCL(전류법칙): 접속점에서 ΣI(입) = ΣI(출) / KVL(전압법칙): 폐회로 전압강하 합 = 0'},
+  {n:9,  cat:'1장', hot:false, q:'브릿지 회로가 평형을 이룰 때 조건은? (P, Q, R, X는 각 저항)', opts:['PQ = RX','PR = QX','PX = QR','P + Q = R + X'], ans:2, ex:'브릿지 평형 조건: 대각선 저항의 곱이 같음 → PX = QR'},
+  {n:10, cat:'1장', hot:true,  q:'1kWh는 몇 kcal에 해당하는가?', opts:['0.24 kcal','860 kcal','746 kcal','1000 kcal'], ans:1, ex:'⚠️ 빈출! 1kWh = 860kcal, 1J = 0.24cal'},
+  {n:11, cat:'1장', hot:false, q:'1HP(마력)는 몇 W에 해당하는가?', opts:['736W','746W','756W','860W'], ans:1, ex:'1HP = 746W (암기 필수)'},
+  {n:12, cat:'1장', hot:false, q:'저항의 역수를 무엇이라고 하는가?', opts:['임피던스','리액턴스','컨덕턴스','어드미턴스'], ans:2, ex:'G = 1/R [S](지멘스) = 컨덕턴스 / 어드미턴스는 임피던스의 역수'},
+  {n:13, cat:'1장', hot:false, q:'전압계의 측정 범위를 확대하기 위해 사용하는 것은?', opts:['배율기 (직렬 연결)','분류기 (병렬 연결)','변압기','정류기'], ans:0, ex:'전압계 측정범위 확대 → 배율기(직렬) / 전류계 측정범위 확대 → 분류기(병렬)'},
+  {n:14, cat:'1장', hot:false, q:'전류계의 측정 범위를 확대하기 위해 사용하는 것은?', opts:['배율기 (직렬 연결)','분류기 (병렬 연결)','변압기','정류기'], ans:1, ex:'분류기(shunt): 전류계와 병렬로 연결하여 전류 측정범위 확대'},
+  {n:15, cat:'1장', hot:false, q:'구리(경동선)의 고유저항 ρ는 약 얼마인가?', opts:['1/55','1/58','1/100','55'], ans:0, ex:'경동선 = 1/55, 연동선 = 1/58 (단위: Ω·m)'},
+  {n:16, cat:'1장', hot:false, q:'저항 R = ρl/A 공식에서 l이 의미하는 것은?', opts:['길이','단면적','고유저항','전류'], ans:0, ex:'R = ρ(고유저항) × l(길이) / A(단면적)'},
+  {n:17, cat:'1장', hot:false, q:'100V, 5A의 전류가 10초간 흘렀을 때 전력량은?', opts:['50J','500J','5000J','50000J'], ans:2, ex:'W = VIt = 100 × 5 × 10 = 5000J'},
+  {n:18, cat:'1장', hot:false, q:'전기량 Q = 10C, 시간 t = 5s일 때 전류는?', opts:['0.5A','2A','15A','50A'], ans:1, ex:'I = Q/t = 10/5 = 2A'},
+  {n:19, cat:'1장', hot:false, q:'1J은 약 몇 cal에 해당하는가?', opts:['0.24 cal','0.86 cal','4.18 cal','860 cal'], ans:0, ex:'1J = 0.24cal (역으로 1cal = 4.18J)'},
+  {n:20, cat:'1장', hot:false, q:'저항 10Ω, 20Ω, 30Ω을 직렬 연결했을 때 합성저항은?', opts:['5.45Ω','20Ω','60Ω','6000Ω'], ans:2, ex:'직렬 = 10 + 20 + 30 = 60Ω'},
 
-  // ===== 배선재료·공구 =====
-  {cat:'배선재료', type:'mc', q:'송전선로에 주로 사용되는 전선은?',
-    opts:['경동선(H)','연동선(A)','ACSR','CNCV'], ans:2,
-    ex:'ACSR(강심 알루미늄 연선)은 코로나 방지용 중공연선도 있으며 송전선로에 사용됩니다.'},
-  {cat:'배선재료', type:'mc', q:'인입용 비닐 절연전선의 기호는?',
-    opts:['OW','DV','HIV','MI'], ans:1,
-    ex:'DV: 인입용, OW·OB·OC: 옥외용, HIV: 내열용, MI: 내화성·내열성 우수'},
-  {cat:'배선재료', type:'mc', q:'연선 가닥 수 계산 공식은?',
-    opts:['N=3n²+1','N=3n(n+1)+1','N=6n+1','N=n²+n+1'], ans:1,
-    ex:'N=3n(n+1)+1 → 1층 7가닥, 2층 19가닥, 3층 37가닥'},
-  {cat:'배선재료', type:'mc', q:'전선 색상 중 중성선(N)의 색은?',
-    opts:['갈색','흑색','청색','녹황색'], ans:2,
-    ex:'L1 갈색 / L2 흑색 / L3 회색 / N 청색 / PE(보호도체) 녹황색'},
-  {cat:'배선재료', type:'mc', q:'절연저항 측정에 사용하는 계기는?',
-    opts:['어스 테스터','메거','네온 검전기','후크미터'], ans:1,
-    ex:'메거: 절연저항 / 어스 테스터: 접지저항 / 네온 검전기: 통전 검사'},
-  {cat:'배선재료', type:'mc', q:'금속관에 나사선을 내는 공구는?',
-    opts:['벤더','리머','오스터','파이프 커터'], ans:2,
-    ex:'오스터: 나사선 내기 / 벤더: 구부림 / 리머: 끝단 다듬기 / 파이프 커터: 절단'},
-  {cat:'배선재료', type:'mc', q:'비포장 퓨즈 중 정격전류가 2배일 때 2분 이내 융단되는 것은?',
-    opts:['포장 퓨즈','비포장 퓨즈','온도 퓨즈','전동기용 퓨즈'], ans:1,
-    ex:'비포장: 1.25배 견디고 2배에서 2분 이내 / 포장: 1.3배 견디고 2배에서 120분 이내'},
-  {cat:'배선재료', type:'mc', q:'활선 상태에서 전선 피복을 벗기는 공구는?',
-    opts:['와이어 스트리퍼','전선 피박기','피시 테이프','클리퍼'], ans:1,
-    ex:'전선 피박기는 활선 상태에서 전선 피복을 벗길 때 사용합니다.'},
-  {cat:'배선재료', type:'mc', q:'3극 단투형 나이프 스위치의 기호는?',
-    opts:['DPST','TPST','TPDT','SPDT'], ans:1,
-    ex:'S=1극, D=2극, T=3극 / ST=단투, DT=쌍투. TPST는 3극 단투형입니다.'},
-  {cat:'배선재료', type:'mc', q:'대지전압 150V~300V 회로의 절연저항 최솟값은?',
-    opts:['0.1 MΩ','0.2 MΩ','0.3 MΩ','0.4 MΩ'], ans:1,
-    ex:'150V 이하 → 0.1MΩ / 150~300V → 0.2MΩ / 300~400V → 0.3MΩ / 400V 초과 → 0.4MΩ'},
-  {cat:'배선재료', type:'mc', q:'저압 옥내배선 검사 순서로 옳은 것은?',
-    opts:['절연저항→접지저항→점검→통전','점검→절연저항→접지저항→통전','점검→접지저항→절연저항→통전','통전→점검→절연저항→접지저항'], ans:1,
-    ex:'점검 → 절연저항 측정 → 접지저항 측정 → 통전 시험 순서입니다.'},
+  // 2장
+  {n:21, cat:'2장', hot:false, q:'제베크 효과의 설명으로 옳은 것은?', opts:['전류를 흘리면 열이 흡수/발생한다','온도차가 있으면 기전력이 발생한다','동일 금속에서 열류가 이동한다','저항이 증가한다'], ans:1, ex:'제베크 효과: 두 금속 접합부의 온도차 → 기전력 발생 (열전 온도계에 활용)'},
+  {n:22, cat:'2장', hot:false, q:'제베크 효과에 사용되는 금속 조합은?', opts:['구리 + 콘스탄탄','비스무스 + 안티몬','철 + 니켈','알루미늄 + 구리'], ans:0, ex:'제베크 효과: 구리 + 콘스탄탄 / 펠티어 효과: 비스무스 + 안티몬'},
+  {n:23, cat:'2장', hot:false, q:'펠티어 효과를 이용한 장치는?', opts:['열전 온도계','전자 냉동기','변압기','정류기'], ans:1, ex:'펠티어 효과: 전류 방향에 따라 열 흡수/발생 → 전자 냉동기에 활용'},
+  {n:24, cat:'2장', hot:false, q:'펠티어 효과에 사용되는 금속 조합은?', opts:['구리 + 콘스탄탄','비스무스 + 안티몬','철 + 니켈','알루미늄 + 구리'], ans:1, ex:'펠티어 효과: 비스무스 + 안티몬 조합 사용'},
+  {n:25, cat:'2장', hot:false, q:'톰슨 효과의 특징은?', opts:['서로 다른 금속을 사용한다','동일 금속을 사용한다','반드시 전류가 필요하다','온도차가 없어도 발생한다'], ans:1, ex:'톰슨 효과: 동일 금속에서 온도차가 있을 때 전류가 흐르면 열 흡수/발생'},
+  {n:26, cat:'2장', hot:false, q:'건전지를 직렬로 연결하면?', opts:['전압은 동일, 전류 증가','전압 증가, 전류는 동일','전압, 전류 모두 증가','전압, 전류 모두 동일'], ans:1, ex:'직렬: 전압 = n×E (증가), 전류 용량 동일 / 병렬: 전압 동일, 전류 용량 증가'},
+  {n:27, cat:'2장', hot:false, q:'건전지를 병렬로 연결하면?', opts:['전압은 동일, 전류 증가','전압 증가, 전류는 동일','전압, 전류 모두 증가','전압, 전류 모두 감소'], ans:0, ex:'병렬: 전압 동일, 전류 용량 증가 (수명 연장 효과)'},
+  {n:28, cat:'2장', hot:false, q:'기전력 E = 1.5V, 내부저항 r = 0.5Ω인 건전지 2개를 직렬 연결하고 부하저항 R = 5Ω을 연결했을 때 전류는?', opts:['0.5A','1A','1.5A','3A'], ans:0, ex:'I = nE/(nr+R) = (2×1.5)/(2×0.5+5) = 3/6 = 0.5A'},
+  {n:29, cat:'2장', hot:false, q:'가정용 전기제품을 연결하는 방식은?', opts:['직렬','병렬','직병렬 혼합','브릿지'], ans:1, ex:'가정 전기: 병렬 연결 → 220V 동일 전압 유지, 개별 on/off 가능'},
+  {n:30, cat:'2장', hot:false, q:'가정에서 과전류 차단기가 보호하는 대상은?', opts:['전압','전류','전력','주파수'], ans:1, ex:'병렬 연결 시 전류가 증가하므로 과전류 차단기로 전류를 보호'},
 
-  // ===== 전선 접속 =====
-  {cat:'전선접속', type:'mc', q:'전선 접속 시 유지해야 할 최소 인장강도 비율은?',
-    opts:['60%','70%','80%','90%'], ans:2,
-    ex:'접속 후 원래 인장강도의 80% 이상 유지해야 합니다.'},
-  {cat:'전선접속', type:'mc', q:'직선 접속에서 10㎟ 이상 전선에 적용하는 방법은?',
-    opts:['트위스트 접속','쥐꼬리 접속','브리타니아 접속','슬리브 접속'], ans:2,
-    ex:'6㎟ 이하 → 트위스트 / 10㎟ 이상 → 브리타니아 (피복 벗기는 길이 20배)'},
-  {cat:'전선접속', type:'mc', q:'종단 접속에 사용하는 방법은?',
-    opts:['트위스트','브리타니아','쥐꼬리(와이어 커넥터)','압착 슬리브'], ans:2,
-    ex:'종단 접속은 쥐꼬리 접속(와이어 커넥터)으로 마감합니다.'},
-  {cat:'전선접속', type:'mc', q:'병렬 사용이 가능한 구리 전선의 최소 단면적은?',
-    opts:['25㎟','35㎟','50㎟','70㎟'], ans:2,
-    ex:'병렬 사용: 구리 50㎟ 이상, 알루미늄 70㎟ 이상. 퓨즈는 각각 개별 설치 금지.'},
-  {cat:'전선접속', type:'mc', q:'접착력이 없고 연피케이블에 사용하는 테이프는?',
-    opts:['면테이프','고무테이프','리노테이프','자기융착테이프'], ans:2,
-    ex:'리노테이프: 접착력 없음, 바이어스템프+니스, 연피케이블용'},
-  {cat:'전선접속', type:'mc', q:'자기융착테이프 사용 시 얼마나 늘려서 사용하는가?',
-    opts:['1.5배','2배','2.5배','3배'], ans:1,
-    ex:'자기융착테이프는 2배 늘려서 사용하며 합성수지·고무 재질입니다.'},
+  // 3장
+  {n:31, cat:'3장', hot:false, q:'정현파에서 최대값이 100V일 때 실효값은 약 몇 V인가?', opts:['63.7V','70.7V','100V','141.4V'], ans:1, ex:'실효값 = 0.707 × Vm = 0.707 × 100 = 70.7V'},
+  {n:32, cat:'3장', hot:false, q:'정현파에서 실효값이 220V일 때 최대값은 약 몇 V인가?', opts:['155.4V','220V','311.08V','440V'], ans:2, ex:'최대값 = √2 × 실효값 = 1.414 × 220 = 311.08V'},
+  {n:33, cat:'3장', hot:false, q:'정현파에서 최대값이 100V일 때 평균값은 약 몇 V인가?', opts:['63.7V','70.7V','100V','141.4V'], ans:0, ex:'평균값 = 0.637 × Vm = 63.7V'},
+  {n:34, cat:'3장', hot:false, q:'파형률의 정의는?', opts:['최대값 / 실효값','실효값 / 평균값','평균값 / 최대값','실효값 / 최대값'], ans:1, ex:'파형률 = 실효값 / 평균값 / 파고율 = 최대값 / 실효값'},
+  {n:35, cat:'3장', hot:false, q:'파고율의 정의는?', opts:['최대값 / 실효값','실효값 / 평균값','평균값 / 최대값','실효값 / 최대값'], ans:0, ex:'파고율 = 최대값 / 실효값 (정현파: √2 ≈ 1.414)'},
+  {n:36, cat:'3장', hot:false, q:'정현파의 파형률은?', opts:['1','1.11','1.15','1.414'], ans:1, ex:'정현파 파형률 = 1.11, 파고율 = 1.414(√2)'},
+  {n:37, cat:'3장', hot:true,  q:'정현파의 파고율은?', opts:['1','1.11','1.15','1.414'], ans:3, ex:'⚠️ 파형률(1.11)과 혼동 주의! 파고율 = √2 ≈ 1.414'},
+  {n:38, cat:'3장', hot:false, q:'주파수 f = 60Hz일 때 주기 T는?', opts:['1/60 s','60 s','120π s','377 s'], ans:0, ex:'T = 1/f = 1/60 s'},
+  {n:39, cat:'3장', hot:false, q:'60Hz의 각속도 ω는?', opts:['60','120','377','754'], ans:2, ex:'ω = 2πf = 2 × 3.14 × 60 ≈ 377 rad/s'},
+  {n:40, cat:'3장', hot:false, q:'주파수 f = 50Hz, 인덕턴스 L = 0.1H일 때 유도성 리액턴스 XL은?', opts:['5Ω','10π Ω','31.4Ω','314Ω'], ans:2, ex:'XL = 2πfL = 2 × 3.14 × 50 × 0.1 = 31.4Ω'},
+  {n:41, cat:'3장', hot:false, q:'주파수 f = 60Hz, 정전용량 C = 100μF일 때 용량성 리액턴스 XC는 약 몇 Ω인가?', opts:['2.65Ω','26.5Ω','265Ω','2650Ω'], ans:1, ex:'XC = 1/(2πfC) = 1/(2×3.14×60×100×10⁻⁶) ≈ 26.5Ω'},
+  {n:42, cat:'3장', hot:false, q:'코일에서 전류와 전압의 위상 관계는?', opts:['전류가 전압보다 90° 빠르다','전류가 전압보다 90° 늦다','전류와 전압이 동위상이다','전류가 전압보다 180° 늦다'], ans:1, ex:'유도성(코일) = 지상(전류 늦음) / 용량성(콘덴서) = 진상(전류 빠름)'},
+  {n:43, cat:'3장', hot:false, q:'콘덴서에서 전류와 전압의 위상 관계는?', opts:['전류가 전압보다 90° 빠르다','전류가 전압보다 90° 늦다','전류와 전압이 동위상이다','전류가 전압보다 180° 빠르다'], ans:0, ex:'콘덴서 = 진상 = 전류가 전압보다 90° 앞선다'},
+  {n:44, cat:'3장', hot:false, q:'R = 3Ω, XL = 4Ω일 때 임피던스 Z는?', opts:['1Ω','5Ω','7Ω','12Ω'], ans:1, ex:'Z = √(R² + XL²) = √(9 + 16) = √25 = 5Ω'},
+  {n:45, cat:'3장', hot:false, q:'R = 6Ω, XL = 10Ω, XC = 2Ω일 때 임피던스 Z는?', opts:['8Ω','10Ω','14Ω','18Ω'], ans:1, ex:'Z = √(R² + (XL-XC)²) = √(36 + 64) = √100 = 10Ω'},
+  {n:46, cat:'3장', hot:false, q:'XL > XC일 때 부하의 성질은?', opts:['유도성','용량성','저항성','공진'], ans:0, ex:'XL > XC → 유도성(지상) / XL < XC → 용량성(진상) / XL = XC → 공진'},
+  {n:47, cat:'3장', hot:false, q:'XL < XC일 때 부하의 성질은?', opts:['유도성','용량성','저항성','공진'], ans:1, ex:'XL < XC → 용량성(진상, 전류가 앞섬)'},
+  {n:48, cat:'3장', hot:false, q:'XL = XC일 때 무슨 현상이 발생하는가?', opts:['단락','개방','공진','과전류'], ans:2, ex:'XL = XC → 공진(resonance), 직렬공진 시 Z = R(최소), I = V/R(최대)'},
+  {n:49, cat:'3장', hot:false, q:'직렬 공진 시 임피던스 Z는?', opts:['0','R (최소)','∞ (최대)','XL + XC'], ans:1, ex:'직렬 공진: Z = R (리액턴스 상쇄) → 최솟값 / 병렬 공진: Z = 최대'},
+  {n:50, cat:'3장', hot:false, q:'직렬 공진 시 전류는?', opts:['0','최소','V/R (최대)','일정'], ans:2, ex:'직렬 공진: I = V/R → 최대 / 병렬 공진: I = 최소'},
+  {n:51, cat:'3장', hot:false, q:'병렬 공진 시 임피던스 Z는?', opts:['0','R','최소','최대'], ans:3, ex:'병렬 공진: Z = 최대 (직렬 공진과 반대)'},
+  {n:52, cat:'3장', hot:false, q:'병렬 공진 시 전류는?', opts:['0','최소','최대','V/R'], ans:1, ex:'병렬 공진: 전류 최소 (직렬 공진과 반대)'},
+  {n:53, cat:'3장', hot:false, q:'L = 0.1H, C = 10μF일 때 공진 주파수는 약 몇 Hz인가?', opts:['50Hz','60Hz','159Hz','377Hz'], ans:2, ex:'f = 1/(2π√LC) = 1/(2×3.14×√(0.1×10×10⁻⁶)) ≈ 159Hz'},
+  {n:54, cat:'3장', hot:false, q:'삼각파의 파형률은?', opts:['1','1.11','1.15','1.732'], ans:2, ex:'삼각파: 파형률 1.15, 파고율 √3 ≈ 1.732'},
+  {n:55, cat:'3장', hot:false, q:'삼각파의 파고율은?', opts:['1','1.414','1.732','2'], ans:2, ex:'삼각파 파고율 = √3 ≈ 1.732'},
+  {n:56, cat:'3장', hot:false, q:'구형파의 파형률과 파고율은?', opts:['파형률 1, 파고율 1','파형률 1.11, 파고율 1.414','파형률 1.15, 파고율 1.732','파형률 1, 파고율 1.414'], ans:0, ex:'구형파: 파형률 = 파고율 = 1 (최대값 = 실효값 = 평균값)'},
+  {n:57, cat:'3장', hot:false, q:'복소수 Z = 3 + j4에서 |Z|는?', opts:['1','5','7','12'], ans:1, ex:'|Z| = √(3² + 4²) = √25 = 5'},
+  {n:58, cat:'3장', hot:false, q:'복소수 Z = 6 + j8에서 편각은?', opts:['30°','45°','53.13°','60°'], ans:2, ex:'3 + j4 = 5∠53.13° → 비율이 같으면 편각 동일. 6+j8 = 10∠53.13°'},
+  {n:59, cat:'3장', hot:false, q:'임피던스(Z)의 역수를 무엇이라고 하는가?', opts:['컨덕턴스','어드미턴스','리액턴스','서셉턴스'], ans:1, ex:'어드미턴스 Y = 1/Z / 컨덕턴스 G = 1/R / 서셉턴스 B = 1/X'},
+  {n:60, cat:'3장', hot:false, q:'리액턴스(X)의 역수를 무엇이라고 하는가?', opts:['컨덕턴스','어드미턴스','임피던스','서셉턴스'], ans:3, ex:'서셉턴스 B = 1/X'},
 
-  // ===== 옥내배선공사 =====
-  {cat:'옥내배선', type:'mc', q:'애자 사용 공사에서 전선 상호간 거리 기준은?',
-    opts:['2.5cm','4cm','6cm','8cm'], ans:2,
-    ex:'전선 상호간 6cm, 전선과 조영재 간 2.5cm, 지지점 간격 2m'},
-  {cat:'옥내배선', type:'mc', q:'합성수지관 1본의 길이는?',
-    opts:['2m','3m','4m','5m'], ans:2,
-    ex:'합성수지관 1본 길이는 4m이며 경질 비닐관 두께는 2.0mm 이상입니다.'},
-  {cat:'옥내배선', type:'mc', q:'금속관 공사에서 직각에 가까운 굴곡은 최대 몇 개소까지 가능한가?',
-    opts:['2개소','3개소','4개소','5개소'], ans:1,
-    ex:'직각에 가까운 굴곡은 3개소 초과 금지. 굽힘 반경은 내경의 6배입니다.'},
-  {cat:'옥내배선', type:'mc', q:'합성수지관 공사의 지지점 간격은?',
-    opts:['1m','1.5m','2m','2.5m'], ans:1,
-    ex:'합성수지관·몰드 1.5m / 가요관·캡타이어 1m / 애자·금속·비닐관 2m'},
-  {cat:'옥내배선', type:'mc', q:'금속관 콘크리트 매입 시 요구되는 두께는?',
-    opts:['0.8mm','1.0mm','1.2mm','1.5mm'], ans:2,
-    ex:'기본 금속관 두께 1mm, 콘크리트 매입 시 1.2mm 이상이 필요합니다.'},
-  {cat:'옥내배선', type:'mc', q:'가요전선관에서 2종의 굽힘 반경은 내경의 몇 배인가?',
-    opts:['3배','4배','6배','8배'], ans:0,
-    ex:'1종: 내경 6배 / 2종: 내경 3배 (아연도금+파이버 구조)'},
-  {cat:'옥내배선', type:'mc', q:'금속 덕트의 단면적 점유율 기준은?',
-    opts:['10% 이하','20% 이하','30% 이하','50% 이하'], ans:1,
-    ex:'금속 덕트 20% 이하 (전광표시 제어회로는 50% 이하), 수평 3m 수직 6m 고정'},
-  {cat:'옥내배선', type:'mc', q:'박스 녹아웃 지름이 로크너트보다 클 때 사용하는 부품은?',
-    opts:['부싱','유니온 커플링','링 리듀서','앵글 커넥터'], ans:2,
-    ex:'링 리듀서는 관 지름보다 큰 녹아웃에 고정하기 위한 보조 부품입니다.'},
-  {cat:'옥내배선', type:'mc', q:'라이팅 덕트 공사의 지지점 간격은?',
-    opts:['1m','1.5m','2m','3m'], ans:2,
-    ex:'라이팅 덕트 2m, 버스 덕트 3m, 금속 덕트 수평 3m/수직 6m'},
-  {cat:'옥내배선', type:'mc', q:'CD관과 PE관의 차이로 옳은 것은?',
-    opts:['CD는 구부릴 수 없고 PE는 구부릴 수 있다','CD는 구부릴 수 있고 PE는 구부릴 수 없다','둘 다 구부릴 수 있다','둘 다 구부릴 수 없다'], ans:1,
-    ex:'CD관은 구부릴 수 있어 굴곡 배관에 적합하고, PE관은 구부릴 수 없습니다.'},
+  // 4장
+  {n:61, cat:'4장', hot:false, q:'단상 유효전력의 공식은?', opts:['P = VI','P = VIsinθ','P = VIcosθ','P = √(V² + I²)'], ans:2, ex:'유효전력(P) = VIcosθ [W] / 무효전력(Pr) = VIsinθ [VAr] / 피상전력(Pa) = VI [VA]'},
+  {n:62, cat:'4장', hot:false, q:'단상 무효전력의 공식은?', opts:['Pr = VI','Pr = VIsinθ','Pr = VIcosθ','Pr = √(V² + I²)'], ans:1, ex:'무효전력 Pr = VIsinθ [VAr]'},
+  {n:63, cat:'4장', hot:false, q:'단상 피상전력의 공식은?', opts:['Pa = VIcosθ','Pa = VIsinθ','Pa = VI','Pa = I²R'], ans:2, ex:'피상전력 Pa = VI [VA] = √(P² + Pr²)'},
+  {n:64, cat:'4장', hot:false, q:'역률 cosθ의 공식은?', opts:['P/Pa','Pr/Pa','Pa/P','P/Pr'], ans:0, ex:'역률 cosθ = 유효전력(P) / 피상전력(Pa)'},
+  {n:65, cat:'4장', hot:false, q:'유효전력 P = 800W, 피상전력 Pa = 1000VA일 때 역률은?', opts:['0.6','0.8','1.0','1.25'], ans:1, ex:'cosθ = P/Pa = 800/1000 = 0.8'},
+  {n:66, cat:'4장', hot:true,  q:'cosθ = 0.8일 때 sinθ는?', opts:['0.6','0.8','1.0','1.414'], ans:0, ex:'⚠️ 암기! cosθ=0.8 → sinθ=0.6 (3:4:5 직각삼각형)'},
+  {n:67, cat:'4장', hot:true,  q:'cosθ = 0.6일 때 sinθ는?', opts:['0.6','0.8','1.0','1.2'], ans:1, ex:'⚠️ 암기! cosθ=0.6 → sinθ=0.8 (3:4:5 직각삼각형)'},
+  {n:68, cat:'4장', hot:false, q:'유효전력 P = 600W, 무효전력 Pr = 800VAr일 때 피상전력은?', opts:['200VA','1000VA','1400VA','480000VA'], ans:1, ex:'Pa = √(P² + Pr²) = √(600² + 800²) = √1000000 = 1000VA'},
+  {n:69, cat:'4장', hot:false, q:'3상 전력의 공식은? (VL: 선간전압, IL: 선전류)', opts:['P = VLIL','P = √3 VLILcosθ','P = 3VLILcosθ','P = VLILcosθ/√3'], ans:1, ex:'3상 유효전력 P = √3 × VL × IL × cosθ'},
+  {n:70, cat:'4장', hot:false, q:'3상 회로에서 선전류 IL = 10A, 저항 R = 5Ω일 때 유효전력은?', opts:['50W','500W','1500W','150W'], ans:2, ex:'P = 3I²R = 3 × 100 × 5 = 1500W'},
+  {n:71, cat:'4장', hot:false, q:'델타(Δ) 결선에서 선간전압과 상전압의 관계는?', opts:['EL = EP','EL = √3 EP','EL = EP/√3','EL = 3EP'], ans:0, ex:'Δ결선: EL = EP (전압 동일), IL = √3 IP (전류 증가) / Y결선: EL = √3 EP (전압 증가), IL = IP'},
+  {n:72, cat:'4장', hot:false, q:'델타(Δ) 결선에서 선전류와 상전류의 관계는?', opts:['IL = IP','IL = √3 IP','IL = IP/√3','IL = 3IP'], ans:1, ex:'Δ결선: IL = √3 × IP'},
+  {n:73, cat:'4장', hot:false, q:'와이(Y) 결선에서 선간전압과 상전압의 관계는?', opts:['EL = EP','EL = √3 EP','EL = EP/√3','EL = 3EP'], ans:1, ex:'Y결선: EL = √3 × EP'},
+  {n:74, cat:'4장', hot:false, q:'와이(Y) 결선에서 선전류와 상전류의 관계는?', opts:['IL = IP','IL = √3 IP','IL = IP/√3','IL = 3IP'], ans:0, ex:'Y결선: IL = IP (전류 동일)'},
+  {n:75, cat:'4장', hot:false, q:'델타(Δ) 결선에서 1대 고장 시 가능한 운전 방식은?', opts:['운전 불가능','Y 결선','V 결선','정상 운전'], ans:2, ex:'Δ결선 1대 고장 → V결선(2대 운전) 가능 / Y결선 1대 고장 → 운전 불가능'},
+  {n:76, cat:'4장', hot:false, q:'와이(Y) 결선에서 1대 고장 시 가능한 운전 방식은?', opts:['운전 불가능','V 결선','Δ 결선','정상 운전'], ans:0, ex:'Y결선: 1대 고장 시 운전 불가능 / Δ결선: 1대 고장 시 V결선 가능'},
+  {n:77, cat:'4장', hot:false, q:'델타(Δ) 결선의 이용률은?', opts:['0.577','0.707','0.866','1'], ans:2, ex:'V결선 이용률 = √3/2 ≈ 0.866 (86.6%)'},
+  {n:78, cat:'4장', hot:false, q:'델타(Δ)에서 와이(Y)로 변환 시 저항은?', opts:['1/3배','3배','√3배','동일'], ans:0, ex:'Δ→Y: 저항 1/3배 (흩어지면 작아짐) / Y→Δ: 저항 3배 (뭉치면 커짐)'},
+  {n:79, cat:'4장', hot:false, q:'와이(Y)에서 델타(Δ)로 변환 시 저항은?', opts:['1/3배','3배','√3배','동일'], ans:1, ex:'Y→Δ 변환: 저항 3배'},
+  {n:80, cat:'4장', hot:false, q:'Y-Y 결선 시 발생하는 문제와 해결 방법은?', opts:['제3고조파 발생 → Δ-Y 또는 Y-Δ 결선','과전류 발생 → 차단기 설치','과전압 발생 → 피뢰기 설치','단락 발생 → 퓨즈 설치'], ans:0, ex:'Y-Y: 제3고조파 발생 문제 → Δ포함 결선(Δ-Y, Y-Δ, Δ-Δ)으로 해결'},
+  {n:81, cat:'4장', hot:false, q:'전압 220V, 전류 10A, 역률 0.8인 단상 부하의 유효전력은?', opts:['1760W','2200W','2750W','3110W'], ans:0, ex:'P = VIcosθ = 220 × 10 × 0.8 = 1760W'},
+  {n:82, cat:'4장', hot:false, q:'선간전압 380V, 선전류 20A, 역률 0.9인 3상 부하의 유효전력은 약 몇 kW인가?', opts:['6.84kW','11.85kW','13.16kW','22.8kW'], ans:1, ex:'P = √3 × VL × IL × cosθ = 1.732 × 380 × 20 × 0.9 ≈ 11850W ≈ 11.85kW'},
+  {n:83, cat:'4장', hot:false, q:'1000W의 전력을 3시간 사용했을 때 전력량은 몇 kWh인가?', opts:['0.3kWh','3kWh','30kWh','300kWh'], ans:1, ex:'W = P × t = 1kW × 3h = 3kWh'},
+  {n:84, cat:'4장', hot:false, q:'2kW의 전열기를 5시간 사용했을 때 발생하는 열량은 몇 kcal인가?', opts:['860kcal','4300kcal','8600kcal','10000kcal'], ans:2, ex:'2kW × 5h = 10kWh × 860kcal/kWh = 8600kcal'},
+  {n:85, cat:'4장', hot:false, q:'저항 R = 100Ω인 도체의 길이를 2배, 단면적을 2배로 하면 저항은?', opts:['50Ω','100Ω','200Ω','400Ω'], ans:1, ex:'R = ρl/A → ρ(2l)/(2A) = ρl/A = R → 동일 100Ω'},
+  {n:86, cat:'4장', hot:false, q:'Δ-Δ 결선과 Δ-Y 결선은 병렬 운전이 가능한가?', opts:['가능','불가능','조건부 가능','알 수 없음'], ans:1, ex:'병렬 운전 가능: Δ-Δ ↔ Y-Y (짝수 변환) / 불가능: Δ-Δ ↔ Δ-Y (홀수 변환)'},
+  {n:87, cat:'4장', hot:false, q:'Δ-Δ 결선과 Y-Y 결선은 병렬 운전이 가능한가?', opts:['가능','불가능','조건부 가능','알 수 없음'], ans:0, ex:'Δ-Δ ↔ Y-Y: 짝수 변환(2번) → 병렬 운전 가능'},
+  {n:88, cat:'4장', hot:false, q:'배율기의 배율 m = 5이고 전압계의 내부저항 rv = 1000Ω일 때 배율기 저항 Rm은?', opts:['200Ω','1000Ω','4000Ω','5000Ω'], ans:2, ex:'m = Rm/rv + 1 → 5 = Rm/1000 + 1 → Rm = 4 × 1000 = 4000Ω'},
+  {n:89, cat:'4장', hot:false, q:'분류기의 배율 m = 10이고 전류계의 내부저항 ra = 0.9Ω일 때 분류기 저항 Rs는?', opts:['0.1Ω','0.9Ω','1Ω','9Ω'], ans:0, ex:'m = ra/Rs + 1 → 10 = 0.9/Rs + 1 → Rs = 0.9/9 = 0.1Ω'},
+  {n:90, cat:'4장', hot:false, q:'R = 8Ω, XL = 6Ω인 회로에 V = 100V를 인가했을 때 전류는?', opts:['6.25A','10A','12.5A','16.67A'], ans:1, ex:'Z = √(8² + 6²) = √100 = 10Ω → I = V/Z = 100/10 = 10A'},
 
-  // ===== 기계기구 보안 =====
-  {cat:'보안', type:'mc', q:'과전류 차단기 시설이 금지된 장소는?',
-    opts:['분기회로 분기점','접지 공사의 접지선','인입구','변압기 2차측'], ans:1,
-    ex:'접지선, 접지측 전선, 다선식 중성선에는 과전류 차단기 설치 금지'},
-  {cat:'보안', type:'mc', q:'SF₆ 가스를 이용하는 차단기는?',
-    opts:['VCB','OCB','GCB','MBB'], ans:2,
-    ex:'VCB: 진공 / OCB: 유입 / GCB: SF₆ 가스 / MBB: 자기 / ABB: 공기'},
-  {cat:'보안', type:'mc', q:'3상 정격 차단 용량 계산식은?',
-    opts:['정격전압 × 정격차단전류','√2 × 정격전압 × 정격차단전류','√3 × 정격전압 × 정격차단전류','2 × 정격전압 × 정격차단전류'], ans:2,
-    ex:'단상: V×I / 3상: √3×V×I'},
-  {cat:'보안', type:'mc', q:'접지선 매설 깊이 기준으로 옳은 것은?',
-    opts:['지하 50cm 이상','지하 75cm 이상','지하 1m 이상','지하 1.2m 이상'], ans:1,
-    ex:'지하 75cm 이상, 철주 밑면 30cm 이상, 지중 1m 이상 이격 설치'},
-  {cat:'보안', type:'mc', q:'분기점으로부터 과전류 차단기를 이동 설치할 수 있는 최대 거리는?',
-    opts:['1m','2m','3m','5m'], ans:2,
-    ex:'분기점으로부터 3m까지 이동하여 과전류 차단기 설치 가능'},
-  {cat:'보안', type:'mc', q:'전동기 과부하 보호장치 생략이 가능한 최대 용량은?',
-    opts:['0.1kW','0.2kW','0.5kW','1.0kW'], ans:1,
-    ex:'전동기 0.2kW 이하는 과부하 보호장치 생략 가능'},
-  {cat:'보안', type:'mc', q:'전동기 분기회로 전선의 허용전류는 정격전류의 몇 배 이상이어야 하는가?',
-    opts:['1.0배','1.1배','1.25배','1.5배'], ans:2,
-    ex:'전동기 분기회로 전선 허용전류는 정격전류의 1.25배 이상'},
-  {cat:'보안', type:'mc', q:'제1종 접지 저항 기준은?',
-    opts:['1Ω 이하','10Ω 이하','100Ω 이하','150Ω 이하'], ans:1,
-    ex:'제1종 10Ω / 제2종 150Ω / 제3종 100Ω / 특별3종 10Ω / 중성점직접접지 1Ω'},
+  // 5장
+  {n:91,  cat:'5장', hot:false, q:'두 점전하 Q₁ = 2C, Q₂ = 3C이 진공 중에서 r = 1m 떨어져 있을 때 작용하는 힘은?', opts:['5.4 × 10⁹ N','2.7 × 10¹⁰ N','5.4 × 10¹⁰ N','1.8 × 10¹⁰ N'], ans:2, ex:'F = 9×10⁹ × Q₁Q₂/r² = 9×10⁹ × 6/1 = 54×10⁹ = 5.4×10¹⁰ N'},
+  {n:92,  cat:'5장', hot:true,  q:'쿨롱의 법칙에서 진공 중 전기력 비례상수 값은?', opts:['6.33 × 10⁴','8.855 × 10⁻¹²','9 × 10⁹','4π × 10⁻⁷'], ans:2, ex:'⚠️ 전기(정전계) 비례상수 = 9×10⁹ / 자기(정자계) = 6.33×10⁴ 혼동 주의!'},
+  {n:93,  cat:'5장', hot:false, q:'콘덴서 C₁ = 4μF, C₂ = 4μF을 직렬 연결했을 때 합성 정전용량은?', opts:['1μF','2μF','4μF','8μF'], ans:1, ex:'같은 값 직렬: C₀ = C/n = 4/2 = 2μF'},
+  {n:94,  cat:'5장', hot:false, q:'콘덴서 C₁ = 3μF, C₂ = 6μF을 병렬 연결했을 때 합성 정전용량은?', opts:['2μF','3μF','6μF','9μF'], ans:3, ex:'병렬: C₀ = C₁ + C₂ = 3 + 6 = 9μF'},
+  {n:95,  cat:'5장', hot:false, q:'콘덴서 C₁ = 2μF, C₂ = 4μF을 직렬 연결하고 V = 12V를 인가했을 때 C₁에 걸리는 전압은?', opts:['3V','4V','8V','12V'], ans:2, ex:'직렬: 전압 분배는 용량에 반비례 → V₁ = C₂/(C₁+C₂) × V = 4/6 × 12 = 8V'},
+  {n:96,  cat:'5장', hot:false, q:'정전용량 C = 100μF인 콘덴서에 V = 200V를 인가했을 때 축적되는 전하량 Q는?', opts:['0.02C','0.2C','2C','20C'], ans:0, ex:'Q = CV = 100×10⁻⁶ × 200 = 0.02C'},
+  {n:97,  cat:'5장', hot:false, q:'정전용량 C = 10μF인 콘덴서에 V = 100V를 인가했을 때 정전 에너지 W는?', opts:['0.005J','0.05J','0.5J','5J'], ans:1, ex:'W = ½CV² = ½ × 10×10⁻⁶ × 100² = 0.05J'},
+  {n:98,  cat:'5장', hot:false, q:'진공 중 비유전율(εs)의 값은?', opts:['0','1','80','무한대'], ans:1, ex:'진공(공기) 비유전율 εs = 1 (기준값)'},
+  {n:99,  cat:'5장', hot:false, q:'물의 비유전율은 약 얼마인가?', opts:['1','3','40','80'], ans:3, ex:'암기: 물=80, 유리≈3~10, 공기=1'},
+  {n:100, cat:'5장', hot:false, q:'전기력선에 관한 설명으로 옳지 않은 것은?', opts:['(+)전하에서 시작하여 (-)전하에서 끝난다','전기력선끼리 서로 교차하지 않는다','전위가 높은 곳에서 낮은 곳으로 향한다','도체 내부에도 전기력선이 존재한다'], ans:3, ex:'전기력선은 도체 내부에 존재하지 않는다 (도체 내 전계 = 0)'},
+  {n:101, cat:'5장', hot:true,  q:'전속밀도 D의 단위는?', opts:['[V/m]','[C/m²]','[Wb/m²]','[A/m]'], ans:1, ex:'D = [C/m²] / E = [V/m] / B = [Wb/m²] / H = [AT/m]'},
+  {n:102, cat:'5장', hot:false, q:'전계의 세기 E의 단위는?', opts:['[V/m]','[C/m²]','[Wb/m²]','[A/m]'], ans:0, ex:'전계 E = [V/m] (자계 H = [AT/m]과 구별)'},
+  {n:103, cat:'5장', hot:false, q:'콘덴서의 정전 에너지를 구하는 공식으로 옳은 것은?', opts:['W = CV','W = ½CV²','W = CV²','W = 2CV²'], ans:1, ex:'정전 에너지 W = ½CV² = ½QV = Q²/2C [J]'},
+  {n:104, cat:'5장', hot:false, q:'전속밀도 D와 전계의 세기 E의 관계식은?', opts:['D = E/ε','D = εE','D = ε²E','D = E + ε'], ans:1, ex:'D = εE (자속밀도 B = μH 와 대응)'},
+  {n:105, cat:'5장', hot:false, q:'C₁ = 4μF, C₂ = 12μF 두 콘덴서를 직렬 연결했을 때 합성 정전용량은?', opts:['2μF','3μF','8μF','16μF'], ans:1, ex:'C₀ = (C₁×C₂)/(C₁+C₂) = (4×12)/(4+12) = 48/16 = 3μF'},
 
-  // ===== 가공·배전반 =====
-  {cat:'가공', type:'mc', q:'가공전선 지지물 중 가장 많이 사용되는 것은?',
-    opts:['목주','철주','철근콘크리트주','철탑'], ans:2,
-    ex:'철근콘크리트주가 가장 많이 이용됩니다.'},
-  {cat:'가공', type:'mc', q:'도로에서 저압·고압 가공전선의 최소 높이는?',
-    opts:['4m','5m','6m','6.5m'], ans:2,
-    ex:'도로 6m 이상 / 철도 6.5m 이상 / 횡단보도교 고압 3.5m, 저압 3m 이상'},
-  {cat:'가공', type:'mc', q:'철탑 풍압 하중에서 단도체의 값은? (N/m²)',
-    opts:['588','666','745','1039'], ans:2,
-    ex:'원형 588 / 다도체 666 / 단도체 745 / 애자장치 1039'},
-  {cat:'가공', type:'mc', q:'고압 완금(암) 설치 높이는?',
-    opts:['1400mm','1600mm','1800mm','2400mm'], ans:2,
-    ex:'저압 1400mm / 고압 1800mm / 특고압 2400mm'},
-  {cat:'가공', type:'mc', q:'변압기 1차 보호에 사용되는 장치는?',
-    opts:['캣치홀더','COS(컷아웃 스위치)','누전차단기','VCB'], ans:1,
-    ex:'1차 보호: COS(컷아웃 스위치) / 2차 보호: 캣치홀더'},
-  {cat:'가공', type:'mc', q:'지중 인입선에서 암거식 시설의 매설 깊이 제한은?',
-    opts:['0.6m 이상','1m 이상','1.2m 이상','제한 없음'], ans:3,
-    ex:'직매·관로식 → 차량통행 1m, 비통행 0.6m / 암거식 → 제한 없음'},
-  {cat:'가공', type:'mc', q:'수용가 설비 기준 저압 전압 강하 허용치는?',
-    opts:['1%','3%','5%','6%'], ans:1,
-    ex:'저압 3%, 고압 6%가 전압 강하 기준입니다.'},
-  {cat:'가공', type:'mc', q:'분전반 철판 두께 기준으로 옳은 것은?',
-    opts:['0.8mm 또는 1.0mm','1.0mm 또는 1.2mm','1.2mm 또는 1.6mm','1.6mm 또는 2.0mm'], ans:2,
-    ex:'분전반 철판 두께 1.2mm 또는 1.6mm, 뚜껑 3.2mm'},
-
-  // ===== 특수장소·조명 =====
-  {cat:'특수', type:'mc', q:'폭연성 분진 장소에서 허용되는 배선 공사는?',
-    opts:['합성수지관 공사','애자 공사','케이블·금속관 공사','몰드 공사'], ans:2,
-    ex:'폭연성 분진 → 케이블·금속관 / 가연성 분진·위험물 → 케이블·금속관·합성수지'},
-  {cat:'특수', type:'mc', q:'화약류 저장소에서 허용되는 전기설비는?',
-    opts:['동력 설비','조명 설비만','통신 설비','냉방 설비'], ans:1,
-    ex:'화약류 저장소는 조명 설비만 허용됩니다.'},
-  {cat:'특수', type:'mc', q:'전기 울타리 사용 전압 기준은?',
-    opts:['100V 이하','200V 이하','250V 이하','300V 이하'], ans:2,
-    ex:'전기 울타리: 250V 이하, 경동선 2mm 이상, 기둥 2.5cm, 식물과 0.3m 이상 이격'},
-  {cat:'특수', type:'mc', q:'조도(입사광속 밝기)의 단위는?',
-    opts:['루멘(lm)','칸델라(cd)','럭스(lx)','니트(nt)'], ans:2,
-    ex:'F(lm): 광속 / I(cd): 광도 / E(lx): 조도 / B(nt): 휘도'},
-  {cat:'특수', type:'mc', q:'직접 조명 방식에서 등기구 배치 간격 기준은?',
-    opts:['1/2H','2/3H','3/4H','4/5H'], ans:1,
-    ex:'직접 조명 2/3H / 간접 조명 4/5H'},
-  {cat:'특수', type:'mc', q:'조명 계산식 FUN = EAD에서 D가 의미하는 것은?',
-    opts:['조명률','감광보상률(유지율의 역수)','면적','광속'], ans:1,
-    ex:'F=광속, U=조명률, N=등수, E=조도, A=면적, D=감광보상률(=1/보수율)'},
-  {cat:'특수', type:'mc', q:'수은등의 등기구 기호는?',
-    opts:['F','H','N','M'], ans:1,
-    ex:'F: 형광등 / H: 수은등 / N: 나트륨등 / M: 메탈 핼라이드등'},
-  {cat:'특수', type:'mc', q:'교통 신호등 및 도로 발열선에 사용하는 전압 기준은?',
-    opts:['15V 이하','24V 이하','30V 이하','50V 이하'], ans:2,
-    ex:'교통 신호등·도로 발열선은 30V 이하를 사용합니다.'},
+  // 6장
+  {n:106, cat:'6장', hot:false, q:'두 자하 m₁ = 2Wb, m₂ = 3Wb이 진공 중에서 r = 1m 떨어져 있을 때 작용하는 힘은?', opts:['6 N','3.8 × 10⁵ N','6.33 × 10⁴ N','1.9 × 10⁵ N'], ans:1, ex:'F = 6.33×10⁴ × m₁m₂/r² = 6.33×10⁴ × 6/1 ≈ 3.8×10⁵ N'},
+  {n:107, cat:'6장', hot:false, q:'자계의 세기 H의 단위로 옳은 것은?', opts:['[Wb/m²]','[AT/m]','[V/m]','[C/m²]'], ans:1, ex:'H = [AT/m] (전계 E = [V/m] 와 대응)'},
+  {n:108, cat:'6장', hot:true,  q:'다음 중 강자성체에 해당하는 것은?', opts:['구리','알루미늄','철','금'], ans:2, ex:'강자성체(μs≫1): 철, 니켈, 코발트 / 상자성체: 알루미늄, 백금 / 반자성체: 구리, 금, 물'},
+  {n:109, cat:'6장', hot:false, q:'다음 중 상자성체에 해당하는 것은?', opts:['구리','알루미늄','철','금'], ans:1, ex:'상자성체(μs>1): 알루미늄, 백금, 공기'},
+  {n:110, cat:'6장', hot:false, q:'다음 중 반자성체에 해당하는 것은?', opts:['철','니켈','알루미늄','구리'], ans:3, ex:'반자성체(μs<1): 구리, 금, 물 / 구리는 반자성체, 철·니켈은 강자성체'},
+  {n:111, cat:'6장', hot:false, q:'자속밀도 B의 단위는?', opts:['[AT/m]','[C/m²]','[Wb/m²]','[V/m]'], ans:2, ex:'자속밀도 B = [Wb/m²] (전속밀도 D = [C/m²] 와 대응)'},
+  {n:112, cat:'6장', hot:false, q:'자속밀도 B와 자계의 세기 H의 관계식은?', opts:['B = H/μ','B = μH','B = μ²H','B = H + μ'], ans:1, ex:'B = μH (전속밀도 D = εE 와 대응)'},
+  {n:113, cat:'6장', hot:true,  q:'진공의 투자율 μ₀의 값은?', opts:['8.855 × 10⁻¹²','4π × 10⁻⁷','9 × 10⁹','6.33 × 10⁴'], ans:1, ex:'⚠️ 진공 투자율 μ₀ = 4π×10⁻⁷ [H/m] / 진공 유전율 ε₀ = 8.855×10⁻¹² 혼동 주의!'},
+  {n:114, cat:'6장', hot:true,  q:'진공 중 자계에서 비례상수 1/(4πμ₀)의 값은?', opts:['9 × 10⁹','8.855 × 10⁻¹²','6.33 × 10⁴','4π × 10⁻⁷'], ans:2, ex:'⚠️ 자계 비례상수 = 6.33×10⁴ / 전계 비례상수 = 9×10⁹ 혼동 주의!'},
+  {n:115, cat:'6장', hot:false, q:'자기력선에 관한 설명으로 옳지 않은 것은?', opts:['N극에서 시작하여 S극에서 끝난다 (외부 기준)','자기력선끼리 서로 교차하지 않는다','자성체 내부에는 자기력선이 존재하지 않는다','등자위면에 수직으로 작용한다'], ans:2, ex:'자기력선은 자성체 내부에도 존재한다 (연속 폐곡선). 전기력선과 반대!'},
+  {n:116, cat:'6장', hot:true,  q:'전기력선과 자기력선의 비교로 옳은 것은?', opts:['전기력선은 연속적이고 자기력선은 불연속적이다','전기력선과 자기력선 모두 연속적이다','전기력선은 불연속적이고 자기력선은 연속적이다','전기력선과 자기력선 모두 불연속적이다'], ans:2, ex:'전기력선: 불연속(도체 내부 없음) / 자기력선: 연속(폐곡선, 자성체 내부에도 있음)'},
+  {n:117, cat:'6장', hot:false, q:'비투자율 μs = 1인 물질은?', opts:['철','니켈','진공(공기)','알루미늄'], ans:2, ex:'비투자율 μs = 1 → 진공(공기) / 비유전율 εs = 1도 진공 → 대응'},
+  {n:118, cat:'6장', hot:false, q:'자성체에서 μs >> 1인 물질로만 묶인 것은?', opts:['구리, 금, 물','알루미늄, 백금, 공기','철, 니켈','구리, 알루미늄'], ans:2, ex:'강자성체(μs≫1) = 철, 니켈, 코발트'},
+  {n:119, cat:'6장', hot:false, q:'자위 U의 단위로 옳은 것은?', opts:['[Wb]','[AT]','[V/m]','[C]'], ans:1, ex:'자위 U = [AT] = [A] = [J/Wb]'},
+  {n:120, cat:'6장', hot:false, q:'정전계와 정자계를 비교할 때 대응이 옳지 않은 것은?', opts:['유전율(ε) ↔ 투자율(μ)','전속밀도(D) ↔ 자속밀도(B)','전하(Q) ↔ 자하(m)','전계의 세기(E) ↔ 자속수(N)'], ans:3, ex:'올바른 대응: 전계의 세기(E) ↔ 자계의 세기(H). 자속수(N)는 대응이 아님'},
 ];
 
-let stats = { done: 0, correct: 0, wrong: 0 };
-let currentFilter = 'all';
+const catNames = {
+  '1장':'1장. 기초 전기이론','2장':'2장. 열전 효과 & 건전지',
+  '3장':'3장. 교류 회로','4장':'4장. 3상 전력',
+  '5장':'5장. 정전계','6장':'6장. 정자계'
+};
+
+let stats = {done:0, correct:0, wrong:0};
+let currentCat = 'all';
 
 function getFiltered() {
-  if (currentFilter === 'all') return questions;
-  return questions.filter(q => q.cat === currentFilter);
+  return currentCat === 'all' ? questions : questions.filter(q => q.cat === currentCat);
 }
 
 function renderQuiz() {
@@ -613,7 +410,7 @@ function renderQuiz() {
   const noResult = document.getElementById('no-result');
   const filtered = getFiltered();
 
-  if (filtered.length === 0) {
+  if (!filtered.length) {
     container.innerHTML = '';
     noResult.style.display = 'block';
     document.getElementById('stat-total').textContent = 0;
@@ -624,68 +421,52 @@ function renderQuiz() {
 
   let html = '';
   let lastCat = '';
-  const catNames = {
-    '개요':'설비 개요 및 용어', '배선재료':'배선재료 및 공구',
-    '전선접속':'전선의 접속', '옥내배선':'옥내배선공사',
-    '보안':'전선 및 기계기구 보안', '가공':'가공인입선 및 배전반',
-    '특수':'특수장소 및 조명'
-  };
-
   filtered.forEach((q, i) => {
-    const globalIdx = questions.indexOf(q);
     if (q.cat !== lastCat) {
-      html += `<div class="chapter-label">📚 ${catNames[q.cat] || q.cat}</div>`;
+      html += `<div class="chapter-label">📚 ${catNames[q.cat]}</div>`;
       lastCat = q.cat;
     }
-    html += `<div class="q-card" id="qcard-${globalIdx}">
-      <div class="q-header" onclick="toggleQ(${globalIdx})">
-        <span class="q-num">Q${String(i+1).padStart(2,'0')}</span>
-        <span class="q-tag">${catNames[q.cat]}</span>
+    const hotBadge = q.hot ? `<span class="q-hot">⚠️빈출</span>` : '';
+    html += `<div class="q-card" id="qcard-${q.n}">
+      <div class="q-header" onclick="toggleQ(${q.n})">
+        <span class="q-num">Q${String(i+1).padStart(3,'0')}</span>
+        ${hotBadge}
         <span class="q-text">${q.q}</span>
         <span class="q-arrow">▼</span>
       </div>
-      <div class="q-options" id="opts-${globalIdx}">
-        ${q.opts.map((o, oi) => `
-          <button class="option-btn" id="opt-${globalIdx}-${oi}" onclick="selectOpt(${globalIdx}, ${oi})" ${''}>
+      <div class="q-options" id="opts-${q.n}">
+        ${q.opts.map((o,oi)=>`
+          <button class="option-btn" id="opt-${q.n}-${oi}" onclick="selectOpt(${q.n},${oi})">
             <span class="option-num">${oi+1}</span>${o}
-          </button>
-        `).join('')}
-        <div class="answer-box" id="ans-${globalIdx}">
-          <div class="answer-label">✅ 해설</div>
-          ${q.ex}
+          </button>`).join('')}
+        <div class="answer-box" id="ans-${q.n}">
+          <div class="answer-label">✅ 해설</div>${q.ex}
         </div>
       </div>
     </div>`;
   });
-
   container.innerHTML = html;
   updateStats();
 }
 
-function toggleQ(idx) {
-  const card = document.getElementById(`qcard-${idx}`);
-  card.classList.toggle('open');
+function toggleQ(n) {
+  document.getElementById(`qcard-${n}`).classList.toggle('open');
 }
 
-function selectOpt(idx, chosen) {
-  const q = questions[idx];
-  const card = document.getElementById(`qcard-${idx}`);
-
-  // already answered?
+function selectOpt(n, chosen) {
+  const q = questions.find(x => x.n === n);
+  const card = document.getElementById(`qcard-${n}`);
   if (card.classList.contains('answered-correct') || card.classList.contains('answered-wrong')) return;
 
   const isCorrect = chosen === q.ans;
-
-  // mark all buttons
-  q.opts.forEach((_, oi) => {
-    const btn = document.getElementById(`opt-${idx}-${oi}`);
+  q.opts.forEach((_,oi)=>{
+    const btn = document.getElementById(`opt-${n}-${oi}`);
     btn.disabled = true;
     if (oi === q.ans) btn.classList.add('correct');
     else if (oi === chosen && !isCorrect) btn.classList.add('wrong');
   });
-
   card.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
-  document.getElementById(`ans-${idx}`).classList.add('show');
+  document.getElementById(`ans-${n}`).classList.add('show');
 
   stats.done++;
   if (isCorrect) stats.correct++;
@@ -697,22 +478,22 @@ function updateStats() {
   document.getElementById('stat-done').textContent = stats.done;
   document.getElementById('stat-correct').textContent = stats.correct;
   document.getElementById('stat-wrong').textContent = stats.wrong;
-
   const total = getFiltered().length;
   const pct = total > 0 ? Math.round(stats.done / total * 100) : 0;
   document.getElementById('progress-fill').style.width = pct + '%';
 }
 
-function filterCategory(cat) {
-  currentFilter = cat;
+function filterCat(cat, btn) {
+  currentCat = cat;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  stats = { done:0, correct:0, wrong:0 };
+  btn.classList.add('active');
+  stats = {done:0, correct:0, wrong:0};
   renderQuiz();
+  document.getElementById('memo-section').style.display = cat === 'all' ? 'block' : 'none';
 }
 
 function resetAll() {
-  stats = { done:0, correct:0, wrong:0 };
+  stats = {done:0, correct:0, wrong:0};
   renderQuiz();
 }
 
