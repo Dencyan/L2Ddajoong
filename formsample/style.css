@@ -248,6 +248,27 @@ section{
     padding: 0;
 }
 
+/* event group */
+.event-group {
+    margin-bottom: 0;
+}
+
+.event-group + .event-group {
+    border-top: 2px solid rgba(157, 234, 225, .35);
+}
+
+.event-group-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 16px 8px;
+    background: rgba(158, 234, 225, .07);
+    border-bottom: 1px solid rgba(157, 234, 225, .2);
+}
+
 .event-list {
     display: flex;
     flex-direction: column;
@@ -302,6 +323,29 @@ section{
     font-size: 13px;
     line-height: 1.6;
     color: var(--text);
+}
+
+.event-link {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    transition: color .2s ease;
+}
+
+.event-link::after {
+    content: " ↗";
+    font-size: 13px;
+    color: var(--primary);
+    opacity: 0;
+    transition: opacity .2s ease;
+}
+
+.event-link:hover {
+    color: var(--primary);
+}
+
+.event-link:hover::after {
+    opacity: 1;
 }
 
 .badge {
