@@ -103,6 +103,15 @@ section{
 
 .hero-left-col .hero-card {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-left-col .hero-card .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .hero-left, .hero-right, .hero-card{
@@ -258,6 +267,26 @@ section{
 .hero-collab .card-body {
     background: linear-gradient(135deg, rgba(255, 107, 107, .05), rgba(158, 234, 225, .05));
     padding: 0;
+}
+
+.hero-collab .event-list {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(157, 234, 225, .5) transparent;
+}
+
+.hero-collab .event-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.hero-collab .event-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.hero-collab .event-list::-webkit-scrollbar-thumb {
+    background: rgba(157, 234, 225, .5);
+    border-radius: 999px;
 }
 
 .event-list {
