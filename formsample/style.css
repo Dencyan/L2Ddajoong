@@ -92,13 +92,17 @@ section{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
-    align-items: start;
+    align-items: stretch;
 }
 
 .hero-left-col {
     display: flex;
     flex-direction: column;
     gap: 18px;
+}
+
+.hero-left-col .hero-card {
+    flex: 1;
 }
 
 .hero-left, .hero-right, .hero-card{
