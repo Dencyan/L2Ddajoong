@@ -227,6 +227,18 @@ section{
    caption
 ====================== */
 
+/* ======================
+   tall variant (전신 리깅 300x700)
+====================== */
+
+.sp-group--tall {
+    --sp-ar: 3/7;
+    --sp-fit: contain;
+}
+
+.sp-group--tall .sp-item {
+    max-width: 300px;
+}
 .sp-cap {
     padding: 10px 12px 12px;
     font-size: 12px;
