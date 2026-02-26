@@ -25,21 +25,6 @@
   </style>
 
 <style>
-    /* ====================================================================
-   
-   🎬 Dajoong Live2D - Slider Script
-   
-   이 코드는 Live2D Rigger "다중(Dajoong)"이 작성했습니다.
-   
-   수정 사항이나 개선 아이디어가 있으시다면 편하게 DM 보내주세요!
-   개선에 협력해주셔서 감사합니다! 🙏
-   
-   👤 Contact:
-   • X (Twitter): https://x.com/_Dajoong
-   • Foriio: https://www.foriio.com/DaJoong
-   • YouTube: https://www.youtube.com/@Dajoong_L2d
-   
-   ===================================================================== */
 /* ==============================
    THEME
 ============================== */
@@ -161,22 +146,6 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   box-shadow: 0 0 0 3px rgba(159,168,255,.15);
 }
 .card-body { padding: 4px 18px 18px; }
-
-/* ====================================================================
-   
-   🎬 Dajoong Live2D - Slider Script
-   
-   이 코드는 Live2D Rigger "다중(Dajoong)"이 작성했습니다.
-   
-   수정 사항이나 개선 아이디어가 있으시다면 편하게 DM 보내주세요!
-   개선에 협력해주셔서 감사합니다! 🙏
-   
-   👤 Contact:
-   • X (Twitter): https://x.com/_Dajoong
-   • Foriio: https://www.foriio.com/DaJoong
-   • YouTube: https://www.youtube.com/@Dajoong_L2d
-   
-===================================================================== */
 
 /* ==============================
    NOTICE BANNER (공지사항)
@@ -1285,20 +1254,259 @@ section[data-type][data-active] { display: block; }
   .sp-title { font-size: 18px; }
   .plan-grid { grid-template-columns: 1fr; }
 }
+
+/* ==============================
+   SIDE NAVIGATION
+============================== */
+.side-nav {
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+}
+.side-nav.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.side-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  justify-content: flex-end;
+}
+.side-nav-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary-strong);
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-sm);
+}
+.side-nav-item:hover .side-nav-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+.side-nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(150,160,255,.35);
+  border: 1.5px solid rgba(150,160,255,.5);
+  flex-shrink: 0;
+  transition: all .22s ease;
+}
+.side-nav-item[data-active] .side-nav-dot {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: scale(1.4);
+  box-shadow: 0 0 0 3px rgba(159,168,255,.2);
+}
+.side-nav-item:hover .side-nav-dot {
+  background: var(--primary-strong);
+  border-color: var(--primary-strong);
+}
+
+/* 판매 모델 섹션 */
+.sale-model-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  background: var(--panel);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.sale-model-head {
+  padding: 18px 24px 14px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(255,194,227,.12), rgba(159,168,255,.10));
+  border-bottom: 1px solid var(--border);
+}
+.sale-model-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255,107,107,.10);
+  border: 1px solid rgba(255,107,107,.25);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--danger);
+  margin-bottom: 10px;
+}
+.sale-model-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: 4px;
+}
+.sale-model-sub {
+  font-size: 12.5px;
+  color: var(--text-light);
+}
+.sale-model-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.sale-model-video-col {
+  padding: 18px;
+  border-right: 1px solid var(--border);
+}
+.sale-model-video-frame {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  background: #0d0d12;
+}
+.sale-model-video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.sale-model-info-col {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+.sale-model-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-strong);
+  margin-bottom: 8px;
+  letter-spacing: .02em;
+}
+.sale-model-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sale-model-features li {
+  font-size: 12.5px;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  line-height: 1.5;
+}
+.sale-model-features li::before {
+  content: "✓";
+  color: var(--primary-strong);
+  font-weight: 700;
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.sale-price-box {
+  background: linear-gradient(135deg, rgba(255,194,227,.15), rgba(159,168,255,.12));
+  border: 1px solid rgba(255,194,227,.4);
+  border-radius: var(--r-md);
+  padding: 12px 16px;
+  text-align: center;
+}
+.sale-price-label {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+.sale-price-formula {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+.sale-price-original {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+.sale-price-original s {
+  text-decoration-color: var(--danger);
+  text-decoration-thickness: 2px;
+}
+.sale-price-total {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--danger);
+  letter-spacing: -.02em;
+  line-height: 1.2;
+}
+.sale-price-save {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255,107,107,.12);
+  border: 1px solid rgba(255,107,107,.3);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--danger);
+}
+.sale-model-cta {
+  display: flex;
+  justify-content: center;
+  padding: 14px 18px 18px;
+  border-top: 1px solid var(--border);
+  background: rgba(245,247,255,.5);
+}
+.sale-model-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(159,168,255,.4);
+  transition: all .22s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.sale-model-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(159,168,255,.5);
+}
+
+@media (max-width: 720px) {
+  .side-nav { display: none; }
+  .sale-model-body { grid-template-columns: 1fr; }
+  .sale-model-video-col { border-right: none; border-bottom: 1px solid var(--border); }
+}
 </style>
 </head>
 
 <body>
 <div class="page">
-  <!--* ===========================================
+
+  <!-- ============================================
    
    🎬 Dajoong Live2D - artmug page
    
    이 코드는 Live2D Rigger "다중(Dajoong)"이 작성했습니다.
    
    수정 사항이나 개선 아이디어가 있으시다면 편하게 DM 보내주세요!
-   개선에 협력해주셔서 감사합니다! 🙏
-   또한 코드 관련 도움이 필요 할 경우 언제든지 연락 주세요.
+   개선에 협력해주셔서 감사합니다! 
+   코드에 관련된 질문이 있을 경우 아래 연락처로 연락 부탁드립니다.
    
    👤 Contact:
    • X (Twitter): https://x.com/_Dajoong
@@ -1308,7 +1516,7 @@ section[data-type][data-active] { display: block; }
   <!-- ============================================
        공지사항
   ============================================= -->
-  <div class="notice-wrap">
+  <div class="notice-wrap" id="sec-notice">
     <div class="notice-head">
       <span class="notice-head-icon">📢</span>
       <span class="notice-head-title">공지사항</span>
@@ -1354,7 +1562,7 @@ section[data-type][data-active] { display: block; }
   <!-- ============================================
        이벤트 / 콜라보 + 프로세스
   ============================================= -->
-  <div class="hero-bottom">
+  <div class="hero-bottom" id="sec-event">
 
     <div class="hero-left-col">
       <!-- 이벤트 -->
@@ -1448,7 +1656,7 @@ section[data-type][data-active] { display: block; }
   <!-- ============================================
        베이직 / 프리미엄 표
   ============================================= -->
-  <div class="sec-divider">
+  <div class="sec-divider" id="sec-plan">
     <div class="sec-divider-line"></div>
     <span class="sec-divider-label">Plan</span>
     <div class="sec-divider-line"></div>
@@ -1514,7 +1722,7 @@ section[data-type][data-active] { display: block; }
   <!-- ============================================
        작업 과정 / 수정 사항 / 저작권
   ============================================= -->
-  <div class="sec-divider">
+  <div class="sec-divider" id="sec-info">
     <div class="sec-divider-line"></div>
     <span class="sec-divider-label">Info</span>
     <div class="sec-divider-line"></div>
@@ -1583,9 +1791,59 @@ section[data-type][data-active] { display: block; }
   </div>
 
   <!-- ============================================
+       판매 모델
+  ============================================= -->
+  <div class="sec-divider" id="sec-sale">
+    <div class="sec-divider-line"></div>
+    <span class="sec-divider-label">Sale Model</span>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <div class="sale-model-wrap">
+    <div class="sale-model-head">
+      <div class="sale-model-badge">🛒 판매 중</div>
+      <h2 class="sale-model-title">판매 모델</h2>
+      <p class="sale-model-sub">일러스트 - 양초 작가님</p>
+    </div>
+    <div class="sale-model-body">
+      <div class="sale-model-video-col">
+        <div class="sale-model-video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/wML53bUKn1Q?si=gaP4RIUI9Yy9XTuG"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            title="판매 모델 쇼케이스">
+          </iframe>
+        </div>
+      </div>
+      <div class="sale-model-info-col">
+        <div>
+          <p class="sale-model-section-title">추가 표정 및 기능</p>
+          <ul class="sale-model-features">
+            <li>홍조, 경멸, 하트눈, 눈물 (애니메이션)</li>
+            <li>겉옷, 귀 ON/OFF</li>
+            <li>VBridger 포함 (메룽 X)</li>
+          </ul>
+        </div>
+        <div class="sale-price-box">
+          <p class="sale-price-label">판매가</p>
+          <p class="sale-price-formula">일러스트 85만원 + 리깅 78만원</p>
+          <p class="sale-price-original"><s>합계 163만원</s></p>
+          <p class="sale-price-total">🎉 130만원 🎉</p>
+          <p class="sale-price-save">33만원 할인</p>
+        </div>
+      </div>
+    </div>
+    <div class="sale-model-cta">
+      <a href="https://artmug.kr/index.php?channel=view&uid=47209" target="_blank" class="sale-model-btn">
+        🛒 구매 문의하기
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================
        RIGGING SAMPLE
   ============================================= -->
-  <div class="sec-divider">
+  <div class="sec-divider" id="sec-sample">
     <div class="sec-divider-line"></div>
     <span class="sec-divider-label">Rigging Sample</span>
     <div class="sec-divider-line"></div>
@@ -1662,7 +1920,7 @@ section[data-type][data-active] { display: block; }
   <!-- ============================================
        SHOWCASE
   ============================================= -->
-  <div class="sec-divider">
+  <div class="sec-divider" id="sec-showcase">
     <div class="sec-divider-line"></div>
     <span class="sec-divider-label">Showcase</span>
     <div class="sec-divider-line"></div>
@@ -1868,6 +2126,79 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
 });
+</script>
+
+<!-- SIDE NAVIGATION -->
+<nav class="side-nav" id="sideNav">
+  <div class="side-nav-item" data-target="sec-notice">
+    <span class="side-nav-label">공지사항</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-event">
+    <span class="side-nav-label">이벤트 / 프로세스</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-plan">
+    <span class="side-nav-label">Plan</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-info">
+    <span class="side-nav-label">작업 안내</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-sale">
+    <span class="side-nav-label">판매 모델</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-sample">
+    <span class="side-nav-label">Rigging Sample</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-showcase">
+    <span class="side-nav-label">Showcase</span>
+    <span class="side-nav-dot"></span>
+  </div>
+</nav>
+
+<script>
+// Side Nav
+(function() {
+  const nav = document.getElementById('sideNav');
+  const items = Array.from(nav.querySelectorAll('.side-nav-item'));
+  const sectionIds = items.map(i => i.dataset.target);
+
+  // Click to scroll
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const el = document.getElementById(item.dataset.target);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Show nav after scrolling past top
+  function checkVisibility() {
+    if (window.scrollY > 100) nav.classList.add('visible');
+    else nav.classList.remove('visible');
+  }
+
+  // Highlight active section
+  function updateActive() {
+    let current = sectionIds[0];
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 120) current = id;
+    });
+    items.forEach(item => {
+      item.getAttribute('data-target') === current
+        ? item.setAttribute('data-active', '')
+        : item.removeAttribute('data-active');
+    });
+  }
+
+  window.addEventListener('scroll', () => { checkVisibility(); updateActive(); }, { passive: true });
+  checkVisibility();
+  updateActive();
+})();
 </script>
 
 </body>
