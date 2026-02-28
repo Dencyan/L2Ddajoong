@@ -1017,6 +1017,20 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   max-width: 960px;
   margin: 0 auto 16px;
 }
+.sp-grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 640px;
+}
+.sp-grid--2 .sp-media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.sp-grid--2 .sp-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
 .sp-item {
   border-radius: var(--r-md);
   overflow: hidden;
@@ -1921,9 +1935,9 @@ section[data-type][data-active] { display: block; }
     <div class="sp-group">
       <h3 class="sp-cat-title">기타 애니메이션</h3>
       <p class="sp-cat-desc">애니메이션으로 다양한 효과를 제공합니다.</p>
-      <div class="sp-grid">
+      <div class="sp-grid sp-grid--2">
         <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/sad.gif?raw=true" alt="눈물효과"></div>
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/sad.gif?raw=true" alt="눈물 효과 샘플"></div>
           <figcaption class="sp-cap">눈물 효과를 표현합니다.</figcaption>
         </figure>
         <figure class="sp-item">
