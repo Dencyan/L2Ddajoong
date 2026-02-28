@@ -84,33 +84,6 @@ body.cursor-click #cursor-dot {
 .reveal.revealed { opacity: 1; transform: none; }
 
 /* ==============================
-   SCROLL PROGRESS BAR
-============================== */
-#scroll-progress {
-  position: fixed;
-  top: 0; left: 0;
-  width: 0%;
-  height: 3px;
-  background: linear-gradient(90deg, #9FA8FF, #FFC2E3, #9EEAE1);
-  z-index: 999999;
-  transition: width .1s linear;
-  box-shadow: 0 0 8px rgba(159,168,255,.7), 0 0 16px rgba(255,194,227,.4);
-}
-
-/* ==============================
-   TILT EFFECT
-============================== */
-.tilt-card {
-  transform-style: preserve-3d;
-  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
-  transition: transform .08s ease, box-shadow .2s ease;
-  will-change: transform;
-}
-.tilt-card:hover {
-  box-shadow: 0 22px 60px rgba(40,55,140,.18) !important;
-}
-
-/* ==============================
    THEME
 ============================== */
 :root {
@@ -1589,7 +1562,6 @@ section[data-type][data-active] { display: block; }
 <div id="cursor-ring"></div>
 <canvas id="cursor-canvas"></canvas>
 <canvas id="bg-canvas"></canvas>
-<div id="scroll-progress"></div>
 
 <div class="page">
 
@@ -2538,67 +2510,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: .07 });
   els.forEach(el => io.observe(el));
-})();
-</script>
-
-<script>
-/* ====================================================
-   SCROLL PROGRESS BAR
-==================================================== */
-(function() {
-  const bar = document.getElementById('scroll-progress');
-  function update() {
-    const scrolled = window.scrollY;
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
-  }
-  window.addEventListener('scroll', update, { passive: true });
-  update();
-})();
-
-/* ====================================================
-   TILT EFFECT
-==================================================== */
-(function() {
-  const TILT_SELECTORS = [
-    '.card', '.pricing-card', '.plan-card',
-    '.sp-item', '.info-block', '.sale-model-wrap'
-  ];
-  const MAX_TILT = 8;
-  const PERSPECTIVE = 800;
-
-  function applyTilt(el) {
-    if (el.classList.contains('tilt-card')) return;
-    el.classList.add('tilt-card');
-
-    el.addEventListener('mousemove', e => {
-      const rect = el.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) / (rect.width / 2);
-      const dy = (e.clientY - cy) / (rect.height / 2);
-      const rotY =  dx * MAX_TILT;
-      const rotX = -dy * MAX_TILT;
-      el.style.transform = `perspective(${PERSPECTIVE}px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02,1.02,1.02)`;
-    });
-
-    el.addEventListener('mouseleave', () => {
-      el.style.transform = `perspective(${PERSPECTIVE}px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)`;
-    });
-  }
-
-  function init() {
-    TILT_SELECTORS.forEach(sel => {
-      document.querySelectorAll(sel).forEach(applyTilt);
-    });
-  }
-
-  // Run after DOM ready + slight delay for dynamically built elements
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
 })();
 </script>
 

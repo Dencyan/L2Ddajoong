@@ -2513,5 +2513,12 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'scrollTo') {
+    window.scrollTo({ top: e.data.top, behavior: 'smooth' });
+  }
+});
+</script>
 </body>
 </html>
