@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전기기능사 연습문제 (설비편)_김찬우</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #161922;
+    --card: #1e2230;
+    --border: #2a3045;
+    --accent: #f0a500;
+    --accent2: #3b82f6;
+    --correct: #22c55e;
+    --wrong: #ef4444;
+    --text: #e8eaf0;
+    --muted: #8892a4;
+    --tag-bg: #252b3b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0d0f14 0%, #1a1f2e 50%, #0d0f14 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 24px 24px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    padding: 14px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .stat-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  .stat.total .stat-dot { background: var(--accent); }
+  .stat.done .stat-dot { background: var(--accent2); }
+  .stat.correct .stat-dot { background: var(--correct); }
+  .stat.wrong .stat-dot { background: var(--wrong); }
+
+  /* FILTER */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    padding: 16px 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filter-btn {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 700; }
+
+  /* MAIN */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    margin-bottom: 20px;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* QUESTION CARD */
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .q-card.answered-correct { border-color: var(--correct); }
+  .q-card.answered-wrong { border-color: var(--wrong); }
+
+  .q-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .q-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: rgba(240,165,0,0.1);
+    border: 1px solid rgba(240,165,0,0.3);
+    border-radius: 6px;
+    padding: 3px 8px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+
+  .q-tag {
+    font-size: 0.7rem;
+    color: var(--muted);
+    background: var(--tag-bg);
+    border-radius: 4px;
+    padding: 2px 7px;
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+
+  .q-text {
+    flex: 1;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .q-arrow {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 3px;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .q-card.open .q-arrow { transform: rotate(180deg); }
+
+  /* OPTIONS */
+  .q-options {
+    padding: 0 20px 4px;
+    display: none;
+  }
+
+  .q-card.open .q-options { display: block; }
+
+  .option-btn {
+    width: 100%;
+    text-align: left;
+    padding: 11px 14px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--accent2);
+    background: rgba(59,130,246,0.08);
+  }
+
+  .option-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .option-btn.correct {
+    border-color: var(--correct);
+    background: rgba(34,197,94,0.1);
+    color: var(--correct);
+  }
+
+  .option-btn.correct .option-num { color: var(--correct); }
+
+  .option-btn.wrong {
+    border-color: var(--wrong);
+    background: rgba(239,68,68,0.1);
+    color: var(--wrong);
+  }
+
+  .option-btn.wrong .option-num { color: var(--wrong); }
+
+  .option-btn:disabled { cursor: default; }
+
+  /* ANSWER REVEAL */
+  .answer-box {
+    display: none;
+    margin: 4px 0 16px;
+    padding: 14px 16px;
+    background: rgba(240,165,0,0.05);
+    border: 1px solid rgba(240,165,0,0.2);
+    border-radius: 8px;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .answer-box.show { display: block; }
+
+  .answer-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  /* SHORT ANSWER (주관식) */
+  .short-input-wrap {
+    padding: 0 20px 12px;
+    display: none;
+  }
+
+  .q-card.open .short-input-wrap { display: block; }
+
+  .short-input {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    margin-bottom: 8px;
+    transition: border-color 0.2s;
+  }
+
+  .short-input:focus { border-color: var(--accent2); }
+
+  .check-btn {
+    padding: 8px 20px;
+    background: var(--accent2);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .check-btn:hover { opacity: 0.85; }
+
+  /* RESET BTN */
+  .reset-wrap {
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  .reset-btn {
+    padding: 12px 32px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* NO RESULT */
+  .no-result {
+    text-align: center;
+    color: var(--muted);
+    padding: 60px 0;
+    font-size: 0.95rem;
+    display: none;
+  }
+
+  .chapter-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 28px 0 12px;
+    padding: 0 4px;
+    border-left: 3px solid var(--accent);
+    padding-left: 10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚡ 전기기능사 전기설비 문제집</h1>
+  <p>클릭하여 문제 확인 · 보기 선택으로 정답 체크</p>
+</header>
+
+<div class="stats-bar">
+  <div class="stat total"><span class="stat-dot"></span><span id="stat-total">0</span>문제</div>
+  <div class="stat done"><span class="stat-dot"></span>풀이 <span id="stat-done">0</span></div>
+  <div class="stat correct"><span class="stat-dot"></span>정답 <span id="stat-correct">0</span></div>
+  <div class="stat wrong"><span class="stat-dot"></span>오답 <span id="stat-wrong">0</span></div>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCategory('all')">전체</button>
+  <button class="filter-btn" onclick="filterCategory('개요')">설비 개요</button>
+  <button class="filter-btn" onclick="filterCategory('배선재료')">배선재료·공구</button>
+  <button class="filter-btn" onclick="filterCategory('전선접속')">전선접속</button>
+  <button class="filter-btn" onclick="filterCategory('옥내배선')">옥내배선공사</button>
+  <button class="filter-btn" onclick="filterCategory('보안')">기계기구 보안</button>
+  <button class="filter-btn" onclick="filterCategory('가공')">가공·배전반</button>
+  <button class="filter-btn" onclick="filterCategory('특수')">특수장소·조명</button>
+</div>
+
+<main>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+
+  <div id="quiz-container"></div>
+  <div class="no-result" id="no-result">해당 카테고리에 문제가 없습니다.</div>
+
+  <div class="reset-wrap">
+    <button class="reset-btn" onclick="resetAll()">🔄 전체 다시 풀기</button>
+  </div>
+</main>
+
+<script>
+const questions = [
+  // ===== 설비 개요 =====
+  {cat:'개요', type:'mc', q:'전력 계통에서 명령 및 지시를 수행하는 곳은?',
+    opts:['발전소','변전소','급전소','개폐소'], ans:2,
+    ex:'급전소는 전력 계통 운용을 지시하고 급전 조작을 담당합니다.'},
+  {cat:'개요', type:'mc', q:'대지전압의 최대 허용 기준은?',
+    opts:['200V','250V','300V','400V'], ans:2,
+    ex:'대지전압 300V 이하, 사용전압 400V 이하가 기준입니다.'},
+  {cat:'개요', type:'mc', q:'교류 기준 전압의 구분에서 "고압"의 범위는?',
+    opts:['1kV 이하','1kV 초과 7kV 이하','7kV 초과 60kV 이하','60kV 초과'], ans:1,
+    ex:'고압은 AC 1kV 초과 ~ 7kV 이하, 특고압은 7kV 초과입니다.'},
+  {cat:'개요', type:'mc', q:'전압 밴드(특별저압) 기준으로 옳은 것은?',
+    opts:['교류 60V, 직류 150V','교류 50V, 직류 120V','교류 70V, 직류 100V','교류 100V, 직류 200V'], ans:1,
+    ex:'분수대·수영장 등 인체 밀접 장소에 적용하는 특별저압 기준입니다.'},
+  {cat:'개요', type:'mc', q:'저압 전로의 누설전류 허용 기준은?',
+    opts:['0.5mA 이하','1mA 이하','2mA 이하','5mA 이하'], ans:1,
+    ex:'저압 전로 누설전류는 1mA 이하여야 합니다.'},
+  {cat:'개요', type:'mc', q:'단상 3선식 설비 불평형률 기준은?',
+    opts:['20% 이하','30% 이하','40% 이하','50% 이하'], ans:2,
+    ex:'단상 3선식 40% 이하, 3상 3·4선식은 30% 이하입니다.'},
+  {cat:'개요', type:'mc', q:'7kV 이하 전로의 절연 내력 시험 배수는?',
+    opts:['1.1배 (최소 75kV)','1.25배 (최소 10,500V)','1.5배 (최소 500V)','2배 (최소 1,000V)'], ans:2,
+    ex:'절연 내력은 7kV 이하 → 1.5배(최소 500V), 60kV 이하 → 1.25배, 60kV 초과 → 1.1배입니다.'},
+  {cat:'개요', type:'mc', q:'건물 표준부하(W/㎡)로 주택·아파트에 적용하는 값은?',
+    opts:['10','20','30','40'], ans:3,
+    ex:'주택·아파트 40 / 사무실·상점 30 / 병원·학교 20 / 교회·극장 10 / 복도·계단 5'},
+  {cat:'개요', type:'mc', q:'전선 굵기 결정 시 고려하지 않는 것은?',
+    opts:['기계적 강도','허용 전류','전압 강하','절연 내력'], ans:3,
+    ex:'전선 굵기는 기계적 강도, 허용 전류, 전압 강하 3가지로 결정합니다.'},
+  {cat:'개요', type:'mc', q:'"제2차 접근 상태"의 정의로 옳은 것은?',
+    opts:['수평거리 1m 미만','수평거리 3m 미만','수평거리 5m 미만','수직거리 3m 미만'], ans:1,
+    ex:'제2차 접근 상태는 수평거리 3m 미만인 곳을 말합니다.'},
+
+  // ===== 배선재료·공구 =====
+  {cat:'배선재료', type:'mc', q:'송전선로에 주로 사용되는 전선은?',
+    opts:['경동선(H)','연동선(A)','ACSR','CNCV'], ans:2,
+    ex:'ACSR(강심 알루미늄 연선)은 코로나 방지용 중공연선도 있으며 송전선로에 사용됩니다.'},
+  {cat:'배선재료', type:'mc', q:'인입용 비닐 절연전선의 기호는?',
+    opts:['OW','DV','HIV','MI'], ans:1,
+    ex:'DV: 인입용, OW·OB·OC: 옥외용, HIV: 내열용, MI: 내화성·내열성 우수'},
+  {cat:'배선재료', type:'mc', q:'연선 가닥 수 계산 공식은?',
+    opts:['N=3n²+1','N=3n(n+1)+1','N=6n+1','N=n²+n+1'], ans:1,
+    ex:'N=3n(n+1)+1 → 1층 7가닥, 2층 19가닥, 3층 37가닥'},
+  {cat:'배선재료', type:'mc', q:'전선 색상 중 중성선(N)의 색은?',
+    opts:['갈색','흑색','청색','녹황색'], ans:2,
+    ex:'L1 갈색 / L2 흑색 / L3 회색 / N 청색 / PE(보호도체) 녹황색'},
+  {cat:'배선재료', type:'mc', q:'절연저항 측정에 사용하는 계기는?',
+    opts:['어스 테스터','메거','네온 검전기','후크미터'], ans:1,
+    ex:'메거: 절연저항 / 어스 테스터: 접지저항 / 네온 검전기: 통전 검사'},
+  {cat:'배선재료', type:'mc', q:'금속관에 나사선을 내는 공구는?',
+    opts:['벤더','리머','오스터','파이프 커터'], ans:2,
+    ex:'오스터: 나사선 내기 / 벤더: 구부림 / 리머: 끝단 다듬기 / 파이프 커터: 절단'},
+  {cat:'배선재료', type:'mc', q:'비포장 퓨즈 중 정격전류가 2배일 때 2분 이내 융단되는 것은?',
+    opts:['포장 퓨즈','비포장 퓨즈','온도 퓨즈','전동기용 퓨즈'], ans:1,
+    ex:'비포장: 1.25배 견디고 2배에서 2분 이내 / 포장: 1.3배 견디고 2배에서 120분 이내'},
+  {cat:'배선재료', type:'mc', q:'활선 상태에서 전선 피복을 벗기는 공구는?',
+    opts:['와이어 스트리퍼','전선 피박기','피시 테이프','클리퍼'], ans:1,
+    ex:'전선 피박기는 활선 상태에서 전선 피복을 벗길 때 사용합니다.'},
+  {cat:'배선재료', type:'mc', q:'3극 단투형 나이프 스위치의 기호는?',
+    opts:['DPST','TPST','TPDT','SPDT'], ans:1,
+    ex:'S=1극, D=2극, T=3극 / ST=단투, DT=쌍투. TPST는 3극 단투형입니다.'},
+  {cat:'배선재료', type:'mc', q:'대지전압 150V~300V 회로의 절연저항 최솟값은?',
+    opts:['0.1 MΩ','0.2 MΩ','0.3 MΩ','0.4 MΩ'], ans:1,
+    ex:'150V 이하 → 0.1MΩ / 150~300V → 0.2MΩ / 300~400V → 0.3MΩ / 400V 초과 → 0.4MΩ'},
+  {cat:'배선재료', type:'mc', q:'저압 옥내배선 검사 순서로 옳은 것은?',
+    opts:['절연저항→접지저항→점검→통전','점검→절연저항→접지저항→통전','점검→접지저항→절연저항→통전','통전→점검→절연저항→접지저항'], ans:1,
+    ex:'점검 → 절연저항 측정 → 접지저항 측정 → 통전 시험 순서입니다.'},
+
+  // ===== 전선 접속 =====
+  {cat:'전선접속', type:'mc', q:'전선 접속 시 유지해야 할 최소 인장강도 비율은?',
+    opts:['60%','70%','80%','90%'], ans:2,
+    ex:'접속 후 원래 인장강도의 80% 이상 유지해야 합니다.'},
+  {cat:'전선접속', type:'mc', q:'직선 접속에서 10㎟ 이상 전선에 적용하는 방법은?',
+    opts:['트위스트 접속','쥐꼬리 접속','브리타니아 접속','슬리브 접속'], ans:2,
+    ex:'6㎟ 이하 → 트위스트 / 10㎟ 이상 → 브리타니아 (피복 벗기는 길이 20배)'},
+  {cat:'전선접속', type:'mc', q:'종단 접속에 사용하는 방법은?',
+    opts:['트위스트','브리타니아','쥐꼬리(와이어 커넥터)','압착 슬리브'], ans:2,
+    ex:'종단 접속은 쥐꼬리 접속(와이어 커넥터)으로 마감합니다.'},
+  {cat:'전선접속', type:'mc', q:'병렬 사용이 가능한 구리 전선의 최소 단면적은?',
+    opts:['25㎟','35㎟','50㎟','70㎟'], ans:2,
+    ex:'병렬 사용: 구리 50㎟ 이상, 알루미늄 70㎟ 이상. 퓨즈는 각각 개별 설치 금지.'},
+  {cat:'전선접속', type:'mc', q:'접착력이 없고 연피케이블에 사용하는 테이프는?',
+    opts:['면테이프','고무테이프','리노테이프','자기융착테이프'], ans:2,
+    ex:'리노테이프: 접착력 없음, 바이어스템프+니스, 연피케이블용'},
+  {cat:'전선접속', type:'mc', q:'자기융착테이프 사용 시 얼마나 늘려서 사용하는가?',
+    opts:['1.5배','2배','2.5배','3배'], ans:1,
+    ex:'자기융착테이프는 2배 늘려서 사용하며 합성수지·고무 재질입니다.'},
+
+  // ===== 옥내배선공사 =====
+  {cat:'옥내배선', type:'mc', q:'애자 사용 공사에서 전선 상호간 거리 기준은?',
+    opts:['2.5cm','4cm','6cm','8cm'], ans:2,
+    ex:'전선 상호간 6cm, 전선과 조영재 간 2.5cm, 지지점 간격 2m'},
+  {cat:'옥내배선', type:'mc', q:'합성수지관 1본의 길이는?',
+    opts:['2m','3m','4m','5m'], ans:2,
+    ex:'합성수지관 1본 길이는 4m이며 경질 비닐관 두께는 2.0mm 이상입니다.'},
+  {cat:'옥내배선', type:'mc', q:'금속관 공사에서 직각에 가까운 굴곡은 최대 몇 개소까지 가능한가?',
+    opts:['2개소','3개소','4개소','5개소'], ans:1,
+    ex:'직각에 가까운 굴곡은 3개소 초과 금지. 굽힘 반경은 내경의 6배입니다.'},
+  {cat:'옥내배선', type:'mc', q:'합성수지관 공사의 지지점 간격은?',
+    opts:['1m','1.5m','2m','2.5m'], ans:1,
+    ex:'합성수지관·몰드 1.5m / 가요관·캡타이어 1m / 애자·금속·비닐관 2m'},
+  {cat:'옥내배선', type:'mc', q:'금속관 콘크리트 매입 시 요구되는 두께는?',
+    opts:['0.8mm','1.0mm','1.2mm','1.5mm'], ans:2,
+    ex:'기본 금속관 두께 1mm, 콘크리트 매입 시 1.2mm 이상이 필요합니다.'},
+  {cat:'옥내배선', type:'mc', q:'가요전선관에서 2종의 굽힘 반경은 내경의 몇 배인가?',
+    opts:['3배','4배','6배','8배'], ans:0,
+    ex:'1종: 내경 6배 / 2종: 내경 3배 (아연도금+파이버 구조)'},
+  {cat:'옥내배선', type:'mc', q:'금속 덕트의 단면적 점유율 기준은?',
+    opts:['10% 이하','20% 이하','30% 이하','50% 이하'], ans:1,
+    ex:'금속 덕트 20% 이하 (전광표시 제어회로는 50% 이하), 수평 3m 수직 6m 고정'},
+  {cat:'옥내배선', type:'mc', q:'박스 녹아웃 지름이 로크너트보다 클 때 사용하는 부품은?',
+    opts:['부싱','유니온 커플링','링 리듀서','앵글 커넥터'], ans:2,
+    ex:'링 리듀서는 관 지름보다 큰 녹아웃에 고정하기 위한 보조 부품입니다.'},
+  {cat:'옥내배선', type:'mc', q:'라이팅 덕트 공사의 지지점 간격은?',
+    opts:['1m','1.5m','2m','3m'], ans:2,
+    ex:'라이팅 덕트 2m, 버스 덕트 3m, 금속 덕트 수평 3m/수직 6m'},
+  {cat:'옥내배선', type:'mc', q:'CD관과 PE관의 차이로 옳은 것은?',
+    opts:['CD는 구부릴 수 없고 PE는 구부릴 수 있다','CD는 구부릴 수 있고 PE는 구부릴 수 없다','둘 다 구부릴 수 있다','둘 다 구부릴 수 없다'], ans:1,
+    ex:'CD관은 구부릴 수 있어 굴곡 배관에 적합하고, PE관은 구부릴 수 없습니다.'},
+
+  // ===== 기계기구 보안 =====
+  {cat:'보안', type:'mc', q:'과전류 차단기 시설이 금지된 장소는?',
+    opts:['분기회로 분기점','접지 공사의 접지선','인입구','변압기 2차측'], ans:1,
+    ex:'접지선, 접지측 전선, 다선식 중성선에는 과전류 차단기 설치 금지'},
+  {cat:'보안', type:'mc', q:'SF₆ 가스를 이용하는 차단기는?',
+    opts:['VCB','OCB','GCB','MBB'], ans:2,
+    ex:'VCB: 진공 / OCB: 유입 / GCB: SF₆ 가스 / MBB: 자기 / ABB: 공기'},
+  {cat:'보안', type:'mc', q:'3상 정격 차단 용량 계산식은?',
+    opts:['정격전압 × 정격차단전류','√2 × 정격전압 × 정격차단전류','√3 × 정격전압 × 정격차단전류','2 × 정격전압 × 정격차단전류'], ans:2,
+    ex:'단상: V×I / 3상: √3×V×I'},
+  {cat:'보안', type:'mc', q:'접지선 매설 깊이 기준으로 옳은 것은?',
+    opts:['지하 50cm 이상','지하 75cm 이상','지하 1m 이상','지하 1.2m 이상'], ans:1,
+    ex:'지하 75cm 이상, 철주 밑면 30cm 이상, 지중 1m 이상 이격 설치'},
+  {cat:'보안', type:'mc', q:'분기점으로부터 과전류 차단기를 이동 설치할 수 있는 최대 거리는?',
+    opts:['1m','2m','3m','5m'], ans:2,
+    ex:'분기점으로부터 3m까지 이동하여 과전류 차단기 설치 가능'},
+  {cat:'보안', type:'mc', q:'전동기 과부하 보호장치 생략이 가능한 최대 용량은?',
+    opts:['0.1kW','0.2kW','0.5kW','1.0kW'], ans:1,
+    ex:'전동기 0.2kW 이하는 과부하 보호장치 생략 가능'},
+  {cat:'보안', type:'mc', q:'전동기 분기회로 전선의 허용전류는 정격전류의 몇 배 이상이어야 하는가?',
+    opts:['1.0배','1.1배','1.25배','1.5배'], ans:2,
+    ex:'전동기 분기회로 전선 허용전류는 정격전류의 1.25배 이상'},
+  {cat:'보안', type:'mc', q:'제1종 접지 저항 기준은?',
+    opts:['1Ω 이하','10Ω 이하','100Ω 이하','150Ω 이하'], ans:1,
+    ex:'제1종 10Ω / 제2종 150Ω / 제3종 100Ω / 특별3종 10Ω / 중성점직접접지 1Ω'},
+
+  // ===== 가공·배전반 =====
+  {cat:'가공', type:'mc', q:'가공전선 지지물 중 가장 많이 사용되는 것은?',
+    opts:['목주','철주','철근콘크리트주','철탑'], ans:2,
+    ex:'철근콘크리트주가 가장 많이 이용됩니다.'},
+  {cat:'가공', type:'mc', q:'도로에서 저압·고압 가공전선의 최소 높이는?',
+    opts:['4m','5m','6m','6.5m'], ans:2,
+    ex:'도로 6m 이상 / 철도 6.5m 이상 / 횡단보도교 고압 3.5m, 저압 3m 이상'},
+  {cat:'가공', type:'mc', q:'철탑 풍압 하중에서 단도체의 값은? (N/m²)',
+    opts:['588','666','745','1039'], ans:2,
+    ex:'원형 588 / 다도체 666 / 단도체 745 / 애자장치 1039'},
+  {cat:'가공', type:'mc', q:'고압 완금(암) 설치 높이는?',
+    opts:['1400mm','1600mm','1800mm','2400mm'], ans:2,
+    ex:'저압 1400mm / 고압 1800mm / 특고압 2400mm'},
+  {cat:'가공', type:'mc', q:'변압기 1차 보호에 사용되는 장치는?',
+    opts:['캣치홀더','COS(컷아웃 스위치)','누전차단기','VCB'], ans:1,
+    ex:'1차 보호: COS(컷아웃 스위치) / 2차 보호: 캣치홀더'},
+  {cat:'가공', type:'mc', q:'지중 인입선에서 암거식 시설의 매설 깊이 제한은?',
+    opts:['0.6m 이상','1m 이상','1.2m 이상','제한 없음'], ans:3,
+    ex:'직매·관로식 → 차량통행 1m, 비통행 0.6m / 암거식 → 제한 없음'},
+  {cat:'가공', type:'mc', q:'수용가 설비 기준 저압 전압 강하 허용치는?',
+    opts:['1%','3%','5%','6%'], ans:1,
+    ex:'저압 3%, 고압 6%가 전압 강하 기준입니다.'},
+  {cat:'가공', type:'mc', q:'분전반 철판 두께 기준으로 옳은 것은?',
+    opts:['0.8mm 또는 1.0mm','1.0mm 또는 1.2mm','1.2mm 또는 1.6mm','1.6mm 또는 2.0mm'], ans:2,
+    ex:'분전반 철판 두께 1.2mm 또는 1.6mm, 뚜껑 3.2mm'},
+
+  // ===== 특수장소·조명 =====
+  {cat:'특수', type:'mc', q:'폭연성 분진 장소에서 허용되는 배선 공사는?',
+    opts:['합성수지관 공사','애자 공사','케이블·금속관 공사','몰드 공사'], ans:2,
+    ex:'폭연성 분진 → 케이블·금속관 / 가연성 분진·위험물 → 케이블·금속관·합성수지'},
+  {cat:'특수', type:'mc', q:'화약류 저장소에서 허용되는 전기설비는?',
+    opts:['동력 설비','조명 설비만','통신 설비','냉방 설비'], ans:1,
+    ex:'화약류 저장소는 조명 설비만 허용됩니다.'},
+  {cat:'특수', type:'mc', q:'전기 울타리 사용 전압 기준은?',
+    opts:['100V 이하','200V 이하','250V 이하','300V 이하'], ans:2,
+    ex:'전기 울타리: 250V 이하, 경동선 2mm 이상, 기둥 2.5cm, 식물과 0.3m 이상 이격'},
+  {cat:'특수', type:'mc', q:'조도(입사광속 밝기)의 단위는?',
+    opts:['루멘(lm)','칸델라(cd)','럭스(lx)','니트(nt)'], ans:2,
+    ex:'F(lm): 광속 / I(cd): 광도 / E(lx): 조도 / B(nt): 휘도'},
+  {cat:'특수', type:'mc', q:'직접 조명 방식에서 등기구 배치 간격 기준은?',
+    opts:['1/2H','2/3H','3/4H','4/5H'], ans:1,
+    ex:'직접 조명 2/3H / 간접 조명 4/5H'},
+  {cat:'특수', type:'mc', q:'조명 계산식 FUN = EAD에서 D가 의미하는 것은?',
+    opts:['조명률','감광보상률(유지율의 역수)','면적','광속'], ans:1,
+    ex:'F=광속, U=조명률, N=등수, E=조도, A=면적, D=감광보상률(=1/보수율)'},
+  {cat:'특수', type:'mc', q:'수은등의 등기구 기호는?',
+    opts:['F','H','N','M'], ans:1,
+    ex:'F: 형광등 / H: 수은등 / N: 나트륨등 / M: 메탈 핼라이드등'},
+  {cat:'특수', type:'mc', q:'교통 신호등 및 도로 발열선에 사용하는 전압 기준은?',
+    opts:['15V 이하','24V 이하','30V 이하','50V 이하'], ans:2,
+    ex:'교통 신호등·도로 발열선은 30V 이하를 사용합니다.'},
+];
+
+let stats = { done: 0, correct: 0, wrong: 0 };
+let currentFilter = 'all';
+
+function getFiltered() {
+  if (currentFilter === 'all') return questions;
+  return questions.filter(q => q.cat === currentFilter);
+}
+
+function renderQuiz() {
+  const container = document.getElementById('quiz-container');
+  const noResult = document.getElementById('no-result');
+  const filtered = getFiltered();
+
+  if (filtered.length === 0) {
+    container.innerHTML = '';
+    noResult.style.display = 'block';
+    document.getElementById('stat-total').textContent = 0;
+    return;
+  }
+  noResult.style.display = 'none';
+  document.getElementById('stat-total').textContent = filtered.length;
+
+  let html = '';
+  let lastCat = '';
+  const catNames = {
+    '개요':'설비 개요 및 용어', '배선재료':'배선재료 및 공구',
+    '전선접속':'전선의 접속', '옥내배선':'옥내배선공사',
+    '보안':'전선 및 기계기구 보안', '가공':'가공인입선 및 배전반',
+    '특수':'특수장소 및 조명'
+  };
+
+  filtered.forEach((q, i) => {
+    const globalIdx = questions.indexOf(q);
+    if (q.cat !== lastCat) {
+      html += `<div class="chapter-label">📚 ${catNames[q.cat] || q.cat}</div>`;
+      lastCat = q.cat;
+    }
+    html += `<div class="q-card" id="qcard-${globalIdx}">
+      <div class="q-header" onclick="toggleQ(${globalIdx})">
+        <span class="q-num">Q${String(i+1).padStart(2,'0')}</span>
+        <span class="q-tag">${catNames[q.cat]}</span>
+        <span class="q-text">${q.q}</span>
+        <span class="q-arrow">▼</span>
+      </div>
+      <div class="q-options" id="opts-${globalIdx}">
+        ${q.opts.map((o, oi) => `
+          <button class="option-btn" id="opt-${globalIdx}-${oi}" onclick="selectOpt(${globalIdx}, ${oi})" ${''}>
+            <span class="option-num">${oi+1}</span>${o}
+          </button>
+        `).join('')}
+        <div class="answer-box" id="ans-${globalIdx}">
+          <div class="answer-label">✅ 해설</div>
+          ${q.ex}
+        </div>
+      </div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+  updateStats();
+}
+
+function toggleQ(idx) {
+  const card = document.getElementById(`qcard-${idx}`);
+  card.classList.toggle('open');
+}
+
+function selectOpt(idx, chosen) {
+  const q = questions[idx];
+  const card = document.getElementById(`qcard-${idx}`);
+
+  // already answered?
+  if (card.classList.contains('answered-correct') || card.classList.contains('answered-wrong')) return;
+
+  const isCorrect = chosen === q.ans;
+
+  // mark all buttons
+  q.opts.forEach((_, oi) => {
+    const btn = document.getElementById(`opt-${idx}-${oi}`);
+    btn.disabled = true;
+    if (oi === q.ans) btn.classList.add('correct');
+    else if (oi === chosen && !isCorrect) btn.classList.add('wrong');
+  });
+
+  card.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
+  document.getElementById(`ans-${idx}`).classList.add('show');
+
+  stats.done++;
+  if (isCorrect) stats.correct++;
+  else stats.wrong++;
+  updateStats();
+}
+
+function updateStats() {
+  document.getElementById('stat-done').textContent = stats.done;
+  document.getElementById('stat-correct').textContent = stats.correct;
+  document.getElementById('stat-wrong').textContent = stats.wrong;
+
+  const total = getFiltered().length;
+  const pct = total > 0 ? Math.round(stats.done / total * 100) : 0;
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function filterCategory(cat) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  stats = { done:0, correct:0, wrong:0 };
+  renderQuiz();
+}
+
+function resetAll() {
+  stats = { done:0, correct:0, wrong:0 };
+  renderQuiz();
+}
+
+renderQuiz();
+</script>
+</body>
+</html>

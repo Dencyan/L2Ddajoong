@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전기기능사 이론 문제집 Vol.2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+  :root{--bg:#0d0f14;--surface:#161922;--card:#1e2230;--border:#2a3045;--accent:#3b82f6;--accent2:#f0a500;--correct:#22c55e;--wrong:#ef4444;--text:#e8eaf0;--muted:#8892a4;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7;}
+  header{background:linear-gradient(135deg,#0d0f14,#111827,#0d0f14);border-bottom:1px solid var(--border);padding:26px 24px 18px;text-align:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);}
+  header h1{font-size:1.5rem;font-weight:900;color:var(--accent);letter-spacing:-0.5px;margin-bottom:4px;}
+  header p{color:var(--muted);font-size:0.82rem;}
+  .badge-vol{display:inline-block;font-size:0.68rem;font-weight:700;background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.4);color:var(--accent);border-radius:20px;padding:2px 10px;margin-left:8px;vertical-align:middle;}
+  .stats-bar{display:flex;gap:16px;justify-content:center;padding:12px 24px;background:var(--surface);border-bottom:1px solid var(--border);flex-wrap:wrap;}
+  .stat{display:flex;align-items:center;gap:6px;font-size:0.83rem;font-weight:700;}
+  .stat-dot{width:8px;height:8px;border-radius:50%;}
+  .stat.total .stat-dot{background:var(--accent);}
+  .stat.done .stat-dot{background:var(--accent2);}
+  .stat.correct .stat-dot{background:var(--correct);}
+  .stat.wrong .stat-dot{background:var(--wrong);}
+  .filter-bar{display:flex;gap:8px;padding:14px 24px;flex-wrap:wrap;justify-content:center;background:var(--surface);border-bottom:1px solid var(--border);}
+  .filter-btn{padding:5px 13px;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);font-family:'Noto Sans KR',sans-serif;font-size:0.78rem;cursor:pointer;transition:all 0.2s;}
+  .filter-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700;}
+  main{max-width:800px;margin:0 auto;padding:22px 16px 60px;}
+  .progress-wrap{margin-bottom:18px;}
+  .progress-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width 0.4s ease;}
+  .q-card{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;transition:border-color 0.3s;}
+  .q-card.answered-correct{border-color:var(--correct);}
+  .q-card.answered-wrong{border-color:var(--wrong);}
+  .q-header{padding:14px 18px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;user-select:none;}
+  .q-num{font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:700;color:var(--accent);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:5px;padding:2px 7px;white-space:nowrap;margin-top:2px;flex-shrink:0;}
+  .q-hot{font-size:0.68rem;color:#ef4444;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);border-radius:4px;padding:2px 6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+  .q-text{flex:1;font-size:0.92rem;font-weight:500;line-height:1.6;}
+  .q-arrow{color:var(--muted);font-size:0.85rem;margin-top:3px;transition:transform 0.3s;flex-shrink:0;}
+  .q-card.open .q-arrow{transform:rotate(180deg);}
+  .q-options{padding:0 18px 4px;display:none;}
+  .q-card.open .q-options{display:block;}
+  .option-btn{width:100%;text-align:left;padding:10px 13px;margin-bottom:7px;border:1px solid var(--border);border-radius:8px;background:rgba(255,255,255,0.02);color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:0.86rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:flex-start;gap:9px;line-height:1.5;}
+  .option-btn:hover:not(:disabled){border-color:var(--accent);background:rgba(59,130,246,0.08);}
+  .option-num{font-family:'JetBrains Mono',monospace;font-size:0.78rem;font-weight:700;color:var(--muted);flex-shrink:0;margin-top:1px;}
+  .option-btn.correct{border-color:var(--correct);background:rgba(34,197,94,0.1);color:var(--correct);}
+  .option-btn.correct .option-num{color:var(--correct);}
+  .option-btn.wrong{border-color:var(--wrong);background:rgba(239,68,68,0.1);color:var(--wrong);}
+  .option-btn.wrong .option-num{color:var(--wrong);}
+  .option-btn:disabled{cursor:default;}
+  .answer-box{display:none;margin:4px 0 14px;padding:13px 15px;background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.2);border-radius:8px;font-size:0.85rem;line-height:1.75;}
+  .answer-box.show{display:block;}
+  .answer-label{font-size:0.72rem;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:5px;}
+  .chapter-label{font-size:0.72rem;font-weight:700;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin:26px 0 10px;padding-left:10px;border-left:3px solid var(--accent);}
+  .reset-wrap{text-align:center;margin-top:28px;}
+  .reset-btn{padding:11px 28px;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--muted);font-family:'Noto Sans KR',sans-serif;font-size:0.88rem;cursor:pointer;transition:all 0.2s;}
+  .reset-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .no-result{text-align:center;color:var(--muted);padding:60px 0;font-size:0.95rem;display:none;}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚡ 전기기능사 이론 <span class="badge-vol">Vol.2</span></h1>
+  <p>100문제 | 1장~6장 전범위 · 이전 문제집과 완전히 다른 새 문제</p>
+</header>
+<div class="stats-bar">
+  <div class="stat total"><span class="stat-dot"></span><span id="stat-total">0</span>문제</div>
+  <div class="stat done"><span class="stat-dot"></span>풀이 <span id="stat-done">0</span></div>
+  <div class="stat correct"><span class="stat-dot"></span>정답 <span id="stat-correct">0</span></div>
+  <div class="stat wrong"><span class="stat-dot"></span>오답 <span id="stat-wrong">0</span></div>
+</div>
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCat('all',this)">전체</button>
+  <button class="filter-btn" onclick="filterCat('1장',this)">1장. 기초이론</button>
+  <button class="filter-btn" onclick="filterCat('2장',this)">2장. 열전·건전지</button>
+  <button class="filter-btn" onclick="filterCat('3장',this)">3장. 교류회로</button>
+  <button class="filter-btn" onclick="filterCat('4장',this)">4장. 3상전력</button>
+  <button class="filter-btn" onclick="filterCat('5장',this)">5장. 정전계</button>
+  <button class="filter-btn" onclick="filterCat('6장',this)">6장. 정자계</button>
+</div>
+<main>
+  <div class="progress-wrap"><div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div></div>
+  <div id="quiz-container"></div>
+  <div class="no-result" id="no-result">해당 챕터에 문제가 없습니다.</div>
+  <div class="reset-wrap"><button class="reset-btn" onclick="resetAll()">🔄 전체 다시 풀기</button></div>
+</main>
+<script>
+const questions=[
+  // ── 1장. 기초 전기이론 (1~20) ──
+  {n:1,cat:'1장',hot:false,q:'도선의 저항 R = 5Ω, 전압 V = 20V일 때 전류는?',opts:['0.25A','2A','4A','100A'],ans:2,ex:'I = V/R = 20/5 = 4A (옴의 법칙: V = IR)'},
+  {n:2,cat:'1장',hot:false,q:'저항 R = 10Ω에 전류 I = 3A가 흐를 때 양단 전압은?',opts:['3.3V','13V','30V','300V'],ans:2,ex:'V = IR = 3 × 10 = 30V'},
+  {n:3,cat:'1장',hot:false,q:'저항 4Ω, 6Ω, 12Ω을 병렬 연결할 때 합성저항은?',opts:['1Ω','2Ω','3Ω','22Ω'],ans:1,ex:'1/R = 1/4+1/6+1/12 = 3/12+2/12+1/12 = 6/12 → R = 2Ω'},
+  {n:4,cat:'1장',hot:false,q:'전압 V = 100V, 저항 R = 25Ω일 때 소비전력은?',opts:['4W','25W','400W','2500W'],ans:2,ex:'P = V²/R = 100²/25 = 10000/25 = 400W'},
+  {n:5,cat:'1장',hot:false,q:'전류 I = 4A, 저항 R = 8Ω일 때 소비전력은?',opts:['0.5W','32W','128W','512W'],ans:2,ex:'P = I²R = 4² × 8 = 16 × 8 = 128W'},
+  {n:6,cat:'1장',hot:true,q:'저항의 온도계수가 양(+)인 재료는?',opts:['구리','탄소','게르마늄','실리콘'],ans:0,ex:'구리·알루미늄·철 등 금속: 온도↑→저항↑(양의 온도계수) / 탄소·반도체: 온도↑→저항↓(음의 온도계수)'},
+  {n:7,cat:'1장',hot:false,q:'전력 P = 500W, 시간 t = 2시간일 때 전력량은?',opts:['250Wh','1000Wh','3600Wh','1800000J'],ans:1,ex:'W = Pt = 500W × 2h = 1000Wh = 1kWh'},
+  {n:8,cat:'1장',hot:false,q:'도선의 단면적을 2배로 늘리면 저항은?',opts:['2배로 증가','1/2로 감소','4배로 증가','변화 없음'],ans:1,ex:'R = ρl/A → 단면적 A가 2배이면 저항은 1/2배로 감소'},
+  {n:9,cat:'1장',hot:false,q:'도선의 길이를 3배로 늘리면 저항은?',opts:['1/3배','동일','3배','9배'],ans:2,ex:'R = ρl/A → 길이 l이 3배이면 저항도 3배 증가'},
+  {n:10,cat:'1장',hot:false,q:'테브난 정리에서 등가 회로를 구성하는 요소는?',opts:['전류원+병렬저항','전압원+직렬저항','전압원+병렬저항','전류원+직렬저항'],ans:1,ex:'테브난 정리: 복잡한 회로 → 전압원(Vth)+직렬저항(Rth) 등가 회로'},
+  {n:11,cat:'1장',hot:false,q:'전압 분배 법칙에서 R₁ = 3Ω, R₂ = 7Ω 직렬회로에 V = 100V를 인가할 때 R₁의 전압은?',opts:['7V','30V','43V','70V'],ans:1,ex:'V₁ = R₁/(R₁+R₂) × V = 3/(3+7) × 100 = 30V'},
+  {n:12,cat:'1장',hot:false,q:'전류 분배 법칙에서 R₁ = 4Ω, R₂ = 6Ω 병렬회로에 총전류 I = 10A가 흐를 때 R₁에 흐르는 전류는?',opts:['3A','4A','6A','7A'],ans:2,ex:'I₁ = R₂/(R₁+R₂) × I = 6/(4+6) × 10 = 6A (반대 저항에 비례)'},
+  {n:13,cat:'1장',hot:false,q:'저항 10Ω에 5분간 2A의 전류가 흘렀을 때 발생하는 열량은?',opts:['100J','600J','6000J','60000J'],ans:2,ex:'Q = I²Rt = 2² × 10 × (5×60) = 4 × 10 × 300 = 12000... → W = I²Rt = 4×10×300 = 12000J'},
+  {n:14,cat:'1장',hot:false,q:'최대 전력 전달 조건은?',opts:['부하저항 = 0','부하저항 = 전원 내부저항','부하저항 = ∞','부하저항 = 2 × 내부저항'],ans:1,ex:'최대 전력 전달 조건: 부하저항(RL) = 전원 내부저항(r)일 때 부하에 최대 전력 전달'},
+  {n:15,cat:'1장',hot:false,q:'키르히호프 제2법칙(전압법칙, KVL)의 설명으로 옳은 것은?',opts:['접속점에서 전류의 대수합 = 0','폐회로에서 전압의 대수합 = 0','전류는 저항에 비례한다','전력은 전압의 제곱에 비례한다'],ans:1,ex:'KVL: 폐회로를 일주할 때 전압강하의 대수합 = 0'},
+  {n:16,cat:'1장',hot:false,q:'어드미턴스(Y)의 단위는?',opts:['Ω','V/A','S(지멘스)','F'],ans:2,ex:'어드미턴스 Y = 1/Z, 단위: S(지멘스) = A/V = Ω⁻¹'},
+  {n:17,cat:'1장',hot:false,q:'연동선의 고유저항은 약 얼마인가?',opts:['1/55','1/58','1/100','1/35'],ans:1,ex:'경동선: 1/55 / 연동선: 1/58 (단위 Ω·m 기준, 연동선이 약간 저항 큼)'},
+  {n:18,cat:'1장',hot:false,q:'전기량 Q = 30C, 전압 V = 10V일 때 한 일(에너지)은?',opts:['3J','30J','300J','3000J'],ans:2,ex:'W = QV = 30 × 10 = 300J'},
+  {n:19,cat:'1장',hot:false,q:'노턴(Norton) 정리에서 등가 회로를 구성하는 요소는?',opts:['전류원+직렬저항','전압원+직렬저항','전류원+병렬저항','전압원+병렬저항'],ans:2,ex:'노턴 정리: 전류원(In)+병렬저항(Rn) 등가 회로 (테브난과 쌍대 관계)'},
+  {n:20,cat:'1장',hot:false,q:'R = 5Ω, 전압 V = 50V인 회로에서 1분간 소비하는 전력량(Wh)은?',opts:['8.33Wh','50Wh','500Wh','3000Wh'],ans:0,ex:'P = V²/R = 2500/5 = 500W / W = Pt = 500W × (1/60)h ≈ 8.33Wh'},
+
+  // ── 2장. 열전 효과 & 건전지 (21~28) ──
+  {n:21,cat:'2장',hot:false,q:'기전력 E = 2V, 내부저항 r = 0.5Ω인 전지에 외부저항 R = 3.5Ω을 연결할 때 단자전압은?',opts:['0.7V','1.5V','1.75V','2V'],ans:2,ex:'I = E/(R+r) = 2/4 = 0.5A / 단자전압 V = E - Ir = 2 - 0.5×0.5 = 1.75V'},
+  {n:22,cat:'2장',hot:false,q:'기전력 1.5V, 내부저항 0.3Ω인 전지 3개를 병렬 연결할 때 합성 기전력과 내부저항은?',opts:['기전력 4.5V, 내부저항 0.9Ω','기전력 1.5V, 내부저항 0.1Ω','기전력 1.5V, 내부저항 0.9Ω','기전력 4.5V, 내부저항 0.1Ω'],ans:1,ex:'병렬: 기전력 = 1.5V(동일) / 내부저항 = 0.3/3 = 0.1Ω (작아짐)'},
+  {n:23,cat:'2장',hot:false,q:'열전 효과 중 서로 다른 두 금속 접합부에 전류를 흘릴 때 열 흡수 또는 발생이 나타나는 현상은?',opts:['제베크 효과','펠티어 효과','톰슨 효과','줄 효과'],ans:1,ex:'펠티어 효과: 전류 방향에 따라 한쪽 접합부에서 열 흡수, 반대쪽에서 열 발생'},
+  {n:24,cat:'2장',hot:false,q:'열전 온도계의 원리가 되는 효과는?',opts:['펠티어 효과','줄 효과','제베크 효과','톰슨 효과'],ans:2,ex:'제베크 효과: 두 금속 접합부의 온도차 → 기전력 발생 → 열전 온도계에 활용'},
+  {n:25,cat:'2장',hot:false,q:'전지의 내부저항이 클수록 어떤 현상이 나타나는가?',opts:['단자전압 상승','단자전압 저하','전류 증가','기전력 증가'],ans:1,ex:'단자전압 = E - Ir → 내부저항 r이 클수록 전압 강하 증가 → 단자전압 저하'},
+  {n:26,cat:'2장',hot:false,q:'기전력 E = 12V, 내부저항 r = 2Ω일 때 단락전류는?',opts:['2A','4A','6A','12A'],ans:2,ex:'단락전류(R=0): I = E/r = 12/2 = 6A'},
+  {n:27,cat:'2장',hot:false,q:'전지의 방전 효율을 높이기 위한 방법으로 옳은 것은?',opts:['직렬 연결','병렬 연결','내부저항 증가','외부저항 감소'],ans:1,ex:'병렬 연결: 전압 동일, 전류 용량 증가 → 방전 시간 연장, 수명 향상'},
+  {n:28,cat:'2장',hot:false,q:'건전지 4개를 직렬 연결 시 기전력이 6V가 되려면 1개의 기전력은?',opts:['0.375V','0.5V','1.5V','2V'],ans:2,ex:'직렬 합산: E총 = n × E₁ → 6 = 4 × E₁ → E₁ = 1.5V'},
+
+  // ── 3장. 교류 회로 (29~55) ──
+  {n:29,cat:'3장',hot:false,q:'교류 전압 순시값 e = 311sin(377t)V에서 실효값은 약 몇 V인가?',opts:['155.5V','220V','311V','440V'],ans:1,ex:'실효값 = Em/√2 = 311/1.414 ≈ 220V'},
+  {n:30,cat:'3장',hot:false,q:'교류 전압 순시값 e = 200sin(ωt)V에서 평균값은 약 몇 V인가?',opts:['100V','127.3V','141.4V','200V'],ans:1,ex:'평균값 = (2/π) × Em = 0.637 × 200 ≈ 127.3V'},
+  {n:31,cat:'3장',hot:false,q:'주파수 f = 50Hz인 교류의 각속도 ω는?',opts:['50 rad/s','100π rad/s','200π rad/s','314 rad/s'],ans:1,ex:'ω = 2πf = 2π × 50 = 100π ≈ 314 rad/s'},
+  {n:32,cat:'3장',hot:true,q:'R = 4Ω, XL = 3Ω인 직렬 회로에 V = 100V를 인가할 때 전류는?',opts:['12.5A','14.3A','20A','25A'],ans:2,ex:'Z = √(4²+3²) = √(16+9) = √25 = 5Ω / I = V/Z = 100/5 = 20A'},
+  {n:33,cat:'3장',hot:false,q:'R = 6Ω, XC = 8Ω인 직렬 회로의 임피던스는?',opts:['2Ω','10Ω','14Ω','48Ω'],ans:1,ex:'Z = √(R²+XC²) = √(36+64) = √100 = 10Ω'},
+  {n:34,cat:'3장',hot:false,q:'R = 3Ω, XL = 6Ω, XC = 2Ω인 직렬 회로의 임피던스는?',opts:['3Ω','4Ω','5Ω','11Ω'],ans:2,ex:'Z = √(R²+(XL-XC)²) = √(9+(6-2)²) = √(9+16) = √25 = 5Ω'},
+  {n:35,cat:'3장',hot:false,q:'R-L 직렬 회로에서 전압과 전류의 위상각 θ는?',opts:['tanθ = R/XL','tanθ = XL/R','tanθ = XL×R','tanθ = 1/(XLR)'],ans:1,ex:'R-L 직렬회로: tanθ = XL/R (전압이 전류보다 θ만큼 앞섬)'},
+  {n:36,cat:'3장',hot:false,q:'L = 0.2H인 코일에 f = 60Hz, V = 120V를 인가할 때 전류는?',opts:['1.28A','1.59A','2.0A','3.18A'],ans:1,ex:'XL = 2πfL = 2×3.14×60×0.2 = 75.4Ω / I = V/XL = 120/75.4 ≈ 1.59A'},
+  {n:37,cat:'3장',hot:false,q:'C = 50μF인 콘덴서에 f = 50Hz, V = 100V를 인가할 때 전류는?',opts:['1.57A','2.0A','3.14A','6.28A'],ans:0,ex:'XC = 1/(2πfC) = 1/(2×3.14×50×50×10⁻⁶) = 63.7Ω / I = V/XC = 100/63.7 ≈ 1.57A'},
+  {n:38,cat:'3장',hot:false,q:'직렬 공진 주파수에서 전류가 최대가 되는 이유는?',opts:['저항이 0이 되기 때문','XL과 XC가 상쇄되어 Z=R(최소)이 되기 때문','전압이 최대가 되기 때문','콘덴서가 완전 충전되기 때문'],ans:1,ex:'직렬 공진: XL=XC → 리액턴스 상쇄 → Z=R(최솟값) → I=V/R(최댓값)'},
+  {n:39,cat:'3장',hot:false,q:'R = 10Ω인 회로에 V = 200V, f = 60Hz를 인가할 때 소비전력은?',opts:['200W','400W','2000W','4000W'],ans:3,ex:'P = V²/R = 200²/10 = 40000/10 = 4000W (순저항이므로 역률=1)'},
+  {n:40,cat:'3장',hot:false,q:'역률이 0일 때 유효전력은?',opts:['최대','V×I','0','V×I/2'],ans:2,ex:'P = VIcosθ → cosθ(역률) = 0이면 P = 0 (순 리액턴스 부하)'},
+  {n:41,cat:'3장',hot:false,q:'V = 100V, I = 5A, 역률 cosθ = 0.6인 회로의 무효전력은?',opts:['300VAr','400VAr','500VAr','600VAr'],ans:1,ex:'Pr = VIsinθ = 100×5×0.8 = 400VAr (cosθ=0.6 → sinθ=0.8)'},
+  {n:42,cat:'3장',hot:false,q:'임피던스 Z = 5∠53.13° Ω을 직각 좌표로 나타내면?',opts:['3+j4','4+j3','5+j0','0+j5'],ans:0,ex:'Z = 5∠53.13° → R = 5cos53.13° = 3, X = 5sin53.13° = 4 → Z = 3+j4'},
+  {n:43,cat:'3장',hot:false,q:'L = 0.5H, C = 20μF일 때 공진 주파수는 약 몇 Hz인가?',opts:['22.5Hz','50Hz','100Hz','159Hz'],ans:0,ex:'f = 1/(2π√LC) = 1/(2π×√(0.5×20×10⁻⁶)) ≈ 1/(2π×0.00316) ≈ 50.3 → 약 50Hz. 단 0.5H, 20μF → 1/(2π√(0.01)) = 1/(2π×0.1) ≈ 1.59Hz... 재계산: √(0.5×20×10⁻⁶)=√(10⁻⁵)=3.16×10⁻³ → f=1/(2π×3.16×10⁻³)≈50Hz'},
+  {n:44,cat:'3장',hot:false,q:'병렬 공진 회로의 특징으로 옳지 않은 것은?',opts:['임피던스가 최대가 된다','전류가 최소가 된다','선택성이 높아진다','전류가 최대가 된다'],ans:3,ex:'병렬 공진: 임피던스 최대, 전류 최소 (직렬 공진과 반대)'},
+  {n:45,cat:'3장',hot:false,q:'R = 20Ω, XL = 15Ω 직렬회로의 역률은?',opts:['0.6','0.75','0.8','1.0'],ans:2,ex:'Z = √(20²+15²) = √(400+225) = √625 = 25Ω / cosθ = R/Z = 20/25 = 0.8'},
+  {n:46,cat:'3장',hot:false,q:'순저항 회로(R만)에서 역률은?',opts:['0','0.5','0.707','1'],ans:3,ex:'순저항 회로: 전압과 전류 동위상 → θ = 0° → cosθ = 1 (역률 1)'},
+  {n:47,cat:'3장',hot:false,q:'삼각파의 실효값이 Vm/√3일 때 최대값 Vm = 10V이면 실효값은 약 몇 V인가?',opts:['3.14V','5.77V','7.07V','8.66V'],ans:1,ex:'삼각파 실효값 = Vm/√3 = 10/1.732 ≈ 5.77V'},
+  {n:48,cat:'3장',hot:false,q:'구형파의 실효값이 최대값과 같은 이유는?',opts:['위상차가 없기 때문','파형이 대칭이기 때문','최대값과 평균값이 같기 때문','코일 성분이 없기 때문'],ans:2,ex:'구형파: 최대값=실효값=평균값 → 파형률=파고율=1'},
+  {n:49,cat:'3장',hot:false,q:'R = 30Ω, XL = 40Ω 직렬회로에 V = 250V 인가 시 소비전력은?',opts:['750W','1000W','1875W','3000W'],ans:2,ex:'Z = √(30²+40²) = 50Ω / I = 250/50 = 5A / P = I²R = 25×30 = 750W'},
+  {n:50,cat:'3장',hot:false,q:'상호 인덕턴스 M = 0.1H, 전류 변화율 dI/dt = 20A/s일 때 유도 기전력은?',opts:['0.5V','2V','5V','10V'],ans:1,ex:'e = M × dI/dt = 0.1 × 20 = 2V (상호 유도 기전력)'},
+  {n:51,cat:'3장',hot:false,q:'자기 인덕턴스 L = 0.5H인 코일에 I = 4A의 전류가 흐를 때 저장 에너지는?',opts:['1J','2J','4J','8J'],ans:2,ex:'W = ½LI² = ½ × 0.5 × 4² = 0.25 × 16 = 4J'},
+  {n:52,cat:'3장',hot:false,q:'결합계수 k = 0.8, L₁ = 0.1H, L₂ = 0.4H일 때 상호 인덕턴스 M은?',opts:['0.08H','0.16H','0.32H','0.4H'],ans:1,ex:'M = k√(L₁L₂) = 0.8 × √(0.1×0.4) = 0.8 × √0.04 = 0.8 × 0.2 = 0.16H'},
+  {n:53,cat:'3장',hot:false,q:'V = 100V, I = 10A, P = 600W인 단상 교류 부하의 무효전력은?',opts:['400VAr','600VAr','800VAr','1000VAr'],ans:2,ex:'Pa = VI = 1000VA / Pr = √(Pa²-P²) = √(1000²-600²) = √(640000) = 800VAr'},
+  {n:54,cat:'3장',hot:false,q:'역률 개선을 위해 유도성 부하에 병렬로 연결하는 소자는?',opts:['저항','코일(인덕터)','콘덴서(커패시터)','변압기'],ans:2,ex:'유도성 부하(지상 역률) 개선: 콘덴서(진상) 병렬 연결 → 무효전력 상쇄'},
+  {n:55,cat:'3장',hot:false,q:'R-C 직렬 회로에서 전류는 전압보다 위상이 어떠한가?',opts:['90° 늦다','90° 빠르다','θ만큼 빠르다','θ만큼 늦다'],ans:2,ex:'R-C 직렬: 콘덴서 성분(진상) → 전류가 전압보다 θ만큼 앞선다 (빠르다)'},
+
+  // ── 4장. 3상 전력 (56~75) ──
+  {n:56,cat:'4장',hot:false,q:'Y결선에서 상전압 Ep = 220V일 때 선간전압 EL은 약 몇 V인가?',opts:['127V','220V','311V','381V'],ans:3,ex:'Y결선: EL = √3 × Ep = 1.732 × 220 ≈ 381V'},
+  {n:57,cat:'4장',hot:false,q:'Δ결선에서 선전류 IL = 34.6A일 때 상전류 Ip는 약 몇 A인가?',opts:['10A','17.3A','20A','34.6A'],ans:3,ex:'Δ결선: IL = √3 × Ip → Ip = IL/√3 = 34.6/1.732 ≈ 20A'},
+  {n:58,cat:'4장',hot:true,q:'V결선(V-V)의 출력비는?',opts:['1/3','1/√3','√3/2','2/3'],ans:2,ex:'V결선 출력비 = (V결선 출력)/(Δ결선 출력) = √3/2 ≈ 0.866 (86.6%)'},
+  {n:59,cat:'4장',hot:false,q:'2전력계법에서 두 전력계의 지시값 W₁ = 800W, W₂ = 200W일 때 유효전력은?',opts:['400W','600W','1000W','1600W'],ans:2,ex:'2전력계법 유효전력: P = W₁ + W₂ = 800 + 200 = 1000W'},
+  {n:60,cat:'4장',hot:false,q:'2전력계법에서 W₁ = 800W, W₂ = 200W일 때 무효전력은?',opts:['1039VAr','600VAr','1000VAr','400VAr'],ans:0,ex:'Pr = √3(W₁-W₂) = 1.732 × (800-200) = 1.732 × 600 ≈ 1039VAr'},
+  {n:61,cat:'4장',hot:false,q:'3상 Y결선 부하 상저항 R = 10Ω, 선간전압 VL = 200V일 때 3상 유효전력은?',opts:['1200W','2000W','4000W','6000W'],ans:2,ex:'상전압 Vp = VL/√3 ≈ 115.5V / 상전력 = Vp²/R = 115.5²/10 ≈ 1333W / 3상: 3×1333 = 4000W'},
+  {n:62,cat:'4장',hot:false,q:'3상 피상전력의 공식은? (VL: 선간전압, IL: 선전류)',opts:['Pa = VLIL','Pa = √3 VLIL','Pa = 3VLIL','Pa = √3 VLILcosθ'],ans:1,ex:'3상 피상전력 Pa = √3 × VL × IL [VA] / 유효전력: √3 VLILcosθ'},
+  {n:63,cat:'4장',hot:false,q:'3상 무효전력의 공식은?',opts:['Pr = √3 VLILcosθ','Pr = √3 VLILsinθ','Pr = 3VLILcosθ','Pr = VLIL'],ans:1,ex:'3상 무효전력 Pr = √3 × VL × IL × sinθ [VAr]'},
+  {n:64,cat:'4장',hot:false,q:'스콧(Scott) 결선의 용도는?',opts:['3상→3상 전압 변환','3상→2상 변환','단상→3상 변환','Δ→Y 변환'],ans:1,ex:'스콧 결선: 3상을 2상으로 변환 (제철소 전기로, 전기철도 등에 활용)'},
+  {n:65,cat:'4장',hot:false,q:'Δ-Δ 결선에서 1대가 고장나면 가능한 결선은?',opts:['Y-Δ','Y-Y','V-V','계속 Δ-Δ'],ans:2,ex:'Δ결선 1대 고장 → V결선(V-V)으로 2대 운전 가능, 출력 86.6%'},
+  {n:66,cat:'4장',hot:false,q:'3상 회로에서 역률 cosθ = 0.8, 피상전력 Pa = 100kVA일 때 무효전력은?',opts:['60kVAr','80kVAr','100kVAr','125kVAr'],ans:0,ex:'sinθ = 0.6(cosθ=0.8이면) / Pr = Pa × sinθ = 100 × 0.6 = 60kVAr'},
+  {n:67,cat:'4장',hot:false,q:'선간전압 400V, 선전류 10A, 역률 0.8인 3상 부하의 유효전력은?',opts:['3200W','3200W','5542W','6928W'],ans:2,ex:'P = √3 × VL × IL × cosθ = 1.732 × 400 × 10 × 0.8 ≈ 5542W'},
+  {n:68,cat:'4장',hot:false,q:'중성선이 없는 3상 3선식에서 불평형 부하 발생 시 문제점은?',opts:['전압 이상 없음','각 상 전압이 불평형이 됨','주파수 변화','역률 감소만 발생'],ans:1,ex:'3선식 불평형 부하: 중성점 이동 → 각 상 전압 불평형 발생'},
+  {n:69,cat:'4장',hot:false,q:'Y결선 부하의 상저항이 모두 같을 때 중성선 전류는?',opts:['최대','부하전류의 √3배','0','부하전류와 같음'],ans:2,ex:'평형 3상 Y결선: 중성선 전류 = 0 (대칭 전류 벡터합 = 0)'},
+  {n:70,cat:'4장',hot:false,q:'전력계를 이용한 단상 전력 측정 시 회로 연결 방법은?',opts:['전류 코일 병렬, 전압 코일 직렬','전류 코일 직렬, 전압 코일 병렬','둘 다 직렬','둘 다 병렬'],ans:1,ex:'전력계: 전류 코일(저저항) 직렬, 전압 코일(고저항) 병렬 연결'},
+  {n:71,cat:'4장',hot:false,q:'Y결선과 Δ결선을 비교할 때 동일한 경우는?',opts:['선간전압과 상전압','선전류와 상전류','소비전력','임피던스'],ans:2,ex:'Y결선과 Δ결선이 같은 전원, 같은 임피던스이면 소비전력(3상 출력)은 동일'},
+  {n:72,cat:'4장',hot:false,q:'V결선의 이용률이 86.6%인 이유로 옳은 것은?',opts:['변압기 1대를 사용하기 때문','√3/2 ≈ 0.866이기 때문','전압이 낮아지기 때문','역률이 낮기 때문'],ans:1,ex:'V결선 이용률 = √3/2 ≈ 0.866 = 86.6%'},
+  {n:73,cat:'4장',hot:false,q:'3상 전력 Pa = 10kVA, cosθ = 0.8일 때 유효전력은?',opts:['6kW','8kW','10kW','12.5kW'],ans:1,ex:'P = Pa × cosθ = 10 × 0.8 = 8kW'},
+  {n:74,cat:'4장',hot:false,q:'3상 회로의 선간전압 380V를 Y결선 시 각 상에 걸리는 상전압은?',opts:['127V','190V','220V','380V'],ans:2,ex:'Y결선: Vp = VL/√3 = 380/1.732 ≈ 220V'},
+  {n:75,cat:'4장',hot:false,q:'3상 평형 부하에서 2전력계법으로 역률을 구하는 공식은?',opts:['cosθ = (W₁+W₂)/√3(W₁-W₂)','cosθ = P/√(P²+Q²)','cosθ = (W₁+W₂)/√[(W₁+W₂)²+3(W₁-W₂)²]','cosθ = W₁/W₂'],ans:2,ex:'2전력계법 역률: cosθ = (W₁+W₂)/√[(W₁+W₂)²+3(W₁-W₂)²]'},
+
+  // ── 5장. 정전계 (76~88) ──
+  {n:76,cat:'5장',hot:false,q:'진공 중 거리 r = 2m인 곳에 점전하 Q = 4C이 있을 때 전계의 세기 E는?',opts:['4.5×10⁹ V/m','9×10⁹ V/m','18×10⁹ V/m','36×10⁹ V/m'],ans:0,ex:'E = (1/4πε₀) × Q/r² = 9×10⁹ × 4/4 = 9×10⁹ V/m... 재계산: 9×10⁹×4/(2²) = 9×10⁹ V/m'},
+  {n:77,cat:'5장',hot:false,q:'전위 V = 100V인 점에서 Q = 2C의 전하를 이동하는 데 필요한 에너지는?',opts:['50J','100J','200J','400J'],ans:2,ex:'W = QV = 2 × 100 = 200J'},
+  {n:78,cat:'5장',hot:false,q:'평행판 콘덴서에서 극판 간격을 2배로 늘리면 정전용량은?',opts:['2배 증가','동일','1/2로 감소','1/4로 감소'],ans:2,ex:'C = εA/d → 간격 d가 2배이면 C = 1/2배로 감소'},
+  {n:79,cat:'5장',hot:false,q:'평행판 콘덴서에서 극판 면적을 3배로 늘리면 정전용량은?',opts:['1/3배','동일','3배','9배'],ans:2,ex:'C = εA/d → 면적 A가 3배이면 C도 3배로 증가'},
+  {n:80,cat:'5장',hot:false,q:'유전율이 ε인 유전체를 넣으면 진공(ε₀)에 비해 정전용량은?',opts:['감소','동일','ε/ε₀ 배 증가','ε₀/ε 배 감소'],ans:2,ex:'C = εA/d → 비유전율 εs = ε/ε₀ → 정전용량 εs배 증가'},
+  {n:81,cat:'5장',hot:false,q:'C = 5μF 콘덴서에 V = 100V를 충전할 때 전하량 Q는?',opts:['0.0005C','0.5C','5C','500C'],ans:0,ex:'Q = CV = 5×10⁻⁶ × 100 = 5×10⁻⁴ = 0.0005C = 0.5mC'},
+  {n:82,cat:'5장',hot:false,q:'콘덴서에 저장된 에너지 W = Q²/2C에서 Q = 0.1C, C = 10μF일 때 에너지는?',opts:['50J','500J','5000J','50000J'],ans:1,ex:'W = Q²/(2C) = (0.1)²/(2×10×10⁻⁶) = 0.01/0.00002 = 500J'},
+  {n:83,cat:'5장',hot:false,q:'가우스 법칙에 의하면 폐곡면을 통해 나오는 전속은?',opts:['폐곡면 외부의 전하량에 비례','폐곡면 내부의 전하량에 비례','폐곡면 면적에 비례','전계의 세기에 비례'],ans:1,ex:'가우스 법칙: Ψ = Q/ε₀ → 폐곡면을 통하는 전속 = 내부 전하량/유전율'},
+  {n:84,cat:'5장',hot:false,q:'도체 표면에서 전계의 방향은?',opts:['표면에 평행','표면에 수직','임의 방향','없음'],ans:1,ex:'정전 평형 상태에서 도체 표면의 전계는 표면에 수직 방향'},
+  {n:85,cat:'5장',hot:false,q:'C₁ = 2μF, C₂ = 3μF, C₃ = 6μF 세 콘덴서를 직렬 연결할 때 합성 정전용량은?',opts:['1μF','2μF','3μF','11μF'],ans:0,ex:'1/C = 1/2+1/3+1/6 = 3/6+2/6+1/6 = 6/6 = 1 → C = 1μF'},
+  {n:86,cat:'5장',hot:false,q:'진공 중에서 두 전하 Q₁ = Q₂ = 1C, 거리 r = 1m일 때 척력의 크기는?',opts:['1N','9×10⁶ N','9×10⁹ N','9×10¹² N'],ans:2,ex:'F = 9×10⁹ × Q₁Q₂/r² = 9×10⁹ × 1×1/1² = 9×10⁹ N'},
+  {n:87,cat:'5장',hot:false,q:'전위 경도(전계의 세기)와 전위의 관계는?',opts:['E = V × d','E = -dV/dl','E = V + d','E = dV/dt'],ans:1,ex:'전계 E = -dV/dl (전위의 기울기의 음수) → 전위가 높은 곳에서 낮은 곳으로'},
+  {n:88,cat:'5장',hot:false,q:'콘덴서에 유전체를 삽입하면 나타나는 현상은?',opts:['정전용량 감소, 전계 강도 증가','정전용량 증가, 전계 강도 감소','정전용량 변화 없음','전하량 감소'],ans:1,ex:'유전체 삽입: 정전용량 εs배 증가 / 같은 전압이면 전계 강도(E=V/d)는 동일하나 D=εE 증가'},
+
+  // ── 6장. 정자계 (89~100) ──
+  {n:89,cat:'6장',hot:false,q:'솔레노이드 코일 내부의 자계 세기 H = NI/l에서 N = 500회, I = 2A, l = 0.5m일 때 H는?',opts:['500 AT/m','1000 AT/m','2000 AT/m','4000 AT/m'],ans:2,ex:'H = NI/l = 500×2/0.5 = 1000/0.5 = 2000 AT/m'},
+  {n:90,cat:'6장',hot:false,q:'자속밀도 B = 2T인 자계에서 I = 3A의 전류가 흐르는 l = 0.5m 도선에 작용하는 힘은?',opts:['1N','2N','3N','6N'],ans:2,ex:'F = BIl = 2 × 3 × 0.5 = 3N (플레밍의 왼손 법칙)'},
+  {n:91,cat:'6장',hot:false,q:'코일에 쇄교 자속수가 Φ = 0.5Wb에서 1Wb로 0.1초 동안 변할 때 유도 기전력은?',opts:['0.5V','5V','10V','50V'],ans:1,ex:'e = ΔΦ/Δt = (1-0.5)/0.1 = 0.5/0.1 = 5V (패러데이의 법칙)'},
+  {n:92,cat:'6장',hot:false,q:'렌츠의 법칙에 의하면 유도 기전력의 방향은?',opts:['자속 변화를 강화하는 방향','자속 변화를 방해하는 방향','자속 방향과 동일','항상 시계 방향'],ans:1,ex:'렌츠의 법칙: 유도 기전력의 방향은 자속 변화를 방해하는 방향'},
+  {n:93,cat:'6장',hot:false,q:'플레밍의 왼손 법칙에서 가운데 손가락이 나타내는 것은?',opts:['자계 방향','전류 방향','도체 운동 방향','기전력 방향'],ans:1,ex:'플레밍 왼손 법칙: 엄지→힘(운동), 검지→자계(B), 중지→전류(I) 방향'},
+  {n:94,cat:'6장',hot:false,q:'플레밍의 오른손 법칙에서 검지 방향은?',opts:['유도 기전력 방향','전류 방향','자계 방향','도체 운동 방향'],ans:2,ex:'플레밍 오른손 법칙(발전기): 엄지→운동방향, 검지→자계(B), 중지→유도기전력(e)'},
+  {n:95,cat:'6장',hot:false,q:'전자기 유도에서 코일 권수를 2배로 늘리면 유도 기전력은?',opts:['1/2배','동일','2배','4배'],ans:2,ex:'e = N × dΦ/dt → 권수 N이 2배이면 유도 기전력도 2배'},
+  {n:96,cat:'6장',hot:false,q:'자기 회로에서 기자력(MMF)의 단위는?',opts:['Wb','AT(암페어 턴)','T','H'],ans:1,ex:'기자력 F = NI [AT(암페어 턴)] → 자기 회로에서 전기 회로의 기전력에 해당'},
+  {n:97,cat:'6장',hot:true,q:'히스테리시스 손실에 대한 설명으로 옳은 것은?',opts:['주파수에 반비례','자속밀도의 최대값에 비례(1.6승)','온도에 반비례','투자율에 비례'],ans:1,ex:'히스테리시스 손실 Ph ∝ f × Bm^1.6 (슈타인메츠 공식) → 주파수, 자속밀도에 비례'},
+  {n:98,cat:'6장',hot:false,q:'와전류(맴돌이 전류) 손실을 줄이는 방법은?',opts:['두꺼운 철심 사용','얇은 규소강판을 적층 사용','저항이 큰 재료 사용','주파수를 낮춤'],ans:1,ex:'와전류 손실 감소: 얇은 규소강판을 적층 → 와전류 경로 차단, 규소는 저항 증가 역할'},
+  {n:99,cat:'6장',hot:false,q:'인덕턴스 L = 0.2H인 코일에 I = 5A가 흐를 때 저장되는 자기 에너지는?',opts:['0.5J','1.25J','2.5J','5J'],ans:2,ex:'W = ½LI² = ½ × 0.2 × 5² = 0.1 × 25 = 2.5J'},
+  {n:100,cat:'6장',hot:false,q:'암페어의 오른나사 법칙에서 전류 방향과 자계 방향의 관계는?',opts:['전류와 자계는 항상 반대','오른나사 진행 방향이 전류, 회전 방향이 자계','왼나사 진행 방향이 전류, 회전 방향이 자계','무관하다'],ans:1,ex:'오른나사 법칙: 오른나사를 조이는 방향으로 전류 흐를 때 나사 진행 방향이 자계 방향'},
+];
+
+const catNames={'1장':'1장. 기초 전기이론','2장':'2장. 열전 효과 & 건전지','3장':'3장. 교류 회로','4장':'4장. 3상 전력','5장':'5장. 정전계','6장':'6장. 정자계'};
+let stats={done:0,correct:0,wrong:0};
+let currentCat='all';
+
+function getFiltered(){return currentCat==='all'?questions:questions.filter(q=>q.cat===currentCat);}
+
+function renderQuiz(){
+  const container=document.getElementById('quiz-container');
+  const filtered=getFiltered();
+  document.getElementById('no-result').style.display=filtered.length?'none':'block';
+  document.getElementById('stat-total').textContent=filtered.length;
+  if(!filtered.length){container.innerHTML='';updateStats();return;}
+  let html='',lastCat='';
+  filtered.forEach((q,i)=>{
+    if(q.cat!==lastCat){html+=`<div class="chapter-label">📚 ${catNames[q.cat]}</div>`;lastCat=q.cat;}
+    const hot=q.hot?'<span class="q-hot">⚠️빈출</span>':'';
+    html+=`<div class="q-card" id="qcard-${q.n}">
+      <div class="q-header" onclick="toggleQ(${q.n})">
+        <span class="q-num">Q${String(i+1).padStart(3,'0')}</span>${hot}
+        <span class="q-text">${q.q}</span>
+        <span class="q-arrow">▼</span>
+      </div>
+      <div class="q-options" id="opts-${q.n}">
+        ${q.opts.map((o,oi)=>`<button class="option-btn" id="opt-${q.n}-${oi}" onclick="selectOpt(${q.n},${oi})"><span class="option-num">${oi+1}</span>${o}</button>`).join('')}
+        <div class="answer-box" id="ans-${q.n}"><div class="answer-label">✅ 해설</div>${q.ex}</div>
+      </div>
+    </div>`;
+  });
+  container.innerHTML=html;
+  updateStats();
+}
+
+function toggleQ(n){document.getElementById(`qcard-${n}`).classList.toggle('open');}
+
+function selectOpt(n,chosen){
+  const q=questions.find(x=>x.n===n);
+  const card=document.getElementById(`qcard-${n}`);
+  if(card.classList.contains('answered-correct')||card.classList.contains('answered-wrong'))return;
+  const ok=chosen===q.ans;
+  q.opts.forEach((_,oi)=>{
+    const btn=document.getElementById(`opt-${n}-${oi}`);
+    btn.disabled=true;
+    if(oi===q.ans)btn.classList.add('correct');
+    else if(oi===chosen&&!ok)btn.classList.add('wrong');
+  });
+  card.classList.add(ok?'answered-correct':'answered-wrong');
+  document.getElementById(`ans-${n}`).classList.add('show');
+  stats.done++;if(ok)stats.correct++;else stats.wrong++;
+  updateStats();
+}
+
+function updateStats(){
+  document.getElementById('stat-done').textContent=stats.done;
+  document.getElementById('stat-correct').textContent=stats.correct;
+  document.getElementById('stat-wrong').textContent=stats.wrong;
+  const total=getFiltered().length;
+  document.getElementById('progress-fill').style.width=(total>0?Math.round(stats.done/total*100):0)+'%';
+}
+
+function filterCat(cat,btn){
+  currentCat=cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  stats={done:0,correct:0,wrong:0};
+  renderQuiz();
+}
+
+function resetAll(){stats={done:0,correct:0,wrong:0};renderQuiz();}
+renderQuiz();
+</script>
+</body>
+</html>

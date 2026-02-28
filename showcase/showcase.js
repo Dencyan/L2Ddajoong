@@ -1,6 +1,6 @@
 /* ====================================================================
    
-   🎬 Dajoong Live2D Portfolio - Slider Script
+   🎬 Dajoong Live2D - Slider Script
    
    이 코드는 Live2D Rigger "다중(Dajoong)"이 작성했습니다.
    
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
      카테고리별 YouTube 비디오 ID 목록 정의
      ===================================================================== */
   const videoData = {
-    LD: { title: "LD", list: ["8EabRx_ZFAI", "wML53bUKn1Q", "yvc0yN8uwqU", "w-eRgLmsgas", "zKRPxZ7pv58", ] },
+    LD: { title: "LD", list: ["Zlbfvuxf3Lo", "8EabRx_ZFAI", "wML53bUKn1Q", "yvc0yN8uwqU", "w-eRgLmsgas", "zKRPxZ7pv58"] },
     SD: { title: "SD", list: ["bdD1dhv6lI4", "BtvMd8yG80g", "SwGP1UFE424", "pH4GRAjcp2U", "b6DNOVjED9o"] },
     FAN: { title: "오너캐", list: ["cOmUiWxkqfo", "FzIi9m1bKeI", "9XtIUiv314c"] },
     MEM: { title: "메모리얼", list: ["JLTUyPkfsj0", "lhVUjv1q-bw"] }

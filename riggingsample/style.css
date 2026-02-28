@@ -29,7 +29,7 @@
     --secondary: #CFE3FF;
     --white: #FFFFFF;
     --accent-pink: #FFC2E3;
-    --bg: linear-gradient(180deg, #EEF1FF 0%, #F6F8FF 40%, #FFFFFF 100%);
+    --bg: #f2f0ff;
     --panel: rgba(255,255,255,.7);
     --panel-2: rgba(245,247,255,.7);
     --text: #1F2A44;
@@ -59,7 +59,7 @@ html, body{
 }
 
 body{
-    background: #ffffff;
+    background: #f2f0ff;
     overflow-x: hidden;
 }
 
@@ -98,7 +98,7 @@ section{
 .sp-wrap {
     border: 1px solid var(--border);
     border-radius: var(--r-xl);
-    background: rgba(247,248,255,.92);
+    background: #f2f0ff;
     box-shadow: var(--shadow-md);
     padding: 18px;
     overflow: hidden;
@@ -227,6 +227,18 @@ section{
    caption
 ====================== */
 
+/* ======================
+   tall variant (전신 리깅 300x700)
+====================== */
+
+.sp-group--tall {
+    --sp-ar: 3/7;
+    --sp-fit: contain;
+}
+
+.sp-group--tall .sp-item {
+    max-width: 300px;
+}
 .sp-cap {
     padding: 10px 12px 12px;
     font-size: 12px;
