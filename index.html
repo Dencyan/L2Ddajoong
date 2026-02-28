@@ -3,567 +3,401 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dajoong — Live2D Rigger</title>
+  <title>Dajoong Live2D Portfolio</title>
+
+  <!-- Open Graph / Twitter Card -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Dajoong Live2D Portfolio" />
   <meta property="og:description" content="Live2D 리거 다중의 포트폴리오입니다. 다양한 스타일의 리깅과 배경 애니메이션 작업을 확인해보세요." />
+  <!-- Primary (wide) -->
   <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="600" />
+  <!-- Fallback (square) -->
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="600" />
   <meta property="og:url" content="https://dajoong.cloud/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Dajoong Live2D Portfolio" />
   <meta name="twitter:description" content="Live2D 리거 다중의 포트폴리오입니다." />
   <meta name="twitter:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+
+  <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Header -->
+  <header>
+    <h1>Dajoong</h1>
+    <nav>
+      <a href="#about">알아보기</a>
+      <a href="#works">작품</a>
+      <a href="#contact">문의하기</a>
+      <a href="price.html">가격</a>
+    </nav>
+  </header>
 
-<!-- HEADER -->
-<header>
-  <h1><a href="#hero">Dajoong</a></h1>
-  <nav>
-    <a href="#about">알아보기</a>
-    <a href="#works">작품</a>
-    <a href="#samples">샘플</a>
-    <a href="#price">가격</a>
-    <a href="#contact">문의하기</a>
-  </nav>
-</header>
-
-<!-- HERO -->
-<section id="hero" class="hero">
-  <span class="hero-eyebrow">Live2D Rigger</span>
-  <h2>Dajoong</h2>
-  <p class="hero-sub">LD · SD · 메모리얼 애니메이션 포트폴리오</p>
-</section>
-
-<!-- SIDE NAV -->
-<nav id="side-nav" aria-label="페이지 네비게이션">
-  <ul>
-    <li><a href="#hero"    data-label="Top">    <span class="sn-dot"></span><span class="sn-label">Top</span></a></li>
-    <li><a href="#about"   data-label="About">  <span class="sn-dot"></span><span class="sn-label">About</span></a></li>
-    <li><a href="#info"    data-label="Info">   <span class="sn-dot"></span><span class="sn-label">Info</span></a></li>
-    <li><a href="#works"   data-label="Works">  <span class="sn-dot"></span><span class="sn-label">Works</span></a></li>
-    <li><a href="#samples" data-label="Samples"><span class="sn-dot"></span><span class="sn-label">Samples</span></a></li>
-    <li><a href="#price"   data-label="Price">  <span class="sn-dot"></span><span class="sn-label">Price</span></a></li>
-    <li><a href="#contact" data-label="Contact"><span class="sn-dot"></span><span class="sn-label">Contact</span></a></li>
-  </ul>
-</nav>
-
-<!-- ABOUT -->
-<section id="about" class="section-hidden">
-  <div class="section-wrap">
-    <h2 class="section-title reveal">About</h2>
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Live2D Rigger Dajoong</h2>
+    <p>Live2D LD · SD · 메모리얼 포트폴리오</p>
+  <!-- About -->
+  <section id="about" class="about">
     <div class="about-inner">
-
       <div class="about-text">
-        <h2 class="reveal">안녕하세요. Live2D Rigger 다중(Dajoong)입니다.</h2>
-        <p class="reveal">
-          LD·SD 버추얼 모델을 비롯해 배경 애니메이션과 월페이퍼 작업을 진행하며,
-          섬세하고 부드러운 모션 구현에 집중하고 있습니다.
-        </p>
-        <p class="reveal">
-          모델의 매력을 극대화할 수 있는 리깅 방식을 연구하며,
-          다양한 스타일의 모델 작업에 대응할 수 있습니다.
-          클라이언트의 요구에 맞춘 맞춤형 리깅 솔루션을 제공합니다.
-        </p>
-        <p class="reveal">
-          여러 작가님들과의 협업 및 상업 제작 경험을 통해
+        <h2>About</h2>
+        <p>
+          안녕하세요. Live2D Rigger 다중(Dajoong)입니다.<br>
+          LD·SD 버추얼 모델을 비롯해 배경 애니메이션과 월페이퍼 작업을 진행하며, 
+          섬세하고 부드러운 모션 구현에 집중하고 있습니다.<br><br>
+
+          모델의 매력을 극대화할 수 있는 리깅 방식을 연구하며, 
+          다양한 스타일의 모델 작업에 대응할 수 있습니다.<br>
+          또한 클라이언트의 요구에 맞춘 맞춤형 리깅 솔루션을 제공합니다.<br><br>
+
+          여러 작가님들과의 협업 및 상업 제작 경험을 통해 
           의도에 맞는 결과물을 안정적이고 효율적으로 제작합니다.
         </p>
-        <div class="tag-row reveal">
-          <span class="tag">#Live2D Rigging</span>
-          <span class="tag">#Live2D Animation</span>
-          <span class="tag">#Background Rigging</span>
-        </div>
       </div>
 
-      <aside class="about-card">
+      <aside class="about-card" aria-hidden="false">
         <ul>
-          <li class="about-skill reveal">
-            <span class="skill-label">전문 분야</span>
-            <div class="skill-tags">
-              <span class="skill-tag">Live2D Rigging</span>
-              <span class="skill-tag">Live2D Animation</span>
-              <span class="skill-tag">Background Rigging</span>
+          <li>
+            <strong>전문 분야</strong>
+            <div class="about-list">
+              <div>·Live2D Rigging</div>
+              <div>·Live2D Animation</div>
+              <div>·Background Rigging</div>
             </div>
           </li>
-          <li class="about-skill reveal">
-            <span class="skill-label">툴</span>
-            <div class="skill-tags">
-              <span class="skill-tag">Live2D Cubism</span>
-              <span class="skill-tag">CLIPSTUDIO</span>
-              <span class="skill-tag">Photoshop</span>
+
+          <li>
+            <strong>툴</strong>
+            <div class="about-list">
+              <div>·Live2D Cubism</div>
+              <div>·CLIPSTUDIO</div>
+              <div>·Photoshop</div>
             </div>
           </li>
-          <li class="about-skill reveal">
-            <span class="skill-label">스타일</span>
-            <div class="skill-tags">
-              <span class="skill-tag">자연스럽고 디테일한 리깅</span>
-              <span class="skill-tag">다양한 스타일 대응</span>
+
+          <li>
+            <strong>스타일</strong>
+            <div class="about-list">
+              <div>·자연스럽고 디테일한 리깅</div>
+              <div>·다양한 스타일의 모델 작업 대응</div>
             </div>
           </li>
         </ul>
       </aside>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- INFO (이벤트 · 콜라보 · 프로세스) -->
-<section id="info" class="section-hidden">
-  <div class="section-wrap">
-    <div class="info-grid">
-
-      <div class="info-left">
-        <!-- 이벤트 안내 -->
-        <article class="i-card">
-          <div class="i-card-head"><h3 class="i-card-title">이벤트 안내</h3></div>
-          <div class="i-card-body">
-            <div class="ev-list">
-              <div class="ev-item">
-                <div class="ev-top">
-                  <span class="ev-title">리뉴얼 기념 특별 할인</span>
-                  <span class="badge">리뉴얼 할인</span>
-                </div>
-                <span class="ev-sub">언제 마감될지 모릅니다.</span>
-                <p class="ev-desc">프리미엄 리깅 LD 전신이 리뉴얼 특별 할인 진행 중!</p>
-              </div>
-              <div class="ev-item">
-                <div class="ev-top">
-                  <span class="ev-title">리뷰 작성 고객 이벤트</span>
-                  <span class="badge">리뷰 이벤트</span>
-                </div>
-                <span class="ev-sub">긍정적인 리뷰를 남겨 주시면 추가 혜택까지</span>
-                <p class="ev-desc">리뷰 이벤트 확인 후 2만원 or 표정 2종 서비스 받아가세요</p>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 콜라보 안내 -->
-        <article class="i-card">
-          <div class="i-card-head"><h3 class="i-card-title">콜라보 안내</h3></div>
-          <div class="i-card-body">
-            <div class="ev-list">
-              <a href="https://artmug.kr/index.php?channel=view&uid=47209" target="_blank" class="ev-item is-link">
-                <div class="ev-top"><span class="ev-title">양초 작가님 콜라보 할인</span><span class="badge">콜라보 할인</span></div>
-                <span class="ev-sub">말랑 쫀득한 귀여운 움직임을 원하면 추천</span>
-                <p class="ev-desc">일러스트 5만원 + 리깅 5만원 할인 혜택</p>
-              </a>
-              <a href="https://artmug.kr/index.php?channel=view&uid=46759" target="_blank" class="ev-item is-link">
-                <div class="ev-top"><span class="ev-title">하노히 작가님 콜라보 할인</span><span class="badge">콜라보 할인</span></div>
-                <span class="ev-sub">단아하고 깔끔한 디자인을 원하면 추천</span>
-                <p class="ev-desc">일러스트 5만원 + 리깅 5만원 할인 혜택</p>
-              </a>
-              <a href="https://artmug.kr/index.php?channel=view&uid=51109" target="_blank" class="ev-item is-link">
-                <div class="ev-top"><span class="ev-title">피치 작가님 콜라보 할인</span><span class="badge">콜라보 할인</span></div>
-                <span class="ev-sub">만화 같은 분위기의 디자인을 원하면 추천</span>
-                <p class="ev-desc">일러스트 5만원 + 리깅 5만원 할인 혜택</p>
-              </a>
-              <a href="https://artmug.kr/index.php?channel=view&uid=26682" target="_blank" class="ev-item is-link">
-                <div class="ev-top"><span class="ev-title">뚱땅이 작가님 콜라보 할인</span><span class="badge">콜라보 할인</span></div>
-                <span class="ev-sub">귀엽고 부드러운 움직임을 원하면 추천</span>
-                <p class="ev-desc">일러스트 10만원 + 리깅 5만원 할인 혜택</p>
-              </a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <!-- 작업 프로세스 -->
-      <article class="i-card">
-        <div class="i-card-head"><h3 class="i-card-title">작업 프로세스</h3></div>
-        <div class="i-card-body">
-          <div class="process-list">
-            <div class="process-step"><div class="step-num">01</div><div class="step-body"><div class="step-title">문의</div><div class="step-desc">작업 요청 및 기본 정보 제공</div></div></div>
-            <div class="process-step"><div class="step-num">02</div><div class="step-body"><div class="step-title">파일 확인 및 견적</div><div class="step-desc">파일 검토 후 상세 견적 제시</div></div></div>
-            <div class="process-step"><div class="step-num">03</div><div class="step-body"><div class="step-title">접수 및 입금</div><div class="step-desc">계약 및 결제</div></div></div>
-            <div class="process-step"><div class="step-num">04</div><div class="step-body"><div class="step-title">1차 리깅</div><div class="step-desc">헤드 및 페이스 구조 제작</div></div></div>
-            <div class="process-step"><div class="step-num">05</div><div class="step-body"><div class="step-title">1차 컨펌 및 수정</div><div class="step-desc">1차 리깅 영상 제공, 피드백 반영</div></div></div>
-            <div class="process-step"><div class="step-num">06</div><div class="step-body"><div class="step-title">2차 리깅</div><div class="step-desc">바디 및 소품 디테일 작업</div></div></div>
-            <div class="process-step"><div class="step-num">07</div><div class="step-body"><div class="step-title">2차 컨펌 및 수정</div><div class="step-desc">2차 리깅 영상 제공, 피드백 반영</div></div></div>
-            <div class="process-step"><div class="step-num">08</div><div class="step-body"><div class="step-title">완성 및 파일 납품</div><div class="step-desc">최종 파일 전달</div></div></div>
-            <div class="process-step"><div class="step-num">09</div><div class="step-body"><div class="step-title">최종 수정 (3차 수정)</div><div class="step-desc">파일 적용 후 문제 발생 시 수정</div></div></div>
-          </div>
-          <p class="process-note">평균 작업 기간은 2–4주이며, 디자인 복잡도에 따라 조정 가능합니다.</p>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section id="works" class="section-hidden">
-  <div class="section-wrap">
-    <h2 class="section-title">Portfolio</h2>
+  <!-- Works -->
+  <section id="works" class="works">
+    <h2>Portfolio</h2>
     <div data-type-buttons></div>
     <div id="type-container"></div>
-    <div class="more-btn">
-      <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer">더 많은 작업 보기 →</a>
-      <a href="#price">가격 확인하기 →</a>
-    </div>
-  </div>
-</section>
-
-<!-- RIGGING SAMPLES -->
-<section id="samples" class="section-hidden">
-  <div class="section-wrap">
-    <h2 class="section-title">리깅 샘플</h2>
-    <div class="sp-outer">
-
-      <!-- 전신 리깅 : 세로 비율 3/7 (300×700) -->
-      <div class="sp-group sp-group--tall">
-        <h3 class="sp-cat-title">전신 리깅</h3>
-        <p class="sp-cat-desc">자연스럽고 부드러운 움직임을 구현합니다.</p>
-        <div class="sp-grid">
-          <figure class="sp-item">
-            <div class="sp-media"><img src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/X_.gif?raw=true" alt="X축 움직임 샘플"/></div>
-            <figcaption class="sp-cap">X 축 움직임</figcaption>
-          </figure>
-          <figure class="sp-item">
-            <div class="sp-media"><img src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Y_.gif?raw=true" alt="Y축 움직임 샘플"/></div>
-            <figcaption class="sp-cap">Y 축 움직임</figcaption>
-          </figure>
-          <figure class="sp-item">
-            <div class="sp-media"><img src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Z_.gif?raw=true" alt="Z축 움직임 샘플"/></div>
-            <figcaption class="sp-cap">Z 축 움직임</figcaption>
-          </figure>
-        </div>
-        <p class="sp-cat-desc" style="margin-top:6px">캐릭터 체형과 디자인에 따라 움직임은 변경될 수 있습니다.</p>
-      </div>
-
-      <!-- 눈 물리 -->
-      <div class="sp-group">
-        <h3 class="sp-cat-title">눈 물리</h3>
-        <p class="sp-cat-desc">다양한 스타일의 눈을 생동감 있게 표현합니다.</p>
-        <div class="sp-grid">
-          <figure class="sp-item">
-            <div class="sp-media">
-              <img src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/odeyes.gif?raw=true" alt="오드아이 눈 샘플"
-                onerror="this.src='https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/odeyes.gif?raw=true'"/>
-            </div>
-            <figcaption class="sp-cap">몽환적인 눈빛을 살린 디테일한 물리 표현</figcaption>
-          </figure>
-          <figure class="sp-item">
-            <div class="sp-media">
-              <img src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/greeneyes.gif?raw=true" alt="녹색 눈 샘플"
-                onerror="this.src='https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/greeneyes.gif?raw=true'"/>
-            </div>
-            <figcaption class="sp-cap">초롱초롱한 눈동자의 자연스러운 물리 움직임</figcaption>
-          </figure>
-          <figure class="sp-item">
-            <div class="sp-media">
-              <img src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/redeyes.gif?raw=true" alt="붉은 눈 샘플"
-                onerror="this.src='https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/redeyes.gif?raw=true'"/>
-            </div>
-            <figcaption class="sp-cap">섬세한 속눈썹과 눈동자의 부드러운 물리</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <!-- 바디와 장식 리깅 -->
-      <div class="sp-group">
-        <h3 class="sp-cat-title">바디와 장식 리깅</h3>
-        <p class="sp-cat-desc">소품과 몸의 움직임을 자연스럽게 표현합니다.</p>
-        <div class="sp-grid">
-          <figure class="sp-item">
-            <div class="sp-media">
-              <img src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%AA%B8%ED%86%B5%20%EC%9D%B4%EB%AF%B8%EC%A7%801.JPG?raw=true" alt="의상 움직임 샘플"
-                onerror="this.src='https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%AA%B8%ED%86%B5%20%EC%9D%B4%EB%AF%B8%EC%A7%80.JPG?raw=true'"/>
-            </div>
-            <figcaption class="sp-cap">의상의 자연스러운 움직임</figcaption>
-          </figure>
-          <figure class="sp-item">
-            <div class="sp-media"><img src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%AA%B8%ED%86%B5%20%EC%9D%B4%EB%AF%B8%EC%A7%80.JPG?raw=true" alt="소품 움직임 샘플"/></div>
-            <figcaption class="sp-cap">각 소품들에 맞춤형 움직임</figcaption>
-          </figure>
-          <figure class="sp-item">
-            <div class="sp-media">
-              <img src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%AA%B8%ED%86%B5%20%EC%9D%B4%EB%AF%B8%EC%A7%802.JPG?raw=true" alt="이펙트 샘플"
-                onerror="this.src='https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%AA%B8%ED%86%B5%20%EC%9D%B4%EB%AF%B8%EC%A7%80.JPG?raw=true'"/>
-            </div>
-            <figcaption class="sp-cap">화려한 이펙트와 깔끔한 효과</figcaption>
-          </figure>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- PRICE -->
-<section id="price" class="section-hidden">
-  <div class="section-wrap">
-    <h2 class="section-title">가격</h2>
-    <p class="price-intro">기본 안내 요금입니다. 프로젝트 요구사항에 따라 견적이 달라집니다.<br>상세 견적은 파일 구조와 요구 사항 확인 후 안내드립니다.</p>
-
-    <div class="price-cards">
-      <article class="price-card">
-        <h3>LD 리깅</h3>
-        <div>
-          <div class="price-amount">₩600,000<span> ~ (전신)</span></div>
-          <div class="price-amount">₩450,000<span> ~ (반신)</span></div>
-        </div>
-        <p>자연스러운 움직임과 풍성한 물리 움직임을 제공합니다. 제공하신 PSD 파일에 따라 디테일에 차이가 있을 수 있습니다.</p>
-        <ul>
-          <li>자연스러운 XYZ 움직임 제공</li>
-          <li>디테일한 입 모양</li>
-          <li>호흡 모션 루프 제공</li>
-          <li>추가 표정 2종 포함</li>
-        </ul>
-        <div class="price-card-foot">예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회</div>
-      </article>
-
-      <article class="price-card">
-        <h3>SD 리깅</h3>
-        <div class="price-amount">₩200,000<span> ~ (전신)</span></div>
-        <p>작고 귀여운 SD 모델 리깅. 가볍고 빠른 리깅을 제공합니다. 제공하신 PSD 파일에 따라 디테일에 차이가 있을 수 있습니다.</p>
-        <ul>
-          <li>자연스러운 XYZ 움직임 제공</li>
-          <li>단순한 입 모양</li>
-          <li>추가 표정 2종 포함</li>
-        </ul>
-        <div class="price-card-foot">예상 작업 기간: 7일–14일 · 수정 2회 + 적용 후 1회</div>
-      </article>
-
-      <article class="price-card">
-        <h3>배경 / 월페이퍼 애니메이션</h3>
-        <div class="price-amount">₩130,000<span> ~ (메모리얼)</span></div>
-        <p>반복되는 루프형 애니메이션과 월페이퍼를 제작합니다. 파일 움직임에 따라 애니메이션 길이가 달라집니다.</p>
-        <ul>
-          <li>자연스럽게 반복되는 애니메이션 제작</li>
-          <li>기본 mp4 포맷 제공 (GIF 추가 가능)</li>
-          <li>GIF는 파일 특성상 깨짐이 있을 수 있음</li>
-        </ul>
-        <div class="price-card-foot">예상 작업 기간: 7일–14일 · 수정 최대 2회</div>
-      </article>
-    </div>
-
-    <p class="price-note">정확한 견적은 아트워크(PSD/PNG)와 요구사항 확인 후 산정됩니다.</p>
-    <a class="contact-cta" href="https://x.com/_Dajoong" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 6v9a2 2 0 0 1-2 2H8l-5 3V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      DM으로 상세 문의하기
-    </a>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="section-hidden">
-  <div class="section-wrap">
-    <div class="contact-inner">
-      <h2 class="section-title" style="justify-content:center">Contact</h2>
-      <div class="contact-links">
-        <a href="https://x.com/_Dajoong" target="_blank" rel="noopener noreferrer" class="contact-btn">X (Twitter)</a>
-        <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer" class="contact-btn">YouTube</a>
-        <a href="https://artmug.kr/index.php?channel=list&field=brand&search=cW1qMTc3MA==" target="_blank" rel="noopener noreferrer" class="contact-btn">ArtMug</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>copyright © 2025 All rights reserved by Dajoong</p>
-</footer>
-
-<!-- SCRIPTS -->
 <script>
-/* ── Section Entrance Animation ── */
-(function() {
-  const sections = document.querySelectorAll('.section-hidden');
-  if (!sections.length) return;
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('section-visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
-  sections.forEach(el => obs.observe(el));
-})();
-
-/* ── Side Navigation ── */
-(function() {
-  const sideNav = document.getElementById('side-nav');
-  if (!sideNav) return;
-
-  const targets = ['hero','about','info','works','samples','price','contact']
-    .map(id => document.getElementById(id)).filter(Boolean);
-  const links = Array.from(sideNav.querySelectorAll('a[href^="#"]'));
-
-  // 활성 링크 업데이트
-  function setActive(id) {
-    links.forEach(a => {
-      const isActive = a.getAttribute('href') === '#' + id;
-      a.classList.toggle('is-active', isActive);
-    });
-  }
-
-  // 스크롤 위치에 따라 현재 섹션 감지
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) setActive(e.target.id);
-    });
-  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-
-  targets.forEach(el => obs.observe(el));
-
-  // 헤더 스크롤 시 사이드 네비 표시/숨김
-  const hero = document.getElementById('hero');
-  const showObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      sideNav.classList.toggle('is-visible', !e.isIntersecting);
-    });
-  }, { threshold: 0.3 });
-  if (hero) showObs.observe(hero);
-
-  // 클릭 시 부드러운 스크롤
-  links.forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-})();
-
-/* ── Reveal Animation ── */
-(function() {
-  const items = document.querySelectorAll('.reveal');
-  if (!items.length) return;
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.12 });
-  items.forEach(el => obs.observe(el));
-})();
-
-/* ── Portfolio Slider ── */
+// Wrap slider setup so it runs after DOM is parsed and ensures a consistent init order
 document.addEventListener('DOMContentLoaded', () => {
+  // ------------------- 데이터 정의 -------------------
   const videoData = {
-    LD:  { title: "LD",     list: ["Zlbfvuxf3Lo","8EabRx_ZFAI","wML53bUKn1Q","yvc0yN8uwqU","w-eRgLmsgas","zKRPxZ7pv58"] },
-    SD:  { title: "SD",     list: ["bdD1dhv6lI4","BtvMd8yG80g","SwGP1UFE424","pH4GRAjcp2U","b6DNOVjED9o"] },
-    FAN: { title: "오너캐",  list: ["cOmUiWxkqfo","FzIi9m1bKeI","9XtIUiv314c"] },
-    MEM: { title: "메모리얼", list: ["JLTUyPkfsj0","lhVUjv1q-bw"] }
+    LD: { title: "LD", list: ["Zlbfvuxf3Lo", "8EabRx_ZFAI", "wML53bUKn1Q", "yvc0yN8uwqU", "w-eRgLmsgas", "zKRPxZ7pv58"] },
+    SD: { title: "SD", list: ["bdD1dhv6lI4", "BtvMd8yG80g", "SwGP1UFE424", "pH4GRAjcp2U", "b6DNOVjED9o"] },
+    FAN: { title: "오너캐", list: ["cOmUiWxkqfo", "FzIi9m1bKeI", "9XtIUiv314c"  ] },
+    MEM: { title: "메모리얼", list: ["JLTUyPkfsj0", "lhVUjv1q-bw"] }
   };
-  const merged = [];
-  Object.keys(videoData).forEach(k => merged.push(...videoData[k].list));
-  videoData.ALL = { title: '전체', list: merged };
 
+  // 자동으로 '모두' 탭 생성 (모든 섹션을 순서대로 병합)
+  (function addAllTab(){
+    const merged = [];
+    Object.keys(videoData).forEach(k => {
+      if (videoData[k] && Array.isArray(videoData[k].list)) merged.push(...videoData[k].list);
+    });
+    videoData.ALL = { title: '전체', list: merged };
+  })();
+
+  // ------------------- HTML 자동 생성 -------------------
   function buildAllTypes() {
-    const btns = document.querySelector("[data-type-buttons]");
-    const cont = document.getElementById("type-container");
-    btns.innerHTML = cont.innerHTML = "";
-    ['ALL', ...Object.keys(videoData).filter(k => k !== 'ALL')].forEach((key, idx) => {
-      const item = videoData[key];
+    const typeButtons = document.querySelector("[data-type-buttons]");
+    const container = document.getElementById("type-container");
+
+    typeButtons.innerHTML = "";
+    container.innerHTML = "";
+
+    let typeKeys = Object.keys(videoData);
+    if (videoData.ALL) typeKeys = ['ALL', ...typeKeys.filter(k => k !== 'ALL')];
+
+    typeKeys.forEach((typeKey, idx) => {
+      const item = videoData[typeKey];
+
       const btn = document.createElement("button");
       btn.textContent = item.title;
-      btn.setAttribute("data-switch", key);
+      btn.setAttribute("data-switch", typeKey);
       if (idx === 0) btn.setAttribute("data-active", "true");
-      btns.appendChild(btn);
+      typeButtons.appendChild(btn);
+
       const sec = document.createElement("section");
-      sec.setAttribute("data-type", key);
+      sec.setAttribute("data-type", typeKey);
       if (idx === 0) sec.setAttribute("data-active", "true");
-      sec.innerHTML = genSlider(item.list);
-      cont.appendChild(sec);
+
+      sec.innerHTML = generateSliderHTML(item.list);
+      container.appendChild(sec);
     });
   }
 
-  function genSlider(list) {
-    let slides = "", thumbs = "";
+  // ------------------- 슬라이더 HTML 템플릿 생성 -------------------
+  function generateSliderHTML(list) {
+    let slides = "";
     list.forEach((vid, i) => {
-      slides += `<div data-slide data-video="${vid}" data-index="${i}" data-active="${i===0}"><div class="video-wrapper"><div class="image-placeholder">로딩 중…</div><iframe class="lazy-iframe" title="Video ${vid}" data-src="https://www.youtube.com/embed/${vid}" src="about:blank" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div></div>`;
-      thumbs += `<button data-thumb data-index="${i}" ${i===0?'data-active="true"':''}><img src="https://img.youtube.com/vi/${vid}/hqdefault.jpg" alt="썸네일 ${i+1}" loading="lazy"></button>`;
+      slides += `
+        <div data-slide data-video="${vid}" data-index="${i}" data-active="${i===0}">
+          <div class="video-wrapper">
+            <div class="image-placeholder">Loading…</div>
+            <iframe class="lazy-iframe" title="Video ${vid}" data-src="https://www.youtube.com/embed/${vid}" src="about:blank" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>`;
     });
-    return `<div data-root><div data-stage data-autoplay="false" data-interval="6000">${slides}<button data-action="prev">❮</button><button data-action="next">❯</button></div><div data-dots></div><div data-thumbs-wrapper><div data-thumbs>${thumbs}</div></div></div>`;
+
+    let thumbs = "";
+    list.forEach((vid, i) => {
+      thumbs += `
+        <button data-thumb data-index="${i}" ${i===0 ? 'data-active="true"' : ''}>
+          <img src="https://img.youtube.com/vi/${vid}/hqdefault.jpg">
+        </button>`;
+    });
+
+    return `
+      <div data-root>
+        <div data-stage aria-roledescription="carousel" data-autoplay="false" data-interval="6000">
+          ${slides}
+          <button data-action="prev">❮</button>
+          <button data-action="next">❯</button>
+        </div>
+
+        <div data-dots></div>
+
+        <div data-thumbs-wrapper>
+          <div data-thumbs>${thumbs}</div>
+        </div>
+      </div>`;
   }
 
+  // ------------------- 초기 실행 -------------------
   buildAllTypes();
 
-  function loadIframe(w) {
-    if (!w) return;
-    const iframe = w.querySelector('iframe[data-src]');
-    const ph = w.querySelector('.image-placeholder');
-    if (!iframe || !iframe.dataset.src) return;
-    iframe.src = iframe.dataset.src;
-    iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
-    iframe.removeAttribute('data-src'); iframe.classList.remove('lazy-iframe');
-  }
+  // Initialize lazy-loading for iframes and click-to-load behavior
+  function initLazyIframes() {
+    const wrappers = Array.from(document.querySelectorAll('.video-wrapper'))
+      .filter(w => w.querySelector('iframe[data-src]'));
 
-  function initLazy() {
-    const slides = document.querySelectorAll('[data-slide]');
+    if (!wrappers.length) return;
+
     if ('IntersectionObserver' in window) {
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) { loadIframe(e.target.querySelector('.video-wrapper')); obs.unobserve(e.target); } });
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const wrapper = entry.target;
+          const iframe = wrapper.querySelector('iframe[data-src]');
+          const ph = wrapper.querySelector('.image-placeholder');
+          if (iframe && iframe.dataset.src) {
+            iframe.src = iframe.dataset.src;
+            iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
+            iframe.removeAttribute('data-src'); iframe.classList.remove('lazy-iframe');
+          }
+          obs.unobserve(wrapper);
+        });
       }, { rootMargin: '300px 0px' });
-      slides.forEach(s => obs.observe(s));
-    }
-    slides.forEach(s => { const w = s.querySelector('.video-wrapper'); if (w) w.addEventListener('click', () => loadIframe(w)); });
-  }
-  initLazy();
 
-  document.querySelector("[data-type-buttons]").addEventListener('click', e => {
-    const btn = e.target.closest('[data-switch]');
-    if (!btn) return;
-    const target = btn.getAttribute('data-switch');
-    document.querySelectorAll('[data-type-buttons] button').forEach(b => b.removeAttribute('data-active'));
-    btn.setAttribute('data-active', 'true');
-    document.querySelectorAll('section[data-type]').forEach(s => {
-      s.getAttribute('data-type') === target ? s.setAttribute('data-active','true') : s.removeAttribute('data-active');
+      wrappers.forEach(w => observer.observe(w));
+    }
+
+    // click-to-load fallback
+    wrappers.forEach(wrapper => {
+      wrapper.addEventListener('click', () => {
+        const iframe = wrapper.querySelector('iframe[data-src]');
+        const ph = wrapper.querySelector('.image-placeholder');
+        if (iframe && iframe.dataset.src) {
+          iframe.src = iframe.dataset.src;
+          iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
+          iframe.removeAttribute('data-src'); iframe.classList.remove('lazy-iframe');
+        }
+      });
     });
-    setTimeout(() => {
-      const a = document.querySelector('section[data-type][data-active] [data-slide][data-active="true"]');
-      if (a) loadIframe(a.querySelector('.video-wrapper'));
-    }, 10);
+  }
+
+  initLazyIframes();
+
+  // 타입 전환 (타입 버튼)
+  const typeButtons = document.querySelectorAll('[data-type-buttons] button');
+  const typeSections = document.querySelectorAll('section[data-type]');
+
+  typeButtons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const target = btn.getAttribute('data-switch');
+
+      typeButtons.forEach(b=>b.removeAttribute('data-active'));
+      btn.setAttribute('data-active','true');
+
+      typeSections.forEach(sec=>{
+        if(sec.getAttribute('data-type') === target)
+          sec.setAttribute('data-active','true');
+        else
+          sec.removeAttribute('data-active');
+      });
+
+      // ★ 타입 전환 후 즉시 각 root의 사이즈 재계산 (CSS 기반 비율 사용)
+      setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 10);
+    });
   });
 
-  (function() {
-    document.querySelectorAll('div[data-root]').forEach(root => {
+  // Slider core
+  (function(){
+    const roots = document.querySelectorAll('div[data-root]');
+
+    roots.forEach(root => {
       const stage = root.querySelector('div[data-stage]');
       const slides = Array.from(stage.querySelectorAll('div[data-slide]'));
       const prevBtn = stage.querySelector('button[data-action="prev"]');
       const nextBtn = stage.querySelector('button[data-action="next"]');
       const dotsWrap = root.querySelector('div[data-dots]');
       const thumbs = root.querySelector('div[data-thumbs]');
-      const thumbBtns = Array.from(thumbs.querySelectorAll('button[data-thumb]'));
-      let current = Number(slides.find(s => s.getAttribute('data-active')==='true')?.getAttribute('data-index') || 0);
+      const thumbButtons = Array.from(thumbs.querySelectorAll('button[data-thumb]'));
+      const progressBar = root.querySelector('div[data-bar]');
+
+      let current = slides.find(s => s.getAttribute('data-active') === 'true')
+        ?.getAttribute('data-index') || 0;
+      current = Number(current);
       const total = slides.length;
-      const autoplay = stage.getAttribute('data-autoplay') === 'true';
-      const interval = parseInt(stage.getAttribute('data-interval')||'5000',10);
+
+      let autoplay = stage.getAttribute('data-autoplay') === 'true';
+      let interval = parseInt(stage.getAttribute('data-interval') || '5000', 10);
       let timer = null;
 
-      function buildDots() {
+      function buildDots(){
         dotsWrap.innerHTML = '';
-        for (let i=0;i<total;i++) {
+        for(let i=0;i<total;i++){
           const b = document.createElement('button');
           b.setAttribute('data-dot','');
-          if (i===current) b.setAttribute('data-active','true');
-          b.addEventListener('click', ()=>goTo(i));
+          if(i===current) b.setAttribute('data-active','true');
+          b.addEventListener('click', ()=> goTo(i));
           dotsWrap.appendChild(b);
         }
       }
-      function updateUI() {
-        slides.forEach(s => s.setAttribute('data-active', Number(s.getAttribute('data-index'))===current ? 'true' : 'false'));
-        dotsWrap.querySelectorAll('[data-dot]').forEach((d,i) => i===current ? d.setAttribute('data-active','true') : d.removeAttribute('data-active'));
-        thumbBtns.forEach((t,i) => i===current ? t.setAttribute('data-active','true') : t.removeAttribute('data-active'));
-        const a = slides.find(s => Number(s.getAttribute('data-index'))===current);
-        if (a) loadIframe(a.querySelector('.video-wrapper'));
+
+      function updateUI(){
+        slides.forEach(s=>{
+          const idx = Number(s.getAttribute('data-index'));
+          const active = idx===current;
+          s.setAttribute('data-active', active?'true':'false');
+          s.setAttribute('aria-hidden', active?'false':'true');
+        });
+
+        const dotBtns = dotsWrap.querySelectorAll('button[data-dot]');
+        dotBtns.forEach((d,i)=>{
+          if(i===current) d.setAttribute('data-active','true');
+          else d.removeAttribute('data-active');
+        });
+
+        thumbButtons.forEach((t,i)=>{
+          if(i===current) t.setAttribute('data-active','true');
+          else t.removeAttribute('data-active');
+        });
+
+        if (progressBar) progressBar.style.width = ((current+1)/total*100)+'%';
       }
-      function goTo(i) { if (i<0) i=total-1; if (i>=total) i=0; current=i; updateUI(); resetTimer(); }
-      thumbBtns.forEach(b => b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); goTo(Number(b.getAttribute('data-index'))); }, true));
-      prevBtn.addEventListener('click', () => goTo(current-1));
-      nextBtn.addEventListener('click', () => goTo(current+1));
-      window.addEventListener('keydown', e => { if (e.key==='ArrowLeft') goTo(current-1); if (e.key==='ArrowRight') goTo(current+1); });
-      function startTimer() { if (!autoplay) return; stopTimer(); timer=setInterval(()=>goTo(current+1),interval); }
-      function stopTimer() { if (timer) { clearInterval(timer); timer=null; } }
-      function resetTimer() { stopTimer(); startTimer(); }
-      buildDots(); updateUI(); startTimer();
+
+      function goTo(i){
+        if(i<0) i=total-1;
+        if(i>=total) i=0;
+        current=i; updateUI(); resetAutoplay();
+      }
+
+      function prev(){ goTo(current-1); }
+      function next(){ goTo(current+1); }
+
+      thumbButtons.forEach(btn=> btn.addEventListener('click', ()=>{ const idx = Number(btn.getAttribute('data-index')); goTo(idx); }));
+
+      prevBtn.addEventListener('click', prev);
+      nextBtn.addEventListener('click', next);
+
+      window.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
+
+      function startAutoplay(){ if(!autoplay) return; stopAutoplay(); timer=setInterval(()=>next(), interval); }
+      function stopAutoplay(){ if(timer){ clearInterval(timer); timer=null; } }
+      function resetAutoplay(){ stopAutoplay(); startAutoplay(); }
+
+      function resizeThumbs() {
+        const thumbs = document.querySelectorAll('[data-thumbs] > button[data-thumb]');
+        if (!thumbs.length) return;
+        const width = window.innerWidth * 0.3;
+        const height = width * (9 / 16);
+        thumbs.forEach(btn => { btn.style.width = width + 'px'; btn.style.height = height + 'px'; });
+      }
+
+      function resizeStage() { const stage = root.querySelector('div[data-stage]'); if (!stage) return; stage.style.height = ''; }
+      function resizeIframe() { const iframes = root.querySelectorAll('[data-slide] iframe'); if (!iframes.length) return; iframes.forEach(iframe => { iframe.style.width = '100%'; iframe.style.height = '100%'; }); }
+
+      function handleResize() { resizeThumbs(); resizeStage(); resizeIframe(); }
+      let _resizeTimer = null; function scheduleResize() { if (_resizeTimer) clearTimeout(_resizeTimer); _resizeTimer = setTimeout(handleResize, 80); }
+
+      handleResize(); window.addEventListener('resize', scheduleResize);
+
+      buildDots(); updateUI(); startAutoplay();
     });
   })();
+
 });
 </script>
+<script>
+(function() {
+  let hasSentHeight = false;
+
+  function sendHeightOnce() {
+    if (hasSentHeight) return;
+
+    const height = document.body.scrollHeight; // 로딩 무시, 바로 계산
+
+    parent.postMessage(
+      { type: "sliderHeight", value: height },
+      "*"
+    );
+
+    hasSentHeight = true;
+  }
+
+  // DOMContentLoaded 시점에 바로 실행
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", sendHeightOnce);
+  } else {
+    sendHeightOnce();
+  }
+})();
+</script>
+
+    <div class="more-btn">
+      <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer">더 많은 작업 보기 →</a>
+    <a href="https://dajoong.cloud/price.html" target="_blank" rel="noopener noreferrer">가격 확인하기 →</a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <h2>Contact-us</h2>
+    <div class="contact-links">
+      <a href="https://x.com/_Dajoong" target="_blank" rel="noopener noreferrer" class="contact-btn">X (Twitter)</a>
+      <a href="https://www.foriio.com/DaJoong" target="_blank" rel="noopener noreferrer" class="contact-btn">Foriio</a>
+      <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer" class="contact-btn">YouTube</a>
+      <a href="https://artmug.kr/index.php?channel=list&field=brand&search=cW1qMTc3MA==" target="_blank" rel="noopener noreferrer" class="contact-btn">ArtMug</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>copyright(c)2025 All rights reserved by Dajoong</p>
+  </footer>
 </body>
 </html>
+
