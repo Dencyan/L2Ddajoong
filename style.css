@@ -1094,3 +1094,43 @@ footer {
   [data-thumb] { width: 72px; height: 40px; }
   .price-cards { grid-template-columns: 1fr; }
 }
+
+/* ── Language Switcher ── */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 16px;
+  flex-shrink: 0;
+}
+.lang-btn {
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.75);
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  padding: 5px 9px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  line-height: 1;
+}
+.lang-btn:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.6);
+}
+.lang-btn.lang-active {
+  color: #fff;
+  background: rgba(159,168,255,0.45);
+  border-color: #9FA8FF;
+  box-shadow: 0 0 10px rgba(159,168,255,0.5);
+}
+.lang-divider {
+  color: rgba(255,255,255,0.25);
+  font-size: 0.6rem;
+  user-select: none;
+  margin: 0 1px;
+}

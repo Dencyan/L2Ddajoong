@@ -33,27 +33,34 @@
 <header>
   <h1><a href="#hero">Dajoong</a></h1>
   <nav>
-    <a href="#about">알아보기</a>
-    <a href="#info">정보</a>
-    <a href="#works">작품</a>
-    <a href="#samples">샘플</a>
-    <a href="#price">가격</a>
-    <a href="#contact">문의하기</a>
+    <a href="#about" data-i18n="nav.about">알아보기</a>
+    <a href="#info" data-i18n="nav.info">정보</a>
+    <a href="#works" data-i18n="nav.works">작품</a>
+    <a href="#samples" data-i18n="nav.samples">샘플</a>
+    <a href="#price" data-i18n="nav.price">가격</a>
+    <a href="#contact" data-i18n="nav.contact">문의하기</a>
   </nav>
+  <div class="lang-switcher">
+    <button class="lang-btn lang-active" data-lang="ko">KO</button>
+    <span class="lang-divider">|</span>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <span class="lang-divider">|</span>
+    <button class="lang-btn" data-lang="ja">JP</button>
+  </div>
 </header>
 
 <!-- HERO -->
 <section id="hero" class="hero">
   <span class="hero-eyebrow">Live2D Rigger</span>
   <h2>Dajoong</h2>
-  <p class="hero-sub">LD · SD · 메모리얼 애니메이션 포트폴리오</p>
+  <p class="hero-sub" data-i18n="hero.sub">LD · SD · 메모리얼 애니메이션 포트폴리오</p>
 </section>
 
 <!-- SIDE NAV -->
 <nav id="side-nav" aria-label="페이지 네비게이션">
   <ul>
     <li><a href="#hero"    data-label="Top">    <span class="sn-dot"></span><span class="sn-label">Top</span></a></li>
-    <li><a href="#notice"  data-label="공지">   <span class="sn-dot"></span><span class="sn-label">공지</span></a></li>
+    <li><a href="#notice"  data-label="공지">   <span class="sn-dot"></span><span class="sn-label" data-i18n="sidenav.notice">공지</span></a></li>
     <li><a href="#about"   data-label="About">  <span class="sn-dot"></span><span class="sn-label">About</span></a></li>
     <li><a href="#info"    data-label="Info">   <span class="sn-dot"></span><span class="sn-label">Info</span></a></li>
     <li><a href="#works"   data-label="Works">  <span class="sn-dot"></span><span class="sn-label">Works</span></a></li>
@@ -68,42 +75,42 @@
 ============================================= -->
 <section id="notice" class="section-hidden">
   <div class="section-wrap">
-    <h2 class="section-title reveal">공지사항</h2>
+    <h2 class="section-title reveal" data-i18n="notice.title">공지사항</h2>
     <div class="notice-wrap reveal">
-      <div class="notice-top-alert">
+      <div class="notice-top-alert" data-i18n="notice.alert">
         ※ 공지를 읽지 않아 발생하는 문제는 일절 책임지지 않습니다.<br>
         작업 의뢰 시 모든 내용을 확인·동의한 것으로 간주합니다.
       </div>
       <div class="notice-list">
         <div class="notice-item">
-          <div class="notice-item-title">일러스트 작업 불가 / 파일 안내</div>
-          <p class="notice-item-desc">일러스트 작업은 하지 않습니다. 파츠 분리가 완료된 일러스트 PSD 파일이 필요합니다.</p>
+          <div class="notice-item-title" data-i18n="notice.n1.title">일러스트 작업 불가 / 파일 안내</div>
+          <p class="notice-item-desc" data-i18n="notice.n1.desc">일러스트 작업은 하지 않습니다. 파츠 분리가 완료된 일러스트 PSD 파일이 필요합니다.</p>
         </div>
         <div class="notice-item">
-          <div class="notice-item-title">납품 파일 안내</div>
-          <p class="notice-item-desc">작업 완료 후 전달되는 파일은 아이콘 이미지를 포함한 .moc3 파일이 전달됩니다. 수정이 가능한 cmo3 파일은 제공하지 않습니다.</p>
+          <div class="notice-item-title" data-i18n="notice.n2.title">납품 파일 안내</div>
+          <p class="notice-item-desc" data-i18n="notice.n2.desc">작업 완료 후 전달되는 파일은 아이콘 이미지를 포함한 .moc3 파일이 전달됩니다. 수정이 가능한 cmo3 파일은 제공하지 않습니다.</p>
         </div>
         <div class="notice-item">
-          <div class="notice-item-title">스트리밍 안내</div>
-          <p class="notice-item-desc">스트리밍을 하고 있습니다. 방송에 송출을 원하지 않는다면 미리 말씀 부탁드립니다.</p>
+          <div class="notice-item-title" data-i18n="notice.n3.title">스트리밍 안내</div>
+          <p class="notice-item-desc" data-i18n="notice.n3.desc">스트리밍을 하고 있습니다. 방송에 송출을 원하지 않는다면 미리 말씀 부탁드립니다.</p>
         </div>
         <div class="notice-item">
-          <div class="notice-item-title">SNS · 포트폴리오 게시 안내</div>
-          <p class="notice-item-desc">모든 작업물은 홍보와 포트폴리오를 위해 SNS와 유튜브에 게시됩니다. 데뷔일까지 공개 지연을 희망하시는 경우 미리 말씀 부탁드립니다.</p>
+          <div class="notice-item-title" data-i18n="notice.n4.title">SNS · 포트폴리오 게시 안내</div>
+          <p class="notice-item-desc" data-i18n="notice.n4.desc">모든 작업물은 홍보와 포트폴리오를 위해 SNS와 유튜브에 게시됩니다. 데뷔일까지 공개 지연을 희망하시는 경우 미리 말씀 부탁드립니다.</p>
         </div>
         <div class="notice-item">
-          <div class="notice-item-title">요청 사항 기재</div>
-          <p class="notice-item-desc">결제 전 요청 사항은 상세히 작성 부탁드립니다. 기재되지 않은 사항은 추가 작업 및 수정 시 작업이 어렵거나 추가금이 들 수 있습니다.</p>
+          <div class="notice-item-title" data-i18n="notice.n5.title">요청 사항 기재</div>
+          <p class="notice-item-desc" data-i18n="notice.n5.desc">결제 전 요청 사항은 상세히 작성 부탁드립니다. 기재되지 않은 사항은 추가 작업 및 수정 시 작업이 어렵거나 추가금이 들 수 있습니다.</p>
         </div>
         <div class="notice-item">
-          <div class="notice-item-title">저작권 안내</div>
-          <p class="notice-item-desc">리깅과 관련된 저작권은 작가(다중)에게 있습니다. 일러스트와 관련된 저작권은 일러스트 작가님에게 있습니다.</p>
+          <div class="notice-item-title" data-i18n="notice.n6.title">저작권 안내</div>
+          <p class="notice-item-desc" data-i18n="notice.n6.desc">리깅과 관련된 저작권은 작가(다중)에게 있습니다. 일러스트와 관련된 저작권은 일러스트 작가님에게 있습니다.</p>
         </div>
         <div class="notice-item">
-          <div class="notice-item-title">작업 일정 안내</div>
-          <p class="notice-item-desc">작업 일정은 문의 순이 아닌 결제 순으로 확정됩니다. 일정은 작업 속도에 따라 조금씩 당겨질 수 있으며, 작업이 지연될 시 사전에 미리 연락 드립니다.</p>
-          <p class="notice-item-desc notice-bold">※ 컨펌 시 연락이 지연되거나 수정 사항이 많을 시 작업 기간이 늘어날 수 있습니다.</p>
-          <p class="notice-item-desc notice-bold">※ 작업 기간은 평균 기본 모델 기준 2주~4주 정도입니다.</p>
+          <div class="notice-item-title" data-i18n="notice.n7.title">작업 일정 안내</div>
+          <p class="notice-item-desc" data-i18n="notice.n7.desc">작업 일정은 문의 순이 아닌 결제 순으로 확정됩니다. 일정은 작업 속도에 따라 조금씩 당겨질 수 있으며, 작업이 지연될 시 사전에 미리 연락 드립니다.</p>
+          <p class="notice-item-desc notice-bold" data-i18n="notice.n7.desc2">※ 컨펌 시 연락이 지연되거나 수정 사항이 많을 시 작업 기간이 늘어날 수 있습니다.</p>
+          <p class="notice-item-desc notice-bold" data-i18n="notice.n7.desc3">※ 작업 기간은 평균 기본 모델 기준 2주~4주 정도입니다.</p>
         </div>
       </div>
     </div>
@@ -119,17 +126,17 @@
     <div class="about-inner">
 
       <div class="about-text">
-        <h2 class="reveal">안녕하세요. Live2D Rigger 다중(Dajoong)입니다.</h2>
-        <p class="reveal">
+        <h2 class="reveal" data-i18n="about.greeting">안녕하세요. Live2D Rigger 다중(Dajoong)입니다.</h2>
+        <p class="reveal" data-i18n="about.p1">
           LD·SD 버추얼 모델을 비롯해 배경 애니메이션과 월페이퍼 작업을 진행하며,
           섬세하고 부드러운 모션 구현에 집중하고 있습니다.
         </p>
-        <p class="reveal">
+        <p class="reveal" data-i18n="about.p2">
           모델의 매력을 극대화할 수 있는 리깅 방식을 연구하며,
           다양한 스타일의 모델 작업에 대응할 수 있습니다.
           클라이언트의 요구에 맞춘 맞춤형 리깅 솔루션을 제공합니다.
         </p>
-        <p class="reveal">
+        <p class="reveal" data-i18n="about.p3">
           여러 작가님들과의 협업 및 상업 제작 경험을 통해
           의도에 맞는 결과물을 안정적이고 효율적으로 제작합니다.
         </p>
@@ -143,7 +150,7 @@
       <aside class="about-card">
         <ul>
           <li class="about-skill reveal">
-            <span class="skill-label">전문 분야</span>
+            <span class="skill-label" data-i18n="about.card.specialty">전문 분야</span>
             <div class="skill-tags">
               <span class="skill-tag">Live2D Rigging</span>
               <span class="skill-tag">Live2D Animation</span>
@@ -151,7 +158,7 @@
             </div>
           </li>
           <li class="about-skill reveal">
-            <span class="skill-label">툴</span>
+            <span class="skill-label" data-i18n="about.card.tools">툴</span>
             <div class="skill-tags">
               <span class="skill-tag">Live2D Cubism</span>
               <span class="skill-tag">CLIPSTUDIO</span>
@@ -159,10 +166,10 @@
             </div>
           </li>
           <li class="about-skill reveal">
-            <span class="skill-label">스타일</span>
+            <span class="skill-label" data-i18n="about.card.style">스타일</span>
             <div class="skill-tags">
-              <span class="skill-tag">자연스럽고 디테일한 리깅</span>
-              <span class="skill-tag">다양한 스타일 대응</span>
+              <span class="skill-tag" data-i18n="about.card.style1">자연스럽고 디테일한 리깅</span>
+              <span class="skill-tag" data-i18n="about.card.style2">다양한 스타일 대응</span>
             </div>
           </li>
         </ul>
@@ -177,31 +184,31 @@
 ============================================= -->
 <section id="info" class="section-hidden">
   <div class="section-wrap">
-    <h2 class="section-title reveal">이벤트 &amp; 프로세스</h2>
+    <h2 class="section-title reveal" data-i18n="info.title">이벤트 &amp; 프로세스</h2>
 
     <div class="info-event-grid reveal">
 
       <div class="info-left-col">
         <!-- 이벤트 -->
         <div class="i-card">
-          <div class="i-card-head"><h3 class="i-card-title">이벤트 안내</h3></div>
+          <div class="i-card-head"><h3 class="i-card-title" data-i18n="info.event.heading">이벤트 안내</h3></div>
           <div class="i-card-body">
             <div class="event-list">
               <div class="event-item">
                 <div class="event-top">
-                  <span class="event-title">리뉴얼 기념 특별 할인</span>
-                  <span class="badge">리뉴얼 할인</span>
+                  <span class="event-title" data-i18n="info.event.e1.title">리뉴얼 기념 특별 할인</span>
+                  <span class="badge" data-i18n="info.event.e1.badge">리뉴얼 할인</span>
                 </div>
-                <span class="event-sub">조기 마감될 수 있습니다</span>
-                <p class="event-desc">프리미엄 리깅 LD 전신이 리뉴얼 특별 할인</p>
+                <span class="event-sub" data-i18n="info.event.e1.sub">조기 마감될 수 있습니다</span>
+                <p class="event-desc" data-i18n="info.event.e1.desc">프리미엄 리깅 LD 전신이 리뉴얼 특별 할인</p>
               </div>
               <div class="event-item">
                 <div class="event-top">
-                  <span class="event-title">리뷰 작성 고객 이벤트</span>
-                  <span class="badge">리뷰 이벤트</span>
+                  <span class="event-title" data-i18n="info.event.e2.title">리뷰 작성 고객 이벤트</span>
+                  <span class="badge" data-i18n="info.event.e2.badge">리뷰 이벤트</span>
                 </div>
-                <span class="event-sub">긍정적인 리뷰를 남겨 주시면 추가 할인 혜택까지</span>
-                <p class="event-desc">리뷰 작성 시 2만원 할인 또는 표정 2종 중 선택 가능합니다</p>
+                <span class="event-sub" data-i18n="info.event.e2.sub">긍정적인 리뷰를 남겨 주시면 추가 할인 혜택까지</span>
+                <p class="event-desc" data-i18n="info.event.e2.desc">리뷰 작성 시 2만원 할인 또는 표정 2종 중 선택 가능합니다</p>
               </div>
             </div>
           </div>
@@ -209,40 +216,40 @@
 
         <!-- 콜라보 -->
         <div class="i-card">
-          <div class="i-card-head"><h3 class="i-card-title">콜라보 안내</h3></div>
+          <div class="i-card-head"><h3 class="i-card-title" data-i18n="info.collab.heading">콜라보 안내</h3></div>
           <div class="i-card-body collab-body">
             <div class="event-list">
               <a href="https://artmug.kr/index.php?channel=view&uid=47209" target="_blank" class="event-item collab-link">
                 <div class="event-top">
-                  <span class="event-title">양초 작가님 콜라보 할인</span>
-                  <span class="badge">콜라보 할인</span>
+                  <span class="event-title" data-i18n="info.collab.c1.title">양초 작가님 콜라보 할인</span>
+                  <span class="badge" data-i18n="info.collab.badge">콜라보 할인</span>
                 </div>
-                <span class="event-sub">말랑 쫀득한 귀여운 움직임을 원하면 추천</span>
-                <p class="event-desc">일러스트 5만원 + 리깅 5만원 할인 혜택</p>
+                <span class="event-sub" data-i18n="info.collab.c1.sub">말랑 쫀득한 귀여운 움직임을 원하면 추천</span>
+                <p class="event-desc" data-i18n="info.collab.c1.desc">일러스트 5만원 + 리깅 5만원 할인 혜택</p>
               </a>
               <a href="https://artmug.kr/index.php?channel=view&uid=46759" target="_blank" class="event-item collab-link">
                 <div class="event-top">
-                  <span class="event-title">하노히 작가님 콜라보 할인</span>
-                  <span class="badge">콜라보 할인</span>
+                  <span class="event-title" data-i18n="info.collab.c2.title">하노히 작가님 콜라보 할인</span>
+                  <span class="badge" data-i18n="info.collab.badge">콜라보 할인</span>
                 </div>
-                <span class="event-sub">단아하고 깔끔한 디자인을 원하면 추천</span>
-                <p class="event-desc">일러스트 5만원 + 리깅 5만원 할인 혜택</p>
+                <span class="event-sub" data-i18n="info.collab.c2.sub">단아하고 깔끔한 디자인을 원하면 추천</span>
+                <p class="event-desc" data-i18n="info.collab.c2.desc">일러스트 5만원 + 리깅 5만원 할인 혜택</p>
               </a>
               <a href="https://artmug.kr/index.php?channel=view&uid=51109" target="_blank" class="event-item collab-link">
                 <div class="event-top">
-                  <span class="event-title">피치 작가님 콜라보 할인</span>
-                  <span class="badge">콜라보 할인</span>
+                  <span class="event-title" data-i18n="info.collab.c3.title">피치 작가님 콜라보 할인</span>
+                  <span class="badge" data-i18n="info.collab.badge">콜라보 할인</span>
                 </div>
-                <span class="event-sub">만화 같은 분위기의 디자인을 원하면 추천</span>
-                <p class="event-desc">일러스트 5만원 + 리깅 5만원 할인 혜택</p>
+                <span class="event-sub" data-i18n="info.collab.c3.sub">만화 같은 분위기의 디자인을 원하면 추천</span>
+                <p class="event-desc" data-i18n="info.collab.c3.desc">일러스트 5만원 + 리깅 5만원 할인 혜택</p>
               </a>
               <a href="https://artmug.kr/index.php?channel=view&uid=26682" target="_blank" class="event-item collab-link">
                 <div class="event-top">
-                  <span class="event-title">뚱땅이 작가님 콜라보 할인</span>
-                  <span class="badge">콜라보 할인</span>
+                  <span class="event-title" data-i18n="info.collab.c4.title">뚱땅이 작가님 콜라보 할인</span>
+                  <span class="badge" data-i18n="info.collab.badge">콜라보 할인</span>
                 </div>
-                <span class="event-sub">귀엽고 부드러운 움직임을 원하면 추천</span>
-                <p class="event-desc">일러스트 10만원 + 리깅 5만원 할인 혜택</p>
+                <span class="event-sub" data-i18n="info.collab.c4.sub">귀엽고 부드러운 움직임을 원하면 추천</span>
+                <p class="event-desc" data-i18n="info.collab.c4.desc">일러스트 10만원 + 리깅 5만원 할인 혜택</p>
               </a>
             </div>
           </div>
@@ -251,20 +258,20 @@
 
       <!-- 프로세스 -->
       <div class="i-card i-card--process">
-        <div class="i-card-head"><h3 class="i-card-title">작업 프로세스</h3></div>
+        <div class="i-card-head"><h3 class="i-card-title" data-i18n="info.process.heading">작업 프로세스</h3></div>
         <div class="i-card-body">
           <div class="process-timeline">
-            <div class="process-step"><div class="step-number">01</div><div class="step-content"><p class="step-title">문의</p><p class="step-desc">작업 요청 및 기본 정보 제공</p></div></div>
-            <div class="process-step"><div class="step-number">02</div><div class="step-content"><p class="step-title">파일 확인 및 견적</p><p class="step-desc">파일 검토 후 상세 견적 제시</p></div></div>
-            <div class="process-step"><div class="step-number">03</div><div class="step-content"><p class="step-title">접수 및 입금</p><p class="step-desc">계약 및 결제</p></div></div>
-            <div class="process-step"><div class="step-number">04</div><div class="step-content"><p class="step-title">1차 리깅</p><p class="step-desc">헤드 및 페이스 구조 제작</p></div></div>
-            <div class="process-step"><div class="step-number">05</div><div class="step-content"><p class="step-title">1차 컨펌 및 수정</p><p class="step-desc">1차 리깅 영상 제공, 피드백 반영 및 개선</p></div></div>
-            <div class="process-step"><div class="step-number">06</div><div class="step-content"><p class="step-title">2차 리깅</p><p class="step-desc">바디 및 소품 디테일 작업</p></div></div>
-            <div class="process-step"><div class="step-number">07</div><div class="step-content"><p class="step-title">2차 컨펌 및 수정</p><p class="step-desc">2차 리깅 영상 제공, 피드백 반영 및 개선</p></div></div>
-            <div class="process-step"><div class="step-number">08</div><div class="step-content"><p class="step-title">완성 및 파일 납품</p><p class="step-desc">최종 파일 전달</p></div></div>
-            <div class="process-step"><div class="step-number">09</div><div class="step-content"><p class="step-title">최종 수정 (3차 수정)</p><p class="step-desc">파일 적용 후 문제 발생 시 수정</p></div></div>
+            <div class="process-step"><div class="step-number">01</div><div class="step-content"><p class="step-title" data-i18n="info.process.s1.title">문의</p><p class="step-desc" data-i18n="info.process.s1.desc">작업 요청 및 기본 정보 제공</p></div></div>
+            <div class="process-step"><div class="step-number">02</div><div class="step-content"><p class="step-title" data-i18n="info.process.s2.title">파일 확인 및 견적</p><p class="step-desc" data-i18n="info.process.s2.desc">파일 검토 후 상세 견적 제시</p></div></div>
+            <div class="process-step"><div class="step-number">03</div><div class="step-content"><p class="step-title" data-i18n="info.process.s3.title">접수 및 입금</p><p class="step-desc" data-i18n="info.process.s3.desc">계약 및 결제</p></div></div>
+            <div class="process-step"><div class="step-number">04</div><div class="step-content"><p class="step-title" data-i18n="info.process.s4.title">1차 리깅</p><p class="step-desc" data-i18n="info.process.s4.desc">헤드 및 페이스 구조 제작</p></div></div>
+            <div class="process-step"><div class="step-number">05</div><div class="step-content"><p class="step-title" data-i18n="info.process.s5.title">1차 컨펌 및 수정</p><p class="step-desc" data-i18n="info.process.s5.desc">1차 리깅 영상 제공, 피드백 반영 및 개선</p></div></div>
+            <div class="process-step"><div class="step-number">06</div><div class="step-content"><p class="step-title" data-i18n="info.process.s6.title">2차 리깅</p><p class="step-desc" data-i18n="info.process.s6.desc">바디 및 소품 디테일 작업</p></div></div>
+            <div class="process-step"><div class="step-number">07</div><div class="step-content"><p class="step-title" data-i18n="info.process.s7.title">2차 컨펌 및 수정</p><p class="step-desc" data-i18n="info.process.s7.desc">2차 리깅 영상 제공, 피드백 반영 및 개선</p></div></div>
+            <div class="process-step"><div class="step-number">08</div><div class="step-content"><p class="step-title" data-i18n="info.process.s8.title">완성 및 파일 납품</p><p class="step-desc" data-i18n="info.process.s8.desc">최종 파일 전달</p></div></div>
+            <div class="process-step"><div class="step-number">09</div><div class="step-content"><p class="step-title" data-i18n="info.process.s9.title">최종 수정 (3차 수정)</p><p class="step-desc" data-i18n="info.process.s9.desc">파일 적용 후 문제 발생 시 수정</p></div></div>
           </div>
-          <p class="process-note">평균 작업 기간은 2–4주이며, 디자인의 복잡도에 따라 조정 가능합니다.</p>
+          <p class="process-note" data-i18n="info.process.note">평균 작업 기간은 2–4주이며, 디자인의 복잡도에 따라 조정 가능합니다.</p>
         </div>
       </div>
 
@@ -282,59 +289,59 @@
         <!-- 베이직 -->
         <div class="plan-card">
           <div class="plan-card-head">
-            <span class="plan-name">베이직</span>
+            <span class="plan-name" data-i18n="plan.basic">베이직</span>
           </div>
           <div class="plan-card-body">
             <ul class="plan-list">
-              <li>얼굴 XYZ</li>
-              <li>눈썹 (위아래, 변형, 각도)</li>
-              <li class="red">눈썹눈 연동 페이셜</li>
-              <li>눈깜빡 (윙크)</li>
-              <li>눈동자 물리</li>
-              <li class="red">속눈썹 물리</li>
-              <li>입움직임 (9점)</li>
-              <li class="red">입 개폐 연동 턱 리깅</li>
-              <li>몸 XYZ</li>
-              <li>호흡</li>
-              <li class="red">팔 흔들림 (손가락 흔들림)</li>
-              <li class="red">캠 이탈 애니메이션 (선택)</li>
-              <li>기본 제공 표정 2종<span class="plan-sub">(애니메이션 X)</span></li>
+              <li data-i18n="plan.item.faceXYZ">얼굴 XYZ</li>
+              <li data-i18n="plan.item.eyebrow">눈썹 (위아래, 변형, 각도)</li>
+              <li class="red" data-i18n="plan.item.eyebrowFacial">눈썹눈 연동 페이셜</li>
+              <li data-i18n="plan.item.blink">눈깜빡 (윙크)</li>
+              <li data-i18n="plan.item.pupilPhysics">눈동자 물리</li>
+              <li class="red" data-i18n="plan.item.lashPhysics">속눈썹 물리</li>
+              <li data-i18n="plan.item.mouth9">입움직임 (9점)</li>
+              <li class="red" data-i18n="plan.item.jaw">입 개폐 연동 턱 리깅</li>
+              <li data-i18n="plan.item.bodyXYZ">몸 XYZ</li>
+              <li data-i18n="plan.item.breath">호흡</li>
+              <li class="red" data-i18n="plan.item.arm">팔 흔들림 (손가락 흔들림)</li>
+              <li class="red" data-i18n="plan.item.camAnim">캠 이탈 애니메이션 (선택)</li>
+              <li data-i18n="plan.item.expr2">기본 제공 표정 2종<span class="plan-sub" data-i18n="plan.item.noAnim">(애니메이션 X)</span></li>
             </ul>
-            <div class="plan-physics">최대 3단계 물리 지원<span class="plan-sub">(필요의 경우 4단계 지원)</span></div>
+            <div class="plan-physics" data-i18n="plan.physics.basic">최대 3단계 물리 지원<span class="plan-sub" data-i18n="plan.physics.basic.sub">(필요의 경우 4단계 지원)</span></div>
           </div>
         </div>
         <!-- 프리미엄 -->
         <div class="plan-card plan-card--premium">
           <div class="plan-card-head">
-            <span class="plan-name">프리미엄</span>
+            <span class="plan-name" data-i18n="plan.premium">프리미엄</span>
           </div>
           <div class="plan-card-body">
             <ul class="plan-list">
-              <li>얼굴 XYZ</li>
-              <li>눈썹 (위아래, 변형, 각도)</li>
-              <li>눈썹 눈 연동 페이셜</li>
-              <li>눈깜빡 (윙크)</li>
-              <li>눈동자 물리</li>
-              <li>속눈썹 물리</li>
-              <li>입움직임 (12점~)</li>
-              <li>입 개폐 연동 턱 리깅</li>
-              <li>몸 XYZ</li>
-              <li>호흡</li>
-              <li>팔 흔들림 (손가락 흔들림)</li>
-              <li>캠 이탈 애니메이션 (선택)</li>
-              <li>기본 제공 표정 2종<span class="plan-sub">(애니메이션 X)</span></li>
+              <li data-i18n="plan.item.faceXYZ">얼굴 XYZ</li>
+              <li data-i18n="plan.item.eyebrow">눈썹 (위아래, 변형, 각도)</li>
+              <li data-i18n="plan.item.eyebrowFacial">눈썹 눈 연동 페이셜</li>
+              <li data-i18n="plan.item.blink">눈깜빡 (윙크)</li>
+              <li data-i18n="plan.item.pupilPhysics">눈동자 물리</li>
+              <li data-i18n="plan.item.lashPhysics">속눈썹 물리</li>
+              <li data-i18n="plan.item.mouth12">입움직임 (12점~)</li>
+              <li data-i18n="plan.item.jaw">입 개폐 연동 턱 리깅</li>
+              <li data-i18n="plan.item.bodyXYZ">몸 XYZ</li>
+              <li data-i18n="plan.item.breath">호흡</li>
+              <li data-i18n="plan.item.arm">팔 흔들림 (손가락 흔들림)</li>
+              <li data-i18n="plan.item.camAnim">캠 이탈 애니메이션 (선택)</li>
+              <li data-i18n="plan.item.expr2">기본 제공 표정 2종<span class="plan-sub" data-i18n="plan.item.noAnim">(애니메이션 X)</span></li>
             </ul>
-            <div class="plan-physics">최소 3단계 물리 지원<span class="plan-sub">(필요의 경우 2단계 지원)</span></div>
+            <div class="plan-physics" data-i18n="plan.physics.premium">최소 3단계 물리 지원<span class="plan-sub" data-i18n="plan.physics.premium.sub">(필요의 경우 2단계 지원)</span></div>
           </div>
         </div>
       </div>
-      <p class="plan-note">베이직과 프리미엄은 움직임 각도, 물리 단계, 전반적인 디테일에서 차이가 있습니다</p>
+      <p class="plan-note" data-i18n="plan.note">베이직과 프리미엄은 움직임 각도, 물리 단계, 전반적인 디테일에서 차이가 있습니다</p>
     </div>
 
     <!-- 작업 안내 -->
     <div class="sec-divider reveal">
       <div class="sec-divider-line"></div>
-      <span class="sec-divider-label">작업 안내</span>
+      <span class="sec-divider-label" data-i18n="work.guide.label">작업 안내</span>
       <div class="sec-divider-line"></div>
     </div>
 
@@ -342,49 +349,49 @@
       <div class="info-block">
         <div class="info-block-head">
           <span class="info-block-icon">🔄</span>
-          <h3 class="info-block-title">작업 과정</h3>
+          <h3 class="info-block-title" data-i18n="work.process.title">작업 과정</h3>
         </div>
         <div class="info-block-body">
           <div class="flow-row">
-            <span class="flow-step">문의</span><span class="flow-arrow">→</span>
-            <span class="flow-step">파일 확인 및 견적</span><span class="flow-arrow">→</span>
-            <span class="flow-step">접수 및 입금</span><span class="flow-arrow">→</span>
-            <span class="flow-step">1차 리깅</span><span class="flow-arrow">→</span>
-            <span class="flow-step">1차 컨펌(수정)</span><span class="flow-arrow">→</span>
-            <span class="flow-step">2차 리깅</span><span class="flow-arrow">→</span>
-            <span class="flow-step">2차 컨펌(수정)</span><span class="flow-arrow">→</span>
-            <span class="flow-step">완성 후 전달</span><span class="flow-arrow">→</span>
-            <span class="flow-step flow-step--final">최종 수정</span>
+            <span class="flow-step" data-i18n="info.process.s1.title">문의</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="info.process.s2.title">파일 확인 및 견적</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="info.process.s3.title">접수 및 입금</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="info.process.s4.title">1차 리깅</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="work.flow.confirm1">1차 컨펌(수정)</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="info.process.s6.title">2차 리깅</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="work.flow.confirm2">2차 컨펌(수정)</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="work.flow.deliver">완성 후 전달</span><span class="flow-arrow">→</span>
+            <span class="flow-step flow-step--final" data-i18n="work.flow.final">최종 수정</span>
           </div>
           <ul class="info-desc-list">
-            <li>파일 적용 후 문제가 있다면 수정해 드립니다 (최종 수정)</li>
-            <li class="info-note">오너캐·동물·팬캐 등은 2차 컨펌 없이 1차 컨펌만 진행됩니다.</li>
+            <li data-i18n="work.process.d1">파일 적용 후 문제가 있다면 수정해 드립니다 (최종 수정)</li>
+            <li class="info-note" data-i18n="work.process.d2">오너캐·동물·팬캐 등은 2차 컨펌 없이 1차 컨펌만 진행됩니다.</li>
           </ul>
         </div>
       </div>
       <div class="info-block">
         <div class="info-block-head">
           <span class="info-block-icon">✏️</span>
-          <h3 class="info-block-title">수정 사항</h3>
+          <h3 class="info-block-title" data-i18n="work.revision.title">수정 사항</h3>
         </div>
         <div class="info-block-body">
           <ul class="info-desc-list">
-            <li>기본적인 수정 사항은 작업 기간에 진행되는 총 2회의 컨펌 및 수정 단계에서 진행됩니다.<span class="info-sub">동물/오너캐의 경우 최종 리깅까지 진행 후 1차 컨펌만 진행합니다.</span></li>
-            <li>수정 완료 후 이전 상태로 되돌리거나 과한 번복 요청 시 추가금이 청구될 수 있습니다.</li>
-            <li>리깅 실수 및 오류가 있는 경우 무료로 수정해 드립니다. 파일 적용 후 오류 발견 시 편히 말해 주세요.</li>
+            <li data-i18n="work.revision.d1">기본적인 수정 사항은 작업 기간에 진행되는 총 2회의 컨펌 및 수정 단계에서 진행됩니다.<span class="info-sub" data-i18n="work.revision.d1sub">동물/오너캐의 경우 최종 리깅까지 진행 후 1차 컨펌만 진행합니다.</span></li>
+            <li data-i18n="work.revision.d2">수정 완료 후 이전 상태로 되돌리거나 과한 번복 요청 시 추가금이 청구될 수 있습니다.</li>
+            <li data-i18n="work.revision.d3">리깅 실수 및 오류가 있는 경우 무료로 수정해 드립니다. 파일 적용 후 오류 발견 시 편히 말해 주세요.</li>
           </ul>
         </div>
       </div>
       <div class="info-block">
         <div class="info-block-head">
           <span class="info-block-icon">©️</span>
-          <h3 class="info-block-title">저작권</h3>
+          <h3 class="info-block-title" data-i18n="work.copyright.title">저작권</h3>
         </div>
         <div class="info-block-body">
           <ul class="info-desc-list">
-            <li>리깅 데이터의 저작권은 기본적으로 리거(다중)에게 귀속됩니다.</li>
-            <li>의뢰인은 본 리깅 결과물을 방송, 영상 제작, SNS 등 목적에 한하여 이용할 수 있습니다.</li>
-            <li class="warn">리깅 데이터의 재판매·양도·공유는 허용되지 않습니다.</li>
+            <li data-i18n="work.copyright.d1">리깅 데이터의 저작권은 기본적으로 리거(다중)에게 귀속됩니다.</li>
+            <li data-i18n="work.copyright.d2">의뢰인은 본 리깅 결과물을 방송, 영상 제작, SNS 등 목적에 한하여 이용할 수 있습니다.</li>
+            <li class="warn" data-i18n="work.copyright.d3">리깅 데이터의 재판매·양도·공유는 허용되지 않습니다.</li>
           </ul>
         </div>
       </div>
@@ -402,8 +409,8 @@
     <div data-type-buttons></div>
     <div id="type-container"></div>
     <div class="more-btn reveal">
-      <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer">더 많은 작업 보기 →</a>
-      <a href="#price">가격 확인하기 →</a>
+      <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer" data-i18n="works.more">더 많은 작업 보기 →</a>
+      <a href="#price" data-i18n="works.price">가격 확인하기 →</a>
     </div>
   </div>
 </section>
@@ -413,145 +420,145 @@
 ============================================= -->
 <section id="samples" class="section-hidden">
   <div class="section-wrap">
-    <h2 class="section-title reveal">리깅 샘플</h2>
+    <h2 class="section-title reveal" data-i18n="samples.title">리깅 샘플</h2>
     <div class="sp-wrap reveal">
       <div class="sp-head">
-        <p class="sp-subtitle">리깅 작업의 다양한 샘플을 확인해보세요.</p>
+        <p class="sp-subtitle" data-i18n="samples.subtitle">리깅 작업의 다양한 샘플을 확인해보세요.</p>
       </div>
 
       <!-- 전신 리깅 -->
       <div class="sp-group">
-        <h3 class="sp-cat-title">전신 리깅</h3>
-        <p class="sp-cat-desc">자연스럽고 부드러운 움직임을 구현합니다.</p>
+        <h3 class="sp-cat-title" data-i18n="samples.fullbody.title">전신 리깅</h3>
+        <p class="sp-cat-desc" data-i18n="samples.fullbody.desc">자연스럽고 부드러운 움직임을 구현합니다.</p>
         <div class="sp-grid">
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/X_.gif?raw=true" alt="X 축 움직임 샘플"></div>
-            <figcaption class="sp-cap">X 축 움직임</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.fullbody.x">X 축 움직임</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Y_.gif?raw=true" alt="Y 축 움직임 샘플"></div>
-            <figcaption class="sp-cap">Y 축 움직임</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.fullbody.y">Y 축 움직임</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Z_.gif?raw=true" alt="Z 축 움직임 샘플"></div>
-            <figcaption class="sp-cap">Z 축 움직임</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.fullbody.z">Z 축 움직임</figcaption>
           </figure>
         </div>
-        <p class="sp-cat-desc">캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.</p>
+        <p class="sp-cat-desc" data-i18n="samples.fullbody.note">캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.</p>
       </div>
 
       <!-- 눈 물리 -->
       <div class="sp-group">
-        <h3 class="sp-cat-title">눈 물리</h3>
-        <p class="sp-cat-desc">다양한 스타일의 눈을 생동감 있게 표현합니다.</p>
+        <h3 class="sp-cat-title" data-i18n="samples.eyes.title">눈 물리</h3>
+        <p class="sp-cat-desc" data-i18n="samples.eyes.desc">다양한 스타일의 눈을 생동감 있게 표현합니다.</p>
         <div class="sp-grid">
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/odeyes.gif?raw=true" alt="오드아이 눈 샘플"></div>
-            <figcaption class="sp-cap">몽환적인 눈빛을 살린 디테일한 물리 표현</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.eyes.odd">몽환적인 눈빛을 살린 디테일한 물리 표현</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/greeneyes.gif?raw=true" alt="녹색 눈 샘플"></div>
-            <figcaption class="sp-cap">초롱초롱한 눈동자의 자연스러운 물리 움직임</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.eyes.green">초롱초롱한 눈동자의 자연스러운 물리 움직임</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/redeyes.gif?raw=true" alt="붉은 눈 샘플"></div>
-            <figcaption class="sp-cap">섬세한 속눈썹과 눈동자의 부드러운 물리</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.eyes.red">섬세한 속눈썹과 눈동자의 부드러운 물리</figcaption>
           </figure>
         </div>
       </div>
 
       <!-- 입 움직임 -->
       <div class="sp-group">
-        <h3 class="sp-cat-title">입 움직임</h3>
-        <p class="sp-cat-desc">발화 스타일에 맞게 선택할 수 있는 세 가지 입 구조입니다</p>
+        <h3 class="sp-cat-title" data-i18n="samples.mouth.title">입 움직임</h3>
+        <p class="sp-cat-desc" data-i18n="samples.mouth.desc">발화 스타일에 맞게 선택할 수 있는 세 가지 입 구조입니다</p>
         <div class="sp-grid">
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%209%EC%A0%90.gif?raw=true" alt="입 움직임 9점"></div>
-            <figcaption class="sp-cap">단순한 9점 구조로 일반 대화에 적합</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.mouth.9pt">단순한 9점 구조로 일반 대화에 적합</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%2012%EC%A0%90.gif?raw=true" alt="입 움직임 12점"></div>
-            <figcaption class="sp-cap">세밀한 12점 구조로 대화와 감정 표현에 적합</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.mouth.12pt">세밀한 12점 구조로 대화와 감정 표현에 적합</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%2012%EC%A0%90%20VBridger%20.gif?raw=true" alt="입 움직임 12점 VBridger"></div>
-            <figcaption class="sp-cap">Vbridger 사용으로 섬세한 감정 표현에 적합</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.mouth.vbridger">Vbridger 사용으로 섬세한 감정 표현에 적합</figcaption>
           </figure>
         </div>
       </div>
 
       <!-- 표정 효과 -->
       <div class="sp-group">
-        <h3 class="sp-cat-title">표정 효과</h3>
-        <p class="sp-cat-desc">단축키 한 번으로 개성 있는 감정을 표현해보세요</p>
+        <h3 class="sp-cat-title" data-i18n="samples.expr.title">표정 효과</h3>
+        <p class="sp-cat-desc" data-i18n="samples.expr.desc">단축키 한 번으로 개성 있는 감정을 표현해보세요</p>
         <div class="sp-grid">
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%EA%B2%BD%EB%A9%B8.gif?raw=true" alt="표정 효과 경멸"></div>
-            <figcaption class="sp-cap">차갑고 날카로운 눈빛으로 경멸감을 표현</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.expr.contempt">차갑고 날카로운 눈빛으로 경멸감을 표현</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%EB%B9%A0%EC%A7%81.gif?raw=true" alt="표정 효과 짜증"></div>
-            <figcaption class="sp-cap">순간적인 짜증과 불쾌감을 생동감 있게 연출</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.expr.annoy">순간적인 짜증과 불쾌감을 생동감 있게 연출</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%ED%95%98%ED%8A%B8%EB%88%88.gif?raw=true" alt="표정 효과 하트"></div>
-            <figcaption class="sp-cap">설레고 사랑스러운 순간을 하트눈으로 표현</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.expr.heart">설레고 사랑스러운 순간을 하트눈으로 표현</figcaption>
           </figure>
         </div>
       </div>
 
       <!-- 표정 애니메이션 -->
       <div class="sp-group">
-        <h3 class="sp-cat-title">표정 애니메이션</h3>
-        <p class="sp-cat-desc">캐릭터 위에 자연스럽게 재생되는 감정 연출 효과입니다</p>
+        <h3 class="sp-cat-title" data-i18n="samples.exprAnim.title">표정 애니메이션</h3>
+        <p class="sp-cat-desc" data-i18n="samples.exprAnim.desc">캐릭터 위에 자연스럽게 재생되는 감정 연출 효과입니다</p>
         <div class="sp-grid sp-grid--2">
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/sad.gif?raw=true" alt="눈물 효과 샘플"></div>
-            <figcaption class="sp-cap">눈가를 타고 흐르는 자연스러운 눈물 연출</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.exprAnim.tear">눈가를 타고 흐르는 자연스러운 눈물 연출</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/omg.gif?raw=true" alt="땀삐질효과"></div>
-            <figcaption class="sp-cap">긴장감과 당황스러움을 식은땀으로 표현</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.exprAnim.sweat">긴장감과 당황스러움을 식은땀으로 표현</figcaption>
           </figure>
         </div>
       </div>
 
       <!-- 팔 움직임 -->
       <div class="sp-group">
-        <h3 class="sp-cat-title">팔 움직임</h3>
-        <p class="sp-cat-desc">캐릭터의 콘셉트에 맞는 팔 움직임 예시입니다</p>
+        <h3 class="sp-cat-title" data-i18n="samples.arm.title">팔 움직임</h3>
+        <p class="sp-cat-desc" data-i18n="samples.arm.desc">캐릭터의 콘셉트에 맞는 팔 움직임 예시입니다</p>
         <div class="sp-grid">
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EA%B2%8C%EC%9E%84%EA%B8%B0.gif?raw=true" alt="팔 움직임 게임기"></div>
-            <figcaption class="sp-cap">게임기를 이용해 게임 화면에 몰입감을 올릴 수 있습니다</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.arm.game">게임기를 이용해 게임 화면에 몰입감을 올릴 수 있습니다</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EB%A7%88%EB%B2%95%EB%B4%89.gif?raw=true" alt="팔 움직임 마법봉"></div>
-            <figcaption class="sp-cap">캐릭터 컨셉에 맞는 아이템으로 다양한 연출</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.arm.wand">캐릭터 컨셉에 맞는 아이템으로 다양한 연출</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EC%86%90%EC%9D%B8%EC%82%AC.gif?raw=true" alt="팔 움직임 손인사"></div>
-            <figcaption class="sp-cap">손을 흔들며 인사하는 디테일한 표현</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.arm.wave">손을 흔들며 인사하는 디테일한 표현</figcaption>
           </figure>
         </div>
       </div>
 
       <!-- 의상 및 헤어 -->
       <div class="sp-group">
-        <h3 class="sp-cat-title">의상 및 헤어</h3>
-        <p class="sp-cat-desc">의상과 헤어 변경으로 같은 캐릭터도 전혀 다른 분위기를 연출할 수 있습니다.</p>
+        <h3 class="sp-cat-title" data-i18n="samples.costume.title">의상 및 헤어</h3>
+        <p class="sp-cat-desc" data-i18n="samples.costume.desc">의상과 헤어 변경으로 같은 캐릭터도 전혀 다른 분위기를 연출할 수 있습니다.</p>
         <div class="sp-grid">
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9D%98%EC%83%81%20%EB%B0%8F%20%ED%97%A4%EC%96%B4/1.%EB%A8%B8%EB%A6%AC%20%EC%BB%AC%EB%9F%AC%20%EB%B3%80%EA%B2%BD.gif?raw=true" alt="머리색상변경"></div>
-            <figcaption class="sp-cap">머리 색상을 바꿔 전혀 다른 분위기를 연출</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.costume.hair">머리 색상을 바꿔 전혀 다른 분위기를 연출</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9D%98%EC%83%81%20%EB%B0%8F%20%ED%97%A4%EC%96%B4/2.%EC%9D%98%EC%83%81%20%EB%B3%80%EA%B2%BD.gif?raw=true" alt="의상 변경"></div>
-            <figcaption class="sp-cap">의상 교체로 캐릭터 콘셉트를 폭넓게 표현</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.costume.outfit">의상 교체로 캐릭터 콘셉트를 폭넓게 표현</figcaption>
           </figure>
           <figure class="sp-item">
             <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9D%98%EC%83%81%20%EB%B0%8F%20%ED%97%A4%EC%96%B4/3.%ED%97%A4%EC%96%B4%20%EB%B3%80%EA%B2%BD.gif?raw=true" alt="헤어 변경"></div>
-            <figcaption class="sp-cap">헤어 스타일 변경으로 같은 캐릭터도 새로운 느낌으로</figcaption>
+            <figcaption class="sp-cap" data-i18n="samples.costume.hairstyle">헤어 스타일 변경으로 같은 캐릭터도 새로운 느낌으로</figcaption>
           </figure>
         </div>
       </div>
@@ -565,56 +572,56 @@
 ============================================= -->
 <section id="price" class="section-hidden">
   <div class="section-wrap">
-    <h2 class="section-title reveal">가격</h2>
-    <p class="price-intro reveal">기본 안내 요금입니다. 프로젝트 요구사항에 따라 견적이 달라집니다.<br>상세 견적은 파일 구조와 요구 사항 확인 후 안내드립니다.</p>
+    <h2 class="section-title reveal" data-i18n="price.title">가격</h2>
+    <p class="price-intro reveal" data-i18n="price.intro">기본 안내 요금입니다. 프로젝트 요구사항에 따라 견적이 달라집니다.<br>상세 견적은 파일 구조와 요구 사항 확인 후 안내드립니다.</p>
 
     <div class="price-cards reveal">
       <article class="price-card">
-        <h3>LD 리깅</h3>
+        <h3 data-i18n="price.ld.title">LD 리깅</h3>
         <div>
-          <div class="price-amount">₩600,000<span> ~ (전신)</span></div>
-          <div class="price-amount">₩450,000<span> ~ (반신)</span></div>
+          <div class="price-amount">₩600,000<span data-i18n="price.ld.full"> ~ (전신)</span></div>
+          <div class="price-amount">₩450,000<span data-i18n="price.ld.half"> ~ (반신)</span></div>
         </div>
-        <p>자연스러운 움직임과 풍성한 물리 움직임을 제공합니다.</p>
+        <p data-i18n="price.ld.desc">자연스러운 움직임과 풍성한 물리 움직임을 제공합니다.</p>
         <ul>
-          <li>자연스러운 XYZ 움직임 제공</li>
-          <li>디테일한 입 모양</li>
-          <li>호흡 모션 루프 제공</li>
-          <li>추가 표정 2종 포함</li>
+          <li data-i18n="price.ld.f1">자연스러운 XYZ 움직임 제공</li>
+          <li data-i18n="price.ld.f2">디테일한 입 모양</li>
+          <li data-i18n="price.ld.f3">호흡 모션 루프 제공</li>
+          <li data-i18n="price.ld.f4">추가 표정 2종 포함</li>
         </ul>
-        <div class="price-card-foot">예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회</div>
+        <div class="price-card-foot" data-i18n="price.ld.period">예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회</div>
       </article>
 
       <article class="price-card">
-        <h3>SD 리깅</h3>
-        <div class="price-amount">₩200,000<span> ~ (전신)</span></div>
-        <p>작고 귀여운 SD 모델 리깅. 가볍고 빠른 리깅을 제공합니다.</p>
+        <h3 data-i18n="price.sd.title">SD 리깅</h3>
+        <div class="price-amount">₩200,000<span data-i18n="price.sd.full"> ~ (전신)</span></div>
+        <p data-i18n="price.sd.desc">작고 귀여운 SD 모델 리깅. 가볍고 빠른 리깅을 제공합니다.</p>
         <ul>
-          <li>자연스러운 XYZ 움직임 제공</li>
-          <li>단순한 입 모양</li>
-          <li>추가 표정 2종 포함</li>
+          <li data-i18n="price.ld.f1">자연스러운 XYZ 움직임 제공</li>
+          <li data-i18n="price.sd.f2">단순한 입 모양</li>
+          <li data-i18n="price.ld.f4">추가 표정 2종 포함</li>
         </ul>
-        <div class="price-card-foot">예상 작업 기간: 7일–14일 · 수정 2회 + 적용 후 1회</div>
+        <div class="price-card-foot" data-i18n="price.sd.period">예상 작업 기간: 7일–14일 · 수정 2회 + 적용 후 1회</div>
       </article>
 
       <article class="price-card">
-        <h3>배경 / 월페이퍼 애니메이션</h3>
-        <div class="price-amount">₩130,000<span> ~ (메모리얼)</span></div>
-        <p>반복되는 루프형 애니메이션과 월페이퍼를 제작합니다.</p>
+        <h3 data-i18n="price.bg.title">배경 / 월페이퍼 애니메이션</h3>
+        <div class="price-amount">₩130,000<span data-i18n="price.bg.type"> ~ (메모리얼)</span></div>
+        <p data-i18n="price.bg.desc">반복되는 루프형 애니메이션과 월페이퍼를 제작합니다.</p>
         <ul>
-          <li>자연스럽게 반복되는 애니메이션 제작</li>
-          <li>기본 mp4 포맷 제공 (GIF 추가 가능)</li>
-          <li>GIF는 파일 특성상 깨짐이 있을 수 있음</li>
+          <li data-i18n="price.bg.f1">자연스럽게 반복되는 애니메이션 제작</li>
+          <li data-i18n="price.bg.f2">기본 mp4 포맷 제공 (GIF 추가 가능)</li>
+          <li data-i18n="price.bg.f3">GIF는 파일 특성상 깨짐이 있을 수 있음</li>
         </ul>
-        <div class="price-card-foot">예상 작업 기간: 7일–14일 · 수정 최대 2회</div>
+        <div class="price-card-foot" data-i18n="price.bg.period">예상 작업 기간: 7일–14일 · 수정 최대 2회</div>
       </article>
     </div>
 
-    <p class="price-note reveal">정확한 견적은 아트워크(PSD/PNG)와 요구사항 확인 후 산정됩니다.</p>
+    <p class="price-note reveal" data-i18n="price.note">정확한 견적은 아트워크(PSD/PNG)와 요구사항 확인 후 산정됩니다.</p>
     <div style="text-align:center" class="reveal">
       <a class="contact-cta" href="https://x.com/_Dajoong" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 6v9a2 2 0 0 1-2 2H8l-5 3V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        DM으로 상세 문의하기
+        <span data-i18n="price.cta">DM으로 상세 문의하기</span>
       </a>
     </div>
   </div>
@@ -963,5 +970,374 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
+<script>
+/* ── i18n Translations ── */
+(function() {
+  const translations = {
+    ko: {
+      'nav.about': '알아보기', 'nav.info': '정보', 'nav.works': '작품',
+      'nav.samples': '샘플', 'nav.price': '가격', 'nav.contact': '문의하기',
+      'hero.sub': 'LD · SD · 메모리얼 애니메이션 포트폴리오',
+      'sidenav.notice': '공지',
+      'notice.title': '공지사항',
+      'notice.alert': '※ 공지를 읽지 않아 발생하는 문제는 일절 책임지지 않습니다.<br>작업 의뢰 시 모든 내용을 확인·동의한 것으로 간주합니다.',
+      'notice.n1.title': '일러스트 작업 불가 / 파일 안내',
+      'notice.n1.desc': '일러스트 작업은 하지 않습니다. 파츠 분리가 완료된 일러스트 PSD 파일이 필요합니다.',
+      'notice.n2.title': '납품 파일 안내',
+      'notice.n2.desc': '작업 완료 후 전달되는 파일은 아이콘 이미지를 포함한 .moc3 파일이 전달됩니다. 수정이 가능한 cmo3 파일은 제공하지 않습니다.',
+      'notice.n3.title': '스트리밍 안내',
+      'notice.n3.desc': '스트리밍을 하고 있습니다. 방송에 송출을 원하지 않는다면 미리 말씀 부탁드립니다.',
+      'notice.n4.title': 'SNS · 포트폴리오 게시 안내',
+      'notice.n4.desc': '모든 작업물은 홍보와 포트폴리오를 위해 SNS와 유튜브에 게시됩니다. 데뷔일까지 공개 지연을 희망하시는 경우 미리 말씀 부탁드립니다.',
+      'notice.n5.title': '요청 사항 기재',
+      'notice.n5.desc': '결제 전 요청 사항은 상세히 작성 부탁드립니다. 기재되지 않은 사항은 추가 작업 및 수정 시 작업이 어렵거나 추가금이 들 수 있습니다.',
+      'notice.n6.title': '저작권 안내',
+      'notice.n6.desc': '리깅과 관련된 저작권은 작가(다중)에게 있습니다. 일러스트와 관련된 저작권은 일러스트 작가님에게 있습니다.',
+      'notice.n7.title': '작업 일정 안내',
+      'notice.n7.desc': '작업 일정은 문의 순이 아닌 결제 순으로 확정됩니다. 일정은 작업 속도에 따라 조금씩 당겨질 수 있으며, 작업이 지연될 시 사전에 미리 연락 드립니다.',
+      'notice.n7.desc2': '※ 컨펌 시 연락이 지연되거나 수정 사항이 많을 시 작업 기간이 늘어날 수 있습니다.',
+      'notice.n7.desc3': '※ 작업 기간은 평균 기본 모델 기준 2주~4주 정도입니다.',
+      'about.greeting': '안녕하세요. Live2D Rigger 다중(Dajoong)입니다.',
+      'about.p1': 'LD·SD 버추얼 모델을 비롯해 배경 애니메이션과 월페이퍼 작업을 진행하며,\n          섬세하고 부드러운 모션 구현에 집중하고 있습니다.',
+      'about.p2': '모델의 매력을 극대화할 수 있는 리깅 방식을 연구하며,\n          다양한 스타일의 모델 작업에 대응할 수 있습니다.\n          클라이언트의 요구에 맞춘 맞춤형 리깅 솔루션을 제공합니다.',
+      'about.p3': '여러 작가님들과의 협업 및 상업 제작 경험을 통해\n          의도에 맞는 결과물을 안정적이고 효율적으로 제작합니다.',
+      'about.card.specialty': '전문 분야', 'about.card.tools': '툴', 'about.card.style': '스타일',
+      'about.card.style1': '자연스럽고 디테일한 리깅', 'about.card.style2': '다양한 스타일 대응',
+      'info.title': '이벤트 & 프로세스',
+      'info.event.heading': '이벤트 안내',
+      'info.event.e1.title': '리뉴얼 기념 특별 할인', 'info.event.e1.badge': '리뉴얼 할인',
+      'info.event.e1.sub': '조기 마감될 수 있습니다', 'info.event.e1.desc': '프리미엄 리깅 LD 전신이 리뉴얼 특별 할인',
+      'info.event.e2.title': '리뷰 작성 고객 이벤트', 'info.event.e2.badge': '리뷰 이벤트',
+      'info.event.e2.sub': '긍정적인 리뷰를 남겨 주시면 추가 할인 혜택까지',
+      'info.event.e2.desc': '리뷰 작성 시 2만원 할인 또는 표정 2종 중 선택 가능합니다',
+      'info.collab.heading': '콜라보 안내', 'info.collab.badge': '콜라보 할인',
+      'info.collab.c1.title': '양초 작가님 콜라보 할인', 'info.collab.c1.sub': '말랑 쫀득한 귀여운 움직임을 원하면 추천', 'info.collab.c1.desc': '일러스트 5만원 + 리깅 5만원 할인 혜택',
+      'info.collab.c2.title': '하노히 작가님 콜라보 할인', 'info.collab.c2.sub': '단아하고 깔끔한 디자인을 원하면 추천', 'info.collab.c2.desc': '일러스트 5만원 + 리깅 5만원 할인 혜택',
+      'info.collab.c3.title': '피치 작가님 콜라보 할인', 'info.collab.c3.sub': '만화 같은 분위기의 디자인을 원하면 추천', 'info.collab.c3.desc': '일러스트 5만원 + 리깅 5만원 할인 혜택',
+      'info.collab.c4.title': '뚱땅이 작가님 콜라보 할인', 'info.collab.c4.sub': '귀엽고 부드러운 움직임을 원하면 추천', 'info.collab.c4.desc': '일러스트 10만원 + 리깅 5만원 할인 혜택',
+      'info.process.heading': '작업 프로세스',
+      'info.process.s1.title': '문의', 'info.process.s1.desc': '작업 요청 및 기본 정보 제공',
+      'info.process.s2.title': '파일 확인 및 견적', 'info.process.s2.desc': '파일 검토 후 상세 견적 제시',
+      'info.process.s3.title': '접수 및 입금', 'info.process.s3.desc': '계약 및 결제',
+      'info.process.s4.title': '1차 리깅', 'info.process.s4.desc': '헤드 및 페이스 구조 제작',
+      'info.process.s5.title': '1차 컨펌 및 수정', 'info.process.s5.desc': '1차 리깅 영상 제공, 피드백 반영 및 개선',
+      'info.process.s6.title': '2차 리깅', 'info.process.s6.desc': '바디 및 소품 디테일 작업',
+      'info.process.s7.title': '2차 컨펌 및 수정', 'info.process.s7.desc': '2차 리깅 영상 제공, 피드백 반영 및 개선',
+      'info.process.s8.title': '완성 및 파일 납품', 'info.process.s8.desc': '최종 파일 전달',
+      'info.process.s9.title': '최종 수정 (3차 수정)', 'info.process.s9.desc': '파일 적용 후 문제 발생 시 수정',
+      'info.process.note': '평균 작업 기간은 2–4주이며, 디자인의 복잡도에 따라 조정 가능합니다.',
+      'plan.basic': '베이직', 'plan.premium': '프리미엄',
+      'plan.item.faceXYZ': '얼굴 XYZ', 'plan.item.eyebrow': '눈썹 (위아래, 변형, 각도)',
+      'plan.item.eyebrowFacial': '눈썹눈 연동 페이셜', 'plan.item.blink': '눈깜빡 (윙크)',
+      'plan.item.pupilPhysics': '눈동자 물리', 'plan.item.lashPhysics': '속눈썹 물리',
+      'plan.item.mouth9': '입움직임 (9점)', 'plan.item.mouth12': '입움직임 (12점~)',
+      'plan.item.jaw': '입 개폐 연동 턱 리깅', 'plan.item.bodyXYZ': '몸 XYZ', 'plan.item.breath': '호흡',
+      'plan.item.arm': '팔 흔들림 (손가락 흔들림)', 'plan.item.camAnim': '캠 이탈 애니메이션 (선택)',
+      'plan.item.expr2': '기본 제공 표정 2종', 'plan.item.noAnim': '(애니메이션 X)',
+      'plan.physics.basic': '최대 3단계 물리 지원', 'plan.physics.basic.sub': '(필요의 경우 4단계 지원)',
+      'plan.physics.premium': '최소 3단계 물리 지원', 'plan.physics.premium.sub': '(필요의 경우 2단계 지원)',
+      'plan.note': '베이직과 프리미엄은 움직임 각도, 물리 단계, 전반적인 디테일에서 차이가 있습니다',
+      'work.guide.label': '작업 안내', 'work.process.title': '작업 과정',
+      'work.flow.confirm1': '1차 컨펌(수정)', 'work.flow.confirm2': '2차 컨펌(수정)',
+      'work.flow.deliver': '완성 후 전달', 'work.flow.final': '최종 수정',
+      'work.process.d1': '파일 적용 후 문제가 있다면 수정해 드립니다 (최종 수정)',
+      'work.process.d2': '오너캐·동물·팬캐 등은 2차 컨펌 없이 1차 컨펌만 진행됩니다.',
+      'work.revision.title': '수정 사항',
+      'work.revision.d1': '기본적인 수정 사항은 작업 기간에 진행되는 총 2회의 컨펌 및 수정 단계에서 진행됩니다.',
+      'work.revision.d1sub': '동물/오너캐의 경우 최종 리깅까지 진행 후 1차 컨펌만 진행합니다.',
+      'work.revision.d2': '수정 완료 후 이전 상태로 되돌리거나 과한 번복 요청 시 추가금이 청구될 수 있습니다.',
+      'work.revision.d3': '리깅 실수 및 오류가 있는 경우 무료로 수정해 드립니다. 파일 적용 후 오류 발견 시 편히 말해 주세요.',
+      'work.copyright.title': '저작권',
+      'work.copyright.d1': '리깅 데이터의 저작권은 기본적으로 리거(다중)에게 귀속됩니다.',
+      'work.copyright.d2': '의뢰인은 본 리깅 결과물을 방송, 영상 제작, SNS 등 목적에 한하여 이용할 수 있습니다.',
+      'work.copyright.d3': '리깅 데이터의 재판매·양도·공유는 허용되지 않습니다.',
+      'works.more': '더 많은 작업 보기 →', 'works.price': '가격 확인하기 →',
+      'samples.title': '리깅 샘플', 'samples.subtitle': '리깅 작업의 다양한 샘플을 확인해보세요.',
+      'samples.fullbody.title': '전신 리깅', 'samples.fullbody.desc': '자연스럽고 부드러운 움직임을 구현합니다.',
+      'samples.fullbody.x': 'X 축 움직임', 'samples.fullbody.y': 'Y 축 움직임', 'samples.fullbody.z': 'Z 축 움직임',
+      'samples.fullbody.note': '캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.',
+      'samples.eyes.title': '눈 물리', 'samples.eyes.desc': '다양한 스타일의 눈을 생동감 있게 표현합니다.',
+      'samples.eyes.odd': '몽환적인 눈빛을 살린 디테일한 물리 표현', 'samples.eyes.green': '초롱초롱한 눈동자의 자연스러운 물리 움직임', 'samples.eyes.red': '섬세한 속눈썹과 눈동자의 부드러운 물리',
+      'samples.mouth.title': '입 움직임', 'samples.mouth.desc': '발화 스타일에 맞게 선택할 수 있는 세 가지 입 구조입니다',
+      'samples.mouth.9pt': '단순한 9점 구조로 일반 대화에 적합', 'samples.mouth.12pt': '세밀한 12점 구조로 대화와 감정 표현에 적합', 'samples.mouth.vbridger': 'Vbridger 사용으로 섬세한 감정 표현에 적합',
+      'samples.expr.title': '표정 효과', 'samples.expr.desc': '단축키 한 번으로 개성 있는 감정을 표현해보세요',
+      'samples.expr.contempt': '차갑고 날카로운 눈빛으로 경멸감을 표현', 'samples.expr.annoy': '순간적인 짜증과 불쾌감을 생동감 있게 연출', 'samples.expr.heart': '설레고 사랑스러운 순간을 하트눈으로 표현',
+      'samples.exprAnim.title': '표정 애니메이션', 'samples.exprAnim.desc': '캐릭터 위에 자연스럽게 재생되는 감정 연출 효과입니다',
+      'samples.exprAnim.tear': '눈가를 타고 흐르는 자연스러운 눈물 연출', 'samples.exprAnim.sweat': '긴장감과 당황스러움을 식은땀으로 표현',
+      'samples.arm.title': '팔 움직임', 'samples.arm.desc': '캐릭터의 콘셉트에 맞는 팔 움직임 예시입니다',
+      'samples.arm.game': '게임기를 이용해 게임 화면에 몰입감을 올릴 수 있습니다', 'samples.arm.wand': '캐릭터 컨셉에 맞는 아이템으로 다양한 연출', 'samples.arm.wave': '손을 흔들며 인사하는 디테일한 표현',
+      'samples.costume.title': '의상 및 헤어', 'samples.costume.desc': '의상과 헤어 변경으로 같은 캐릭터도 전혀 다른 분위기를 연출할 수 있습니다.',
+      'samples.costume.hair': '머리 색상을 바꿔 전혀 다른 분위기를 연출', 'samples.costume.outfit': '의상 교체로 캐릭터 콘셉트를 폭넓게 표현', 'samples.costume.hairstyle': '헤어 스타일 변경으로 같은 캐릭터도 새로운 느낌으로',
+      'price.title': '가격',
+      'price.intro': '기본 안내 요금입니다. 프로젝트 요구사항에 따라 견적이 달라집니다.<br>상세 견적은 파일 구조와 요구 사항 확인 후 안내드립니다.',
+      'price.ld.title': 'LD 리깅', 'price.ld.full': ' ~ (전신)', 'price.ld.half': ' ~ (반신)',
+      'price.ld.desc': '자연스러운 움직임과 풍성한 물리 움직임을 제공합니다.',
+      'price.ld.f1': '자연스러운 XYZ 움직임 제공', 'price.ld.f2': '디테일한 입 모양', 'price.ld.f3': '호흡 모션 루프 제공', 'price.ld.f4': '추가 표정 2종 포함',
+      'price.ld.period': '예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회',
+      'price.sd.title': 'SD 리깅', 'price.sd.full': ' ~ (전신)',
+      'price.sd.desc': '작고 귀여운 SD 모델 리깅. 가볍고 빠른 리깅을 제공합니다.',
+      'price.sd.f2': '단순한 입 모양', 'price.sd.period': '예상 작업 기간: 7일–14일 · 수정 2회 + 적용 후 1회',
+      'price.bg.title': '배경 / 월페이퍼 애니메이션', 'price.bg.type': ' ~ (메모리얼)',
+      'price.bg.desc': '반복되는 루프형 애니메이션과 월페이퍼를 제작합니다.',
+      'price.bg.f1': '자연스럽게 반복되는 애니메이션 제작', 'price.bg.f2': '기본 mp4 포맷 제공 (GIF 추가 가능)', 'price.bg.f3': 'GIF는 파일 특성상 깨짐이 있을 수 있음',
+      'price.bg.period': '예상 작업 기간: 7일–14일 · 수정 최대 2회',
+      'price.note': '정확한 견적은 아트워크(PSD/PNG)와 요구사항 확인 후 산정됩니다.',
+      'price.cta': 'DM으로 상세 문의하기',
+    },
+    en: {
+      'nav.about': 'About', 'nav.info': 'Info', 'nav.works': 'Works',
+      'nav.samples': 'Samples', 'nav.price': 'Price', 'nav.contact': 'Contact',
+      'hero.sub': 'LD · SD · Memorial Animation Portfolio',
+      'sidenav.notice': 'Notice',
+      'notice.title': 'Notice',
+      'notice.alert': '※ We are not responsible for issues arising from not reading the notices.<br>By placing a commission, you agree to all the terms listed here.',
+      'notice.n1.title': 'No Illustration Work / File Requirements',
+      'notice.n1.desc': 'Illustration work is not available. A fully separated PSD file with all parts is required.',
+      'notice.n2.title': 'Delivery File Info',
+      'notice.n2.desc': 'The delivered file will be a .moc3 file including an icon image. The editable .cmo3 source file is not provided.',
+      'notice.n3.title': 'Streaming Notice',
+      'notice.n3.desc': 'I stream on occasion. Please let me know in advance if you do not wish your model to appear on stream.',
+      'notice.n4.title': 'SNS & Portfolio Posting',
+      'notice.n4.desc': 'All completed works may be posted on SNS and YouTube for promotion and portfolio purposes. Please inform me in advance if you wish to delay the reveal until your debut date.',
+      'notice.n5.title': 'Request Details',
+      'notice.n5.desc': 'Please describe all requests in detail before payment. Items not specified may be difficult to add later or may incur additional charges.',
+      'notice.n6.title': 'Copyright Notice',
+      'notice.n6.desc': 'The copyright for the rigging belongs to the rigger (Dajoong). The copyright for the illustration belongs to the respective illustrator.',
+      'notice.n7.title': 'Work Schedule',
+      'notice.n7.desc': 'Work schedules are confirmed by order of payment, not inquiry. Schedules may be moved up depending on work pace; delays will be communicated in advance.',
+      'notice.n7.desc2': '※ Delays in confirmation responses or a large number of revisions may extend the work period.',
+      'notice.n7.desc3': '※ Average work duration is approximately 2–4 weeks for a standard model.',
+      'about.greeting': 'Hello, I\'m Dajoong — a Live2D Rigger.',
+      'about.p1': 'I work on LD/SD virtual models, background animations, and wallpapers,\n          with a focus on creating smooth, detailed motion.',
+      'about.p2': 'I continually research rigging methods to maximize the appeal of each model\n          and can handle a wide variety of styles.\n          I provide customized rigging solutions tailored to each client\'s needs.',
+      'about.p3': 'Through collaboration with multiple artists and commercial production experience,\n          I deliver results that match your vision reliably and efficiently.',
+      'about.card.specialty': 'Specialty', 'about.card.tools': 'Tools', 'about.card.style': 'Style',
+      'about.card.style1': 'Natural & Detailed Rigging', 'about.card.style2': 'Versatile Style Support',
+      'info.title': 'Events & Process',
+      'info.event.heading': 'Events',
+      'info.event.e1.title': 'Renewal Special Discount', 'info.event.e1.badge': 'Renewal Sale',
+      'info.event.e1.sub': 'May end early', 'info.event.e1.desc': 'Special discount on Premium LD Full-Body rigging',
+      'info.event.e2.title': 'Review Event', 'info.event.e2.badge': 'Review Event',
+      'info.event.e2.sub': 'Leave a positive review and receive extra benefits',
+      'info.event.e2.desc': 'Get ₩20,000 off or 2 extra expressions of your choice',
+      'info.collab.heading': 'Collaborations', 'info.collab.badge': 'Collab Discount',
+      'info.collab.c1.title': 'Yangcho Artist Collab', 'info.collab.c1.sub': 'Recommended for soft & bouncy cute movement', 'info.collab.c1.desc': '₩50,000 off illustration + ₩50,000 off rigging',
+      'info.collab.c2.title': 'Hanohi Artist Collab', 'info.collab.c2.sub': 'Recommended for elegant and clean design', 'info.collab.c2.desc': '₩50,000 off illustration + ₩50,000 off rigging',
+      'info.collab.c3.title': 'Peach Artist Collab', 'info.collab.c3.sub': 'Recommended for manga-style design', 'info.collab.c3.desc': '₩50,000 off illustration + ₩50,000 off rigging',
+      'info.collab.c4.title': 'Ddungddangi Artist Collab', 'info.collab.c4.sub': 'Recommended for cute and smooth movement', 'info.collab.c4.desc': '₩100,000 off illustration + ₩50,000 off rigging',
+      'info.process.heading': 'Work Process',
+      'info.process.s1.title': 'Inquiry', 'info.process.s1.desc': 'Submit work request and basic info',
+      'info.process.s2.title': 'File Review & Quote', 'info.process.s2.desc': 'Review files and provide detailed estimate',
+      'info.process.s3.title': 'Acceptance & Payment', 'info.process.s3.desc': 'Contract and payment',
+      'info.process.s4.title': '1st Rigging', 'info.process.s4.desc': 'Head & face structure creation',
+      'info.process.s5.title': '1st Review & Revision', 'info.process.s5.desc': 'Provide 1st rigging video, apply feedback',
+      'info.process.s6.title': '2nd Rigging', 'info.process.s6.desc': 'Body & prop detail work',
+      'info.process.s7.title': '2nd Review & Revision', 'info.process.s7.desc': 'Provide 2nd rigging video, apply feedback',
+      'info.process.s8.title': 'Completion & Delivery', 'info.process.s8.desc': 'Final file delivery',
+      'info.process.s9.title': 'Final Revision (3rd)', 'info.process.s9.desc': 'Fix any issues found after applying the file',
+      'info.process.note': 'Average work period is 2–4 weeks, adjustable based on design complexity.',
+      'plan.basic': 'Basic', 'plan.premium': 'Premium',
+      'plan.item.faceXYZ': 'Face XYZ', 'plan.item.eyebrow': 'Eyebrows (Up/Down, Deform, Angle)',
+      'plan.item.eyebrowFacial': 'Eyebrow-Eye Linked Facial', 'plan.item.blink': 'Blink (Wink)',
+      'plan.item.pupilPhysics': 'Pupil Physics', 'plan.item.lashPhysics': 'Eyelash Physics',
+      'plan.item.mouth9': 'Mouth Movement (9pt)', 'plan.item.mouth12': 'Mouth Movement (12pt+)',
+      'plan.item.jaw': 'Jaw Rigging Linked to Mouth', 'plan.item.bodyXYZ': 'Body XYZ', 'plan.item.breath': 'Breathing',
+      'plan.item.arm': 'Arm Swing (Finger Shake)', 'plan.item.camAnim': 'Camera Exit Animation (Optional)',
+      'plan.item.expr2': '2 Default Expressions Included', 'plan.item.noAnim': '(No Animation)',
+      'plan.physics.basic': 'Up to 3-layer Physics', 'plan.physics.basic.sub': '(4-layer if needed)',
+      'plan.physics.premium': 'Minimum 3-layer Physics', 'plan.physics.premium.sub': '(2-layer if needed)',
+      'plan.note': 'Basic and Premium differ in movement angles, physics layers, and overall detail',
+      'work.guide.label': 'Work Guidelines', 'work.process.title': 'Work Flow',
+      'work.flow.confirm1': '1st Review (Revision)', 'work.flow.confirm2': '2nd Review (Revision)',
+      'work.flow.deliver': 'Completion & Delivery', 'work.flow.final': 'Final Revision',
+      'work.process.d1': 'If any issues arise after applying the file, revisions will be provided (Final Revision).',
+      'work.process.d2': 'For OC / animal / fan models, only a 1st review is conducted (no 2nd review).',
+      'work.revision.title': 'Revisions',
+      'work.revision.d1': 'Basic revisions are handled during the 2 review stages within the work period.',
+      'work.revision.d1sub': 'For animal/OC models, only a 1st review is conducted after full rigging.',
+      'work.revision.d2': 'Reverting completed revisions or excessive back-and-forth may incur additional charges.',
+      'work.revision.d3': 'Rigging errors and mistakes will be fixed for free. Please feel free to mention any issues after applying the file.',
+      'work.copyright.title': 'Copyright',
+      'work.copyright.d1': 'The copyright for the rigging data belongs to the rigger (Dajoong) by default.',
+      'work.copyright.d2': 'The client may use the rigging results for streaming, video production, and SNS purposes.',
+      'work.copyright.d3': 'Resale, transfer, or sharing of the rigging data is not permitted.',
+      'works.more': 'View More Work →', 'works.price': 'View Pricing →',
+      'samples.title': 'Rigging Samples', 'samples.subtitle': 'Browse a variety of rigging work samples.',
+      'samples.fullbody.title': 'Full-Body Rigging', 'samples.fullbody.desc': 'Natural and smooth movement implementation.',
+      'samples.fullbody.x': 'X-Axis Movement', 'samples.fullbody.y': 'Y-Axis Movement', 'samples.fullbody.z': 'Z-Axis Movement',
+      'samples.fullbody.note': 'Movement may vary depending on the character\'s body type and design.',
+      'samples.eyes.title': 'Eye Physics', 'samples.eyes.desc': 'Expressive and lively eyes in a variety of styles.',
+      'samples.eyes.odd': 'Detailed physics for a dreamy, otherworldly gaze', 'samples.eyes.green': 'Natural physics for bright, sparkling eyes', 'samples.eyes.red': 'Soft physics for delicate lashes and pupils',
+      'samples.mouth.title': 'Mouth Movement', 'samples.mouth.desc': 'Three mouth structures to match your speaking style',
+      'samples.mouth.9pt': 'Simple 9-point structure, ideal for casual conversation', 'samples.mouth.12pt': 'Detailed 12-point structure for expressive dialogue', 'samples.mouth.vbridger': 'Vbridger-compatible for nuanced emotional expression',
+      'samples.expr.title': 'Expression Effects', 'samples.expr.desc': 'Express personality with a single hotkey',
+      'samples.expr.contempt': 'Cold and sharp gaze expressing contempt', 'samples.expr.annoy': 'Vivid depiction of sudden irritation', 'samples.expr.heart': 'Heart-eyes for loveable, fluttery moments',
+      'samples.exprAnim.title': 'Expression Animations', 'samples.exprAnim.desc': 'Emotion overlay effects that play naturally over your character',
+      'samples.exprAnim.tear': 'Natural teardrop flowing down the eye', 'samples.exprAnim.sweat': 'Cold sweat to convey tension and surprise',
+      'samples.arm.title': 'Arm Movement', 'samples.arm.desc': 'Arm movement examples suited to your character\'s concept',
+      'samples.arm.game': 'Immerse viewers with a handheld game controller', 'samples.arm.wand': 'Diverse expressions with concept-fitting items', 'samples.arm.wave': 'Detailed waving hand gesture',
+      'samples.costume.title': 'Costume & Hair', 'samples.costume.desc': 'Costume and hair swaps let the same character radiate a completely different vibe.',
+      'samples.costume.hair': 'Hair color change for a completely different look', 'samples.costume.outfit': 'Outfit swap to express a wide range of character concepts', 'samples.costume.hairstyle': 'Hairstyle change gives the same character a fresh feel',
+      'price.title': 'Pricing',
+      'price.intro': 'These are base reference prices. Quotes may vary based on project requirements.<br>Detailed quotes are provided after reviewing files and requirements.',
+      'price.ld.title': 'LD Rigging', 'price.ld.full': ' ~ (Full-Body)', 'price.ld.half': ' ~ (Half-Body)',
+      'price.ld.desc': 'Natural movement with rich physics.',
+      'price.ld.f1': 'Natural XYZ Movement', 'price.ld.f2': 'Detailed Mouth Shapes', 'price.ld.f3': 'Breathing Motion Loop', 'price.ld.f4': '2 Additional Expressions Included',
+      'price.ld.period': 'Estimated Time: 14–30 days · 2 revisions + 1 post-delivery',
+      'price.sd.title': 'SD Rigging', 'price.sd.full': ' ~ (Full-Body)',
+      'price.sd.desc': 'Cute SD model rigging. Light and fast.',
+      'price.sd.f2': 'Simple Mouth Shapes', 'price.sd.period': 'Estimated Time: 7–14 days · 2 revisions + 1 post-delivery',
+      'price.bg.title': 'Background / Wallpaper Animation', 'price.bg.type': ' ~ (Memorial)',
+      'price.bg.desc': 'Looping animations and wallpaper creation.',
+      'price.bg.f1': 'Naturally looping animation', 'price.bg.f2': 'Base mp4 format (GIF available)', 'price.bg.f3': 'GIF quality may vary due to format limitations',
+      'price.bg.period': 'Estimated Time: 7–14 days · Up to 2 revisions',
+      'price.note': 'Final quotes are determined after reviewing artwork (PSD/PNG) and requirements.',
+      'price.cta': 'Contact via DM',
+    },
+    ja: {
+      'nav.about': '紹介', 'nav.info': '情報', 'nav.works': '作品',
+      'nav.samples': 'サンプル', 'nav.price': '料金', 'nav.contact': 'お問い合わせ',
+      'hero.sub': 'LD · SD · メモリアルアニメーション ポートフォリオ',
+      'sidenav.notice': 'お知らせ',
+      'notice.title': 'お知らせ',
+      'notice.alert': '※ お知らせを読まなかったことによる問題について、一切の責任を負いません。<br>依頼をもって、すべての内容に同意したものとみなします。',
+      'notice.n1.title': 'イラスト作業不可 / ファイルについて',
+      'notice.n1.desc': 'イラスト作業は行っておりません。パーツ分けが完了したイラストのPSDファイルが必要です。',
+      'notice.n2.title': '納品ファイルについて',
+      'notice.n2.desc': '作業完了後にお渡しするファイルは、アイコン画像を含む.moc3ファイルです。編集可能な.cmo3ファイルの提供は行っておりません。',
+      'notice.n3.title': '配信について',
+      'notice.n3.desc': '配信活動をしています。配信への映り込みを希望しない場合は、事前にお知らせください。',
+      'notice.n4.title': 'SNS・ポートフォリオ掲載について',
+      'notice.n4.desc': 'すべての作業物は宣伝・ポートフォリオ目的でSNSおよびYouTubeに掲載されます。デビュー日までの公開延期を希望される場合は、事前にご連絡ください。',
+      'notice.n5.title': 'ご要望の記載について',
+      'notice.n5.desc': 'お支払い前にご要望を詳しくお書きください。記載のない項目については、追加作業・修正が難しい場合や追加料金が発生することがあります。',
+      'notice.n6.title': '著作権について',
+      'notice.n6.desc': 'リギングに関する著作権は作者（다중）に帰属します。イラストに関する著作権はイラストレーターに帰属します。',
+      'notice.n7.title': '作業スケジュールについて',
+      'notice.n7.desc': '作業スケジュールはお問い合わせ順ではなく、お支払い順で確定されます。進捗に応じてスケジュールが前倒しになる場合があります。遅延が発生する場合は事前にご連絡いたします。',
+      'notice.n7.desc2': '※ 確認返信の遅延や修正が多い場合、作業期間が延長されることがあります。',
+      'notice.n7.desc3': '※ 作業期間は標準モデルで平均2〜4週間程度です。',
+      'about.greeting': 'はじめまして。Live2DリガーのDajoong（다중）です。',
+      'about.p1': 'LD・SDバーチャルモデルをはじめ、背景アニメーションや\n          壁紙制作を行っており、繊細で滑らかなモーション表現にこだわっています。',
+      'about.p2': 'モデルの魅力を最大限に引き出せるリギング手法を研究しており、\n          様々なスタイルのモデルに対応可能です。\n          クライアントの要望に合わせたオーダーメイドのリギングソリューションを提供します。',
+      'about.p3': '多くのアーティストとのコラボや商業制作の経験を通じて、\n          ご要望に沿った成果物を安定的かつ効率よく制作します。',
+      'about.card.specialty': '専門分野', 'about.card.tools': 'ツール', 'about.card.style': 'スタイル',
+      'about.card.style1': '自然でディテールなリギング', 'about.card.style2': '多様なスタイルに対応',
+      'info.title': 'イベント & プロセス',
+      'info.event.heading': 'イベント',
+      'info.event.e1.title': 'リニューアル記念特別割引', 'info.event.e1.badge': 'リニューアル割引',
+      'info.event.e1.sub': '早期終了の可能性あり', 'info.event.e1.desc': 'プレミアムリギング LD全身が特別割引中',
+      'info.event.e2.title': 'レビュー投稿イベント', 'info.event.e2.badge': 'レビューイベント',
+      'info.event.e2.sub': 'ポジティブなレビューを投稿すると特典があります',
+      'info.event.e2.desc': '₩20,000割引または表情2種からお選びいただけます',
+      'info.collab.heading': 'コラボ情報', 'info.collab.badge': 'コラボ割引',
+      'info.collab.c1.title': 'ヤンチョ作家コラボ割引', 'info.collab.c1.sub': 'やわらかくかわいい動きがご希望の方におすすめ', 'info.collab.c1.desc': 'イラスト₩50,000 + リギング₩50,000割引',
+      'info.collab.c2.title': 'ハノヒ作家コラボ割引', 'info.collab.c2.sub': 'シンプルでスタイリッシュなデザインがご希望の方に', 'info.collab.c2.desc': 'イラスト₩50,000 + リギング₩50,000割引',
+      'info.collab.c3.title': 'ピーチ作家コラボ割引', 'info.collab.c3.sub': 'マンガ調のデザインがご希望の方におすすめ', 'info.collab.c3.desc': 'イラスト₩50,000 + リギング₩50,000割引',
+      'info.collab.c4.title': 'トゥントゥン作家コラボ割引', 'info.collab.c4.sub': 'かわいくソフトな動きがご希望の方におすすめ', 'info.collab.c4.desc': 'イラスト₩100,000 + リギング₩50,000割引',
+      'info.process.heading': '作業プロセス',
+      'info.process.s1.title': 'お問い合わせ', 'info.process.s1.desc': '作業依頼と基本情報の提供',
+      'info.process.s2.title': 'ファイル確認・見積もり', 'info.process.s2.desc': 'ファイルを確認後、詳細な見積もりを提示',
+      'info.process.s3.title': '受付・お支払い', 'info.process.s3.desc': '契約と決済',
+      'info.process.s4.title': '第1次リギング', 'info.process.s4.desc': '頭部・顔の構造制作',
+      'info.process.s5.title': '第1次確認・修正', 'info.process.s5.desc': '第1次リギング動画を提供し、フィードバックを反映',
+      'info.process.s6.title': '第2次リギング', 'info.process.s6.desc': '胴体・小道具のディテール作業',
+      'info.process.s7.title': '第2次確認・修正', 'info.process.s7.desc': '第2次リギング動画を提供し、フィードバックを反映',
+      'info.process.s8.title': '完成・納品', 'info.process.s8.desc': '最終ファイルの納品',
+      'info.process.s9.title': '最終修正（第3次修正）', 'info.process.s9.desc': 'ファイル適用後の不具合修正',
+      'info.process.note': '平均作業期間は2〜4週間で、デザインの複雑さに応じて調整可能です。',
+      'plan.basic': 'ベーシック', 'plan.premium': 'プレミアム',
+      'plan.item.faceXYZ': '顔XYZ', 'plan.item.eyebrow': '眉毛（上下・変形・角度）',
+      'plan.item.eyebrowFacial': '眉毛・目連動フェイシャル', 'plan.item.blink': '瞬き（ウィンク）',
+      'plan.item.pupilPhysics': '瞳物理', 'plan.item.lashPhysics': 'まつ毛物理',
+      'plan.item.mouth9': '口の動き（9点）', 'plan.item.mouth12': '口の動き（12点〜）',
+      'plan.item.jaw': '口の開閉連動あご', 'plan.item.bodyXYZ': '体XYZ', 'plan.item.breath': '呼吸',
+      'plan.item.arm': '腕の揺れ（指の揺れ）', 'plan.item.camAnim': 'カメラ外れアニメーション（任意）',
+      'plan.item.expr2': 'デフォルト表情2種付き', 'plan.item.noAnim': '（アニメーションなし）',
+      'plan.physics.basic': '最大3段階物理対応', 'plan.physics.basic.sub': '（必要に応じて4段階対応）',
+      'plan.physics.premium': '最低3段階物理対応', 'plan.physics.premium.sub': '（必要に応じて2段階対応）',
+      'plan.note': 'ベーシックとプレミアムは動きの角度、物理の段階、全体的なディテールが異なります',
+      'work.guide.label': '作業ガイド', 'work.process.title': '作業フロー',
+      'work.flow.confirm1': '第1次確認（修正）', 'work.flow.confirm2': '第2次確認（修正）',
+      'work.flow.deliver': '完成・納品', 'work.flow.final': '最終修正',
+      'work.process.d1': 'ファイル適用後に問題が発生した場合、修正対応いたします（最終修正）。',
+      'work.process.d2': 'オリキャラ・動物・ファンキャラは第2次確認なしで第1次確認のみ行います。',
+      'work.revision.title': '修正について',
+      'work.revision.d1': '基本的な修正は作業期間中に行われる合計2回の確認・修正段階で対応します。',
+      'work.revision.d1sub': '動物・オリキャラの場合は最終リギングまで進めた後、第1次確認のみ行います。',
+      'work.revision.d2': '修正完了後に以前の状態に戻す依頼や過度な変更要求には追加料金が発生する場合があります。',
+      'work.revision.d3': 'リギングのミスやエラーがある場合は無料で修正いたします。ファイル適用後に問題を発見した場合はお気軽にお知らせください。',
+      'work.copyright.title': '著作権',
+      'work.copyright.d1': 'リギングデータの著作権は原則としてリガー（Dajoong）に帰属します。',
+      'work.copyright.d2': '依頼者は本リギング成果物を配信・動画制作・SNS等の目的に限り使用することができます。',
+      'work.copyright.d3': 'リギングデータの転売・譲渡・共有は禁止されています。',
+      'works.more': 'もっと作品を見る →', 'works.price': '料金を確認する →',
+      'samples.title': 'リギングサンプル', 'samples.subtitle': 'リギング作業の様々なサンプルをご覧ください。',
+      'samples.fullbody.title': '全身リギング', 'samples.fullbody.desc': '自然でなめらかな動きを実現します。',
+      'samples.fullbody.x': 'X軸の動き', 'samples.fullbody.y': 'Y軸の動き', 'samples.fullbody.z': 'Z軸の動き',
+      'samples.fullbody.note': 'キャラクターの体型やデザインによって動きが異なる場合があります。',
+      'samples.eyes.title': '目の物理', 'samples.eyes.desc': '様々なスタイルの目を生き生きと表現します。',
+      'samples.eyes.odd': '幻想的な目でディテールにこだわった物理表現', 'samples.eyes.green': 'キラキラした瞳の自然な物理的動き', 'samples.eyes.red': 'まつ毛と瞳のなめらかな物理表現',
+      'samples.mouth.title': '口の動き', 'samples.mouth.desc': '発話スタイルに合わせて選べる3種類の口の構造',
+      'samples.mouth.9pt': 'シンプルな9点構造で一般的な会話に最適', 'samples.mouth.12pt': '細かい12点構造で会話・感情表現に最適', 'samples.mouth.vbridger': 'Vbridger対応で繊細な感情表現に最適',
+      'samples.expr.title': '表情エフェクト', 'samples.expr.desc': 'ショートカット一つで個性的な感情を表現',
+      'samples.expr.contempt': '冷たく鋭い視線で侮蔑感を表現', 'samples.expr.annoy': '瞬間的なイライラと不快感を生き生きと演出', 'samples.expr.heart': 'ドキドキした愛らしい瞬間をハート目で表現',
+      'samples.exprAnim.title': '表情アニメーション', 'samples.exprAnim.desc': 'キャラクターに自然に再生される感情演出エフェクト',
+      'samples.exprAnim.tear': '目元を流れる自然な涙の演出', 'samples.exprAnim.sweat': '緊張感と戸惑いを冷や汗で表現',
+      'samples.arm.title': '腕の動き', 'samples.arm.desc': 'キャラクターのコンセプトに合った腕の動きの例',
+      'samples.arm.game': 'ゲームコントローラーでゲーム画面への没入感を演出', 'samples.arm.wand': 'コンセプトに合ったアイテムで多彩な演出', 'samples.arm.wave': '手を振って挨拶するディテールな表現',
+      'samples.costume.title': '衣装・ヘア', 'samples.costume.desc': '衣装やヘアを変えることで同じキャラクターでも全く異なる雰囲気を演出できます。',
+      'samples.costume.hair': '髪の色を変えて全く異なる雰囲気を演出', 'samples.costume.outfit': '衣装チェンジでキャラクターのコンセプトを幅広く表現', 'samples.costume.hairstyle': 'ヘアスタイル変更で同じキャラクターでも新鮮な印象に',
+      'price.title': '料金',
+      'price.intro': '基本参考料金です。プロジェクトの要件によって見積もりが異なります。<br>詳細な見積もりはファイル構造と要件を確認後にご案内します。',
+      'price.ld.title': 'LDリギング', 'price.ld.full': ' 〜（全身）', 'price.ld.half': ' 〜（半身）',
+      'price.ld.desc': '自然な動きと豊かな物理表現を提供します。',
+      'price.ld.f1': '自然なXYZ動作', 'price.ld.f2': 'ディテールな口の形', 'price.ld.f3': '呼吸モーションループ', 'price.ld.f4': '追加表情2種付き',
+      'price.ld.period': '予想作業期間：14〜30日 · 修正2回 + 適用後1回',
+      'price.sd.title': 'SDリギング', 'price.sd.full': ' 〜（全身）',
+      'price.sd.desc': 'かわいらしいSDモデルのリギング。軽快でスピーディーな対応。',
+      'price.sd.f2': 'シンプルな口の形', 'price.sd.period': '予想作業期間：7〜14日 · 修正2回 + 適用後1回',
+      'price.bg.title': '背景 / 壁紙アニメーション', 'price.bg.type': ' 〜（メモリアル）',
+      'price.bg.desc': 'ループ型アニメーションと壁紙を制作します。',
+      'price.bg.f1': '自然にループするアニメーション制作', 'price.bg.f2': 'mp4形式で提供（GIF追加可能）', 'price.bg.f3': 'GIFはファイルの特性上、画質が低下する場合があります',
+      'price.bg.period': '予想作業期間：7〜14日 · 最大2回修正',
+      'price.note': '正確な見積もりはアートワーク（PSD/PNG）と要件の確認後に算定されます。',
+      'price.cta': 'DMでお問い合わせ',
+    }
+  };
+
+  let currentLang = 'ko';
+
+  function applyLang(lang) {
+    const t = translations[lang];
+    if (!t) return;
+    currentLang = lang;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) {
+        el.innerHTML = t[key];
+      }
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('lang-active', btn.getAttribute('data-lang') === lang);
+    });
+
+    document.documentElement.lang = lang;
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      applyLang(btn.getAttribute('data-lang'));
+    });
+  });
+
+  // 브라우저 언어 자동 감지
+  const browserLang = navigator.language.toLowerCase();
+  if (browserLang.startsWith('ja')) applyLang('ja');
+  else if (!browserLang.startsWith('ko')) applyLang('en');
+})();
+</script>
+
 </body>
-</html>
