@@ -26,6 +26,81 @@
 
 <style>
 /* ==============================
+   CUSTOM CURSOR
+============================== */
+*, *::before, *::after { cursor: none !important; }
+
+#cursor-dot {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform .12s ease, background .2s ease, width .2s ease, height .2s ease;
+  box-shadow: 0 0 10px rgba(159,168,255,.8), 0 0 20px rgba(159,168,255,.4);
+  mix-blend-mode: normal;
+}
+#cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(159,168,255,.55);
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: transform .06s linear, width .22s ease, height .22s ease, border-color .22s ease, opacity .22s ease;
+  box-shadow: 0 0 12px rgba(159,168,255,.2);
+}
+body.cursor-hover #cursor-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--accent-pink);
+  box-shadow: 0 0 14px rgba(255,194,227,.9), 0 0 28px rgba(255,194,227,.4);
+}
+body.cursor-hover #cursor-ring {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(255,194,227,.5);
+}
+body.cursor-click #cursor-dot {
+  transform: translate(-50%, -50%) scale(.6);
+}
+
+/* Trail canvas */
+#cursor-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99997;
+}
+
+/* Background particle canvas */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .55;
+}
+
+/* ==============================
+   SCROLL REVEAL
+============================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==============================
    THEME
 ============================== */
 :root {
@@ -992,12 +1067,45 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   font-size: 13px;
   color: var(--text-light);
 }
-.sp-group {
-  padding: 22px 0 0;
-  border-top: 1px solid rgba(150,160,255,.15);
-  margin-top: 4px;
+/* ==============================
+   SAMPLE TABS
+============================== */
+.sp-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 22px;
 }
-.sp-group:first-of-type { border-top: none; }
+.sp-tab-btn {
+  padding: 7px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--panel);
+  color: var(--text-light);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all .22s ease;
+  cursor: pointer;
+}
+.sp-tab-btn[data-active] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(159,168,255,.35);
+}
+.sp-tab-btn:hover:not([data-active]) {
+  background: rgba(159,168,255,.12);
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+/* ==============================
+   SAMPLE PANELS
+============================== */
+.sp-panel { display: none; }
+.sp-panel[data-active] { display: block; }
+
 .sp-cat-title {
   font-size: 16px;
   font-weight: 700;
@@ -1008,20 +1116,37 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   font-size: 12px;
   color: var(--text-light);
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
-.sp-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 14px;
+.sp-cat-desc-bottom {
+  font-size: 11.5px;
+  color: var(--text-light);
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* ==============================
+   GIF SLIDER
+============================== */
+.sp-slider-outer {
+  position: relative;
   max-width: 960px;
-  margin: 0 auto 16px;
+  margin: 0 auto;
+  padding: 0 44px;
 }
-.sp-grid--2 {
-  grid-template-columns: repeat(2, 1fr);
-  max-width: 640px;
+.sp-slider-viewport {
+  overflow: hidden;
+  border-radius: var(--r-md);
 }
-.sp-item {
+.sp-slider-track {
+  display: flex;
+  gap: 14px;
+  transition: transform .38s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
+}
+.sp-slide-card {
+  flex: 0 0 calc((100% - 28px) / 3);
+  min-width: 0;
   border-radius: var(--r-md);
   overflow: hidden;
   background: #fff;
@@ -1029,24 +1154,22 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   box-shadow: var(--shadow-sm);
   transition: transform .18s ease, box-shadow .18s ease;
 }
-.sp-item:hover {
+.sp-slide-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 36px rgba(40,55,140,.12);
 }
-.sp-media {
+.sp-slide-card .sp-media {
   width: 100%;
-  display: block;
   background: rgba(245,247,255,.9);
   overflow: hidden;
   line-height: 0;
 }
-.sp-gif {
+.sp-slide-card .sp-gif {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: unset;
 }
-.sp-cap {
+.sp-slide-card .sp-cap {
   padding: 9px 12px 11px;
   font-size: 11.5px;
   text-align: center;
@@ -1054,6 +1177,69 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   border-top: 1px solid rgba(150,160,255,.10);
   background: #fff;
 }
+
+/* NAV ARROWS */
+.sp-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  color: var(--primary-strong);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s ease;
+  z-index: 5;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.sp-nav-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.sp-nav-btn[data-disabled] {
+  opacity: .3;
+  pointer-events: none;
+}
+.sp-nav-btn--prev { left: 0; }
+.sp-nav-btn--next { right: 0; }
+
+/* DOTS */
+.sp-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 14px;
+}
+.sp-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(150,160,255,.3);
+  border: none;
+  cursor: pointer;
+  transition: all .22s ease;
+  padding: 0;
+}
+.sp-dot[data-active] {
+  background: var(--primary);
+  transform: scale(1.35);
+}
+
+@media (max-width: 640px) {
+  .sp-slide-card { flex: 0 0 calc(100% - 0px); }
+  .sp-slider-outer { padding: 0 36px; }
+}
+@media (min-width: 641px) and (max-width: 860px) {
+  .sp-slide-card { flex: 0 0 calc((100% - 14px) / 2); }
+}
+
 
 /* ==============================
    SHOWCASE (YouTube Slider)
@@ -1500,6 +1686,12 @@ section[data-type][data-active] { display: block; }
 </head>
 
 <body>
+<!-- Cursor elements -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<canvas id="cursor-canvas"></canvas>
+<canvas id="bg-canvas"></canvas>
+
 <div class="page">
 
   <!-- ============================================
@@ -1859,102 +2051,175 @@ section[data-type][data-active] { display: block; }
       <p class="sp-subtitle">리깅 작업의 다양한 샘플을 확인해보세요.</p>
     </div>
 
+    <!-- 탭 버튼 -->
+    <div class="sp-tabs" id="spTabs">
+      <button class="sp-tab-btn" data-tab="body" data-active>전신 리깅</button>
+      <button class="sp-tab-btn" data-tab="eye">눈 물리</button>
+      <button class="sp-tab-btn" data-tab="mouth">입 움직임</button>
+      <button class="sp-tab-btn" data-tab="expr">표정 효과</button>
+      <button class="sp-tab-btn" data-tab="arm">팔 움직임</button>
+      <button class="sp-tab-btn" data-tab="anim">표정 애니메이션</button>
+    </div>
+
     <!-- 전신 리깅 -->
-    <div class="sp-group">
+    <div class="sp-panel" data-tab="body" data-active>
       <h3 class="sp-cat-title">전신 리깅</h3>
       <p class="sp-cat-desc">자연스럽고 부드러운 움직임을 구현합니다.</p>
-      <div class="sp-grid">
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/X_.gif?raw=true" alt="X 축 움직임 샘플"></div>
-          <figcaption class="sp-cap">X 축 움직임</figcaption>
-        </figure>
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Y_.gif?raw=true" alt="Y 축 움직임 샘플"></div>
-          <figcaption class="sp-cap">Y 축 움직임</figcaption>
-        </figure>
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Z_.gif?raw=true" alt="Z 축 움직임 샘플"></div>
-          <figcaption class="sp-cap">Z 축 움직임</figcaption>
-        </figure>
+      <div class="sp-slider-outer" id="slider-body">
+        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
+        <div class="sp-slider-viewport">
+          <div class="sp-slider-track">
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/X_.gif?raw=true" alt="X 축 움직임 샘플"></div>
+              <div class="sp-cap">X 축 움직임</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Y_.gif?raw=true" alt="Y 축 움직임 샘플"></div>
+              <div class="sp-cap">Y 축 움직임</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Z_.gif?raw=true" alt="Z 축 움직임 샘플"></div>
+              <div class="sp-cap">Z 축 움직임</div>
+            </div>
+          </div>
+        </div>
+        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
       </div>
-      <p class="sp-cat-desc">캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.</p>
+      <div class="sp-dots" id="dots-body"></div>
+      <p class="sp-cat-desc-bottom">캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.</p>
     </div>
 
     <!-- 눈 물리 -->
-    <div class="sp-group">
+    <div class="sp-panel" data-tab="eye">
       <h3 class="sp-cat-title">눈 물리</h3>
       <p class="sp-cat-desc">다양한 스타일의 눈을 생동감 있게 표현합니다.</p>
-      <div class="sp-grid">
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/odeyes.gif?raw=true" alt="오드아이 눈 샘플"></div>
-          <figcaption class="sp-cap">몽환적인 눈빛을 살린 디테일한 물리 표현</figcaption>
-        </figure>
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/greeneyes.gif?raw=true" alt="녹색 눈 샘플"></div>
-          <figcaption class="sp-cap">초롱초롱한 눈동자의 자연스러운 물리 움직임</figcaption>
-        </figure>
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/redeyes.gif?raw=true" alt="붉은 눈 샘플"></div>
-          <figcaption class="sp-cap">섬세한 속눈썹과 눈동자의 부드러운 물리</figcaption>
-        </figure>
+      <div class="sp-slider-outer" id="slider-eye">
+        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
+        <div class="sp-slider-viewport">
+          <div class="sp-slider-track">
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/odeyes.gif?raw=true" alt="오드아이 눈 샘플"></div>
+              <div class="sp-cap">몽환적인 눈빛을 살린 디테일한 물리 표현</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/greeneyes.gif?raw=true" alt="녹색 눈 샘플"></div>
+              <div class="sp-cap">초롱초롱한 눈동자의 자연스러운 물리 움직임</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/redeyes.gif?raw=true" alt="붉은 눈 샘플"></div>
+              <div class="sp-cap">섬세한 속눈썹과 눈동자의 부드러운 물리</div>
+            </div>
+          </div>
+        </div>
+        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
       </div>
+      <div class="sp-dots" id="dots-eye"></div>
     </div>
 
     <!-- 입 움직임 -->
-    <div class="sp-group">
+    <div class="sp-panel" data-tab="mouth">
       <h3 class="sp-cat-title">입 움직임</h3>
-      <p class="sp-cat-desc">다양한 입의 움직임을 자연스럽게 표현합니다.</p>
-      <div class="sp-grid">
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%209%EC%A0%90.gif?raw=true" alt="입 움직임 9점"></div>
-          <figcaption class="sp-cap">단순한 9점 구조로 일반 대화에 적합</figcaption>
-        </figure>
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%2012%EC%A0%90.gif?raw=true" alt="입 움직임 12점"></div>
-          <figcaption class="sp-cap">세밀한 12점 구조로 대화와 감정 표현에 적합</figcaption>
-        </figure>
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%2012%EC%A0%90%20VBridger%20.gif?raw=true" alt="입 움직임 12점 VBridger"></div>
-          <figcaption class="sp-cap">Vbridger 사용으로 섬세한 감정 표현에 적합</figcaption>
-        </figure>
+      <p class="sp-cat-desc">발화 스타일에 맞게 선택할 수 있는 세 가지 입 구조입니다.</p>
+      <div class="sp-slider-outer" id="slider-mouth">
+        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
+        <div class="sp-slider-viewport">
+          <div class="sp-slider-track">
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%209%EC%A0%90.gif?raw=true" alt="입 움직임 9점"></div>
+              <div class="sp-cap">단순한 9점 구조로 일반 대화에 적합</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%2012%EC%A0%90.gif?raw=true" alt="입 움직임 12점"></div>
+              <div class="sp-cap">세밀한 12점 구조로 대화와 감정 표현에 적합</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%2012%EC%A0%90%20VBridger%20.gif?raw=true" alt="입 움직임 12점 VBridger"></div>
+              <div class="sp-cap">Vbridger 사용으로 섬세한 감정 표현에 적합</div>
+            </div>
+          </div>
+        </div>
+        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
       </div>
-
+      <div class="sp-dots" id="dots-mouth"></div>
     </div>
-    <!-- 표정효과 -->
-    <div class="sp-group">
+
+    <!-- 표정 효과 -->
+    <div class="sp-panel" data-tab="expr">
       <h3 class="sp-cat-title">표정 효과</h3>
-      <p class="sp-cat-desc">단축키 한 번으로 개성 있는 감정을 표현해보세요</p>
-      <div class="sp-grid">
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%EA%B2%BD%EB%A9%B8.gif?raw=true" alt="표정 효과 경멸"></div>
-          <figcaption class="sp-cap">차갑고 날카로운 눈빛으로 경멸감을 표현</figcaption>
-        </figure>
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%EB%B9%A0%EC%A7%81.gif?raw=true" alt="표정 효과 짜증"></div>
-          <figcaption class="sp-cap">순간적인 짜증과 불쾌감을 생동감 있게 연출</figcaption>
-        </figure>
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%ED%95%98%ED%8A%B8%EB%88%88.gif?raw=true" alt="표정 효과 하트"></div>
-          <figcaption class="sp-cap">설레고 사랑스러운 순간을 하트눈으로 표현</figcaption>
-        </figure>
+      <p class="sp-cat-desc">단축키 한 번으로 개성 있는 감정을 표현해보세요.</p>
+      <div class="sp-slider-outer" id="slider-expr">
+        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
+        <div class="sp-slider-viewport">
+          <div class="sp-slider-track">
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%EA%B2%BD%EB%A9%B8.gif?raw=true" alt="표정 효과 경멸"></div>
+              <div class="sp-cap">차갑고 날카로운 눈빛으로 경멸감을 표현</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%EB%B9%A0%EC%A7%81.gif?raw=true" alt="표정 효과 짜증"></div>
+              <div class="sp-cap">순간적인 짜증과 불쾌감을 생동감 있게 연출</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%ED%95%98%ED%8A%B8%EB%88%88.gif?raw=true" alt="표정 효과 하트"></div>
+              <div class="sp-cap">설레고 사랑스러운 순간을 하트눈으로 표현</div>
+            </div>
+          </div>
+        </div>
+        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
       </div>
+      <div class="sp-dots" id="dots-expr"></div>
     </div>
 
-    <!-- 기타 애니메이션 -->
-    <div class="sp-group">
-      <h3 class="sp-cat-title">표정 애니메이션</h3>
-      <p class="sp-cat-desc">캐릭터 위에 자연스럽게 재생되는 감정 연출 효과입니다</p>
-      <div class="sp-grid sp-grid--2">
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/sad.gif?raw=true" alt="눈물 효과 샘플"></div>
-          <figcaption class="sp-cap">눈가를 타고 흐르는 자연스러운 눈물 연출</figcaption>
-        </figure>
-        <figure class="sp-item">
-          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/omg.gif?raw=true" alt="땀삐질효과"></div>
-          <figcaption class="sp-cap">긴장감과 당황스러움을 식은땀으로 표현</figcaption>
-        </figure>
+    <!-- 팔 움직임 -->
+    <div class="sp-panel" data-tab="arm">
+      <h3 class="sp-cat-title">팔 움직임</h3>
+      <p class="sp-cat-desc">캐릭터의 콘셉트에 맞는 팔 움직임 예시입니다.</p>
+      <div class="sp-slider-outer" id="slider-arm">
+        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
+        <div class="sp-slider-viewport">
+          <div class="sp-slider-track">
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EA%B2%8C%EC%9E%84%EA%B8%B0.gif?raw=true" alt="팔 움직임 게임기"></div>
+              <div class="sp-cap">게임기를 쥔 양손 · 활기찬 스트리머 감성</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EB%A7%88%EB%B2%95%EB%B4%89.gif?raw=true" alt="팔 움직임 마법봉"></div>
+              <div class="sp-cap">마법봉을 든 한 손 · 신비롭고 우아한 분위기</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EC%86%90%EC%9D%B8%EC%82%AC.gif?raw=true" alt="팔 움직임 손인사"></div>
+              <div class="sp-cap">손 흔들어 인사하기 · 밝고 친근한 첫인상</div>
+            </div>
+          </div>
+        </div>
+        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
       </div>
+      <div class="sp-dots" id="dots-arm"></div>
     </div>
+
+    <!-- 표정 애니메이션 -->
+    <div class="sp-panel" data-tab="anim">
+      <h3 class="sp-cat-title">표정 애니메이션</h3>
+      <p class="sp-cat-desc">캐릭터 위에 자연스럽게 재생되는 감정 연출 효과입니다.</p>
+      <div class="sp-slider-outer" id="slider-anim">
+        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
+        <div class="sp-slider-viewport">
+          <div class="sp-slider-track">
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/sad.gif?raw=true" alt="눈물 효과 샘플"></div>
+              <div class="sp-cap">눈가를 타고 흐르는 자연스러운 눈물 연출</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/omg.gif?raw=true" alt="땀삐질효과"></div>
+              <div class="sp-cap">긴장감과 당황스러움을 식은땀으로 표현</div>
+            </div>
+          </div>
+        </div>
+        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      </div>
+      <div class="sp-dots" id="dots-anim"></div>
+    </div>
+
   </div><!-- /sp-wrap -->
 
   <!-- ============================================
@@ -2168,7 +2433,99 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<!-- SIDE NAVIGATION -->
+<script>
+// =====================
+// SAMPLE TABS + SLIDERS
+// =====================
+(function() {
+  // --- TAB SWITCHING ---
+  const tabBtns = document.querySelectorAll('.sp-tab-btn');
+  const panels  = document.querySelectorAll('.sp-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.tab;
+      tabBtns.forEach(b => b.removeAttribute('data-active'));
+      panels.forEach(p => p.removeAttribute('data-active'));
+      btn.setAttribute('data-active', '');
+      document.querySelector(`.sp-panel[data-tab="${key}"]`).setAttribute('data-active', '');
+    });
+  });
+
+  // --- PER-PANEL SLIDER ---
+  const sliderDefs = [
+    { id: 'body',  dotsId: 'dots-body' },
+    { id: 'eye',   dotsId: 'dots-eye' },
+    { id: 'mouth', dotsId: 'dots-mouth' },
+    { id: 'expr',  dotsId: 'dots-expr' },
+    { id: 'arm',   dotsId: 'dots-arm' },
+    { id: 'anim',  dotsId: 'dots-anim' },
+  ];
+
+  sliderDefs.forEach(({ id, dotsId }) => {
+    const outer    = document.getElementById('slider-' + id);
+    if (!outer) return;
+    const track    = outer.querySelector('.sp-slider-track');
+    const cards    = Array.from(track.querySelectorAll('.sp-slide-card'));
+    const prevBtn  = outer.querySelector('.sp-nav-btn--prev');
+    const nextBtn  = outer.querySelector('.sp-nav-btn--next');
+    const dotsWrap = document.getElementById(dotsId);
+    const total    = cards.length;
+    let current    = 0;
+
+    // Dots
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'sp-dot';
+      if (i === 0) dot.setAttribute('data-active', '');
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+
+    function getVisible() {
+      const vw = outer.querySelector('.sp-slider-viewport').offsetWidth;
+      const cw = cards[0] ? cards[0].offsetWidth : 300;
+      const gap = 14;
+      return Math.max(1, Math.round((vw + gap) / (cw + gap)));
+    }
+
+    function getCardWidth() {
+      return cards[0] ? cards[0].offsetWidth + 14 : 0;
+    }
+
+    function updateUI() {
+      const cw = getCardWidth();
+      track.style.transform = `translateX(-${current * cw}px)`;
+
+      const vis = getVisible();
+      const maxStep = Math.max(0, total - vis);
+
+      prevBtn[current <= 0 ? 'setAttribute' : 'removeAttribute']('data-disabled', '');
+      nextBtn[current >= maxStep ? 'setAttribute' : 'removeAttribute']('data-disabled', '');
+
+      const dots = dotsWrap.querySelectorAll('.sp-dot');
+      dots.forEach((d, i) => {
+        i === current ? d.setAttribute('data-active', '') : d.removeAttribute('data-active');
+      });
+    }
+
+    function goTo(i) {
+      const vis = getVisible();
+      const max = Math.max(0, total - vis);
+      current = Math.min(Math.max(i, 0), max);
+      updateUI();
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+    window.addEventListener('resize', () => { current = 0; updateUI(); });
+
+    updateUI();
+  });
+})();
+</script>
+
+
 <nav class="side-nav" id="sideNav">
   <div class="side-nav-item" data-target="sec-notice">
     <span class="side-nav-label">공지사항</span>
@@ -2238,6 +2595,192 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', () => { checkVisibility(); updateActive(); }, { passive: true });
   checkVisibility();
   updateActive();
+})();
+</script>
+
+<script>
+/* ====================================================
+   BACKGROUND PARTICLES
+==================================================== */
+(function() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const COLORS = ['#9FA8FF','#C2CAFF','#FFC2E3','#9EEAE1','#d4b9ff'];
+
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+  function Particle() { this.reset(true); }
+  Particle.prototype.reset = function(init) {
+    this.x = Math.random() * W;
+    this.y = init ? Math.random() * H : H + 10;
+    this.r = Math.random() * 1.8 + .5;
+    this.vx = (Math.random() - .5) * .3;
+    this.vy = -(Math.random() * .4 + .1);
+    this.alpha = Math.random() * .45 + .15;
+    this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    this.tw = Math.random() * .018 + .004;
+    this.td = Math.random() > .5 ? 1 : -1;
+  };
+  Particle.prototype.update = function() {
+    this.x += this.vx; this.y += this.vy;
+    this.alpha += this.tw * this.td;
+    if (this.alpha > .7 || this.alpha < .08) this.td *= -1;
+    if (this.y < -10) this.reset(false);
+  };
+  Particle.prototype.draw = function() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = ctx.shadowColor = this.color;
+    ctx.shadowBlur = 7;
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+  };
+
+  function init() {
+    resize(); particles = [];
+    const n = Math.floor((W * H) / 8500);
+    for (let i = 0; i < n; i++) particles.push(new Particle());
+  }
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  }
+  window.addEventListener('resize', init);
+  init(); loop();
+})();
+
+/* ====================================================
+   CUSTOM CURSOR + SPARKLE TRAIL + CLICK BURST
+==================================================== */
+(function() {
+  const dot    = document.getElementById('cursor-dot');
+  const ring   = document.getElementById('cursor-ring');
+  const canvas = document.getElementById('cursor-canvas');
+  const ctx    = canvas.getContext('2d');
+  let mx = -300, my = -300, rx = -300, ry = -300;
+  const SC = ['#9FA8FF','#FFC2E3','#9EEAE1','#fff','#d4b9ff','#ffe0f5'];
+
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+
+  // Smooth ring follow
+  (function ringLoop() {
+    rx += (mx - rx) * .13; ry += (my - ry) * .13;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(ringLoop);
+  })();
+
+  // Hover
+  const hov = 'a,button,.card,.sp-tab-btn,.sp-nav-btn,.pricing-card,.plan-card,.sp-slide-card,.notice-item,.collab-link,[data-type-buttons] button,.side-nav-item,.sale-model-btn';
+  document.addEventListener('mouseover', e => { if (e.target.closest(hov)) document.body.classList.add('cursor-hover'); });
+  document.addEventListener('mouseout',  e => { if (e.target.closest(hov)) document.body.classList.remove('cursor-hover'); });
+  document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+  document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
+
+  // Star shape helper
+  function drawStar(x, y, r, alpha, color, rot) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = ctx.shadowColor = color;
+    ctx.shadowBlur = 8;
+    ctx.translate(x, y); ctx.rotate(rot);
+    ctx.beginPath();
+    for (let i = 0; i < 5; i++) {
+      const a1 = (i*4*Math.PI)/5 - Math.PI/2;
+      const a2 = ((i*4+2)*Math.PI)/5 - Math.PI/2;
+      ctx.lineTo(Math.cos(a1)*r, Math.sin(a1)*r);
+      ctx.lineTo(Math.cos(a2)*(r*.4), Math.sin(a2)*(r*.4));
+    }
+    ctx.closePath(); ctx.fill(); ctx.restore();
+  }
+
+  function makeParticle(x, y, burstSpeed) {
+    const angle = Math.random() * Math.PI * 2;
+    const spd = burstSpeed || (Math.random() * 1.6 + .4);
+    return {
+      x, y,
+      vx: Math.cos(angle)*spd, vy: Math.sin(angle)*spd - (burstSpeed ? 0 : .5),
+      r: Math.random() * (burstSpeed ? 4 : 2.5) + 1.2,
+      alpha: 1,
+      decay: burstSpeed ? .028 : .022,
+      color: SC[Math.floor(Math.random() * SC.length)],
+      rot: Math.random() * Math.PI * 2,
+      rotV: (Math.random()-.5) * .18,
+      star: Math.random() > .45,
+      gravity: burstSpeed ? .04 : .03,
+      drag: burstSpeed ? .93 : 1
+    };
+  }
+
+  let particles = [], lastX = -999, lastY = -999;
+
+  // Trail spawn on movement
+  document.addEventListener('mousemove', () => {
+    const dx = mx - lastX, dy = my - lastY;
+    if (dx*dx + dy*dy > 100) {
+      for (let i = 0; i < 2; i++) particles.push(makeParticle(mx, my, 0));
+      lastX = mx; lastY = my;
+    }
+  });
+
+  // Click burst
+  document.addEventListener('click', e => {
+    for (let i = 0; i < 16; i++) particles.push(makeParticle(e.clientX, e.clientY, Math.random()*5+2.5));
+  });
+
+  (function particleLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles = particles.filter(p => p.alpha > .01);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      p.vx *= p.drag; p.vy *= p.drag;
+      p.vy += p.gravity;
+      p.alpha -= p.decay;
+      p.rot += p.rotV;
+      if (p.star) {
+        drawStar(p.x, p.y, p.r, p.alpha, p.color, p.rot);
+      } else {
+        ctx.save();
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = ctx.shadowColor = p.color;
+        ctx.shadowBlur = 9;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+        ctx.restore();
+      }
+    });
+    requestAnimationFrame(particleLoop);
+  })();
+})();
+
+/* ====================================================
+   SCROLL REVEAL
+==================================================== */
+(function() {
+  const sels = [
+    '.notice-wrap','.hero-intro','.hero-bottom > *',
+    '.pricing-wrap','.plan-wrap','.info-block',
+    '.sale-model-wrap','.sp-wrap','.works',
+  ];
+  const els = [];
+  sels.forEach(s => document.querySelectorAll(s).forEach(el => {
+    el.classList.add('reveal'); els.push(el);
+  }));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((en, i) => {
+      if (en.isIntersecting) {
+        setTimeout(() => en.target.classList.add('revealed'), i * 55);
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: .07 });
+  els.forEach(el => io.observe(el));
 })();
 </script>
 

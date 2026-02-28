@@ -1,0 +1,2521 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>다중 - Live2D Rigger</title>
+
+  <style>
+    @font-face {
+      font-family: 'Isamanru';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Isamanru';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+      font-weight: 400; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Isamanru';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicBold.woff') format('woff');
+      font-weight: 700; font-display: swap;
+    }
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+  </style>
+
+<style>
+/* ==============================
+   THEME
+============================== */
+:root {
+  --primary:        #9FA8FF;
+  --primary-strong: #7C87FF;
+  --accent-pink:    #FFC2E3;
+  --accent-teal:    #9EEAE1;
+  --danger:         #ff6b6b;
+  --bg:       #f2f0ff;
+  --panel:    rgba(255,255,255,.78);
+  --panel-2:  rgba(245,247,255,.85);
+  --text:       #1F2A44;
+  --text-light: rgba(31,42,68,.60);
+  --border:        rgba(150,160,255,.22);
+  --border-strong: rgba(150,160,255,.40);
+  --shadow-sm: 0 8px 24px rgba(40,55,140,.09);
+  --shadow-md: 0 18px 56px rgba(40,55,140,.13);
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 30px;
+}
+
+/* ==============================
+   RESET / BASE
+============================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Pretendard', 'Isamanru', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+img { max-width: 100%; display: block; }
+a   { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; }
+
+/* ==============================
+   LAYOUT
+============================== */
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 14px 40px;
+}
+
+/* ==============================
+   SECTION DIVIDER
+============================== */
+.sec-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 32px 0 18px;
+}
+.sec-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+}
+.sec-divider-label {
+  /* 5번 요청: Pretendard 계열 세련된 폰트로 교체, 트래킹 넓게 */
+  font-family: 'Pretendard', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--primary-strong);
+  white-space: nowrap;
+  padding: 5px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: rgba(124,135,255,.07);
+}
+
+/* ==============================
+   CARD BASE
+============================== */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+.card-head {
+  padding: 16px 18px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.card-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  position: relative;
+  padding-left: 14px;
+}
+.card-title::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 5px; height: 17px;
+  transform: translateY(-50%);
+  border-radius: 99px;
+  background: var(--primary);
+  box-shadow: 0 0 0 3px rgba(159,168,255,.15);
+}
+.card-body { padding: 4px 18px 18px; }
+
+/* ==============================
+   NOTICE BANNER (공지사항)
+============================== */
+.notice-wrap {
+  margin-bottom: 14px;
+  border: 1px solid rgba(255,107,107,.20);
+  border-radius: var(--r-lg);
+  background: rgba(255,255,255,.82);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.notice-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, rgba(255,107,107,.10), rgba(159,168,255,.08));
+  border-bottom: 1px solid rgba(255,107,107,.12);
+}
+
+.notice-head-icon {
+  font-size: 16px;
+}
+
+.notice-head-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--danger);
+  letter-spacing: -.01em;
+}
+
+.notice-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.notice-item {
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(150,160,255,.10);
+  transition: background .18s ease;
+  text-align: center;
+}
+.notice-item:last-child { border-bottom: none; }
+.notice-item:hover { background: rgba(255,107,107,.02); }
+
+.notice-item-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--danger);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.notice-item-title::before {
+  content: "▸";
+  font-size: 10px;
+  color: var(--danger);
+  opacity: .7;
+}
+
+.notice-item-desc {
+  font-size: 12px;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.notice-item-desc.highlight {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ==============================
+   INTRO
+============================== */
+.hero-intro {
+  margin-bottom: 14px;
+}
+.intro-title {
+  font-size: 17px;
+  font-weight: 700;
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 12px;
+}
+.intro-title::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 5px; height: 17px;
+  transform: translateY(-50%);
+  border-radius: 99px;
+  background: var(--primary);
+  box-shadow: 0 0 0 3px rgba(159,168,255,.15);
+}
+.intro-desc {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 14px;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(159,168,255,.35);
+  background: rgba(159,168,255,.10);
+  font-size: 11.5px;
+  font-weight: 500;
+  transition: all .22s ease;
+  cursor: default;
+}
+.tag:hover {
+  background: rgba(159,168,255,.22);
+  border-color: rgba(159,168,255,.6);
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* ==============================
+   1번 수정: 좌우 높이 맞추기
+   hero-bottom: equal height columns
+============================== */
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  /* align-items: stretch 가 기본값 → 양쪽 같은 높이 */
+  align-items: stretch;
+}
+
+.hero-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 이벤트/콜라보 카드가 남은 공간을 균등하게 채우도록 */
+.hero-left-col > .card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.hero-left-col > .card .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 프로세스 카드도 높이 100% */
+.hero-process {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.hero-process .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.hero-process .process-timeline {
+  flex: 1;
+}
+
+/* ==============================
+   EVENT / COLLAB
+============================== */
+.event-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* 콜라보 카드 본문만 스크롤 */
+.hero-collab-body {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 320px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(150,160,255,.4) transparent;
+}
+.hero-collab-body::-webkit-scrollbar { width: 4px; }
+.hero-collab-body::-webkit-scrollbar-track { background: transparent; }
+.hero-collab-body::-webkit-scrollbar-thumb {
+  background: rgba(150,160,255,.4);
+  border-radius: 999px;
+}
+.event-item {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(150,160,255,.12);
+  transition: background .18s ease;
+}
+.event-item:last-child { border-bottom: none; }
+.event-item.collab-link { display: block; cursor: pointer; }
+.event-item.collab-link:hover { background: rgba(159,168,255,.04); }
+.event-item.collab-link:hover .event-title { color: var(--primary); }
+.event-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.event-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  transition: color .18s ease;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(255,107,107,.10);
+  border: 1px solid rgba(255,107,107,.22);
+  font-size: 11px;
+  white-space: nowrap;
+}
+.event-sub {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+.event-desc {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* ==============================
+   PROCESS TIMELINE
+============================== */
+.process-timeline {
+  display: flex;
+  flex-direction: column;
+}
+.process-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(150,160,255,.12);
+  transition: all .18s ease;
+}
+.process-step:last-of-type { border-bottom: none; }
+.process-step:hover { background: rgba(159,168,255,.02); }
+.step-number {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  background: linear-gradient(135deg, rgba(159,168,255,.14), rgba(158,234,225,.08));
+  border: 1px solid rgba(150,160,255,.25);
+  flex-shrink: 0;
+  transition: all .18s ease;
+}
+.process-step:hover .step-number {
+  background: linear-gradient(135deg, rgba(159,168,255,.25), rgba(158,234,225,.16));
+  border-color: rgba(150,160,255,.45);
+  transform: scale(1.07);
+}
+.step-content { flex: 1; }
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.step-desc {
+  font-size: 11.5px;
+  color: var(--text-light);
+  line-height: 1.45;
+}
+.process-note {
+  font-size: 11.5px;
+  color: var(--text-light);
+  line-height: 1.55;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(150,160,255,.10);
+}
+
+/* ==============================
+   PRICING TABLE (베이직 / 프리미엄)
+============================== */
+.pricing-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  background: var(--bg);
+  box-shadow: var(--shadow-md);
+  padding: 24px 18px;
+  overflow: hidden;
+}
+
+.pricing-head {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.pricing-main-title {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: 6px;
+}
+
+.pricing-subtitle {
+  font-size: 12.5px;
+  color: var(--text-light);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: var(--shadow-sm);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.pricing-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.pricing-card-head {
+  padding: 14px 16px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(159,168,255,.12), rgba(158,234,225,.07));
+  border-bottom: 1px solid var(--border);
+}
+
+.pricing-card-head.premium {
+  background: linear-gradient(135deg, rgba(255,194,227,.15), rgba(159,168,255,.12));
+}
+
+.pricing-card-name {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  margin-bottom: 4px;
+}
+
+.pricing-card-price {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary-strong);
+}
+
+.pricing-card-price .price-old {
+  font-size: 13px;
+  color: var(--text-light);
+  text-decoration: line-through;
+  margin-right: 6px;
+  font-weight: 400;
+}
+
+.pricing-card-price .price-discount {
+  font-size: 12px;
+  color: var(--danger);
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.pricing-card-body {
+  padding: 14px 16px;
+}
+
+.pricing-feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pricing-feature-list li {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.pricing-feature-list li::before {
+  content: "✓";
+  color: var(--primary-strong);
+  font-weight: 700;
+  font-size: 11px;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.pricing-feature-list li.highlight {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.pricing-feature-list li.highlight::before {
+  content: "★";
+  color: var(--danger);
+}
+
+.pricing-feature-list li.muted {
+  color: var(--text-light);
+  font-size: 11.5px;
+}
+.pricing-feature-list li.muted::before {
+  content: "·";
+  color: var(--text-light);
+}
+
+.pricing-card-cta {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 11.5px;
+  color: var(--text-light);
+  text-align: center;
+  line-height: 1.55;
+}
+
+.pricing-note {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ==============================
+   INFO CARDS (작업 과정 / 수정 / 저작권)
+============================== */
+.info-section {
+  margin-top: 0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.info-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.info-card-head {
+  padding: 13px 16px 10px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(159,168,255,.08), rgba(158,234,225,.04));
+}
+
+.info-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  position: relative;
+  padding-left: 13px;
+}
+.info-card-title::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 4px; height: 14px;
+  transform: translateY(-50%);
+  border-radius: 99px;
+  background: var(--primary);
+}
+
+.info-card-body {
+  padding: 13px 16px;
+}
+
+.info-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-list li {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.info-list li::before {
+  content: "·";
+  color: var(--primary-strong);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.info-list li strong {
+  font-weight: 600;
+  color: var(--primary-strong);
+}
+
+.info-list li.warn {
+  color: var(--danger);
+  font-weight: 500;
+}
+.info-list li.warn::before {
+  content: "⚠";
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+/* ==============================
+   NOTICE TOP ALERT
+============================== */
+.notice-top-alert {
+  background: rgba(255,107,107,.07);
+  border-bottom: 1px solid rgba(255,107,107,.15);
+  padding: 10px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--danger);
+  line-height: 1.7;
+  text-align: center;
+}
+
+.notice-bold {
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 4px;
+}
+
+/* ==============================
+   PLAN TABLE (베이직 / 프리미엄)
+============================== */
+.plan-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  background: var(--bg);
+  box-shadow: var(--shadow-md);
+  padding: 24px 20px 18px;
+  overflow: hidden;
+}
+
+.plan-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.plan-card {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 2px solid rgba(150,160,255,.30);
+  background: var(--panel);
+  box-shadow: var(--shadow-sm);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.plan-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.plan-card--premium {
+  border-color: rgba(255,194,227,.5);
+}
+
+.plan-card-head {
+  padding: 14px 16px 12px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(150,160,255,.12), rgba(158,234,225,.06));
+  border-bottom: 2px solid rgba(150,160,255,.18);
+}
+
+.plan-card--premium .plan-card-head {
+  background: linear-gradient(135deg, rgba(255,194,227,.18), rgba(159,168,255,.10));
+  border-bottom-color: rgba(255,194,227,.3);
+}
+
+.plan-name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.plan-card-body {
+  padding: 16px;
+}
+
+.plan-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.plan-list li {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(150,160,255,.10);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.plan-list li:last-child { border-bottom: none; }
+
+.plan-list li::before {
+  content: "·";
+  color: var(--primary);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.plan-list li.red {
+  color: var(--danger);
+  font-weight: 500;
+  text-decoration: line-through;
+  text-decoration-color: var(--danger);
+  opacity: .75;
+}
+.plan-list li.red::before {
+  color: var(--danger);
+}
+
+.plan-sub {
+  font-size: 11px;
+  color: var(--text-light);
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  padding-left: 14px;
+}
+
+.plan-physics {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  background: rgba(150,160,255,.10);
+  border: 1px solid rgba(150,160,255,.20);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--primary-strong);
+}
+
+.plan-note {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-light);
+  line-height: 1.6;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+/* ==============================
+   INFO BLOCKS (작업과정/수정/저작권)
+   — 세로 적층형, 글씨 늘어짐 없음
+============================== */
+.info-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow .22s ease;
+}
+.info-block:hover { box-shadow: var(--shadow-md); }
+
+.info-block-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px 11px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(159,168,255,.07), rgba(158,234,225,.04));
+}
+
+.info-block-icon { font-size: 16px; line-height: 1; }
+
+.info-block-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  position: relative;
+  padding-left: 12px;
+}
+.info-block-title::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 4px; height: 14px;
+  transform: translateY(-50%);
+  border-radius: 99px;
+  background: var(--primary);
+}
+
+.info-block-body {
+  padding: 14px 18px 16px;
+}
+
+/* 플로우 다이어그램 */
+.flow-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  background: rgba(150,160,255,.06);
+  border-radius: var(--r-md);
+  border: 1px solid rgba(150,160,255,.14);
+}
+
+.flow-step {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.flow-step--final {
+  background: rgba(159,168,255,.18);
+  border-color: var(--primary);
+  color: var(--primary-strong);
+}
+
+.flow-arrow {
+  font-size: 12px;
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+
+/* 설명 리스트 */
+.info-desc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-desc-list li {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text);
+  padding-left: 14px;
+  position: relative;
+}
+
+.info-desc-list li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.info-desc-list li.info-note {
+  color: var(--text-light);
+  font-size: 12px;
+}
+.info-desc-list li.info-note::before { color: var(--text-light); }
+
+.info-desc-list li.warn {
+  color: var(--danger);
+  font-weight: 500;
+}
+.info-desc-list li.warn::before { color: var(--danger); content: "⚠"; }
+
+.info-sub {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-light);
+  margin-top: 3px;
+}
+
+/* ==============================
+   RIGGING SAMPLE
+============================== */
+.sp-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  background: var(--bg);
+  box-shadow: var(--shadow-md);
+  padding: 18px;
+  overflow: hidden;
+}
+.sp-head { padding: 6px 6px 18px; }
+.sp-title {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: 6px;
+}
+.sp-subtitle {
+  font-size: 13px;
+  color: var(--text-light);
+}
+/* ==============================
+   SAMPLE TABS
+============================== */
+.sp-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+.sp-tab-btn {
+  padding: 7px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--panel);
+  color: var(--text-light);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all .22s ease;
+  cursor: pointer;
+}
+.sp-tab-btn[data-active] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(159,168,255,.35);
+}
+.sp-tab-btn:hover:not([data-active]) {
+  background: rgba(159,168,255,.12);
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+/* ==============================
+   SAMPLE PANELS
+============================== */
+.sp-panel { display: none; }
+.sp-panel[data-active] { display: block; }
+
+.sp-cat-title {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 6px;
+}
+.sp-cat-desc {
+  font-size: 12px;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 20px;
+}
+.sp-cat-desc-bottom {
+  font-size: 11.5px;
+  color: var(--text-light);
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* ==============================
+   GIF SLIDER
+============================== */
+.sp-slider-outer {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 44px;
+}
+.sp-slider-viewport {
+  overflow: hidden;
+  border-radius: var(--r-md);
+}
+.sp-slider-track {
+  display: flex;
+  gap: 14px;
+  transition: transform .38s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
+}
+.sp-slide-card {
+  flex: 0 0 calc((100% - 28px) / 3);
+  min-width: 0;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(150,160,255,.16);
+  box-shadow: var(--shadow-sm);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.sp-slide-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(40,55,140,.12);
+}
+.sp-slide-card .sp-media {
+  width: 100%;
+  background: rgba(245,247,255,.9);
+  overflow: hidden;
+  line-height: 0;
+}
+.sp-slide-card .sp-gif {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.sp-slide-card .sp-cap {
+  padding: 9px 12px 11px;
+  font-size: 11.5px;
+  text-align: center;
+  color: var(--text-light);
+  border-top: 1px solid rgba(150,160,255,.10);
+  background: #fff;
+}
+
+/* NAV ARROWS */
+.sp-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  color: var(--primary-strong);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s ease;
+  z-index: 5;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.sp-nav-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.sp-nav-btn[data-disabled] {
+  opacity: .3;
+  pointer-events: none;
+}
+.sp-nav-btn--prev { left: 0; }
+.sp-nav-btn--next { right: 0; }
+
+/* DOTS */
+.sp-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 14px;
+}
+.sp-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(150,160,255,.3);
+  border: none;
+  cursor: pointer;
+  transition: all .22s ease;
+  padding: 0;
+}
+.sp-dot[data-active] {
+  background: var(--primary);
+  transform: scale(1.35);
+}
+
+@media (max-width: 640px) {
+  .sp-slide-card { flex: 0 0 calc(100% - 0px); }
+  .sp-slider-outer { padding: 0 36px; }
+}
+@media (min-width: 641px) and (max-width: 860px) {
+  .sp-slide-card { flex: 0 0 calc((100% - 14px) / 2); }
+}
+
+
+/* ==============================
+   SHOWCASE (YouTube Slider)
+============================== */
+.works { margin-top: 4px; }
+
+[data-type-buttons] {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+[data-type-buttons] button {
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--panel);
+  color: var(--text-light);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all .22s ease;
+}
+[data-type-buttons] button[data-active] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(159,168,255,.35);
+}
+[data-type-buttons] button:hover:not([data-active]) {
+  background: rgba(159,168,255,.12);
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+section[data-type]           { display: none; }
+section[data-type][data-active] { display: block; }
+
+[data-root] {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+[data-stage] {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: #0d0d12;
+  aspect-ratio: 16/9;
+  max-height: 520px;
+}
+[data-slide] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .45s ease;
+}
+[data-slide][data-active="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.image-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20,20,35,.7);
+  color: rgba(255,255,255,.5);
+  font-size: 13px;
+  z-index: 2;
+  cursor: pointer;
+}
+.image-placeholder.hidden { display: none; }
+
+[data-action="prev"],
+[data-action="next"] {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.22);
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s ease;
+  z-index: 10;
+}
+[data-action="prev"] { left: 10px; }
+[data-action="next"] { right: 10px; }
+[data-action="prev"]:hover,
+[data-action="next"]:hover { background: rgba(255,255,255,.28); }
+
+[data-dots] {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding: 10px 0 6px;
+}
+[data-dot] {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(150,160,255,.3);
+  transition: all .22s ease;
+}
+[data-dot][data-active] {
+  background: var(--primary);
+  transform: scale(1.3);
+}
+[data-thumbs-wrapper] {
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  display: flex;
+  justify-content: center;
+}
+[data-thumbs-wrapper]::-webkit-scrollbar { display: none; }
+[data-thumbs] {
+  display: flex;
+  gap: 8px;
+  padding: 6px 0;
+  width: max-content;
+}
+[data-thumb] {
+  width: 96px;
+  height: 54px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid transparent;
+  transition: border-color .2s ease, transform .2s ease;
+  padding: 0;
+}
+[data-thumb] img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+[data-thumb][data-active] {
+  border-color: var(--primary);
+  transform: scale(1.05);
+}
+[data-thumb]:hover:not([data-active]) { border-color: var(--border-strong); }
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media (max-width: 820px) {
+  .plan-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .page { padding: 14px 10px 30px; }
+
+  .hero-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+  }
+
+  [data-stage] {
+    max-height: 260px;
+  }
+
+  [data-thumb] { width: 72px; height: 40px; }
+  [data-action="prev"], [data-action="next"] { width: 30px; height: 30px; font-size: 13px; }
+  .card-head { padding: 12px 14px 8px; }
+  .card-body { padding: 4px 14px 14px; }
+}
+
+@media (max-width: 480px) {
+  .sp-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  [data-stage] { max-height: 220px; }
+  .intro-title, .card-title { font-size: 15px; }
+  .sp-title { font-size: 18px; }
+  .plan-grid { grid-template-columns: 1fr; }
+}
+
+/* ==============================
+   SIDE NAVIGATION
+============================== */
+.side-nav {
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+}
+.side-nav.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.side-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  justify-content: flex-end;
+}
+.side-nav-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary-strong);
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-sm);
+}
+.side-nav-item:hover .side-nav-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+.side-nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(150,160,255,.35);
+  border: 1.5px solid rgba(150,160,255,.5);
+  flex-shrink: 0;
+  transition: all .22s ease;
+}
+.side-nav-item[data-active] .side-nav-dot {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: scale(1.4);
+  box-shadow: 0 0 0 3px rgba(159,168,255,.2);
+}
+.side-nav-item:hover .side-nav-dot {
+  background: var(--primary-strong);
+  border-color: var(--primary-strong);
+}
+
+/* 판매 모델 섹션 */
+.sale-model-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  background: var(--panel);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.sale-model-head {
+  padding: 18px 24px 14px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(255,194,227,.12), rgba(159,168,255,.10));
+  border-bottom: 1px solid var(--border);
+}
+.sale-model-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255,107,107,.10);
+  border: 1px solid rgba(255,107,107,.25);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--danger);
+  margin-bottom: 10px;
+}
+.sale-model-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: 4px;
+}
+.sale-model-sub {
+  font-size: 12.5px;
+  color: var(--text-light);
+}
+.sale-model-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.sale-model-video-col {
+  padding: 18px;
+  border-right: 1px solid var(--border);
+}
+.sale-model-video-frame {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  background: #0d0d12;
+}
+.sale-model-video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.sale-model-info-col {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+.sale-model-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-strong);
+  margin-bottom: 8px;
+  letter-spacing: .02em;
+}
+.sale-model-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sale-model-features li {
+  font-size: 12.5px;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  line-height: 1.5;
+}
+.sale-model-features li::before {
+  content: "✓";
+  color: var(--primary-strong);
+  font-weight: 700;
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.sale-price-box {
+  background: linear-gradient(135deg, rgba(255,194,227,.15), rgba(159,168,255,.12));
+  border: 1px solid rgba(255,194,227,.4);
+  border-radius: var(--r-md);
+  padding: 12px 16px;
+  text-align: center;
+}
+.sale-price-label {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+.sale-price-formula {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+.sale-price-original {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+.sale-price-original s {
+  text-decoration-color: var(--danger);
+  text-decoration-thickness: 2px;
+}
+.sale-price-total {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--danger);
+  letter-spacing: -.02em;
+  line-height: 1.2;
+}
+.sale-price-save {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255,107,107,.12);
+  border: 1px solid rgba(255,107,107,.3);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--danger);
+}
+.sale-model-cta {
+  display: flex;
+  justify-content: center;
+  padding: 14px 18px 18px;
+  border-top: 1px solid var(--border);
+  background: rgba(245,247,255,.5);
+}
+.sale-model-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(159,168,255,.4);
+  transition: all .22s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.sale-model-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(159,168,255,.5);
+}
+
+@media (max-width: 720px) {
+  .side-nav { display: none; }
+  .sale-model-body { grid-template-columns: 1fr; }
+  .sale-model-video-col { border-right: none; border-bottom: 1px solid var(--border); }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <!-- ============================================
+   
+   🎬 Dajoong Live2D - artmug page
+   
+   이 코드는 Live2D Rigger "다중(Dajoong)"이 작성했습니다.
+   
+   수정 사항이나 개선 아이디어가 있으시다면 편하게 DM 보내주세요!
+   개선에 협력해주셔서 감사합니다! 
+   코드에 관련된 질문이 있을 경우 아래 연락처로 연락 부탁드립니다.
+   
+   👤 Contact:
+   • X (Twitter): https://x.com/_Dajoong
+   • YouTube: https://www.youtube.com/@Dajoong_L2d
+   
+   ============================================ -->
+  <!-- ============================================
+       공지사항
+  ============================================= -->
+  <div class="notice-wrap" id="sec-notice">
+    <div class="notice-head">
+      <span class="notice-head-icon">📢</span>
+      <span class="notice-head-title">공지사항</span>
+    </div>
+    <div class="notice-top-alert">
+      ※ 공지를 읽지 않아 발생하는 문제는 일절 책임지지 않습니다.<br>
+      작업 의뢰 시 모든 내용을 확인·동의한 것으로 간주합니다.
+    </div>
+    <div class="notice-list">
+      <div class="notice-item">
+        <div class="notice-item-title">일러스트 작업 불가 / 파일 안내</div>
+        <p class="notice-item-desc">일러스트 작업은 하지 않습니다. 파츠 분리가 완료된 일러스트 PSD 파일이 필요합니다.</p>
+      </div>
+      <div class="notice-item">
+        <div class="notice-item-title">납품 파일 안내</div>
+        <p class="notice-item-desc">작업 완료 후 전달되는 파일은 아이콘 이미지를 포함한 .moc3 파일이 전달됩니다. 수정이 가능한 cmo3 파일은 제공하지 않습니다.</p>
+      </div>
+      <div class="notice-item">
+        <div class="notice-item-title">스트리밍 안내</div>
+        <p class="notice-item-desc">스트리밍을 하고 있습니다. 방송에 송출을 원하지 않는다면 미리 말씀 부탁드립니다.</p>
+      </div>
+      <div class="notice-item">
+        <div class="notice-item-title">SNS · 포트폴리오 게시 안내</div>
+        <p class="notice-item-desc">모든 작업물은 홍보와 포트폴리오를 위해 SNS와 유튜브에 게시됩니다. 데뷔일까지 공개 지연을 희망하시는 경우 미리 말씀 부탁드립니다.</p>
+      </div>
+      <div class="notice-item">
+        <div class="notice-item-title">요청 사항 기재</div>
+        <p class="notice-item-desc">결제 전 요청 사항은 상세히 작성 부탁드립니다. 기재되지 않은 사항은 추가 작업 및 수정 시 작업이 어렵거나 추가금이 들 수 있습니다.</p>
+      </div>
+      <div class="notice-item">
+        <div class="notice-item-title">저작권 안내</div>
+        <p class="notice-item-desc">리깅과 관련된 저작권은 작가(다중)에게 있습니다. 일러스트와 관련된 저작권은 일러스트 작가님에게 있습니다.</p>
+      </div>
+      <div class="notice-item">
+        <div class="notice-item-title">작업 일정 안내</div>
+        <p class="notice-item-desc">작업 일정은 문의 순이 아닌 결제 순으로 확정됩니다. 일정은 작업 속도에 따라 조금씩 당겨질 수 있으며, 작업이 지연될 시 사전에 미리 연락 드립니다.</p>
+        <p class="notice-item-desc notice-bold">※ 컨펌 시 연락이 지연되거나 수정 사항이 많을 시 작업 기간이 늘어날 수 있습니다.</p>
+        <p class="notice-item-desc notice-bold">※ 작업 기간은 평균 기본 모델 기준 2주~4주 정도입니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       이벤트 / 콜라보 + 프로세스
+  ============================================= -->
+  <div class="hero-bottom" id="sec-event">
+
+    <div class="hero-left-col">
+      <!-- 이벤트 -->
+      <div class="card">
+        <div class="card-head"><h2 class="card-title">이벤트 안내</h2></div>
+        <div class="card-body">
+          <div class="event-list">
+            <div class="event-item">
+              <div class="event-top">
+                <span class="event-title">리뉴얼 기념 특별 할인</span>
+                <span class="badge">리뉴얼 할인</span>
+              </div>
+              <span class="event-sub">언제 마감 될지 모릅니다.</span>
+              <p class="event-desc">프리미엄 리깅 LD 전신이 리뉴얼 특별 할인</p>
+            </div>
+            <div class="event-item">
+              <div class="event-top">
+                <span class="event-title">리뷰 작성 고객 이벤트</span>
+                <span class="badge">리뷰 이벤트</span>
+              </div>
+              <span class="event-sub">긍정적인 리뷰를 남겨 주시면 추가 할인 혜택까지</span>
+              <p class="event-desc">리뷰 이벤트까지 확인 하시고 2만원 or 표정 2종 서비스 받아가세요</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 콜라보 -->
+      <div class="card">
+        <div class="card-head"><h2 class="card-title">콜라보 안내</h2></div>
+        <div class="card-body hero-collab-body">
+          <div class="event-list">
+            <a href="https://artmug.kr/index.php?channel=view&uid=47209" target="_blank" class="event-item collab-link">
+              <div class="event-top">
+                <span class="event-title">양초 작가님 콜라보 할인</span>
+                <span class="badge">콜라보 할인</span>
+              </div>
+              <span class="event-sub">말랑 쫀득한 귀여운 움직임을 원하면 추천</span>
+              <p class="event-desc">일러스트 5만원 + 리깅 5만원 할인 혜택까지</p>
+            </a>
+            <a href="https://artmug.kr/index.php?channel=view&uid=46759" target="_blank" class="event-item collab-link">
+              <div class="event-top">
+                <span class="event-title">하노히 작가님 콜라보 할인</span>
+                <span class="badge">콜라보 할인</span>
+              </div>
+              <span class="event-sub">단아하고 깔끔한 디자인을 원하면 추천</span>
+              <p class="event-desc">일러스트 5만원 + 리깅 5만원 할인 혜택까지</p>
+            </a>
+            <a href="https://artmug.kr/index.php?channel=view&uid=51109" target="_blank" class="event-item collab-link">
+              <div class="event-top">
+                <span class="event-title">피치 작가님 콜라보 할인</span>
+                <span class="badge">콜라보 할인</span>
+              </div>
+              <span class="event-sub">만화와 같은 분위기의 디자인을 원하면 추천</span>
+              <p class="event-desc">일러스트 5만원 + 리깅 5만원 할인 혜택까지</p>
+            </a>
+            <a href="https://artmug.kr/index.php?channel=view&uid=26682" target="_blank" class="event-item collab-link">
+              <div class="event-top">
+                <span class="event-title">뚱땅이 작가님 콜라보 할인</span>
+                <span class="badge">콜라보 할인</span>
+              </div>
+              <span class="event-sub">귀엽고 부드러운 움직임을 원하면 추천</span>
+              <p class="event-desc">일러스트 10만원 + 리깅 5만원 할인 혜택까지</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div><!-- /hero-left-col -->
+
+    <!-- 프로세스 -->
+    <div class="card hero-process">
+      <div class="card-head"><h2 class="card-title">작업 프로세스</h2></div>
+      <div class="card-body">
+        <div class="process-timeline">
+          <div class="process-step"><div class="step-number">01</div><div class="step-content"><p class="step-title">문의</p><p class="step-desc">작업 요청 및 기본 정보 제공</p></div></div>
+          <div class="process-step"><div class="step-number">02</div><div class="step-content"><p class="step-title">파일 확인 및 견적</p><p class="step-desc">파일 검토 후 상세 견적 제시</p></div></div>
+          <div class="process-step"><div class="step-number">03</div><div class="step-content"><p class="step-title">접수 및 입금</p><p class="step-desc">계약 및 결제</p></div></div>
+          <div class="process-step"><div class="step-number">04</div><div class="step-content"><p class="step-title">1차 리깅</p><p class="step-desc">헤드 및 페이스 구조 제작</p></div></div>
+          <div class="process-step"><div class="step-number">05</div><div class="step-content"><p class="step-title">1차 컨펌 및 수정</p><p class="step-desc">1차 리깅 영상 제공, 피드백 반영 및 개선</p></div></div>
+          <div class="process-step"><div class="step-number">06</div><div class="step-content"><p class="step-title">2차 리깅</p><p class="step-desc">바디 및 소품 디테일 작업</p></div></div>
+          <div class="process-step"><div class="step-number">07</div><div class="step-content"><p class="step-title">2차 컨펌 및 수정</p><p class="step-desc">2차 리깅 영상 제공, 피드백 반영 및 개선</p></div></div>
+          <div class="process-step"><div class="step-number">08</div><div class="step-content"><p class="step-title">완성 및 파일 납품</p><p class="step-desc">최종 파일 전달</p></div></div>
+          <div class="process-step"><div class="step-number">09</div><div class="step-content"><p class="step-title">최종 수정 (3차 수정)</p><p class="step-desc">파일 적용 후 문제 발생 시 수정</p></div></div>
+        </div>
+        <p class="process-note">평균 작업 기간은 2–4주이며, 디자인의 복잡도에 따라 조정 가능합니다.</p>
+      </div>
+    </div>
+
+  </div><!-- /hero-bottom -->
+
+  <!-- ============================================
+       베이직 / 프리미엄 표
+  ============================================= -->
+  <div class="sec-divider" id="sec-plan">
+    <div class="sec-divider-line"></div>
+    <span class="sec-divider-label">Plan</span>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <div class="plan-wrap">
+    <div class="plan-grid">
+
+      <!-- 베이직 -->
+      <div class="plan-card">
+        <div class="plan-card-head">
+          <span class="plan-name">베이직</span>
+        </div>
+        <div class="plan-card-body">
+          <ul class="plan-list">
+            <li>얼굴 XYZ</li>
+            <li>눈썹 (위아래, 변형, 각도)</li>
+            <li class="red">눈썹눈 연동 페이셜</li>
+            <li>눈깜빡 (윙크)</li>
+            <li>눈동자 물리</li>
+            <li class="red">속눈썹 물리</li>
+            <li>입움직임 (9점)</li>
+            <li class="red">입 개폐 연동 턱 리깅</li>
+            <li>몸 XYZ</li>
+            <li>호흡</li>
+            <li class="red">팔 흔들림 (손가락 흔들림)</li>
+            <li class="red">캠 이탈 애니메이션 (선택)</li>
+            <li>기본 제공 표정 2종<span class="plan-sub">(애니메이션 X)</span></li>
+          </ul>
+          <div class="plan-physics">최대 3단계 물리 지원<span class="plan-sub">(필요의 경우 4단계 지원)</span></div>
+        </div>
+      </div>
+
+      <!-- 프리미엄 -->
+      <div class="plan-card plan-card--premium">
+        <div class="plan-card-head">
+          <span class="plan-name">프리미엄</span>
+        </div>
+        <div class="plan-card-body">
+          <ul class="plan-list">
+            <li>얼굴 XYZ</li>
+            <li>눈썹 (위아래, 변형, 각도)</li>
+            <li>눈썹 눈 연동 페이셜</li>
+            <li>눈깜빡 (윙크)</li>
+            <li>눈동자 물리</li>
+            <li>속눈썹 물리</li>
+            <li>입움직임 (12점~)</li>
+            <li>입 개폐 연동 턱 리깅</li>
+            <li>몸 XYZ</li>
+            <li>호흡</li>
+            <li>팔 흔들림 (손가락 흔들림)</li>
+            <li>캠 이탈 애니메이션 (선택)</li>
+            <li>기본 제공 표정 2종<span class="plan-sub">(애니메이션 X)</span></li>
+          </ul>
+          <div class="plan-physics">최소 3단계 물리 지원<span class="plan-sub">(필요의 경우 2단계 지원)</span></div>
+        </div>
+      </div>
+
+    </div>
+    <p class="plan-note">얼굴 및 바디 움직임에 각도 및 움직임 차이가 있으며 베이직의 경우 전체적인 디테일과 물리가 적습니다.</p>
+  </div>
+
+  <!-- ============================================
+       작업 과정 / 수정 사항 / 저작권
+  ============================================= -->
+  <div class="sec-divider" id="sec-info">
+    <div class="sec-divider-line"></div>
+    <span class="sec-divider-label">Info</span>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <div class="info-wrap">
+
+    <!-- 작업 과정 -->
+    <div class="info-block">
+      <div class="info-block-head">
+        <span class="info-block-icon">🔄</span>
+        <h3 class="info-block-title">작업 과정</h3>
+      </div>
+      <div class="info-block-body">
+        <!-- 플로우 -->
+        <div class="flow-row">
+          <span class="flow-step">문의</span><span class="flow-arrow">→</span>
+          <span class="flow-step">파일 확인 및 견적</span><span class="flow-arrow">→</span>
+          <span class="flow-step">접수 및 입금</span><span class="flow-arrow">→</span>
+          <span class="flow-step">1차 리깅</span><span class="flow-arrow">→</span>
+          <span class="flow-step">1차 컨펌(수정)</span><span class="flow-arrow">→</span>
+          <span class="flow-step">2차 리깅</span><span class="flow-arrow">→</span>
+          <span class="flow-step">2차 컨펌(수정)</span><span class="flow-arrow">→</span>
+          <span class="flow-step">완성 후 전달</span><span class="flow-arrow">→</span>
+          <span class="flow-step flow-step--final">최종 수정</span>
+        </div>
+        <ul class="info-desc-list">
+          <li>파일 적용 후 문제가 있다면 수정해 드립니다 (최종 수정)</li>
+          <li class="info-note">오너캐·동물·팬캐 등은 2차 컨펌 없이 1차 컨펌만 진행됩니다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 수정 사항 -->
+    <div class="info-block">
+      <div class="info-block-head">
+        <span class="info-block-icon">✏️</span>
+        <h3 class="info-block-title">수정 사항</h3>
+      </div>
+      <div class="info-block-body">
+        <ul class="info-desc-list">
+          <li>기본적인 수정 사항은 작업 기간에 진행되는 총 2회의 컨펌 및 수정 단계에서 진행됩니다.<br>
+            <span class="info-sub">동물/오너캐의 경우 최종 리깅까지 진행 후 1차 컨펌만 진행합니다.</span>
+          </li>
+          <li>수정 완료 후 이전 상태로 되돌리거나 과한 번복 요청 시 추가금이 청구될 수 있습니다.</li>
+          <li>리깅 실수 및 오류가 있는 경우 무료로 수정해 드립니다. 파일 적용 후 오류 발견 시 편히 말해 주세요.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 저작권 -->
+    <div class="info-block">
+      <div class="info-block-head">
+        <span class="info-block-icon">©️</span>
+        <h3 class="info-block-title">저작권</h3>
+      </div>
+      <div class="info-block-body">
+        <ul class="info-desc-list">
+          <li>리깅 데이터의 저작권은 기본적으로 리거(다중)에게 귀속됩니다.</li>
+          <li>의뢰인은 본 리깅 결과물을 방송, 영상 제작, SNS 등 목적에 한하여 이용할 수 있습니다.</li>
+          <li class="warn">리깅 데이터의 재판매·양도·공유는 허용되지 않습니다.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================
+       판매 모델
+  ============================================= -->
+  <div class="sec-divider" id="sec-sale">
+    <div class="sec-divider-line"></div>
+    <span class="sec-divider-label">Sale Model</span>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <div class="sale-model-wrap">
+    <div class="sale-model-head">
+      <div class="sale-model-badge">🛒 판매 중</div>
+      <h2 class="sale-model-title">판매 모델</h2>
+      <p class="sale-model-sub">일러스트 - 양초 작가님</p>
+    </div>
+    <div class="sale-model-body">
+      <div class="sale-model-video-col">
+        <div class="sale-model-video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/wML53bUKn1Q?si=gaP4RIUI9Yy9XTuG"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            title="판매 모델 쇼케이스">
+          </iframe>
+        </div>
+      </div>
+      <div class="sale-model-info-col">
+        <div>
+          <p class="sale-model-section-title">추가 표정 및 기능</p>
+          <ul class="sale-model-features">
+            <li>홍조, 경멸, 하트눈, 눈물 (애니메이션)</li>
+            <li>겉옷, 귀 ON/OFF</li>
+            <li>VBridger 포함 (메룽 X)</li>
+          </ul>
+        </div>
+        <div class="sale-price-box">
+          <p class="sale-price-label">판매가</p>
+          <p class="sale-price-formula">일러스트 85만원 + 리깅 78만원</p>
+          <p class="sale-price-original"><s>합계 163만원</s></p>
+          <p class="sale-price-total">🎉 130만원 🎉</p>
+          <p class="sale-price-save">33만원 할인</p>
+        </div>
+      </div>
+    </div>
+    <div class="sale-model-cta">
+      <a href="https://artmug.kr/index.php?channel=view&uid=47209" target="_blank" class="sale-model-btn">
+        🛒 구매 문의하기
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================
+       RIGGING SAMPLE
+  ============================================= -->
+  <div class="sec-divider" id="sec-sample">
+    <div class="sec-divider-line"></div>
+    <span class="sec-divider-label">Rigging Sample</span>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <div class="sp-wrap">
+    <div class="sp-head">
+      <h2 class="sp-title">리깅 작업 샘플</h2>
+      <p class="sp-subtitle">리깅 작업의 다양한 샘플을 확인해보세요.</p>
+    </div>
+
+    <!-- 탭 버튼 -->
+    <div class="sp-tabs" id="spTabs">
+      <button class="sp-tab-btn" data-tab="body" data-active>전신 리깅</button>
+      <button class="sp-tab-btn" data-tab="eye">눈 물리</button>
+      <button class="sp-tab-btn" data-tab="mouth">입 움직임</button>
+      <button class="sp-tab-btn" data-tab="expr">표정 효과</button>
+      <button class="sp-tab-btn" data-tab="arm">팔 움직임</button>
+      <button class="sp-tab-btn" data-tab="anim">표정 애니메이션</button>
+    </div>
+
+    <!-- 전신 리깅 -->
+    <div class="sp-panel" data-tab="body" data-active>
+      <h3 class="sp-cat-title">전신 리깅</h3>
+      <p class="sp-cat-desc">자연스럽고 부드러운 움직임을 구현합니다.</p>
+      <div class="sp-slider-outer" id="slider-body">
+        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
+        <div class="sp-slider-viewport">
+          <div class="sp-slider-track">
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/X_.gif?raw=true" alt="X 축 움직임 샘플"></div>
+              <div class="sp-cap">X 축 움직임</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Y_.gif?raw=true" alt="Y 축 움직임 샘플"></div>
+              <div class="sp-cap">Y 축 움직임</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Z_.gif?raw=true" alt="Z 축 움직임 샘플"></div>
+              <div class="sp-cap">Z 축 움직임</div>
+            </div>
+          </div>
+        </div>
+        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      </div>
+      <div class="sp-dots" id="dots-body"></div>
+      <p class="sp-cat-desc-bottom">캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.</p>
+    </div>
+
+    <!-- 눈 물리 -->
+    <div class="sp-panel" data-tab="eye">
+      <h3 class="sp-cat-title">눈 물리</h3>
+      <p class="sp-cat-desc">다양한 스타일의 눈을 생동감 있게 표현합니다.</p>
+      <div class="sp-slider-outer" id="slider-eye">
+        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
+        <div class="sp-slider-viewport">
+          <div class="sp-slider-track">
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/odeyes.gif?raw=true" alt="오드아이 눈 샘플"></div>
+              <div class="sp-cap">몽환적인 눈빛을 살린 디테일한 물리 표현</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/greeneyes.gif?raw=true" alt="녹색 눈 샘플"></div>
+              <div class="sp-cap">초롱초롱한 눈동자의 자연스러운 물리 움직임</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/redeyes.gif?raw=true" alt="붉은 눈 샘플"></div>
+              <div class="sp-cap">섬세한 속눈썹과 눈동자의 부드러운 물리</div>
+            </div>
+          </div>
+        </div>
+        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      </div>
+      <div class="sp-dots" id="dots-eye"></div>
+    </div>
+
+    <!-- 입 움직임 -->
+    <div class="sp-panel" data-tab="mouth">
+      <h3 class="sp-cat-title">입 움직임</h3>
+      <p class="sp-cat-desc">발화 스타일에 맞게 선택할 수 있는 세 가지 입 구조입니다.</p>
+      <div class="sp-slider-outer" id="slider-mouth">
+        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
+        <div class="sp-slider-viewport">
+          <div class="sp-slider-track">
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%209%EC%A0%90.gif?raw=true" alt="입 움직임 9점"></div>
+              <div class="sp-cap">단순한 9점 구조로 일반 대화에 적합</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%2012%EC%A0%90.gif?raw=true" alt="입 움직임 12점"></div>
+              <div class="sp-cap">세밀한 12점 구조로 대화와 감정 표현에 적합</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%2012%EC%A0%90%20VBridger%20.gif?raw=true" alt="입 움직임 12점 VBridger"></div>
+              <div class="sp-cap">Vbridger 사용으로 섬세한 감정 표현에 적합</div>
+            </div>
+          </div>
+        </div>
+        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      </div>
+      <div class="sp-dots" id="dots-mouth"></div>
+    </div>
+
+    <!-- 표정 효과 -->
+    <div class="sp-panel" data-tab="expr">
+      <h3 class="sp-cat-title">표정 효과</h3>
+      <p class="sp-cat-desc">단축키 한 번으로 개성 있는 감정을 표현해보세요.</p>
+      <div class="sp-slider-outer" id="slider-expr">
+        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
+        <div class="sp-slider-viewport">
+          <div class="sp-slider-track">
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%EA%B2%BD%EB%A9%B8.gif?raw=true" alt="표정 효과 경멸"></div>
+              <div class="sp-cap">차갑고 날카로운 눈빛으로 경멸감을 표현</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%EB%B9%A0%EC%A7%81.gif?raw=true" alt="표정 효과 짜증"></div>
+              <div class="sp-cap">순간적인 짜증과 불쾌감을 생동감 있게 연출</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%ED%95%98%ED%8A%B8%EB%88%88.gif?raw=true" alt="표정 효과 하트"></div>
+              <div class="sp-cap">설레고 사랑스러운 순간을 하트눈으로 표현</div>
+            </div>
+          </div>
+        </div>
+        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      </div>
+      <div class="sp-dots" id="dots-expr"></div>
+    </div>
+
+    <!-- 팔 움직임 -->
+    <div class="sp-panel" data-tab="arm">
+      <h3 class="sp-cat-title">팔 움직임</h3>
+      <p class="sp-cat-desc">캐릭터의 콘셉트에 맞는 팔 움직임 예시입니다.</p>
+      <div class="sp-slider-outer" id="slider-arm">
+        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
+        <div class="sp-slider-viewport">
+          <div class="sp-slider-track">
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EA%B2%8C%EC%9E%84%EA%B8%B0.gif?raw=true" alt="팔 움직임 게임기"></div>
+              <div class="sp-cap">게임기를 쥔 양손 · 활기찬 스트리머 감성</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EB%A7%88%EB%B2%95%EB%B4%89.gif?raw=true" alt="팔 움직임 마법봉"></div>
+              <div class="sp-cap">마법봉을 든 한 손 · 신비롭고 우아한 분위기</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EC%86%90%EC%9D%B8%EC%82%AC.gif?raw=true" alt="팔 움직임 손인사"></div>
+              <div class="sp-cap">손 흔들어 인사하기 · 밝고 친근한 첫인상</div>
+            </div>
+          </div>
+        </div>
+        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      </div>
+      <div class="sp-dots" id="dots-arm"></div>
+    </div>
+
+    <!-- 표정 애니메이션 -->
+    <div class="sp-panel" data-tab="anim">
+      <h3 class="sp-cat-title">표정 애니메이션</h3>
+      <p class="sp-cat-desc">캐릭터 위에 자연스럽게 재생되는 감정 연출 효과입니다.</p>
+      <div class="sp-slider-outer" id="slider-anim">
+        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
+        <div class="sp-slider-viewport">
+          <div class="sp-slider-track">
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/sad.gif?raw=true" alt="눈물 효과 샘플"></div>
+              <div class="sp-cap">눈가를 타고 흐르는 자연스러운 눈물 연출</div>
+            </div>
+            <div class="sp-slide-card">
+              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/omg.gif?raw=true" alt="땀삐질효과"></div>
+              <div class="sp-cap">긴장감과 당황스러움을 식은땀으로 표현</div>
+            </div>
+          </div>
+        </div>
+        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      </div>
+      <div class="sp-dots" id="dots-anim"></div>
+    </div>
+
+  </div><!-- /sp-wrap -->
+
+  <!-- ============================================
+       SHOWCASE
+  ============================================= -->
+  <div class="sec-divider" id="sec-showcase">
+    <div class="sec-divider-line"></div>
+    <span class="sec-divider-label">Showcase</span>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <section class="works">
+    <div data-type-buttons></div>
+    <div id="type-container"></div>
+  </section>
+
+</div><!-- /page -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const videoData = {
+    LD:  { title: "LD",      list: ["Zlbfvuxf3Lo","8EabRx_ZFAI","wML53bUKn1Q","yvc0yN8uwqU","w-eRgLmsgas","zKRPxZ7pv58"] },
+    SD:  { title: "SD",      list: ["bdD1dhv6lI4","BtvMd8yG80g","SwGP1UFE424","pH4GRAjcp2U","b6DNOVjED9o"] },
+    FAN: { title: "오너캐",  list: ["cOmUiWxkqfo","FzIi9m1bKeI","9XtIUiv314c"] },
+    MEM: { title: "메모리얼", list: ["JLTUyPkfsj0","lhVUjv1q-bw"] }
+  };
+
+  function buildAllTypes() {
+    const typeButtons = document.querySelector('[data-type-buttons]');
+    const container   = document.getElementById('type-container');
+    typeButtons.innerHTML = '';
+    container.innerHTML   = '';
+
+    Object.keys(videoData).forEach((typeKey, idx) => {
+      const item = videoData[typeKey];
+      const btn = document.createElement('button');
+      btn.textContent = item.title;
+      btn.setAttribute('data-switch', typeKey);
+      if (idx === 0) btn.setAttribute('data-active', 'true');
+      typeButtons.appendChild(btn);
+
+      const sec = document.createElement('section');
+      sec.setAttribute('data-type', typeKey);
+      if (idx === 0) sec.setAttribute('data-active', 'true');
+      sec.innerHTML = generateSliderHTML(item.list);
+      container.appendChild(sec);
+    });
+  }
+
+  function generateSliderHTML(list) {
+    let slides = '';
+    list.forEach((vid, i) => {
+      const active = i === 0;
+      slides += `
+        <div data-slide data-video="${vid}" data-index="${i}" data-active="${active}">
+          <div class="video-wrapper">
+            <div class="image-placeholder${active ? ' hidden' : ''}" data-clickable="true">Loading…</div>
+            <iframe title="Video ${vid}"
+              ${active ? `src="https://www.youtube.com/embed/${vid}?fs=0"` : `data-src="https://www.youtube.com/embed/${vid}?fs=0" src="about:blank" class="lazy-iframe"`}
+              frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+            </iframe>
+          </div>
+        </div>`;
+    });
+
+    let thumbs = '';
+    list.forEach((vid, i) => {
+      thumbs += `
+        <button data-thumb data-index="${i}"${i === 0 ? ' data-active="true"' : ''}>
+          <img src="https://img.youtube.com/vi/${vid}/hqdefault.jpg" alt="Thumbnail ${i+1}" loading="lazy">
+        </button>`;
+    });
+
+    return `
+      <div data-root>
+        <div data-stage aria-roledescription="carousel" data-autoplay="false" data-interval="6000">
+          ${slides}
+          <button data-action="prev" aria-label="이전">❮</button>
+          <button data-action="next" aria-label="다음">❯</button>
+        </div>
+        <div data-dots></div>
+        <div data-thumbs-wrapper><div data-thumbs>${thumbs}</div></div>
+      </div>`;
+  }
+
+  buildAllTypes();
+
+  function loadIframe(wrapper) {
+    const iframe = wrapper.querySelector('iframe[data-src]');
+    const ph     = wrapper.querySelector('.image-placeholder');
+    if (iframe && iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
+      iframe.removeAttribute('data-src');
+      iframe.classList.remove('lazy-iframe');
+      return true;
+    }
+    return false;
+  }
+
+  function initLazyIframes() {
+    const allSlides = document.querySelectorAll('[data-slide]');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const wrapper = entry.target.querySelector('.video-wrapper');
+            if (wrapper && loadIframe(wrapper)) observer.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '300px 0px' });
+      allSlides.forEach(s => observer.observe(s));
+    }
+    allSlides.forEach(slide => {
+      const ph = slide.querySelector('.image-placeholder');
+      if (ph) {
+        ph.addEventListener('click', () => {
+          loadIframe(slide.querySelector('.video-wrapper'));
+        });
+      }
+    });
+  }
+
+  initLazyIframes();
+
+  document.querySelector('[data-type-buttons]').addEventListener('click', e => {
+    const btn = e.target.closest('button[data-switch]');
+    if (!btn) return;
+    const target = btn.getAttribute('data-switch');
+    document.querySelectorAll('[data-type-buttons] button').forEach(b => b.removeAttribute('data-active'));
+    btn.setAttribute('data-active', 'true');
+    document.querySelectorAll('section[data-type]').forEach(sec => {
+      sec.getAttribute('data-type') === target
+        ? sec.setAttribute('data-active', 'true')
+        : sec.removeAttribute('data-active');
+    });
+    setTimeout(() => {
+      const activeSlide = document.querySelector('section[data-type][data-active] [data-slide][data-active="true"]');
+      if (activeSlide) loadIframe(activeSlide.querySelector('.video-wrapper'));
+    }, 10);
+  });
+
+  (function() {
+    document.querySelectorAll('div[data-root]').forEach(root => {
+      const stage     = root.querySelector('div[data-stage]');
+      const slides    = Array.from(stage.querySelectorAll('div[data-slide]'));
+      const prevBtn   = stage.querySelector('button[data-action="prev"]');
+      const nextBtn   = stage.querySelector('button[data-action="next"]');
+      const dotsWrap  = root.querySelector('div[data-dots]');
+      const thumbsEl  = root.querySelector('div[data-thumbs]');
+      const thumbBtns = Array.from(thumbsEl.querySelectorAll('button[data-thumb]'));
+      const total     = slides.length;
+      let current     = 0;
+
+      function buildDots() {
+        dotsWrap.innerHTML = '';
+        for (let i = 0; i < total; i++) {
+          const b = document.createElement('button');
+          b.setAttribute('data-dot', '');
+          if (i === 0) b.setAttribute('data-active', 'true');
+          b.addEventListener('click', () => goTo(i));
+          dotsWrap.appendChild(b);
+        }
+      }
+
+      function updateUI() {
+        slides.forEach(s => {
+          const idx = Number(s.getAttribute('data-index'));
+          s.setAttribute('data-active', idx === current ? 'true' : 'false');
+          s.setAttribute('aria-hidden', idx === current ? 'false' : 'true');
+        });
+        dotsWrap.querySelectorAll('[data-dot]').forEach((d, i) => {
+          i === current ? d.setAttribute('data-active', 'true') : d.removeAttribute('data-active');
+        });
+        thumbBtns.forEach((t, i) => {
+          i === current ? t.setAttribute('data-active', 'true') : t.removeAttribute('data-active');
+        });
+        const activeSlide = slides.find(s => Number(s.getAttribute('data-index')) === current);
+        if (activeSlide) loadIframe(activeSlide.querySelector('.video-wrapper'));
+      }
+
+      function goTo(i) {
+        if (i < 0) i = total - 1;
+        if (i >= total) i = 0;
+        current = i;
+        updateUI();
+      }
+
+      thumbBtns.forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          e.stopPropagation();
+          goTo(Number(btn.getAttribute('data-index')));
+        }, true);
+      });
+
+      prevBtn.addEventListener('click', e => { e.preventDefault(); goTo(current - 1); });
+      nextBtn.addEventListener('click', e => { e.preventDefault(); goTo(current + 1); });
+
+      window.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+      });
+
+      buildDots();
+      updateUI();
+    });
+  })();
+
+});
+</script>
+
+<script>
+// =====================
+// SAMPLE TABS + SLIDERS
+// =====================
+(function() {
+  // --- TAB SWITCHING ---
+  const tabBtns = document.querySelectorAll('.sp-tab-btn');
+  const panels  = document.querySelectorAll('.sp-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.tab;
+      tabBtns.forEach(b => b.removeAttribute('data-active'));
+      panels.forEach(p => p.removeAttribute('data-active'));
+      btn.setAttribute('data-active', '');
+      document.querySelector(`.sp-panel[data-tab="${key}"]`).setAttribute('data-active', '');
+    });
+  });
+
+  // --- PER-PANEL SLIDER ---
+  const sliderDefs = [
+    { id: 'body',  dotsId: 'dots-body' },
+    { id: 'eye',   dotsId: 'dots-eye' },
+    { id: 'mouth', dotsId: 'dots-mouth' },
+    { id: 'expr',  dotsId: 'dots-expr' },
+    { id: 'arm',   dotsId: 'dots-arm' },
+    { id: 'anim',  dotsId: 'dots-anim' },
+  ];
+
+  sliderDefs.forEach(({ id, dotsId }) => {
+    const outer    = document.getElementById('slider-' + id);
+    if (!outer) return;
+    const track    = outer.querySelector('.sp-slider-track');
+    const cards    = Array.from(track.querySelectorAll('.sp-slide-card'));
+    const prevBtn  = outer.querySelector('.sp-nav-btn--prev');
+    const nextBtn  = outer.querySelector('.sp-nav-btn--next');
+    const dotsWrap = document.getElementById(dotsId);
+    const total    = cards.length;
+    let current    = 0;
+
+    // Dots
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'sp-dot';
+      if (i === 0) dot.setAttribute('data-active', '');
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+
+    function getVisible() {
+      const vw = outer.querySelector('.sp-slider-viewport').offsetWidth;
+      const cw = cards[0] ? cards[0].offsetWidth : 300;
+      const gap = 14;
+      return Math.max(1, Math.round((vw + gap) / (cw + gap)));
+    }
+
+    function getCardWidth() {
+      return cards[0] ? cards[0].offsetWidth + 14 : 0;
+    }
+
+    function updateUI() {
+      const cw = getCardWidth();
+      track.style.transform = `translateX(-${current * cw}px)`;
+
+      const vis = getVisible();
+      const maxStep = Math.max(0, total - vis);
+
+      prevBtn[current <= 0 ? 'setAttribute' : 'removeAttribute']('data-disabled', '');
+      nextBtn[current >= maxStep ? 'setAttribute' : 'removeAttribute']('data-disabled', '');
+
+      const dots = dotsWrap.querySelectorAll('.sp-dot');
+      dots.forEach((d, i) => {
+        i === current ? d.setAttribute('data-active', '') : d.removeAttribute('data-active');
+      });
+    }
+
+    function goTo(i) {
+      const vis = getVisible();
+      const max = Math.max(0, total - vis);
+      current = Math.min(Math.max(i, 0), max);
+      updateUI();
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+    window.addEventListener('resize', () => { current = 0; updateUI(); });
+
+    updateUI();
+  });
+})();
+</script>
+
+
+<nav class="side-nav" id="sideNav">
+  <div class="side-nav-item" data-target="sec-notice">
+    <span class="side-nav-label">공지사항</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-event">
+    <span class="side-nav-label">이벤트 / 프로세스</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-plan">
+    <span class="side-nav-label">Plan</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-info">
+    <span class="side-nav-label">작업 안내</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-sale">
+    <span class="side-nav-label">판매 모델</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-sample">
+    <span class="side-nav-label">Rigging Sample</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-showcase">
+    <span class="side-nav-label">Showcase</span>
+    <span class="side-nav-dot"></span>
+  </div>
+</nav>
+
+<script>
+// Side Nav
+(function() {
+  const nav = document.getElementById('sideNav');
+  const items = Array.from(nav.querySelectorAll('.side-nav-item'));
+  const sectionIds = items.map(i => i.dataset.target);
+
+  // Click to scroll
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const el = document.getElementById(item.dataset.target);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Show nav after scrolling past top
+  function checkVisibility() {
+    if (window.scrollY > 100) nav.classList.add('visible');
+    else nav.classList.remove('visible');
+  }
+
+  // Highlight active section
+  function updateActive() {
+    let current = sectionIds[0];
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 120) current = id;
+    });
+    items.forEach(item => {
+      item.getAttribute('data-target') === current
+        ? item.setAttribute('data-active', '')
+        : item.removeAttribute('data-active');
+    });
+  }
+
+  window.addEventListener('scroll', () => { checkVisibility(); updateActive(); }, { passive: true });
+  checkVisibility();
+  updateActive();
+})();
+</script>
+
+</body>
+</html>
