@@ -992,45 +992,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   font-size: 13px;
   color: var(--text-light);
 }
-/* ==============================
-   SAMPLE TABS
-============================== */
-.sp-tabs {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 22px;
+.sp-group {
+  padding: 22px 0 0;
+  border-top: 1px solid rgba(150,160,255,.15);
+  margin-top: 4px;
 }
-.sp-tab-btn {
-  padding: 7px 18px;
-  border-radius: 999px;
-  border: 1px solid var(--border-strong);
-  background: var(--panel);
-  color: var(--text-light);
-  font-size: 13px;
-  font-weight: 600;
-  transition: all .22s ease;
-  cursor: pointer;
-}
-.sp-tab-btn[data-active] {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(159,168,255,.35);
-}
-.sp-tab-btn:hover:not([data-active]) {
-  background: rgba(159,168,255,.12);
-  border-color: var(--primary);
-  color: var(--text);
-}
-
-/* ==============================
-   SAMPLE PANELS
-============================== */
-.sp-panel { display: none; }
-.sp-panel[data-active] { display: block; }
-
+.sp-group:first-of-type { border-top: none; }
 .sp-cat-title {
   font-size: 16px;
   font-weight: 700;
@@ -1041,37 +1008,20 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   font-size: 12px;
   color: var(--text-light);
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
-.sp-cat-desc-bottom {
-  font-size: 11.5px;
-  color: var(--text-light);
-  text-align: center;
-  margin-top: 10px;
-}
-
-/* ==============================
-   GIF SLIDER
-============================== */
-.sp-slider-outer {
-  position: relative;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 44px;
-}
-.sp-slider-viewport {
-  overflow: hidden;
-  border-radius: var(--r-md);
-}
-.sp-slider-track {
-  display: flex;
+.sp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 14px;
-  transition: transform .38s cubic-bezier(.4,0,.2,1);
-  will-change: transform;
+  max-width: 960px;
+  margin: 0 auto 16px;
 }
-.sp-slide-card {
-  flex: 0 0 calc((100% - 28px) / 3);
-  min-width: 0;
+.sp-grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 640px;
+}
+.sp-item {
   border-radius: var(--r-md);
   overflow: hidden;
   background: #fff;
@@ -1079,22 +1029,24 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   box-shadow: var(--shadow-sm);
   transition: transform .18s ease, box-shadow .18s ease;
 }
-.sp-slide-card:hover {
+.sp-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 36px rgba(40,55,140,.12);
 }
-.sp-slide-card .sp-media {
+.sp-media {
   width: 100%;
+  display: block;
   background: rgba(245,247,255,.9);
   overflow: hidden;
   line-height: 0;
 }
-.sp-slide-card .sp-gif {
+.sp-gif {
   width: 100%;
   height: auto;
   display: block;
+  object-fit: unset;
 }
-.sp-slide-card .sp-cap {
+.sp-cap {
   padding: 9px 12px 11px;
   font-size: 11.5px;
   text-align: center;
@@ -1102,69 +1054,6 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   border-top: 1px solid rgba(150,160,255,.10);
   background: #fff;
 }
-
-/* NAV ARROWS */
-.sp-nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--panel);
-  border: 1px solid var(--border-strong);
-  color: var(--primary-strong);
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .2s ease;
-  z-index: 5;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
-}
-.sp-nav-btn:hover {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
-}
-.sp-nav-btn[data-disabled] {
-  opacity: .3;
-  pointer-events: none;
-}
-.sp-nav-btn--prev { left: 0; }
-.sp-nav-btn--next { right: 0; }
-
-/* DOTS */
-.sp-dots {
-  display: flex;
-  gap: 6px;
-  justify-content: center;
-  margin-top: 14px;
-}
-.sp-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: rgba(150,160,255,.3);
-  border: none;
-  cursor: pointer;
-  transition: all .22s ease;
-  padding: 0;
-}
-.sp-dot[data-active] {
-  background: var(--primary);
-  transform: scale(1.35);
-}
-
-@media (max-width: 640px) {
-  .sp-slide-card { flex: 0 0 calc(100% - 0px); }
-  .sp-slider-outer { padding: 0 36px; }
-}
-@media (min-width: 641px) and (max-width: 860px) {
-  .sp-slide-card { flex: 0 0 calc((100% - 14px) / 2); }
-}
-
 
 /* ==============================
    SHOWCASE (YouTube Slider)
@@ -1690,7 +1579,7 @@ section[data-type][data-active] { display: block; }
                 <span class="event-title">리뉴얼 기념 특별 할인</span>
                 <span class="badge">리뉴얼 할인</span>
               </div>
-              <span class="event-sub">언제 마감 될지 모릅니다.</span>
+              <span class="event-sub">조기 마감될 수 있습니다</span>
               <p class="event-desc">프리미엄 리깅 LD 전신이 리뉴얼 특별 할인</p>
             </div>
             <div class="event-item">
@@ -1699,7 +1588,7 @@ section[data-type][data-active] { display: block; }
                 <span class="badge">리뷰 이벤트</span>
               </div>
               <span class="event-sub">긍정적인 리뷰를 남겨 주시면 추가 할인 혜택까지</span>
-              <p class="event-desc">리뷰 이벤트까지 확인 하시고 2만원 or 표정 2종 서비스 받아가세요</p>
+              <p class="event-desc">리뷰 작성 시 2만원 할인 또는 표정 2종 중 선택 가능합니다</p>
             </div>
           </div>
         </div>
@@ -1831,7 +1720,7 @@ section[data-type][data-active] { display: block; }
       </div>
 
     </div>
-    <p class="plan-note">얼굴 및 바디 움직임에 각도 및 움직임 차이가 있으며 베이직의 경우 전체적인 디테일과 물리가 적습니다.</p>
+    <p class="plan-note">베이직과 프리미엄은 움직임 각도, 물리 단계, 전반적인 디테일에서 차이가 있습니다</p>
   </div>
 
   <!-- ============================================
@@ -1970,175 +1859,142 @@ section[data-type][data-active] { display: block; }
       <p class="sp-subtitle">리깅 작업의 다양한 샘플을 확인해보세요.</p>
     </div>
 
-    <!-- 탭 버튼 -->
-    <div class="sp-tabs" id="spTabs">
-      <button class="sp-tab-btn" data-tab="body" data-active>전신 리깅</button>
-      <button class="sp-tab-btn" data-tab="eye">눈 물리</button>
-      <button class="sp-tab-btn" data-tab="mouth">입 움직임</button>
-      <button class="sp-tab-btn" data-tab="expr">표정 효과</button>
-      <button class="sp-tab-btn" data-tab="arm">팔 움직임</button>
-      <button class="sp-tab-btn" data-tab="anim">표정 애니메이션</button>
-    </div>
-
     <!-- 전신 리깅 -->
-    <div class="sp-panel" data-tab="body" data-active>
+    <div class="sp-group">
       <h3 class="sp-cat-title">전신 리깅</h3>
       <p class="sp-cat-desc">자연스럽고 부드러운 움직임을 구현합니다.</p>
-      <div class="sp-slider-outer" id="slider-body">
-        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
-        <div class="sp-slider-viewport">
-          <div class="sp-slider-track">
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/X_.gif?raw=true" alt="X 축 움직임 샘플"></div>
-              <div class="sp-cap">X 축 움직임</div>
-            </div>
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Y_.gif?raw=true" alt="Y 축 움직임 샘플"></div>
-              <div class="sp-cap">Y 축 움직임</div>
-            </div>
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Z_.gif?raw=true" alt="Z 축 움직임 샘플"></div>
-              <div class="sp-cap">Z 축 움직임</div>
-            </div>
-          </div>
-        </div>
-        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/X_.gif?raw=true" alt="X 축 움직임 샘플"></div>
+          <figcaption class="sp-cap">X 축 움직임</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Y_.gif?raw=true" alt="Y 축 움직임 샘플"></div>
+          <figcaption class="sp-cap">Y 축 움직임</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/Z_.gif?raw=true" alt="Z 축 움직임 샘플"></div>
+          <figcaption class="sp-cap">Z 축 움직임</figcaption>
+        </figure>
       </div>
-      <div class="sp-dots" id="dots-body"></div>
-      <p class="sp-cat-desc-bottom">캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.</p>
+      <p class="sp-cat-desc">캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.</p>
     </div>
 
     <!-- 눈 물리 -->
-    <div class="sp-panel" data-tab="eye">
+    <div class="sp-group">
       <h3 class="sp-cat-title">눈 물리</h3>
       <p class="sp-cat-desc">다양한 스타일의 눈을 생동감 있게 표현합니다.</p>
-      <div class="sp-slider-outer" id="slider-eye">
-        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
-        <div class="sp-slider-viewport">
-          <div class="sp-slider-track">
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/odeyes.gif?raw=true" alt="오드아이 눈 샘플"></div>
-              <div class="sp-cap">몽환적인 눈빛을 살린 디테일한 물리 표현</div>
-            </div>
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/greeneyes.gif?raw=true" alt="녹색 눈 샘플"></div>
-              <div class="sp-cap">초롱초롱한 눈동자의 자연스러운 물리 움직임</div>
-            </div>
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/redeyes.gif?raw=true" alt="붉은 눈 샘플"></div>
-              <div class="sp-cap">섬세한 속눈썹과 눈동자의 부드러운 물리</div>
-            </div>
-          </div>
-        </div>
-        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/odeyes.gif?raw=true" alt="오드아이 눈 샘플"></div>
+          <figcaption class="sp-cap">몽환적인 눈빛을 살린 디테일한 물리 표현</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/greeneyes.gif?raw=true" alt="녹색 눈 샘플"></div>
+          <figcaption class="sp-cap">초롱초롱한 눈동자의 자연스러운 물리 움직임</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%88%88/redeyes.gif?raw=true" alt="붉은 눈 샘플"></div>
+          <figcaption class="sp-cap">섬세한 속눈썹과 눈동자의 부드러운 물리</figcaption>
+        </figure>
       </div>
-      <div class="sp-dots" id="dots-eye"></div>
     </div>
 
     <!-- 입 움직임 -->
-    <div class="sp-panel" data-tab="mouth">
+    <div class="sp-group">
       <h3 class="sp-cat-title">입 움직임</h3>
-      <p class="sp-cat-desc">발화 스타일에 맞게 선택할 수 있는 세 가지 입 구조입니다.</p>
-      <div class="sp-slider-outer" id="slider-mouth">
-        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
-        <div class="sp-slider-viewport">
-          <div class="sp-slider-track">
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%209%EC%A0%90.gif?raw=true" alt="입 움직임 9점"></div>
-              <div class="sp-cap">단순한 9점 구조로 일반 대화에 적합</div>
-            </div>
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%2012%EC%A0%90.gif?raw=true" alt="입 움직임 12점"></div>
-              <div class="sp-cap">세밀한 12점 구조로 대화와 감정 표현에 적합</div>
-            </div>
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%2012%EC%A0%90%20VBridger%20.gif?raw=true" alt="입 움직임 12점 VBridger"></div>
-              <div class="sp-cap">Vbridger 사용으로 섬세한 감정 표현에 적합</div>
-            </div>
-          </div>
-        </div>
-        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      <p class="sp-cat-desc">발화 스타일에 맞게 선택할 수 있는 세 가지 입 구조입니다</p>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%209%EC%A0%90.gif?raw=true" alt="입 움직임 9점"></div>
+          <figcaption class="sp-cap">단순한 9점 구조로 일반 대화에 적합</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%2012%EC%A0%90.gif?raw=true" alt="입 움직임 12점"></div>
+          <figcaption class="sp-cap">세밀한 12점 구조로 대화와 감정 표현에 적합</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9E%85/%EC%9E%85%20%EC%9B%80%EC%A7%81%EC%9E%84%2012%EC%A0%90%20VBridger%20.gif?raw=true" alt="입 움직임 12점 VBridger"></div>
+          <figcaption class="sp-cap">Vbridger 사용으로 섬세한 감정 표현에 적합</figcaption>
+        </figure>
       </div>
-      <div class="sp-dots" id="dots-mouth"></div>
-    </div>
 
-    <!-- 표정 효과 -->
-    <div class="sp-panel" data-tab="expr">
+    </div>
+    <!-- 표정효과 -->
+    <div class="sp-group">
       <h3 class="sp-cat-title">표정 효과</h3>
-      <p class="sp-cat-desc">단축키 한 번으로 개성 있는 감정을 표현해보세요.</p>
-      <div class="sp-slider-outer" id="slider-expr">
-        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
-        <div class="sp-slider-viewport">
-          <div class="sp-slider-track">
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%EA%B2%BD%EB%A9%B8.gif?raw=true" alt="표정 효과 경멸"></div>
-              <div class="sp-cap">차갑고 날카로운 눈빛으로 경멸감을 표현</div>
-            </div>
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%EB%B9%A0%EC%A7%81.gif?raw=true" alt="표정 효과 짜증"></div>
-              <div class="sp-cap">순간적인 짜증과 불쾌감을 생동감 있게 연출</div>
-            </div>
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%ED%95%98%ED%8A%B8%EB%88%88.gif?raw=true" alt="표정 효과 하트"></div>
-              <div class="sp-cap">설레고 사랑스러운 순간을 하트눈으로 표현</div>
-            </div>
-          </div>
-        </div>
-        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      <p class="sp-cat-desc">단축키 한 번으로 개성 있는 감정을 표현해보세요</p>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%EA%B2%BD%EB%A9%B8.gif?raw=true" alt="표정 효과 경멸"></div>
+          <figcaption class="sp-cap">차갑고 날카로운 눈빛으로 경멸감을 표현</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%EB%B9%A0%EC%A7%81.gif?raw=true" alt="표정 효과 짜증"></div>
+          <figcaption class="sp-cap">순간적인 짜증과 불쾌감을 생동감 있게 연출</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EB%8B%A8%EC%B6%95%20%ED%9A%A8%EA%B3%BC/%ED%95%98%ED%8A%B8%EB%88%88.gif?raw=true" alt="표정 효과 하트"></div>
+          <figcaption class="sp-cap">설레고 사랑스러운 순간을 하트눈으로 표현</figcaption>
+        </figure>
       </div>
-      <div class="sp-dots" id="dots-expr"></div>
     </div>
 
-    <!-- 팔 움직임 -->
-    <div class="sp-panel" data-tab="arm">
+        <!-- 팔 움직임 -->
+    <div class="sp-group">
       <h3 class="sp-cat-title">팔 움직임</h3>
-      <p class="sp-cat-desc">캐릭터의 콘셉트에 맞는 팔 움직임 예시입니다.</p>
-      <div class="sp-slider-outer" id="slider-arm">
-        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
-        <div class="sp-slider-viewport">
-          <div class="sp-slider-track">
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EA%B2%8C%EC%9E%84%EA%B8%B0.gif?raw=true" alt="팔 움직임 게임기"></div>
-              <div class="sp-cap">게임기를 쥔 양손 · 활기찬 스트리머 감성</div>
-            </div>
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EB%A7%88%EB%B2%95%EB%B4%89.gif?raw=true" alt="팔 움직임 마법봉"></div>
-              <div class="sp-cap">마법봉을 든 한 손 · 신비롭고 우아한 분위기</div>
-            </div>
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EC%86%90%EC%9D%B8%EC%82%AC.gif?raw=true" alt="팔 움직임 손인사"></div>
-              <div class="sp-cap">손 흔들어 인사하기 · 밝고 친근한 첫인상</div>
-            </div>
-          </div>
-        </div>
-        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      <p class="sp-cat-desc">캐릭터의 콘셉트에 맞는 팔 움직임 예시입니다</p>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EA%B2%8C%EC%9E%84%EA%B8%B0.gif?raw=true" alt="팔 움직임 게임기"></div>
+          <figcaption class="sp-cap">게임기를 이용해 게임 화면에 몰입감을 올릴 수 있습니다</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EB%A7%88%EB%B2%95%EB%B4%89.gif?raw=true" alt="팔 움직임 마법봉"></div>
+          <figcaption class="sp-cap">캐릭터 컨셉에 맞는 아이템으로 다양한 연출</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%8C%94/%EC%86%90%EC%9D%B8%EC%82%AC.gif?raw=true" alt="팔 움직임 손인사"></div>
+          <figcaption class="sp-cap">손을 흔들며 인사하는 디테일한 표현</figcaption>
+        </figure>
       </div>
-      <div class="sp-dots" id="dots-arm"></div>
     </div>
 
-    <!-- 표정 애니메이션 -->
-    <div class="sp-panel" data-tab="anim">
+            <!-- 의상 및 헤어 -->
+    <div class="sp-group">
+      <h3 class="sp-cat-title">의상 및 헤어</h3>
+      <p class="sp-cat-desc">캐릭터의 콘셉트에 맞는 의상 및 헤어 예시입니다</p>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9D%98%EC%83%81%20%EB%B0%8F%20%ED%97%A4%EC%96%B4/1.%EB%A8%B8%EB%A6%AC%20%EC%BB%AC%EB%9F%AC%20%EB%B3%80%EA%B2%BD.gif?raw=true" alt="머리색상변경"></div>
+          <figcaption class="sp-cap">머리 색상을 바뀌 다양한 분위기를 연출할 수 있습니다</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9D%98%EC%83%81%20%EB%B0%8F%20%ED%97%A4%EC%96%B4/2.%EC%9D%98%EC%83%81%20%EB%B3%80%EA%B2%BD.gif?raw=true" alt="의상 변경"></div>
+          <figcaption class="sp-cap">캐릭터 컨셉에 맞는 의상으로 다양한 연출</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9D%98%EC%83%81%20%EB%B0%8F%20%ED%97%A4%EC%96%B4/3.%ED%97%A4%EC%96%B4%20%EB%B3%80%EA%B2%BD.gif?raw=true" alt="헤어 변경"></div>
+          <figcaption class="sp-cap">헤어 스타일을 바꿔 다양한 분위기를 연출할 수 있습니다</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- 기타 애니메이션 -->
+    <div class="sp-group">
       <h3 class="sp-cat-title">표정 애니메이션</h3>
-      <p class="sp-cat-desc">캐릭터 위에 자연스럽게 재생되는 감정 연출 효과입니다.</p>
-      <div class="sp-slider-outer" id="slider-anim">
-        <button class="sp-nav-btn sp-nav-btn--prev" aria-label="이전">❮</button>
-        <div class="sp-slider-viewport">
-          <div class="sp-slider-track">
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/sad.gif?raw=true" alt="눈물 효과 샘플"></div>
-              <div class="sp-cap">눈가를 타고 흐르는 자연스러운 눈물 연출</div>
-            </div>
-            <div class="sp-slide-card">
-              <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/omg.gif?raw=true" alt="땀삐질효과"></div>
-              <div class="sp-cap">긴장감과 당황스러움을 식은땀으로 표현</div>
-            </div>
-          </div>
-        </div>
-        <button class="sp-nav-btn sp-nav-btn--next" aria-label="다음">❯</button>
+      <p class="sp-cat-desc">캐릭터 위에 자연스럽게 재생되는 감정 연출 효과입니다</p>
+      <div class="sp-grid sp-grid--2">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/sad.gif?raw=true" alt="눈물 효과 샘플"></div>
+          <figcaption class="sp-cap">눈가를 타고 흐르는 자연스러운 눈물 연출</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%ED%9A%A8%EA%B3%BC/omg.gif?raw=true" alt="땀삐질효과"></div>
+          <figcaption class="sp-cap">긴장감과 당황스러움을 식은땀으로 표현</figcaption>
+        </figure>
       </div>
-      <div class="sp-dots" id="dots-anim"></div>
     </div>
-
   </div><!-- /sp-wrap -->
 
   <!-- ============================================
@@ -2352,99 +2208,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<script>
-// =====================
-// SAMPLE TABS + SLIDERS
-// =====================
-(function() {
-  // --- TAB SWITCHING ---
-  const tabBtns = document.querySelectorAll('.sp-tab-btn');
-  const panels  = document.querySelectorAll('.sp-panel');
-
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const key = btn.dataset.tab;
-      tabBtns.forEach(b => b.removeAttribute('data-active'));
-      panels.forEach(p => p.removeAttribute('data-active'));
-      btn.setAttribute('data-active', '');
-      document.querySelector(`.sp-panel[data-tab="${key}"]`).setAttribute('data-active', '');
-    });
-  });
-
-  // --- PER-PANEL SLIDER ---
-  const sliderDefs = [
-    { id: 'body',  dotsId: 'dots-body' },
-    { id: 'eye',   dotsId: 'dots-eye' },
-    { id: 'mouth', dotsId: 'dots-mouth' },
-    { id: 'expr',  dotsId: 'dots-expr' },
-    { id: 'arm',   dotsId: 'dots-arm' },
-    { id: 'anim',  dotsId: 'dots-anim' },
-  ];
-
-  sliderDefs.forEach(({ id, dotsId }) => {
-    const outer    = document.getElementById('slider-' + id);
-    if (!outer) return;
-    const track    = outer.querySelector('.sp-slider-track');
-    const cards    = Array.from(track.querySelectorAll('.sp-slide-card'));
-    const prevBtn  = outer.querySelector('.sp-nav-btn--prev');
-    const nextBtn  = outer.querySelector('.sp-nav-btn--next');
-    const dotsWrap = document.getElementById(dotsId);
-    const total    = cards.length;
-    let current    = 0;
-
-    // Dots
-    cards.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'sp-dot';
-      if (i === 0) dot.setAttribute('data-active', '');
-      dot.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(dot);
-    });
-
-    function getVisible() {
-      const vw = outer.querySelector('.sp-slider-viewport').offsetWidth;
-      const cw = cards[0] ? cards[0].offsetWidth : 300;
-      const gap = 14;
-      return Math.max(1, Math.round((vw + gap) / (cw + gap)));
-    }
-
-    function getCardWidth() {
-      return cards[0] ? cards[0].offsetWidth + 14 : 0;
-    }
-
-    function updateUI() {
-      const cw = getCardWidth();
-      track.style.transform = `translateX(-${current * cw}px)`;
-
-      const vis = getVisible();
-      const maxStep = Math.max(0, total - vis);
-
-      prevBtn[current <= 0 ? 'setAttribute' : 'removeAttribute']('data-disabled', '');
-      nextBtn[current >= maxStep ? 'setAttribute' : 'removeAttribute']('data-disabled', '');
-
-      const dots = dotsWrap.querySelectorAll('.sp-dot');
-      dots.forEach((d, i) => {
-        i === current ? d.setAttribute('data-active', '') : d.removeAttribute('data-active');
-      });
-    }
-
-    function goTo(i) {
-      const vis = getVisible();
-      const max = Math.max(0, total - vis);
-      current = Math.min(Math.max(i, 0), max);
-      updateUI();
-    }
-
-    prevBtn.addEventListener('click', () => goTo(current - 1));
-    nextBtn.addEventListener('click', () => goTo(current + 1));
-    window.addEventListener('resize', () => { current = 0; updateUI(); });
-
-    updateUI();
-  });
-})();
-</script>
-
-
+<!-- SIDE NAVIGATION -->
 <nav class="side-nav" id="sideNav">
   <div class="side-nav-item" data-target="sec-notice">
     <span class="side-nav-label">공지사항</span>

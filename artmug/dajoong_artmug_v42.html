@@ -26,6 +26,64 @@
 
 <style>
 /* ==============================
+   CUSTOM CURSOR
+============================== */
+*, *::before, *::after { cursor: none !important; }
+
+#cursor-dot {
+  position: fixed;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--primary, #9FA8FF);
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform .12s ease, background .2s ease, width .2s ease, height .2s ease;
+  box-shadow: 0 0 10px rgba(159,168,255,.8), 0 0 20px rgba(159,168,255,.4);
+}
+#cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(159,168,255,.55);
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width .22s ease, height .22s ease, border-color .22s ease;
+  box-shadow: 0 0 12px rgba(159,168,255,.2);
+}
+body.cursor-hover #cursor-dot {
+  width: 14px; height: 14px;
+  background: #FFC2E3;
+  box-shadow: 0 0 14px rgba(255,194,227,.9), 0 0 28px rgba(255,194,227,.4);
+}
+body.cursor-hover #cursor-ring {
+  width: 52px; height: 52px;
+  border-color: rgba(255,194,227,.5);
+}
+body.cursor-click #cursor-dot {
+  transform: translate(-50%, -50%) scale(.6);
+}
+#cursor-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 99997;
+}
+#bg-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0; opacity: .5;
+}
+
+/* ==============================
+   SCROLL REVEAL
+============================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
+}
+.reveal.revealed { opacity: 1; transform: none; }
+
+/* ==============================
    THEME
 ============================== */
 :root {
@@ -1500,6 +1558,11 @@ section[data-type][data-active] { display: block; }
 </head>
 
 <body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<canvas id="cursor-canvas"></canvas>
+<canvas id="bg-canvas"></canvas>
+
 <div class="page">
 
   <!-- ============================================
@@ -1878,6 +1941,26 @@ section[data-type][data-active] { display: block; }
         </figure>
       </div>
       <p class="sp-cat-desc">캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.</p>
+    </div>
+    
+            <!-- 의상 및 헤어 -->
+    <div class="sp-group">
+      <h3 class="sp-cat-title">의상 및 헤어</h3>
+      <p class="sp-cat-desc">의상과 헤어 변경으로 같은 캐릭터도 전혀 다른 분위기를 연출할 수 있습니다.</p>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9D%98%EC%83%81%20%EB%B0%8F%20%ED%97%A4%EC%96%B4/1.%EB%A8%B8%EB%A6%AC%20%EC%BB%AC%EB%9F%AC%20%EB%B3%80%EA%B2%BD.gif?raw=true" alt="머리색상변경"></div>
+          <figcaption class="sp-cap">머리 색상을 바꿔 전혀 다른 분위기를 연출</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9D%98%EC%83%81%20%EB%B0%8F%20%ED%97%A4%EC%96%B4/2.%EC%9D%98%EC%83%81%20%EB%B3%80%EA%B2%BD.gif?raw=true" alt="의상 변경"></div>
+          <figcaption class="sp-cap">의상 교체로 캐릭터 콘셉트를 폭넓게 표현</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://github.com/Dencyan/L2Ddajoong/blob/main/assets/%EC%9D%98%EC%83%81%20%EB%B0%8F%20%ED%97%A4%EC%96%B4/3.%ED%97%A4%EC%96%B4%20%EB%B3%80%EA%B2%BD.gif?raw=true" alt="헤어 변경"></div>
+          <figcaption class="sp-cap">헤어 스타일 변경으로 같은 캐릭터도 새로운 느낌으로</figcaption>
+        </figure>
+      </div>
     </div>
 
     <!-- 눈 물리 -->
@@ -2258,6 +2341,177 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', () => { checkVisibility(); updateActive(); }, { passive: true });
   checkVisibility();
   updateActive();
+})();
+</script>
+
+<script>
+/* ====================================================
+   BACKGROUND PARTICLES
+==================================================== */
+(function() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const COLORS = ['#9FA8FF','#C2CAFF','#FFC2E3','#9EEAE1','#d4b9ff'];
+
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+  function Particle() { this.reset(true); }
+  Particle.prototype.reset = function(init) {
+    this.x = Math.random() * W;
+    this.y = init ? Math.random() * H : H + 10;
+    this.r = Math.random() * 1.8 + .5;
+    this.vx = (Math.random() - .5) * .3;
+    this.vy = -(Math.random() * .4 + .1);
+    this.alpha = Math.random() * .45 + .15;
+    this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    this.tw = Math.random() * .018 + .004;
+    this.td = Math.random() > .5 ? 1 : -1;
+  };
+  Particle.prototype.update = function() {
+    this.x += this.vx; this.y += this.vy;
+    this.alpha += this.tw * this.td;
+    if (this.alpha > .7 || this.alpha < .08) this.td *= -1;
+    if (this.y < -10) this.reset(false);
+  };
+  Particle.prototype.draw = function() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = ctx.shadowColor = this.color;
+    ctx.shadowBlur = 7;
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+  };
+
+  function init() {
+    resize(); particles = [];
+    const n = Math.floor((W * H) / 8500);
+    for (let i = 0; i < n; i++) particles.push(new Particle());
+  }
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  }
+  window.addEventListener('resize', init);
+  init(); loop();
+})();
+
+/* ====================================================
+   CUSTOM CURSOR + SPARKLE TRAIL + CLICK BURST
+==================================================== */
+(function() {
+  const dot    = document.getElementById('cursor-dot');
+  const ring   = document.getElementById('cursor-ring');
+  const canvas = document.getElementById('cursor-canvas');
+  const ctx    = canvas.getContext('2d');
+  let mx = -300, my = -300, rx = -300, ry = -300;
+  const SC = ['#9FA8FF','#FFC2E3','#9EEAE1','#fff','#d4b9ff','#ffe0f5'];
+
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+
+  (function ringLoop() {
+    rx += (mx - rx) * .13; ry += (my - ry) * .13;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(ringLoop);
+  })();
+
+  const hov = 'a,button,.card,.pricing-card,.plan-card,.notice-item,.collab-link,[data-type-buttons] button,.side-nav-item,.sale-model-btn,.sp-item';
+  document.addEventListener('mouseover', e => { if (e.target.closest(hov)) document.body.classList.add('cursor-hover'); });
+  document.addEventListener('mouseout',  e => { if (e.target.closest(hov)) document.body.classList.remove('cursor-hover'); });
+  document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+  document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
+
+  function drawStar(x, y, r, alpha, color, rot) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = ctx.shadowColor = color;
+    ctx.shadowBlur = 8;
+    ctx.translate(x, y); ctx.rotate(rot);
+    ctx.beginPath();
+    for (let i = 0; i < 5; i++) {
+      const a1 = (i*4*Math.PI)/5 - Math.PI/2;
+      const a2 = ((i*4+2)*Math.PI)/5 - Math.PI/2;
+      ctx.lineTo(Math.cos(a1)*r, Math.sin(a1)*r);
+      ctx.lineTo(Math.cos(a2)*(r*.4), Math.sin(a2)*(r*.4));
+    }
+    ctx.closePath(); ctx.fill(); ctx.restore();
+  }
+
+  function makeParticle(x, y, burst) {
+    const angle = Math.random() * Math.PI * 2;
+    const spd = burst ? (Math.random()*5+2.5) : (Math.random()*1.6+.4);
+    return {
+      x, y,
+      vx: Math.cos(angle)*spd, vy: Math.sin(angle)*spd - (burst ? 0 : .5),
+      r: Math.random()*(burst?4:2.5)+1.2,
+      alpha: 1, decay: burst?.028:.022,
+      color: SC[Math.floor(Math.random()*SC.length)],
+      rot: Math.random()*Math.PI*2, rotV: (Math.random()-.5)*.18,
+      star: Math.random()>.45, gravity: .035, drag: burst?.93:1
+    };
+  }
+
+  let particles = [], lastX = -999, lastY = -999;
+
+  document.addEventListener('mousemove', () => {
+    const dx = mx-lastX, dy = my-lastY;
+    if (dx*dx+dy*dy > 100) {
+      for (let i = 0; i < 2; i++) particles.push(makeParticle(mx, my, false));
+      lastX = mx; lastY = my;
+    }
+  });
+
+  document.addEventListener('click', e => {
+    for (let i = 0; i < 16; i++) particles.push(makeParticle(e.clientX, e.clientY, true));
+  });
+
+  (function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles = particles.filter(p => p.alpha > .01);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      p.vx *= p.drag; p.vy *= p.drag;
+      p.vy += p.gravity; p.alpha -= p.decay; p.rot += p.rotV;
+      if (p.star) drawStar(p.x, p.y, p.r, p.alpha, p.color, p.rot);
+      else {
+        ctx.save(); ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = ctx.shadowColor = p.color; ctx.shadowBlur = 9;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill(); ctx.restore();
+      }
+    });
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ====================================================
+   SCROLL REVEAL
+==================================================== */
+(function() {
+  const sels = [
+    '.notice-wrap','.hero-intro','.hero-bottom > *',
+    '.pricing-wrap','.plan-wrap','.info-block',
+    '.sale-model-wrap','.sp-wrap','.works'
+  ];
+  const els = [];
+  sels.forEach(s => document.querySelectorAll(s).forEach(el => {
+    el.classList.add('reveal'); els.push(el);
+  }));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((en, i) => {
+      if (en.isIntersecting) {
+        setTimeout(() => en.target.classList.add('revealed'), i*55);
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: .07 });
+  els.forEach(el => io.observe(el));
 })();
 </script>
 
