@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전기기능사 오답 요점정리 v2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Share+Tech+Mono&display=swap');
+  :root {
+    --bg:#0a0c10;--surface:#12151d;--card:#181c28;--border:#252d40;
+    --accent:#00e5ff;--accent2:#ff6b35;--correct:#00e676;--wrong:#ff1744;
+    --text:#dde3f0;--muted:#6b7894;--yellow:#ffd740;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+  header{padding:28px 24px 20px;text-align:center;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#0d1520,var(--bg));position:relative;overflow:hidden;}
+  header::before{content:'';position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:500px;height:180px;background:radial-gradient(ellipse,rgba(0,229,255,.09),transparent 70%);pointer-events:none;}
+  .badge{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--accent);border:1px solid rgba(0,229,255,.3);border-radius:4px;padding:3px 10px;margin-bottom:10px;letter-spacing:2px;}
+  .badge2{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:.63rem;color:var(--accent2);border:1px solid rgba(255,107,53,.3);border-radius:4px;padding:2px 8px;margin-left:8px;letter-spacing:1px;}
+  header h1{font-size:1.4rem;font-weight:900;color:#fff;margin-bottom:5px;}
+  header h1 span{color:var(--accent);}
+  header p{color:var(--muted);font-size:.8rem;}
+
+  .stats-bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:11px 16px;background:var(--surface);border-bottom:1px solid var(--border);}
+  .stat-item{font-size:.8rem;display:flex;align-items:center;gap:5px;font-weight:700;color:var(--muted);}
+  .sdot{width:7px;height:7px;border-radius:50%;}
+  .s1 .sdot{background:var(--accent2)}.s2 .sdot{background:#7c83f5}.s3 .sdot{background:var(--correct)}.s4 .sdot{background:var(--wrong)}
+  .stat-item span{color:var(--text);}
+
+  .tab-bar{display:flex;overflow-x:auto;background:var(--surface);border-bottom:1px solid var(--border);padding:0 10px;scrollbar-width:none;}
+  .tab-bar::-webkit-scrollbar{display:none;}
+  .tab-btn{flex-shrink:0;padding:12px 14px;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--muted);font-family:'Noto Sans KR',sans-serif;font-size:.78rem;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;}
+  .tab-btn:hover{color:var(--text);}
+  .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:700;}
+
+  main{max-width:760px;margin:0 auto;padding:22px 14px 80px;}
+  .page{display:none;}.page.active{display:block;}
+
+  .sec-title{display:flex;align-items:center;gap:9px;margin:6px 0 16px;}
+  .sec-title h2{font-size:.98rem;font-weight:700;color:#fff;}
+  .cnt{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--accent2);background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.28);padding:2px 7px;border-radius:4px;margin-left:auto;}
+
+  .pt-card{background:#0d2030;border:1px solid rgba(0,229,255,.2);border-left:3px solid var(--accent);border-radius:10px;padding:15px 17px;margin-bottom:11px;}
+  .pt-title{font-size:.7rem;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:9px;text-transform:uppercase;}
+  .pt-card p{font-size:.88rem;line-height:1.8;color:var(--text);}
+
+  .mem-table{width:100%;border-collapse:collapse;font-size:.84rem;margin-top:5px;}
+  .mem-table th{background:rgba(0,229,255,.07);color:var(--accent);padding:7px 10px;text-align:left;font-size:.74rem;border-bottom:1px solid var(--border);}
+  .mem-table td{padding:7px 10px;border-bottom:1px solid rgba(37,45,64,.5);color:var(--text);line-height:1.5;}
+  .mem-table tr:last-child td{border-bottom:none;}
+  .mem-table td strong{color:#fff;font-weight:700;}
+  .val{font-family:'Share Tech Mono',monospace;color:var(--accent2);font-weight:700;}
+  .vg{font-family:'Share Tech Mono',monospace;color:var(--correct);font-weight:700;}
+  .vr{font-family:'Share Tech Mono',monospace;color:var(--wrong);font-weight:700;}
+  .vy{font-family:'Share Tech Mono',monospace;color:var(--yellow);font-weight:700;}
+
+  .tip{background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.22);border-radius:7px;padding:10px 13px;font-size:.8rem;color:#ffb899;margin-top:10px;line-height:1.7;}
+  .tip::before{content:'💡 ';}
+
+  .quiz-wrap{margin-top:26px;}
+  .quiz-hd{display:flex;align-items:center;gap:8px;margin-bottom:13px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .quiz-hd h3{font-size:.9rem;font-weight:700;color:#fff;}
+  .q-score{font-family:'Share Tech Mono',monospace;font-size:.76rem;color:var(--muted);margin-left:auto;}
+  .q-score span{color:var(--accent);}
+
+  .q-card{background:var(--card);border:1px solid var(--border);border-radius:9px;margin-bottom:10px;overflow:hidden;transition:border-color .3s;}
+  .q-card.ok{border-color:var(--correct);}.q-card.ng{border-color:var(--wrong);}
+  .q-head{padding:13px 15px;display:flex;align-items:flex-start;gap:9px;cursor:pointer;user-select:none;}
+  .q-num{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--accent2);background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.28);border-radius:4px;padding:2px 6px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+  .q-text{flex:1;font-size:.88rem;font-weight:500;line-height:1.6;}
+  .q-arrow{color:var(--muted);font-size:.8rem;transition:transform .3s;flex-shrink:0;margin-top:3px;}
+  .q-card.open .q-arrow{transform:rotate(180deg);}
+  .q-opts{padding:0 15px 5px;display:none;}
+  .q-card.open .q-opts{display:block;}
+  .opt{width:100%;text-align:left;padding:9px 12px;margin-bottom:6px;border:1px solid var(--border);border-radius:7px;background:rgba(255,255,255,.02);color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:.84rem;cursor:pointer;transition:all .18s;display:flex;align-items:flex-start;gap:9px;line-height:1.5;}
+  .opt:hover:not(:disabled){border-color:var(--accent);background:rgba(0,229,255,.06);}
+  .onum{font-family:'Share Tech Mono',monospace;font-size:.73rem;color:var(--muted);flex-shrink:0;margin-top:1px;}
+  .opt.correct{border-color:var(--correct);background:rgba(0,230,118,.1);color:var(--correct);}
+  .opt.correct .onum{color:var(--correct);}
+  .opt.wrong{border-color:var(--wrong);background:rgba(255,23,68,.1);color:var(--wrong);}
+  .opt.wrong .onum{color:var(--wrong);}
+  .ans-box{display:none;background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.14);border-radius:7px;padding:10px 13px;margin-bottom:12px;font-size:.8rem;color:#a8d8e8;line-height:1.7;}
+  .ans-box.show{display:block;}
+  .ans-box strong{color:var(--accent);}
+  .divider{height:1px;background:var(--border);margin:26px 0;}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">WRONG ANSWER NOTE</div><span class="badge2">노션 자료 보강판</span>
+  <h1>전기기능사 <span>오답 요점정리</span></h1>
+  <p>노션 정리 자료 기반으로 보강된 핵심 요점 + 집중 문제</p>
+</header>
+<div class="stats-bar">
+  <div class="stat-item s1"><div class="sdot"></div>총 문제 <span id="st"></span></div>
+  <div class="stat-item s2"><div class="sdot"></div>풀이 <span id="sd"></span></div>
+  <div class="stat-item s3"><div class="sdot"></div>정답 <span id="so"></span></div>
+  <div class="stat-item s4"><div class="sdot"></div>오답 <span id="sb"></span></div>
+</div>
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="go('all',this)">전체</button>
+  <button class="tab-btn" onclick="go('insul',this)">절연내력</button>
+  <button class="tab-btn" onclick="go('tape',this)">테이프</button>
+  <button class="tab-btn" onclick="go('intv',this)">지지점간격</button>
+  <button class="tab-btn" onclick="go('gnd',this)">접지저항</button>
+  <button class="tab-btn" onclick="go('ht',this)">가공높이</button>
+  <button class="tab-btn" onclick="go('cd',this)">CD·PE관</button>
+  <button class="tab-btn" onclick="go('flex',this)">가요전선관</button>
+  <button class="tab-btn" onclick="go('wire',this)">전선접속</button>
+  <button class="tab-btn" onclick="go('fuse',this)">퓨즈·차단기</button>
+  <button class="tab-btn" onclick="go('tool',this)">공구·계기</button>
+  <button class="tab-btn" onclick="go('special',this)">특수장소</button>
+  <button class="tab-btn" onclick="go('light',this)">조명</button>
+</div>
+<main id="main"></main>
+
+<script>
+const DATA = {
+  insul:{
+    label:'⚡ 절연내력 시험전압',
+    point:`<div class="pt-title">핵심 공식 (10분간 측정)</div>
+    <table class="mem-table">
+      <tr><th>전압 구간</th><th>배수</th><th>최저전압</th></tr>
+      <tr><td><strong>7kV 이하</strong></td><td><span class="val">1.5배</span></td><td><span class="val">최소 500V</span></td></tr>
+      <tr><td><strong>60kV 이하</strong></td><td><span class="val">1.25배</span></td><td><span class="val">최소 10,500V</span></td></tr>
+      <tr><td><strong>60kV 초과</strong></td><td><span class="val">1.1배</span></td><td><span class="val">최소 75kV</span></td></tr>
+    </table>
+    <div class="tip">전선 긁기·결정 시 절연내력 시험은 <strong>불필요</strong>. 저압 전로 누설전류는 <strong>1mA 이하</strong>.</div>`,
+    qs:[
+      {q:'7kV 이하 전선의 절연내력 시험전압은 최대사용전압의 몇 배인가?',opts:['1.1배','1.25배','1.5배','2배'],ans:2,ex:'7kV 이하 → 1.5배 (최소 500V). 60kV 이하 → 1.25배, 60kV 초과 → 1.1배'},
+      {q:'절연내력 시험에서 60kV 이하 구간 적용 배수와 최저 전압은?',opts:['1.5배 / 500V','1.25배 / 10,500V','1.1배 / 75kV','1.25배 / 500V'],ans:1,ex:'60kV 이하 → 1.25배, 최저 10,500V 적용'},
+      {q:'전선 긁기·결정 작업 시 절연내력 시험은?',opts:['반드시 필요','필요 없다','고압만 필요','전압에 따라 다르다'],ans:1,ex:'전선 긁기·결정 작업 시에는 절연내력 시험 불필요'},
+      {q:'60kV를 초과하는 경우 절연내력 시험전압 배수와 최저 전압은?',opts:['1.1배 / 75kV','1.25배 / 75kV','1.5배 / 500V','1.1배 / 10,500V'],ans:0,ex:'60kV 초과 → 1.1배, 최저 75kV'},
+      {q:'저압 전로의 누설 전류 허용 기준은?',opts:['0.1mA 이하','0.5mA 이하','1mA 이하','2mA 이하'],ans:2,ex:'저압 전로 누설 전류: 1mA 이하 (절연저항 = 사용전압/누설전류 ≥ 1/2000)'},
+    ]
+  },
+  tape:{
+    label:'🧲 절연 테이프 종류',
+    point:`<div class="pt-title">테이프 종류 비교</div>
+    <table class="mem-table">
+      <tr><th>종류</th><th>핵심 특징</th><th>용도</th></tr>
+      <tr><td><strong>면테이프</strong></td><td>점착성 강함, 절연성 우수</td><td>마감·절연</td></tr>
+      <tr><td><strong>고무테이프</strong></td><td>가황 후 고무풀 도포</td><td>일반 절연</td></tr>
+      <tr><td><strong>비닐테이프</strong></td><td>염화비닐 컴파운드 제작</td><td>일반 절연</td></tr>
+      <tr><td><strong>리노테이프</strong></td><td>접착력 <span class="vr">없음</span> / 바이어스컷+니스</td><td>연피케이블</td></tr>
+      <tr><td><strong>자기융착테이프</strong></td><td><span class="val">2배</span> 늘려 사용 / 합성수지·고무</td><td>클로로프렌 외장 케이블</td></tr>
+    </table>
+    <div class="tip">자기융착 = <strong>2배 늘려</strong> / 리노 = <strong>접착력 없음</strong> — 이 두 가지가 핵심 출제 포인트!</div>`,
+    qs:[
+      {q:'자기융착테이프 사용 시 얼마나 늘려서 감아야 하는가?',opts:['1.5배','2배','2.5배','3배'],ans:1,ex:'자기융착테이프는 2배 늘려서 사용. 합성수지·고무 재질, 클로로프렌 외장 케이블에 사용'},
+      {q:'접착력이 없으며 연피케이블에 사용하는 테이프는?',opts:['자기융착테이프','고무테이프','리노테이프','면테이프'],ans:2,ex:'리노테이프: 접착력 없음, 바이어스컷+니스 처리, 연피케이블 전용'},
+      {q:'자기융착테이프의 재질로 옳은 것은?',opts:['면·폴리에스터','합성수지·고무','유리섬유','금속박막'],ans:1,ex:'자기융착테이프 재질: 합성수지 또는 고무'},
+      {q:'면테이프의 특징으로 옳은 것은?',opts:['접착력이 없다','2배 늘려 사용한다','점착성이 강하고 절연성이 우수하다','연피케이블 전용이다'],ans:2,ex:'면테이프: 점착성 강함, 절연성 우수. 리노테이프(접착력 없음)와 혼동 주의'},
+    ]
+  },
+  intv:{
+    label:'📏 공사별 지지점 간격',
+    point:`<div class="pt-title">지지점 간격 일람 (노션 자료 종합)</div>
+    <table class="mem-table">
+      <tr><th>공사 종류</th><th>간격</th></tr>
+      <tr><td><strong>가요전선관·캡타이어 케이블</strong></td><td><span class="val">1m</span></td></tr>
+      <tr><td><strong>합성수지관·몰드</strong></td><td><span class="val">1.5m</span></td></tr>
+      <tr><td><strong>애자·금속관·비닐관·라이팅덕트</strong></td><td><span class="val">2m</span></td></tr>
+      <tr><td><strong>케이블 트레이 (케이블)</strong></td><td><span class="val">2m</span></td></tr>
+      <tr><td><strong>버스 덕트</strong></td><td><span class="val">3m</span></td></tr>
+      <tr><td><strong>금속 덕트 수평</strong></td><td><span class="val">3m</span></td></tr>
+      <tr><td><strong>금속 덕트 수직</strong></td><td><span class="val">6m</span></td></tr>
+    </table>
+    <div class="tip">가요·캡 → 1m / 합성수지·몰드 → 1.5m / 나머지 대부분 → 2m / 버스·금속덕트(수평) → 3m</div>`,
+    qs:[
+      {q:'합성수지관 공사의 지지점 간격은?',opts:['1m','1.5m','2m','2.5m'],ans:1,ex:'합성수지관·몰드 = 1.5m. 가요관(1m), 금속관(2m)과 구분 필수'},
+      {q:'가요전선관 공사의 지지점 간격은?',opts:['0.5m','1m','1.5m','2m'],ans:1,ex:'가요전선관·캡타이어 케이블은 1m마다 지지점 설치'},
+      {q:'라이팅 덕트 공사의 지지점 간격은?',opts:['1m','1.5m','2m','3m'],ans:2,ex:'라이팅 덕트 2m / 버스 덕트 3m — 헷갈리지 말 것!'},
+      {q:'버스 덕트 공사의 지지점 간격은?',opts:['1.5m','2m','3m','4m'],ans:2,ex:'버스 덕트는 3m. 금속 덕트 수평도 3m (수직은 6m)'},
+      {q:'금속 덕트 수직 방향 고정 간격은?',opts:['2m','3m','4m','6m'],ans:3,ex:'금속 덕트: 수평 3m / 수직 6m. 단면적 점유율은 20% 이하 (전광표시 제어회로는 50% 이하)'},
+    ]
+  },
+  gnd:{
+    label:'🔌 접지 저항 기준',
+    point:`<div class="pt-title">접지 종별 저항값 (노션 자료 기준)</div>
+    <table class="mem-table">
+      <tr><th>종류</th><th>저항값</th><th>적용 대상</th></tr>
+      <tr><td><strong>제1종</strong></td><td><span class="val">10Ω</span> 이하</td><td>고압·특고압 기기 외함</td></tr>
+      <tr><td><strong>제2종</strong></td><td><span class="val">150Ω</span> 이하</td><td>변압기 저압 중성점</td></tr>
+      <tr><td><strong>제3종</strong></td><td><span class="val">100Ω</span> 이하</td><td>300V 이하 저압 기기</td></tr>
+      <tr><td><strong>특별제3종</strong></td><td><span class="val">10Ω</span> 이하</td><td>400V 초과 저압 기기</td></tr>
+      <tr><td><strong>중성점 직접접지</strong></td><td><span class="val">1Ω</span> 이하</td><td>초고압 계통</td></tr>
+      <tr><td><strong>수도관 접지</strong></td><td><span class="val">3Ω</span> 이하</td><td>수도관 이용 시</td></tr>
+      <tr><td><strong>철골 접지</strong></td><td><span class="val">2Ω</span> 이하</td><td>철골 이용 시</td></tr>
+    </table>
+    <div class="tip">암기법: <strong>1·특3 → 10Ω / 3 → 100Ω / 2 → 150Ω</strong>. 접지선 매설: 지하 <strong>75cm</strong> 이상!</div>`,
+    qs:[
+      {q:'제1종 접지 공사의 접지 저항값 기준은?',opts:['1Ω 이하','10Ω 이하','100Ω 이하','150Ω 이하'],ans:1,ex:'제1종: 10Ω / 제2종: 150Ω / 제3종: 100Ω / 특별제3종: 10Ω / 중성점 직접접지: 1Ω'},
+      {q:'제2종 접지 공사의 저항값 기준은?',opts:['10Ω 이하','50Ω 이하','100Ω 이하','150Ω 이하'],ans:3,ex:'제2종 접지: 변압기 저압 중성점 접지, 150Ω 이하'},
+      {q:'제3종 접지 공사의 저항값 기준은?',opts:['10Ω 이하','50Ω 이하','100Ω 이하','150Ω 이하'],ans:2,ex:'제3종: 300V 이하 저압 기기 외함, 100Ω 이하'},
+      {q:'특별제3종 접지의 저항값 기준은?',opts:['5Ω 이하','10Ω 이하','50Ω 이하','100Ω 이하'],ans:1,ex:'특별제3종: 400V 초과 기기, 제1종과 동일하게 10Ω 이하'},
+      {q:'접지선 매설 깊이 기준으로 옳은 것은?',opts:['지하 50cm 이상','지하 75cm 이상','지하 1m 이상','지하 1.2m 이상'],ans:1,ex:'접지선 매설: 지하 75cm 이상, 철주 밑면으로부터 30cm 이상, 지중 1m 이상 이격'},
+    ]
+  },
+  ht:{
+    label:'🗼 가공전선 높이 & 완금 높이',
+    point:`<div class="pt-title">가공전선 최소 높이</div>
+    <table class="mem-table">
+      <tr><th>장소</th><th>저압·고압 가공전선</th><th>구내 인입선</th></tr>
+      <tr><td><strong>도로</strong></td><td><span class="val">6m</span></td><td><span class="val">5m</span></td></tr>
+      <tr><td><strong>철도·궤도</strong></td><td><span class="val">6.5m</span></td><td><span class="val">6.5m</span></td></tr>
+      <tr><td><strong>횡단보도교 — 고압</strong></td><td><span class="val">3.5m</span></td><td>—</td></tr>
+      <tr><td><strong>횡단보도교 — 저압</strong></td><td><span class="val">3m</span></td><td><span class="val">3m</span></td></tr>
+    </table>
+    <br>
+    <div class="pt-title">완금(암) 설치 높이</div>
+    <table class="mem-table">
+      <tr><th>완금 종류</th><th>높이</th></tr>
+      <tr><td><strong>저압 완금</strong></td><td><span class="val">1400mm</span></td></tr>
+      <tr><td><strong>고압 완금</strong></td><td><span class="val">1800mm</span></td></tr>
+      <tr><td><strong>특고압 완금</strong></td><td><span class="val">2400mm</span></td></tr>
+    </table>
+    <div class="tip">완금 높이: 저→고→특 순서로 1400 → 1800 → 2400 (400mm씩 증가!). 이웃 연결 인입선은 <strong>100m 이하</strong>.</div>`,
+    qs:[
+      {q:'도로를 횡단하는 저·고압 가공전선의 최소 높이는?',opts:['4m','5m','6m','6.5m'],ans:2,ex:'도로: 6m / 철도: 6.5m / 횡단보도교 저압: 3m, 고압: 3.5m'},
+      {q:'철도를 횡단하는 가공전선의 최소 높이는?',opts:['5m','5.5m','6m','6.5m'],ans:3,ex:'철도·궤도는 6.5m 이상. 도로(6m)보다 0.5m 더 높음'},
+      {q:'고압 완금(암)의 설치 높이 기준은?',opts:['1200mm','1400mm','1800mm','2400mm'],ans:2,ex:'저압 1400mm / 고압 1800mm / 특고압 2400mm'},
+      {q:'저압 구내 인입선이 도로를 횡단할 때 최소 높이는?',opts:['3m','4m','5m','6m'],ans:2,ex:'저압 구내 가공 인입선의 도로 횡단 최소 높이: 5m (가공전선 6m와 구분!)'},
+      {q:'가공전선 지지물 중 현장에서 가장 많이 사용되는 것은?',opts:['목주','철주','철근콘크리트주','철탑'],ans:2,ex:'철근콘크리트주가 가장 많이 이용됨. 발판 볼트는 1.8m 이상'},
+    ]
+  },
+  cd:{
+    label:'🔧 CD관 vs PE관',
+    point:`<div class="pt-title">핵심 차이점</div>
+    <table class="mem-table">
+      <tr><th>종류</th><th>굴곡 가능?</th><th>주요 용도</th></tr>
+      <tr><td><strong>CD관</strong></td><td><span class="vg">✅ 가능</span></td><td>콘크리트 매입 굴곡 배관</td></tr>
+      <tr><td><strong>PE관</strong></td><td><span class="vr">❌ 불가</span></td><td>직선 배관</td></tr>
+    </table>
+    <div class="tip">CD = <strong>C</strong>urve <strong>D</strong>uct → 굽힐 수 있다고 기억! PE관은 단단해서 구부릴 수 없음.</div>`,
+    qs:[
+      {q:'CD관과 PE관의 차이로 옳은 것은?',opts:['둘 다 구부릴 수 있다','CD는 구부릴 수 없고 PE는 구부릴 수 있다','CD는 구부릴 수 있고 PE는 구부릴 수 없다','둘 다 구부릴 수 없다'],ans:2,ex:'CD관: 굴곡 가능(콘크리트 매입용) / PE관: 굴곡 불가(직선 배관용)'},
+      {q:'CD관의 주요 사용 장소로 옳은 것은?',opts:['수중 배관','콘크리트 매입 굴곡 배관','고온 배관','야외 노출 배관'],ans:1,ex:'CD관(합성수지 가요전선관)은 굴곡이 있는 콘크리트 매입 배선에 사용'},
+    ]
+  },
+  flex:{
+    label:'🌀 가요전선관 굽힘 반경',
+    point:`<div class="pt-title">종별 굽힘 반경</div>
+    <table class="mem-table">
+      <tr><th>종류</th><th>굽힘 반경</th><th>구조</th></tr>
+      <tr><td><strong>1종</strong></td><td><span class="val">내경의 6배</span></td><td>아연도금 강판 0.8mm</td></tr>
+      <tr><td><strong>2종</strong></td><td><span class="val">내경의 3배</span></td><td>아연도금 + 파이버</td></tr>
+    </table>
+    <p style="font-size:.84rem;margin-top:10px;line-height:1.8;color:var(--text);">
+    전선관 연결 부품 정리:<br>
+    • 전선관끼리 = <strong style="color:#fff">스플릿 커플링</strong><br>
+    • 금속관 + 가요전선관 = <strong style="color:#fff">콤비네이션 커플링</strong><br>
+    • 박스 + 전선관 = <strong style="color:#fff">앵글 커넥터</strong>
+    </p>
+    <div class="tip">2종이 더 유연 → 반경이 더 작음(3배). 금속관 굽힘도 <strong>내경의 6배</strong>, 직각 굴곡 <strong>3개소 초과 금지</strong>!</div>`,
+    qs:[
+      {q:'가요전선관 1종의 굽힘 반경은 내경의 몇 배인가?',opts:['3배','4배','6배','8배'],ans:2,ex:'1종: 내경의 6배(아연도금 강판 0.8mm) / 2종: 내경의 3배(아연도금+파이버)'},
+      {q:'가요전선관 2종의 굽힘 반경 기준은?',opts:['내경의 3배','내경의 6배','내경의 9배','내경의 12배'],ans:0,ex:'2종 가요전선관: 내경의 3배. 1종(6배)보다 더 유연'},
+      {q:'금속관 공사에서 직각에 가까운 굴곡 허용 개소는 최대 몇 개소인가?',opts:['2개소','3개소','4개소','5개소'],ans:1,ex:'직각에 가까운 굴곡은 3개소 초과 금지. 금속관 굽힘 반경은 내경의 6배'},
+      {q:'금속관 공사에서 박스 녹아웃 지름이 로크너트보다 클 때 사용하는 부품은?',opts:['부싱','유니온 커플링','링 리듀서','앵글 커넥터'],ans:2,ex:'링 리듀서: 관 지름보다 큰 녹아웃에 고정하기 위한 보조 부품'},
+    ]
+  },
+  wire:{
+    label:'🔗 전선 접속 규정',
+    point:`<div class="pt-title">전선 접속 핵심 규정</div>
+    <table class="mem-table">
+      <tr><th>항목</th><th>기준</th></tr>
+      <tr><td><strong>인장강도 유지</strong></td><td>원래 강도의 <span class="val">80%</span> 이상 (20% 이하 감소 허용)</td></tr>
+      <tr><td><strong>직선 접속 (6㎟ 이하)</strong></td><td><span class="val">트위스트 접속</span></td></tr>
+      <tr><td><strong>직선 접속 (10㎟ 이상)</strong></td><td><span class="val">브리타니아 접속</span> (피복 벗기는 길이 20배)</td></tr>
+      <tr><td><strong>종단 접속</strong></td><td><span class="val">쥐꼬리 접속</span> (와이어 커넥터)</td></tr>
+      <tr><td><strong>병렬 사용 (구리)</strong></td><td><span class="val">50㎟ 이상</span></td></tr>
+      <tr><td><strong>병렬 사용 (알루미늄)</strong></td><td><span class="val">70㎟ 이상</span></td></tr>
+      <tr><td><strong>터미널 러그</strong></td><td>단선 <span class="val">10㎟</span> 이상, 연선 <span class="val">6㎟</span> 이상</td></tr>
+    </table>
+    <div class="tip">1본 전선에 2본 이상 접속 금지 / 병렬 사용 시 각각 퓨즈 개별 설치 금지!</div>`,
+    qs:[
+      {q:'전선 접속 후 유지해야 할 최소 인장강도 비율은?',opts:['60%','70%','80%','90%'],ans:2,ex:'접속 후 원래 인장강도의 80% 이상 유지 (20% 이하 감소 허용)'},
+      {q:'10㎟ 이상 전선의 직선 접속 방법은?',opts:['트위스트 접속','브리타니아 접속','쥐꼬리 접속','압착 슬리브'],ans:1,ex:'6㎟ 이하 → 트위스트 / 10㎟ 이상 → 브리타니아 (피복 벗기는 길이 20배)'},
+      {q:'종단 접속에 사용하는 방법은?',opts:['트위스트','브리타니아','쥐꼬리(와이어 커넥터)','압착 슬리브'],ans:2,ex:'종단 접속은 쥐꼬리 접속(와이어 커넥터)으로 마감'},
+      {q:'구리 전선 병렬 사용 시 최소 단면적은?',opts:['25㎟','35㎟','50㎟','70㎟'],ans:2,ex:'병렬 사용: 구리 50㎟ 이상, 알루미늄 70㎟ 이상. 퓨즈 개별 설치 금지'},
+      {q:'저압 옥내배선 검사 순서로 옳은 것은?',opts:['점검→통전→절연저항→접지저항','점검→절연저항→접지저항→통전','절연저항→점검→접지저항→통전','점검→접지저항→절연저항→통전'],ans:1,ex:'점검 → 절연저항 측정(메거) → 접지저항 측정(어스 테스터) → 통전시험(네온 검전기)'},
+    ]
+  },
+  fuse:{
+    label:'⚙️ 퓨즈·차단기',
+    point:`<div class="pt-title">퓨즈 융단 조건</div>
+    <table class="mem-table">
+      <tr><th>종류</th><th>견디는 전류</th><th>융단 조건</th></tr>
+      <tr><td><strong>비포장 퓨즈</strong></td><td><span class="val">1.25배</span> 견딤</td><td>2배 전류 → <span class="val">2분</span> 이내 융단</td></tr>
+      <tr><td><strong>포장 퓨즈</strong></td><td><span class="val">1.3배</span> 견딤</td><td>2배 전류 → <span class="val">120분</span> 이내 융단</td></tr>
+    </table>
+    <br>
+    <div class="pt-title">차단기 종류</div>
+    <table class="mem-table">
+      <tr><th>기호</th><th>명칭</th><th>특징</th></tr>
+      <tr><td><span class="val">VCB</span></td><td>진공 차단기</td><td>진공 이용</td></tr>
+      <tr><td><span class="val">OCB</span></td><td>유입 차단기</td><td>절연유 이용</td></tr>
+      <tr><td><span class="val">GCB</span></td><td>가스 차단기</td><td>SF₆ 가스</td></tr>
+      <tr><td><span class="val">MBB</span></td><td>자기 차단기</td><td>자기력 이용</td></tr>
+      <tr><td><span class="val">ABB</span></td><td>공기 차단기</td><td>압축공기</td></tr>
+      <tr><td><span class="val">ACB</span></td><td>자연공기 차단기</td><td>저압용</td></tr>
+    </table>
+    <div class="tip">과전류 차단기 설치 금지: <strong>접지선 / 접지측 전선 / 다선식 중성선</strong>. 분기점에서 <strong>3m</strong>까지 이동 설치 가능!</div>`,
+    qs:[
+      {q:'비포장 퓨즈에서 2배 전류 시 융단 시간 기준은?',opts:['즉시','1분 이내','2분 이내','10분 이내'],ans:2,ex:'비포장 퓨즈: 1.25배 견디고, 2배 전류에서 2분 이내 융단'},
+      {q:'포장 퓨즈에서 2배 전류 시 융단 시간 기준은?',opts:['2분 이내','30분 이내','60분 이내','120분 이내'],ans:3,ex:'포장 퓨즈: 1.3배 견디고, 2배 전류에서 120분 이내 융단'},
+      {q:'SF₆ 가스를 이용하는 차단기는?',opts:['VCB','OCB','GCB','ABB'],ans:2,ex:'VCB: 진공 / OCB: 유입 / GCB: SF₆ 가스 / ABB: 공기'},
+      {q:'3상 정격 차단 용량 계산식은?',opts:['정격전압 × 정격차단전류','√2 × 정격전압 × 정격차단전류','√3 × 정격전압 × 정격차단전류','2 × 정격전압 × 정격차단전류'],ans:2,ex:'단상: V×I / 3상: √3×V×I'},
+      {q:'과전류 차단기 시설이 금지된 장소는?',opts:['분기회로 분기점','접지 공사의 접지선','인입구','변압기 2차측'],ans:1,ex:'접지선, 접지측 전선, 다선식 중성선에는 과전류 차단기 설치 금지'},
+      {q:'분기점으로부터 과전류 차단기를 이동하여 설치할 수 있는 최대 거리는?',opts:['1m','2m','3m','5m'],ans:2,ex:'분기점으로부터 3m까지 이동하여 과전류 차단기 설치 가능'},
+    ]
+  },
+  tool:{
+    label:'🔨 공구·계기',
+    point:`<div class="pt-title">계기 (측정 목적별 구분)</div>
+    <table class="mem-table">
+      <tr><th>측정 대상</th><th>계기명</th></tr>
+      <tr><td><strong>절연저항 측정</strong></td><td><span class="val">메거 (Megger)</span></td></tr>
+      <tr><td><strong>접지저항 측정</strong></td><td><span class="val">어스 테스터</span></td></tr>
+      <tr><td><strong>통전 검사</strong></td><td><span class="val">네온 검전기</span></td></tr>
+      <tr><td><strong>전선 굵기 측정</strong></td><td><span class="val">와이어 게이지</span></td></tr>
+    </table>
+    <br>
+    <div class="pt-title">금속관 전용 공구</div>
+    <table class="mem-table">
+      <tr><th>공구명</th><th>용도</th></tr>
+      <tr><td><strong>벤더</strong></td><td>금속관 구부림</td></tr>
+      <tr><td><strong>파이프 커터</strong></td><td>금속관 절단</td></tr>
+      <tr><td><strong>오스터</strong></td><td>금속관 나사선 내기</td></tr>
+      <tr><td><strong>리머</strong></td><td>금속관 끝단 다듬기</td></tr>
+      <tr><td><strong>피시 테이프</strong></td><td>전선관에 전선 넣을 때</td></tr>
+      <tr><td><strong>드라이브이트 툴</strong></td><td>콘크리트에 화약 폭발력으로 박는 도구</td></tr>
+    </table>
+    <div class="tip">나선 = 오스터 + 밴더 = 리머 + 커터 = 조합 암기! 활선 피복 벗김은 <strong>전선 피박기</strong>.</div>`,
+    qs:[
+      {q:'절연저항 측정에 사용하는 계기는?',opts:['네온 검전기','어스 테스터','메거','클램프미터'],ans:2,ex:'메거(Megger): 절연저항 측정 / 어스 테스터: 접지저항 / 네온 검전기: 통전 검사'},
+      {q:'접지저항 측정에 사용하는 계기는?',opts:['메거','어스 테스터','네온 검전기','와이어 게이지'],ans:1,ex:'어스 테스터: 접지저항 측정'},
+      {q:'금속관에 나사선을 내는 공구는?',opts:['벤더','파이프 커터','오스터','리머'],ans:2,ex:'오스터: 금속관 나사선 내기 / 리머: 금속관 끝단 다듬기 / 벤더: 구부림'},
+      {q:'전선관에 전선을 넣을 때 사용하는 공구는?',opts:['피시 테이프','파이프 렌치','드라이브이트 툴','프레셔 툴'],ans:0,ex:'피시 테이프: 전선관에 전선 넣을 때 사용. 여러 가닥은 철망 그립 사용'},
+      {q:'콘크리트에 화약 폭발력으로 박는 공구는?',opts:['녹아웃 펀치','홀 소','드라이브이트 툴','토치 램프'],ans:2,ex:'드라이브이트 툴: 콘크리트에 화약 폭발력으로 박는 도구'},
+    ]
+  },
+  special:{
+    label:'⚠️ 특수장소 배선 규정',
+    point:`<div class="pt-title">특수 장소별 허용 공사 방법</div>
+    <table class="mem-table">
+      <tr><th>장소</th><th>허용 공사</th></tr>
+      <tr><td><strong>폭연성 분진</strong></td><td><span class="val">케이블, 금속관</span> (나사 조임 5턱 이상)</td></tr>
+      <tr><td><strong>가연성 분진·위험물</strong></td><td><span class="val">케이블, 금속관, 합성수지</span></td></tr>
+      <tr><td><strong>화약류 저장소</strong></td><td><span class="val">조명 설비만</span></td></tr>
+      <tr><td><strong>교통 신호등·도로 발열선</strong></td><td><span class="val">30V 이하</span></td></tr>
+      <tr><td><strong>전기 울타리</strong></td><td><span class="val">250V 이하</span>, 경동선 2mm 이상</td></tr>
+    </table>
+    <div class="tip">폭연성 > 가연성·위험물 순서로 규제 강함! 폭연성은 합성수지 <strong>불가</strong>, 가연성은 <strong>가능</strong>.</div>`,
+    qs:[
+      {q:'폭연성 분진 장소에서 허용되는 배선 공사 방법은?',opts:['합성수지관 공사','애자 공사','케이블·금속관 공사','몰드 공사'],ans:2,ex:'폭연성 분진: 케이블·금속관만 허용 (합성수지 불가). 나사 조임 5턱 이상'},
+      {q:'화약류 저장소에서 허용되는 전기설비는?',opts:['동력 설비','조명 설비만','통신 설비','냉방 설비'],ans:1,ex:'화약류 저장소는 조명 설비만 허용'},
+      {q:'가연성 분진 장소에서 허용되지 않는 공사 방법은?',opts:['케이블 공사','금속관 공사','합성수지관 공사','애자 공사'],ans:3,ex:'가연성 분진·위험물: 케이블, 금속관, 합성수지 가능. 애자 공사는 불가'},
+      {q:'전기 울타리 사용 전압 기준은?',opts:['100V 이하','200V 이하','250V 이하','300V 이하'],ans:2,ex:'전기 울타리: 250V 이하, 경동선 2mm 이상, 기둥 2.5cm, 식물과 0.3m 이상 이격'},
+      {q:'교통 신호등 및 도로 발열선에 사용하는 전압 기준은?',opts:['15V 이하','24V 이하','30V 이하','50V 이하'],ans:2,ex:'교통 신호등·도로 발열선은 30V 이하'},
+    ]
+  },
+  light:{
+    label:'💡 조명 기초',
+    point:`<div class="pt-title">조명 단위 및 기호</div>
+    <table class="mem-table">
+      <tr><th>기호</th><th>단위</th><th>의미</th></tr>
+      <tr><td><span class="val">F</span></td><td>루멘 (lm)</td><td>광속: 빛의 총량</td></tr>
+      <tr><td><span class="val">I</span></td><td>칸델라 (cd)</td><td>광도: 빛의 세기</td></tr>
+      <tr><td><span class="val">E</span></td><td>럭스 (lx)</td><td>조도: 입사광속 밝기</td></tr>
+      <tr><td><span class="val">B</span></td><td>니트 (nt)</td><td>휘도: 표면 밝기</td></tr>
+    </table>
+    <br>
+    <div class="pt-title">등기구 기호 & 조명 배치</div>
+    <table class="mem-table">
+      <tr><th>기호</th><th>등기구</th></tr>
+      <tr><td><span class="val">F</span></td><td>형광등</td></tr>
+      <tr><td><span class="val">H</span></td><td>수은등</td></tr>
+      <tr><td><span class="val">N</span></td><td>나트륨등</td></tr>
+      <tr><td><span class="val">M</span></td><td>메탈 핼라이드등</td></tr>
+    </table>
+    <p style="font-size:.84rem;margin-top:10px;line-height:1.9;color:var(--text);">
+    조명 계산: <strong style="color:#fff">FUN = EAD</strong><br>
+    배치 간격: 직접조명 = <strong style="color:var(--accent2)">2/3H</strong> / 간접조명 = <strong style="color:var(--accent2)">4/5H</strong>
+    </p>
+    <div class="tip">조도(lx) = E, 광속(lm) = F. FUN=EAD에서 D=감광보상률(보수율의 역수)!</div>`,
+    qs:[
+      {q:'조도(입사광속 밝기)의 단위는?',opts:['루멘(lm)','칸델라(cd)','럭스(lx)','니트(nt)'],ans:2,ex:'F(루멘): 광속 / I(칸델라): 광도 / E(럭스): 조도 / B(니트): 휘도'},
+      {q:'수은등의 등기구 기호는?',opts:['F','H','N','M'],ans:1,ex:'F: 형광등 / H: 수은등 / N: 나트륨등 / M: 메탈 핼라이드등'},
+      {q:'직접 조명 방식에서 등기구 배치 간격 기준은?',opts:['1/2H','2/3H','3/4H','4/5H'],ans:1,ex:'직접 조명: 2/3H / 간접 조명: 4/5H'},
+      {q:'조명 계산식 FUN = EAD에서 D가 의미하는 것은?',opts:['조명률','감광보상률(유지율의 역수)','면적','광속'],ans:1,ex:'F=광속, U=조명률, N=등수, E=조도, A=면적, D=감광보상률(=1/보수율)'},
+    ]
+  }
+};
+
+const CATS = Object.keys(DATA);
+let score = {done:0,ok:0,bad:0};
+
+function buildSection(cat) {
+  const d = DATA[cat];
+  const total = d.qs.length;
+  let html = `<div class="sec-title"><h2>${d.label}</h2><span class="cnt">${total}문제</span></div>
+  <div class="pt-card">${d.point}</div>
+  <div class="quiz-wrap">
+    <div class="quiz-hd"><h3>🧪 확인 문제</h3><div class="q-score" id="rate-${cat}">정답 <span>-</span></div></div>`;
+  d.qs.forEach((q,i) => {
+    html += `<div class="q-card" id="qc-${cat}-${i}">
+      <div class="q-head" onclick="tog('${cat}',${i})">
+        <span class="q-num">Q${String(i+1).padStart(2,'0')}</span>
+        <span class="q-text">${q.q}</span>
+        <span class="q-arrow">▼</span>
+      </div>
+      <div class="q-opts" id="qo-${cat}-${i}">
+        ${q.opts.map((o,oi)=>`<button class="opt" id="ob-${cat}-${i}-${oi}" onclick="pick('${cat}',${i},${oi})"><span class="onum">${oi+1}</span>${o}</button>`).join('')}
+        <div class="ans-box" id="ab-${cat}-${i}"><strong>해설:</strong> ${q.ex}</div>
+      </div>
+    </div>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderPage(tab) {
+  const m = document.getElementById('main');
+  m.innerHTML = '';
+  if (tab === 'all') {
+    CATS.forEach((cat,ci) => {
+      const div = document.createElement('div');
+      div.innerHTML = buildSection(cat);
+      if (ci < CATS.length-1) div.innerHTML += '<div class="divider"></div>';
+      m.appendChild(div);
+    });
+  } else {
+    const div = document.createElement('div');
+    div.innerHTML = buildSection(tab);
+    m.appendChild(div);
+  }
+  updateStat();
+}
+
+function tog(cat,i) {
+  document.getElementById(`qc-${cat}-${i}`).classList.toggle('open');
+}
+
+function pick(cat,i,chosen) {
+  const card = document.getElementById(`qc-${cat}-${i}`);
+  if(!card || card.classList.contains('ok') || card.classList.contains('ng')) return;
+  const q = DATA[cat].qs[i];
+  const correct = chosen === q.ans;
+  q.opts.forEach((_,oi) => {
+    const b = document.getElementById(`ob-${cat}-${i}-${oi}`);
+    if(!b) return;
+    b.disabled = true;
+    if(oi === q.ans) b.classList.add('correct');
+    else if(oi === chosen && !correct) b.classList.add('wrong');
+  });
+  card.classList.add(correct ? 'ok' : 'ng');
+  const ab = document.getElementById(`ab-${cat}-${i}`);
+  if(ab) ab.classList.add('show');
+  score.done++; if(correct) score.ok++; else score.bad++;
+  updateStat(); updateRate(cat);
+}
+
+function updateStat() {
+  const total = CATS.reduce((s,c) => s + DATA[c].qs.length, 0);
+  document.getElementById('st').textContent = total;
+  document.getElementById('sd').textContent = score.done;
+  document.getElementById('so').textContent = score.ok;
+  document.getElementById('sb').textContent = score.bad;
+}
+
+function updateRate(cat) {
+  const qs = DATA[cat].qs;
+  let done=0,ok=0;
+  qs.forEach((_,i) => {
+    const c = document.getElementById(`qc-${cat}-${i}`);
+    if(c && (c.classList.contains('ok') || c.classList.contains('ng'))) {
+      done++;
+      if(c.classList.contains('ok')) ok++;
+    }
+  });
+  const el = document.getElementById(`rate-${cat}`);
+  if(el) el.innerHTML = `정답 <span>${done > 0 ? ok+'/'+done : '-'}</span>`;
+}
+
+function go(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPage(tab);
+}
+
+renderPage('all');
+</script>
+</body>
+</html>
