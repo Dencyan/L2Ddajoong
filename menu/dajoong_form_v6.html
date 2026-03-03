@@ -1415,8 +1415,6 @@ const CONFIG = {
     t += `사용할 캠 : ${cam || '(미선택)'}\n`;
     t += `리깅 방송 공개 여부 : ${broadcast || '(미선택)'}\n`;
     t += `SNS·포트폴리오 공개 : 공개 (항상)\n`;
-    t += `\n── 추가 요청 사항 ──\n`;
-    t += `${memo || '없음'}\n`;
     t += `\n── 예상 견적 ──\n`;
     items.forEach(item => {
       const ps = item.price > 0 ? `+${fmt(item.price)}`
@@ -1425,6 +1423,8 @@ const CONFIG = {
       t += `  ${item.label} : ${ps}\n`;
     });
     t += `  합계 : ${fmt(total)} (최종 금액은 상담 후 확정)\n`;
+    t += `\n── 추가 요청 사항 ──\n`;
+    t += `${memo || '없음'}\n`;
     t += `─────────────────────────`;
     return t;
   }
