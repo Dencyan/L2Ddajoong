@@ -1104,9 +1104,9 @@ footer {
   flex-shrink: 0;
 }
 .lang-btn {
-  background: rgba(255,255,255,0.12);
-  border: 1.5px solid rgba(255,255,255,0.35);
-  color: rgba(255,255,255,0.75);
+  background: rgba(159,168,255,0.15);
+  border: 1.5px solid rgba(159,168,255,0.50);
+  color: #9FA8FF;
   font-family: inherit;
   font-size: 0.72rem;
   font-weight: 800;
@@ -1118,18 +1118,18 @@ footer {
   line-height: 1;
 }
 .lang-btn:hover {
-  color: #fff;
-  background: rgba(255,255,255,0.22);
-  border-color: rgba(255,255,255,0.6);
+  color: #C2CAFF;
+  background: rgba(159,168,255,0.28);
+  border-color: rgba(159,168,255,0.75);
 }
 .lang-btn.lang-active {
   color: #fff;
-  background: rgba(159,168,255,0.45);
+  background: rgba(159,168,255,0.55);
   border-color: #9FA8FF;
   box-shadow: 0 0 10px rgba(159,168,255,0.5);
 }
 .lang-divider {
-  color: rgba(255,255,255,0.25);
+  color: rgba(159,168,255,0.45);
   font-size: 0.6rem;
   user-select: none;
   margin: 0 1px;
