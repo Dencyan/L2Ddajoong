@@ -955,8 +955,8 @@ section[data-type][data-active] { display: block; }
 .price-intro { font-size: .9rem; color: var(--text-light); margin-bottom: 22px; }
 .price-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 18px; margin-bottom: 18px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px; margin-bottom: 18px;
 }
 .price-card {
   background: var(--panel);

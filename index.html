@@ -576,45 +576,115 @@
     <p class="price-intro reveal" data-i18n="price.intro">기본 안내 요금입니다. 프로젝트 요구사항에 따라 견적이 달라집니다.<br>상세 견적은 파일 구조와 요구 사항 확인 후 안내드립니다.</p>
 
     <div class="price-cards reveal">
+
+      <!-- LD 베이직 -->
       <article class="price-card">
-        <h3 data-i18n="price.ld.title">LD 리깅</h3>
-        <div>
-          <div class="price-amount">₩600,000<span data-i18n="price.ld.full"> ~ (전신)</span></div>
-          <div class="price-amount">₩450,000<span data-i18n="price.ld.half"> ~ (반신)</span></div>
+        <div class="price-card-head">
+          <span class="price-card-title">베이직 리깅 <small>LD</small></span>
+          <span class="price-card-badge" data-i18n="price.badge.ld">Live2D</span>
         </div>
-        <p data-i18n="price.ld.desc">자연스러운 움직임과 풍성한 물리 움직임을 제공합니다.</p>
-        <ul>
-          <li data-i18n="price.ld.f1">자연스러운 XYZ 움직임 제공</li>
-          <li data-i18n="price.ld.f2">디테일한 입 모양</li>
-          <li data-i18n="price.ld.f3">호흡 모션 루프 제공</li>
-          <li data-i18n="price.ld.f4">추가 표정 2종 포함</li>
-        </ul>
-        <div class="price-card-foot" data-i18n="price.ld.period">예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회</div>
+        <div class="price-card-body">
+          <div class="price-amount-wrap">
+            <div class="price-row">
+              <span class="price-row-label" data-i18n="price.label.full">전신</span>
+              <span class="price-row-amount">₩600,000<span data-i18n="price.label.from"> ~</span></span>
+            </div>
+            <div class="price-row">
+              <span class="price-row-label" data-i18n="price.label.half">반신</span>
+              <span class="price-row-amount">₩500,000<span data-i18n="price.label.from"> ~</span></span>
+            </div>
+          </div>
+          <p class="price-card-desc" data-i18n="price.basic.desc">자연스러운 XYZ 움직임과 안정적인 물리를 제공합니다.</p>
+          <ul class="price-feat-list">
+            <li data-i18n="price.basic.f1">얼굴 · 몸 XYZ 움직임</li>
+            <li data-i18n="price.basic.f2">눈썹 변형 · 각도 / 눈깜빡 (윙크)</li>
+            <li data-i18n="price.basic.f3">입움직임 9점 / 입 개폐 연동 턱</li>
+            <li data-i18n="price.basic.f4">호흡 · 팔 흔들림 (손가락 포함)</li>
+            <li data-i18n="price.basic.f5">기본 표정 2종 포함</li>
+            <li class="feat-highlight" data-i18n="price.basic.f6">최대 3단계 물리 지원</li>
+          </ul>
+        </div>
+        <div class="price-card-foot" data-i18n="price.basic.period">예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회</div>
       </article>
 
+      <!-- LD 프리미엄 -->
+      <article class="price-card price-card--premium">
+        <div class="price-card-head">
+          <span class="price-card-title">프리미엄 리깅 <small>LD</small></span>
+          <span class="price-card-badge price-card-badge--premium" data-i18n="price.badge.premium">Premium</span>
+        </div>
+        <div class="price-card-body">
+          <div class="price-amount-wrap">
+            <div class="price-row">
+              <span class="price-row-label" data-i18n="price.label.full">전신</span>
+              <span class="price-row-amount">₩780,000<span data-i18n="price.label.from"> ~</span></span>
+            </div>
+            <div class="price-row">
+              <span class="price-row-label" data-i18n="price.label.half">반신</span>
+              <span class="price-row-amount">₩670,000<span data-i18n="price.label.from"> ~</span></span>
+            </div>
+          </div>
+          <p class="price-card-desc" data-i18n="price.prem.desc">높은 물리 단계와 세밀한 디테일로 풍부한 움직임을 제공합니다.</p>
+          <ul class="price-feat-list">
+            <li data-i18n="price.prem.f1">얼굴 · 몸 XYZ 움직임</li>
+            <li data-i18n="price.prem.f2">눈썹눈 연동 페이셜 / 눈깜빡 (윙크)</li>
+            <li data-i18n="price.prem.f3">입움직임 12점~ / 입 개폐 연동 턱</li>
+            <li data-i18n="price.prem.f4">속눈썹 물리 / 눈동자 물리</li>
+            <li data-i18n="price.prem.f5">호흡 · 팔 흔들림 (손가락 포함)</li>
+            <li data-i18n="price.prem.f6">기본 표정 2종 포함</li>
+            <li class="feat-highlight" data-i18n="price.prem.f7">최소 3단계 물리 지원</li>
+          </ul>
+        </div>
+        <div class="price-card-foot" data-i18n="price.prem.period">예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회</div>
+      </article>
+
+      <!-- SD -->
       <article class="price-card">
-        <h3 data-i18n="price.sd.title">SD 리깅</h3>
-        <div class="price-amount">₩200,000<span data-i18n="price.sd.full"> ~ (전신)</span></div>
-        <p data-i18n="price.sd.desc">작고 귀여운 SD 모델 리깅. 가볍고 빠른 리깅을 제공합니다.</p>
-        <ul>
-          <li data-i18n="price.ld.f1">자연스러운 XYZ 움직임 제공</li>
-          <li data-i18n="price.sd.f2">단순한 입 모양</li>
-          <li data-i18n="price.ld.f4">추가 표정 2종 포함</li>
-        </ul>
+        <div class="price-card-head">
+          <span class="price-card-title">SD 리깅</span>
+          <span class="price-card-badge price-card-badge--sd" data-i18n="price.badge.sd">SD</span>
+        </div>
+        <div class="price-card-body">
+          <div class="price-amount-wrap">
+            <div class="price-row">
+              <span class="price-row-label" data-i18n="price.label.full">전신</span>
+              <span class="price-row-amount">₩250,000<span data-i18n="price.label.from"> ~</span></span>
+            </div>
+          </div>
+          <p class="price-card-desc" data-i18n="price.sd.desc">작고 귀여운 SD 모델 리깅. 가볍고 빠른 리깅을 제공합니다.</p>
+          <ul class="price-feat-list">
+            <li data-i18n="price.ld.f1">자연스러운 XYZ 움직임 제공</li>
+            <li data-i18n="price.sd.f2">단순한 입 모양</li>
+            <li data-i18n="price.ld.f4">기본 표정 2종 포함</li>
+          </ul>
+        </div>
         <div class="price-card-foot" data-i18n="price.sd.period">예상 작업 기간: 7일–14일 · 수정 2회 + 적용 후 1회</div>
       </article>
 
+      <!-- 배경 / 월페이퍼 -->
       <article class="price-card">
-        <h3 data-i18n="price.bg.title">배경 / 월페이퍼 애니메이션</h3>
-        <div class="price-amount">₩130,000<span data-i18n="price.bg.type"> ~ (메모리얼)</span></div>
-        <p data-i18n="price.bg.desc">반복되는 루프형 애니메이션과 월페이퍼를 제작합니다.</p>
-        <ul>
-          <li data-i18n="price.bg.f1">자연스럽게 반복되는 애니메이션 제작</li>
-          <li data-i18n="price.bg.f2">기본 mp4 포맷 제공 (GIF 추가 가능)</li>
-          <li data-i18n="price.bg.f3">GIF는 파일 특성상 깨짐이 있을 수 있음</li>
-        </ul>
+        <div class="price-card-head">
+          <span class="price-card-title" data-i18n="price.bg.title">배경 / 월페이퍼 애니메이션</span>
+          <span class="price-card-badge price-card-badge--bg" data-i18n="price.badge.bg">Animation</span>
+        </div>
+        <div class="price-card-body">
+          <div class="price-amount-wrap">
+            <div class="price-row">
+              <span class="price-row-label" data-i18n="price.label.base">기본가</span>
+              <span class="price-row-amount">₩170,000<span data-i18n="price.label.from"> ~</span></span>
+            </div>
+          </div>
+          <p class="price-card-desc" data-i18n="price.bg.desc">반복되는 루프형 애니메이션과 월페이퍼를 제작합니다.</p>
+          <ul class="price-feat-list">
+            <li data-i18n="price.bg.f1">자연스럽게 반복되는 애니메이션 제작</li>
+            <li data-i18n="price.bg.f2">기본 mp4 포맷 제공 (GIF 추가 가능)</li>
+            <li data-i18n="price.bg.f3">GIF는 파일 특성상 깨짐이 있을 수 있음</li>
+            <li class="feat-highlight" data-i18n="price.bg.f4">복잡도에 따라 금액 협의</li>
+          </ul>
+        </div>
         <div class="price-card-foot" data-i18n="price.bg.period">예상 작업 기간: 7일–14일 · 수정 최대 2회</div>
       </article>
+
     </div>
 
     <p class="price-note reveal" data-i18n="price.note">정확한 견적은 아트워크(PSD/PNG)와 요구사항 확인 후 산정됩니다.</p>
@@ -1068,18 +1138,30 @@ document.addEventListener('DOMContentLoaded', () => {
       'samples.arm.game': '게임기를 이용해 게임 화면에 몰입감을 올릴 수 있습니다', 'samples.arm.wand': '캐릭터 컨셉에 맞는 아이템으로 다양한 연출', 'samples.arm.wave': '손을 흔들며 인사하는 디테일한 표현',
       'samples.costume.title': '의상 및 헤어', 'samples.costume.desc': '의상과 헤어 변경으로 같은 캐릭터도 전혀 다른 분위기를 연출할 수 있습니다.',
       'samples.costume.hair': '머리 색상을 바꿔 전혀 다른 분위기를 연출', 'samples.costume.outfit': '의상 교체로 캐릭터 콘셉트를 폭넓게 표현', 'samples.costume.hairstyle': '헤어 스타일 변경으로 같은 캐릭터도 새로운 느낌으로',
-      'price.title': '가격',
+      'price.badge.ld': 'Live2D', 'price.badge.premium': 'Premium', 'price.badge.sd': 'SD', 'price.badge.bg': 'Animation',
+      'price.label.full': '전신', 'price.label.half': '반신', 'price.label.base': '기본가', 'price.label.from': ' ~',
       'price.intro': '기본 안내 요금입니다. 프로젝트 요구사항에 따라 견적이 달라집니다.<br>상세 견적은 파일 구조와 요구 사항 확인 후 안내드립니다.',
-      'price.ld.title': 'LD 리깅', 'price.ld.full': ' ~ (전신)', 'price.ld.half': ' ~ (반신)',
-      'price.ld.desc': '자연스러운 움직임과 풍성한 물리 움직임을 제공합니다.',
-      'price.ld.f1': '자연스러운 XYZ 움직임 제공', 'price.ld.f2': '디테일한 입 모양', 'price.ld.f3': '호흡 모션 루프 제공', 'price.ld.f4': '추가 표정 2종 포함',
-      'price.ld.period': '예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회',
-      'price.sd.title': 'SD 리깅', 'price.sd.full': ' ~ (전신)',
+      'price.basic.title': '베이직 리깅', 'price.basic.full': ' (전신)', 'price.basic.half': ' (반신)',
+      'price.basic.desc': '자연스러운 XYZ 움직임과 안정적인 물리를 제공합니다.',
+      'price.basic.f1': '얼굴 · 몸 XYZ 움직임', 'price.basic.f2': '눈썹 변형 · 각도 / 눈깜빡 (윙크)',
+      'price.basic.f3': '입움직임 9점 / 입 개폐 연동 턱', 'price.basic.f4': '호흡 · 팔 흔들림 (손가락 포함)',
+      'price.basic.f5': '기본 표정 2종 포함', 'price.basic.f6': '최대 3단계 물리 지원',
+      'price.basic.period': '예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회',
+      'price.prem.title': '프리미엄 리깅', 'price.prem.full': ' (전신)', 'price.prem.half': ' (반신)',
+      'price.prem.desc': '높은 물리 단계와 세밀한 디테일로 풍부한 움직임을 제공합니다.',
+      'price.prem.f1': '얼굴 · 몸 XYZ 움직임', 'price.prem.f2': '눈썹눈 연동 페이셜 / 눈깜빡 (윙크)',
+      'price.prem.f3': '입움직임 12점~ / 입 개폐 연동 턱', 'price.prem.f4': '속눈썹 물리 / 눈동자 물리',
+      'price.prem.f5': '호흡 · 팔 흔들림 (손가락 포함)', 'price.prem.f6': '기본 표정 2종 포함',
+      'price.prem.f7': '최소 3단계 물리 지원',
+      'price.prem.period': '예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회',
+      'price.ld.f1': '자연스러운 XYZ 움직임 제공', 'price.ld.f4': '기본 표정 2종 포함',
+      'price.sd.title': 'SD 리깅', 'price.sd.full': ' (전신)',
       'price.sd.desc': '작고 귀여운 SD 모델 리깅. 가볍고 빠른 리깅을 제공합니다.',
       'price.sd.f2': '단순한 입 모양', 'price.sd.period': '예상 작업 기간: 7일–14일 · 수정 2회 + 적용 후 1회',
-      'price.bg.title': '배경 / 월페이퍼 애니메이션', 'price.bg.type': ' ~ (메모리얼)',
+      'price.bg.title': '배경 / 월페이퍼 애니메이션', 'price.bg.type': ' ~',
       'price.bg.desc': '반복되는 루프형 애니메이션과 월페이퍼를 제작합니다.',
-      'price.bg.f1': '자연스럽게 반복되는 애니메이션 제작', 'price.bg.f2': '기본 mp4 포맷 제공 (GIF 추가 가능)', 'price.bg.f3': 'GIF는 파일 특성상 깨짐이 있을 수 있음',
+      'price.bg.f1': '자연스럽게 반복되는 애니메이션 제작', 'price.bg.f2': '기본 mp4 포맷 제공 (GIF 추가 가능)',
+      'price.bg.f3': 'GIF는 파일 특성상 깨짐이 있을 수 있음', 'price.bg.f4': '복잡도에 따라 금액 협의',
       'price.bg.period': '예상 작업 기간: 7일–14일 · 수정 최대 2회',
       'price.note': '정확한 견적은 아트워크(PSD/PNG)와 요구사항 확인 후 산정됩니다.',
       'price.cta': 'DM으로 상세 문의하기',
@@ -1178,18 +1260,31 @@ document.addEventListener('DOMContentLoaded', () => {
       'samples.arm.game': 'Immerse viewers with a handheld game controller', 'samples.arm.wand': 'Diverse expressions with concept-fitting items', 'samples.arm.wave': 'Detailed waving hand gesture',
       'samples.costume.title': 'Costume & Hair', 'samples.costume.desc': 'Costume and hair swaps let the same character radiate a completely different vibe.',
       'samples.costume.hair': 'Hair color change for a completely different look', 'samples.costume.outfit': 'Outfit swap to express a wide range of character concepts', 'samples.costume.hairstyle': 'Hairstyle change gives the same character a fresh feel',
+      'price.badge.ld': 'Live2D', 'price.badge.premium': 'Premium', 'price.badge.sd': 'SD', 'price.badge.bg': 'Animation',
+      'price.label.full': 'Full-Body', 'price.label.half': 'Half-Body', 'price.label.base': 'Base Price', 'price.label.from': ' ~',
       'price.title': 'Pricing',
       'price.intro': 'These are base reference prices. Quotes may vary based on project requirements.<br>Detailed quotes are provided after reviewing files and requirements.',
-      'price.ld.title': 'LD Rigging', 'price.ld.full': ' ~ (Full-Body)', 'price.ld.half': ' ~ (Half-Body)',
-      'price.ld.desc': 'Natural movement with rich physics.',
-      'price.ld.f1': 'Natural XYZ Movement', 'price.ld.f2': 'Detailed Mouth Shapes', 'price.ld.f3': 'Breathing Motion Loop', 'price.ld.f4': '2 Additional Expressions Included',
-      'price.ld.period': 'Estimated Time: 14–30 days · 2 revisions + 1 post-delivery',
-      'price.sd.title': 'SD Rigging', 'price.sd.full': ' ~ (Full-Body)',
+      'price.basic.title': 'Basic Rigging', 'price.basic.full': ' (Full-Body)', 'price.basic.half': ' (Half-Body)',
+      'price.basic.desc': 'Natural XYZ movement with stable physics.',
+      'price.basic.f1': 'Face & Body XYZ Movement', 'price.basic.f2': 'Eyebrow Deform & Angle / Blink (Wink)',
+      'price.basic.f3': 'Mouth (9-point) / Jaw Linked', 'price.basic.f4': 'Breathing & Arm Swing (incl. fingers)',
+      'price.basic.f5': '2 Default Expressions Included', 'price.basic.f6': 'Up to 3-tier Physics',
+      'price.basic.period': 'Estimated Time: 14–30 days · 2 revisions + 1 post-delivery',
+      'price.prem.title': 'Premium Rigging', 'price.prem.full': ' (Full-Body)', 'price.prem.half': ' (Half-Body)',
+      'price.prem.desc': 'High-tier physics and detailed movement for rich expressiveness.',
+      'price.prem.f1': 'Face & Body XYZ Movement', 'price.prem.f2': 'Eyebrow-Eye Linked Facial / Blink (Wink)',
+      'price.prem.f3': 'Mouth (12-point+) / Jaw Linked', 'price.prem.f4': 'Eyelash & Pupil Physics',
+      'price.prem.f5': 'Breathing & Arm Swing (incl. fingers)', 'price.prem.f6': '2 Default Expressions Included',
+      'price.prem.f7': 'Minimum 3-tier Physics',
+      'price.prem.period': 'Estimated Time: 14–30 days · 2 revisions + 1 post-delivery',
+      'price.ld.f1': 'Natural XYZ Movement', 'price.ld.f4': '2 Default Expressions Included',
+      'price.sd.title': 'SD Rigging', 'price.sd.full': ' (Full-Body)',
       'price.sd.desc': 'Cute SD model rigging. Light and fast.',
       'price.sd.f2': 'Simple Mouth Shapes', 'price.sd.period': 'Estimated Time: 7–14 days · 2 revisions + 1 post-delivery',
-      'price.bg.title': 'Background / Wallpaper Animation', 'price.bg.type': ' ~ (Memorial)',
+      'price.bg.title': 'Background / Wallpaper Animation', 'price.bg.type': ' ~',
       'price.bg.desc': 'Looping animations and wallpaper creation.',
-      'price.bg.f1': 'Naturally looping animation', 'price.bg.f2': 'Base mp4 format (GIF available)', 'price.bg.f3': 'GIF quality may vary due to format limitations',
+      'price.bg.f1': 'Naturally looping animation', 'price.bg.f2': 'Base mp4 format (GIF available)',
+      'price.bg.f3': 'GIF quality may vary due to format limitations', 'price.bg.f4': 'Price varies by complexity',
       'price.bg.period': 'Estimated Time: 7–14 days · Up to 2 revisions',
       'price.note': 'Final quotes are determined after reviewing artwork (PSD/PNG) and requirements.',
       'price.cta': 'Contact via DM',
@@ -1288,18 +1383,31 @@ document.addEventListener('DOMContentLoaded', () => {
       'samples.arm.game': 'ゲームコントローラーでゲーム画面への没入感を演出', 'samples.arm.wand': 'コンセプトに合ったアイテムで多彩な演出', 'samples.arm.wave': '手を振って挨拶するディテールな表現',
       'samples.costume.title': '衣装・ヘア', 'samples.costume.desc': '衣装やヘアを変えることで同じキャラクターでも全く異なる雰囲気を演出できます。',
       'samples.costume.hair': '髪の色を変えて全く異なる雰囲気を演出', 'samples.costume.outfit': '衣装チェンジでキャラクターのコンセプトを幅広く表現', 'samples.costume.hairstyle': 'ヘアスタイル変更で同じキャラクターでも新鮮な印象に',
+      'price.badge.ld': 'Live2D', 'price.badge.premium': 'Premium', 'price.badge.sd': 'SD', 'price.badge.bg': 'Animation',
+      'price.label.full': '全身', 'price.label.half': '半身', 'price.label.base': '基本価格', 'price.label.from': ' 〜',
       'price.title': '料金',
       'price.intro': '基本参考料金です。プロジェクトの要件によって見積もりが異なります。<br>詳細な見積もりはファイル構造と要件を確認後にご案内します。',
-      'price.ld.title': 'LDリギング', 'price.ld.full': ' 〜（全身）', 'price.ld.half': ' 〜（半身）',
-      'price.ld.desc': '自然な動きと豊かな物理表現を提供します。',
-      'price.ld.f1': '自然なXYZ動作', 'price.ld.f2': 'ディテールな口の形', 'price.ld.f3': '呼吸モーションループ', 'price.ld.f4': '追加表情2種付き',
-      'price.ld.period': '予想作業期間：14〜30日 · 修正2回 + 適用後1回',
-      'price.sd.title': 'SDリギング', 'price.sd.full': ' 〜（全身）',
+      'price.basic.title': 'ベーシックリギング', 'price.basic.full': '（全身）', 'price.basic.half': '（半身）',
+      'price.basic.desc': '自然なXYZ動作と安定した物理表現を提供します。',
+      'price.basic.f1': '顔・体 XYZ動作', 'price.basic.f2': '眉変形・角度 / まばたき（ウィンク）',
+      'price.basic.f3': '口の動き9点 / 顎リンク', 'price.basic.f4': '呼吸・腕揺れ（指含む）',
+      'price.basic.f5': 'デフォルト表情2種付き', 'price.basic.f6': '最大3段階物理対応',
+      'price.basic.period': '予想作業期間：14〜30日 · 修正2回 + 適用後1回',
+      'price.prem.title': 'プレミアムリギング', 'price.prem.full': '（全身）', 'price.prem.half': '（半身）',
+      'price.prem.desc': '高精度の物理と細かいディテールで豊かな動きを提供します。',
+      'price.prem.f1': '顔・体 XYZ動作', 'price.prem.f2': '眉目連動フェイシャル / まばたき（ウィンク）',
+      'price.prem.f3': '口の動き12点〜 / 顎リンク', 'price.prem.f4': 'まつ毛・瞳物理',
+      'price.prem.f5': '呼吸・腕揺れ（指含む）', 'price.prem.f6': 'デフォルト表情2種付き',
+      'price.prem.f7': '最低3段階物理対応',
+      'price.prem.period': '予想作業期間：14〜30日 · 修正2回 + 適用後1回',
+      'price.ld.f1': '自然なXYZ動作', 'price.ld.f4': 'デフォルト表情2種付き',
+      'price.sd.title': 'SDリギング', 'price.sd.full': '（全身）',
       'price.sd.desc': 'かわいらしいSDモデルのリギング。軽快でスピーディーな対応。',
       'price.sd.f2': 'シンプルな口の形', 'price.sd.period': '予想作業期間：7〜14日 · 修正2回 + 適用後1回',
-      'price.bg.title': '背景 / 壁紙アニメーション', 'price.bg.type': ' 〜（メモリアル）',
+      'price.bg.title': '背景 / 壁紙アニメーション', 'price.bg.type': ' 〜',
       'price.bg.desc': 'ループ型アニメーションと壁紙を制作します。',
-      'price.bg.f1': '自然にループするアニメーション制作', 'price.bg.f2': 'mp4形式で提供（GIF追加可能）', 'price.bg.f3': 'GIFはファイルの特性上、画質が低下する場合があります',
+      'price.bg.f1': '自然にループするアニメーション制作', 'price.bg.f2': 'mp4形式で提供（GIF追加可能）',
+      'price.bg.f3': 'GIFはファイルの特性上、画質が低下する場合があります', 'price.bg.f4': '複雑さにより金額要相談',
       'price.bg.period': '予想作業期間：7〜14日 · 最大2回修正',
       'price.note': '正確な見積もりはアートワーク（PSD/PNG）と要件の確認後に算定されます。',
       'price.cta': 'DMでお問い合わせ',
