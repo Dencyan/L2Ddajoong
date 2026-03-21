@@ -645,6 +645,7 @@ body {
         </div>
         <div class="field">
           <label class="field-label" id="lbl-illust">일러스트 작가님 닉네임</label>
+          <p class="field-hint" id="hint-illust">영어 닉네임이 있다면 같이 작성해 주세요.</p>
           <input type="text" class="field-input" id="f-illust" placeholder="일러스트 작가님 닉네임">
         </div>
       </div>
@@ -1676,6 +1677,7 @@ const CONFIG = {
       badge_04:'선택', badge_05:'선택', badge_06:'해당 시', badge_07:'선택', badge_08:'선택', badge_10:'선택',
       lbl_nickname:'닉네임 / 활동명', ph_nickname:'활동 닉네임',
       lbl_illust:'일러스트 작가님 닉네임', ph_illust:'일러스트 작가님 닉네임',
+      hint_illust:'영어 닉네임이 있다면 같이 작성해 주세요.',
       lbl_platform:'방송 플랫폼', chip_other:'기타',
       lbl_debut:'데뷔 날짜 / 모델 사용 일정', ph_debut:'예: 2025년 6월 or 미정',
       event_banner_note:'이벤트 선택 시 기본 리깅이 자동 적용됩니다 · 협업 할인과 중복 불가',
@@ -1740,6 +1742,7 @@ const CONFIG = {
       badge_04:'Optional', badge_05:'Optional', badge_06:'If applicable', badge_07:'Optional', badge_08:'Optional', badge_10:'Optional',
       lbl_nickname:'Nickname / VTuber Name', ph_nickname:'Your nickname',
       lbl_illust:"Illustrator's Nickname", ph_illust:"Illustrator's nickname",
+      hint_illust:'If they have an English nickname, please include it as well.',
       lbl_platform:'Streaming Platform', chip_other:'Other',
       lbl_debut:'Debut Date / Schedule', ph_debut:'e.g. June 2025 or TBD',
       event_banner_note:'Selecting an event auto-applies base rigging · Cannot be combined with collab discount',
@@ -1804,6 +1807,7 @@ const CONFIG = {
       badge_04:'任意', badge_05:'任意', badge_06:'該当時', badge_07:'任意', badge_08:'任意', badge_10:'任意',
       lbl_nickname:'ニックネーム / 活動名', ph_nickname:'活動ニックネーム',
       lbl_illust:'イラストレーターのニックネーム', ph_illust:'イラストレーターのニックネーム',
+      hint_illust:'英語のニックネームがあれば一緒にご記入ください。',
       lbl_platform:'配信プラットフォーム', chip_other:'その他',
       lbl_debut:'デビュー日 / モデル使用予定', ph_debut:'例: 2025年6月 or 未定',
       event_banner_note:'イベントを選択するとベースリギングが自動適用されます · コラボ割引との併用不可',
@@ -1887,6 +1891,7 @@ const CONFIG = {
     ['badge-opt-10',     'badge_10',         'text'],
     ['lbl-nickname',     'lbl_nickname',     'text'],
     ['lbl-illust',       'lbl_illust',       'text'],
+    ['hint-illust',      'hint_illust',      'text'],
     ['lbl-platform',     'lbl_platform',     'text'],
     ['chip-other',       'chip_other',       'text'],
     ['lbl-debut',        'lbl_debut',        'text'],
