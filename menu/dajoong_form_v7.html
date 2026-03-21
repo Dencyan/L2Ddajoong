@@ -910,19 +910,21 @@ const CONFIG = {
 
   /* ── iOS / VBridger ──────────────────────── */
   iosOptions: [
-    { id: 'ios-mer', name: '메롱',                  price: 70000 },
-    { id: 'ios-vb',  name: 'VBridger',              price: 100000 },
-    { id: 'ios-set', name: '메롱 + VBridger 세트',  price: 150000 },
+    { id: 'ios-mouthx', name: '입 X',    sub: '입 좌우 움직임',                                      price: 20000 },
+    { id: 'ios-chub',   name: '볼빵빵',  sub: 'iOS 사용자가 아니라면 단축키로도 추가 가능',           price: 20000 },
+    { id: 'ios-mer',    name: '메롱',    sub: '혀 내밀기',                                            price: 70000 },
+    { id: 'ios-set1',   name: '입 X + 볼빵빵 + VBridger 세트',                                       price: 120000 },
+    { id: 'ios-set2',   name: '입 X + 볼빵빵 + 메롱 + VBridger 세트',                                price: 190000 },
   ],
 
   /* ── 협업 작가 ───────────────────────────── */
   collabArtists: [
     { value: '',        label: '선택 안 함',          discount: 0 },
-    { value: 'hwangu',  label: '황구 작가님(HWANGU)',   note: 'LD 5만원 할인', discount: 50000 },
-    { value: 'ddung',   label: '뚱땅이 작가님(TTUNGTTANGI)', note: 'LD 5만원 할인', discount: 50000 },
-    { value: 'yangcho', label: '양초 작가님(YANGCHO)',   note: 'LD 5만원 할인', discount: 50000 },
-    { value: 'hanohi',  label: '하노히 작가님(HANOHI)', note: 'LD 5만원 할인', discount: 50000 },
-    { value: 'peach',   label: '피치 작가님(PICHI)',   note: 'LD 5만원 할인', discount: 50000 },
+    { value: 'hwangu',  label: '황구 작가님',   note: 'LD 5만원 할인', discount: 50000 },
+    { value: 'ddung',   label: '뚱땅이 작가님', note: 'LD 5만원 할인', discount: 50000 },
+    { value: 'yangcho', label: '양초 작가님',   note: 'LD 5만원 할인', discount: 50000 },
+    { value: 'hanohi',  label: '하노히 작가님', note: 'LD 5만원 할인', discount: 50000 },
+    { value: 'peach',   label: '피치 작가님',   note: 'LD 5만원 할인', discount: 50000 },
   ],
 
   /* ── 리뷰 이벤트 ─────────────────────────── */
@@ -1026,7 +1028,7 @@ const CONFIG = {
       <input type="checkbox" id="${cfg.id}">
       <label class="rig-label" for="${cfg.id}">
         <span class="rig-dot rig-dot--sq"></span>
-        <span class="rig-name">${cfg.name}</span>
+        <span class="rig-name">${cfg.name}${cfg.sub ? `<span class="rig-sub">${cfg.sub}</span>` : ''}</span>
         <div class="rig-price">${cfg.priceText || fmt(cfg.price)}</div>
       </label>`;
     return wrap;
@@ -1711,7 +1713,13 @@ const CONFIG = {
         {name:'날개 / 뿔',priceText:'금액 협의'},{name:'팔 파츠 (마이크, 게임기 등)',priceText:'금액 협의'},
         {name:'추가 의상',priceText:'금액 협의'},{name:'추가 헤어',priceText:'금액 협의'},
       ],
-      cfg_iosOptions:[{name:'메롱'},{name:'VBridger'},{name:'메롱 + VBridger 세트'}],
+      cfg_iosOptions:[
+        {name:'입 X',   sub:'입 좌우 움직임'},
+        {name:'볼빵빵', sub:'iOS 사용자가 아니라면 단축키로도 추가 가능'},
+        {name:'메롱',   sub:'혀 내밀기'},
+        {name:'입 X + 볼빵빵 + VBridger 세트'},
+        {name:'입 X + 볼빵빵 + 메롱 + VBridger 세트'},
+      ],
       cfg_collabNone:'선택 안 함', cfg_collabNote:'LD 5만원 할인',
       cfg_reviewOptions:[
         {name:'2만원 할인',priceText:null},{name:'단순 표정 2종 추가',priceText:'표정 2종'},{name:'참여 안 함',priceText:null},
@@ -1769,7 +1777,13 @@ const CONFIG = {
         {name:'Wings / Horns',priceText:'Quote'},{name:'Arm Parts (mic, gamepad, etc.)',priceText:'Quote'},
         {name:'Extra Outfit',priceText:'Quote'},{name:'Extra Hairstyle',priceText:'Quote'},
       ],
-      cfg_iosOptions:[{name:'Tongue (Melong)'},{name:'VBridger'},{name:'Tongue + VBridger Set'}],
+      cfg_iosOptions:[
+        {name:'Mouth X',       sub:'Left-right mouth movement'},
+        {name:'Puffed Cheeks', sub:'Can also be added as a hotkey for non-iOS users'},
+        {name:'Tongue Out',    sub:'Tongue protrusion (Melong)'},
+        {name:'Mouth X + Puffed Cheeks + VBridger Set'},
+        {name:'Mouth X + Puffed Cheeks + Tongue Out + VBridger Set'},
+      ],
       cfg_collabNone:'Not selected', cfg_collabNote:'₩50,000 OFF',
       cfg_reviewOptions:[
         {name:'₩20,000 Discount',priceText:null},{name:'+2 Simple Expressions',priceText:'2 Expressions'},{name:'No Participation',priceText:null},
@@ -1827,7 +1841,13 @@ const CONFIG = {
         {name:'翼 / 角',priceText:'要相談'},{name:'アームパーツ（マイク、ゲーム機など）',priceText:'要相談'},
         {name:'追加衣装',priceText:'要相談'},{name:'追加ヘア',priceText:'要相談'},
       ],
-      cfg_iosOptions:[{name:'メロン（舌出し）'},{name:'VBridger'},{name:'メロン + VBridgerセット'}],
+      cfg_iosOptions:[
+        {name:'マウスX',         sub:'口の左右の動き'},
+        {name:'ほっぺぷくぷく', sub:'iOS以外のユーザーはホットキーでも追加可能'},
+        {name:'メロン（舌出し）', sub:'舌を出す動き'},
+        {name:'マウスX + ほっぺぷくぷく + VBridger セット'},
+        {name:'マウスX + ほっぺぷくぷく + メロン + VBridger セット'},
+      ],
       cfg_collabNone:'選択しない', cfg_collabNote:'₩50,000割引',
       cfg_reviewOptions:[
         {name:'₩20,000割引',priceText:null},{name:'簡単表情2種追加',priceText:'表情2種'},{name:'参加しない',priceText:null},
@@ -1992,7 +2012,14 @@ const CONFIG = {
       const row = document.querySelector(`#rig-ios .rig-option[data-id="${opt.id}"]`);
       if (!row) return;
       const nameEl = row.querySelector('.rig-name');
-      if (nameEl) nameEl.childNodes[0].textContent = t.name;
+      if (nameEl) {
+        nameEl.childNodes[0].textContent = t.name;
+        let subEl = nameEl.querySelector('.rig-sub');
+        if (t.sub) {
+          if (!subEl) { subEl = document.createElement('span'); subEl.className = 'rig-sub'; nameEl.appendChild(subEl); }
+          subEl.textContent = t.sub;
+        } else if (subEl) subEl.remove();
+      }
       const priceEl = row.querySelector('.rig-price');
       if (priceEl) priceEl.textContent = fmtKr(opt.price);
     });
