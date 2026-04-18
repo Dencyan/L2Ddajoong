@@ -1,0 +1,226 @@
+
+<script src="https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+.wrap {
+  display:flex; flex-direction:column; align-items:center;
+  padding:2.5rem 1rem 1.5rem; gap:1.2rem;
+  background: transparent;
+}
+svg { max-width:100%; overflow:visible; }
+.controls { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+button {
+  font-size:12px; letter-spacing:0.08em;
+  color:var(--color-text-secondary); background:none;
+  border:0.5px solid var(--color-border-secondary);
+  border-radius:6px; padding:5px 16px; cursor:pointer;
+}
+button:hover { background:var(--color-background-secondary); }
+#status { font-size:11px; color:var(--color-text-tertiary); min-height:16px; }
+.font-btns { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+.font-btn {
+  font-size:11px; padding:4px 12px;
+  border-radius:6px; cursor:pointer; background:none;
+  border:0.5px solid var(--color-border-tertiary);
+  color:var(--color-text-secondary);
+}
+.font-btn.active {
+  border-color:var(--color-border-primary);
+  color:var(--color-text-primary);
+  background:var(--color-background-secondary);
+}
+</style>
+
+<div class="wrap">
+  <svg id="sig" viewBox="0 0 600 130" width="600" height="130" xmlns="http://www.w3.org/2000/svg"></svg>
+  <div class="controls">
+    <button onclick="replay()">↺ replay</button>
+    <button onclick="toggleFill()">stroke ↔ fill</button>
+  </div>
+  <div class="font-btns">
+    <button class="font-btn active" onclick="switchFont(0, this)">Pinyon Script</button>
+    <button class="font-btn" onclick="switchFont(1, this)">Great Vibes</button>
+    <button class="font-btn" onclick="switchFont(2, this)">Pacifico</button>
+    <button class="font-btn" onclick="switchFont(3, this)">Dancing Script</button>
+  </div>
+  <div id="status">로딩 중...</div>
+</div>
+
+<script>
+const TEXT = 'Dajoong';
+const W = 600, H = 130;
+
+const FONTS = [
+  {
+    name: 'Pinyon Script',
+    url: 'https://cdn.jsdelivr.net/gh/fonts-archive/PinyonScript/PinyonScript-Regular.ttf',
+    fallback: 'https://cdn.jsdelivr.net/npm/@fontsource/pinyon-script@5.0.5/files/pinyon-script-latin-400-normal.woff',
+    size: 96, baseline: 100
+  },
+  {
+    name: 'Great Vibes',
+    url: 'https://cdn.jsdelivr.net/gh/fonts-archive/GreatVibes/GreatVibes-Regular.ttf',
+    fallback: 'https://cdn.jsdelivr.net/npm/@fontsource/great-vibes@5.0.4/files/great-vibes-latin-400-normal.woff',
+    size: 90, baseline: 100
+  },
+  {
+    name: 'Pacifico',
+    url: 'https://cdn.jsdelivr.net/gh/fonts-archive/Pacifico/Pacifico-Regular.ttf',
+    fallback: 'https://cdn.jsdelivr.net/npm/@fontsource/pacifico@5.0.8/files/pacifico-latin-400-normal.woff',
+    size: 82, baseline: 100
+  },
+  {
+    name: 'Dancing Script',
+    url: 'https://cdn.jsdelivr.net/gh/fonts-archive/DancingScript/DancingScript-Regular.ttf',
+    fallback: 'https://cdn.jsdelivr.net/npm/@fontsource/dancing-script@5.0.13/files/dancing-script-latin-400-normal.woff',
+    size: 88, baseline: 100
+  }
+];
+
+const svg = document.getElementById('sig');
+const status = document.getElementById('status');
+let charEls = [];
+let filled = false;
+let currentFontIdx = 0;
+const fontCache = {};
+
+async function loadFont(idx) {
+  if (fontCache[idx]) return fontCache[idx];
+  const f = FONTS[idx];
+  const urls = [f.url, f.fallback].filter(Boolean);
+  for (const url of urls) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) continue;
+      const buf = await res.arrayBuffer();
+      const font = opentype.parse(buf);
+      fontCache[idx] = font;
+      return font;
+    } catch(e) { console.warn(url, e.message); }
+  }
+  throw new Error(`${f.name} 로드 실패`);
+}
+
+function buildSVG(font, fontIdx) {
+  svg.innerHTML = '';
+  charEls = [];
+  filled = false;
+
+  const { size: FS, baseline: BASELINE } = FONTS[fontIdx];
+  const scale = FS / font.unitsPerEm;
+  let curX = 0;
+  const items = [];
+
+  for (let i = 0; i < TEXT.length; i++) {
+    const g = font.charToGlyph(TEXT[i]);
+    const next = i < TEXT.length - 1 ? font.charToGlyph(TEXT[i+1]) : null;
+    const kern = next ? font.getKerningValue(g, next) * scale : 0;
+    const adv = (g.advanceWidth || 0) * scale;
+    items.push({ g, x: curX });
+    curX += adv + kern;
+  }
+
+  const totalW = curX;
+  const ox = (W - totalW) / 2;
+
+  items.forEach(({ g, x }) => {
+    const d = g.getPath(x + ox, BASELINE, FS).toPathData(3);
+    if (!d || d.trim().replace(/Z/gi,'').trim() === '') return;
+
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    el.setAttribute('d', d);
+    // 기본: stroke만, fill 없음 (애니메이션용)
+    el.setAttribute('fill', 'none');
+    el.setAttribute('stroke', '#111');
+    el.setAttribute('stroke-width', '1.8');
+    el.setAttribute('stroke-linecap', 'round');
+    el.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(el);
+
+    const len = el.getTotalLength();
+    el.style.strokeDasharray = len;
+    el.style.strokeDashoffset = len;
+    el.style.transition = 'none';
+    charEls.push({ el, len });
+  });
+}
+
+function replay() {
+  filled = false;
+  charEls.forEach(({ el, len }) => {
+    el.setAttribute('fill', 'none');
+    el.setAttribute('stroke', '#111');
+    el.style.strokeWidth = '1.8';
+    el.style.transition = 'none';
+    el.style.strokeDashoffset = len;
+  });
+
+  svg.getBoundingClientRect(); // reflow
+
+  let delay = 80;
+  charEls.forEach(({ el, len }) => {
+    const dur = Math.max(400, len * 3.2);
+    setTimeout(() => {
+      el.style.transition = `stroke-dashoffset ${dur}ms cubic-bezier(0.4,0,0.2,1)`;
+      el.style.strokeDashoffset = '0';
+    }, delay);
+    delay += dur * 0.6 + 50;
+  });
+
+  // 애니메이션 완료 후 fill로 전환
+  setTimeout(() => {
+    charEls.forEach(({ el }) => {
+      el.setAttribute('fill', '#111');
+      el.setAttribute('stroke', 'none');
+      el.style.strokeDasharray = 'none';
+      el.style.strokeDashoffset = '0';
+    });
+    status.textContent = '';
+  }, delay + 200);
+}
+
+function toggleFill() {
+  filled = !filled;
+  charEls.forEach(({ el, len }) => {
+    if (filled) {
+      el.setAttribute('fill', '#111');
+      el.setAttribute('stroke', 'none');
+      el.style.strokeDasharray = 'none';
+      el.style.strokeDashoffset = '0';
+    } else {
+      el.setAttribute('fill', 'none');
+      el.setAttribute('stroke', '#111');
+      el.style.strokeWidth = '1.8';
+      el.style.strokeDasharray = len;
+      el.style.strokeDashoffset = '0';
+    }
+  });
+}
+
+async function switchFont(idx, btn) {
+  document.querySelectorAll('.font-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFontIdx = idx;
+  status.textContent = `${FONTS[idx].name} 로딩 중...`;
+  try {
+    const font = await loadFont(idx);
+    buildSVG(font, idx);
+    setTimeout(replay, 300);
+  } catch(e) {
+    status.textContent = '❌ ' + e.message;
+  }
+}
+
+async function init() {
+  status.textContent = '폰트 로딩 중...';
+  try {
+    const font = await loadFont(0);
+    buildSVG(font, 0);
+    setTimeout(replay, 400);
+  } catch(e) {
+    status.textContent = '❌ ' + e.message;
+  }
+}
+
+init();
+</script>
