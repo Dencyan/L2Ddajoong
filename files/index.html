@@ -137,7 +137,26 @@
 
 <script>
 /* ── 커미션 일정 ────────────────────────────────────────── */
-var CAL_EVENTS = [
+/*
+  📋 구글 시트 연동 안내
+  -------------------------------------------------------
+  1. 구글 시트를 만들고 아래 형식으로 작성하세요:
+     A열: date (예: 2026-05-01)
+     B열: type (open 또는 close)
+     C열: label (예: LD 모델 전신 시작)
+     ※ 1행은 반드시 헤더: date,type,label
+
+  2. 파일 → 공유 → 웹에 게시 → CSV 형식으로 게시
+     게시된 URL을 복사해서 아래 SHEET_CSV_URL에 붙여넣기
+
+  3. SHEET_CSV_URL을 빈 문자열('')로 두면
+     아래 CAL_EVENTS_FALLBACK 기본 데이터가 사용됩니다.
+  -------------------------------------------------------
+*/
+var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1l661Zg-lTXwDhpKZ3yeK7MWqDMc4ySu7omRg1qbmzhs/export?format=csv'; // ← 구글 시트 CSV URL 붙여넣기
+
+/* 기본 데이터 (시트 미연결 시 사용) */
+var CAL_EVENTS_FALLBACK = [
   { date: '2025-12-08', type: 'open',  label: 'LD 모델 전신 시작' },
   { date: '2026-01-12', type: 'close', label: 'LD 모델 전신 완료' },
   { date: '2026-01-07', type: 'open',  label: 'LD 모델 전신 시작' },
@@ -151,6 +170,37 @@ var CAL_EVENTS = [
   { date: '2026-04-17', type: 'open',  label: '메모리얼 애니메이션 작업 시작' },
   { date: '2026-05-01', type: 'close', label: '메모리얼 애니메이션 작업 완료' }
 ];
+
+var CAL_EVENTS = CAL_EVENTS_FALLBACK.slice();
+
+/* CSV 파싱 */
+function parseCSV(text) {
+  var lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  var headers = lines[0].split(',').map(function(h){ return h.trim().replace(/^"|"$/g, '').toLowerCase(); });
+  return lines.slice(1).map(function(line) {
+    var vals = line.split(',').map(function(v){ return v.trim().replace(/^"|"$/g, ''); });
+    var obj = {};
+    headers.forEach(function(h, i){ obj[h] = vals[i] || ''; });
+    return obj;
+  }).filter(function(e){ return e.date && e.type && e.label; });
+}
+
+/* 구글 시트에서 일정 불러오기 */
+function loadCalEvents(callback) {
+  if (!SHEET_CSV_URL) { callback(); return; }
+  fetch(SHEET_CSV_URL)
+    .then(function(res){ return res.text(); })
+    .then(function(text){
+      var parsed = parseCSV(text);
+      if (parsed.length) CAL_EVENTS = parsed;
+      callback();
+    })
+    .catch(function(){
+      console.warn('[캘린더] 시트 불러오기 실패 — 기본 데이터 사용');
+      callback();
+    });
+}
 
 var calYear, calMonth, calOpen = false;
 
@@ -299,7 +349,7 @@ function calRender() {
   }
 }
 
-calInit();
+loadCalEvents(function(){ calInit(); });
 </script>
 
 <!-- ============================================

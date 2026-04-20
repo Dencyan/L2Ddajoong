@@ -1070,12 +1070,12 @@ section[data-type][data-active] { display: block; }
 ============================== */
 #cal-widget {
   position: fixed;
-  left: 20px;
+  right: 20px;
   bottom: 24px;
   z-index: 300;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
 }
 
 /* 닫힌 상태: 탭 버튼 */
@@ -1110,7 +1110,7 @@ section[data-type][data-active] { display: block; }
 #cal-panel {
   position: absolute;
   bottom: 54px;
-  left: 0;
+  right: 0;
   width: 310px;
   background: rgba(242,240,255,.97);
   border: 1px solid var(--border-strong);
@@ -1120,7 +1120,7 @@ section[data-type][data-active] { display: block; }
   padding: 18px 18px 16px;
   opacity: 0;
   transform: scale(.78) translateY(14px);
-  transform-origin: bottom left;
+  transform-origin: bottom right;
   filter: blur(7px);
   pointer-events: none;
   transition:
@@ -1301,7 +1301,7 @@ section[data-type][data-active] { display: block; }
 .cal-no-ev   { font-size: .8rem; color: var(--muted); text-align: center; padding: 4px 0; }
 
 @media (max-width: 600px) {
-  #cal-widget { left: 12px; bottom: 16px; }
+  #cal-widget { right: 12px; bottom: 16px; }
   #cal-panel  { width: 280px; }
 }
 
