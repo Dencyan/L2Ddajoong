@@ -203,14 +203,17 @@ nav a:hover {
   margin-bottom: 20px;
   animation: fadeSlideUp .7s ease both;
 }
-.hero h2 {
+.hero-sig-wrap {
+  margin-bottom: 12px;
+  animation: fadeSlideUp .5s .08s ease both;
+}
+.hero-h2-fallback {
   font-family: var(--font-heading);
   font-size: clamp(2.2rem, 5vw, 3.4rem);
   font-weight: 800;
   color: var(--primary-strong);
   letter-spacing: -.04em;
-  margin-bottom: 12px;
-  animation: fadeSlideUp .7s .12s ease both;
+  margin-bottom: 0;
 }
 .hero-sub {
   color: var(--text-light);
@@ -1061,6 +1064,246 @@ section[data-type][data-active] { display: block; }
   box-shadow: 0 0 0 4px rgba(159,168,255,.2);
 }
 #side-nav a.is-active .sn-label { opacity: 1; transform: translateX(0); color: var(--primary-strong); }
+
+/* ==============================
+   MINI CALENDAR WIDGET
+============================== */
+#cal-widget {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* 닫힌 상태: 탭 버튼 */
+#cal-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px 10px 14px;
+  border-radius: 999px;
+  background: rgba(242,240,255,.92);
+  border: 1px solid var(--border-strong);
+  color: var(--primary-strong);
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(124,135,255,.18);
+  transition: background .18s, box-shadow .18s, transform .18s;
+}
+#cal-tab:hover {
+  background: rgba(159,168,255,.22);
+  box-shadow: 0 6px 22px rgba(124,135,255,.28);
+  transform: translateY(-1px);
+}
+#cal-tab svg { flex-shrink: 0; }
+
+/* 열린 상태에서 탭 숨기기 */
+#cal-widget.cal-is-open #cal-tab { opacity: 0; pointer-events: none; transform: translateY(4px); }
+
+/* 패널 */
+#cal-panel {
+  position: absolute;
+  bottom: 54px;
+  right: 0;
+  width: 310px;
+  background: rgba(242,240,255,.97);
+  border: 1px solid var(--border-strong);
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(40,55,140,.16);
+  backdrop-filter: blur(16px);
+  padding: 18px 18px 16px;
+  opacity: 0;
+  transform: scale(.78) translateY(14px);
+  transform-origin: bottom right;
+  filter: blur(7px);
+  pointer-events: none;
+  transition:
+    opacity   .1s ease,
+    transform .42s cubic-bezier(.34,1.58,.64,1),
+    filter    .25s ease;
+}
+#cal-widget.cal-is-open #cal-panel {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0px);
+  pointer-events: auto;
+}
+
+/* 헤더 */
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.cal-header #cal-title {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.01em;
+  flex: 1;
+  text-align: center;
+}
+.cal-nav, .cal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-strong);
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 2px 5px;
+  border-radius: 6px;
+  transition: background .15s;
+}
+.cal-nav:hover, .cal-close:hover { background: rgba(159,168,255,.18); }
+.cal-close { font-size: .75rem; color: var(--muted); margin-left: 2px; }
+
+/* 요일 헤더 */
+.cal-grid-head {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+.cal-grid-head span {
+  text-align: center;
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--muted);
+  padding: 2px 0;
+}
+
+/* 날짜 그리드 */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 4px;
+  margin-bottom: 12px;
+}
+.cal-cell {
+  text-align: center;
+  font-size: .85rem;
+  padding: 6px 0 7px;
+  color: var(--text);
+  line-height: 1;
+  cursor: default;
+  position: relative;
+  z-index: 0;
+}
+.cal-cell.empty { visibility: hidden; }
+
+/* 오늘 */
+.cal-today .cal-num {
+  background: rgba(159,168,255,.3);
+  color: var(--primary-strong);
+  font-weight: 700;
+  border-radius: 50%;
+  width: 26px; height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 숫자 래퍼 */
+.cal-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  position: relative;
+  z-index: 2;
+  font-size: .85rem;
+}
+
+/* 범위 바 (오픈~마감 사이 배경) */
+.cal-bar {
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 5px;
+  transform: translateY(-50%);
+  background: rgba(124,135,255,.28);
+  z-index: 1;
+  pointer-events: none;
+}
+/* 시작일: 오른쪽만 연결 */
+.cal-bar-start { left: 50%; border-radius: 99px 0 0 99px; }
+/* 끝일: 왼쪽만 연결 */
+.cal-bar-end   { right: 50%; border-radius: 0 99px 99px 0; }
+/* 시작=끝 같은 날 */
+.cal-bar-single { left: 50%; right: 50%; display: none; }
+/* 주 시작(일)에서 바가 왼쪽 끊김 */
+.cal-bar-week-start { left: 0; border-radius: 4px 0 0 4px; }
+/* 주 끝(토)에서 바가 오른쪽 끊김 */
+.cal-bar-week-end   { right: 0; border-radius: 0 4px 4px 0; }
+
+/* 오픈 날짜 숫자 강조 */
+.cal-cell.is-open .cal-num {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  background: rgba(124,135,255,.7);
+  color: #fff;
+  font-weight: 800;
+  font-size: .78rem;
+}
+/* 마감 날짜 숫자 강조 */
+.cal-cell.is-close .cal-num {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  background: rgba(200,110,155,.6);
+  color: #fff;
+  font-weight: 800;
+  font-size: .78rem;
+}
+/* 범위 내 날짜 */
+.cal-cell.in-range .cal-num { color: var(--primary-strong); }
+
+/* 범례 */
+.cal-legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .78rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.cal-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px; height: 14px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  font-size: .62rem;
+  font-weight: 800;
+  color: #fff;
+}
+.cal-dot.open  { background: rgba(124,135,255,.7); }
+.cal-dot.close { background: rgba(200,110,155,.6); }
+
+/* 이벤트 목록 */
+.cal-events { display: flex; flex-direction: column; gap: 6px; }
+.cal-ev-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .85rem;
+  color: var(--text);
+}
+.cal-ev-day  { color: var(--muted); min-width: 28px; }
+.cal-ev-label { flex: 1; }
+.cal-no-ev   { font-size: .8rem; color: var(--muted); text-align: center; padding: 4px 0; }
+
+@media (max-width: 600px) {
+  #cal-widget { right: 12px; bottom: 16px; }
+  #cal-panel  { width: 280px; }
+}
 
 /* ==============================
    FOOTER

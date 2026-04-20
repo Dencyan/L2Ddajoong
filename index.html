@@ -83,7 +83,14 @@
 <!-- HERO -->
 <section id="hero" class="hero">
   <span class="hero-eyebrow">Live2D Rigger</span>
-  <h2>Dajoong</h2>
+  <div class="hero-sig-wrap" aria-label="Dajoong">
+    <svg id="hero-sig" viewBox="0 0 600 130" xmlns="http://www.w3.org/2000/svg"
+         style="width:min(520px,80vw);height:auto;overflow:visible;display:block;margin:0 auto">
+      <!-- 폴백: 폰트 로드 전 자리 확보 -->
+    </svg>
+    <!-- JS 실패 시 폴백 텍스트 -->
+    <h2 id="hero-sig-fallback" class="hero-h2-fallback" style="display:none">Dajoong</h2>
+  </div>
   <p class="hero-sub" data-i18n="hero.sub">LD · SD · 메모리얼 애니메이션 포트폴리오</p>
 </section>
 
@@ -100,6 +107,280 @@
     <li><a href="#contact" data-label="Contact"><span class="sn-dot"></span><span class="sn-label">Contact</span></a></li>
   </ul>
 </nav>
+
+<!-- MINI CALENDAR WIDGET -->
+<div id="cal-widget">
+  <button id="cal-tab" aria-label="캘린더 열기" onclick="calToggle()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+    <span>일정</span>
+  </button>
+  <div id="cal-panel" aria-hidden="true">
+    <div class="cal-header">
+      <button class="cal-nav" onclick="calMove(-1)">&#8249;</button>
+      <span id="cal-title"></span>
+      <button class="cal-nav" onclick="calMove(1)">&#8250;</button>
+      <button class="cal-close" onclick="calToggle()" aria-label="닫기">&#10005;</button>
+    </div>
+    <div class="cal-grid-head">
+      <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+    </div>
+    <div id="cal-grid" class="cal-grid"></div>
+    <div class="cal-legend">
+      <span class="cal-dot open"></span><span>오픈</span>
+      <span class="cal-dot close"></span><span>마감</span>
+    </div>
+    <div id="cal-events" class="cal-events"></div>
+  </div>
+</div>
+
+<script>
+/* ── 커미션 일정 ────────────────────────────────────────── */
+/*
+  📋 구글 시트 연동 안내
+  -------------------------------------------------------
+  1. 구글 시트를 만들고 아래 형식으로 작성하세요:
+     A열: date (예: 2026-05-01)
+     B열: type (open 또는 close)
+     C열: label (예: LD 모델 전신 시작)
+     ※ 1행은 반드시 헤더: date,type,label
+
+  2. 파일 → 공유 → 웹에 게시 → CSV 형식으로 게시
+     게시된 URL을 복사해서 아래 SHEET_CSV_URL에 붙여넣기
+
+  3. SHEET_CSV_URL을 빈 문자열('')로 두면
+     아래 CAL_EVENTS_FALLBACK 기본 데이터가 사용됩니다.
+  -------------------------------------------------------
+*/
+/*
+  📋 구글 시트 연동 안내
+  -------------------------------------------------------
+  1. 구글 시트 공유 설정을 "링크가 있는 모든 사용자 - 뷰어" 로 설정
+  2. 아래 SHEET_ID에 구글 시트 URL의 ID 부분만 붙여넣기
+     예) https://docs.google.com/spreadsheets/d/【여기】/edit
+  3. 시트 1행 헤더: date | type | label
+     date: YYYY-MM-DD 형식 / type: open 또는 close
+  -------------------------------------------------------
+*/
+var SHEET_ID = '1l661Zg-lTXwDhpKZ3yeK7MWqDMc4ySu7omRg1qbmzhs'; // ← 시트 ID 입력
+
+/* 기본 데이터 (시트 미연결 시 사용) */
+var CAL_EVENTS_FALLBACK = [
+  { date: '2025-12-08', type: 'open',  label: 'LD 모델 전신 시작' },
+  { date: '2026-01-12', type: 'close', label: 'LD 모델 전신 완료' },
+  { date: '2026-01-07', type: 'open',  label: 'LD 모델 전신 시작' },
+  { date: '2026-01-21', type: 'close', label: 'LD 모델 전신 완료' },
+  { date: '2026-02-01', type: 'open',  label: '개인 작품 작업 시작' },
+  { date: '2026-02-28', type: 'close', label: '개인 작품 작업 완료' },
+  { date: '2026-03-12', type: 'open',  label: 'LD 모델 및 파츠 시작' },
+  { date: '2026-03-26', type: 'close', label: 'LD 모델 및 파츠 완료' },
+  { date: '2026-03-23', type: 'open',  label: '동물,오너캐 타입 모델 작업 시작' },
+  { date: '2026-04-06', type: 'close', label: '동물,오너캐 타입 모델 작업 완료' },
+  { date: '2026-04-17', type: 'open',  label: '메모리얼 애니메이션 작업 시작' },
+  { date: '2026-05-01', type: 'close', label: '메모리얼 애니메이션 작업 완료' }
+];
+
+var CAL_EVENTS = CAL_EVENTS_FALLBACK.slice();
+
+/* 구글 시트 JSON API로 일정 불러오기 */
+function loadCalEvents(callback) {
+  if (!SHEET_ID) { callback(); return; }
+  // tq 쿼리로 날짜를 문자열로 강제 변환하여 가져오기
+  var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID
+          + '/gviz/tq?tqx=out:json&tq=' + encodeURIComponent('select *');
+  fetch(url)
+    .then(function(res){ return res.text(); })
+    .then(function(text){
+      // JSONP 래퍼 제거
+      var jsonStr = text.replace(/^[\s\S]*?\(/, '').replace(/\);?\s*$/, '');
+      var json = JSON.parse(jsonStr);
+      var cols = json.table.cols.map(function(c){ return (c.label || '').split('\n')[0].toLowerCase().trim(); });
+
+      var rows = json.table.rows.map(function(r){
+        var obj = {};
+        cols.forEach(function(col, i){
+          var cell = r.c[i];
+          if (!cell || cell.v == null) { obj[col] = ''; return; }
+
+          // 날짜 타입: gviz가 Date(yyyy,m,d) 형식으로 반환하는 경우 변환
+          var val = String(cell.v);
+          var dateMatch = val.match(/^Date\((\d+),(\d+),(\d+)\)$/);
+          if (dateMatch) {
+            var y = dateMatch[1];
+            var m = String(parseInt(dateMatch[2]) + 1).padStart(2, '0'); // 월은 0-index
+            var d = String(dateMatch[3]).padStart(2, '0');
+            val = y + '-' + m + '-' + d;
+          }
+          // 서식 있는 날짜 문자열(f 값) 우선 사용 가능하나 v 기준으로 처리
+          obj[col] = val.trim();
+        });
+        return obj;
+      }).filter(function(e){ return e.date && e.type && e.label; });
+
+      if (rows.length) {
+        CAL_EVENTS = rows;
+        console.log('[캘린더] 시트에서 ' + rows.length + '개 일정 불러옴');
+      } else {
+        console.warn('[캘린더] 파싱된 일정 없음 — 기본 데이터 사용');
+      }
+      callback();
+    })
+    .catch(function(err){
+      console.warn('[캘린더] 시트 불러오기 실패 — 기본 데이터 사용', err);
+      callback();
+    });
+}
+
+var calYear, calMonth, calOpen = false;
+
+/* 날짜 문자열 → Date 객체 (시간 0으로 고정) */
+function toDate(str) {
+  var p = str.split('-');
+  return new Date(+p[0], +p[1] - 1, +p[2]);
+}
+
+/* open/close 쌍 매칭 → [{open: Date, close: Date}] */
+function buildRanges() {
+  var opens = CAL_EVENTS.filter(function(e){ return e.type === 'open'; })
+                        .map(function(e){ return toDate(e.date); })
+                        .sort(function(a,b){ return a-b; });
+  var closes = CAL_EVENTS.filter(function(e){ return e.type === 'close'; })
+                         .map(function(e){ return toDate(e.date); })
+                         .sort(function(a,b){ return a-b; });
+  var ranges = [];
+  opens.forEach(function(o, i){
+    if (closes[i]) ranges.push({ open: o, close: closes[i] });
+  });
+  return ranges;
+}
+
+function calInit() {
+  var now = new Date();
+  calYear  = now.getFullYear();
+  calMonth = now.getMonth();
+  calRender();
+}
+
+function calToggle() {
+  calOpen = !calOpen;
+  var panel  = document.getElementById('cal-panel');
+  var widget = document.getElementById('cal-widget');
+  panel.setAttribute('aria-hidden', String(!calOpen));
+  widget.classList.toggle('cal-is-open', calOpen);
+}
+
+function calMove(dir) {
+  calMonth += dir;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  if (calMonth < 0)  { calMonth = 11; calYear--; }
+  calRender();
+}
+
+function calRender() {
+  var months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+  document.getElementById('cal-title').textContent = calYear + '년 ' + months[calMonth];
+
+  var first  = new Date(calYear, calMonth, 1).getDay();
+  var days   = new Date(calYear, calMonth + 1, 0).getDate();
+  var today  = new Date(); today.setHours(0,0,0,0);
+  var ranges = buildRanges();
+  var grid   = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+
+  /* 이벤트 빠른 조회 맵 */
+  var eventMap = {};
+  CAL_EVENTS.forEach(function(e){ eventMap[e.date] = e; });
+
+  /* 빈 셀 */
+  for (var i = 0; i < first; i++) {
+    var emp = document.createElement('span');
+    emp.className = 'cal-cell empty';
+    emp.innerHTML = '<span class="cal-num"></span>';
+    grid.appendChild(emp);
+  }
+
+  for (var d = 1; d <= days; d++) {
+    var mm  = String(calMonth + 1).padStart(2, '0');
+    var dd  = String(d).padStart(2, '0');
+    var key = calYear + '-' + mm + '-' + dd;
+    var cur = toDate(key);
+    var ev  = eventMap[key];
+    var col = (first + d - 1) % 7; // 0=일 … 6=토
+
+    var el = document.createElement('span');
+    el.className = 'cal-cell';
+
+    /* 오늘 표시 */
+    if (cur.getTime() === today.getTime()) el.classList.add('cal-today');
+
+    /* 오픈/마감 날짜 표시 */
+    if (ev && ev.type === 'open')  el.classList.add('is-open');
+    if (ev && ev.type === 'close') el.classList.add('is-close');
+
+    /* 범위 안인지 판별 & 바 생성 */
+    ranges.forEach(function(r) {
+      var inRange  = cur >= r.open  && cur <= r.close;
+      var isOpen   = cur.getTime() === r.open.getTime();
+      var isClose  = cur.getTime() === r.close.getTime();
+      var isSingle = r.open.getTime() === r.close.getTime();
+
+      if (!inRange) return;
+
+      el.classList.add('in-range');
+
+      var bar = document.createElement('span');
+      bar.className = 'cal-bar';
+
+      if (isSingle) {
+        bar.style.display = 'none';                     // 같은 날이면 바 없음
+      } else if (isOpen) {
+        bar.classList.add('cal-bar-start');
+        if (col === 6) bar.classList.add('cal-bar-week-end'); // 오픈이 토요일
+      } else if (isClose) {
+        bar.classList.add('cal-bar-end');
+        if (col === 0) bar.classList.add('cal-bar-week-start'); // 마감이 일요일
+      } else {
+        /* 범위 중간 */
+        if (col === 0) bar.classList.add('cal-bar-week-start');
+        if (col === 6) bar.classList.add('cal-bar-week-end');
+      }
+
+      el.appendChild(bar);
+    });
+
+    /* 날짜 숫자 (z-index 위에 표시) */
+    var num = document.createElement('span');
+    num.className = 'cal-num';
+    num.textContent = d;
+    el.appendChild(num);
+
+    grid.appendChild(el);
+  }
+
+  /* 이번 달 이벤트 목록 */
+  var evList    = document.getElementById('cal-events');
+  var padMonth  = String(calMonth + 1).padStart(2, '0');
+  var thisMonth = CAL_EVENTS.filter(function(e){
+    return e.date.startsWith(calYear + '-' + padMonth);
+  });
+
+  if (thisMonth.length === 0) {
+    evList.innerHTML = '<p class="cal-no-ev">이번 달 일정 없음</p>';
+  } else {
+    evList.innerHTML = thisMonth.map(function(e) {
+      var day = parseInt(e.date.split('-')[2]);
+      return '<div class="cal-ev-item">' +
+        '<span class="cal-dot ' + e.type + '"></span>' +
+        '<span class="cal-ev-day">' + day + '일</span>' +
+        '<span class="cal-ev-label">' + e.label + '</span>' +
+      '</div>';
+    }).join('');
+  }
+}
+
+loadCalEvents(function(){ calInit(); });
+</script>
 
 <!-- ============================================
      공지사항
@@ -1493,4 +1774,108 @@ Korean Live2D Rigger available for VTuber rigging commissions.
 Live2D rigger portfolio by Dajoong.
 VTuber Live2D rigging commission.
 </div>
+
+<!-- Hero Signature: opentype 로드 후 실행 -->
+<script>
+(function(){
+  const FONT_URL = 'https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js';
+  const s = document.createElement('script');
+  s.src = FONT_URL;
+  s.onload = function(){ initHeroSig(); };
+  s.onerror = function(){ showFallback(); };
+  document.body.appendChild(s);
+
+  function showFallback(){
+    const fb = document.getElementById('hero-sig-fallback');
+    const sv = document.getElementById('hero-sig');
+    if(fb){ fb.style.display = 'block'; }
+    if(sv){ sv.style.display = 'none'; }
+  }
+
+  function initHeroSig(){
+    const TEXT = 'Dajoong';
+    const W = 600, FS = 96, BASELINE = 100;
+    const STROKE_COLOR = '#7C87FF';
+    const FILL_COLOR = '#7C87FF';
+    const svg = document.getElementById('hero-sig');
+    if(!svg){ showFallback(); return; }
+
+    const FONT_TTF = 'https://cdn.jsdelivr.net/gh/fonts-archive/PinyonScript/PinyonScript-Regular.ttf';
+    const FONT_FALLBACK = 'https://cdn.jsdelivr.net/npm/@fontsource/pinyon-script@5.0.5/files/pinyon-script-latin-400-normal.woff';
+
+    async function tryLoad(urls){
+      for(const url of urls){
+        try{
+          const res = await fetch(url);
+          if(!res.ok) continue;
+          const buf = await res.arrayBuffer();
+          return opentype.parse(buf);
+        }catch(e){ continue; }
+      }
+      return null;
+    }
+
+    tryLoad([FONT_TTF, FONT_FALLBACK]).then(function(font){
+      if(!font){ showFallback(); return; }
+
+      const scale = FS / font.unitsPerEm;
+      let cx = 0;
+      const items = [];
+      for(let i = 0; i < TEXT.length; i++){
+        const g = font.charToGlyph(TEXT[i]);
+        const nx = i < TEXT.length - 1 ? font.charToGlyph(TEXT[i+1]) : null;
+        const k = nx ? font.getKerningValue(g, nx) * scale : 0;
+        items.push({ g, x: cx });
+        cx += (g.advanceWidth || 0) * scale + k;
+      }
+      const ox = (W - cx) / 2;
+      const charEls = [];
+
+      items.forEach(function({ g, x }){
+        const d = g.getPath(x + ox, BASELINE, FS).toPathData(3);
+        if(!d || d.trim().replace(/Z/gi,'').trim() === '') return;
+        const el = document.createElementNS('http://www.w3.org/2000/svg','path');
+        el.setAttribute('d', d);
+        el.setAttribute('fill', 'none');
+        el.setAttribute('stroke', STROKE_COLOR);
+        el.setAttribute('stroke-width', '2');
+        el.setAttribute('stroke-linecap', 'round');
+        el.setAttribute('stroke-linejoin', 'round');
+        svg.appendChild(el);
+        const len = el.getTotalLength();
+        el.style.strokeDasharray = len;
+        el.style.strokeDashoffset = len;
+        el.style.transition = 'none';
+        charEls.push({ el, len });
+      });
+
+      if(charEls.length === 0){ showFallback(); return; }
+
+      // 드로잉 시작
+      setTimeout(function(){
+        let delay = 80;
+        charEls.forEach(function({ el, len }){
+          const dur = Math.max(420, len * 3.2);
+          setTimeout(function(){
+            el.style.transition = 'stroke-dashoffset ' + dur + 'ms cubic-bezier(0.4,0,0.2,1)';
+            el.style.strokeDashoffset = '0';
+          }, delay);
+          delay += dur * 0.6 + 40;
+        });
+        // 완료 후 fill 전환
+        setTimeout(function(){
+          charEls.forEach(function({ el }){
+            el.style.transition = 'fill 0.4s ease';
+            el.setAttribute('fill', FILL_COLOR);
+            el.setAttribute('stroke', 'none');
+            el.style.strokeDasharray = 'none';
+            el.style.strokeDashoffset = '0';
+          });
+        }, delay + 150);
+      }, 500);
+    });
+  }
+})();
+</script>
 </body>
+</html>
