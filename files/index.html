@@ -183,28 +183,51 @@ var CAL_EVENTS_FALLBACK = [
 
 var CAL_EVENTS = CAL_EVENTS_FALLBACK.slice();
 
-/* 구글 시트 JSON API로 일정 불러오기 (인코딩 문제 없음) */
+/* 구글 시트 JSON API로 일정 불러오기 */
 function loadCalEvents(callback) {
   if (!SHEET_ID) { callback(); return; }
-  var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json';
+  // tq 쿼리로 날짜를 문자열로 강제 변환하여 가져오기
+  var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID
+          + '/gviz/tq?tqx=out:json&tq=' + encodeURIComponent('select *');
   fetch(url)
     .then(function(res){ return res.text(); })
     .then(function(text){
-      // 구글이 반환하는 JSONP 래퍼 제거: /*O_o*/\ngoogle.visualization.Query.setResponse({...});
-      var json = JSON.parse(text.replace(/^[^{]*/, '').replace(/\);?\s*$/, ''));
-      var cols = json.table.cols.map(function(c){ return c.label.toLowerCase(); });
+      // JSONP 래퍼 제거
+      var jsonStr = text.replace(/^[\s\S]*?\(/, '').replace(/\);?\s*$/, '');
+      var json = JSON.parse(jsonStr);
+      var cols = json.table.cols.map(function(c){ return (c.label || '').split('\n')[0].toLowerCase().trim(); });
+
       var rows = json.table.rows.map(function(r){
         var obj = {};
         cols.forEach(function(col, i){
-          obj[col] = (r.c[i] && r.c[i].v != null) ? String(r.c[i].v) : '';
+          var cell = r.c[i];
+          if (!cell || cell.v == null) { obj[col] = ''; return; }
+
+          // 날짜 타입: gviz가 Date(yyyy,m,d) 형식으로 반환하는 경우 변환
+          var val = String(cell.v);
+          var dateMatch = val.match(/^Date\((\d+),(\d+),(\d+)\)$/);
+          if (dateMatch) {
+            var y = dateMatch[1];
+            var m = String(parseInt(dateMatch[2]) + 1).padStart(2, '0'); // 월은 0-index
+            var d = String(dateMatch[3]).padStart(2, '0');
+            val = y + '-' + m + '-' + d;
+          }
+          // 서식 있는 날짜 문자열(f 값) 우선 사용 가능하나 v 기준으로 처리
+          obj[col] = val.trim();
         });
         return obj;
       }).filter(function(e){ return e.date && e.type && e.label; });
-      if (rows.length) CAL_EVENTS = rows;
+
+      if (rows.length) {
+        CAL_EVENTS = rows;
+        console.log('[캘린더] 시트에서 ' + rows.length + '개 일정 불러옴');
+      } else {
+        console.warn('[캘린더] 파싱된 일정 없음 — 기본 데이터 사용');
+      }
       callback();
     })
-    .catch(function(){
-      console.warn('[캘린더] 시트 불러오기 실패 — 기본 데이터 사용');
+    .catch(function(err){
+      console.warn('[캘린더] 시트 불러오기 실패 — 기본 데이터 사용', err);
       callback();
     });
 }
