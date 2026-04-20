@@ -153,7 +153,17 @@
      아래 CAL_EVENTS_FALLBACK 기본 데이터가 사용됩니다.
   -------------------------------------------------------
 */
-var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1l661Zg-lTXwDhpKZ3yeK7MWqDMc4ySu7omRg1qbmzhs/export?format=csv'; // ← 구글 시트 CSV URL 붙여넣기
+/*
+  📋 구글 시트 연동 안내
+  -------------------------------------------------------
+  1. 구글 시트 공유 설정을 "링크가 있는 모든 사용자 - 뷰어" 로 설정
+  2. 아래 SHEET_ID에 구글 시트 URL의 ID 부분만 붙여넣기
+     예) https://docs.google.com/spreadsheets/d/【여기】/edit
+  3. 시트 1행 헤더: date | type | label
+     date: YYYY-MM-DD 형식 / type: open 또는 close
+  -------------------------------------------------------
+*/
+var SHEET_ID = '1l661Zg-lTXwDhpKZ3yeK7MWqDMc4ySu7omRg1qbmzhs'; // ← 시트 ID 입력
 
 /* 기본 데이터 (시트 미연결 시 사용) */
 var CAL_EVENTS_FALLBACK = [
@@ -173,27 +183,24 @@ var CAL_EVENTS_FALLBACK = [
 
 var CAL_EVENTS = CAL_EVENTS_FALLBACK.slice();
 
-/* CSV 파싱 */
-function parseCSV(text) {
-  var lines = text.trim().split('\n');
-  if (lines.length < 2) return [];
-  var headers = lines[0].split(',').map(function(h){ return h.trim().replace(/^"|"$/g, '').toLowerCase(); });
-  return lines.slice(1).map(function(line) {
-    var vals = line.split(',').map(function(v){ return v.trim().replace(/^"|"$/g, ''); });
-    var obj = {};
-    headers.forEach(function(h, i){ obj[h] = vals[i] || ''; });
-    return obj;
-  }).filter(function(e){ return e.date && e.type && e.label; });
-}
-
-/* 구글 시트에서 일정 불러오기 */
+/* 구글 시트 JSON API로 일정 불러오기 (인코딩 문제 없음) */
 function loadCalEvents(callback) {
-  if (!SHEET_CSV_URL) { callback(); return; }
-  fetch(SHEET_CSV_URL)
+  if (!SHEET_ID) { callback(); return; }
+  var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json';
+  fetch(url)
     .then(function(res){ return res.text(); })
     .then(function(text){
-      var parsed = parseCSV(text);
-      if (parsed.length) CAL_EVENTS = parsed;
+      // 구글이 반환하는 JSONP 래퍼 제거: /*O_o*/\ngoogle.visualization.Query.setResponse({...});
+      var json = JSON.parse(text.replace(/^[^{]*/, '').replace(/\);?\s*$/, ''));
+      var cols = json.table.cols.map(function(c){ return c.label.toLowerCase(); });
+      var rows = json.table.rows.map(function(r){
+        var obj = {};
+        cols.forEach(function(col, i){
+          obj[col] = (r.c[i] && r.c[i].v != null) ? String(r.c[i].v) : '';
+        });
+        return obj;
+      }).filter(function(e){ return e.date && e.type && e.label; });
+      if (rows.length) CAL_EVENTS = rows;
       callback();
     })
     .catch(function(){
