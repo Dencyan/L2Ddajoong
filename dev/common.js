@@ -15,17 +15,58 @@
     });
   });
 
+  /* 현재 페이지 파일명 추출 (예: "works.html") */
+  function currentFile() {
+    var p = window.location.pathname;
+    return p.substring(p.lastIndexOf('/') + 1) || 'index.html';
+  }
+
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[href]');
     if (!a) return;
     var href = a.getAttribute('href');
-    if (!href || href.startsWith('#') || href.startsWith('mailto') ||
+    if (!href || href.startsWith('mailto') ||
         href.startsWith('http') || a.target === '_blank') return;
+
+    /* 순수 앵커(#section) → 그냥 스크롤 */
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      var target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    /* 같은 페이지 앵커(works.html#samples) → 스크롤만 */
+    var parts   = href.split('#');
+    var file    = parts[0];
+    var anchor  = parts[1] || '';
+    if (file === currentFile() || file === '') {
+      e.preventDefault();
+      if (anchor) {
+        var el = document.getElementById(anchor);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      return;
+    }
+
+    /* 다른 페이지 → 페이드 후 이동 */
     e.preventDefault();
     document.documentElement.style.opacity = '0';
     setTimeout(function () { window.location.href = href; }, 420);
   });
 })();
+
+
+/* ── 페이지 진입 시 URL 해시로 자동 스크롤 ─────────────── */
+window.addEventListener('DOMContentLoaded', function () {
+  var hash = window.location.hash;
+  if (hash) {
+    setTimeout(function () {
+      var el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 350);
+  }
+});
 
 /* ── 캘린더 위젯 ─────────────────────────────────────────── */
 var SHEET_ID = '1l661Zg-lTXwDhpKZ3yeK7MWqDMc4ySu7omRg1qbmzhs';
