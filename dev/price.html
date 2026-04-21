@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Price | Dajoong Live2D Rigger</title>
+  <meta name="description" content="Dajoong Live2D 리깅 가격 안내. LD 베이직/프리미엄, SD, 배경 애니메이션 커미션 요금.">
+  <meta property="og:title" content="Price | Dajoong Live2D Rigger" />
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:url" content="https://dajoong.cloud/price.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');</style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="price">
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<canvas id="cursor-canvas"></canvas>
+<canvas id="bg-canvas"></canvas>
+
+<!-- HEADER -->
+<header>
+  <h1><a href="index.html">Dajoong</a></h1>
+  <nav>
+    <a href="index.html#about" data-i18n="nav.about">알아보기</a>
+    <a href="commission.html" data-i18n="nav.info">정보</a>
+    <a href="works.html" data-i18n="nav.works">작품</a>
+    <a href="works.html#samples" data-i18n="nav.samples">샘플</a>
+    <a href="price.html" data-i18n="nav.price" class="nav-active">가격</a>
+    <a href="price.html#contact" data-i18n="nav.contact">문의하기</a>
+  </nav>
+  <div class="lang-switcher">
+    <button class="lang-btn lang-active" data-lang="ko">KO</button>
+    <span class="lang-divider">|</span>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <span class="lang-divider">|</span>
+    <button class="lang-btn" data-lang="ja">JP</button>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section id="page-top" class="hero hero--sub">
+  <span class="hero-eyebrow">Pricing</span>
+  <h2 class="hero-page-title" data-i18n="price.title">가격</h2>
+  <p class="hero-sub" data-i18n="price.intro">기본 안내 요금입니다. 프로젝트 요구사항에 따라 견적이 달라집니다.</p>
+</section>
+
+<!-- SIDE NAV -->
+<nav id="side-nav" aria-label="페이지 네비게이션">
+  <ul>
+    <li><a href="#page-top" data-label="Top">    <span class="sn-dot"></span><span class="sn-label">Top</span></a></li>
+    <li><a href="#price"    data-label="Price">  <span class="sn-dot"></span><span class="sn-label">Price</span></a></li>
+    <li><a href="#contact"  data-label="Contact"><span class="sn-dot"></span><span class="sn-label">Contact</span></a></li>
+  </ul>
+</nav>
+
+<!-- CALENDAR WIDGET -->
+<div id="cal-widget">
+  <button id="cal-tab" aria-label="캘린더 열기" onclick="calToggle()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+    <span>일정</span>
+  </button>
+  <div id="cal-panel" aria-hidden="true">
+    <div class="cal-header">
+      <button class="cal-nav" onclick="calMove(-1)">&#8249;</button>
+      <span id="cal-title"></span>
+      <button class="cal-nav" onclick="calMove(1)">&#8250;</button>
+      <button class="cal-close" onclick="calToggle()" aria-label="닫기">&#10005;</button>
+    </div>
+    <div class="cal-grid-head"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+    <div id="cal-grid" class="cal-grid"></div>
+    <div class="cal-legend"><span class="cal-dot open"></span><span>오픈</span><span class="cal-dot close"></span><span>마감</span></div>
+    <div id="cal-events" class="cal-events"></div>
+  </div>
+</div>
+
+<!-- PRICE -->
+<section id="price" class="section-hidden">
+  <div class="section-wrap">
+    <h2 class="section-title reveal" data-i18n="price.title">가격</h2>
+    <p class="price-intro reveal" data-i18n="price.intro">기본 안내 요금입니다. 프로젝트 요구사항에 따라 견적이 달라집니다.<br>상세 견적은 파일 구조와 요구 사항 확인 후 안내드립니다.</p>
+
+    <div class="price-cards reveal">
+      <!-- LD 베이직 -->
+      <article class="price-card">
+        <div class="price-card-head">
+          <span class="price-card-title">베이직 리깅 <small>LD</small></span>
+          <span class="price-card-badge" data-i18n="price.badge.ld">Live2D</span>
+        </div>
+        <div class="price-card-body">
+          <div class="price-amount-wrap">
+            <div class="price-row"><span class="price-row-label" data-i18n="price.label.full">전신</span><span class="price-row-amount">₩600,000<span data-i18n="price.label.from"> ~</span></span></div>
+            <div class="price-row"><span class="price-row-label" data-i18n="price.label.half">반신</span><span class="price-row-amount">₩500,000<span data-i18n="price.label.from"> ~</span></span></div>
+          </div>
+          <p class="price-card-desc" data-i18n="price.basic.desc">자연스러운 XYZ 움직임과 안정적인 물리를 제공합니다.</p>
+          <ul class="price-feat-list">
+            <li data-i18n="price.basic.f1">얼굴 · 몸 XYZ 움직임</li>
+            <li data-i18n="price.basic.f2">눈썹 변형 · 각도 / 눈깜빡 (윙크)</li>
+            <li data-i18n="price.basic.f3">입움직임 9점 / 입 개폐 연동 턱</li>
+            <li data-i18n="price.basic.f4">호흡 · 팔 흔들림 (손가락 포함)</li>
+            <li data-i18n="price.basic.f5">기본 표정 2종 포함</li>
+            <li class="feat-highlight" data-i18n="price.basic.f6">최대 3단계 물리 지원</li>
+          </ul>
+        </div>
+        <div class="price-card-foot" data-i18n="price.basic.period">예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회</div>
+      </article>
+
+      <!-- LD 프리미엄 -->
+      <article class="price-card price-card--premium">
+        <div class="price-card-head">
+          <span class="price-card-title">프리미엄 리깅 <small>LD</small></span>
+          <span class="price-card-badge price-card-badge--premium" data-i18n="price.badge.premium">Premium</span>
+        </div>
+        <div class="price-card-body">
+          <div class="price-amount-wrap">
+            <div class="price-row"><span class="price-row-label" data-i18n="price.label.full">전신</span><span class="price-row-amount">₩780,000<span data-i18n="price.label.from"> ~</span></span></div>
+            <div class="price-row"><span class="price-row-label" data-i18n="price.label.half">반신</span><span class="price-row-amount">₩670,000<span data-i18n="price.label.from"> ~</span></span></div>
+          </div>
+          <p class="price-card-desc" data-i18n="price.prem.desc">높은 물리 단계와 세밀한 디테일로 풍부한 움직임을 제공합니다.</p>
+          <ul class="price-feat-list">
+            <li data-i18n="price.prem.f1">얼굴 · 몸 XYZ 움직임</li>
+            <li data-i18n="price.prem.f2">눈썹눈 연동 페이셜 / 눈깜빡 (윙크)</li>
+            <li data-i18n="price.prem.f3">입움직임 12점~ / 입 개폐 연동 턱</li>
+            <li data-i18n="price.prem.f4">속눈썹 물리 / 눈동자 물리</li>
+            <li data-i18n="price.prem.f5">호흡 · 팔 흔들림 (손가락 포함)</li>
+            <li data-i18n="price.prem.f6">기본 표정 2종 포함</li>
+            <li class="feat-highlight" data-i18n="price.prem.f7">최소 3단계 물리 지원</li>
+          </ul>
+        </div>
+        <div class="price-card-foot" data-i18n="price.prem.period">예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회</div>
+      </article>
+
+      <!-- SD -->
+      <article class="price-card">
+        <div class="price-card-head">
+          <span class="price-card-title">SD 리깅</span>
+          <span class="price-card-badge price-card-badge--sd" data-i18n="price.badge.sd">SD</span>
+        </div>
+        <div class="price-card-body">
+          <div class="price-amount-wrap">
+            <div class="price-row"><span class="price-row-label" data-i18n="price.label.full">전신</span><span class="price-row-amount">₩250,000<span data-i18n="price.label.from"> ~</span></span></div>
+          </div>
+          <p class="price-card-desc" data-i18n="price.sd.desc">작고 귀여운 SD 모델 리깅. 가볍고 빠른 리깅을 제공합니다.</p>
+          <ul class="price-feat-list">
+            <li data-i18n="price.ld.f1">자연스러운 XYZ 움직임 제공</li>
+            <li data-i18n="price.sd.f2">단순한 입 모양</li>
+            <li data-i18n="price.ld.f4">기본 표정 2종 포함</li>
+          </ul>
+        </div>
+        <div class="price-card-foot" data-i18n="price.sd.period">예상 작업 기간: 7일–14일 · 수정 2회 + 적용 후 1회</div>
+      </article>
+
+      <!-- 배경 -->
+      <article class="price-card">
+        <div class="price-card-head">
+          <span class="price-card-title" data-i18n="price.bg.title">배경 / 월페이퍼 애니메이션</span>
+          <span class="price-card-badge price-card-badge--bg" data-i18n="price.badge.bg">Animation</span>
+        </div>
+        <div class="price-card-body">
+          <div class="price-amount-wrap">
+            <div class="price-row"><span class="price-row-label" data-i18n="price.label.base">기본가</span><span class="price-row-amount">₩170,000<span data-i18n="price.label.from"> ~</span></span></div>
+          </div>
+          <p class="price-card-desc" data-i18n="price.bg.desc">반복되는 루프형 애니메이션과 월페이퍼를 제작합니다.</p>
+          <ul class="price-feat-list">
+            <li data-i18n="price.bg.f1">자연스럽게 반복되는 애니메이션 제작</li>
+            <li data-i18n="price.bg.f2">기본 mp4 포맷 제공 (GIF 추가 가능)</li>
+            <li data-i18n="price.bg.f3">GIF는 파일 특성상 깨짐이 있을 수 있음</li>
+            <li class="feat-highlight" data-i18n="price.bg.f4">복잡도에 따라 금액 협의</li>
+          </ul>
+        </div>
+        <div class="price-card-foot" data-i18n="price.bg.period">예상 작업 기간: 7일–14일 · 수정 최대 2회</div>
+      </article>
+    </div>
+
+    <p class="price-note reveal" data-i18n="price.note">정확한 견적은 아트워크(PSD/PNG)와 요구사항 확인 후 산정됩니다.</p>
+    <div style="text-align:center" class="reveal">
+      <a class="contact-cta" href="https://x.com/_Dajoong" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 6v9a2 2 0 0 1-2 2H8l-5 3V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span data-i18n="price.cta">DM으로 상세 문의하기</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section-hidden">
+  <div class="section-wrap">
+    <div class="contact-inner">
+      <h2 class="section-title reveal" style="justify-content:center">Contact</h2>
+      <div class="contact-links reveal">
+        <a href="https://x.com/_Dajoong" target="_blank" rel="noopener noreferrer" class="contact-btn">X (Twitter)</a>
+        <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer" class="contact-btn">YouTube</a>
+        <a href="https://artmug.kr/index.php?channel=list&field=brand&search=cW1qMTc3MA==" target="_blank" rel="noopener noreferrer" class="contact-btn">ArtMug</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Korean Live2D Rigger specializing in VTuber model rigging commissions. © 2025 All rights reserved Dajoong</p>
+</footer>
+
+<script src="common.js"></script>
+</body>
+</html>
