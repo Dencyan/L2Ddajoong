@@ -1,0 +1,51 @@
+{
+  "Version": 3,
+  "FileReferences": {
+    "Moc": "m.moc3",
+    "Textures": [
+      "tex/texture_00.png",
+      "tex/texture_01.png"
+    ],
+    "Physics": "p.physics3.json",
+    "DisplayInfo": "d.cdi3.json",
+    "Expressions": [
+      {
+        "Name": "blush",
+        "File": "e01.exp3.json"
+      },
+      {
+        "Name": "heart_eyes",
+        "File": "e02.exp3.json"
+      }
+    ],
+    "Motions": {
+      "Idle": [
+        {
+          "File": "i01.motion3.json"
+        }
+      ]
+    }
+  },
+  "Groups": [
+    {
+      "Target": "Parameter",
+      "Name": "EyeBlink",
+      "Ids": [
+        "ParamEyeLOpen",
+        "ParamEyeROpen"
+      ]
+    },
+    {
+      "Target": "Parameter",
+      "Name": "LipSync",
+      "Ids": [
+        "ParamMouthOpenY"
+      ]
+    }
+  ],
+  "Layout": {
+    "CenterX": 0.0,
+    "CenterY": -0.2,
+    "Width": 1.55
+  }
+}

@@ -1,0 +1,22 @@
+Collab Model 2 Lite
+
+Purpose
+- Public web showcase version
+- Reduced feature set for lower reuse value
+
+Included
+- 1 idle motion
+- 2 expressions: blush, heart_eyes
+- moc3, display info, physics, 2 textures
+
+Removed from lite
+- showcase_scene.motion3.json
+- outer_off.exp3.json
+- disdain.exp3.json
+- recording.exp3.json
+- tears.exp3.json
+- animal_ears_off.exp3.json
+- vtube config
+
+Recommended next step
+- If stronger protection is needed, create lower-resolution web textures separately.

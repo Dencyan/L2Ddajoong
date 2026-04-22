@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live2D Showcase Card</title>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    html {
+      overscroll-behavior-x: none;
+      touch-action: none;
+      background: #f4f2ff;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      box-sizing: border-box;
+      background:
+        radial-gradient(circle at top, rgba(150, 163, 255, 0.2), transparent 24%),
+        linear-gradient(180deg, #f7f5ff 0%, #f1effd 100%);
+    }
+
+    .showcase-shell {
+      width: min(440px, 92vw);
+    }
+
+    .showcase-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 28px;
+      border: 1px solid rgba(133, 133, 164, 0.18);
+      background:
+        radial-gradient(circle at top, rgba(205, 214, 255, 0.28), transparent 42%),
+        #ffffff;
+      box-shadow:
+        0 18px 50px rgba(79, 84, 131, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .showcase-watermark {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .showcase-watermark-track {
+      position: absolute;
+      left: -18%;
+      right: -18%;
+      display: flex;
+      gap: 28px;
+      white-space: nowrap;
+      transform: rotate(-24deg);
+      transform-origin: center;
+      color: rgba(114, 118, 156, 0.16);
+      font: 700 18px/1 "Segoe UI", sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: none;
+      user-select: none;
+    }
+
+    .showcase-watermark-track span {
+      flex: none;
+    }
+
+    .showcase-watermark-track:nth-child(1) { top: 14%; }
+    .showcase-watermark-track:nth-child(2) { top: 31%; }
+    .showcase-watermark-track:nth-child(3) { top: 48%; }
+    .showcase-watermark-track:nth-child(4) { top: 65%; }
+    .showcase-watermark-track:nth-child(5) { top: 82%; }
+
+    .showcase-card canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .showcase-footer {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(10px);
+      color: #5f648f;
+      font: 600 12px/1.3 "Segoe UI", sans-serif;
+      box-shadow: 0 8px 24px rgba(85, 90, 138, 0.12);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .showcase-label {
+      margin: 0 0 12px;
+      text-align: center;
+      color: #7e83c5;
+      font: 700 12px/1.2 "Segoe UI", sans-serif;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+  </style>
+  <!-- Live2DCubismCore script -->
+  <script src = "./Core/live2dcubismcore.js"></script>
+  <!-- Build script -->
+  <script type="module" crossorigin src="./assets/index-LxVTv_bp.js"></script>
+</head>
+<body>
+  <main class="showcase-shell">
+    <p class="showcase-label">Live2D Sample</p>
+    <section id="live2d-stage" class="showcase-card">
+      <div class="showcase-watermark" aria-hidden="true">
+        <div class="showcase-watermark-track">
+          <span>Do not repost</span>
+          <span>Illustration by 양초</span>
+          <span>Rigging by 다중</span>
+          <span>Do not repost</span>
+          <span>Illustration by 양초</span>
+          <span>Rigging by 다중</span>
+        </div>
+        <div class="showcase-watermark-track">
+          <span>Illustration by 양초</span>
+          <span>Rigging by 다중</span>
+          <span>Do not repost</span>
+          <span>Illustration by 양초</span>
+          <span>Rigging by 다중</span>
+          <span>Do not repost</span>
+        </div>
+        <div class="showcase-watermark-track">
+          <span>Rigging by 다중</span>
+          <span>Do not repost</span>
+          <span>Illustration by 양초</span>
+          <span>Rigging by 다중</span>
+          <span>Do not repost</span>
+          <span>Illustration by 양초</span>
+        </div>
+        <div class="showcase-watermark-track">
+          <span>Do not repost</span>
+          <span>Illustration by 양초</span>
+          <span>Rigging by 다중</span>
+          <span>Do not repost</span>
+          <span>Illustration by 양초</span>
+          <span>Rigging by 다중</span>
+        </div>
+        <div class="showcase-watermark-track">
+          <span>Illustration by 양초</span>
+          <span>Rigging by 다중</span>
+          <span>Do not repost</span>
+          <span>Illustration by 양초</span>
+          <span>Rigging by 다중</span>
+          <span>Do not repost</span>
+        </div>
+      </div>
+      <div class="showcase-footer">
+        <span>일러스트레이터 - 양초</span>
+        <span>리거 - 다중</span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
