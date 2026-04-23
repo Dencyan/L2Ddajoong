@@ -1,0 +1,2926 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Live2D rigger Dajoong. VTuber Live2D rigging commission and portfolio." />
+  <meta name="keywords" content="Live2D rigger, VTuber rigging, Live2D commission, Dajoong Live2D" />
+  <meta name="author" content="Dajoong" />
+  <meta property="og:title" content="Live2D Rigger Dajoong">
+  <meta property="og:description" content="VTuber Live2D Rigging Commission and Portfolio">
+  <meta property="og:url" content="https://dajoong.cloud">
+  <meta property="og:type" content="website">
+  <title>다중 - Live2D Rigger</title>
+
+  <style>
+    @font-face {
+      font-family: 'Isamanru';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Isamanru';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+      font-weight: 400; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Isamanru';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicBold.woff') format('woff');
+      font-weight: 700; font-display: swap;
+    }
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+  </style>
+
+<style>
+/* ==============================
+   CUSTOM CURSOR
+============================== */
+*, *::before, *::after { cursor: none !important; }
+
+#cursor-dot {
+  position: fixed;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--primary, #9FA8FF);
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform .12s ease, background .2s ease, width .2s ease, height .2s ease;
+  box-shadow: 0 0 10px rgba(159,168,255,.8), 0 0 20px rgba(159,168,255,.4);
+}
+#cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(159,168,255,.55);
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width .22s ease, height .22s ease, border-color .22s ease;
+  box-shadow: 0 0 12px rgba(159,168,255,.2);
+}
+body.cursor-hover #cursor-dot {
+  width: 14px; height: 14px;
+  background: #FFC2E3;
+  box-shadow: 0 0 14px rgba(255,194,227,.9), 0 0 28px rgba(255,194,227,.4);
+}
+body.cursor-hover #cursor-ring {
+  width: 52px; height: 52px;
+  border-color: rgba(255,194,227,.5);
+}
+body.cursor-click #cursor-dot {
+  transform: translate(-50%, -50%) scale(.6);
+}
+#cursor-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 99997;
+}
+#bg-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0; opacity: .5;
+}
+
+/* ==============================
+   SCROLL REVEAL
+============================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
+}
+.reveal.revealed { opacity: 1; transform: none; }
+
+/* ==============================
+   THEME
+============================== */
+:root {
+  --primary:        #9FA8FF;
+  --primary-strong: #7C87FF;
+  --accent-pink:    #FFC2E3;
+  --accent-teal:    #9EEAE1;
+  --danger:         #ff6b6b;
+  --bg:       #f2f0ff;
+  --panel:    rgba(255,255,255,.78);
+  --panel-2:  rgba(245,247,255,.85);
+  --text:       #1F2A44;
+  --text-light: rgba(31,42,68,.60);
+  --border:        rgba(150,160,255,.22);
+  --border-strong: rgba(150,160,255,.40);
+  --shadow-sm: 0 8px 24px rgba(40,55,140,.09);
+  --shadow-md: 0 18px 56px rgba(40,55,140,.13);
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 30px;
+}
+
+/* ==============================
+   RESET / BASE
+============================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Pretendard', 'Isamanru', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+img { max-width: 100%; display: block; }
+a   { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; }
+
+/* ==============================
+   LAYOUT
+============================== */
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 14px 40px;
+}
+
+/* ==============================
+   SECTION DIVIDER
+============================== */
+.sec-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 32px 0 18px;
+}
+.sec-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+}
+.sec-divider-label {
+  /* 5번 요청: Pretendard 계열 세련된 폰트로 교체, 트래킹 넓게 */
+  font-family: 'Pretendard', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--primary-strong);
+  white-space: nowrap;
+  padding: 5px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: rgba(124,135,255,.07);
+}
+
+/* ==============================
+   CARD BASE
+============================== */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+.card-head {
+  padding: 16px 18px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.card-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  position: relative;
+  padding-left: 14px;
+}
+.card-title::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 5px; height: 17px;
+  transform: translateY(-50%);
+  border-radius: 99px;
+  background: var(--primary);
+  box-shadow: 0 0 0 3px rgba(159,168,255,.15);
+}
+.card-body { padding: 4px 18px 18px; }
+
+/* ==============================
+   NOTICE BANNER (공지사항)
+============================== */
+.notice-wrap {
+  margin-bottom: 14px;
+  border: 1px solid rgba(255,107,107,.20);
+  border-radius: var(--r-lg);
+  background: rgba(255,255,255,.82);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.notice-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, rgba(255,107,107,.10), rgba(159,168,255,.08));
+  border-bottom: 1px solid rgba(255,107,107,.12);
+}
+
+.notice-head-icon {
+  font-size: 16px;
+}
+
+.notice-head-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--danger);
+  letter-spacing: -.01em;
+}
+
+.notice-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.notice-item {
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(150,160,255,.10);
+  transition: background .18s ease;
+  text-align: center;
+}
+.notice-item:last-child { border-bottom: none; }
+.notice-item:hover { background: rgba(255,107,107,.02); }
+
+.notice-item-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--danger);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.notice-item-title::before {
+  content: "▸";
+  font-size: 10px;
+  color: var(--danger);
+  opacity: .7;
+}
+
+.notice-item-desc {
+  font-size: 12px;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.notice-item-desc.highlight {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ==============================
+   INTRO
+============================== */
+.hero-intro {
+  margin-bottom: 14px;
+}
+.intro-title {
+  font-size: 17px;
+  font-weight: 700;
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 12px;
+}
+.intro-title::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 5px; height: 17px;
+  transform: translateY(-50%);
+  border-radius: 99px;
+  background: var(--primary);
+  box-shadow: 0 0 0 3px rgba(159,168,255,.15);
+}
+.intro-desc {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 14px;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(159,168,255,.35);
+  background: rgba(159,168,255,.10);
+  font-size: 11.5px;
+  font-weight: 500;
+  transition: all .22s ease;
+  cursor: default;
+}
+.tag:hover {
+  background: rgba(159,168,255,.22);
+  border-color: rgba(159,168,255,.6);
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* ==============================
+   1번 수정: 좌우 높이 맞추기
+   hero-bottom: equal height columns
+============================== */
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  /* align-items: stretch 가 기본값 → 양쪽 같은 높이 */
+  align-items: stretch;
+}
+
+.hero-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 이벤트/콜라보 카드가 남은 공간을 균등하게 채우도록 */
+.hero-left-col > .card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.hero-left-col > .card .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 프로세스 카드도 높이 100% */
+.hero-process {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.hero-process .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.hero-process .process-timeline {
+  flex: 1;
+}
+
+/* ==============================
+   EVENT / COLLAB
+============================== */
+.event-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* 콜라보 카드 본문만 스크롤 */
+.hero-collab-body {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 320px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(150,160,255,.4) transparent;
+}
+.hero-collab-body::-webkit-scrollbar { width: 4px; }
+.hero-collab-body::-webkit-scrollbar-track { background: transparent; }
+.hero-collab-body::-webkit-scrollbar-thumb {
+  background: rgba(150,160,255,.4);
+  border-radius: 999px;
+}
+.event-item {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(150,160,255,.12);
+  transition: background .18s ease;
+}
+.event-item:last-child { border-bottom: none; }
+.event-item.collab-link { display: block; cursor: pointer; }
+.event-item.collab-link:hover { background: rgba(159,168,255,.04); }
+.event-item.collab-link:hover .event-title { color: var(--primary); }
+.event-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.event-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  transition: color .18s ease;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(255,107,107,.10);
+  border: 1px solid rgba(255,107,107,.22);
+  font-size: 11px;
+  white-space: nowrap;
+}
+.event-sub {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+.event-desc {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* ==============================
+   PROCESS TIMELINE
+============================== */
+.process-timeline {
+  display: flex;
+  flex-direction: column;
+}
+.process-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(150,160,255,.12);
+  transition: all .18s ease;
+}
+.process-step:last-of-type { border-bottom: none; }
+.process-step:hover { background: rgba(159,168,255,.02); }
+.step-number {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  background: linear-gradient(135deg, rgba(159,168,255,.14), rgba(158,234,225,.08));
+  border: 1px solid rgba(150,160,255,.25);
+  flex-shrink: 0;
+  transition: all .18s ease;
+}
+.process-step:hover .step-number {
+  background: linear-gradient(135deg, rgba(159,168,255,.25), rgba(158,234,225,.16));
+  border-color: rgba(150,160,255,.45);
+  transform: scale(1.07);
+}
+.step-content { flex: 1; }
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.step-desc {
+  font-size: 11.5px;
+  color: var(--text-light);
+  line-height: 1.45;
+}
+.process-note {
+  font-size: 11.5px;
+  color: var(--text-light);
+  line-height: 1.55;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(150,160,255,.10);
+}
+
+/* ==============================
+   PRICING TABLE (베이직 / 프리미엄)
+============================== */
+.pricing-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  background: var(--bg);
+  box-shadow: var(--shadow-md);
+  padding: 24px 18px;
+  overflow: hidden;
+}
+
+.pricing-head {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.pricing-main-title {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: 6px;
+}
+
+.pricing-subtitle {
+  font-size: 12.5px;
+  color: var(--text-light);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: var(--shadow-sm);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.pricing-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.pricing-card-head {
+  padding: 14px 16px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(159,168,255,.12), rgba(158,234,225,.07));
+  border-bottom: 1px solid var(--border);
+}
+
+.pricing-card-head.premium {
+  background: linear-gradient(135deg, rgba(255,194,227,.15), rgba(159,168,255,.12));
+}
+
+.pricing-card-name {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  margin-bottom: 4px;
+}
+
+.pricing-card-price {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary-strong);
+}
+
+.pricing-card-price .price-old {
+  font-size: 13px;
+  color: var(--text-light);
+  text-decoration: line-through;
+  margin-right: 6px;
+  font-weight: 400;
+}
+
+.pricing-card-price .price-discount {
+  font-size: 12px;
+  color: var(--danger);
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.pricing-card-body {
+  padding: 14px 16px;
+}
+
+.pricing-feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pricing-feature-list li {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.pricing-feature-list li::before {
+  content: "✓";
+  color: var(--primary-strong);
+  font-weight: 700;
+  font-size: 11px;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.pricing-feature-list li.highlight {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.pricing-feature-list li.highlight::before {
+  content: "★";
+  color: var(--danger);
+}
+
+.pricing-feature-list li.muted {
+  color: var(--text-light);
+  font-size: 11.5px;
+}
+.pricing-feature-list li.muted::before {
+  content: "·";
+  color: var(--text-light);
+}
+
+.pricing-card-cta {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 11.5px;
+  color: var(--text-light);
+  text-align: center;
+  line-height: 1.55;
+}
+
+.pricing-note {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ==============================
+   INFO CARDS (작업 과정 / 수정 / 저작권)
+============================== */
+.info-section {
+  margin-top: 0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.info-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.info-card-head {
+  padding: 13px 16px 10px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(159,168,255,.08), rgba(158,234,225,.04));
+}
+
+.info-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  position: relative;
+  padding-left: 13px;
+}
+.info-card-title::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 4px; height: 14px;
+  transform: translateY(-50%);
+  border-radius: 99px;
+  background: var(--primary);
+}
+
+.info-card-body {
+  padding: 13px 16px;
+}
+
+.info-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-list li {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.info-list li::before {
+  content: "·";
+  color: var(--primary-strong);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.info-list li strong {
+  font-weight: 600;
+  color: var(--primary-strong);
+}
+
+.info-list li.warn {
+  color: var(--danger);
+  font-weight: 500;
+}
+.info-list li.warn::before {
+  content: "⚠";
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+/* ==============================
+   NOTICE TOP ALERT
+============================== */
+.notice-top-alert {
+  background: rgba(255,107,107,.07);
+  border-bottom: 1px solid rgba(255,107,107,.15);
+  padding: 10px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--danger);
+  line-height: 1.7;
+  text-align: center;
+}
+
+.notice-bold {
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 4px;
+}
+
+/* ==============================
+   PLAN TABLE (베이직 / 프리미엄)
+============================== */
+.plan-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  background: var(--bg);
+  box-shadow: var(--shadow-md);
+  padding: 24px 20px 18px;
+  overflow: hidden;
+}
+
+.plan-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.plan-card {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 2px solid rgba(150,160,255,.30);
+  background: var(--panel);
+  box-shadow: var(--shadow-sm);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.plan-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.plan-card--premium {
+  border-color: rgba(255,194,227,.5);
+}
+
+.plan-card-head {
+  padding: 14px 16px 12px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(150,160,255,.12), rgba(158,234,225,.06));
+  border-bottom: 2px solid rgba(150,160,255,.18);
+}
+
+.plan-card--premium .plan-card-head {
+  background: linear-gradient(135deg, rgba(255,194,227,.18), rgba(159,168,255,.10));
+  border-bottom-color: rgba(255,194,227,.3);
+}
+
+.plan-name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.plan-card-body {
+  padding: 16px;
+}
+
+.plan-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.plan-list li {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(150,160,255,.10);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.plan-list li:last-child { border-bottom: none; }
+
+.plan-list li::before {
+  content: "·";
+  color: var(--primary);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.plan-list li.red {
+  color: var(--danger);
+  font-weight: 500;
+  text-decoration: line-through;
+  text-decoration-color: var(--danger);
+  opacity: .75;
+}
+.plan-list li.red::before {
+  color: var(--danger);
+}
+
+.plan-sub {
+  font-size: 11px;
+  color: var(--text-light);
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  padding-left: 14px;
+}
+
+.plan-physics {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  background: rgba(150,160,255,.10);
+  border: 1px solid rgba(150,160,255,.20);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--primary-strong);
+}
+
+.plan-note {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-light);
+  line-height: 1.6;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+/* ==============================
+   INFO BLOCKS (작업과정/수정/저작권)
+   — 세로 적층형, 글씨 늘어짐 없음
+============================== */
+.info-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow .22s ease;
+}
+.info-block:hover { box-shadow: var(--shadow-md); }
+
+.info-block-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px 11px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(159,168,255,.07), rgba(158,234,225,.04));
+}
+
+.info-block-icon { font-size: 16px; line-height: 1; }
+
+.info-block-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  position: relative;
+  padding-left: 12px;
+}
+.info-block-title::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 4px; height: 14px;
+  transform: translateY(-50%);
+  border-radius: 99px;
+  background: var(--primary);
+}
+
+.info-block-body {
+  padding: 14px 18px 16px;
+}
+
+/* 플로우 다이어그램 */
+.flow-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  background: rgba(150,160,255,.06);
+  border-radius: var(--r-md);
+  border: 1px solid rgba(150,160,255,.14);
+}
+
+.flow-step {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.flow-step--final {
+  background: rgba(159,168,255,.18);
+  border-color: var(--primary);
+  color: var(--primary-strong);
+}
+
+.flow-arrow {
+  font-size: 12px;
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+
+/* 설명 리스트 */
+.info-desc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-desc-list li {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text);
+  padding-left: 14px;
+  position: relative;
+}
+
+.info-desc-list li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.info-desc-list li.info-note {
+  color: var(--text-light);
+  font-size: 12px;
+}
+.info-desc-list li.info-note::before { color: var(--text-light); }
+
+.info-desc-list li.warn {
+  color: var(--danger);
+  font-weight: 500;
+}
+.info-desc-list li.warn::before { color: var(--danger); content: "⚠"; }
+
+.info-sub {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-light);
+  margin-top: 3px;
+}
+
+/* ==============================
+   RIGGING SAMPLE
+============================== */
+.sp-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  background: var(--bg);
+  box-shadow: var(--shadow-md);
+  padding: 18px;
+  overflow: hidden;
+}
+.sp-head { padding: 6px 6px 18px; }
+.sp-title {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: 6px;
+}
+.sp-subtitle {
+  font-size: 13px;
+  color: var(--text-light);
+}
+.demo-callout {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(150,160,255,.18);
+  background: rgba(255,255,255,.78);
+  box-shadow: var(--shadow-sm);
+}
+.demo-callout-text {
+  font-size: 12.5px;
+  color: var(--text);
+  line-height: 1.65;
+}
+.demo-callout-text strong {
+  color: var(--primary-strong);
+}
+.demo-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.demo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(159,168,255,.12);
+  border: 1px solid rgba(150,160,255,.32);
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.demo-link:hover {
+  transform: translateY(-2px);
+  background: rgba(159,168,255,.18);
+  box-shadow: var(--shadow-sm);
+}
+.demo-note {
+  margin-top: 10px;
+  font-size: 11.5px;
+  color: var(--text-light);
+  line-height: 1.55;
+}
+.sp-group {
+  padding: 22px 0 0;
+  border-top: 1px solid rgba(150,160,255,.15);
+  margin-top: 4px;
+}
+.sp-group:first-of-type { border-top: none; }
+.sp-cat-title {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 6px;
+}
+.sp-cat-desc {
+  font-size: 12px;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 16px;
+}
+.sp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  max-width: 960px;
+  margin: 0 auto 16px;
+}
+.sp-grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 640px;
+}
+.sp-item {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(150,160,255,.16);
+  box-shadow: var(--shadow-sm);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.sp-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(40,55,140,.12);
+}
+.sp-media {
+  width: 100%;
+  display: block;
+  background: rgba(245,247,255,.9);
+  overflow: hidden;
+  line-height: 0;
+}
+.sp-gif {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: unset;
+}
+.sp-cap {
+  padding: 9px 12px 11px;
+  font-size: 11.5px;
+  text-align: center;
+  color: var(--text-light);
+  border-top: 1px solid rgba(150,160,255,.10);
+  background: #fff;
+}
+
+/* ==============================
+   SHOWCASE (YouTube Slider)
+============================== */
+.works { margin-top: 4px; }
+
+[data-type-buttons] {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+[data-type-buttons] button {
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--panel);
+  color: var(--text-light);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all .22s ease;
+}
+[data-type-buttons] button[data-active] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(159,168,255,.35);
+}
+[data-type-buttons] button:hover:not([data-active]) {
+  background: rgba(159,168,255,.12);
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+section[data-type]           { display: none; }
+section[data-type][data-active] { display: block; }
+
+[data-root] {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+[data-stage] {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: #0d0d12;
+  aspect-ratio: 16/9;
+  max-height: 520px;
+}
+[data-slide] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .45s ease;
+}
+[data-slide][data-active="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.image-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20,20,35,.7);
+  color: rgba(255,255,255,.5);
+  font-size: 13px;
+  z-index: 2;
+  cursor: pointer;
+}
+.image-placeholder.hidden { display: none; }
+
+[data-action="prev"],
+[data-action="next"] {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.22);
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s ease;
+  z-index: 10;
+}
+[data-action="prev"] { left: 10px; }
+[data-action="next"] { right: 10px; }
+[data-action="prev"]:hover,
+[data-action="next"]:hover { background: rgba(255,255,255,.28); }
+
+[data-dots] {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding: 10px 0 6px;
+}
+[data-dot] {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(150,160,255,.3);
+  transition: all .22s ease;
+}
+[data-dot][data-active] {
+  background: var(--primary);
+  transform: scale(1.3);
+}
+[data-thumbs-wrapper] {
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  display: flex;
+  justify-content: center;
+}
+[data-thumbs-wrapper]::-webkit-scrollbar { display: none; }
+[data-thumbs] {
+  display: flex;
+  gap: 8px;
+  padding: 6px 0;
+  width: max-content;
+}
+[data-thumb] {
+  width: 96px;
+  height: 54px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid transparent;
+  transition: border-color .2s ease, transform .2s ease;
+  padding: 0;
+}
+[data-thumb] img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+[data-thumb][data-active] {
+  border-color: var(--primary);
+  transform: scale(1.05);
+}
+[data-thumb]:hover:not([data-active]) { border-color: var(--border-strong); }
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media (max-width: 820px) {
+  .plan-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .page { padding: 14px 10px 30px; }
+
+  .hero-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+  }
+
+  [data-stage] {
+    max-height: 260px;
+  }
+
+  [data-thumb] { width: 72px; height: 40px; }
+  [data-action="prev"], [data-action="next"] { width: 30px; height: 30px; font-size: 13px; }
+  .card-head { padding: 12px 14px 8px; }
+  .card-body { padding: 4px 14px 14px; }
+}
+
+@media (max-width: 480px) {
+  .sp-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  [data-stage] { max-height: 220px; }
+  .intro-title, .card-title { font-size: 15px; }
+  .sp-title { font-size: 18px; }
+  .plan-grid { grid-template-columns: 1fr; }
+}
+
+/* ==============================
+   SIDE NAVIGATION
+============================== */
+.side-nav {
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+}
+.side-nav.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.side-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  justify-content: flex-end;
+}
+.side-nav-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary-strong);
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-sm);
+}
+.side-nav-item:hover .side-nav-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+.side-nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(150,160,255,.35);
+  border: 1.5px solid rgba(150,160,255,.5);
+  flex-shrink: 0;
+  transition: all .22s ease;
+}
+.side-nav-item[data-active] .side-nav-dot {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: scale(1.4);
+  box-shadow: 0 0 0 3px rgba(159,168,255,.2);
+}
+.side-nav-item:hover .side-nav-dot {
+  background: var(--primary-strong);
+  border-color: var(--primary-strong);
+}
+
+/* 판매 모델 섹션 */
+.sale-model-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  background: var(--panel);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.sale-model-head {
+  padding: 18px 24px 14px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(255,194,227,.12), rgba(159,168,255,.10));
+  border-bottom: 1px solid var(--border);
+}
+.sale-model-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255,107,107,.10);
+  border: 1px solid rgba(255,107,107,.25);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--danger);
+  margin-bottom: 10px;
+}
+.sale-model-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: 4px;
+}
+.sale-model-sub {
+  font-size: 12.5px;
+  color: var(--text-light);
+}
+.sale-model-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.sale-model-video-col {
+  padding: 18px;
+  border-right: 1px solid var(--border);
+}
+.sale-model-video-frame {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  background: #0d0d12;
+}
+.sale-model-video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.sale-model-info-col {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+.sale-model-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-strong);
+  margin-bottom: 8px;
+  letter-spacing: .02em;
+}
+.sale-model-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sale-model-features li {
+  font-size: 12.5px;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  line-height: 1.5;
+}
+.sale-model-features li::before {
+  content: "✓";
+  color: var(--primary-strong);
+  font-weight: 700;
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.sale-price-box {
+  background: linear-gradient(135deg, rgba(255,194,227,.15), rgba(159,168,255,.12));
+  border: 1px solid rgba(255,194,227,.4);
+  border-radius: var(--r-md);
+  padding: 12px 16px;
+  text-align: center;
+}
+.sale-price-label {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+.sale-price-formula {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+.sale-price-original {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+.sale-price-original s {
+  text-decoration-color: var(--danger);
+  text-decoration-thickness: 2px;
+}
+.sale-price-total {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--danger);
+  letter-spacing: -.02em;
+  line-height: 1.2;
+}
+.sale-price-save {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255,107,107,.12);
+  border: 1px solid rgba(255,107,107,.3);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--danger);
+}
+.sale-model-cta {
+  display: flex;
+  justify-content: center;
+  padding: 14px 18px 18px;
+  border-top: 1px solid var(--border);
+  background: rgba(245,247,255,.5);
+}
+.sale-model-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(159,168,255,.4);
+  transition: all .22s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.sale-model-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(159,168,255,.5);
+}
+.sale-demo-btn {
+  background: linear-gradient(135deg, rgba(159,168,255,.18), rgba(158,234,225,.15));
+  color: var(--primary-strong);
+  border: 1.5px solid rgba(150,160,255,.45);
+  box-shadow: 0 4px 14px rgba(159,168,255,.18);
+}
+.sale-demo-btn:hover {
+  background: linear-gradient(135deg, rgba(159,168,255,.28), rgba(158,234,225,.22));
+  box-shadow: 0 8px 22px rgba(159,168,255,.32);
+}
+.sale-demo-note {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.5;
+  padding: 0 18px 14px;
+}
+
+@media (max-width: 720px) {
+  .side-nav { display: none; }
+  .sale-model-body { grid-template-columns: 1fr; }
+  .sale-model-video-col { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+/* ==============================
+   LANG SWITCHER
+============================== */
+.lang-switcher {
+  display: flex; gap: 6px; justify-content: center;
+  padding: 12px 0 4px; margin-bottom: 10px;
+}
+.lang-btn {
+  padding: 5px 16px; border-radius: 999px;
+  border: 1.5px solid var(--border-strong);
+  background: transparent; font-family: inherit;
+  font-size: 11.5px; font-weight: 600; color: var(--text-light);
+  cursor: pointer; transition: all .18s ease; letter-spacing: .04em;
+}
+.lang-btn:hover  { border-color: var(--primary); color: var(--primary-strong); background: rgba(159,168,255,.06); }
+.lang-btn.active { background: rgba(159,168,255,.14); border-color: var(--primary); color: var(--primary-strong); }
+</style>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Person",
+ "name": "Dajoong",
+ "alternateName": "다중",
+ "jobTitle": "Live2D Rigger",
+ "description": "VTuber Live2D rigging commission",
+ "url": "https://dajoong.cloud"
+}
+</script>
+</head>
+
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<canvas id="cursor-canvas"></canvas>
+<canvas id="bg-canvas"></canvas>
+
+<div class="page">
+  <!-- LANG SWITCHER -->
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="ko" type="button">한국어</button>
+    <button class="lang-btn" data-lang="en" type="button">English</button>
+    <button class="lang-btn" data-lang="ja" type="button">日本語</button>
+  </div>
+
+  <!-- ============================================
+   
+   🎬 Dajoong Live2D - artmug page
+   
+   이 코드는 Live2D Rigger "다중(Dajoong)"이 작성했습니다.
+   
+   수정 사항이나 개선 아이디어가 있으시다면 편하게 DM 보내주세요!
+   개선에 협력해주셔서 감사합니다! 
+   코드에 관련된 질문이 있을 경우 아래 연락처로 연락 부탁드립니다.
+   
+   👤 Contact:
+   • X (Twitter): https://x.com/_Dajoong
+   • YouTube: https://www.youtube.com/@Dajoong_L2d
+   
+   ============================================ -->
+  <!-- ============================================
+       공지사항
+  ============================================= -->
+  <div class="notice-wrap" id="sec-notice">
+    <div class="notice-head">
+      <span class="notice-head-icon">📢</span>
+      <span class="notice-head-title" data-i18n="notice_head">공지사항</span>
+    </div>
+    <div class="notice-top-alert" data-i18n-html="notice_top_alert">
+      ※ 작업 전 반드시 확인해주세요.<br>
+      작업 의뢰 시 모든 내용을 확인·동의한 것으로 간주합니다.
+    </div>
+    <div class="notice-list">
+      <div class="notice-item">
+        <div class="notice-item-title" data-i18n="ni1_t">일러스트 작업 불가 / 파일 안내</div>
+        <p class="notice-item-desc" data-i18n="ni1_d">일러스트 작업은 하지 않습니다. 파츠 분리가 완료된 일러스트 PSD 파일이 필요합니다.</p>
+      </div>
+      <div class="notice-item">
+        <div class="notice-item-title" data-i18n="ni2_t">납품 파일 안내</div>
+        <p class="notice-item-desc" data-i18n="ni2_d">작업 완료 후 전달되는 파일은 아이콘 이미지를 포함한 .moc3 파일이 전달됩니다. 수정이 가능한 cmo3 파일은 제공하지 않습니다.</p>
+      </div>
+      <div class="notice-item">
+        <div class="notice-item-title" data-i18n="ni3_t">스트리밍 안내</div>
+        <p class="notice-item-desc" data-i18n="ni3_d">스트리밍을 하고 있습니다. 방송에 송출을 원하지 않는다면 미리 말씀 부탁드립니다.</p>
+      </div>
+      <div class="notice-item">
+        <div class="notice-item-title" data-i18n="ni4_t">SNS · 포트폴리오 게시 안내</div>
+        <p class="notice-item-desc" data-i18n="ni4_d">모든 작업물은 홍보와 포트폴리오를 위해 SNS와 유튜브에 게시됩니다. 데뷔일까지 공개 지연을 희망하시는 경우 미리 말씀 부탁드립니다.</p>
+      </div>
+      <div class="notice-item">
+        <div class="notice-item-title" data-i18n="ni5_t">요청 사항 기재</div>
+        <p class="notice-item-desc" data-i18n="ni5_d">결제 전 요청 사항은 상세히 작성 부탁드립니다. 기재되지 않은 사항은 추가 작업 및 수정 시 작업이 어렵거나 추가금이 들 수 있습니다.</p>
+      </div>
+      <div class="notice-item">
+        <div class="notice-item-title" data-i18n="ni6_t">저작권 안내</div>
+        <p class="notice-item-desc" data-i18n="ni6_d">리깅과 관련된 저작권은 작가(다중)에게 있습니다. 일러스트와 관련된 저작권은 일러스트 작가님에게 있습니다.</p>
+      </div>
+      <div class="notice-item">
+        <div class="notice-item-title" data-i18n="ni7_t">작업 일정 안내</div>
+        <p class="notice-item-desc" data-i18n="ni7_d">작업 일정은 문의 순이 아닌 결제 순으로 확정됩니다. 일정은 작업 속도에 따라 조금씩 당겨질 수 있으며, 작업이 지연될 시 사전에 미리 연락 드립니다.</p>
+        <p class="notice-item-desc notice-bold" data-i18n="ni7_b1">※ 컨펌 시 연락이 지연되거나 수정 사항이 많을 시 작업 기간이 늘어날 수 있습니다.</p>
+        <p class="notice-item-desc notice-bold" data-i18n="ni7_b2">※ 작업 기간은 평균 기본 모델 기준 2주~4주 정도입니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       이벤트 / 콜라보 + 프로세스
+  ============================================= -->
+  <div class="hero-bottom" id="sec-event">
+
+    <div class="hero-left-col">
+      <!-- 이벤트 -->
+      <div class="card">
+        <div class="card-head"><h2 class="card-title" data-i18n="ct_event">이벤트 안내</h2></div>
+        <div class="card-body">
+          <div class="event-list">
+            <div class="event-item">
+              <div class="event-top">
+                <span class="event-title" data-i18n="ev1_t">리뉴얼 기념 특별 할인</span>
+                <span class="badge" data-i18n="ev1_b">리뉴얼 할인</span>
+              </div>
+              <span class="event-sub" data-i18n="ev1_s">조기 마감될 수 있습니다</span>
+              <p class="event-desc" data-i18n="ev1_d">프리미엄 리깅 LD 전신이 리뉴얼 특별 할인</p>
+            </div>
+            <div class="event-item">
+              <div class="event-top">
+                <span class="event-title" data-i18n="ev2_t">리뷰 작성 고객 이벤트</span>
+                <span class="badge" data-i18n="ev2_b">리뷰 이벤트</span>
+              </div>
+              <span class="event-sub" data-i18n="ev2_s">긍정적인 리뷰를 남겨 주시면 추가 할인 혜택까지</span>
+              <p class="event-desc" data-i18n="ev2_d">리뷰 작성 시 2만원 할인 또는 표정 2종 중 선택 가능합니다</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 콜라보 -->
+      <div class="card">
+        <div class="card-head"><h2 class="card-title" data-i18n="ct_collab">콜라보 안내</h2></div>
+        <div class="card-body hero-collab-body">
+          <div class="event-list">
+            <a href="https://artmug.kr/index.php?channel=view&uid=47209" target="_blank" class="event-item collab-link">
+              <div class="event-top">
+                <span class="event-title" data-i18n="col1_t">양초 작가님 (YANGCHO) 콜라보 할인</span>
+                <span class="badge" data-i18n="col1_b">콜라보 할인</span>
+              </div>
+              <span class="event-sub" data-i18n="col1_s">말랑 쫀득한 귀여운 움직임을 원하면 추천</span>
+              <p class="event-desc" data-i18n="col1_d">일러스트 5만원 + 리깅 5만원 할인 혜택까지</p>
+            </a>
+            <a href="https://artmug.kr/index.php?channel=view&uid=46759" target="_blank" class="event-item collab-link">
+              <div class="event-top">
+                <span class="event-title" data-i18n="col2_t">하노히 작가님 (HANOHI) 콜라보 할인</span>
+                <span class="badge" data-i18n="col2_b">콜라보 할인</span>
+              </div>
+              <span class="event-sub" data-i18n="col2_s">단아하고 깔끔한 디자인을 원하면 추천</span>
+              <p class="event-desc" data-i18n="col2_d">일러스트 5만원 + 리깅 5만원 할인 혜택까지</p>
+            </a>
+            <a href="https://artmug.kr/index.php?channel=view&uid=51109" target="_blank" class="event-item collab-link">
+              <div class="event-top">
+                <span class="event-title" data-i18n="col3_t">피치 작가님 (PICHI) 콜라보 할인</span>
+                <span class="badge" data-i18n="col3_b">콜라보 할인</span>
+              </div>
+              <span class="event-sub" data-i18n="col3_s">만화와 같은 분위기의 디자인을 원하면 추천</span>
+              <p class="event-desc" data-i18n="col3_d">일러스트 5만원 + 리깅 5만원 할인 혜택까지</p>
+            </a>
+            <a href="https://artmug.kr/index.php?channel=view&uid=26682" target="_blank" class="event-item collab-link">
+              <div class="event-top">
+                <span class="event-title" data-i18n="col4_t">뚱땅이 작가님 (TTUNGTTANGI) 콜라보 할인</span>
+                <span class="badge" data-i18n="col4_b">콜라보 할인</span>
+              </div>
+              <span class="event-sub" data-i18n="col4_s">귀엽고 부드러운 움직임을 원하면 추천</span>
+              <p class="event-desc" data-i18n="col4_d">일러스트 10만원 + 리깅 5만원 할인 혜택까지</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div><!-- /hero-left-col -->
+
+    <!-- 프로세스 -->
+    <div class="card hero-process">
+      <div class="card-head"><h2 class="card-title" data-i18n="ct_process">작업 프로세스</h2></div>
+      <div class="card-body">
+        <div class="process-timeline">
+          <div class="process-step"><div class="step-number">01</div><div class="step-content"><p class="step-title" data-i18n="ps1_t">문의</p><p class="step-desc" data-i18n="ps1_d">작업 요청 및 기본 정보 제공</p></div></div>
+          <div class="process-step"><div class="step-number">02</div><div class="step-content"><p class="step-title" data-i18n="ps2_t">파일 확인 및 견적</p><p class="step-desc" data-i18n="ps2_d">파일 검토 후 상세 견적 제시</p></div></div>
+          <div class="process-step"><div class="step-number">03</div><div class="step-content"><p class="step-title" data-i18n="ps3_t">접수 및 입금</p><p class="step-desc" data-i18n="ps3_d">계약 및 결제</p></div></div>
+          <div class="process-step"><div class="step-number">04</div><div class="step-content"><p class="step-title" data-i18n="ps4_t">1차 리깅</p><p class="step-desc" data-i18n="ps4_d">헤드 및 페이스 구조 제작</p></div></div>
+          <div class="process-step"><div class="step-number">05</div><div class="step-content"><p class="step-title" data-i18n="ps5_t">1차 컨펌 및 수정</p><p class="step-desc" data-i18n="ps5_d">1차 리깅 영상 제공, 피드백 반영 및 개선</p></div></div>
+          <div class="process-step"><div class="step-number">06</div><div class="step-content"><p class="step-title" data-i18n="ps6_t">2차 리깅</p><p class="step-desc" data-i18n="ps6_d">바디 및 소품 디테일 작업</p></div></div>
+          <div class="process-step"><div class="step-number">07</div><div class="step-content"><p class="step-title" data-i18n="ps7_t">2차 컨펌 및 수정</p><p class="step-desc" data-i18n="ps7_d">2차 리깅 영상 제공, 피드백 반영 및 개선</p></div></div>
+          <div class="process-step"><div class="step-number">08</div><div class="step-content"><p class="step-title" data-i18n="ps8_t">완성 및 파일 납품</p><p class="step-desc" data-i18n="ps8_d">최종 파일 전달</p></div></div>
+          <div class="process-step"><div class="step-number">09</div><div class="step-content"><p class="step-title" data-i18n="ps9_t">최종 수정 (3차 수정)</p><p class="step-desc" data-i18n="ps9_d">파일 적용 후 문제 발생 시 수정</p></div></div>
+        </div>
+        <p class="process-note" data-i18n="process_note">평균 작업 기간은 2–4주이며, 디자인의 복잡도에 따라 조정 가능합니다.</p>
+      </div>
+    </div>
+
+  </div><!-- /hero-bottom -->
+
+  <!-- ============================================
+       베이직 / 프리미엄 표
+  ============================================= -->
+  <div class="sec-divider" id="sec-plan">
+    <div class="sec-divider-line"></div>
+    <span class="sec-divider-label">Plan</span>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <div class="plan-wrap">
+    <div class="plan-grid">
+
+      <!-- 베이직 -->
+      <div class="plan-card">
+        <div class="plan-card-head">
+          <span class="plan-name" data-i18n="plan_basic">베이직</span>
+        </div>
+        <div class="plan-card-body">
+          <ul class="plan-list">
+            <li data-i18n="pl_face_xyz">얼굴 XYZ</li>
+            <li data-i18n="pl_brow">눈썹 (위아래, 변형, 각도)</li>
+            <li class="red" data-i18n="pl_facial_b">눈썹눈 연동 페이셜</li>
+            <li data-i18n="pl_blink">눈깜빡 (윙크)</li>
+            <li data-i18n="pl_eye_phy">눈동자 물리</li>
+            <li class="red" data-i18n="pl_lash_b">속눈썹 물리</li>
+            <li data-i18n="pl_mouth9">입움직임 (9점)</li>
+            <li class="red" data-i18n="pl_jaw_b">입 개폐 연동 턱 리깅</li>
+            <li data-i18n="pl_body_xyz">몸 XYZ</li>
+            <li data-i18n="pl_breath">호흡</li>
+            <li class="red" data-i18n="pl_arm_b">팔 흔들림 (손가락 흔들림)</li>
+            <li class="red" data-i18n="pl_cam_b">캠 이탈 애니메이션 (선택)</li>
+            <li data-i18n="pl_expr2_b">기본 제공 표정 2종<span class="plan-sub">(애니메이션 X)</span></li>
+          </ul>
+          <div class="plan-physics" data-i18n-html="pl_phy_b">최대 3단계 물리 지원<span class="plan-sub">(필요의 경우 4단계 지원)</span></div>
+        </div>
+      </div>
+
+      <!-- 프리미엄 -->
+      <div class="plan-card plan-card--premium">
+        <div class="plan-card-head">
+          <span class="plan-name" data-i18n="plan_premium">프리미엄</span>
+        </div>
+        <div class="plan-card-body">
+          <ul class="plan-list">
+            <li>얼굴 XYZ</li>
+            <li>눈썹 (위아래, 변형, 각도)</li>
+            <li data-i18n="pl_facial_p">눈썹 눈 연동 페이셜</li>
+            <li>눈깜빡 (윙크)</li>
+            <li>눈동자 물리</li>
+            <li data-i18n="pl_lash_p">속눈썹 물리</li>
+            <li data-i18n="pl_mouth12">입움직임 (12점~)</li>
+            <li data-i18n="pl_jaw_p">입 개폐 연동 턱 리깅</li>
+            <li>몸 XYZ</li>
+            <li>호흡</li>
+            <li data-i18n="pl_arm_p">팔 흔들림 (손가락 흔들림)</li>
+            <li data-i18n="pl_cam_p">캠 이탈 애니메이션 (선택)</li>
+            <li data-i18n="pl_expr2_p">기본 제공 표정 2종<span class="plan-sub">(애니메이션 X)</span></li>
+          </ul>
+          <div class="plan-physics" data-i18n-html="pl_phy_p">최소 3단계 물리 지원<span class="plan-sub">(필요의 경우 2단계 지원)</span></div>
+        </div>
+      </div>
+
+    </div>
+    <p class="plan-note" data-i18n="plan_note">베이직과 프리미엄은 움직임 각도, 물리 단계, 전반적인 디테일에서 차이가 있습니다</p>
+  </div>
+
+  <!-- ============================================
+       작업 과정 / 수정 사항 / 저작권
+  ============================================= -->
+  <div class="sec-divider" id="sec-info">
+    <div class="sec-divider-line"></div>
+    <span class="sec-divider-label">Info</span>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <div class="info-wrap">
+
+    <!-- 작업 과정 -->
+    <div class="info-block">
+      <div class="info-block-head">
+        <span class="info-block-icon">🔄</span>
+        <h3 class="info-block-title" data-i18n="ib_process_t">작업 과정</h3>
+      </div>
+      <div class="info-block-body">
+        <!-- 플로우 -->
+        <div class="flow-row">
+          <span class="flow-step" data-i18n="fs_1">문의</span><span class="flow-arrow">→</span>
+          <span class="flow-step" data-i18n="fs_2">파일 확인 및 견적</span><span class="flow-arrow">→</span>
+          <span class="flow-step" data-i18n="fs_3">접수 및 입금</span><span class="flow-arrow">→</span>
+          <span class="flow-step" data-i18n="fs_4">1차 리깅</span><span class="flow-arrow">→</span>
+          <span class="flow-step" data-i18n="fs_5">1차 컨펌(수정)</span><span class="flow-arrow">→</span>
+          <span class="flow-step" data-i18n="fs_6">2차 리깅</span><span class="flow-arrow">→</span>
+          <span class="flow-step" data-i18n="fs_7">2차 컨펌(수정)</span><span class="flow-arrow">→</span>
+          <span class="flow-step" data-i18n="fs_8">완성 후 전달</span><span class="flow-arrow">→</span>
+          <span class="flow-step flow-step--final" data-i18n="fs_9">최종 수정</span>
+        </div>
+        <ul class="info-desc-list">
+          <li data-i18n="ib_p1">파일 적용 후 문제가 있다면 수정해 드립니다 (최종 수정)</li>
+          <li class="info-note" data-i18n="ib_p2">오너캐·동물·팬캐 등은 2차 컨펌 없이 1차 컨펌만 진행됩니다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 수정 사항 -->
+    <div class="info-block">
+      <div class="info-block-head">
+        <span class="info-block-icon">✏️</span>
+        <h3 class="info-block-title" data-i18n="ib_revision_t">수정 사항</h3>
+      </div>
+      <div class="info-block-body">
+        <ul class="info-desc-list">
+          <li data-i18n-html="ib_r1">기본적인 수정 사항은 작업 기간에 진행되는 총 2회의 컨펌 및 수정 단계에서 진행됩니다.<br>
+            <span class="info-sub">동물/오너캐의 경우 최종 리깅까지 진행 후 1차 컨펌만 진행합니다.</span>
+          </li>
+          <li data-i18n="ib_r2">수정 완료 후 이전 상태로 되돌리거나 과한 번복 요청 시 추가금이 청구될 수 있습니다.</li>
+          <li data-i18n="ib_r3">리깅 실수 및 오류가 있는 경우 무료로 수정해 드립니다. 파일 적용 후 오류 발견 시 편히 말해 주세요.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 저작권 -->
+    <div class="info-block">
+      <div class="info-block-head">
+        <span class="info-block-icon">©️</span>
+        <h3 class="info-block-title" data-i18n="ib_copyright_t">저작권</h3>
+      </div>
+      <div class="info-block-body">
+        <ul class="info-desc-list">
+          <li data-i18n="ib_c1">리깅 데이터의 저작권은 기본적으로 리거(다중)에게 귀속됩니다.</li>
+          <li data-i18n="ib_c2">의뢰인은 본 리깅 결과물을 방송, 영상 제작, SNS 등 목적에 한하여 이용할 수 있습니다.</li>
+          <li class="warn" data-i18n="ib_c3">리깅 데이터의 재판매·양도·공유는 허용되지 않습니다.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================
+       판매 모델
+  ============================================= -->
+  <div class="sec-divider" id="sec-sale">
+    <div class="sec-divider-line"></div>
+    <span class="sec-divider-label">Sale Model</span>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <div class="sale-model-wrap">
+    <div class="sale-model-head">
+      <div class="sale-model-badge" data-i18n="sale_badge">🛒 판매 중</div>
+      <h2 class="sale-model-title" data-i18n="sale_title">판매 모델</h2>
+      <p class="sale-model-sub" data-i18n="sale_sub">일러스트 - 양초 작가님</p>
+    </div>
+    <div class="sale-model-body">
+      <div class="sale-model-video-col">
+        <div class="sale-model-video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/wML53bUKn1Q?si=gaP4RIUI9Yy9XTuG"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            title="판매 모델 쇼케이스">
+          </iframe>
+        </div>
+      </div>
+      <div class="sale-model-info-col">
+        <div>
+          <p class="sale-model-section-title" data-i18n="sale_feat_title">추가 표정 및 기능</p>
+          <ul class="sale-model-features">
+            <li data-i18n="sale_f1">홍조, 경멸, 하트눈, 눈물 (애니메이션)</li>
+            <li data-i18n="sale_f2">겉옷, 귀 ON/OFF</li>
+            <li data-i18n="sale_f3">VBridger 포함 (메롱 X)</li>
+          </ul>
+        </div>
+        <div class="sale-price-box">
+          <p class="sale-price-label" data-i18n="sale_price_label">판매가</p>
+          <p class="sale-price-formula" data-i18n="sale_formula">일러스트 85만원 + 리깅 78만원</p>
+          <p class="sale-price-original"><s>합계 163만원</s></p>
+          <p class="sale-price-total">🎉 130만원 🎉</p>
+          <p class="sale-price-save" data-i18n="sale_save">33만원 할인</p>
+        </div>
+      </div>
+    </div>
+    <div class="sale-model-cta">
+      <a href="https://artmug.kr/index.php?channel=view&uid=47209" target="_blank" class="sale-model-btn">
+        <span data-i18n="sale_cta">🛒 구매 문의하기</span>
+      </a>
+      <a href="https://dajoong.cloud/dev/Online_sample/dist/index.html" target="_blank" rel="noopener noreferrer" class="sale-model-btn sale-demo-btn">
+        <span data-i18n="sp_demo_cta">🖥️ Lite Web Demo 보기</span>
+      </a>
+    </div>
+    <p class="sale-demo-note" data-i18n="sp_demo_subnote">데모는 홍보용 Lite 버전으로 구성되어 있으며, 실제 납품 범위와 품질은 의뢰 내용에 따라 달라집니다.</p>
+  </div>
+
+  <!-- ============================================
+       RIGGING SAMPLE
+  ============================================= -->
+  <div class="sec-divider" id="sec-sample">
+    <div class="sec-divider-line"></div>
+    <span class="sec-divider-label">Rigging Sample</span>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <div class="sp-wrap">
+    <div class="sp-head">
+      <h2 class="sp-title" data-i18n="sp_title">리깅 작업 샘플</h2>
+      <p class="sp-subtitle" data-i18n="sp_sub">리깅 작업의 다양한 샘플을 확인해보세요.</p>
+    </div>
+
+    <!-- 전신 리깅 -->
+    <div class="sp-group">
+      <h3 class="sp-cat-title" data-i18n="sp_g1_t">전신 리깅</h3>
+      <p class="sp-cat-desc" data-i18n="sp_g1_d1">자연스럽고 부드러운 움직임을 구현합니다.</p>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=13DeOGQVDv9XriMmvHwvkK53PGsIWgmFu" alt="X 축 움직임 샘플"></div>
+          <figcaption class="sp-cap" data-i18n="cap_x_axis">X 축 움직임</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1J9hHzappQPfBqFq72pphJzXilSCqcrgz" alt="Y 축 움직임 샘플"></div>
+          <figcaption class="sp-cap" data-i18n="cap_y_axis">Y 축 움직임</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1yz396Y-1Et40sXUXU2tTnIPiOaEhV_l4" alt="Z 축 움직임 샘플"></div>
+          <figcaption class="sp-cap" data-i18n="cap_z_axis">Z 축 움직임</figcaption>
+        </figure>
+      </div>
+      <p class="sp-cat-desc" data-i18n="sp_g1_d2">캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.</p>
+    </div>
+    
+    <!-- 눈 물리 -->
+    <div class="sp-group">
+      <h3 class="sp-cat-title" data-i18n="sp_g2_t">눈 물리</h3>
+      <p class="sp-cat-desc" data-i18n="sp_g2_d1">다양한 스타일의 눈을 생동감 있게 표현합니다.</p>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1tTVBKO72HJ_Wu2DFpN8i82qIa2FdKSjj" alt="오드아이 눈 샘플"></div>
+          <figcaption class="sp-cap" data-i18n="cap_eye1">몽환적인 눈빛을 살린 디테일한 물리 표현</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1qlQFlA6fQ2gz59sav2TBMyvTh7skRS44" alt="녹색 눈 샘플"></div>
+          <figcaption class="sp-cap" data-i18n="cap_eye2">초롱초롱한 눈동자의 자연스러운 물리 움직임</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1GkQgZTVhPdBHSlp6vfNCwkgHSP6uH37z" alt="붉은 눈 샘플"></div>
+          <figcaption class="sp-cap" data-i18n="cap_eye3">섬세한 속눈썹과 눈동자의 부드러운 물리</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- 입 움직임 -->
+    <div class="sp-group">
+      <h3 class="sp-cat-title" data-i18n="sp_g3_t">입 움직임</h3>
+      <p class="sp-cat-desc" data-i18n="sp_g3_d1">발화 스타일에 맞게 선택할 수 있는 세 가지 입 구조입니다</p>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=12jBySn6UZBHB1yGOZwgd5-ZbWdnFjIDb" alt="입 움직임 9점"></div>
+          <figcaption class="sp-cap" data-i18n="cap_mouth1">단순한 9점 구조로 일반 대화에 적합</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1H7ewZ2S5PdGeaX9dgXq8o-DigR7mwHPn" alt="입 움직임 12점"></div>
+          <figcaption class="sp-cap" data-i18n="cap_mouth2">세밀한 12점 구조로 대화와 감정 표현에 적합</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1z8W1xt6Iji0xKWBwkgQmvFUu0FpTmrci" alt="입 움직임 12점 VBridger"></div>
+          <figcaption class="sp-cap" data-i18n="cap_mouth3">Vbridger 사용으로 섬세한 감정 표현에 적합</figcaption>
+        </figure>
+      </div>
+
+          <!-- 표정효과 -->
+    <div class="sp-group">
+      <h3 class="sp-cat-title" data-i18n="sp_g4_t">표정 효과</h3>
+      <p class="sp-cat-desc" data-i18n="sp_g4_d1">단축키 한 번으로 개성 있는 감정을 표현해보세요</p>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=19_Brg4IQsztCIh-VFO6TldCrB7MjnuBI" alt="표정 효과 경멸"></div>
+          <figcaption class="sp-cap" data-i18n="cap_expr1">차갑고 날카로운 눈빛으로 경멸감을 표현</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1b2AXHtxxCLv3Wi-onMdBYA0n3r2M2Sga" alt="표정 효과 짜증"></div>
+          <figcaption class="sp-cap" data-i18n="cap_expr2">순간적인 짜증과 불쾌감을 생동감 있게 연출</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=15wg3TRNcp97TXpTP3rTDF6QaN_SS1jDz" alt="표정 효과 하트"></div>
+          <figcaption class="sp-cap" data-i18n="cap_expr3">설레고 사랑스러운 순간을 하트눈으로 표현</figcaption>
+        </figure>
+      </div>
+    </div>
+
+        <!-- 표정 애니메이션 -->
+    <div class="sp-group">
+      <h3 class="sp-cat-title" data-i18n="sp_g5_t">표정 애니메이션</h3>
+      <p class="sp-cat-desc" data-i18n="sp_g5_d1">캐릭터 위에 자연스럽게 재생되는 감정 연출 효과입니다</p>
+      <div class="sp-grid sp-grid--2">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=17pV9Kj2QeFin7KMLdEQ0F8naUaBZC5J9" alt="눈물 효과 샘플"></div>
+          <figcaption class="sp-cap" data-i18n="cap_anim1">눈가를 타고 흐르는 자연스러운 눈물 연출</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1jysEaksUzsanBT8HCJwK8euJTv0uwM9a" alt="땀삐질효과"></div>
+          <figcaption class="sp-cap" data-i18n="cap_anim2">긴장감과 당황스러움을 식은땀으로 표현</figcaption>
+        </figure>
+      </div>
+    </div>
+
+        <!-- 팔 움직임 -->
+    <div class="sp-group">
+      <h3 class="sp-cat-title" data-i18n="sp_g6_t">팔 움직임</h3>
+      <p class="sp-cat-desc" data-i18n="sp_g6_d1">캐릭터의 콘셉트에 맞는 팔 움직임 예시입니다</p>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1R4n4D8_uI2wvFAaS9pYJ2Ud7MEzR7f-7" alt="팔 움직임 게임기"></div>
+          <figcaption class="sp-cap" data-i18n="cap_arm1">게임기를 이용해 게임 화면에 몰입감을 올릴 수 있습니다</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1RVMA48AtUMd50LoWXTtKwV4McO_6zPRf" alt="팔 움직임 마법봉"></div>
+          <figcaption class="sp-cap" data-i18n="cap_arm2">캐릭터 컨셉에 맞는 아이템으로 다양한 연출</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1MiBHIi_Xsne3ki3-pyLxNlgu3rCLoHYM" alt="팔 움직임 손인사"></div>
+          <figcaption class="sp-cap" data-i18n="cap_arm3">손을 흔들며 인사하는 디테일한 표현</figcaption>
+        </figure>
+      </div>
+    </div>
+            <!-- 의상 및 헤어 -->
+    <div class="sp-group">
+      <h3 class="sp-cat-title" data-i18n="sp_g7_t">의상 및 헤어</h3>
+      <p class="sp-cat-desc" data-i18n="sp_g7_d1">의상과 헤어 변경으로 같은 캐릭터도 전혀 다른 분위기를 연출할 수 있습니다.</p>
+      <div class="sp-grid">
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1F9LJyF49S2O7dndlkmZuEjnRH-KzcqcK" alt="머리색상변경"></div>
+          <figcaption class="sp-cap" data-i18n="cap_cos1">머리 색상을 바꿔 전혀 다른 분위기를 연출</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1Lrp_K0Mp75XqHp64dGwF49emDXNijGK1" alt="의상 변경"></div>
+          <figcaption class="sp-cap" data-i18n="cap_cos2">의상 교체로 캐릭터 콘셉트를 폭넓게 표현</figcaption>
+        </figure>
+        <figure class="sp-item">
+          <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1VDcIPOQEav_DwmMOplBVJ7urL4eh2ORt" alt="헤어 변경"></div>
+          <figcaption class="sp-cap" data-i18n="cap_cos3">헤어 스타일 변경으로 같은 캐릭터도 새로운 느낌으로</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div><!-- /sp-wrap -->
+
+  <!-- ============================================
+       SHOWCASE
+  ============================================= -->
+  <div class="sec-divider" id="sec-showcase">
+    <div class="sec-divider-line"></div>
+    <span class="sec-divider-label">Showcase</span>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <section class="works">
+    <div data-type-buttons></div>
+    <div id="type-container"></div>
+  </section>
+
+</div><!-- /page -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const videoData = {
+    LD:  { title: "LD",      list: ["nOVaZaZqbp4","Zlbfvuxf3Lo","8EabRx_ZFAI","wML53bUKn1Q","yvc0yN8uwqU","w-eRgLmsgas","zKRPxZ7pv58"] },
+    SD:  { title: "SD",      list: ["bdD1dhv6lI4","BtvMd8yG80g","SwGP1UFE424","pH4GRAjcp2U","b6DNOVjED9o"] },
+    FAN: { title: "오너캐", i18nKey: "tab_fan",  list: ["cOmUiWxkqfo","FzIi9m1bKeI","9XtIUiv314c"] },
+    MEM: { title: "메모리얼", i18nKey: "tab_mem", list: ["JLTUyPkfsj0","lhVUjv1q-bw"] }
+  };
+
+  function buildAllTypes() {
+    const typeButtons = document.querySelector('[data-type-buttons]');
+    const container   = document.getElementById('type-container');
+    typeButtons.innerHTML = '';
+    container.innerHTML   = '';
+
+    Object.keys(videoData).forEach((typeKey, idx) => {
+      const item = videoData[typeKey];
+      const btn = document.createElement('button');
+      btn.textContent = (item.i18nKey && window.__artmugLang && window.__artmugLangs)
+        ? (window.__artmugLangs[window.__artmugLang][item.i18nKey] || item.title)
+        : item.title;
+      btn.setAttribute('data-switch', typeKey);
+      if (idx === 0) btn.setAttribute('data-active', 'true');
+      typeButtons.appendChild(btn);
+
+      const sec = document.createElement('section');
+      sec.setAttribute('data-type', typeKey);
+      if (idx === 0) sec.setAttribute('data-active', 'true');
+      sec.innerHTML = generateSliderHTML(item.list);
+      container.appendChild(sec);
+    });
+  }
+
+  function generateSliderHTML(list) {
+    let slides = '';
+    list.forEach((vid, i) => {
+      const active = i === 0;
+      slides += `
+        <div data-slide data-video="${vid}" data-index="${i}" data-active="${active}">
+          <div class="video-wrapper">
+            <div class="image-placeholder${active ? ' hidden' : ''}" data-clickable="true">Loading…</div>
+            <iframe title="Video ${vid}"
+              ${active ? `src="https://www.youtube.com/embed/${vid}?fs=0"` : `data-src="https://www.youtube.com/embed/${vid}?fs=0" src="about:blank" class="lazy-iframe"`}
+              frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+            </iframe>
+          </div>
+        </div>`;
+    });
+
+    let thumbs = '';
+    list.forEach((vid, i) => {
+      thumbs += `
+        <button data-thumb data-index="${i}"${i === 0 ? ' data-active="true"' : ''}>
+          <img src="https://img.youtube.com/vi/${vid}/hqdefault.jpg" alt="Thumbnail ${i+1}" loading="lazy">
+        </button>`;
+    });
+
+    return `
+      <div data-root>
+        <div data-stage aria-roledescription="carousel" data-autoplay="false" data-interval="6000">
+          ${slides}
+          <button data-action="prev" aria-label="이전">❮</button>
+          <button data-action="next" aria-label="다음">❯</button>
+        </div>
+        <div data-dots></div>
+        <div data-thumbs-wrapper><div data-thumbs>${thumbs}</div></div>
+      </div>`;
+  }
+
+  buildAllTypes();
+
+  function loadIframe(wrapper) {
+    const iframe = wrapper.querySelector('iframe[data-src]');
+    const ph     = wrapper.querySelector('.image-placeholder');
+    if (iframe && iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
+      iframe.removeAttribute('data-src');
+      iframe.classList.remove('lazy-iframe');
+      return true;
+    }
+    return false;
+  }
+
+  function initLazyIframes() {
+    const allSlides = document.querySelectorAll('[data-slide]');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const wrapper = entry.target.querySelector('.video-wrapper');
+            if (wrapper && loadIframe(wrapper)) observer.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '300px 0px' });
+      allSlides.forEach(s => observer.observe(s));
+    }
+    allSlides.forEach(slide => {
+      const ph = slide.querySelector('.image-placeholder');
+      if (ph) {
+        ph.addEventListener('click', () => {
+          loadIframe(slide.querySelector('.video-wrapper'));
+        });
+      }
+    });
+  }
+
+  initLazyIframes();
+
+  document.querySelector('[data-type-buttons]').addEventListener('click', e => {
+    const btn = e.target.closest('button[data-switch]');
+    if (!btn) return;
+    const target = btn.getAttribute('data-switch');
+    document.querySelectorAll('[data-type-buttons] button').forEach(b => b.removeAttribute('data-active'));
+    btn.setAttribute('data-active', 'true');
+    document.querySelectorAll('section[data-type]').forEach(sec => {
+      sec.getAttribute('data-type') === target
+        ? sec.setAttribute('data-active', 'true')
+        : sec.removeAttribute('data-active');
+    });
+    setTimeout(() => {
+      const activeSlide = document.querySelector('section[data-type][data-active] [data-slide][data-active="true"]');
+      if (activeSlide) loadIframe(activeSlide.querySelector('.video-wrapper'));
+    }, 10);
+  });
+
+  (function() {
+    document.querySelectorAll('div[data-root]').forEach(root => {
+      const stage     = root.querySelector('div[data-stage]');
+      const slides    = Array.from(stage.querySelectorAll('div[data-slide]'));
+      const prevBtn   = stage.querySelector('button[data-action="prev"]');
+      const nextBtn   = stage.querySelector('button[data-action="next"]');
+      const dotsWrap  = root.querySelector('div[data-dots]');
+      const thumbsEl  = root.querySelector('div[data-thumbs]');
+      const thumbBtns = Array.from(thumbsEl.querySelectorAll('button[data-thumb]'));
+      const total     = slides.length;
+      let current     = 0;
+
+      function buildDots() {
+        dotsWrap.innerHTML = '';
+        for (let i = 0; i < total; i++) {
+          const b = document.createElement('button');
+          b.setAttribute('data-dot', '');
+          if (i === 0) b.setAttribute('data-active', 'true');
+          b.addEventListener('click', () => goTo(i));
+          dotsWrap.appendChild(b);
+        }
+      }
+
+      function updateUI() {
+        slides.forEach(s => {
+          const idx = Number(s.getAttribute('data-index'));
+          s.setAttribute('data-active', idx === current ? 'true' : 'false');
+          s.setAttribute('aria-hidden', idx === current ? 'false' : 'true');
+        });
+        dotsWrap.querySelectorAll('[data-dot]').forEach((d, i) => {
+          i === current ? d.setAttribute('data-active', 'true') : d.removeAttribute('data-active');
+        });
+        thumbBtns.forEach((t, i) => {
+          i === current ? t.setAttribute('data-active', 'true') : t.removeAttribute('data-active');
+        });
+        const activeSlide = slides.find(s => Number(s.getAttribute('data-index')) === current);
+        if (activeSlide) loadIframe(activeSlide.querySelector('.video-wrapper'));
+      }
+
+      function goTo(i) {
+        if (i < 0) i = total - 1;
+        if (i >= total) i = 0;
+        current = i;
+        updateUI();
+      }
+
+      thumbBtns.forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          e.stopPropagation();
+          goTo(Number(btn.getAttribute('data-index')));
+        }, true);
+      });
+
+      prevBtn.addEventListener('click', e => { e.preventDefault(); goTo(current - 1); });
+      nextBtn.addEventListener('click', e => { e.preventDefault(); goTo(current + 1); });
+
+      window.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+      });
+
+      buildDots();
+      updateUI();
+    });
+  })();
+
+});
+</script>
+
+<!-- SIDE NAVIGATION -->
+<nav class="side-nav" id="sideNav">
+  <div class="side-nav-item" data-target="sec-notice">
+    <span class="side-nav-label" data-i18n="snav_notice">공지사항</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-event">
+    <span class="side-nav-label" data-i18n="snav_event">이벤트 / 프로세스</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-plan">
+    <span class="side-nav-label">Plan</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-info">
+    <span class="side-nav-label" data-i18n="snav_info">작업 안내</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-sale">
+    <span class="side-nav-label" data-i18n="snav_sale">판매 모델</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-sample">
+    <span class="side-nav-label">Rigging Sample</span>
+    <span class="side-nav-dot"></span>
+  </div>
+  <div class="side-nav-item" data-target="sec-showcase">
+    <span class="side-nav-label">Showcase</span>
+    <span class="side-nav-dot"></span>
+  </div>
+</nav>
+
+<script>
+// Side Nav
+(function() {
+  const nav = document.getElementById('sideNav');
+  const items = Array.from(nav.querySelectorAll('.side-nav-item'));
+  const sectionIds = items.map(i => i.dataset.target);
+
+  // Click to scroll
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const el = document.getElementById(item.dataset.target);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Show nav after scrolling past top
+  function checkVisibility() {
+    if (window.scrollY > 100) nav.classList.add('visible');
+    else nav.classList.remove('visible');
+  }
+
+  // Highlight active section
+  function updateActive() {
+    let current = sectionIds[0];
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 120) current = id;
+    });
+    items.forEach(item => {
+      item.getAttribute('data-target') === current
+        ? item.setAttribute('data-active', '')
+        : item.removeAttribute('data-active');
+    });
+  }
+
+  window.addEventListener('scroll', () => { checkVisibility(); updateActive(); }, { passive: true });
+  checkVisibility();
+  updateActive();
+})();
+</script>
+
+<script>
+/* ====================================================
+   BACKGROUND PARTICLES
+==================================================== */
+(function() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const COLORS = ['#9FA8FF','#C2CAFF','#FFC2E3','#9EEAE1','#d4b9ff'];
+
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+  function Particle() { this.reset(true); }
+  Particle.prototype.reset = function(init) {
+    this.x = Math.random() * W;
+    this.y = init ? Math.random() * H : H + 10;
+    this.r = Math.random() * 1.8 + .5;
+    this.vx = (Math.random() - .5) * .3;
+    this.vy = -(Math.random() * .4 + .1);
+    this.alpha = Math.random() * .45 + .15;
+    this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    this.tw = Math.random() * .018 + .004;
+    this.td = Math.random() > .5 ? 1 : -1;
+  };
+  Particle.prototype.update = function() {
+    this.x += this.vx; this.y += this.vy;
+    this.alpha += this.tw * this.td;
+    if (this.alpha > .7 || this.alpha < .08) this.td *= -1;
+    if (this.y < -10) this.reset(false);
+  };
+  Particle.prototype.draw = function() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = ctx.shadowColor = this.color;
+    ctx.shadowBlur = 7;
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+  };
+
+  function init() {
+    resize(); particles = [];
+    const n = Math.floor((W * H) / 8500);
+    for (let i = 0; i < n; i++) particles.push(new Particle());
+  }
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  }
+  window.addEventListener('resize', init);
+  init(); loop();
+})();
+
+/* ====================================================
+   CUSTOM CURSOR + SPARKLE TRAIL + CLICK BURST
+==================================================== */
+(function() {
+  const dot    = document.getElementById('cursor-dot');
+  const ring   = document.getElementById('cursor-ring');
+  const canvas = document.getElementById('cursor-canvas');
+  const ctx    = canvas.getContext('2d');
+  let mx = -300, my = -300, rx = -300, ry = -300;
+  const SC = ['#9FA8FF','#FFC2E3','#9EEAE1','#fff','#d4b9ff','#ffe0f5'];
+
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+
+  (function ringLoop() {
+    rx += (mx - rx) * .13; ry += (my - ry) * .13;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(ringLoop);
+  })();
+
+  const hov = 'a,button,.card,.pricing-card,.plan-card,.notice-item,.collab-link,[data-type-buttons] button,.side-nav-item,.sale-model-btn,.sp-item';
+  document.addEventListener('mouseover', e => { if (e.target.closest(hov)) document.body.classList.add('cursor-hover'); });
+  document.addEventListener('mouseout',  e => { if (e.target.closest(hov)) document.body.classList.remove('cursor-hover'); });
+  document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+  document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
+
+  function drawStar(x, y, r, alpha, color, rot) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = ctx.shadowColor = color;
+    ctx.shadowBlur = 8;
+    ctx.translate(x, y); ctx.rotate(rot);
+    ctx.beginPath();
+    for (let i = 0; i < 5; i++) {
+      const a1 = (i*4*Math.PI)/5 - Math.PI/2;
+      const a2 = ((i*4+2)*Math.PI)/5 - Math.PI/2;
+      ctx.lineTo(Math.cos(a1)*r, Math.sin(a1)*r);
+      ctx.lineTo(Math.cos(a2)*(r*.4), Math.sin(a2)*(r*.4));
+    }
+    ctx.closePath(); ctx.fill(); ctx.restore();
+  }
+
+  function makeParticle(x, y, burst) {
+    const angle = Math.random() * Math.PI * 2;
+    const spd = burst ? (Math.random()*5+2.5) : (Math.random()*1.6+.4);
+    return {
+      x, y,
+      vx: Math.cos(angle)*spd, vy: Math.sin(angle)*spd - (burst ? 0 : .5),
+      r: Math.random()*(burst?4:2.5)+1.2,
+      alpha: 1, decay: burst?.028:.022,
+      color: SC[Math.floor(Math.random()*SC.length)],
+      rot: Math.random()*Math.PI*2, rotV: (Math.random()-.5)*.18,
+      star: Math.random()>.45, gravity: .035, drag: burst?.93:1
+    };
+  }
+
+  let particles = [], lastX = -999, lastY = -999;
+
+  document.addEventListener('mousemove', () => {
+    const dx = mx-lastX, dy = my-lastY;
+    if (dx*dx+dy*dy > 100) {
+      for (let i = 0; i < 2; i++) particles.push(makeParticle(mx, my, false));
+      lastX = mx; lastY = my;
+    }
+  });
+
+  document.addEventListener('click', e => {
+    for (let i = 0; i < 16; i++) particles.push(makeParticle(e.clientX, e.clientY, true));
+  });
+
+  (function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles = particles.filter(p => p.alpha > .01);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      p.vx *= p.drag; p.vy *= p.drag;
+      p.vy += p.gravity; p.alpha -= p.decay; p.rot += p.rotV;
+      if (p.star) drawStar(p.x, p.y, p.r, p.alpha, p.color, p.rot);
+      else {
+        ctx.save(); ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = ctx.shadowColor = p.color; ctx.shadowBlur = 9;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill(); ctx.restore();
+      }
+    });
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ====================================================
+   SCROLL REVEAL
+==================================================== */
+(function() {
+  const sels = [
+    '.notice-wrap','.hero-intro','.hero-bottom > *',
+    '.pricing-wrap','.plan-wrap','.info-block',
+    '.sale-model-wrap','.sp-wrap','.works'
+  ];
+  const els = [];
+  sels.forEach(s => document.querySelectorAll(s).forEach(el => {
+    el.classList.add('reveal'); els.push(el);
+  }));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((en, i) => {
+      if (en.isIntersecting) {
+        setTimeout(() => en.target.classList.add('revealed'), i*55);
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: .07 });
+  els.forEach(el => io.observe(el));
+})();
+</script>
+
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'scrollTo') {
+    window.scrollTo({ top: e.data.top, behavior: 'smooth' });
+  }
+});
+</script>
+
+<!-- ============================================================
+  LANG SWITCHER & I18N — artmug
+============================================================ -->
+<script>
+(function(){
+  var lang = 'ko';
+
+  var LANGS = {
+    ko: {
+      // notice
+      notice_head: '공지사항',
+      notice_top_alert: '※ 작업 전 반드시 확인해주세요.<br>작업 의뢰 시 모든 내용을 확인·동의한 것으로 간주합니다.',
+      ni1_t:'일러스트 작업 불가 / 파일 안내', ni1_d:'일러스트 작업은 하지 않습니다. 파츠 분리가 완료된 일러스트 PSD 파일이 필요합니다.',
+      ni2_t:'납품 파일 안내', ni2_d:'작업 완료 후 전달되는 파일은 아이콘 이미지를 포함한 .moc3 파일이 전달됩니다. 수정이 가능한 cmo3 파일은 제공하지 않습니다.',
+      ni3_t:'스트리밍 안내', ni3_d:'스트리밍을 하고 있습니다. 방송에 송출을 원하지 않는다면 미리 말씀 부탁드립니다.',
+      ni4_t:'SNS · 포트폴리오 게시 안내', ni4_d:'모든 작업물은 홍보와 포트폴리오를 위해 SNS와 유튜브에 게시됩니다. 데뷔일까지 공개 지연을 희망하시는 경우 미리 말씀 부탁드립니다.',
+      ni5_t:'요청 사항 기재', ni5_d:'결제 전 요청 사항은 상세히 작성 부탁드립니다. 기재되지 않은 사항은 추가 작업 및 수정 시 작업이 어렵거나 추가금이 들 수 있습니다.',
+      ni6_t:'저작권 안내', ni6_d:'리깅과 관련된 저작권은 작가(다중)에게 있습니다. 일러스트와 관련된 저작권은 일러스트 작가님에게 있습니다.',
+      ni7_t:'작업 일정 안내', ni7_d:'작업 일정은 문의 순이 아닌 결제 순으로 확정됩니다. 일정은 작업 속도에 따라 조금씩 당겨질 수 있으며, 작업이 지연될 시 사전에 미리 연락 드립니다.',
+      ni7_b1:'※ 컨펌 시 연락이 지연되거나 수정 사항이 많을 시 작업 기간이 늘어날 수 있습니다.',
+      ni7_b2:'※ 작업 기간은 평균 기본 모델 기준 2주~4주 정도입니다.',
+      // event/collab/process cards
+      ct_event:'이벤트 안내', ct_collab:'콜라보 안내', ct_process:'작업 프로세스',
+      ev1_t:'리뉴얼 기념 특별 할인', ev1_b:'리뉴얼 할인', ev1_s:'조기 마감될 수 있습니다', ev1_d:'프리미엄 리깅 LD 전신이 리뉴얼 특별 할인',
+      ev2_t:'리뷰 작성 고객 이벤트', ev2_b:'리뷰 이벤트', ev2_s:'긍정적인 리뷰를 남겨 주시면 추가 할인 혜택까지', ev2_d:'리뷰 작성 시 2만원 할인 또는 표정 2종 중 선택 가능합니다',
+      col1_t:'양초 작가님 (YANGCHO) 콜라보 할인', col1_b:'콜라보 할인', col1_s:'말랑 쫀득한 귀여운 움직임을 원하면 추천', col1_d:'일러스트 5만원 + 리깅 5만원 할인 혜택까지',
+      col2_t:'하노히 작가님 (HANOHI) 콜라보 할인', col2_b:'콜라보 할인', col2_s:'단아하고 깔끔한 디자인을 원하면 추천', col2_d:'일러스트 5만원 + 리깅 5만원 할인 혜택까지',
+      col3_t:'피치 작가님 (PICHI) 콜라보 할인', col3_b:'콜라보 할인', col3_s:'만화와 같은 분위기의 디자인을 원하면 추천', col3_d:'일러스트 5만원 + 리깅 5만원 할인 혜택까지',
+      col4_t:'뚱땅이 작가님 (TTUNGTTANGI) 콜라보 할인', col4_b:'콜라보 할인', col4_s:'귀엽고 부드러운 움직임을 원하면 추천', col4_d:'일러스트 10만원 + 리깅 5만원 할인 혜택까지',
+      ps1_t:'문의', ps1_d:'작업 요청 및 기본 정보 제공',
+      ps2_t:'파일 확인 및 견적', ps2_d:'파일 검토 후 상세 견적 제시',
+      ps3_t:'접수 및 입금', ps3_d:'계약 및 결제',
+      ps4_t:'1차 리깅', ps4_d:'헤드 및 페이스 구조 제작',
+      ps5_t:'1차 컨펌 및 수정', ps5_d:'1차 리깅 영상 제공, 피드백 반영 및 개선',
+      ps6_t:'2차 리깅', ps6_d:'바디 및 소품 디테일 작업',
+      ps7_t:'2차 컨펌 및 수정', ps7_d:'2차 리깅 영상 제공, 피드백 반영 및 개선',
+      ps8_t:'완성 및 파일 납품', ps8_d:'최종 파일 전달',
+      ps9_t:'최종 수정 (3차 수정)', ps9_d:'파일 적용 후 문제 발생 시 수정',
+      process_note:'평균 작업 기간은 2–4주이며, 디자인의 복잡도에 따라 조정 가능합니다.',
+      // plan
+      plan_basic:'베이직', plan_premium:'프리미엄',
+      plan_note:'베이직과 프리미엄은 움직임 각도, 물리 단계, 전반적인 디테일에서 차이가 있습니다',
+      pl_face_xyz:'얼굴 XYZ', pl_brow:'눈썹 (위아래, 변형, 각도)', pl_facial_b:'눈썹눈 연동 페이셜', pl_blink:'눈깜빡 (윙크)',
+      pl_eye_phy:'눈동자 물리', pl_lash_b:'속눈썹 물리', pl_mouth9:'입움직임 (9점)', pl_jaw_b:'입 개폐 연동 턱 리깅',
+      pl_body_xyz:'몸 XYZ', pl_breath:'호흡', pl_arm_b:'팔 흔들림 (손가락 흔들림)', pl_cam_b:'캠 이탈 애니메이션 (선택)',
+      pl_expr2_b:'기본 제공 표정 2종<span class="plan-sub">(애니메이션 X)</span>',
+      pl_phy_b:'최대 3단계 물리 지원<span class="plan-sub">(필요의 경우 4단계 지원)</span>',
+      pl_facial_p:'눈썹 눈 연동 페이셜', pl_lash_p:'속눈썹 물리', pl_mouth12:'입움직임 (12점~)', pl_jaw_p:'입 개폐 연동 턱 리깅',
+      pl_arm_p:'팔 흔들림 (손가락 흔들림)', pl_cam_p:'캠 이탈 애니메이션 (선택)',
+      pl_expr2_p:'기본 제공 표정 2종<span class="plan-sub">(애니메이션 X)</span>',
+      pl_phy_p:'최소 3단계 물리 지원<span class="plan-sub">(필요의 경우 2단계 지원)</span>',
+      // info blocks
+      ib_process_t:'작업 과정', ib_revision_t:'수정 사항', ib_copyright_t:'저작권',
+      fs_1:'문의', fs_2:'파일 확인 및 견적', fs_3:'접수 및 입금', fs_4:'1차 리깅', fs_5:'1차 컨펌(수정)',
+      fs_6:'2차 리깅', fs_7:'2차 컨펌(수정)', fs_8:'완성 후 전달', fs_9:'최종 수정',
+      ib_p1:'파일 적용 후 문제가 있다면 수정해 드립니다 (최종 수정)',
+      ib_p2:'오너캐·동물·팬캐 등은 2차 컨펌 없이 1차 컨펌만 진행됩니다.',
+      ib_r1:'기본적인 수정 사항은 작업 기간에 진행되는 총 2회의 컨펌 및 수정 단계에서 진행됩니다.<br><span class="info-sub">동물/오너캐의 경우 최종 리깅까지 진행 후 1차 컨펌만 진행합니다.</span>',
+      ib_r2:'수정 완료 후 이전 상태로 되돌리거나 과한 번복 요청 시 추가금이 청구될 수 있습니다.',
+      ib_r3:'리깅 실수 및 오류가 있는 경우 무료로 수정해 드립니다. 파일 적용 후 오류 발견 시 편히 말해 주세요.',
+      ib_c1:'리깅 데이터의 저작권은 기본적으로 리거(다중)에게 귀속됩니다.',
+      ib_c2:'의뢰인은 본 리깅 결과물을 방송, 영상 제작, SNS 등 목적에 한하여 이용할 수 있습니다.',
+      ib_c3:'리깅 데이터의 재판매·양도·공유는 허용되지 않습니다.',
+      // sale model
+      sale_badge:'🛒 판매 중', sale_title:'판매 모델', sale_sub:'일러스트 - 양초 작가님',
+      sale_feat_title:'추가 표정 및 기능',
+      sale_f1:'홍조, 경멸, 하트눈, 눈물 (애니메이션)', sale_f2:'겉옷, 귀 ON/OFF', sale_f3:'VBridger 포함 (메롱 X)',
+      sale_price_label:'판매가', sale_formula:'일러스트 85만원 + 리깅 78만원', sale_save:'33만원 할인',
+      sale_cta:'🛒 구매 문의하기',
+      // sample
+      sp_title:'리깅 작업 샘플', sp_sub:'리깅 작업의 다양한 샘플을 확인해보세요.',
+      sp_demo_note:'영상 샘플 외에도 <strong>Lite Web Demo</strong>에서 마우스를 따라 움직이는 공개용 축소본을 직접 확인하실 수 있습니다.',
+      sp_demo_cta:'Lite Web Demo 보기',
+      sp_demo_subnote:'데모는 홍보용 Lite 버전으로 구성되어 있으며, 실제 납품 범위와 품질은 의뢰 내용에 따라 달라집니다.',
+      sp_g1_t:'전신 리깅', sp_g1_d1:'자연스럽고 부드러운 움직임을 구현합니다.', sp_g1_d2:'캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.',
+      sp_g2_t:'눈 물리', sp_g2_d1:'다양한 스타일의 눈을 생동감 있게 표현합니다.',
+      sp_g3_t:'입 움직임', sp_g3_d1:'발화 스타일에 맞게 선택할 수 있는 세 가지 입 구조입니다',
+      sp_g4_t:'표정 효과', sp_g4_d1:'단축키 한 번으로 개성 있는 감정을 표현해보세요',
+      sp_g5_t:'표정 애니메이션', sp_g5_d1:'캐릭터 위에 자연스럽게 재생되는 감정 연출 효과입니다',
+      sp_g6_t:'팔 움직임', sp_g6_d1:'캐릭터의 콘셉트에 맞는 팔 움직임 예시입니다',
+      sp_g7_t:'의상 및 헤어', sp_g7_d1:'의상과 헤어 변경으로 같은 캐릭터도 전혀 다른 분위기를 연출할 수 있습니다.',
+      cap_x_axis:'X 축 움직임', cap_y_axis:'Y 축 움직임', cap_z_axis:'Z 축 움직임',
+      cap_eye1:'몽환적인 눈빛을 살린 디테일한 물리 표현', cap_eye2:'초롱초롱한 눈동자의 자연스러운 물리 움직임', cap_eye3:'섬세한 속눈썹과 눈동자의 부드러운 물리',
+      cap_mouth1:'단순한 9점 구조로 일반 대화에 적합', cap_mouth2:'세밀한 12점 구조로 대화와 감정 표현에 적합', cap_mouth3:'Vbridger 사용으로 섬세한 감정 표현에 적합',
+      cap_expr1:'차갑고 날카로운 눈빛으로 경멸감을 표현', cap_expr2:'순간적인 짜증과 불쾌감을 생동감 있게 연출', cap_expr3:'설레고 사랑스러운 순간을 하트눈으로 표현',
+      cap_anim1:'눈가를 타고 흐르는 자연스러운 눈물 연출', cap_anim2:'긴장감과 당황스러움을 식은땀으로 표현',
+      cap_arm1:'게임기를 이용해 게임 화면에 몰입감을 올릴 수 있습니다', cap_arm2:'캐릭터 컨셉에 맞는 아이템으로 다양한 연출', cap_arm3:'손을 흔들며 인사하는 디테일한 표현',
+      cap_cos1:'머리 색상을 바꿔 전혀 다른 분위기를 연출', cap_cos2:'의상 교체로 캐릭터 콘셉트를 폭넓게 표현', cap_cos3:'헤어 스타일 변경으로 같은 캐릭터도 새로운 느낌으로',
+      // side nav
+      snav_notice:'공지사항', snav_event:'이벤트 / 프로세스', snav_info:'작업 안내', snav_sale:'판매 모델',
+      // showcase tabs
+      tab_fan:'오너캐', tab_mem:'메모리얼',
+    },
+    en: {
+      notice_head: 'Notice',
+      notice_top_alert: '※ Please read carefully before placing an order.<br>By submitting a commission, you agree to all terms listed here.',
+      ni1_t:'No Illustration Work / File Requirements', ni1_d:'Illustration work is not provided. Please prepare a fully separated PSD file.',
+      ni2_t:'Deliverable Files', ni2_d:'After completion, you will receive a .moc3 file including an icon image. The editable .cmo3 file is not provided.',
+      ni3_t:'Streaming Notice', ni3_d:'The rigging process may be streamed. Please let me know in advance if you prefer it not to be broadcast.',
+      ni4_t:'SNS · Portfolio Posting', ni4_d:'All finished work will be posted on SNS and YouTube for promotion and portfolio purposes. Please notify me in advance if you need a delay until your debut.',
+      ni5_t:'Requests & Notes', ni5_d:'Please describe all requests in detail before payment. Items not mentioned may be difficult to add later or may incur extra charges.',
+      ni6_t:'Copyright Notice', ni6_d:'Copyright for the rigging belongs to the rigger (Dajoong). Copyright for the illustration belongs to the illustrator.',
+      ni7_t:'Schedule Notice', ni7_d:'Work order is determined by payment date, not inquiry date. The timeline may shift slightly based on work pace. You will be notified in advance if there is a delay.',
+      ni7_b1:'※ Delays in confirmation or excessive revision requests may extend the work period.',
+      ni7_b2:'※ Average work period is approximately 2–4 weeks for a standard model.',
+      ct_event:'Events', ct_collab:'Collab Discounts', ct_process:'Work Process',
+      ev1_t:'Renewal Special Discount', ev1_b:'Renewal Sale', ev1_s:'May close early', ev1_d:'Premium Rigging LD Full Body — renewal special pricing',
+      ev2_t:'Review Customer Event', ev2_b:'Review Event', ev2_s:'Leave a positive review for extra benefits', ev2_d:'₩20,000 off or 2 extra expressions — your choice',
+      col1_t:'YANGCHO Collab Discount', col1_b:'Collab Discount', col1_s:'Recommended for soft & cute movement style', col1_d:'₩50,000 off illustration + ₩50,000 off rigging',
+      col2_t:'HANOHI Collab Discount', col2_b:'Collab Discount', col2_s:'Recommended for elegant & clean design', col2_d:'₩50,000 off illustration + ₩50,000 off rigging',
+      col3_t:'PICHI Collab Discount', col3_b:'Collab Discount', col3_s:'Recommended for comic-style design', col3_d:'₩50,000 off illustration + ₩50,000 off rigging',
+      col4_t:'TTUNGTTANGI Collab Discount', col4_b:'Collab Discount', col4_s:'Recommended for cute & smooth movement style', col4_d:'₩100,000 off illustration + ₩50,000 off rigging',
+      ps1_t:'Inquiry', ps1_d:'Submit request & provide basic info',
+      ps2_t:'File Review & Quote', ps2_d:'Review files and provide detailed quote',
+      ps3_t:'Registration & Payment', ps3_d:'Contract & payment',
+      ps4_t:'1st Rigging', ps4_d:'Head & face structure',
+      ps5_t:'1st Review & Revision', ps5_d:'Video provided, feedback applied',
+      ps6_t:'2nd Rigging', ps6_d:'Body & accessory details',
+      ps7_t:'2nd Review & Revision', ps7_d:'Video provided, feedback applied',
+      ps8_t:'Delivery', ps8_d:'Final files delivered',
+      ps9_t:'Final Touch (3rd Revision)', ps9_d:'Fixes after applying the file',
+      process_note:'Average turnaround is 2–4 weeks, adjustable based on design complexity.',
+      plan_basic:'Basic', plan_premium:'Premium',
+      plan_note:'Basic and Premium differ in movement angles, physics layers, and overall detail level.',
+      pl_face_xyz:'Face XYZ', pl_brow:'Eyebrows (up/down, deform, angle)', pl_facial_b:'Brow-Eye Linked Facial', pl_blink:'Eye Blink (Wink)',
+      pl_eye_phy:'Eye Physics', pl_lash_b:'Lash Physics', pl_mouth9:'Mouth (9-point)', pl_jaw_b:'Jaw Linked to Mouth',
+      pl_body_xyz:'Body XYZ', pl_breath:'Breathing', pl_arm_b:'Arm Swing (Finger Swing)', pl_cam_b:'Camera Exit Animation (Optional)',
+      pl_expr2_b:'2 Default Expressions<span class="plan-sub">(No animation)</span>',
+      pl_phy_b:'Up to 3-Layer Physics<span class="plan-sub">(4-layer if needed)</span>',
+      pl_facial_p:'Brow-Eye Linked Facial', pl_lash_p:'Lash Physics', pl_mouth12:'Mouth (12+ point)', pl_jaw_p:'Jaw Linked to Mouth',
+      pl_arm_p:'Arm Swing (Finger Swing)', pl_cam_p:'Camera Exit Animation (Optional)',
+      pl_expr2_p:'2 Default Expressions<span class="plan-sub">(No animation)</span>',
+      pl_phy_p:'3+ Layer Physics<span class="plan-sub">(2-layer if needed)</span>',
+      ib_process_t:'Work Process', ib_revision_t:'Revisions', ib_copyright_t:'Copyright',
+      fs_1:'Inquiry', fs_2:'File Review & Quote', fs_3:'Registration & Payment', fs_4:'1st Rigging', fs_5:'1st Review (Revision)',
+      fs_6:'2nd Rigging', fs_7:'2nd Review (Revision)', fs_8:'Delivery', fs_9:'Final Touch',
+      ib_p1:'Any issues found after applying the file will be fixed (Final Touch).',
+      ib_p2:'OC / animal / fan characters go through 1st review only, with no 2nd review.',
+      ib_r1:'Basic revisions are handled in 2 review rounds during the work period.<br><span class="info-sub">For animal/OC types, only 1st review is done after final rigging is complete.</span>',
+      ib_r2:'Reverting completed changes or excessive back-and-forth requests may incur extra charges.',
+      ib_r3:'Any rigging mistakes or errors will be fixed for free. Please let me know if you find any after delivery.',
+      ib_c1:'Copyright for the rigging data belongs to the rigger (Dajoong) by default.',
+      ib_c2:'The client may use the rigging output for streaming, video production, SNS, and similar purposes.',
+      ib_c3:'Resale, transfer, or sharing of the rigging data is strictly prohibited.',
+      sale_badge:'🛒 On Sale', sale_title:'Sale Model', sale_sub:'Illustration by Yangcho',
+      sale_feat_title:'Extra Expressions & Features',
+      sale_f1:'Blush, Disdain, Heart Eyes, Tears (Animated)', sale_f2:'Outfit, Ears ON/OFF', sale_f3:'VBridger included (no tongue)',
+      sale_price_label:'Price', sale_formula:'Illustration ₩850,000 + Rigging ₩780,000', sale_save:'₩330,000 off',
+      sale_cta:'🛒 Inquire to Purchase',
+      sp_title:'Rigging Samples', sp_sub:'Browse a variety of rigging work samples.',
+      sp_demo_note:'If you want to check interaction as well as video samples, you can open the public <strong>Lite Web Demo</strong> and move the model with your cursor.',
+      sp_demo_cta:'Open Lite Web Demo',
+      sp_demo_subnote:'This demo uses a reduced public preview build. Final deliverables and quality depend on the commission scope.',
+      sp_g1_t:'Full Body Rigging', sp_g1_d1:'Natural and smooth movement.', sp_g1_d2:'Movement may vary depending on character body type and design.',
+      sp_g2_t:'Eye Physics', sp_g2_d1:'Expressive, lifelike eyes in a variety of styles.',
+      sp_g3_t:'Mouth Movement', sp_g3_d1:'Three mouth structures to match your speaking style.',
+      sp_g4_t:'Expression Effects', sp_g4_d1:'Express distinct emotions with a single hotkey.',
+      sp_g5_t:'Expression Animations', sp_g5_d1:'Smooth emotion effects that play over the character.',
+      sp_g6_t:'Arm Movement', sp_g6_d1:"Examples of arm movement tailored to the character's concept.",
+      sp_g7_t:'Outfit & Hair', sp_g7_d1:'Outfit and hair swaps create a completely different vibe for the same character.',
+      cap_x_axis:'X-Axis Movement', cap_y_axis:'Y-Axis Movement', cap_z_axis:'Z-Axis Movement',
+      cap_eye1:'Detailed physics showcasing a dreamy, ethereal gaze', cap_eye2:'Natural physics for bright, sparkling eyes', cap_eye3:'Smooth physics for delicate lashes and pupils',
+      cap_mouth1:'Simple 9-point structure, ideal for everyday conversation', cap_mouth2:'Detailed 12-point structure for conversation and emotion', cap_mouth3:'VBridger-compatible for subtle emotional expression',
+      cap_expr1:'Conveys cold disdain with sharp, icy eyes', cap_expr2:'Vivid portrayal of frustration and displeasure', cap_expr3:'Heart eyes for those exciting, lovely moments',
+      cap_anim1:'Tears flowing naturally along the eyes', cap_anim2:'Cold sweat expressing tension and panic',
+      cap_arm1:'Boost immersion with a handheld game controller', cap_arm2:'Diverse expressions using character-themed items', cap_arm3:'Detailed waving hand greeting',
+      cap_cos1:'Different hair color, completely different vibe', cap_cos2:'Outfit swap expands character concept range', cap_cos3:'Hairstyle change gives the same character a fresh feel',
+      snav_notice:'Notice', snav_event:'Events / Process', snav_info:'Work Info', snav_sale:'Sale Model',
+      tab_fan:'OC / Fan Char', tab_mem:'Memorial',
+    },
+    ja: {
+      notice_head: 'お知らせ',
+      notice_top_alert: '※ ご依頼前に必ずご確認ください。<br>ご依頼いただいた時点で、すべての内容にご同意いただいたものとみなします。',
+      ni1_t:'イラスト作業不可 / ファイルについて', ni1_d:'イラスト作業は承っておりません。パーツ分けが完了したイラストのPSDファイルが必要です。',
+      ni2_t:'納品ファイルについて', ni2_d:'作業完了後はアイコン画像を含む.moc3ファイルをお渡しします。編集可能な.cmo3ファイルの提供は行っておりません。',
+      ni3_t:'配信についてのご案内', ni3_d:'作業中に配信を行う場合があります。配信を希望されない場合は事前にお知らせください。',
+      ni4_t:'SNS・ポートフォリオへの掲載について', ni4_d:'すべての作業物はSNSおよびYouTubeに掲載される場合があります。デビューまで公開を延期ご希望の場合は事前にご連絡ください。',
+      ni5_t:'ご要望の記載について', ni5_d:'お支払い前にご要望は詳しくご記入ください。記載のない内容は後から追加が難しい場合や追加料金が発生する場合があります。',
+      ni6_t:'著作権について', ni6_d:'リギングに関する著作権はリガー（다중/Dajoong）に帰属します。イラストに関する著作権はイラストレーター様に帰属します。',
+      ni7_t:'作業スケジュールについて', ni7_d:'作業順はお問い合わせ順ではなくお支払い順で確定します。進捗によってスケジュールが前後する場合があり、遅延が生じる場合は事前にご連絡します。',
+      ni7_b1:'※ 確認対応の遅れや修正が多い場合、作業期間が延びることがあります。',
+      ni7_b2:'※ 平均作業期間はベースモデルで約2〜4週間です。',
+      ct_event:'イベント情報', ct_collab:'コラボ情報', ct_process:'作業プロセス',
+      ev1_t:'リニューアル記念特別割引', ev1_b:'リニューアル割引', ev1_s:'早期終了の場合あり', ev1_d:'プレミアムリギング LDフルボディ リニューアル特別割引',
+      ev2_t:'レビュー投稿イベント', ev2_b:'レビューイベント', ev2_s:'ポジティブなレビューで追加特典あり', ev2_d:'レビュー投稿で₩20,000割引または表情2種のどちらかを選択可能',
+      col1_t:'YANGCHO コラボ割引', col1_b:'コラボ割引', col1_s:'やわらかくかわいい動きをご希望の方におすすめ', col1_d:'イラスト₩50,000 + リギング₩50,000割引',
+      col2_t:'HANOHI コラボ割引', col2_b:'コラボ割引', col2_s:'上品でスッキリとしたデザインをご希望の方におすすめ', col2_d:'イラスト₩50,000 + リギング₩50,000割引',
+      col3_t:'PICHI コラボ割引', col3_b:'コラボ割引', col3_s:'漫画的な雰囲気のデザインをご希望の方におすすめ', col3_d:'イラスト₩50,000 + リギング₩50,000割引',
+      col4_t:'TTUNGTTANGI コラボ割引', col4_b:'コラボ割引', col4_s:'かわいくなめらかな動きをご希望の方におすすめ', col4_d:'イラスト₩100,000 + リギング₩50,000割引',
+      ps1_t:'お問い合わせ', ps1_d:'作業依頼・基本情報の提供',
+      ps2_t:'ファイル確認・見積もり', ps2_d:'ファイルの確認と詳細見積もりの提示',
+      ps3_t:'受付・お支払い', ps3_d:'契約・決済',
+      ps4_t:'第1リギング', ps4_d:'頭部・顔の構造制作',
+      ps5_t:'第1確認・修正', ps5_d:'映像の提供、フィードバック対応',
+      ps6_t:'第2リギング', ps6_d:'ボディ・小道具のディテール作業',
+      ps7_t:'第2確認・修正', ps7_d:'映像の提供、フィードバック対応',
+      ps8_t:'完成・ファイル納品', ps8_d:'最終ファイルのお渡し',
+      ps9_t:'最終修正（第3修正）', ps9_d:'ファイル適用後の問題修正',
+      process_note:'平均作業期間は2〜4週間で、デザインの複雑さにより変動します。',
+      plan_basic:'ベーシック', plan_premium:'プレミアム',
+      plan_note:'ベーシックとプレミアムでは、動きの角度・物理レイヤー数・全体的なディテールに違いがあります',
+      pl_face_xyz:'顔 XYZ', pl_brow:'眉毛（上下・変形・角度）', pl_facial_b:'眉毛・目 連動フェイシャル', pl_blink:'瞬き（ウィンク）',
+      pl_eye_phy:'瞳物理', pl_lash_b:'まつ毛物理', pl_mouth9:'口の動き（9点）', pl_jaw_b:'口開閉連動 顎リギング',
+      pl_body_xyz:'体 XYZ', pl_breath:'呼吸', pl_arm_b:'腕の揺れ（指の揺れ）', pl_cam_b:'カメラ離脱アニメーション（任意）',
+      pl_expr2_b:'デフォルト表情2種<span class="plan-sub">（アニメなし）</span>',
+      pl_phy_b:'最大3段階物理サポート<span class="plan-sub">（必要に応じて4段階）</span>',
+      pl_facial_p:'眉毛・目 連動フェイシャル', pl_lash_p:'まつ毛物理', pl_mouth12:'口の動き（12点以上）', pl_jaw_p:'口開閉連動 顎リギング',
+      pl_arm_p:'腕の揺れ（指の揺れ）', pl_cam_p:'カメラ離脱アニメーション（任意）',
+      pl_expr2_p:'デフォルト表情2種<span class="plan-sub">（アニメなし）</span>',
+      pl_phy_p:'最低3段階物理サポート<span class="plan-sub">（必要に応じて2段階）</span>',
+      ib_process_t:'作業工程', ib_revision_t:'修正対応', ib_copyright_t:'著作権',
+      fs_1:'お問い合わせ', fs_2:'ファイル確認・見積もり', fs_3:'受付・お支払い', fs_4:'第1リギング', fs_5:'第1確認（修正）',
+      fs_6:'第2リギング', fs_7:'第2確認（修正）', fs_8:'納品', fs_9:'最終修正',
+      ib_p1:'ファイル適用後に問題があれば修正します（最終修正）。',
+      ib_p2:'オーナーキャラ・動物・ファンキャラ等は第2確認なしで第1確認のみ行います。',
+      ib_r1:'基本的な修正は作業期間中の計2回の確認・修正ステップで行われます。<br><span class="info-sub">動物・オーナーキャラの場合は最終リギング完了後に第1確認のみ行います。</span>',
+      ib_r2:'完了後に以前の状態へ戻すリクエストや過剰な変更要求には追加料金が発生する場合があります。',
+      ib_r3:'リギングのミスやエラーは無料で修正します。納品後に問題を見つけた場合はお気軽にご連絡ください。',
+      ib_c1:'リギングデータの著作権は原則としてリガー（다중/Dajoong）に帰属します。',
+      ib_c2:'依頼者は本リギング成果物を配信・映像制作・SNS等の目的に限り使用できます。',
+      ib_c3:'リギングデータの転売・譲渡・共有は禁止されています。',
+      sale_badge:'🛒 販売中', sale_title:'販売モデル', sale_sub:'イラスト - YANGCHO 様',
+      sale_feat_title:'追加表情・機能',
+      sale_f1:'赤面・軽蔑・ハート目・涙（アニメ付き）', sale_f2:'アウター・耳 ON/OFF', sale_f3:'VBridger 込み（舌出しなし）',
+      sale_price_label:'販売価格', sale_formula:'イラスト ₩850,000 + リギング ₩780,000', sale_save:'₩330,000 割引',
+      sale_cta:'🛒 購入についてお問い合わせ',
+      sp_title:'リギングサンプル', sp_sub:'様々なリギング作業のサンプルをご覧ください。',
+      sp_demo_note:'動画サンプルに加えて、公開用の<strong>Lite Web Demo</strong>ではカーソル追従の軽量版デモもご確認いただけます。',
+      sp_demo_cta:'Lite Web Demoを見る',
+      sp_demo_subnote:'このデモは宣伝用のLite版です。実際の納品範囲と品質はご依頼内容により異なります。',
+      sp_g1_t:'全身リギング', sp_g1_d1:'自然でなめらかな動きを実現します。', sp_g1_d2:'キャラクターの体型やデザインにより動きが変わる場合があります。',
+      sp_g2_t:'目物理', sp_g2_d1:'さまざまなスタイルの目を生き生きと表現します。',
+      sp_g3_t:'口の動き', sp_g3_d1:'話し方に合わせて選べる3種類の口構造です。',
+      sp_g4_t:'表情エフェクト', sp_g4_d1:'ホットキー一つで個性的な感情を表現。',
+      sp_g5_t:'表情アニメーション', sp_g5_d1:'キャラクターの上で自然に再生される感情演出エフェクトです。',
+      sp_g6_t:'腕の動き', sp_g6_d1:'キャラクターのコンセプトに合わせた腕の動きの例です。',
+      sp_g7_t:'衣装・ヘアスタイル', sp_g7_d1:'衣装・ヘア変更で同じキャラクターでも全く違う雰囲気を演出できます。',
+      cap_x_axis:'X軸の動き', cap_y_axis:'Y軸の動き', cap_z_axis:'Z軸の動き',
+      cap_eye1:'幻想的な目線を活かした繊細な物理表現', cap_eye2:'きらきらした瞳の自然な物理動作', cap_eye3:'繊細なまつ毛と瞳のなめらかな物理表現',
+      cap_mouth1:'シンプルな9点構造、日常会話に最適', cap_mouth2:'細かな12点構造、会話と感情表現に最適', cap_mouth3:'VBridger対応、繊細な感情表現に最適',
+      cap_expr1:'冷たく鋭い目で軽蔑感を表現', cap_expr2:'瞬間的なイライラと不快感を生き生きと演出', cap_expr3:'ドキドキ・愛らしい瞬間をハート目で表現',
+      cap_anim1:'目の縁を流れる自然な涙の演出', cap_anim2:'緊張感と狼狽を冷や汗で表現',
+      cap_arm1:'ゲーム機でゲーム画面への没入感をアップ', cap_arm2:'キャラクターコンセプトに合ったアイテムで多彩な演出', cap_arm3:'手を振ってあいさつする細かな表現',
+      cap_cos1:'髪色を変えて全く違う雰囲気に', cap_cos2:'衣装チェンジでキャラクターの幅を広げる', cap_cos3:'ヘアスタイル変更で同じキャラに新鮮な印象を',
+      snav_notice:'お知らせ', snav_event:'イベント / プロセス', snav_info:'作業案内', snav_sale:'販売モデル',
+      tab_fan:'OC / ファンキャラ', tab_mem:'メモリアル',
+    },
+  };
+
+  // expose for buildAllTypes
+  window.__artmugLangs = LANGS;
+  window.__artmugLang  = lang;
+
+  function applyLang(l) {
+    lang = l;
+    window.__artmugLang = l;
+    var T = LANGS[l];
+
+    // button states
+    document.querySelectorAll('.lang-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.lang === l);
+    });
+
+    // text elements
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (T[key] != null) el.textContent = T[key];
+    });
+
+    // html elements
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-html');
+      if (T[key] != null) el.innerHTML = T[key];
+    });
+
+    // showcase tabs (dynamically built)
+    document.querySelectorAll('[data-type-buttons] button[data-switch]').forEach(function(btn){
+      var typeKey = btn.getAttribute('data-switch');
+      var map = { FAN: 'tab_fan', MEM: 'tab_mem' };
+      if (map[typeKey] && T[map[typeKey]]) btn.textContent = T[map[typeKey]];
+    });
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ applyLang(btn.dataset.lang); });
+  });
+})();
+</script>
+
+</body>
+</html>
