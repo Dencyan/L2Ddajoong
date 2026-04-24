@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>다중(Dajoong) | Live2D 리거 · VTuber 모델 리깅 커미션</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dajoong | Live2D Rigger · VTuber Live2D Rigging Commission" />
+  <meta property="og:description" content="Live2D Rigger Dajoong portfolio. Korean VTuber Live2D rigging commission and animation rigging examples." />
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:url" content="https://dajoong.cloud/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dajoong | Live2D Rigger · VTuber Live2D Rigging Commission" />
+  <meta name="twitter:description" content="Dajoong is a Live2D rigger specializing in VTuber model rigging. Commission open for LD, SD, and background animation." />
+  <meta name="twitter:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta name="keywords" content="Live2D rigger, VTuber rigging, Live2D commission, Dajoong Live2D, VTuber Live2D rigging commission" />
+  <meta name="author" content="Dajoong" />
+  <meta name="msvalidate.01" content="470BFA29FCDE5505D3FED7A6207EB92B" />
+  <meta name="description" content="Live2D Rigger Dajoong portfolio. Korean VTuber Live2D rigging commission and animation rigging examples.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "다중(Dajoong) Live2D Rigging",
+    "url": "https://dajoong.cloud",
+    "image": "https://dajoong.cloud/assets/og-thumbnail.jpg",
+    "description": "한국의 전문 Live2D 리거 다중의 포트폴리오. VTuber 모델 리깅, 배경 애니메이션 전문.",
+    "sameAs": [
+      "https://x.com/_Dajoong",
+      "https://www.youtube.com/@Dajoong_L2d"
+    ],
+    "address": {
+     "@type": "PostalAddress",
+     "addressCountry": "KR"
+    },
+    "offers": {
+      "@type": "Offer",
+      "description": "Live2D 리깅 커미션 및 애니메이션 제작 서비스"
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    .about-identity-en {
+      font-size: 0.8rem;
+      opacity: 0.45;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.03em;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<canvas id="cursor-canvas"></canvas>
+<canvas id="bg-canvas"></canvas>
+
+<!-- HEADER -->
+<header>
+  <h1><a href="#hero">Dajoong</a></h1>
+  <nav>
+    <a href="#about" data-i18n="nav.about">알아보기</a>
+    <a href="#info" data-i18n="nav.info">정보</a>
+    <a href="#works" data-i18n="nav.works">작품</a>
+    <a href="#samples" data-i18n="nav.samples">샘플</a>
+    <a href="#price" data-i18n="nav.price">가격</a>
+    <a href="#contact" data-i18n="nav.contact">문의하기</a>
+  </nav>
+  <div class="lang-switcher">
+    <button class="lang-btn lang-active" data-lang="ko">KO</button>
+    <span class="lang-divider">|</span>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <span class="lang-divider">|</span>
+    <button class="lang-btn" data-lang="ja">JP</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+
+  <!-- 왼쪽: 텍스트 -->
+  <div class="hero-left">
+    <span class="hero-eyebrow">Live2D Rigger</span>
+    <div class="hero-sig-wrap" aria-label="Dajoong">
+      <svg id="hero-sig" viewBox="0 0 600 130" xmlns="http://www.w3.org/2000/svg"
+           style="width:min(420px,72vw);height:auto;overflow:visible;display:block">
+        <title>Dajoong</title>
+        <!-- 폴백: 폰트 로드 전 자리 확보 -->
+      </svg>
+      <!-- JS 실패 시 폴백 텍스트 -->
+      <h2 id="hero-sig-fallback" class="hero-h2-fallback" style="display:none">Dajoong</h2>
+    </div>
+    <p class="hero-sub" data-i18n="hero.sub">LD · SD · 메모리얼 애니메이션 포트폴리오</p>
+    <div class="hero-cta">
+      <a href="#works" class="hero-cta-primary" data-i18n="hero.cta.works">포트폴리오 보기</a>
+      <a href="#contact" class="hero-cta-secondary" data-i18n="hero.cta.contact">문의하기</a>
+    </div>
+  </div>
+
+  <!-- 오른쪽: Live2D 캐릭터 -->
+  <div class="hero-right">
+    <div class="hero-l2d-wrap">
+      <div class="hero-l2d-glow"></div>
+      <iframe
+        src="https://live2d-netlify-demo.netlify.app/"
+        class="hero-l2d-frame"
+        title="Live2D Rigging Demo by Dajoong"
+        loading="lazy"
+        scrolling="no"
+        frameborder="0"
+        allowtransparency="true">
+      </iframe>
+      <div class="hero-l2d-credit" data-i18n="hero.l2d.credit">일러스트 · 양초 / 리깅 · 다중</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- SIDE NAV -->
+<nav id="side-nav" aria-label="페이지 네비게이션">
+  <ul>
+    <li><a href="#hero"    data-label="Top">    <span class="sn-dot"></span><span class="sn-label">Top</span></a></li>
+    <li><a href="#notice"  data-label="공지">   <span class="sn-dot"></span><span class="sn-label" data-i18n="sidenav.notice">공지</span></a></li>
+    <li><a href="#about"   data-label="About">  <span class="sn-dot"></span><span class="sn-label">About</span></a></li>
+    <li><a href="#info"    data-label="Info">   <span class="sn-dot"></span><span class="sn-label">Info</span></a></li>
+    <li><a href="#works"   data-label="Works">  <span class="sn-dot"></span><span class="sn-label">Works</span></a></li>
+    <li><a href="#samples" data-label="Samples"><span class="sn-dot"></span><span class="sn-label">Samples</span></a></li>
+    <li><a href="#price"   data-label="Price">  <span class="sn-dot"></span><span class="sn-label">Price</span></a></li>
+    <li><a href="#contact" data-label="Contact"><span class="sn-dot"></span><span class="sn-label">Contact</span></a></li>
+  </ul>
+</nav>
+
+<!-- MINI CALENDAR WIDGET -->
+<div id="cal-widget">
+  <button id="cal-tab" aria-label="캘린더 열기" onclick="calToggle()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+    <span>일정</span>
+  </button>
+  <div id="cal-panel" aria-hidden="true">
+    <div class="cal-header">
+      <button class="cal-nav" onclick="calMove(-1)">&#8249;</button>
+      <span id="cal-title"></span>
+      <button class="cal-nav" onclick="calMove(1)">&#8250;</button>
+      <button class="cal-close" onclick="calToggle()" aria-label="닫기">&#10005;</button>
+    </div>
+    <div class="cal-grid-head">
+      <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+    </div>
+    <div id="cal-grid" class="cal-grid"></div>
+    <div class="cal-legend">
+      <span class="cal-dot open"></span><span>오픈</span>
+      <span class="cal-dot close"></span><span>마감</span>
+    </div>
+    <div id="cal-events" class="cal-events"></div>
+  </div>
+</div>
+
+<script>
+/* ── 커미션 일정 ────────────────────────────────────────── */
+/*
+  📋 구글 시트 연동 안내
+  -------------------------------------------------------
+  1. 구글 시트를 만들고 아래 형식으로 작성하세요:
+     A열: date (예: 2026-05-01)
+     B열: type (open 또는 close)
+     C열: label (예: LD 모델 전신 시작)
+     ※ 1행은 반드시 헤더: date,type,label
+
+  2. 파일 → 공유 → 웹에 게시 → CSV 형식으로 게시
+     게시된 URL을 복사해서 아래 SHEET_CSV_URL에 붙여넣기
+
+  3. SHEET_CSV_URL을 빈 문자열('')로 두면
+     아래 CAL_EVENTS_FALLBACK 기본 데이터가 사용됩니다.
+  -------------------------------------------------------
+*/
+/*
+  📋 구글 시트 연동 안내
+  -------------------------------------------------------
+  1. 구글 시트 공유 설정을 "링크가 있는 모든 사용자 - 뷰어" 로 설정
+  2. 아래 SHEET_ID에 구글 시트 URL의 ID 부분만 붙여넣기
+     예) https://docs.google.com/spreadsheets/d/【여기】/edit
+  3. 시트 1행 헤더: date | type | label
+     date: YYYY-MM-DD 형식 / type: open 또는 close
+  -------------------------------------------------------
+*/
+var SHEET_ID = '1l661Zg-lTXwDhpKZ3yeK7MWqDMc4ySu7omRg1qbmzhs'; // ← 시트 ID 입력
+
+/* 기본 데이터 (시트 미연결 시 사용) */
+var CAL_EVENTS_FALLBACK = [
+  { date: '2025-12-08', type: 'open',  label: 'LD 모델 전신 시작' },
+  { date: '2026-01-12', type: 'close', label: 'LD 모델 전신 완료' },
+  { date: '2026-01-07', type: 'open',  label: 'LD 모델 전신 시작' },
+  { date: '2026-01-21', type: 'close', label: 'LD 모델 전신 완료' },
+  { date: '2026-02-01', type: 'open',  label: '개인 작품 작업 시작' },
+  { date: '2026-02-28', type: 'close', label: '개인 작품 작업 완료' },
+  { date: '2026-03-12', type: 'open',  label: 'LD 모델 및 파츠 시작' },
+  { date: '2026-03-26', type: 'close', label: 'LD 모델 및 파츠 완료' },
+  { date: '2026-03-23', type: 'open',  label: '동물,오너캐 타입 모델 작업 시작' },
+  { date: '2026-04-06', type: 'close', label: '동물,오너캐 타입 모델 작업 완료' },
+  { date: '2026-04-17', type: 'open',  label: '메모리얼 애니메이션 작업 시작' },
+  { date: '2026-05-01', type: 'close', label: '메모리얼 애니메이션 작업 완료' }
+];
+
+var CAL_EVENTS = CAL_EVENTS_FALLBACK.slice();
+
+/* 구글 시트 JSON API로 일정 불러오기 */
+function loadCalEvents(callback) {
+  if (!SHEET_ID) { callback(); return; }
+  // tq 쿼리로 날짜를 문자열로 강제 변환하여 가져오기
+  var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID
+          + '/gviz/tq?tqx=out:json&tq=' + encodeURIComponent('select *');
+  fetch(url)
+    .then(function(res){ return res.text(); })
+    .then(function(text){
+      // JSONP 래퍼 제거
+      var jsonStr = text.replace(/^[\s\S]*?\(/, '').replace(/\);?\s*$/, '');
+      var json = JSON.parse(jsonStr);
+      var cols = json.table.cols.map(function(c){ return (c.label || '').split('\n')[0].toLowerCase().trim(); });
+
+      var rows = json.table.rows.map(function(r){
+        var obj = {};
+        cols.forEach(function(col, i){
+          var cell = r.c[i];
+          if (!cell || cell.v == null) { obj[col] = ''; return; }
+
+          // 날짜 타입: gviz가 Date(yyyy,m,d) 형식으로 반환하는 경우 변환
+          var val = String(cell.v);
+          var dateMatch = val.match(/^Date\((\d+),(\d+),(\d+)\)$/);
+          if (dateMatch) {
+            var y = dateMatch[1];
+            var m = String(parseInt(dateMatch[2]) + 1).padStart(2, '0'); // 월은 0-index
+            var d = String(dateMatch[3]).padStart(2, '0');
+            val = y + '-' + m + '-' + d;
+          }
+          // 서식 있는 날짜 문자열(f 값) 우선 사용 가능하나 v 기준으로 처리
+          obj[col] = val.trim();
+        });
+        return obj;
+      }).filter(function(e){ return e.date && e.type && e.label; });
+
+      if (rows.length) {
+        CAL_EVENTS = rows;
+        console.log('[캘린더] 시트에서 ' + rows.length + '개 일정 불러옴');
+      } else {
+        console.warn('[캘린더] 파싱된 일정 없음 — 기본 데이터 사용');
+      }
+      callback();
+    })
+    .catch(function(err){
+      console.warn('[캘린더] 시트 불러오기 실패 — 기본 데이터 사용', err);
+      callback();
+    });
+}
+
+var calYear, calMonth, calOpen = false;
+
+/* 날짜 문자열 → Date 객체 (시간 0으로 고정) */
+function toDate(str) {
+  var p = str.split('-');
+  return new Date(+p[0], +p[1] - 1, +p[2]);
+}
+
+/* open/close 쌍 매칭 → [{open: Date, close: Date}] */
+function buildRanges() {
+  var opens = CAL_EVENTS.filter(function(e){ return e.type === 'open'; })
+                        .map(function(e){ return toDate(e.date); })
+                        .sort(function(a,b){ return a-b; });
+  var closes = CAL_EVENTS.filter(function(e){ return e.type === 'close'; })
+                         .map(function(e){ return toDate(e.date); })
+                         .sort(function(a,b){ return a-b; });
+  var ranges = [];
+  opens.forEach(function(o, i){
+    if (closes[i]) ranges.push({ open: o, close: closes[i] });
+  });
+  return ranges;
+}
+
+function calInit() {
+  var now = new Date();
+  calYear  = now.getFullYear();
+  calMonth = now.getMonth();
+  calRender();
+}
+
+function calToggle() {
+  calOpen = !calOpen;
+  var panel  = document.getElementById('cal-panel');
+  var widget = document.getElementById('cal-widget');
+  panel.setAttribute('aria-hidden', String(!calOpen));
+  widget.classList.toggle('cal-is-open', calOpen);
+}
+
+function calMove(dir) {
+  calMonth += dir;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  if (calMonth < 0)  { calMonth = 11; calYear--; }
+  calRender();
+}
+
+function calRender() {
+  var months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+  document.getElementById('cal-title').textContent = calYear + '년 ' + months[calMonth];
+
+  var first  = new Date(calYear, calMonth, 1).getDay();
+  var days   = new Date(calYear, calMonth + 1, 0).getDate();
+  var today  = new Date(); today.setHours(0,0,0,0);
+  var ranges = buildRanges();
+  var grid   = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+
+  /* 이벤트 빠른 조회 맵 */
+  var eventMap = {};
+  CAL_EVENTS.forEach(function(e){ eventMap[e.date] = e; });
+
+  /* 빈 셀 */
+  for (var i = 0; i < first; i++) {
+    var emp = document.createElement('span');
+    emp.className = 'cal-cell empty';
+    emp.innerHTML = '<span class="cal-num"></span>';
+    grid.appendChild(emp);
+  }
+
+  for (var d = 1; d <= days; d++) {
+    var mm  = String(calMonth + 1).padStart(2, '0');
+    var dd  = String(d).padStart(2, '0');
+    var key = calYear + '-' + mm + '-' + dd;
+    var cur = toDate(key);
+    var ev  = eventMap[key];
+    var col = (first + d - 1) % 7; // 0=일 … 6=토
+
+    var el = document.createElement('span');
+    el.className = 'cal-cell';
+
+    /* 오늘 표시 */
+    if (cur.getTime() === today.getTime()) el.classList.add('cal-today');
+
+    /* 오픈/마감 날짜 표시 */
+    if (ev && ev.type === 'open')  el.classList.add('is-open');
+    if (ev && ev.type === 'close') el.classList.add('is-close');
+
+    /* 범위 안인지 판별 & 바 생성 */
+    ranges.forEach(function(r) {
+      var inRange  = cur >= r.open  && cur <= r.close;
+      var isOpen   = cur.getTime() === r.open.getTime();
+      var isClose  = cur.getTime() === r.close.getTime();
+      var isSingle = r.open.getTime() === r.close.getTime();
+
+      if (!inRange) return;
+
+      el.classList.add('in-range');
+
+      var bar = document.createElement('span');
+      bar.className = 'cal-bar';
+
+      if (isSingle) {
+        bar.style.display = 'none';                     // 같은 날이면 바 없음
+      } else if (isOpen) {
+        bar.classList.add('cal-bar-start');
+        if (col === 6) bar.classList.add('cal-bar-week-end'); // 오픈이 토요일
+      } else if (isClose) {
+        bar.classList.add('cal-bar-end');
+        if (col === 0) bar.classList.add('cal-bar-week-start'); // 마감이 일요일
+      } else {
+        /* 범위 중간 */
+        if (col === 0) bar.classList.add('cal-bar-week-start');
+        if (col === 6) bar.classList.add('cal-bar-week-end');
+      }
+
+      el.appendChild(bar);
+    });
+
+    /* 날짜 숫자 (z-index 위에 표시) */
+    var num = document.createElement('span');
+    num.className = 'cal-num';
+    num.textContent = d;
+    el.appendChild(num);
+
+    grid.appendChild(el);
+  }
+
+  /* 이번 달 이벤트 목록 */
+  var evList    = document.getElementById('cal-events');
+  var padMonth  = String(calMonth + 1).padStart(2, '0');
+  var thisMonth = CAL_EVENTS.filter(function(e){
+    return e.date.startsWith(calYear + '-' + padMonth);
+  });
+
+  if (thisMonth.length === 0) {
+    evList.innerHTML = '<p class="cal-no-ev">이번 달 일정 없음</p>';
+  } else {
+    evList.innerHTML = thisMonth.map(function(e) {
+      var day = parseInt(e.date.split('-')[2]);
+      return '<div class="cal-ev-item">' +
+        '<span class="cal-dot ' + e.type + '"></span>' +
+        '<span class="cal-ev-day">' + day + '일</span>' +
+        '<span class="cal-ev-label">' + e.label + '</span>' +
+      '</div>';
+    }).join('');
+  }
+}
+
+loadCalEvents(function(){ calInit(); });
+</script>
+
+<!-- ============================================
+     공지사항
+============================================= -->
+<section id="notice" class="section-hidden">
+  <div class="section-wrap">
+    <h2 class="section-title reveal" data-i18n="notice.title">공지사항</h2>
+    <div class="notice-wrap reveal">
+      <div class="notice-top-alert" data-i18n="notice.alert">
+        ※ 작업 전 반드시 확인해주세요.<br>
+        작업 의뢰 시 모든 내용을 확인·동의한 것으로 간주합니다.
+      </div>
+      <div class="notice-list">
+        <div class="notice-item">
+          <div class="notice-item-title" data-i18n="notice.n1.title">일러스트 작업 불가 / 파일 안내</div>
+          <p class="notice-item-desc" data-i18n="notice.n1.desc">일러스트 작업은 하지 않습니다. 파츠 분리가 완료된 일러스트 PSD 파일이 필요합니다.</p>
+        </div>
+        <div class="notice-item">
+          <div class="notice-item-title" data-i18n="notice.n2.title">납품 파일 안내</div>
+          <p class="notice-item-desc" data-i18n="notice.n2.desc">작업 완료 후 전달되는 파일은 아이콘 이미지를 포함한 .moc3 파일이 전달됩니다. 수정이 가능한 cmo3 파일은 제공하지 않습니다.</p>
+        </div>
+        <div class="notice-item">
+          <div class="notice-item-title" data-i18n="notice.n3.title">스트리밍 안내</div>
+          <p class="notice-item-desc" data-i18n="notice.n3.desc">스트리밍을 하고 있습니다. 방송에 송출을 원하지 않는다면 미리 말씀 부탁드립니다.</p>
+        </div>
+        <div class="notice-item">
+          <div class="notice-item-title" data-i18n="notice.n4.title">SNS · 포트폴리오 게시 안내</div>
+          <p class="notice-item-desc" data-i18n="notice.n4.desc">모든 작업물은 홍보와 포트폴리오를 위해 SNS와 유튜브에 게시됩니다. 데뷔일까지 공개 지연을 희망하시는 경우 미리 말씀 부탁드립니다.</p>
+        </div>
+        <div class="notice-item">
+          <div class="notice-item-title" data-i18n="notice.n5.title">요청 사항 기재</div>
+          <p class="notice-item-desc" data-i18n="notice.n5.desc">결제 전 요청 사항은 상세히 작성 부탁드립니다. 기재되지 않은 사항은 추가 작업 및 수정 시 작업이 어렵거나 추가금이 들 수 있습니다.</p>
+        </div>
+        <div class="notice-item">
+          <div class="notice-item-title" data-i18n="notice.n6.title">저작권 안내</div>
+          <p class="notice-item-desc" data-i18n="notice.n6.desc">리깅과 관련된 저작권은 작가(다중)에게 있습니다. 일러스트와 관련된 저작권은 일러스트 작가님에게 있습니다.</p>
+        </div>
+        <div class="notice-item">
+          <div class="notice-item-title" data-i18n="notice.n7.title">작업 일정 안내</div>
+          <p class="notice-item-desc" data-i18n="notice.n7.desc">작업 일정은 문의 순이 아닌 결제 순으로 확정됩니다. 일정은 작업 속도에 따라 조금씩 당겨질 수 있으며, 작업이 지연될 시 사전에 미리 연락 드립니다.</p>
+          <p class="notice-item-desc notice-bold" data-i18n="notice.n7.desc2">※ 컨펌 시 연락이 지연되거나 수정 사항이 많을 시 작업 기간이 늘어날 수 있습니다.</p>
+          <p class="notice-item-desc notice-bold" data-i18n="notice.n7.desc3">※ 작업 기간은 평균 기본 모델 기준 2주~4주 정도입니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     ABOUT
+============================================= -->
+<section id="about" class="section-hidden">
+  <div class="section-wrap">
+    <h2 class="section-title reveal">About</h2>
+    <div class="about-inner">
+
+      <div class="about-text">
+        <h2 class="reveal" data-i18n="about.greeting">안녕하세요. Live2D Rigger 다중(Dajoong)입니다.</h2>
+        <p class="about-seo">
+          한국에서 활동하는 Live2D Rigger 다중(Dajoong)의 포트폴리오입니다.
+          VTuber Live2D Rigging 작업과 애니메이션 리깅 샘플을 확인할 수 있습니다.
+          </p>
+        <p class="reveal" data-i18n="about.p1">
+          LD·SD 버추얼 모델을 비롯해 배경 애니메이션과 월페이퍼 작업을 진행하며,
+          섬세하고 부드러운 모션 구현에 집중하고 있습니다.
+        </p>
+        <p class="reveal" data-i18n="about.p2">
+          모델의 매력을 극대화할 수 있는 리깅 방식을 연구하며,
+          다양한 스타일의 모델 작업에 대응할 수 있습니다.
+          클라이언트의 요구에 맞춘 맞춤형 리깅 솔루션을 제공합니다.
+        </p>
+        <p class="reveal" data-i18n="about.p3">
+          여러 작가님들과의 협업 및 상업 제작 경험을 통해
+          의도에 맞는 결과물을 안정적이고 효율적으로 제작합니다.
+        </p>
+        <div class="tag-row reveal">
+          <span class="tag">#Live2D Rigging</span>
+          <span class="tag">#Live2D Animation</span>
+          <span class="tag">#Background Rigging</span>
+        </div>
+      </div>
+
+      <aside class="about-card">
+        <ul>
+          <li class="about-skill reveal">
+            <span class="skill-label" data-i18n="about.card.specialty">전문 분야</span>
+            <div class="skill-tags">
+              <span class="skill-tag">Live2D Rigging</span>
+              <span class="skill-tag">Live2D Animation</span>
+              <span class="skill-tag">Background Rigging</span>
+            </div>
+          </li>
+          <li class="about-skill reveal">
+            <span class="skill-label" data-i18n="about.card.tools">툴</span>
+            <div class="skill-tags">
+              <span class="skill-tag">Live2D Cubism</span>
+              <span class="skill-tag">CLIPSTUDIO</span>
+              <span class="skill-tag">Photoshop</span>
+            </div>
+          </li>
+          <li class="about-skill reveal">
+            <span class="skill-label" data-i18n="about.card.style">스타일</span>
+            <div class="skill-tags">
+              <span class="skill-tag" data-i18n="about.card.style1">자연스럽고 디테일한 리깅</span>
+              <span class="skill-tag" data-i18n="about.card.style2">다양한 스타일 대응</span>
+            </div>
+          </li>
+        </ul>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     INFO (이벤트 · 콜라보 · 프로세스)
+============================================= -->
+<section id="info" class="section-hidden">
+  <div class="section-wrap">
+    <h2 class="section-title reveal" data-i18n="info.title">이벤트 &amp; 프로세스</h2>
+
+    <div class="info-event-grid reveal">
+
+      <div class="info-left-col">
+        <!-- 이벤트 -->
+        <div class="i-card">
+          <div class="i-card-head"><h3 class="i-card-title" data-i18n="info.event.heading">이벤트 안내</h3></div>
+          <div class="i-card-body">
+            <div class="event-list">
+              <div class="event-item">
+                <div class="event-top">
+                  <span class="event-title" data-i18n="info.event.e1.title">리뉴얼 기념 특별 할인</span>
+                  <span class="badge" data-i18n="info.event.e1.badge">리뉴얼 할인</span>
+                </div>
+                <span class="event-sub" data-i18n="info.event.e1.sub">조기 마감될 수 있습니다</span>
+                <p class="event-desc" data-i18n="info.event.e1.desc">프리미엄 리깅 LD 전신이 리뉴얼 특별 할인</p>
+              </div>
+              <div class="event-item">
+                <div class="event-top">
+                  <span class="event-title" data-i18n="info.event.e2.title">리뷰 작성 고객 이벤트</span>
+                  <span class="badge" data-i18n="info.event.e2.badge">리뷰 이벤트</span>
+                </div>
+                <span class="event-sub" data-i18n="info.event.e2.sub">긍정적인 리뷰를 남겨 주시면 추가 할인 혜택까지</span>
+                <p class="event-desc" data-i18n="info.event.e2.desc">리뷰 작성 시 2만원 할인 또는 표정 2종 중 선택 가능합니다</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 콜라보 -->
+        <div class="i-card">
+          <div class="i-card-head"><h3 class="i-card-title" data-i18n="info.collab.heading">콜라보 안내</h3></div>
+          <div class="i-card-body collab-body">
+            <div class="event-list">
+              <a href="https://artmug.kr/index.php?channel=view&uid=47209" target="_blank" class="event-item collab-link">
+                <div class="event-top">
+                  <span class="event-title" data-i18n="info.collab.c1.title">양초 작가님 콜라보 할인</span>
+                  <span class="badge" data-i18n="info.collab.badge">콜라보 할인</span>
+                </div>
+                <span class="event-sub" data-i18n="info.collab.c1.sub">말랑 쫀득한 귀여운 움직임을 원하면 추천</span>
+                <p class="event-desc" data-i18n="info.collab.c1.desc">일러스트 5만원 + 리깅 5만원 할인 혜택</p>
+              </a>
+              <a href="https://artmug.kr/index.php?channel=view&uid=46759" target="_blank" class="event-item collab-link">
+                <div class="event-top">
+                  <span class="event-title" data-i18n="info.collab.c2.title">하노히 작가님 콜라보 할인</span>
+                  <span class="badge" data-i18n="info.collab.badge">콜라보 할인</span>
+                </div>
+                <span class="event-sub" data-i18n="info.collab.c2.sub">단아하고 깔끔한 디자인을 원하면 추천</span>
+                <p class="event-desc" data-i18n="info.collab.c2.desc">일러스트 5만원 + 리깅 5만원 할인 혜택</p>
+              </a>
+              <a href="https://artmug.kr/index.php?channel=view&uid=51109" target="_blank" class="event-item collab-link">
+                <div class="event-top">
+                  <span class="event-title" data-i18n="info.collab.c3.title">피치 작가님 콜라보 할인</span>
+                  <span class="badge" data-i18n="info.collab.badge">콜라보 할인</span>
+                </div>
+                <span class="event-sub" data-i18n="info.collab.c3.sub">만화 같은 분위기의 디자인을 원하면 추천</span>
+                <p class="event-desc" data-i18n="info.collab.c3.desc">일러스트 5만원 + 리깅 5만원 할인 혜택</p>
+              </a>
+              <a href="https://artmug.kr/index.php?channel=view&uid=26682" target="_blank" class="event-item collab-link">
+                <div class="event-top">
+                  <span class="event-title" data-i18n="info.collab.c4.title">뚱땅이 작가님 콜라보 할인</span>
+                  <span class="badge" data-i18n="info.collab.badge">콜라보 할인</span>
+                </div>
+                <span class="event-sub" data-i18n="info.collab.c4.sub">귀엽고 부드러운 움직임을 원하면 추천</span>
+                <p class="event-desc" data-i18n="info.collab.c4.desc">일러스트 10만원 + 리깅 5만원 할인 혜택</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div><!-- /info-left-col -->
+
+      <!-- 프로세스 -->
+      <div class="i-card i-card--process">
+        <div class="i-card-head"><h3 class="i-card-title" data-i18n="info.process.heading">작업 프로세스</h3></div>
+        <div class="i-card-body">
+          <div class="process-timeline">
+            <div class="process-step"><div class="step-number">01</div><div class="step-content"><p class="step-title" data-i18n="info.process.s1.title">문의</p><p class="step-desc" data-i18n="info.process.s1.desc">작업 요청 및 기본 정보 제공</p></div></div>
+            <div class="process-step"><div class="step-number">02</div><div class="step-content"><p class="step-title" data-i18n="info.process.s2.title">파일 확인 및 견적</p><p class="step-desc" data-i18n="info.process.s2.desc">파일 검토 후 상세 견적 제시</p></div></div>
+            <div class="process-step"><div class="step-number">03</div><div class="step-content"><p class="step-title" data-i18n="info.process.s3.title">접수 및 입금</p><p class="step-desc" data-i18n="info.process.s3.desc">계약 및 결제</p></div></div>
+            <div class="process-step"><div class="step-number">04</div><div class="step-content"><p class="step-title" data-i18n="info.process.s4.title">1차 리깅</p><p class="step-desc" data-i18n="info.process.s4.desc">헤드 및 페이스 구조 제작</p></div></div>
+            <div class="process-step"><div class="step-number">05</div><div class="step-content"><p class="step-title" data-i18n="info.process.s5.title">1차 컨펌 및 수정</p><p class="step-desc" data-i18n="info.process.s5.desc">1차 리깅 영상 제공, 피드백 반영 및 개선</p></div></div>
+            <div class="process-step"><div class="step-number">06</div><div class="step-content"><p class="step-title" data-i18n="info.process.s6.title">2차 리깅</p><p class="step-desc" data-i18n="info.process.s6.desc">바디 및 소품 디테일 작업</p></div></div>
+            <div class="process-step"><div class="step-number">07</div><div class="step-content"><p class="step-title" data-i18n="info.process.s7.title">2차 컨펌 및 수정</p><p class="step-desc" data-i18n="info.process.s7.desc">2차 리깅 영상 제공, 피드백 반영 및 개선</p></div></div>
+            <div class="process-step"><div class="step-number">08</div><div class="step-content"><p class="step-title" data-i18n="info.process.s8.title">완성 및 파일 납품</p><p class="step-desc" data-i18n="info.process.s8.desc">최종 파일 전달</p></div></div>
+            <div class="process-step"><div class="step-number">09</div><div class="step-content"><p class="step-title" data-i18n="info.process.s9.title">최종 수정 (3차 수정)</p><p class="step-desc" data-i18n="info.process.s9.desc">파일 적용 후 문제 발생 시 수정</p></div></div>
+          </div>
+          <p class="process-note" data-i18n="info.process.note">평균 작업 기간은 2–4주이며, 디자인의 복잡도에 따라 조정 가능합니다.</p>
+        </div>
+      </div>
+
+    </div><!-- /info-event-grid -->
+
+    <!-- Plan (베이직 / 프리미엄) -->
+    <div class="sec-divider reveal">
+      <div class="sec-divider-line"></div>
+      <span class="sec-divider-label">Plan</span>
+      <div class="sec-divider-line"></div>
+    </div>
+
+    <div class="plan-wrap reveal">
+      <div class="plan-grid">
+        <!-- 베이직 -->
+        <div class="plan-card">
+          <div class="plan-card-head">
+            <span class="plan-name" data-i18n="plan.basic">베이직</span>
+          </div>
+          <div class="plan-card-body">
+            <ul class="plan-list">
+              <li data-i18n="plan.item.faceXYZ">얼굴 XYZ</li>
+              <li data-i18n="plan.item.eyebrow">눈썹 (위아래, 변형, 각도)</li>
+              <li class="red" data-i18n="plan.item.eyebrowFacial">눈썹눈 연동 페이셜</li>
+              <li data-i18n="plan.item.blink">눈깜빡 (윙크)</li>
+              <li data-i18n="plan.item.pupilPhysics">눈동자 물리</li>
+              <li class="red" data-i18n="plan.item.lashPhysics">속눈썹 물리</li>
+              <li data-i18n="plan.item.mouth9">입움직임 (9점)</li>
+              <li class="red" data-i18n="plan.item.jaw">입 개폐 연동 턱 리깅</li>
+              <li data-i18n="plan.item.bodyXYZ">몸 XYZ</li>
+              <li data-i18n="plan.item.breath">호흡</li>
+              <li class="red" data-i18n="plan.item.arm">팔 흔들림 (손가락 흔들림)</li>
+              <li class="red" data-i18n="plan.item.camAnim">캠 이탈 애니메이션 (선택)</li>
+              <li data-i18n="plan.item.expr2">기본 제공 표정 2종<span class="plan-sub" data-i18n="plan.item.noAnim">(애니메이션 X)</span></li>
+            </ul>
+            <div class="plan-physics" data-i18n="plan.physics.basic">최대 3단계 물리 지원<span class="plan-sub" data-i18n="plan.physics.basic.sub">(필요의 경우 4단계 지원)</span></div>
+          </div>
+        </div>
+        <!-- 프리미엄 -->
+        <div class="plan-card plan-card--premium">
+          <div class="plan-card-head">
+            <span class="plan-name" data-i18n="plan.premium">프리미엄</span>
+          </div>
+          <div class="plan-card-body">
+            <ul class="plan-list">
+              <li data-i18n="plan.item.faceXYZ">얼굴 XYZ</li>
+              <li data-i18n="plan.item.eyebrow">눈썹 (위아래, 변형, 각도)</li>
+              <li data-i18n="plan.item.eyebrowFacial">눈썹 눈 연동 페이셜</li>
+              <li data-i18n="plan.item.blink">눈깜빡 (윙크)</li>
+              <li data-i18n="plan.item.pupilPhysics">눈동자 물리</li>
+              <li data-i18n="plan.item.lashPhysics">속눈썹 물리</li>
+              <li data-i18n="plan.item.mouth12">입움직임 (12점~)</li>
+              <li data-i18n="plan.item.jaw">입 개폐 연동 턱 리깅</li>
+              <li data-i18n="plan.item.bodyXYZ">몸 XYZ</li>
+              <li data-i18n="plan.item.breath">호흡</li>
+              <li data-i18n="plan.item.arm">팔 흔들림 (손가락 흔들림)</li>
+              <li data-i18n="plan.item.camAnim">캠 이탈 애니메이션 (선택)</li>
+              <li data-i18n="plan.item.expr2">기본 제공 표정 2종<span class="plan-sub" data-i18n="plan.item.noAnim">(애니메이션 X)</span></li>
+            </ul>
+            <div class="plan-physics" data-i18n="plan.physics.premium">최소 3단계 물리 지원<span class="plan-sub" data-i18n="plan.physics.premium.sub">(필요의 경우 2단계 지원)</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="plan-note" data-i18n="plan.note">베이직과 프리미엄은 움직임 각도, 물리 단계, 전반적인 디테일에서 차이가 있습니다</p>
+    </div>
+
+    <!-- 작업 안내 -->
+    <div class="sec-divider reveal">
+      <div class="sec-divider-line"></div>
+      <span class="sec-divider-label" data-i18n="work.guide.label">작업 안내</span>
+      <div class="sec-divider-line"></div>
+    </div>
+
+    <div class="info-wrap reveal">
+      <div class="info-block">
+        <div class="info-block-head">
+          <span class="info-block-icon">🔄</span>
+          <h3 class="info-block-title" data-i18n="work.process.title">작업 과정</h3>
+        </div>
+        <div class="info-block-body">
+          <div class="flow-row">
+            <span class="flow-step" data-i18n="info.process.s1.title">문의</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="info.process.s2.title">파일 확인 및 견적</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="info.process.s3.title">접수 및 입금</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="info.process.s4.title">1차 리깅</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="work.flow.confirm1">1차 컨펌(수정)</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="info.process.s6.title">2차 리깅</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="work.flow.confirm2">2차 컨펌(수정)</span><span class="flow-arrow">→</span>
+            <span class="flow-step" data-i18n="work.flow.deliver">완성 후 전달</span><span class="flow-arrow">→</span>
+            <span class="flow-step flow-step--final" data-i18n="work.flow.final">최종 수정</span>
+          </div>
+          <ul class="info-desc-list">
+            <li data-i18n="work.process.d1">파일 적용 후 문제가 있다면 수정해 드립니다 (최종 수정)</li>
+            <li class="info-note" data-i18n="work.process.d2">오너캐·동물·팬캐 등은 2차 컨펌 없이 1차 컨펌만 진행됩니다.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-head">
+          <span class="info-block-icon">✏️</span>
+          <h3 class="info-block-title" data-i18n="work.revision.title">수정 사항</h3>
+        </div>
+        <div class="info-block-body">
+          <ul class="info-desc-list">
+            <li data-i18n="work.revision.d1">기본적인 수정 사항은 작업 기간에 진행되는 총 2회의 컨펌 및 수정 단계에서 진행됩니다.<span class="info-sub" data-i18n="work.revision.d1sub">동물/오너캐의 경우 최종 리깅까지 진행 후 1차 컨펌만 진행합니다.</span></li>
+            <li data-i18n="work.revision.d2">수정 완료 후 이전 상태로 되돌리거나 과한 번복 요청 시 추가금이 청구될 수 있습니다.</li>
+            <li data-i18n="work.revision.d3">리깅 실수 및 오류가 있는 경우 무료로 수정해 드립니다. 파일 적용 후 오류 발견 시 편히 말해 주세요.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-head">
+          <span class="info-block-icon">©️</span>
+          <h3 class="info-block-title" data-i18n="work.copyright.title">저작권</h3>
+        </div>
+        <div class="info-block-body">
+          <ul class="info-desc-list">
+            <li data-i18n="work.copyright.d1">리깅 데이터의 저작권은 기본적으로 리거(다중)에게 귀속됩니다.</li>
+            <li data-i18n="work.copyright.d2">의뢰인은 본 리깅 결과물을 방송, 영상 제작, SNS 등 목적에 한하여 이용할 수 있습니다.</li>
+            <li class="warn" data-i18n="work.copyright.d3">리깅 데이터의 재판매·양도·공유는 허용되지 않습니다.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================
+     PORTFOLIO (YouTube Slider)
+============================================= -->
+<section id="works" class="section-hidden">
+  <div class="section-wrap">
+    <h2 class="section-title reveal">Portfolio</h2>
+    <div data-type-buttons></div>
+    <div id="type-container"></div>
+    <div class="more-btn reveal">
+      <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer" data-i18n="works.more">더 많은 작업 보기 →</a>
+      <a href="#price" data-i18n="works.price">가격 확인하기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     Live2D Rigging Samples
+============================================= -->
+<section id="samples" class="section-hidden">
+  <div class="section-wrap">
+    <h2 class="section-title reveal" data-i18n="samples.title">리깅 샘플</h2>
+    <div class="sp-wrap reveal">
+      <div class="sp-head">
+        <p class="sp-subtitle" data-i18n="samples.subtitle">리깅 작업의 다양한 샘플을 확인해보세요.</p>
+      </div>
+
+      <!-- 전신 리깅 -->
+      <div class="sp-group">
+        <h3 class="sp-cat-title" data-i18n="samples.fullbody.title">전신 리깅</h3>
+        <p class="sp-cat-desc" data-i18n="samples.fullbody.desc">자연스럽고 부드러운 움직임을 구현합니다.</p>
+        <div class="sp-grid">
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=13DeOGQVDv9XriMmvHwvkK53PGsIWgmFu" alt="다중 Live2D 전신 리깅 - 부드러운 좌우 고개 회전 및 입체적인 X축 가동 범위 구현"></div>
+            <figcaption class="sp-cap" data-i18n="samples.fullbody.x">X 축 움직임</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1J9hHzappQPfBqFq72pphJzXilSCqcrgz" alt="다중 Live2D 전신 리깅 - 자연스러운 상하 시선 처리 및 고퀄리티 Y축 움직임 샘플"></div>
+            <figcaption class="sp-cap" data-i18n="samples.fullbody.y">Y 축 움직임</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1yz396Y-1Et40sXUXU2tTnIPiOaEhV_l4" alt="다중 Live2D 전신 리깅 - 캐릭터의 생동감을 더하는 좌우 틸트 및 Z축 물리 효과"></div>
+            <figcaption class="sp-cap" data-i18n="samples.fullbody.z">Z 축 움직임</figcaption>
+          </figure>
+        </div>
+        <p class="sp-cat-desc" data-i18n="samples.fullbody.note">캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.</p>
+      </div>
+
+      <!-- 눈 물리 -->
+      <div class="sp-group">
+        <h3 class="sp-cat-title" data-i18n="samples.eyes.title">눈 물리</h3>
+        <p class="sp-cat-desc" data-i18n="samples.eyes.desc">다양한 스타일의 눈을 생동감 있게 표현합니다.</p>
+        <div class="sp-grid">
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1tTVBKO72HJ_Wu2DFpN8i82qIa2FdKSjj" alt="Live2D 눈 물리 리깅 - 오드아이 캐릭터를 위한 독립적 눈동자 물리 및 몽환적인 눈빛 연출"></div>
+            <figcaption class="sp-cap" data-i18n="samples.eyes.odd">몽환적인 눈빛을 살린 디테일한 물리 표현</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1qlQFlA6fQ2gz59sav2TBMyvTh7skRS44" alt="Live2D 눈 물리 리깅 - 하이라이트가 살아있는 초롱초롱한 눈동자와 자연스러운 깜빡임"></div>
+            <figcaption class="sp-cap" data-i18n="samples.eyes.green">초롱초롱한 눈동자의 자연스러운 물리 움직임</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1GkQgZTVhPdBHSlp6vfNCwkgHSP6uH37z" alt="Live2D 눈 물리 리깅 - 화려한 느낌에 감각적이고 매력 적인 붉은 눈 샘플"></div>
+            <figcaption class="sp-cap" data-i18n="samples.eyes.red">섬세한 속눈썹과 눈동자의 부드러운 물리</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- 입 움직임 -->
+      <div class="sp-group">
+        <h3 class="sp-cat-title" data-i18n="samples.mouth.title">입 움직임</h3>
+        <p class="sp-cat-desc" data-i18n="samples.mouth.desc">발화 스타일에 맞게 선택할 수 있는 세 가지 입 구조입니다</p>
+        <div class="sp-grid">
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=12jBySn6UZBHB1yGOZwgd5-ZbWdnFjIDb" alt="Live2D 입 리깅 - 최적화된 9점 구조로 가볍고 자연스러운 기본 발화 모션 구현"></div>
+            <figcaption class="sp-cap" data-i18n="samples.mouth.9pt">단순한 9점 구조로 일반 대화에 적합</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1H7ewZ2S5PdGeaX9dgXq8o-DigR7mwHPn" alt="Live2D 입 리깅 - 섬세한 12점 가이드 적용으로 풍부한 발음과 감정 표현 최적화"></div>
+            <figcaption class="sp-cap" data-i18n="samples.mouth.12pt">세밀한 12점 구조로 대화와 감정 표현에 적합</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1z8W1xt6Iji0xKWBwkgQmvFUu0FpTmrci" alt="Live2D 하이엔드 리깅 - 아이폰 트래킹 및 VBridger 대응 섬세한 입 모양 5단 분리"></div>
+            <figcaption class="sp-cap" data-i18n="samples.mouth.vbridger">Vbridger 사용으로 섬세한 감정 표현에 적합</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- 표정 효과 -->
+      <div class="sp-group">
+        <h3 class="sp-cat-title" data-i18n="samples.expr.title">표정 효과</h3>
+        <p class="sp-cat-desc" data-i18n="samples.expr.desc">단축키 한 번으로 개성 있는 감정을 표현해보세요</p>
+        <div class="sp-grid">
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=19_Brg4IQsztCIh-VFO6TldCrB7MjnuBI" alt="Live2D 특수 표정 - 단축키 연동 차가운 눈매와 날카로운 시선 처리 리깅"></div>
+            <figcaption class="sp-cap" data-i18n="samples.expr.contempt">차갑고 날카로운 눈빛으로 경멸감을 표현</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1b2AXHtxxCLv3Wi-onMdBYA0n3r2M2Sga" alt="Live2D 감정 표현 - 현실적인 표정 구현으로 보는 사람들이 느끼는 감정을 더 잘 전달"></div>
+            <figcaption class="sp-cap" data-i18n="samples.expr.annoy">순간적인 짜증과 불쾌감을 생동감 있게 연출</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=15wg3TRNcp97TXpTP3rTDF6QaN_SS1jDz" alt="Live2D 감정 표현 - 설레는 하트눈 효과와 얼굴 홍조 애니메이션 연출"></div>
+            <figcaption class="sp-cap" data-i18n="samples.expr.heart">설레고 사랑스러운 순간을 하트눈으로 표현</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- 표정 애니메이션 -->
+      <div class="sp-group">
+        <h3 class="sp-cat-title" data-i18n="samples.exprAnim.title">표정 애니메이션</h3>
+        <p class="sp-cat-desc" data-i18n="samples.exprAnim.desc">캐릭터 위에 자연스럽게 재생되는 감정 연출 효과입니다</p>
+        <div class="sp-grid sp-grid--2">
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=17pV9Kj2QeFin7KMLdEQ0F8naUaBZC5J9" alt="Live2D 파티클 애니메이션 - 눈가를 타고 흐르는 입체적인 눈물 효과 및 감성 연출"></div>
+            <figcaption class="sp-cap" data-i18n="samples.exprAnim.tear">눈가를 타고 흐르는 자연스러운 눈물 연출</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1jysEaksUzsanBT8HCJwK8euJTv0uwM9a" alt="Live2D 표정 애니메이션 - 긴장감과 당황스러움을 보여주는 리얼한 땀삐질 효과"></div>
+            <figcaption class="sp-cap" data-i18n="samples.exprAnim.sweat">긴장감과 당황스러움을 식은땀으로 표현</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- 팔 움직임 -->
+      <div class="sp-group">
+        <h3 class="sp-cat-title" data-i18n="samples.arm.title">팔 움직임</h3>
+        <p class="sp-cat-desc" data-i18n="samples.arm.desc">캐릭터의 콘셉트에 맞는 팔 움직임 예시입니다</p>
+        <div class="sp-grid">
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1R4n4D8_uI2wvFAaS9pYJ2Ud7MEzR7f-7" alt="Live2D 바디 리깅 - 캐릭터 콘셉트에 맞춘 자연스러운 팔 흔들림과 게임기의 손가락 디테일"></div>
+            <figcaption class="sp-cap" data-i18n="samples.arm.game">게임기를 이용해 게임 화면에 몰입감을 올릴 수 있습니다</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1RVMA48AtUMd50LoWXTtKwV4McO_6zPRf" alt="Live2D 바디 리깅 - 캐릭터 콘셉트에 맞춘 자연스러운 팔 흔들림과 마법봉 손가락 디테일"></div>
+            <figcaption class="sp-cap" data-i18n="samples.arm.wand">캐릭터 컨셉에 맞는 아이템으로 다양한 연출</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1MiBHIi_Xsne3ki3-pyLxNlgu3rCLoHYM" alt="Live2D 바디 리깅 - 캐릭터 콘셉트에 맞춘 자연스러운 팔 흔들림과 손인사 디테일"></div>
+            <figcaption class="sp-cap" data-i18n="samples.arm.wave">손을 흔들며 인사하는 디테일한 표현</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- 의상 및 헤어 -->
+      <div class="sp-group">
+        <h3 class="sp-cat-title" data-i18n="samples.costume.title">의상 및 헤어</h3>
+        <p class="sp-cat-desc" data-i18n="samples.costume.desc">의상과 헤어 변경으로 같은 캐릭터도 전혀 다른 분위기를 연출할 수 있습니다.</p>
+        <div class="sp-grid">
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1F9LJyF49S2O7dndlkmZuEjnRH-KzcqcK" alt="Live2D 헤어 색상 변경 - 다양한 헤어 색상 옵션"></div>
+            <figcaption class="sp-cap" data-i18n="samples.costume.hair">머리 색상을 바꿔 전혀 다른 분위기를 연출</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1Lrp_K0Mp75XqHp64dGwF49emDXNijGK1" alt="Live2D 의상 변경 - 캐릭터 콘셉트에 맞춘 다양한 의상 스타일"></div>
+            <figcaption class="sp-cap" data-i18n="samples.costume.outfit">의상 교체로 캐릭터 콘셉트를 폭넓게 표현</figcaption>
+          </figure>
+          <figure class="sp-item">
+            <div class="sp-media"><img class="sp-gif" src="https://drive.google.com/thumbnail?sz=w800&id=1VDcIPOQEav_DwmMOplBVJ7urL4eh2ORt" alt="Live2D 헤어 스타일 변경 - 스타일별 독립적 머리카락 물리 적용 및 자연스러운 파츠 전환 리깅"></div>
+            <figcaption class="sp-cap" data-i18n="samples.costume.hairstyle">헤어 스타일 변경으로 같은 캐릭터도 새로운 느낌으로</figcaption>
+          </figure>
+        </div>
+      </div>
+
+    </div><!-- /sp-wrap -->
+  </div>
+</section>
+
+<!-- ============================================
+     PRICE
+============================================= -->
+<section id="price" class="section-hidden">
+  <div class="section-wrap">
+    <h2 class="section-title reveal" data-i18n="price.title">가격</h2>
+    <p class="price-intro reveal" data-i18n="price.intro">기본 안내 요금입니다. 프로젝트 요구사항에 따라 견적이 달라집니다.<br>상세 견적은 파일 구조와 요구 사항 확인 후 안내드립니다.</p>
+
+    <div class="price-cards reveal">
+
+      <!-- LD 베이직 -->
+      <article class="price-card">
+        <div class="price-card-head">
+          <span class="price-card-title">베이직 리깅 <small>LD</small></span>
+          <span class="price-card-badge" data-i18n="price.badge.ld">Live2D</span>
+        </div>
+        <div class="price-card-body">
+          <div class="price-amount-wrap">
+            <div class="price-row">
+              <span class="price-row-label" data-i18n="price.label.full">전신</span>
+              <span class="price-row-amount">₩600,000<span data-i18n="price.label.from"> ~</span></span>
+            </div>
+            <div class="price-row">
+              <span class="price-row-label" data-i18n="price.label.half">반신</span>
+              <span class="price-row-amount">₩500,000<span data-i18n="price.label.from"> ~</span></span>
+            </div>
+          </div>
+          <p class="price-card-desc" data-i18n="price.basic.desc">자연스러운 XYZ 움직임과 안정적인 물리를 제공합니다.</p>
+          <ul class="price-feat-list">
+            <li data-i18n="price.basic.f1">얼굴 · 몸 XYZ 움직임</li>
+            <li data-i18n="price.basic.f2">눈썹 변형 · 각도 / 눈깜빡 (윙크)</li>
+            <li data-i18n="price.basic.f3">입움직임 9점 / 입 개폐 연동 턱</li>
+            <li data-i18n="price.basic.f4">호흡 · 팔 흔들림 (손가락 포함)</li>
+            <li data-i18n="price.basic.f5">기본 표정 2종 포함</li>
+            <li class="feat-highlight" data-i18n="price.basic.f6">최대 3단계 물리 지원</li>
+          </ul>
+        </div>
+        <div class="price-card-foot" data-i18n="price.basic.period">예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회</div>
+      </article>
+
+      <!-- LD 프리미엄 -->
+      <article class="price-card price-card--premium">
+        <div class="price-card-head">
+          <span class="price-card-title">프리미엄 리깅 <small>LD</small></span>
+          <span class="price-recommended" data-i18n="price.badge.recommended">추천</span>
+          <span class="price-card-badge price-card-badge--premium" data-i18n="price.badge.premium">Premium</span>
+        </div>
+        <div class="price-card-body">
+          <div class="price-amount-wrap">
+            <div class="price-row">
+              <span class="price-row-label" data-i18n="price.label.full">전신</span>
+              <span class="price-row-amount">₩780,000<span data-i18n="price.label.from"> ~</span></span>
+            </div>
+            <div class="price-row">
+              <span class="price-row-label" data-i18n="price.label.half">반신</span>
+              <span class="price-row-amount">₩670,000<span data-i18n="price.label.from"> ~</span></span>
+            </div>
+          </div>
+          <p class="price-card-desc" data-i18n="price.prem.desc">높은 물리 단계와 세밀한 디테일로 풍부한 움직임을 제공합니다.</p>
+          <ul class="price-feat-list">
+            <li data-i18n="price.prem.f1">얼굴 · 몸 XYZ 움직임</li>
+            <li data-i18n="price.prem.f2">눈썹눈 연동 페이셜 / 눈깜빡 (윙크)</li>
+            <li data-i18n="price.prem.f3">입움직임 12점~ / 입 개폐 연동 턱</li>
+            <li data-i18n="price.prem.f4">속눈썹 물리 / 눈동자 물리</li>
+            <li data-i18n="price.prem.f5">호흡 · 팔 흔들림 (손가락 포함)</li>
+            <li data-i18n="price.prem.f6">기본 표정 2종 포함</li>
+            <li class="feat-highlight" data-i18n="price.prem.f7">최소 3단계 물리 지원</li>
+          </ul>
+        </div>
+        <div class="price-card-foot" data-i18n="price.prem.period">예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회</div>
+      </article>
+
+      <!-- SD -->
+      <article class="price-card">
+        <div class="price-card-head">
+          <span class="price-card-title">SD 리깅</span>
+          <span class="price-card-badge price-card-badge--sd" data-i18n="price.badge.sd">SD</span>
+        </div>
+        <div class="price-card-body">
+          <div class="price-amount-wrap">
+            <div class="price-row">
+              <span class="price-row-label" data-i18n="price.label.full">전신</span>
+              <span class="price-row-amount">₩250,000<span data-i18n="price.label.from"> ~</span></span>
+            </div>
+          </div>
+          <p class="price-card-desc" data-i18n="price.sd.desc">작고 귀여운 SD 모델 리깅. 가볍고 빠른 리깅을 제공합니다.</p>
+          <ul class="price-feat-list">
+            <li data-i18n="price.ld.f1">자연스러운 XYZ 움직임 제공</li>
+            <li data-i18n="price.sd.f2">단순한 입 모양</li>
+            <li data-i18n="price.ld.f4">기본 표정 2종 포함</li>
+          </ul>
+        </div>
+        <div class="price-card-foot" data-i18n="price.sd.period">예상 작업 기간: 7일–14일 · 수정 2회 + 적용 후 1회</div>
+      </article>
+
+      <!-- 배경 / 월페이퍼 -->
+      <article class="price-card">
+        <div class="price-card-head">
+          <span class="price-card-title" data-i18n="price.bg.title">배경 / 월페이퍼 애니메이션</span>
+          <span class="price-card-badge price-card-badge--bg" data-i18n="price.badge.bg">Animation</span>
+        </div>
+        <div class="price-card-body">
+          <div class="price-amount-wrap">
+            <div class="price-row">
+              <span class="price-row-label" data-i18n="price.label.base">기본가</span>
+              <span class="price-row-amount">₩170,000<span data-i18n="price.label.from"> ~</span></span>
+            </div>
+          </div>
+          <p class="price-card-desc" data-i18n="price.bg.desc">반복되는 루프형 애니메이션과 월페이퍼를 제작합니다.</p>
+          <ul class="price-feat-list">
+            <li data-i18n="price.bg.f1">자연스럽게 반복되는 애니메이션 제작</li>
+            <li data-i18n="price.bg.f2">기본 mp4 포맷 제공 (GIF 추가 가능)</li>
+            <li data-i18n="price.bg.f3">GIF는 파일 특성상 깨짐이 있을 수 있음</li>
+            <li class="feat-highlight" data-i18n="price.bg.f4">복잡도에 따라 금액 협의</li>
+          </ul>
+        </div>
+        <div class="price-card-foot" data-i18n="price.bg.period">예상 작업 기간: 7일–14일 · 수정 최대 2회</div>
+      </article>
+
+    </div>
+
+    <p class="price-note reveal" data-i18n="price.note">정확한 견적은 아트워크(PSD/PNG)와 요구사항 확인 후 산정됩니다.</p>
+    <div style="text-align:center" class="reveal">
+      <a class="contact-cta" href="https://x.com/_Dajoong" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 6v9a2 2 0 0 1-2 2H8l-5 3V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span data-i18n="price.cta">DM으로 상세 문의하기</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CONTACT
+============================================= -->
+<section id="contact" class="section-hidden">
+  <div class="section-wrap">
+    <div class="contact-inner">
+      <h2 class="section-title reveal" style="justify-content:center">Contact</h2>
+      <div class="contact-links reveal">
+        <a href="https://x.com/_Dajoong" target="_blank" rel="noopener noreferrer" class="contact-btn">X (Twitter)</a>
+        <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer" class="contact-btn">YouTube</a>
+        <a href="https://artmug.kr/index.php?channel=list&field=brand&search=cW1qMTc3MA==" target="_blank" rel="noopener noreferrer" class="contact-btn">ArtMug</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Korean Live2D Rigger specializing in VTuber model rigging commissions. © 2026 All rights reserved Dajoong </p>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+/* ── Section Entrance Animation ── */
+(function() {
+  const sections = document.querySelectorAll('.section-hidden');
+  if (!sections.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('section-visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+  sections.forEach(el => obs.observe(el));
+})();
+
+/* ── Reveal Animation ── */
+(function() {
+  const items = document.querySelectorAll('.reveal');
+  if (!items.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  items.forEach(el => obs.observe(el));
+})();
+
+/* ── Side Navigation ── */
+(function() {
+  const sideNav = document.getElementById('side-nav');
+  if (!sideNav) return;
+  const targets = ['hero','notice','about','info','works','samples','price','contact']
+    .map(id => document.getElementById(id)).filter(Boolean);
+  const links = Array.from(sideNav.querySelectorAll('a[href^="#"]'));
+
+  function setActive(id) {
+    links.forEach(a => {
+      const isActive = a.getAttribute('href') === '#' + id;
+      a.classList.toggle('is-active', isActive);
+    });
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  targets.forEach(el => obs.observe(el));
+
+  const hero = document.getElementById('hero');
+  const showObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { sideNav.classList.toggle('is-visible', !e.isIntersecting); });
+  }, { threshold: 0.3 });
+  if (hero) showObs.observe(hero);
+
+  links.forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+})();
+
+/* ── Portfolio Slider ── */
+document.addEventListener('DOMContentLoaded', () => {
+  const videoData = {
+    LD:  { title: "LD",     list: ["Zlbfvuxf3Lo","8EabRx_ZFAI","wML53bUKn1Q","yvc0yN8uwqU","w-eRgLmsgas","zKRPxZ7pv58"] },
+    SD:  { title: "SD",     list: ["bdD1dhv6lI4","BtvMd8yG80g","SwGP1UFE424","pH4GRAjcp2U","b6DNOVjED9o"] },
+    FAN: { title: "오너캐",  list: ["cOmUiWxkqfo","FzIi9m1bKeI","9XtIUiv314c"] },
+    MEM: { title: "메모리얼", list: ["JLTUyPkfsj0","lhVUjv1q-bw"] }
+  };
+  const merged = [];
+  Object.keys(videoData).forEach(k => merged.push(...videoData[k].list));
+  videoData.ALL = { title: '전체', list: merged };
+
+  function buildAllTypes() {
+    const btns = document.querySelector("[data-type-buttons]");
+    const cont = document.getElementById("type-container");
+    btns.innerHTML = cont.innerHTML = "";
+    ['ALL', ...Object.keys(videoData).filter(k => k !== 'ALL')].forEach((key, idx) => {
+      const item = videoData[key];
+      const btn = document.createElement("button");
+      btn.textContent = item.title;
+      btn.setAttribute("data-switch", key);
+      if (idx === 0) btn.setAttribute("data-active", "true");
+      btns.appendChild(btn);
+      const sec = document.createElement("section");
+      sec.setAttribute("data-type", key);
+      if (idx === 0) sec.setAttribute("data-active", "true");
+      sec.innerHTML = genSlider(item.list);
+      cont.appendChild(sec);
+    });
+  }
+
+  function genSlider(list) {
+    let slides = "", thumbs = "";
+    list.forEach((vid, i) => {
+      slides += `<div data-slide data-video="${vid}" data-index="${i}" data-active="${i===0}"><div class="video-wrapper"><div class="image-placeholder">로딩 중…</div><iframe class="lazy-iframe" title="Video ${vid}" data-src="https://www.youtube.com/embed/${vid}" src="about:blank" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div></div>`;
+      thumbs += `<button data-thumb data-index="${i}" ${i===0?'data-active="true"':''}><img src="https://img.youtube.com/vi/${vid}/hqdefault.jpg" alt="썸네일 ${i+1}" loading="lazy"></button>`;
+    });
+    return `<div data-root><div data-stage data-autoplay="false" data-interval="6000">${slides}<button data-action="prev">❮</button><button data-action="next">❯</button></div><div data-dots></div><div data-thumbs-wrapper><div data-thumbs>${thumbs}</div></div></div>`;
+  }
+
+  buildAllTypes();
+
+  function loadIframe(w) {
+    if (!w) return;
+    const iframe = w.querySelector('iframe[data-src]');
+    const ph = w.querySelector('.image-placeholder');
+    if (!iframe || !iframe.dataset.src) return;
+    iframe.src = iframe.dataset.src;
+    iframe.addEventListener('load', () => { if (ph) ph.classList.add('hidden'); }, { once: true });
+    iframe.removeAttribute('data-src'); iframe.classList.remove('lazy-iframe');
+  }
+
+  function initLazy() {
+    const slides = document.querySelectorAll('[data-slide]');
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { loadIframe(e.target.querySelector('.video-wrapper')); obs.unobserve(e.target); } });
+      }, { rootMargin: '300px 0px' });
+      slides.forEach(s => obs.observe(s));
+    }
+    slides.forEach(s => { const w = s.querySelector('.video-wrapper'); if (w) w.addEventListener('click', () => loadIframe(w)); });
+  }
+  initLazy();
+
+  document.querySelector("[data-type-buttons]").addEventListener('click', e => {
+    const btn = e.target.closest('[data-switch]');
+    if (!btn) return;
+    const target = btn.getAttribute('data-switch');
+    document.querySelectorAll('[data-type-buttons] button').forEach(b => b.removeAttribute('data-active'));
+    btn.setAttribute('data-active', 'true');
+    document.querySelectorAll('section[data-type]').forEach(s => {
+      s.getAttribute('data-type') === target ? s.setAttribute('data-active','true') : s.removeAttribute('data-active');
+    });
+    setTimeout(() => {
+      const a = document.querySelector('section[data-type][data-active] [data-slide][data-active="true"]');
+      if (a) loadIframe(a.querySelector('.video-wrapper'));
+    }, 10);
+  });
+
+  (function() {
+    document.querySelectorAll('div[data-root]').forEach(root => {
+      const stage = root.querySelector('div[data-stage]');
+      const slides = Array.from(stage.querySelectorAll('div[data-slide]'));
+      const prevBtn = stage.querySelector('button[data-action="prev"]');
+      const nextBtn = stage.querySelector('button[data-action="next"]');
+      const dotsWrap = root.querySelector('div[data-dots]');
+      const thumbs = root.querySelector('div[data-thumbs]');
+      const thumbBtns = Array.from(thumbs.querySelectorAll('button[data-thumb]'));
+      let current = 0;
+      const total = slides.length;
+
+      function buildDots() {
+        dotsWrap.innerHTML = '';
+        for (let i=0;i<total;i++) {
+          const b = document.createElement('button');
+          b.setAttribute('data-dot','');
+          if (i===current) b.setAttribute('data-active','true');
+          b.addEventListener('click', ()=>goTo(i));
+          dotsWrap.appendChild(b);
+        }
+      }
+      function updateUI() {
+        slides.forEach(s => s.setAttribute('data-active', Number(s.getAttribute('data-index'))===current ? 'true' : 'false'));
+        dotsWrap.querySelectorAll('[data-dot]').forEach((d,i) => i===current ? d.setAttribute('data-active','true') : d.removeAttribute('data-active'));
+        thumbBtns.forEach((t,i) => i===current ? t.setAttribute('data-active','true') : t.removeAttribute('data-active'));
+        const a = slides.find(s => Number(s.getAttribute('data-index'))===current);
+        if (a) loadIframe(a.querySelector('.video-wrapper'));
+      }
+      function goTo(i) { if (i<0) i=total-1; if (i>=total) i=0; current=i; updateUI(); }
+      thumbBtns.forEach(b => b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); goTo(Number(b.getAttribute('data-index'))); }, true));
+      prevBtn.addEventListener('click', () => goTo(current-1));
+      nextBtn.addEventListener('click', () => goTo(current+1));
+      window.addEventListener('keydown', e => { if (e.key==='ArrowLeft') goTo(current-1); if (e.key==='ArrowRight') goTo(current+1); });
+      buildDots(); updateUI();
+    });
+  })();
+});
+</script>
+
+<script>
+/* ── Background Particles ── */
+(function() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const COLORS = ['#9FA8FF','#C2CAFF','#FFC2E3','#9EEAE1','#d4b9ff'];
+
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+  function Particle() { this.reset(true); }
+  Particle.prototype.reset = function(init) {
+    this.x = Math.random() * W;
+    this.y = init ? Math.random() * H : H + 10;
+    this.r = Math.random() * 1.8 + .5;
+    this.vx = (Math.random() - .5) * .3;
+    this.vy = -(Math.random() * .4 + .1);
+    this.alpha = Math.random() * .45 + .15;
+    this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    this.tw = Math.random() * .018 + .004;
+    this.td = Math.random() > .5 ? 1 : -1;
+  };
+  Particle.prototype.update = function() {
+    this.x += this.vx; this.y += this.vy;
+    this.alpha += this.tw * this.td;
+    if (this.alpha > .7 || this.alpha < .08) this.td *= -1;
+    if (this.y < -10) this.reset(false);
+  };
+  Particle.prototype.draw = function() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = ctx.shadowColor = this.color;
+    ctx.shadowBlur = 7;
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+  };
+
+  function init() {
+    resize(); particles = [];
+    const n = Math.floor((W * H) / 8500);
+    for (let i = 0; i < n; i++) particles.push(new Particle());
+  }
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  }
+  window.addEventListener('resize', init);
+  init(); loop();
+})();
+
+/* ── Custom Cursor + Sparkle Trail ── */
+(function() {
+  const dot    = document.getElementById('cursor-dot');
+  const ring   = document.getElementById('cursor-ring');
+  const canvas = document.getElementById('cursor-canvas');
+  const ctx    = canvas.getContext('2d');
+  let mx = -300, my = -300, rx = -300, ry = -300;
+  const SC = ['#9FA8FF','#FFC2E3','#9EEAE1','#fff','#d4b9ff','#ffe0f5'];
+
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+
+  (function ringLoop() {
+    rx += (mx - rx) * .13; ry += (my - ry) * .13;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(ringLoop);
+  })();
+
+  const hov = 'a,button,.price-card,.plan-card,.i-card,.notice-item,.collab-link,[data-type-buttons] button,.sp-item';
+  document.addEventListener('mouseover', e => { if (e.target.closest(hov)) document.body.classList.add('cursor-hover'); });
+  document.addEventListener('mouseout',  e => { if (e.target.closest(hov)) document.body.classList.remove('cursor-hover'); });
+  document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+  document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
+
+  function drawStar(x, y, r, alpha, color, rot) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = ctx.shadowColor = color;
+    ctx.shadowBlur = 8;
+    ctx.translate(x, y); ctx.rotate(rot);
+    ctx.beginPath();
+    for (let i = 0; i < 5; i++) {
+      const a1 = (i*4*Math.PI)/5 - Math.PI/2;
+      const a2 = ((i*4+2)*Math.PI)/5 - Math.PI/2;
+      ctx.lineTo(Math.cos(a1)*r, Math.sin(a1)*r);
+      ctx.lineTo(Math.cos(a2)*(r*.4), Math.sin(a2)*(r*.4));
+    }
+    ctx.closePath(); ctx.fill(); ctx.restore();
+  }
+
+  function makeParticle(x, y, burst) {
+    const angle = Math.random() * Math.PI * 2;
+    const spd = burst ? (Math.random()*5+2.5) : (Math.random()*1.6+.4);
+    return {
+      x, y,
+      vx: Math.cos(angle)*spd, vy: Math.sin(angle)*spd - (burst ? 0 : .5),
+      r: Math.random()*(burst?4:2.5)+1.2,
+      alpha: 1, decay: burst?.028:.022,
+      color: SC[Math.floor(Math.random()*SC.length)],
+      rot: Math.random()*Math.PI*2, rotV: (Math.random()-.5)*.18,
+      star: Math.random()>.45, gravity: .035, drag: burst?.93:1
+    };
+  }
+
+  let particles = [], lastX = -999, lastY = -999;
+
+  document.addEventListener('mousemove', () => {
+    const dx = mx-lastX, dy = my-lastY;
+    if (dx*dx+dy*dy > 100) {
+      for (let i = 0; i < 2; i++) particles.push(makeParticle(mx, my, false));
+      lastX = mx; lastY = my;
+    }
+  });
+
+  document.addEventListener('click', e => {
+    for (let i = 0; i < 16; i++) particles.push(makeParticle(e.clientX, e.clientY, true));
+  });
+
+  (function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles = particles.filter(p => p.alpha > .01);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      p.vx *= p.drag; p.vy *= p.drag;
+      p.vy += p.gravity; p.alpha -= p.decay; p.rot += p.rotV;
+      if (p.star) drawStar(p.x, p.y, p.r, p.alpha, p.color, p.rot);
+      else {
+        ctx.save(); ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = ctx.shadowColor = p.color; ctx.shadowBlur = 9;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill(); ctx.restore();
+      }
+    });
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
+
+<script>
+/* ── i18n Translations ── */
+(function() {
+  const translations = {
+    ko: {
+      'nav.about': '알아보기', 'nav.info': '정보', 'nav.works': '작품',
+      'nav.samples': '샘플', 'nav.price': '가격', 'nav.contact': '문의하기',
+      'hero.sub': 'LD · SD · 메모리얼 애니메이션 포트폴리오', 'hero.cta.works': '포트폴리오 보기', 'hero.cta.contact': '문의하기', 'hero.l2d.credit': '일러스트 · 양초 / 리깅 · 다중',
+      'sidenav.notice': '공지',
+      'notice.title': '공지사항',
+      'notice.alert': '※ 공지를 읽지 않아 발생하는 문제는 일절 책임지지 않습니다.<br>작업 의뢰 시 모든 내용을 확인·동의한 것으로 간주합니다.',
+      'notice.n1.title': '일러스트 작업 불가 / 파일 안내',
+      'notice.n1.desc': '일러스트 작업은 하지 않습니다. 파츠 분리가 완료된 일러스트 PSD 파일이 필요합니다.',
+      'notice.n2.title': '납품 파일 안내',
+      'notice.n2.desc': '작업 완료 후 전달되는 파일은 아이콘 이미지를 포함한 .moc3 파일이 전달됩니다. 수정이 가능한 cmo3 파일은 제공하지 않습니다.',
+      'notice.n3.title': '스트리밍 안내',
+      'notice.n3.desc': '스트리밍을 하고 있습니다. 방송에 송출을 원하지 않는다면 미리 말씀 부탁드립니다.',
+      'notice.n4.title': 'SNS · 포트폴리오 게시 안내',
+      'notice.n4.desc': '모든 작업물은 홍보와 포트폴리오를 위해 SNS와 유튜브에 게시됩니다. 데뷔일까지 공개 지연을 희망하시는 경우 미리 말씀 부탁드립니다.',
+      'notice.n5.title': '요청 사항 기재',
+      'notice.n5.desc': '결제 전 요청 사항은 상세히 작성 부탁드립니다. 기재되지 않은 사항은 추가 작업 및 수정 시 작업이 어렵거나 추가금이 들 수 있습니다.',
+      'notice.n6.title': '저작권 안내',
+      'notice.n6.desc': '리깅과 관련된 저작권은 작가(다중)에게 있습니다. 일러스트와 관련된 저작권은 일러스트 작가님에게 있습니다.',
+      'notice.n7.title': '작업 일정 안내',
+      'notice.n7.desc': '작업 일정은 문의 순이 아닌 결제 순으로 확정됩니다. 일정은 작업 속도에 따라 조금씩 당겨질 수 있으며, 작업이 지연될 시 사전에 미리 연락 드립니다.',
+      'notice.n7.desc2': '※ 컨펌 시 연락이 지연되거나 수정 사항이 많을 시 작업 기간이 늘어날 수 있습니다.',
+      'notice.n7.desc3': '※ 작업 기간은 평균 기본 모델 기준 2주~4주 정도입니다.',
+      'about.greeting': '안녕하세요. Live2D Rigger 다중(Dajoong)입니다.',
+      'about.p1': 'LD·SD 버추얼 모델을 비롯해 배경 애니메이션과 월페이퍼 작업을 진행하며,\n          섬세하고 부드러운 모션 구현에 집중하고 있습니다.',
+      'about.p2': '모델의 매력을 극대화할 수 있는 리깅 방식을 연구하며,\n          다양한 스타일의 모델 작업에 대응할 수 있습니다.\n          클라이언트의 요구에 맞춘 맞춤형 리깅 솔루션을 제공합니다.',
+      'about.p3': '여러 작가님들과의 협업 및 상업 제작 경험을 통해\n          의도에 맞는 결과물을 안정적이고 효율적으로 제작합니다.',
+      'about.card.specialty': '전문 분야', 'about.card.tools': '툴', 'about.card.style': '스타일',
+      'about.card.style1': '자연스럽고 디테일한 리깅', 'about.card.style2': '다양한 스타일 대응',
+      'info.title': '이벤트 & 프로세스',
+      'info.event.heading': '이벤트 안내',
+      'info.event.e1.title': '리뉴얼 기념 특별 할인', 'info.event.e1.badge': '리뉴얼 할인',
+      'info.event.e1.sub': '조기 마감될 수 있습니다', 'info.event.e1.desc': '프리미엄 리깅 LD 전신이 리뉴얼 특별 할인',
+      'info.event.e2.title': '리뷰 작성 고객 이벤트', 'info.event.e2.badge': '리뷰 이벤트',
+      'info.event.e2.sub': '긍정적인 리뷰를 남겨 주시면 추가 할인 혜택까지',
+      'info.event.e2.desc': '리뷰 작성 시 2만원 할인 또는 표정 2종 중 선택 가능합니다',
+      'info.collab.heading': '콜라보 안내', 'info.collab.badge': '콜라보 할인',
+      'info.collab.c1.title': '양초 작가님 콜라보 할인', 'info.collab.c1.sub': '말랑 쫀득한 귀여운 움직임을 원하면 추천', 'info.collab.c1.desc': '일러스트 5만원 + 리깅 5만원 할인 혜택',
+      'info.collab.c2.title': '하노히 작가님 콜라보 할인', 'info.collab.c2.sub': '단아하고 깔끔한 디자인을 원하면 추천', 'info.collab.c2.desc': '일러스트 5만원 + 리깅 5만원 할인 혜택',
+      'info.collab.c3.title': '피치 작가님 콜라보 할인', 'info.collab.c3.sub': '만화 같은 분위기의 디자인을 원하면 추천', 'info.collab.c3.desc': '일러스트 5만원 + 리깅 5만원 할인 혜택',
+      'info.collab.c4.title': '뚱땅이 작가님 콜라보 할인', 'info.collab.c4.sub': '귀엽고 부드러운 움직임을 원하면 추천', 'info.collab.c4.desc': '일러스트 10만원 + 리깅 5만원 할인 혜택',
+      'info.process.heading': '작업 프로세스',
+      'info.process.s1.title': '문의', 'info.process.s1.desc': '작업 요청 및 기본 정보 제공',
+      'info.process.s2.title': '파일 확인 및 견적', 'info.process.s2.desc': '파일 검토 후 상세 견적 제시',
+      'info.process.s3.title': '접수 및 입금', 'info.process.s3.desc': '계약 및 결제',
+      'info.process.s4.title': '1차 리깅', 'info.process.s4.desc': '헤드 및 페이스 구조 제작',
+      'info.process.s5.title': '1차 컨펌 및 수정', 'info.process.s5.desc': '1차 리깅 영상 제공, 피드백 반영 및 개선',
+      'info.process.s6.title': '2차 리깅', 'info.process.s6.desc': '바디 및 소품 디테일 작업',
+      'info.process.s7.title': '2차 컨펌 및 수정', 'info.process.s7.desc': '2차 리깅 영상 제공, 피드백 반영 및 개선',
+      'info.process.s8.title': '완성 및 파일 납품', 'info.process.s8.desc': '최종 파일 전달',
+      'info.process.s9.title': '최종 수정 (3차 수정)', 'info.process.s9.desc': '파일 적용 후 문제 발생 시 수정',
+      'info.process.note': '평균 작업 기간은 2–4주이며, 디자인의 복잡도에 따라 조정 가능합니다.',
+      'plan.basic': '베이직', 'plan.premium': '프리미엄',
+      'plan.item.faceXYZ': '얼굴 XYZ', 'plan.item.eyebrow': '눈썹 (위아래, 변형, 각도)',
+      'plan.item.eyebrowFacial': '눈썹눈 연동 페이셜', 'plan.item.blink': '눈깜빡 (윙크)',
+      'plan.item.pupilPhysics': '눈동자 물리', 'plan.item.lashPhysics': '속눈썹 물리',
+      'plan.item.mouth9': '입움직임 (9점)', 'plan.item.mouth12': '입움직임 (12점~)',
+      'plan.item.jaw': '입 개폐 연동 턱 리깅', 'plan.item.bodyXYZ': '몸 XYZ', 'plan.item.breath': '호흡',
+      'plan.item.arm': '팔 흔들림 (손가락 흔들림)', 'plan.item.camAnim': '캠 이탈 애니메이션 (선택)',
+      'plan.item.expr2': '기본 제공 표정 2종', 'plan.item.noAnim': '(애니메이션 X)',
+      'plan.physics.basic': '최대 3단계 물리 지원', 'plan.physics.basic.sub': '(필요의 경우 4단계 지원)',
+      'plan.physics.premium': '최소 3단계 물리 지원', 'plan.physics.premium.sub': '(필요의 경우 2단계 지원)',
+      'plan.note': '베이직과 프리미엄은 움직임 각도, 물리 단계, 전반적인 디테일에서 차이가 있습니다',
+      'work.guide.label': '작업 안내', 'work.process.title': '작업 과정',
+      'work.flow.confirm1': '1차 컨펌(수정)', 'work.flow.confirm2': '2차 컨펌(수정)',
+      'work.flow.deliver': '완성 후 전달', 'work.flow.final': '최종 수정',
+      'work.process.d1': '파일 적용 후 문제가 있다면 수정해 드립니다 (최종 수정)',
+      'work.process.d2': '오너캐·동물·팬캐 등은 2차 컨펌 없이 1차 컨펌만 진행됩니다.',
+      'work.revision.title': '수정 사항',
+      'work.revision.d1': '기본적인 수정 사항은 작업 기간에 진행되는 총 2회의 컨펌 및 수정 단계에서 진행됩니다.',
+      'work.revision.d1sub': '동물/오너캐의 경우 최종 리깅까지 진행 후 1차 컨펌만 진행합니다.',
+      'work.revision.d2': '수정 완료 후 이전 상태로 되돌리거나 과한 번복 요청 시 추가금이 청구될 수 있습니다.',
+      'work.revision.d3': '리깅 실수 및 오류가 있는 경우 무료로 수정해 드립니다. 파일 적용 후 오류 발견 시 편히 말해 주세요.',
+      'work.copyright.title': '저작권',
+      'work.copyright.d1': '리깅 데이터의 저작권은 기본적으로 리거(다중)에게 귀속됩니다.',
+      'work.copyright.d2': '의뢰인은 본 리깅 결과물을 방송, 영상 제작, SNS 등 목적에 한하여 이용할 수 있습니다.',
+      'work.copyright.d3': '리깅 데이터의 재판매·양도·공유는 허용되지 않습니다.',
+      'works.more': '더 많은 작업 보기 →', 'works.price': '가격 확인하기 →',
+      'samples.title': '리깅 샘플', 'samples.subtitle': '리깅 작업의 다양한 샘플을 확인해보세요.',
+      'samples.fullbody.title': '전신 리깅', 'samples.fullbody.desc': '자연스럽고 부드러운 움직임을 구현합니다.',
+      'samples.fullbody.x': 'X 축 움직임', 'samples.fullbody.y': 'Y 축 움직임', 'samples.fullbody.z': 'Z 축 움직임',
+      'samples.fullbody.note': '캐릭터의 체형과 디자인에 따라 움직임은 변경될 수 있습니다.',
+      'samples.eyes.title': '눈 물리', 'samples.eyes.desc': '다양한 스타일의 눈을 생동감 있게 표현합니다.',
+      'samples.eyes.odd': '몽환적인 눈빛을 살린 디테일한 물리 표현', 'samples.eyes.green': '초롱초롱한 눈동자의 자연스러운 물리 움직임', 'samples.eyes.red': '섬세한 속눈썹과 눈동자의 부드러운 물리',
+      'samples.mouth.title': '입 움직임', 'samples.mouth.desc': '발화 스타일에 맞게 선택할 수 있는 세 가지 입 구조입니다',
+      'samples.mouth.9pt': '단순한 9점 구조로 일반 대화에 적합', 'samples.mouth.12pt': '세밀한 12점 구조로 대화와 감정 표현에 적합', 'samples.mouth.vbridger': 'Vbridger 사용으로 섬세한 감정 표현에 적합',
+      'samples.expr.title': '표정 효과', 'samples.expr.desc': '단축키 한 번으로 개성 있는 감정을 표현해보세요',
+      'samples.expr.contempt': '차갑고 날카로운 눈빛으로 경멸감을 표현', 'samples.expr.annoy': '순간적인 짜증과 불쾌감을 생동감 있게 연출', 'samples.expr.heart': '설레고 사랑스러운 순간을 하트눈으로 표현',
+      'samples.exprAnim.title': '표정 애니메이션', 'samples.exprAnim.desc': '캐릭터 위에 자연스럽게 재생되는 감정 연출 효과입니다',
+      'samples.exprAnim.tear': '눈가를 타고 흐르는 자연스러운 눈물 연출', 'samples.exprAnim.sweat': '긴장감과 당황스러움을 식은땀으로 표현',
+      'samples.arm.title': '팔 움직임', 'samples.arm.desc': '캐릭터의 콘셉트에 맞는 팔 움직임 예시입니다',
+      'samples.arm.game': '게임기를 이용해 게임 화면에 몰입감을 올릴 수 있습니다', 'samples.arm.wand': '캐릭터 컨셉에 맞는 아이템으로 다양한 연출', 'samples.arm.wave': '손을 흔들며 인사하는 디테일한 표현',
+      'samples.costume.title': '의상 및 헤어', 'samples.costume.desc': '의상과 헤어 변경으로 같은 캐릭터도 전혀 다른 분위기를 연출할 수 있습니다.',
+      'samples.costume.hair': '머리 색상을 바꿔 전혀 다른 분위기를 연출', 'samples.costume.outfit': '의상 교체로 캐릭터 콘셉트를 폭넓게 표현', 'samples.costume.hairstyle': '헤어 스타일 변경으로 같은 캐릭터도 새로운 느낌으로',
+      'price.badge.ld': 'Live2D', 'price.badge.premium': 'Premium', 'price.badge.sd': 'SD', 'price.badge.bg': 'Animation', 'price.badge.recommended': '추천',
+      'price.label.full': '전신', 'price.label.half': '반신', 'price.label.base': '기본가', 'price.label.from': ' ~',
+      'price.intro': '기본 안내 요금입니다. 프로젝트 요구사항에 따라 견적이 달라집니다.<br>상세 견적은 파일 구조와 요구 사항 확인 후 안내드립니다.',
+      'price.basic.title': '베이직 리깅', 'price.basic.full': ' (전신)', 'price.basic.half': ' (반신)',
+      'price.basic.desc': '자연스러운 XYZ 움직임과 안정적인 물리를 제공합니다.',
+      'price.basic.f1': '얼굴 · 몸 XYZ 움직임', 'price.basic.f2': '눈썹 변형 · 각도 / 눈깜빡 (윙크)',
+      'price.basic.f3': '입움직임 9점 / 입 개폐 연동 턱', 'price.basic.f4': '호흡 · 팔 흔들림 (손가락 포함)',
+      'price.basic.f5': '기본 표정 2종 포함', 'price.basic.f6': '최대 3단계 물리 지원',
+      'price.basic.period': '예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회',
+      'price.prem.title': '프리미엄 리깅', 'price.prem.full': ' (전신)', 'price.prem.half': ' (반신)',
+      'price.prem.desc': '높은 물리 단계와 세밀한 디테일로 풍부한 움직임을 제공합니다.',
+      'price.prem.f1': '얼굴 · 몸 XYZ 움직임', 'price.prem.f2': '눈썹눈 연동 페이셜 / 눈깜빡 (윙크)',
+      'price.prem.f3': '입움직임 12점~ / 입 개폐 연동 턱', 'price.prem.f4': '속눈썹 물리 / 눈동자 물리',
+      'price.prem.f5': '호흡 · 팔 흔들림 (손가락 포함)', 'price.prem.f6': '기본 표정 2종 포함',
+      'price.prem.f7': '최소 3단계 물리 지원',
+      'price.prem.period': '예상 작업 기간: 14일–30일 · 수정 2회 + 적용 후 1회',
+      'price.ld.f1': '자연스러운 XYZ 움직임 제공', 'price.ld.f4': '기본 표정 2종 포함',
+      'price.sd.title': 'SD 리깅', 'price.sd.full': ' (전신)',
+      'price.sd.desc': '작고 귀여운 SD 모델 리깅. 가볍고 빠른 리깅을 제공합니다.',
+      'price.sd.f2': '단순한 입 모양', 'price.sd.period': '예상 작업 기간: 7일–14일 · 수정 2회 + 적용 후 1회',
+      'price.bg.title': '배경 / 월페이퍼 애니메이션', 'price.bg.type': ' ~',
+      'price.bg.desc': '반복되는 루프형 애니메이션과 월페이퍼를 제작합니다.',
+      'price.bg.f1': '자연스럽게 반복되는 애니메이션 제작', 'price.bg.f2': '기본 mp4 포맷 제공 (GIF 추가 가능)',
+      'price.bg.f3': 'GIF는 파일 특성상 깨짐이 있을 수 있음', 'price.bg.f4': '복잡도에 따라 금액 협의',
+      'price.bg.period': '예상 작업 기간: 7일–14일 · 수정 최대 2회',
+      'price.note': '정확한 견적은 아트워크(PSD/PNG)와 요구사항 확인 후 산정됩니다.',
+      'price.cta': 'DM으로 상세 문의하기',
+    },
+    en: {
+      'nav.about': 'About', 'nav.info': 'Info', 'nav.works': 'Works',
+      'nav.samples': 'Samples', 'nav.price': 'Price', 'nav.contact': 'Contact',
+      'hero.sub': 'LD · SD · Memorial Animation Portfolio', 'hero.cta.works': 'View Portfolio', 'hero.cta.contact': 'Contact', 'hero.l2d.credit': 'Illust · 양초 / Rigging · Dajoong',
+      'notice.title': 'Notice',
+      'notice.alert': '※ We are not responsible for issues arising from not reading the notices.<br>By placing a commission, you agree to all the terms listed here.',
+      'notice.n1.title': 'No Illustration Work / File Requirements',
+      'notice.n1.desc': 'Illustration work is not available. A fully separated PSD file with all parts is required.',
+      'notice.n2.title': 'Delivery File Info',
+      'notice.n2.desc': 'The delivered file will be a .moc3 file including an icon image. The editable .cmo3 source file is not provided.',
+      'notice.n3.title': 'Streaming Notice',
+      'notice.n3.desc': 'I stream on occasion. Please let me know in advance if you do not wish your model to appear on stream.',
+      'notice.n4.title': 'SNS & Portfolio Posting',
+      'notice.n4.desc': 'All completed works may be posted on SNS and YouTube for promotion and portfolio purposes. Please inform me in advance if you wish to delay the reveal until your debut date.',
+      'notice.n5.title': 'Request Details',
+      'notice.n5.desc': 'Please describe all requests in detail before payment. Items not specified may be difficult to add later or may incur additional charges.',
+      'notice.n6.title': 'Copyright Notice',
+      'notice.n6.desc': 'The copyright for the rigging belongs to the rigger (Dajoong). The copyright for the illustration belongs to the respective illustrator.',
+      'notice.n7.title': 'Work Schedule',
+      'notice.n7.desc': 'Work schedules are confirmed by order of payment, not inquiry. Schedules may be moved up depending on work pace; delays will be communicated in advance.',
+      'notice.n7.desc2': '※ Delays in confirmation responses or a large number of revisions may extend the work period.',
+      'notice.n7.desc3': '※ Average work duration is approximately 2–4 weeks for a standard model.',
+      'about.greeting': 'Hello, I\'m Dajoong — a Live2D Rigger.',
+      'about.p1': 'I work on LD/SD virtual models, background animations, and wallpapers,\n          with a focus on creating smooth, detailed motion.',
+      'about.p2': 'I continually research rigging methods to maximize the appeal of each model\n          and can handle a wide variety of styles.\n          I provide customized rigging solutions tailored to each client\'s needs.',
+      'about.p3': 'Through collaboration with multiple artists and commercial production experience,\n          I deliver results that match your vision reliably and efficiently.',
+      'about.card.specialty': 'Specialty', 'about.card.tools': 'Tools', 'about.card.style': 'Style',
+      'about.card.style1': 'Natural & Detailed Rigging', 'about.card.style2': 'Versatile Style Support',
+      'info.title': 'Events & Process',
+      'info.event.heading': 'Events',
+      'info.event.e1.title': 'Renewal Special Discount', 'info.event.e1.badge': 'Renewal Sale',
+      'info.event.e1.sub': 'May end early', 'info.event.e1.desc': 'Special discount on Premium LD Full-Body rigging',
+      'info.event.e2.title': 'Review Event', 'info.event.e2.badge': 'Review Event',
+      'info.event.e2.sub': 'Leave a positive review and receive extra benefits',
+      'info.event.e2.desc': 'Get ₩20,000 off or 2 extra expressions of your choice',
+      'info.collab.heading': 'Collaborations', 'info.collab.badge': 'Collab Discount',
+      'info.collab.c1.title': 'Yangcho Artist Collab', 'info.collab.c1.sub': 'Recommended for soft & bouncy cute movement', 'info.collab.c1.desc': '₩50,000 off illustration + ₩50,000 off rigging',
+      'info.collab.c2.title': 'Hanohi Artist Collab', 'info.collab.c2.sub': 'Recommended for elegant and clean design', 'info.collab.c2.desc': '₩50,000 off illustration + ₩50,000 off rigging',
+      'info.collab.c3.title': 'Peach Artist Collab', 'info.collab.c3.sub': 'Recommended for manga-style design', 'info.collab.c3.desc': '₩50,000 off illustration + ₩50,000 off rigging',
+      'info.collab.c4.title': 'Ddungddangi Artist Collab', 'info.collab.c4.sub': 'Recommended for cute and smooth movement', 'info.collab.c4.desc': '₩100,000 off illustration + ₩50,000 off rigging',
+      'info.process.heading': 'Work Process',
+      'info.process.s1.title': 'Inquiry', 'info.process.s1.desc': 'Submit work request and basic info',
+      'info.process.s2.title': 'File Review & Quote', 'info.process.s2.desc': 'Review files and provide detailed estimate',
+      'info.process.s3.title': 'Acceptance & Payment', 'info.process.s3.desc': 'Contract and payment',
+      'info.process.s4.title': '1st Rigging', 'info.process.s4.desc': 'Head & face structure creation',
+      'info.process.s5.title': '1st Review & Revision', 'info.process.s5.desc': 'Provide 1st rigging video, apply feedback',
+      'info.process.s6.title': '2nd Rigging', 'info.process.s6.desc': 'Body & prop detail work',
+      'info.process.s7.title': '2nd Review & Revision', 'info.process.s7.desc': 'Provide 2nd rigging video, apply feedback',
+      'info.process.s8.title': 'Completion & Delivery', 'info.process.s8.desc': 'Final file delivery',
+      'info.process.s9.title': 'Final Revision (3rd)', 'info.process.s9.desc': 'Fix any issues found after applying the file',
+      'info.process.note': 'Average work period is 2–4 weeks, adjustable based on design complexity.',
+      'plan.basic': 'Basic', 'plan.premium': 'Premium',
+      'plan.item.faceXYZ': 'Face XYZ', 'plan.item.eyebrow': 'Eyebrows (Up/Down, Deform, Angle)',
+      'plan.item.eyebrowFacial': 'Eyebrow-Eye Linked Facial', 'plan.item.blink': 'Blink (Wink)',
+      'plan.item.pupilPhysics': 'Pupil Physics', 'plan.item.lashPhysics': 'Eyelash Physics',
+      'plan.item.mouth9': 'Mouth Movement (9pt)', 'plan.item.mouth12': 'Mouth Movement (12pt+)',
+      'plan.item.jaw': 'Jaw Rigging Linked to Mouth', 'plan.item.bodyXYZ': 'Body XYZ', 'plan.item.breath': 'Breathing',
+      'plan.item.arm': 'Arm Swing (Finger Shake)', 'plan.item.camAnim': 'Camera Exit Animation (Optional)',
+      'plan.item.expr2': '2 Default Expressions Included', 'plan.item.noAnim': '(No Animation)',
+      'plan.physics.basic': 'Up to 3-layer Physics', 'plan.physics.basic.sub': '(4-layer if needed)',
+      'plan.physics.premium': 'Minimum 3-layer Physics', 'plan.physics.premium.sub': '(2-layer if needed)',
+      'plan.note': 'Basic and Premium differ in movement angles, physics layers, and overall detail',
+      'work.guide.label': 'Work Guidelines', 'work.process.title': 'Work Flow',
+      'work.flow.confirm1': '1st Review (Revision)', 'work.flow.confirm2': '2nd Review (Revision)',
+      'work.flow.deliver': 'Completion & Delivery', 'work.flow.final': 'Final Revision',
+      'work.process.d1': 'If any issues arise after applying the file, revisions will be provided (Final Revision).',
+      'work.process.d2': 'For OC / animal / fan models, only a 1st review is conducted (no 2nd review).',
+      'work.revision.title': 'Revisions',
+      'work.revision.d1': 'Basic revisions are handled during the 2 review stages within the work period.',
+      'work.revision.d1sub': 'For animal/OC models, only a 1st review is conducted after full rigging.',
+      'work.revision.d2': 'Reverting completed revisions or excessive back-and-forth may incur additional charges.',
+      'work.revision.d3': 'Rigging errors and mistakes will be fixed for free. Please feel free to mention any issues after applying the file.',
+      'work.copyright.title': 'Copyright',
+      'work.copyright.d1': 'The copyright for the rigging data belongs to the rigger (Dajoong) by default.',
+      'work.copyright.d2': 'The client may use the rigging results for streaming, video production, and SNS purposes.',
+      'work.copyright.d3': 'Resale, transfer, or sharing of the rigging data is not permitted.',
+      'works.more': 'View More Work →', 'works.price': 'View Pricing →',
+      'samples.title': 'Rigging Samples', 'samples.subtitle': 'Browse a variety of rigging work samples.',
+      'samples.fullbody.title': 'Full-Body Rigging', 'samples.fullbody.desc': 'Natural and smooth movement implementation.',
+      'samples.fullbody.x': 'X-Axis Movement', 'samples.fullbody.y': 'Y-Axis Movement', 'samples.fullbody.z': 'Z-Axis Movement',
+      'samples.fullbody.note': 'Movement may vary depending on the character\'s body type and design.',
+      'samples.eyes.title': 'Eye Physics', 'samples.eyes.desc': 'Expressive and lively eyes in a variety of styles.',
+      'samples.eyes.odd': 'Detailed physics for a dreamy, otherworldly gaze', 'samples.eyes.green': 'Natural physics for bright, sparkling eyes', 'samples.eyes.red': 'Soft physics for delicate lashes and pupils',
+      'samples.mouth.title': 'Mouth Movement', 'samples.mouth.desc': 'Three mouth structures to match your speaking style',
+      'samples.mouth.9pt': 'Simple 9-point structure, ideal for casual conversation', 'samples.mouth.12pt': 'Detailed 12-point structure for expressive dialogue', 'samples.mouth.vbridger': 'Vbridger-compatible for nuanced emotional expression',
+      'samples.expr.title': 'Expression Effects', 'samples.expr.desc': 'Express personality with a single hotkey',
+      'samples.expr.contempt': 'Cold and sharp gaze expressing contempt', 'samples.expr.annoy': 'Vivid depiction of sudden irritation', 'samples.expr.heart': 'Heart-eyes for loveable, fluttery moments',
+      'samples.exprAnim.title': 'Expression Animations', 'samples.exprAnim.desc': 'Emotion overlay effects that play naturally over your character',
+      'samples.exprAnim.tear': 'Natural teardrop flowing down the eye', 'samples.exprAnim.sweat': 'Cold sweat to convey tension and surprise',
+      'samples.arm.title': 'Arm Movement', 'samples.arm.desc': 'Arm movement examples suited to your character\'s concept',
+      'samples.arm.game': 'Immerse viewers with a handheld game controller', 'samples.arm.wand': 'Diverse expressions with concept-fitting items', 'samples.arm.wave': 'Detailed waving hand gesture',
+      'samples.costume.title': 'Costume & Hair', 'samples.costume.desc': 'Costume and hair swaps let the same character radiate a completely different vibe.',
+      'samples.costume.hair': 'Hair color change for a completely different look', 'samples.costume.outfit': 'Outfit swap to express a wide range of character concepts', 'samples.costume.hairstyle': 'Hairstyle change gives the same character a fresh feel',
+      'price.badge.ld': 'Live2D', 'price.badge.premium': 'Premium', 'price.badge.sd': 'SD', 'price.badge.bg': 'Animation', 'price.badge.recommended': 'Recommended',
+      'price.label.full': 'Full-Body', 'price.label.half': 'Half-Body', 'price.label.base': 'Base Price', 'price.label.from': ' ~',
+      'price.title': 'Pricing',
+      'price.intro': 'These are base reference prices. Quotes may vary based on project requirements.<br>Detailed quotes are provided after reviewing files and requirements.',
+      'price.basic.title': 'Basic Rigging', 'price.basic.full': ' (Full-Body)', 'price.basic.half': ' (Half-Body)',
+      'price.basic.desc': 'Natural XYZ movement with stable physics.',
+      'price.basic.f1': 'Face & Body XYZ Movement', 'price.basic.f2': 'Eyebrow Deform & Angle / Blink (Wink)',
+      'price.basic.f3': 'Mouth (9-point) / Jaw Linked', 'price.basic.f4': 'Breathing & Arm Swing (incl. fingers)',
+      'price.basic.f5': '2 Default Expressions Included', 'price.basic.f6': 'Up to 3-tier Physics',
+      'price.basic.period': 'Estimated Time: 14–30 days · 2 revisions + 1 post-delivery',
+      'price.prem.title': 'Premium Rigging', 'price.prem.full': ' (Full-Body)', 'price.prem.half': ' (Half-Body)',
+      'price.prem.desc': 'High-tier physics and detailed movement for rich expressiveness.',
+      'price.prem.f1': 'Face & Body XYZ Movement', 'price.prem.f2': 'Eyebrow-Eye Linked Facial / Blink (Wink)',
+      'price.prem.f3': 'Mouth (12-point+) / Jaw Linked', 'price.prem.f4': 'Eyelash & Pupil Physics',
+      'price.prem.f5': 'Breathing & Arm Swing (incl. fingers)', 'price.prem.f6': '2 Default Expressions Included',
+      'price.prem.f7': 'Minimum 3-tier Physics',
+      'price.prem.period': 'Estimated Time: 14–30 days · 2 revisions + 1 post-delivery',
+      'price.ld.f1': 'Natural XYZ Movement', 'price.ld.f4': '2 Default Expressions Included',
+      'price.sd.title': 'SD Rigging', 'price.sd.full': ' (Full-Body)',
+      'price.sd.desc': 'Cute SD model rigging. Light and fast.',
+      'price.sd.f2': 'Simple Mouth Shapes', 'price.sd.period': 'Estimated Time: 7–14 days · 2 revisions + 1 post-delivery',
+      'price.bg.title': 'Background / Wallpaper Animation', 'price.bg.type': ' ~',
+      'price.bg.desc': 'Looping animations and wallpaper creation.',
+      'price.bg.f1': 'Naturally looping animation', 'price.bg.f2': 'Base mp4 format (GIF available)',
+      'price.bg.f3': 'GIF quality may vary due to format limitations', 'price.bg.f4': 'Price varies by complexity',
+      'price.bg.period': 'Estimated Time: 7–14 days · Up to 2 revisions',
+      'price.note': 'Final quotes are determined after reviewing artwork (PSD/PNG) and requirements.',
+      'price.cta': 'Contact via DM',
+    },
+    ja: {
+      'nav.about': '紹介', 'nav.info': '情報', 'nav.works': '作品',
+      'nav.samples': 'サンプル', 'nav.price': '料金', 'nav.contact': 'お問い合わせ',
+      'hero.sub': 'LD · SD · メモリアルアニメーション ポートフォリオ', 'hero.cta.works': 'ポートフォリオを見る', 'hero.cta.contact': 'お問い合わせ', 'hero.l2d.credit': 'イラスト · 양초 / リギング · 다중',
+      'sidenav.notice': 'お知らせ',
+      'notice.title': 'お知らせ',
+      'notice.alert': '※ お知らせを読まなかったことによる問題について、一切の責任を負いません。<br>依頼をもって、すべての内容に同意したものとみなします。',
+      'notice.n1.title': 'イラスト作業不可 / ファイルについて',
+      'notice.n1.desc': 'イラスト作業は行っておりません。パーツ分けが完了したイラストのPSDファイルが必要です。',
+      'notice.n2.title': '納品ファイルについて',
+      'notice.n2.desc': '作業完了後にお渡しするファイルは、アイコン画像を含む.moc3ファイルです。編集可能な.cmo3ファイルの提供は行っておりません。',
+      'notice.n3.title': '配信について',
+      'notice.n3.desc': '配信活動をしています。配信への映り込みを希望しない場合は、事前にお知らせください。',
+      'notice.n4.title': 'SNS・ポートフォリオ掲載について',
+      'notice.n4.desc': 'すべての作業物は宣伝・ポートフォリオ目的でSNSおよびYouTubeに掲載されます。デビュー日までの公開延期を希望される場合は、事前にご連絡ください。',
+      'notice.n5.title': 'ご要望の記載について',
+      'notice.n5.desc': 'お支払い前にご要望を詳しくお書きください。記載のない項目については、追加作業・修正が難しい場合や追加料金が発生することがあります。',
+      'notice.n6.title': '著作権について',
+      'notice.n6.desc': 'リギングに関する著作権は作者（다중）に帰属します。イラストに関する著作権はイラストレーターに帰属します。',
+      'notice.n7.title': '作業スケジュールについて',
+      'notice.n7.desc': '作業スケジュールはお問い合わせ順ではなく、お支払い順で確定されます。進捗に応じてスケジュールが前倒しになる場合があります。遅延が発生する場合は事前にご連絡いたします。',
+      'notice.n7.desc2': '※ 確認返信の遅延や修正が多い場合、作業期間が延長されることがあります。',
+      'notice.n7.desc3': '※ 作業期間は標準モデルで平均2〜4週間程度です。',
+      'about.greeting': 'はじめまして。Live2DリガーのDajoong（다중）です。',
+      'about.p1': 'LD・SDバーチャルモデルをはじめ、背景アニメーションや\n          壁紙制作を行っており、繊細で滑らかなモーション表現にこだわっています。',
+      'about.p2': 'モデルの魅力を最大限に引き出せるリギング手法を研究しており、\n          様々なスタイルのモデルに対応可能です。\n          クライアントの要望に合わせたオーダーメイドのリギングソリューションを提供します。',
+      'about.p3': '多くのアーティストとのコラボや商業制作の経験を通じて、\n          ご要望に沿った成果物を安定的かつ効率よく制作します。',
+      'about.card.specialty': '専門分野', 'about.card.tools': 'ツール', 'about.card.style': 'スタイル',
+      'about.card.style1': '自然でディテールなリギング', 'about.card.style2': '多様なスタイルに対応',
+      'info.title': 'イベント & プロセス',
+      'info.event.heading': 'イベント',
+      'info.event.e1.title': 'リニューアル記念特別割引', 'info.event.e1.badge': 'リニューアル割引',
+      'info.event.e1.sub': '早期終了の可能性あり', 'info.event.e1.desc': 'プレミアムリギング LD全身が特別割引中',
+      'info.event.e2.title': 'レビュー投稿イベント', 'info.event.e2.badge': 'レビューイベント',
+      'info.event.e2.sub': 'ポジティブなレビューを投稿すると特典があります',
+      'info.event.e2.desc': '₩20,000割引または表情2種からお選びいただけます',
+      'info.collab.heading': 'コラボ情報', 'info.collab.badge': 'コラボ割引',
+      'info.collab.c1.title': 'ヤンチョ作家コラボ割引', 'info.collab.c1.sub': 'やわらかくかわいい動きがご希望の方におすすめ', 'info.collab.c1.desc': 'イラスト₩50,000 + リギング₩50,000割引',
+      'info.collab.c2.title': 'ハノヒ作家コラボ割引', 'info.collab.c2.sub': 'シンプルでスタイリッシュなデザインがご希望の方に', 'info.collab.c2.desc': 'イラスト₩50,000 + リギング₩50,000割引',
+      'info.collab.c3.title': 'ピーチ作家コラボ割引', 'info.collab.c3.sub': 'マンガ調のデザインがご希望の方におすすめ', 'info.collab.c3.desc': 'イラスト₩50,000 + リギング₩50,000割引',
+      'info.collab.c4.title': 'トゥントゥン作家コラボ割引', 'info.collab.c4.sub': 'かわいくソフトな動きがご希望の方におすすめ', 'info.collab.c4.desc': 'イラスト₩100,000 + リギング₩50,000割引',
+      'info.process.heading': '作業プロセス',
+      'info.process.s1.title': 'お問い合わせ', 'info.process.s1.desc': '作業依頼と基本情報の提供',
+      'info.process.s2.title': 'ファイル確認・見積もり', 'info.process.s2.desc': 'ファイルを確認後、詳細な見積もりを提示',
+      'info.process.s3.title': '受付・お支払い', 'info.process.s3.desc': '契約と決済',
+      'info.process.s4.title': '第1次リギング', 'info.process.s4.desc': '頭部・顔の構造制作',
+      'info.process.s5.title': '第1次確認・修正', 'info.process.s5.desc': '第1次リギング動画を提供し、フィードバックを反映',
+      'info.process.s6.title': '第2次リギング', 'info.process.s6.desc': '胴体・小道具のディテール作業',
+      'info.process.s7.title': '第2次確認・修正', 'info.process.s7.desc': '第2次リギング動画を提供し、フィードバックを反映',
+      'info.process.s8.title': '完成・納品', 'info.process.s8.desc': '最終ファイルの納品',
+      'info.process.s9.title': '最終修正（第3次修正）', 'info.process.s9.desc': 'ファイル適用後の不具合修正',
+      'info.process.note': '平均作業期間は2〜4週間で、デザインの複雑さに応じて調整可能です。',
+      'plan.basic': 'ベーシック', 'plan.premium': 'プレミアム',
+      'plan.item.faceXYZ': '顔XYZ', 'plan.item.eyebrow': '眉毛（上下・変形・角度）',
+      'plan.item.eyebrowFacial': '眉毛・目連動フェイシャル', 'plan.item.blink': '瞬き（ウィンク）',
+      'plan.item.pupilPhysics': '瞳物理', 'plan.item.lashPhysics': 'まつ毛物理',
+      'plan.item.mouth9': '口の動き（9点）', 'plan.item.mouth12': '口の動き（12点〜）',
+      'plan.item.jaw': '口の開閉連動あご', 'plan.item.bodyXYZ': '体XYZ', 'plan.item.breath': '呼吸',
+      'plan.item.arm': '腕の揺れ（指の揺れ）', 'plan.item.camAnim': 'カメラ外れアニメーション（任意）',
+      'plan.item.expr2': 'デフォルト表情2種付き', 'plan.item.noAnim': '（アニメーションなし）',
+      'plan.physics.basic': '最大3段階物理対応', 'plan.physics.basic.sub': '（必要に応じて4段階対応）',
+      'plan.physics.premium': '最低3段階物理対応', 'plan.physics.premium.sub': '（必要に応じて2段階対応）',
+      'plan.note': 'ベーシックとプレミアムは動きの角度、物理の段階、全体的なディテールが異なります',
+      'work.guide.label': '作業ガイド', 'work.process.title': '作業フロー',
+      'work.flow.confirm1': '第1次確認（修正）', 'work.flow.confirm2': '第2次確認（修正）',
+      'work.flow.deliver': '完成・納品', 'work.flow.final': '最終修正',
+      'work.process.d1': 'ファイル適用後に問題が発生した場合、修正対応いたします（最終修正）。',
+      'work.process.d2': 'オリキャラ・動物・ファンキャラは第2次確認なしで第1次確認のみ行います。',
+      'work.revision.title': '修正について',
+      'work.revision.d1': '基本的な修正は作業期間中に行われる合計2回の確認・修正段階で対応します。',
+      'work.revision.d1sub': '動物・オリキャラの場合は最終リギングまで進めた後、第1次確認のみ行います。',
+      'work.revision.d2': '修正完了後に以前の状態に戻す依頼や過度な変更要求には追加料金が発生する場合があります。',
+      'work.revision.d3': 'リギングのミスやエラーがある場合は無料で修正いたします。ファイル適用後に問題を発見した場合はお気軽にお知らせください。',
+      'work.copyright.title': '著作権',
+      'work.copyright.d1': 'リギングデータの著作権は原則としてリガー（Dajoong）に帰属します。',
+      'work.copyright.d2': '依頼者は本リギング成果物を配信・動画制作・SNS等の目的に限り使用することができます。',
+      'work.copyright.d3': 'リギングデータの転売・譲渡・共有は禁止されています。',
+      'works.more': 'もっと作品を見る →', 'works.price': '料金を確認する →',
+      'samples.title': 'リギングサンプル', 'samples.subtitle': 'リギング作業の様々なサンプルをご覧ください。',
+      'samples.fullbody.title': '全身リギング', 'samples.fullbody.desc': '自然でなめらかな動きを実現します。',
+      'samples.fullbody.x': 'X軸の動き', 'samples.fullbody.y': 'Y軸の動き', 'samples.fullbody.z': 'Z軸の動き',
+      'samples.fullbody.note': 'キャラクターの体型やデザインによって動きが異なる場合があります。',
+      'samples.eyes.title': '目の物理', 'samples.eyes.desc': '様々なスタイルの目を生き生きと表現します。',
+      'samples.eyes.odd': '幻想的な目でディテールにこだわった物理表現', 'samples.eyes.green': 'キラキラした瞳の自然な物理的動き', 'samples.eyes.red': 'まつ毛と瞳のなめらかな物理表現',
+      'samples.mouth.title': '口の動き', 'samples.mouth.desc': '発話スタイルに合わせて選べる3種類の口の構造',
+      'samples.mouth.9pt': 'シンプルな9点構造で一般的な会話に最適', 'samples.mouth.12pt': '細かい12点構造で会話・感情表現に最適', 'samples.mouth.vbridger': 'Vbridger対応で繊細な感情表現に最適',
+      'samples.expr.title': '表情エフェクト', 'samples.expr.desc': 'ショートカット一つで個性的な感情を表現',
+      'samples.expr.contempt': '冷たく鋭い視線で侮蔑感を表現', 'samples.expr.annoy': '瞬間的なイライラと不快感を生き生きと演出', 'samples.expr.heart': 'ドキドキした愛らしい瞬間をハート目で表現',
+      'samples.exprAnim.title': '表情アニメーション', 'samples.exprAnim.desc': 'キャラクターに自然に再生される感情演出エフェクト',
+      'samples.exprAnim.tear': '目元を流れる自然な涙の演出', 'samples.exprAnim.sweat': '緊張感と戸惑いを冷や汗で表現',
+      'samples.arm.title': '腕の動き', 'samples.arm.desc': 'キャラクターのコンセプトに合った腕の動きの例',
+      'samples.arm.game': 'ゲームコントローラーでゲーム画面への没入感を演出', 'samples.arm.wand': 'コンセプトに合ったアイテムで多彩な演出', 'samples.arm.wave': '手を振って挨拶するディテールな表現',
+      'samples.costume.title': '衣装・ヘア', 'samples.costume.desc': '衣装やヘアを変えることで同じキャラクターでも全く異なる雰囲気を演出できます。',
+      'samples.costume.hair': '髪の色を変えて全く異なる雰囲気を演出', 'samples.costume.outfit': '衣装チェンジでキャラクターのコンセプトを幅広く表現', 'samples.costume.hairstyle': 'ヘアスタイル変更で同じキャラクターでも新鮮な印象に',
+      'price.badge.ld': 'Live2D', 'price.badge.premium': 'Premium', 'price.badge.sd': 'SD', 'price.badge.bg': 'Animation', 'price.badge.recommended': 'おすすめ',
+      'price.label.full': '全身', 'price.label.half': '半身', 'price.label.base': '基本価格', 'price.label.from': ' 〜',
+      'price.title': '料金',
+      'price.intro': '基本参考料金です。プロジェクトの要件によって見積もりが異なります。<br>詳細な見積もりはファイル構造と要件を確認後にご案内します。',
+      'price.basic.title': 'ベーシックリギング', 'price.basic.full': '（全身）', 'price.basic.half': '（半身）',
+      'price.basic.desc': '自然なXYZ動作と安定した物理表現を提供します。',
+      'price.basic.f1': '顔・体 XYZ動作', 'price.basic.f2': '眉変形・角度 / まばたき（ウィンク）',
+      'price.basic.f3': '口の動き9点 / 顎リンク', 'price.basic.f4': '呼吸・腕揺れ（指含む）',
+      'price.basic.f5': 'デフォルト表情2種付き', 'price.basic.f6': '最大3段階物理対応',
+      'price.basic.period': '予想作業期間：14〜30日 · 修正2回 + 適用後1回',
+      'price.prem.title': 'プレミアムリギング', 'price.prem.full': '（全身）', 'price.prem.half': '（半身）',
+      'price.prem.desc': '高精度の物理と細かいディテールで豊かな動きを提供します。',
+      'price.prem.f1': '顔・体 XYZ動作', 'price.prem.f2': '眉目連動フェイシャル / まばたき（ウィンク）',
+      'price.prem.f3': '口の動き12点〜 / 顎リンク', 'price.prem.f4': 'まつ毛・瞳物理',
+      'price.prem.f5': '呼吸・腕揺れ（指含む）', 'price.prem.f6': 'デフォルト表情2種付き',
+      'price.prem.f7': '最低3段階物理対応',
+      'price.prem.period': '予想作業期間：14〜30日 · 修正2回 + 適用後1回',
+      'price.ld.f1': '自然なXYZ動作', 'price.ld.f4': 'デフォルト表情2種付き',
+      'price.sd.title': 'SDリギング', 'price.sd.full': '（全身）',
+      'price.sd.desc': 'かわいらしいSDモデルのリギング。軽快でスピーディーな対応。',
+      'price.sd.f2': 'シンプルな口の形', 'price.sd.period': '予想作業期間：7〜14日 · 修正2回 + 適用後1回',
+      'price.bg.title': '背景 / 壁紙アニメーション', 'price.bg.type': ' 〜',
+      'price.bg.desc': 'ループ型アニメーションと壁紙を制作します。',
+      'price.bg.f1': '自然にループするアニメーション制作', 'price.bg.f2': 'mp4形式で提供（GIF追加可能）',
+      'price.bg.f3': 'GIFはファイルの特性上、画質が低下する場合があります', 'price.bg.f4': '複雑さにより金額要相談',
+      'price.bg.period': '予想作業期間：7〜14日 · 最大2回修正',
+      'price.note': '正確な見積もりはアートワーク（PSD/PNG）と要件の確認後に算定されます。',
+      'price.cta': 'DMでお問い合わせ',
+    }
+  };
+
+  let currentLang = 'ko';
+
+  function applyLang(lang) {
+    const t = translations[lang];
+    if (!t) return;
+    currentLang = lang;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) {
+        el.innerHTML = t[key];
+      }
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('lang-active', btn.getAttribute('data-lang') === lang);
+    });
+
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('dajoong_lang', lang); } catch(e) {}
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      applyLang(btn.getAttribute('data-lang'));
+    });
+  });
+
+  // 저장된 언어 우선, 없으면 브라우저 언어 자동 감지
+  const savedLang = (() => { try { return localStorage.getItem('dajoong_lang'); } catch(e) { return null; } })();
+  const browserLang = navigator.language.toLowerCase();
+  if (savedLang && translations[savedLang]) applyLang(savedLang);
+  else if (browserLang.startsWith('ja')) applyLang('ja');
+  else if (!browserLang.startsWith('ko')) applyLang('en');
+})();
+</script>
+
+
+
+<!-- Hero Signature: opentype 로드 후 실행 -->
+<script>
+(function(){
+  const FONT_URL = 'https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js';
+  const s = document.createElement('script');
+  s.src = FONT_URL;
+  s.onload = function(){ initHeroSig(); };
+  s.onerror = function(){ showFallback(); };
+  document.body.appendChild(s);
+
+  function showFallback(){
+    const fb = document.getElementById('hero-sig-fallback');
+    const sv = document.getElementById('hero-sig');
+    if(fb){ fb.style.display = 'block'; }
+    if(sv){ sv.style.display = 'none'; }
+  }
+
+  function initHeroSig(){
+    const TEXT = 'Dajoong';
+    const W = 600, FS = 96, BASELINE = 100;
+    const STROKE_COLOR = '#7C87FF';
+    const FILL_COLOR = '#7C87FF';
+    const svg = document.getElementById('hero-sig');
+    if(!svg){ showFallback(); return; }
+
+    const FONT_TTF = 'https://cdn.jsdelivr.net/gh/fonts-archive/PinyonScript/PinyonScript-Regular.ttf';
+    const FONT_FALLBACK = 'https://cdn.jsdelivr.net/npm/@fontsource/pinyon-script@5.0.5/files/pinyon-script-latin-400-normal.woff';
+
+    async function tryLoad(urls){
+      for(const url of urls){
+        try{
+          const res = await fetch(url);
+          if(!res.ok) continue;
+          const buf = await res.arrayBuffer();
+          return opentype.parse(buf);
+        }catch(e){ continue; }
+      }
+      return null;
+    }
+
+    tryLoad([FONT_TTF, FONT_FALLBACK]).then(function(font){
+      if(!font){ showFallback(); return; }
+
+      const scale = FS / font.unitsPerEm;
+      let cx = 0;
+      const items = [];
+      for(let i = 0; i < TEXT.length; i++){
+        const g = font.charToGlyph(TEXT[i]);
+        const nx = i < TEXT.length - 1 ? font.charToGlyph(TEXT[i+1]) : null;
+        const k = nx ? font.getKerningValue(g, nx) * scale : 0;
+        items.push({ g, x: cx });
+        cx += (g.advanceWidth || 0) * scale + k;
+      }
+      const ox = (W - cx) / 2;
+      const charEls = [];
+
+      items.forEach(function({ g, x }){
+        const d = g.getPath(x + ox, BASELINE, FS).toPathData(3);
+        if(!d || d.trim().replace(/Z/gi,'').trim() === '') return;
+        const el = document.createElementNS('http://www.w3.org/2000/svg','path');
+        el.setAttribute('d', d);
+        el.setAttribute('fill', 'none');
+        el.setAttribute('stroke', STROKE_COLOR);
+        el.setAttribute('stroke-width', '2');
+        el.setAttribute('stroke-linecap', 'round');
+        el.setAttribute('stroke-linejoin', 'round');
+        svg.appendChild(el);
+        const len = el.getTotalLength();
+        el.style.strokeDasharray = len;
+        el.style.strokeDashoffset = len;
+        el.style.transition = 'none';
+        charEls.push({ el, len });
+      });
+
+      if(charEls.length === 0){ showFallback(); return; }
+
+      // 드로잉 시작
+      setTimeout(function(){
+        let delay = 80;
+        charEls.forEach(function({ el, len }){
+          const dur = Math.max(420, len * 3.2);
+          setTimeout(function(){
+            el.style.transition = 'stroke-dashoffset ' + dur + 'ms cubic-bezier(0.4,0,0.2,1)';
+            el.style.strokeDashoffset = '0';
+          }, delay);
+          delay += dur * 0.6 + 40;
+        });
+        // 완료 후 fill 전환
+        setTimeout(function(){
+          charEls.forEach(function({ el }){
+            el.style.transition = 'fill 0.4s ease';
+            el.setAttribute('fill', FILL_COLOR);
+            el.setAttribute('stroke', 'none');
+            el.style.strokeDasharray = 'none';
+            el.style.strokeDashoffset = '0';
+          });
+        }, delay + 150);
+      }, 500);
+    });
+  }
+})();
+</script>
+</body>
+</html>
