@@ -64,6 +64,7 @@
 <header>
   <h1><a href="#hero">Dajoong</a></h1>
   <nav>
+    <a href="#sale-model" data-i18n="nav.sale">판매 모델</a>
     <a href="#about" data-i18n="nav.about">알아보기</a>
     <a href="#info" data-i18n="nav.info">정보</a>
     <a href="#works" data-i18n="nav.works">작품</a>
@@ -99,6 +100,7 @@
   <ul>
     <li><a href="#hero"    data-label="Top">    <span class="sn-dot"></span><span class="sn-label">Top</span></a></li>
     <li><a href="#notice"  data-label="공지">   <span class="sn-dot"></span><span class="sn-label" data-i18n="sidenav.notice">공지</span></a></li>
+    <li><a href="#sale-model" data-label="Sale"> <span class="sn-dot"></span><span class="sn-label" data-i18n="sidenav.sale">Sale</span></a></li>
     <li><a href="#about"   data-label="About">  <span class="sn-dot"></span><span class="sn-label">About</span></a></li>
     <li><a href="#info"    data-label="Info">   <span class="sn-dot"></span><span class="sn-label">Info</span></a></li>
     <li><a href="#works"   data-label="Works">  <span class="sn-dot"></span><span class="sn-label">Works</span></a></li>
@@ -425,6 +427,86 @@ loadCalEvents(function(){ calInit(); });
           <p class="notice-item-desc notice-bold" data-i18n="notice.n7.desc3">※ 작업 기간은 평균 기본 모델 기준 2주~4주 정도입니다.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SALE MODEL
+============================================= -->
+<section id="sale-model" class="section-hidden">
+  <div class="section-wrap">
+    <h2 class="section-title reveal" data-i18n="sale.title">판매 모델</h2>
+    <p class="sale-model-intro reveal" data-i18n="sale.intro">완성된 Live2D 판매 모델의 움직임과 웹 체험 샘플을 확인해보세요.</p>
+
+    <div class="sale-model-grid reveal">
+      <article class="sale-model-card">
+        <div class="sale-model-head">
+          <span class="sale-model-badge" data-i18n="sale.badge">판매 중</span>
+          <h3 class="sale-model-title" data-i18n="sale.card.title">판매 모델</h3>
+          <p class="sale-model-sub" data-i18n="sale.card.sub">일러스트 - 양초 작가님</p>
+        </div>
+        <div class="sale-model-body">
+          <div class="sale-model-video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/wML53bUKn1Q?si=gaP4RIUI9Yy9XTuG"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              title="판매 모델 쇼케이스">
+            </iframe>
+          </div>
+          <div class="sale-model-info">
+            <div>
+              <p class="sale-model-section-title" data-i18n="sale.features.title">추가 표정 및 기능</p>
+              <ul class="sale-model-list">
+                <li data-i18n="sale.features.f1">홍조, 경멸, 하트눈, 눈물 (애니메이션)</li>
+                <li data-i18n="sale.features.f2">겉옷, 귀 ON/OFF</li>
+                <li data-i18n="sale.features.f3">VBridger 포함 (메롱 X)</li>
+              </ul>
+            </div>
+            <div class="sale-price-box">
+              <p class="sale-price-label" data-i18n="sale.price.label">판매가</p>
+              <p class="sale-price-formula" data-i18n="sale.price.formula">일러스트 85만원 + 리깅 78만원</p>
+              <p class="sale-price-original"><s data-i18n="sale.price.original">합계 163만원</s></p>
+              <p class="sale-price-total">130만원</p>
+              <p class="sale-price-save" data-i18n="sale.price.save">33만원 할인</p>
+            </div>
+          </div>
+        </div>
+        <div class="sale-model-foot">
+          <a href="https://artmug.kr/index.php?channel=view&uid=47209" target="_blank" rel="noopener noreferrer" class="sale-model-btn">
+            <span data-i18n="sale.cta">구매 문의하기</span>
+          </a>
+        </div>
+      </article>
+
+      <aside class="sale-model-card sale-demo-card">
+        <div class="sale-model-head">
+          <span class="sale-demo-badge" data-i18n="sale.demo.badge">웹 공개 샘플</span>
+          <h3 class="sale-model-title" data-i18n="sale.demo.title">판매 모델 Live2D 체험</h3>
+          <p class="sale-model-sub" data-i18n="sale.demo.sub">브라우저에서 직접 움직여볼 수 있어요</p>
+        </div>
+        <div class="sale-demo-body">
+          <div class="sale-demo-frame">
+            <button class="live2d-overlay" id="live2d-overlay" type="button">
+              <span class="live2d-overlay-icon" aria-hidden="true">⌁</span>
+              <span class="live2d-overlay-hint" data-i18n="sale.demo.click">클릭해서 조작하기</span>
+            </button>
+            <iframe
+              src="https://live2d-netlify-demo.netlify.app/"
+              loading="lazy"
+              allow="clipboard-write"
+              title="판매 모델 Live2D 웹 샘플">
+            </iframe>
+          </div>
+          <p class="sale-demo-desc" data-i18n="sale.demo.desc">판매 모델을 브라우저에서 직접 조작해볼 수 있는 웹 샘플입니다. 구매 전에 리깅 퀄리티와 움직임을 미리 확인해보세요.</p>
+          <ul class="sale-model-list">
+            <li data-i18n="sale.demo.f1">마우스로 직접 움직임 조작 가능</li>
+            <li data-i18n="sale.demo.f2">구매 전 퀄리티 체크용으로 쓰기 좋아요</li>
+            <li data-i18n="sale.demo.f3">물리가 없는 웹 캐릭터입니다. 구매시 물리 및 다양한 효과가 들어갑니다.</li>
+          </ul>
+        </div>
+      </aside>
     </div>
   </div>
 </section>
@@ -1064,7 +1146,7 @@ loadCalEvents(function(){ calInit(); });
 (function() {
   const sideNav = document.getElementById('side-nav');
   if (!sideNav) return;
-  const targets = ['hero','notice','about','info','works','samples','price','contact']
+  const targets = ['hero','notice','sale-model','about','info','works','samples','price','contact']
     .map(id => document.getElementById(id)).filter(Boolean);
   const links = Array.from(sideNav.querySelectorAll('a[href^="#"]'));
 
@@ -1091,6 +1173,15 @@ loadCalEvents(function(){ calInit(); });
       const target = document.querySelector(a.getAttribute('href'));
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+  });
+})();
+
+/* ── Sale Model Live2D Overlay ── */
+(function() {
+  const live2dOverlay = document.getElementById('live2d-overlay');
+  if (!live2dOverlay) return;
+  live2dOverlay.addEventListener('click', () => {
+    live2dOverlay.classList.add('is-hidden');
   });
 })();
 
@@ -1362,9 +1453,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const translations = {
     ko: {
       'nav.about': '알아보기', 'nav.info': '정보', 'nav.works': '작품',
-      'nav.samples': '샘플', 'nav.price': '가격', 'nav.contact': '문의하기',
+      'nav.samples': '샘플', 'nav.sale': '판매 모델', 'nav.price': '가격', 'nav.contact': '문의하기',
       'hero.sub': 'LD · SD · 메모리얼 애니메이션 포트폴리오',
-      'sidenav.notice': '공지',
+      'sidenav.notice': '공지', 'sidenav.sale': 'Sale',
       'notice.title': '공지사항',
       'notice.alert': '※ 공지를 읽지 않아 발생하는 문제는 일절 책임지지 않습니다.<br>작업 의뢰 시 모든 내용을 확인·동의한 것으로 간주합니다.',
       'notice.n1.title': '일러스트 작업 불가 / 파일 안내',
@@ -1454,6 +1545,16 @@ document.addEventListener('DOMContentLoaded', () => {
       'samples.arm.game': '게임기를 이용해 게임 화면에 몰입감을 올릴 수 있습니다', 'samples.arm.wand': '캐릭터 컨셉에 맞는 아이템으로 다양한 연출', 'samples.arm.wave': '손을 흔들며 인사하는 디테일한 표현',
       'samples.costume.title': '의상 및 헤어', 'samples.costume.desc': '의상과 헤어 변경으로 같은 캐릭터도 전혀 다른 분위기를 연출할 수 있습니다.',
       'samples.costume.hair': '머리 색상을 바꿔 전혀 다른 분위기를 연출', 'samples.costume.outfit': '의상 교체로 캐릭터 콘셉트를 폭넓게 표현', 'samples.costume.hairstyle': '헤어 스타일 변경으로 같은 캐릭터도 새로운 느낌으로',
+      'sale.title': '판매 모델', 'sale.intro': '완성된 Live2D 판매 모델의 움직임과 웹 체험 샘플을 확인해보세요.',
+      'sale.badge': '판매 중', 'sale.card.title': '판매 모델', 'sale.card.sub': '일러스트 - 양초 작가님',
+      'sale.features.title': '추가 표정 및 기능',
+      'sale.features.f1': '홍조, 경멸, 하트눈, 눈물 (애니메이션)', 'sale.features.f2': '겉옷, 귀 ON/OFF', 'sale.features.f3': 'VBridger 포함 (메롱 X)',
+      'sale.price.label': '판매가', 'sale.price.formula': '일러스트 85만원 + 리깅 78만원', 'sale.price.original': '합계 163만원', 'sale.price.save': '33만원 할인',
+      'sale.cta': '구매 문의하기',
+      'sale.demo.badge': '웹 공개 샘플', 'sale.demo.title': '판매 모델 Live2D 체험', 'sale.demo.sub': '브라우저에서 직접 움직여볼 수 있어요',
+      'sale.demo.click': '클릭해서 조작하기',
+      'sale.demo.desc': '판매 모델을 브라우저에서 직접 조작해볼 수 있는 웹 샘플입니다. 구매 전에 리깅 퀄리티와 움직임을 미리 확인해보세요.',
+      'sale.demo.f1': '마우스로 직접 움직임 조작 가능', 'sale.demo.f2': '구매 전 퀄리티 체크용으로 쓰기 좋아요', 'sale.demo.f3': '물리가 없는 웹 캐릭터입니다. 구매시 물리 및 다양한 효과가 들어갑니다.',
       'price.badge.ld': 'Live2D', 'price.badge.premium': 'Premium', 'price.badge.sd': 'SD', 'price.badge.bg': 'Animation',
       'price.label.full': '전신', 'price.label.half': '반신', 'price.label.base': '기본가', 'price.label.from': ' ~',
       'price.intro': '기본 안내 요금입니다. 프로젝트 요구사항에 따라 견적이 달라집니다.<br>상세 견적은 파일 구조와 요구 사항 확인 후 안내드립니다.',
@@ -1484,9 +1585,9 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     en: {
       'nav.about': 'About', 'nav.info': 'Info', 'nav.works': 'Works',
-      'nav.samples': 'Samples', 'nav.price': 'Price', 'nav.contact': 'Contact',
+      'nav.samples': 'Samples', 'nav.sale': 'Sale Model', 'nav.price': 'Price', 'nav.contact': 'Contact',
       'hero.sub': 'LD · SD · Memorial Animation Portfolio',
-      'sidenav.notice': 'Notice',
+      'sidenav.notice': 'Notice', 'sidenav.sale': 'Sale',
       'notice.title': 'Notice',
       'notice.alert': '※ We are not responsible for issues arising from not reading the notices.<br>By placing a commission, you agree to all the terms listed here.',
       'notice.n1.title': 'No Illustration Work / File Requirements',
@@ -1576,6 +1677,16 @@ document.addEventListener('DOMContentLoaded', () => {
       'samples.arm.game': 'Immerse viewers with a handheld game controller', 'samples.arm.wand': 'Diverse expressions with concept-fitting items', 'samples.arm.wave': 'Detailed waving hand gesture',
       'samples.costume.title': 'Costume & Hair', 'samples.costume.desc': 'Costume and hair swaps let the same character radiate a completely different vibe.',
       'samples.costume.hair': 'Hair color change for a completely different look', 'samples.costume.outfit': 'Outfit swap to express a wide range of character concepts', 'samples.costume.hairstyle': 'Hairstyle change gives the same character a fresh feel',
+      'sale.title': 'Sale Model', 'sale.intro': 'Check the finished Live2D sale model, showcase video, and browser demo.',
+      'sale.badge': 'On Sale', 'sale.card.title': 'Sale Model', 'sale.card.sub': 'Illustration by Yangcho',
+      'sale.features.title': 'Extra Expressions & Features',
+      'sale.features.f1': 'Blush, disdain, heart eyes, tears (animated)', 'sale.features.f2': 'Outerwear and ears ON/OFF', 'sale.features.f3': 'VBridger included (no tongue)',
+      'sale.price.label': 'Price', 'sale.price.formula': 'Illustration ₩850,000 + Rigging ₩780,000', 'sale.price.original': 'Total ₩1,630,000', 'sale.price.save': '₩330,000 off',
+      'sale.cta': 'Inquire to Purchase',
+      'sale.demo.badge': 'Web Demo', 'sale.demo.title': 'Sale Model Live2D Demo', 'sale.demo.sub': 'Try it directly in your browser',
+      'sale.demo.click': 'Click to interact',
+      'sale.demo.desc': 'An interactive web sample of the sale model. Check the rigging quality and movement before purchasing.',
+      'sale.demo.f1': 'Control the model with your mouse', 'sale.demo.f2': 'Great for checking quality before buying', 'sale.demo.f3': 'This web character has no physics. The purchased model includes physics and various effects.',
       'price.badge.ld': 'Live2D', 'price.badge.premium': 'Premium', 'price.badge.sd': 'SD', 'price.badge.bg': 'Animation',
       'price.label.full': 'Full-Body', 'price.label.half': 'Half-Body', 'price.label.base': 'Base Price', 'price.label.from': ' ~',
       'price.title': 'Pricing',
@@ -1607,9 +1718,9 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     ja: {
       'nav.about': '紹介', 'nav.info': '情報', 'nav.works': '作品',
-      'nav.samples': 'サンプル', 'nav.price': '料金', 'nav.contact': 'お問い合わせ',
+      'nav.samples': 'サンプル', 'nav.sale': '販売モデル', 'nav.price': '料金', 'nav.contact': 'お問い合わせ',
       'hero.sub': 'LD · SD · メモリアルアニメーション ポートフォリオ',
-      'sidenav.notice': 'お知らせ',
+      'sidenav.notice': 'お知らせ', 'sidenav.sale': 'Sale',
       'notice.title': 'お知らせ',
       'notice.alert': '※ お知らせを読まなかったことによる問題について、一切の責任を負いません。<br>依頼をもって、すべての内容に同意したものとみなします。',
       'notice.n1.title': 'イラスト作業不可 / ファイルについて',
@@ -1699,6 +1810,16 @@ document.addEventListener('DOMContentLoaded', () => {
       'samples.arm.game': 'ゲームコントローラーでゲーム画面への没入感を演出', 'samples.arm.wand': 'コンセプトに合ったアイテムで多彩な演出', 'samples.arm.wave': '手を振って挨拶するディテールな表現',
       'samples.costume.title': '衣装・ヘア', 'samples.costume.desc': '衣装やヘアを変えることで同じキャラクターでも全く異なる雰囲気を演出できます。',
       'samples.costume.hair': '髪の色を変えて全く異なる雰囲気を演出', 'samples.costume.outfit': '衣装チェンジでキャラクターのコンセプトを幅広く表現', 'samples.costume.hairstyle': 'ヘアスタイル変更で同じキャラクターでも新鮮な印象に',
+      'sale.title': '販売モデル', 'sale.intro': '完成済みLive2D販売モデルの動きとブラウザ体験サンプルをご確認ください。',
+      'sale.badge': '販売中', 'sale.card.title': '販売モデル', 'sale.card.sub': 'イラスト - YANGCHO 様',
+      'sale.features.title': '追加表情・機能',
+      'sale.features.f1': '赤面・軽蔑・ハート目・涙（アニメ付き）', 'sale.features.f2': 'アウター・耳 ON/OFF', 'sale.features.f3': 'VBridger 込み（舌出しなし）',
+      'sale.price.label': '販売価格', 'sale.price.formula': 'イラスト ₩850,000 + リギング ₩780,000', 'sale.price.original': '合計 ₩1,630,000', 'sale.price.save': '₩330,000 割引',
+      'sale.cta': '購入についてお問い合わせ',
+      'sale.demo.badge': 'ウェブサンプル', 'sale.demo.title': '販売モデル Live2D 体験', 'sale.demo.sub': 'ブラウザで直接動かして確認できます',
+      'sale.demo.click': 'クリックして操作する',
+      'sale.demo.desc': '販売モデルをブラウザ上で操作できるウェブサンプルです。購入前にリギングの品質や動きを確認できます。',
+      'sale.demo.f1': 'マウスで自由に操作できます', 'sale.demo.f2': '購入前のクオリティチェックにどうぞ', 'sale.demo.f3': 'ウェブ版には物理がありません。購入時には物理と各種エフェクトが入ります。',
       'price.badge.ld': 'Live2D', 'price.badge.premium': 'Premium', 'price.badge.sd': 'SD', 'price.badge.bg': 'Animation',
       'price.label.full': '全身', 'price.label.half': '半身', 'price.label.base': '基本価格', 'price.label.from': ' 〜',
       'price.title': '料金',
