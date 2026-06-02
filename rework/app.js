@@ -63,6 +63,32 @@ const sampleTitle = document.querySelector("#sample-title");
 const sampleDesc = document.querySelector("#sample-desc");
 const sampleButtons = document.querySelectorAll("[data-sample]");
 const demoCover = document.querySelector("#demo-cover");
+const entryLoader = document.querySelector("#entry-loader");
+
+if (entryLoader) {
+  document.body.classList.add("is-loading");
+
+  const closeEntryLoader = () => {
+    entryLoader.classList.add("is-done");
+    document.body.classList.remove("is-loading");
+    window.setTimeout(() => entryLoader.remove(), 520);
+  };
+
+  try {
+    const hasSeenLoader = sessionStorage.getItem("dajoong-loader-seen") === "1";
+    if (hasSeenLoader) {
+      entryLoader.remove();
+      document.body.classList.remove("is-loading");
+    } else {
+      sessionStorage.setItem("dajoong-loader-seen", "1");
+      window.addEventListener("load", () => window.setTimeout(closeEntryLoader, 680), { once: true });
+      window.setTimeout(closeEntryLoader, 2200);
+    }
+  } catch {
+    window.addEventListener("load", () => window.setTimeout(closeEntryLoader, 680), { once: true });
+    window.setTimeout(closeEntryLoader, 2200);
+  }
+}
 
 sampleButtons.forEach((button) => {
   button.addEventListener("click", () => {

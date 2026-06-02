@@ -3,20 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dajoong Gallery | Rigging Sample Archive</title>
-  <meta name="description" content="Dajoong Live2D rigging sample gallery." />
+  <title>Dajoong | 리깅 샘플 갤러리</title>
+  <meta name="description" content="다중 Live2D 리깅 샘플을 움직임별로 모아둔 갤러리입니다." />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Dajoong Rigging Sample Gallery" />
+  <meta property="og:title" content="Dajoong 리깅 샘플 갤러리" />
   <meta property="og:description" content="눈, 입, 표정, 효과, 팔, 의상/헤어 리깅 샘플을 카테고리별로 확인하세요." />
   <meta property="og:image" content="https://dajoong.cloud/rework/assets/og-thumbnail.jpg" />
   <meta property="og:url" content="https://dajoong.cloud/rework/gallery/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Dajoong Rigging Sample Gallery" />
+  <meta name="twitter:title" content="Dajoong 리깅 샘플 갤러리" />
   <meta name="twitter:description" content="다중의 Live2D 리깅 샘플을 작품 목록처럼 탐색하는 갤러리입니다." />
   <meta name="twitter:image" content="https://dajoong.cloud/rework/assets/og-thumbnail.jpg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body class="sub-page gallery-page">
@@ -26,18 +23,18 @@
       <span>Dajoong</span>
     </a>
     <nav class="top-nav" aria-label="리워크 메뉴">
-      <a href="../">Home</a>
-      <a href="./" aria-current="page">Gallery</a>
-      <a href="../guide/">Guide</a>
-      <a href="../compare/">Compare</a>
-      <a href="../live/">Live</a>
+      <a href="../">처음</a>
+      <a href="./" aria-current="page">갤러리</a>
+      <a href="../guide/">안내</a>
+      <a href="../compare/">가격</a>
+      <a href="../live/">체험</a>
     </nav>
     <a class="nav-action" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">문의</a>
   </header>
 
   <main class="sub-main">
     <section class="sub-hero gallery-hero">
-      <p class="eyebrow">Rigging Sample Archive</p>
+      <p class="eyebrow">샘플 갤러리</p>
       <h1>움직임을 작품처럼 모아보는 리깅 갤러리</h1>
       <p>기존 샘플 GIF를 카테고리별로 정리했습니다. 카드를 선택하면 큰 프레임에서 옵션 성격과 함께 확인할 수 있습니다.</p>
     </section>
@@ -48,7 +45,7 @@
           <img id="gallery-preview-image" src="../assets/body-x.gif" alt="X축 움직임 샘플" />
         </div>
         <div class="gallery-preview-copy">
-          <span id="gallery-preview-category">Body Axis</span>
+          <span id="gallery-preview-category">몸 축</span>
           <h2 id="gallery-preview-title">X축 움직임</h2>
           <p id="gallery-preview-desc">좌우 고개 회전과 몸의 입체감을 확인할 수 있는 기본 축 샘플입니다.</p>
           <dl>
@@ -70,89 +67,89 @@
           <button class="filter-button" type="button" data-filter="body">Body</button>
           <button class="filter-button" type="button" data-filter="eyes">Eyes</button>
           <button class="filter-button" type="button" data-filter="mouth">Mouth</button>
-          <button class="filter-button" type="button" data-filter="expression">Expression</button>
-          <button class="filter-button" type="button" data-filter="variation">Variation</button>
+          <button class="filter-button" type="button" data-filter="expression">표정/효과</button>
+          <button class="filter-button" type="button" data-filter="variation">변경 옵션</button>
           <button class="filter-button" type="button" data-filter="arms">Arms</button>
         </div>
 
         <div class="archive-grid" id="archive-grid">
-          <button class="archive-card is-active" type="button" data-category="body" data-src="../assets/body-x.gif" data-title="X축 움직임" data-label="Body Axis" data-desc="좌우 고개 회전과 몸의 입체감을 확인할 수 있는 기본 축 샘플입니다." data-plan="LD 기본 리깅" data-point="정면에서 측면으로 넘어갈 때의 볼륨감">
+          <button class="archive-card is-active" type="button" data-category="body" data-src="../assets/body-x.gif" data-title="X축 움직임" data-label="몸 축" data-desc="좌우 고개 회전과 몸의 입체감을 확인할 수 있는 기본 축 샘플입니다." data-plan="LD 기본 리깅" data-point="정면에서 측면으로 넘어갈 때의 볼륨감">
             <img src="../assets/thumbs/body-x.jpg" alt="X축 움직임" loading="lazy" />
             <span>Body</span><strong>X축 움직임</strong>
           </button>
-          <button class="archive-card" type="button" data-category="body" data-src="../assets/body-y.gif" data-title="Y축 움직임" data-label="Body Axis" data-desc="상하 시선과 고개 각도를 부드럽게 연결하는 축 움직임입니다." data-plan="LD 기본 리깅" data-point="시선 높이 변화와 턱선 연결">
+          <button class="archive-card" type="button" data-category="body" data-src="../assets/body-y.gif" data-title="Y축 움직임" data-label="몸 축" data-desc="상하 시선과 고개 각도를 부드럽게 연결하는 축 움직임입니다." data-plan="LD 기본 리깅" data-point="시선 높이 변화와 턱선 연결">
             <img src="../assets/thumbs/body-y.jpg" alt="Y축 움직임" loading="lazy" />
             <span>Body</span><strong>Y축 움직임</strong>
           </button>
-          <button class="archive-card" type="button" data-category="body" data-src="../assets/body-z.gif" data-title="Z축 틸트" data-label="Body Axis" data-desc="좌우 기울기와 장식 물리의 균형을 함께 확인할 수 있습니다." data-plan="LD 기본 리깅" data-point="기울기와 머리카락 물리의 반응">
+          <button class="archive-card" type="button" data-category="body" data-src="../assets/body-z.gif" data-title="Z축 틸트" data-label="몸 축" data-desc="좌우 기울기와 장식 물리의 균형을 함께 확인할 수 있습니다." data-plan="LD 기본 리깅" data-point="기울기와 머리카락 물리의 반응">
             <img src="../assets/thumbs/body-z.jpg" alt="Z축 틸트" loading="lazy" />
             <span>Body</span><strong>Z축 틸트</strong>
           </button>
-          <button class="archive-card" type="button" data-category="eyes" data-src="../assets/eyes-green.gif" data-title="그린 아이" data-label="Eye Physics" data-desc="눈동자와 하이라이트의 작은 움직임으로 시선을 또렷하게 보여줍니다." data-plan="눈 물리 옵션" data-point="하이라이트 흔들림과 눈 깜빡임">
+          <button class="archive-card" type="button" data-category="eyes" data-src="../assets/eyes-green.gif" data-title="그린 아이" data-label="눈 물리" data-desc="눈동자와 하이라이트의 작은 움직임으로 시선을 또렷하게 보여줍니다." data-plan="눈 물리 옵션" data-point="하이라이트 흔들림과 눈 깜빡임">
             <img src="../assets/thumbs/eyes-green.jpg" alt="그린 아이" loading="lazy" />
             <span>Eyes</span><strong>그린 아이</strong>
           </button>
-          <button class="archive-card" type="button" data-category="eyes" data-src="../assets/eyes-odd.gif" data-title="오드아이" data-label="Eye Physics" data-desc="서로 다른 눈 색상에서도 하이라이트와 시선 연출을 안정적으로 유지합니다." data-plan="눈 물리 옵션" data-point="양쪽 눈의 시선 균형">
+          <button class="archive-card" type="button" data-category="eyes" data-src="../assets/eyes-odd.gif" data-title="오드아이" data-label="눈 물리" data-desc="서로 다른 눈 색상에서도 하이라이트와 시선 연출을 안정적으로 유지합니다." data-plan="눈 물리 옵션" data-point="양쪽 눈의 시선 균형">
             <img src="../assets/thumbs/eyes-odd.jpg" alt="오드아이" loading="lazy" />
             <span>Eyes</span><strong>오드아이</strong>
           </button>
-          <button class="archive-card" type="button" data-category="eyes" data-src="../assets/eyes-red.gif" data-title="레드 아이" data-label="Eye Physics" data-desc="강한 색감의 눈에서도 표정 변화가 선명하게 보이도록 구성합니다." data-plan="눈 물리 옵션" data-point="강한 색상과 눈매 강조">
+          <button class="archive-card" type="button" data-category="eyes" data-src="../assets/eyes-red.gif" data-title="레드 아이" data-label="눈 물리" data-desc="강한 색감의 눈에서도 표정 변화가 선명하게 보이도록 구성합니다." data-plan="눈 물리 옵션" data-point="강한 색상과 눈매 강조">
             <img src="../assets/thumbs/eyes-red.jpg" alt="레드 아이" loading="lazy" />
             <span>Eyes</span><strong>레드 아이</strong>
           </button>
-          <button class="archive-card" type="button" data-category="mouth" data-src="../assets/mouth-9.gif" data-title="입 움직임 9점" data-label="Mouth Rigging" data-desc="가벼운 대화와 방송용 사용에 적합한 기본 발화 구조입니다." data-plan="기본 입 리깅" data-point="음소 변화가 과하지 않고 안정적인지">
+          <button class="archive-card" type="button" data-category="mouth" data-src="../assets/mouth-9.gif" data-title="입 움직임 9점" data-label="입 리깅" data-desc="가벼운 대화와 방송용 사용에 적합한 기본 발화 구조입니다." data-plan="기본 입 리깅" data-point="음소 변화가 과하지 않고 안정적인지">
             <img src="../assets/thumbs/mouth-9.jpg" alt="입 움직임 9점" loading="lazy" />
             <span>Mouth</span><strong>입 9점</strong>
           </button>
-          <button class="archive-card" type="button" data-category="mouth" data-src="../assets/mouth-12.gif" data-title="입 움직임 12점" data-label="Mouth Rigging" data-desc="대사와 감정 표현을 더 풍부하게 보여주는 세밀한 입 구조입니다." data-plan="고급 입 리깅" data-point="작은 입 모양 변화와 큰 발화의 차이">
+          <button class="archive-card" type="button" data-category="mouth" data-src="../assets/mouth-12.gif" data-title="입 움직임 12점" data-label="입 리깅" data-desc="대사와 감정 표현을 더 풍부하게 보여주는 세밀한 입 구조입니다." data-plan="고급 입 리깅" data-point="작은 입 모양 변화와 큰 발화의 차이">
             <img src="../assets/thumbs/mouth-12.jpg" alt="입 움직임 12점" loading="lazy" />
             <span>Mouth</span><strong>입 12점</strong>
           </button>
-          <button class="archive-card" type="button" data-category="mouth" data-src="../assets/mouth-vbridger.gif" data-title="입 12점 VBridger" data-label="Mouth Rigging" data-desc="VBridger 사용을 고려한 더 풍부한 입 모양 대응 샘플입니다." data-plan="VBridger 옵션" data-point="넓은 발화 범위와 자연스러운 전환">
+          <button class="archive-card" type="button" data-category="mouth" data-src="../assets/mouth-vbridger.gif" data-title="입 12점 VBridger" data-label="입 리깅" data-desc="VBridger 사용을 고려한 더 풍부한 입 모양 대응 샘플입니다." data-plan="VBridger 옵션" data-point="넓은 발화 범위와 자연스러운 전환">
             <img src="../assets/thumbs/mouth-vbridger.jpg" alt="입 12점 VBridger" loading="lazy" />
             <span>Mouth</span><strong>VBridger</strong>
           </button>
-          <button class="archive-card" type="button" data-category="expression" data-src="../assets/expression-scorn.gif" data-title="경멸 표정" data-label="Expression" data-desc="캐릭터 성격을 강하게 보여주는 단축키 표정 효과입니다." data-plan="표정 추가 옵션" data-point="눈매와 입매가 동시에 바뀌는 인상">
+          <button class="archive-card" type="button" data-category="expression" data-src="../assets/expression-scorn.gif" data-title="경멸 표정" data-label="표정" data-desc="캐릭터 성격을 강하게 보여주는 단축키 표정 효과입니다." data-plan="표정 추가 옵션" data-point="눈매와 입매가 동시에 바뀌는 인상">
             <img src="../assets/thumbs/expression-scorn.jpg" alt="경멸 표정" loading="lazy" />
-            <span>Expression</span><strong>경멸</strong>
+            <span>표정</span><strong>경멸</strong>
           </button>
-          <button class="archive-card" type="button" data-category="expression" data-src="../assets/expression-spark.gif" data-title="빠직 효과" data-label="Expression" data-desc="분노나 당황 반응에 쓰기 좋은 강조 효과입니다." data-plan="표정 추가 옵션" data-point="효과 등장 타이밍과 캐릭터 표정의 조합">
+          <button class="archive-card" type="button" data-category="expression" data-src="../assets/expression-spark.gif" data-title="빠직 효과" data-label="표정" data-desc="분노나 당황 반응에 쓰기 좋은 강조 효과입니다." data-plan="표정 추가 옵션" data-point="효과 등장 타이밍과 캐릭터 표정의 조합">
             <img src="../assets/thumbs/expression-spark.jpg" alt="빠직 효과" loading="lazy" />
-            <span>Expression</span><strong>빠직</strong>
+            <span>표정</span><strong>빠직</strong>
           </button>
-          <button class="archive-card" type="button" data-category="expression" data-src="../assets/expression-heart.gif" data-title="하트눈" data-label="Expression" data-desc="좋아함, 감탄, 팬서비스 상황에 바로 쓰기 좋은 표정 효과입니다." data-plan="표정 추가 옵션" data-point="눈 효과와 얼굴 반응의 싱크">
+          <button class="archive-card" type="button" data-category="expression" data-src="../assets/expression-heart.gif" data-title="하트눈" data-label="표정" data-desc="좋아함, 감탄, 팬서비스 상황에 바로 쓰기 좋은 표정 효과입니다." data-plan="표정 추가 옵션" data-point="눈 효과와 얼굴 반응의 싱크">
             <img src="../assets/thumbs/expression-heart.jpg" alt="하트눈" loading="lazy" />
-            <span>Expression</span><strong>하트눈</strong>
+            <span>표정</span><strong>하트눈</strong>
           </button>
-          <button class="archive-card" type="button" data-category="expression" data-src="../assets/effect-omg.gif" data-title="OMG 효과" data-label="Reaction Effect" data-desc="놀람과 리액션을 크게 보여주는 방송용 효과입니다." data-plan="효과 추가 옵션" data-point="화면에서 바로 읽히는 리액션 강도">
+          <button class="archive-card" type="button" data-category="expression" data-src="../assets/effect-omg.gif" data-title="OMG 효과" data-label="리액션" data-desc="놀람과 리액션을 크게 보여주는 방송용 효과입니다." data-plan="효과 추가 옵션" data-point="화면에서 바로 읽히는 리액션 강도">
             <img src="../assets/thumbs/effect-omg.jpg" alt="OMG 효과" loading="lazy" />
             <span>Effect</span><strong>OMG</strong>
           </button>
-          <button class="archive-card" type="button" data-category="expression" data-src="../assets/effect-sad.gif" data-title="Sad 효과" data-label="Reaction Effect" data-desc="슬픔과 시무룩한 분위기를 강조하는 효과 샘플입니다." data-plan="효과 추가 옵션" data-point="감정선이 과하지 않게 유지되는지">
+          <button class="archive-card" type="button" data-category="expression" data-src="../assets/effect-sad.gif" data-title="Sad 효과" data-label="리액션" data-desc="슬픔과 시무룩한 분위기를 강조하는 효과 샘플입니다." data-plan="효과 추가 옵션" data-point="감정선이 과하지 않게 유지되는지">
             <img src="../assets/thumbs/effect-sad.jpg" alt="Sad 효과" loading="lazy" />
             <span>Effect</span><strong>Sad</strong>
           </button>
-          <button class="archive-card" type="button" data-category="variation" data-src="../assets/hair-color.gif" data-title="머리 컬러 변경" data-label="Variation" data-desc="헤어 색상 전환으로 같은 모델의 분위기를 바꾸는 옵션입니다." data-plan="색상 전환 옵션" data-point="전환 후에도 물리와 레이어가 자연스러운지">
+          <button class="archive-card" type="button" data-category="variation" data-src="../assets/hair-color.gif" data-title="머리 컬러 변경" data-label="변경 옵션" data-desc="헤어 색상 전환으로 같은 모델의 분위기를 바꾸는 옵션입니다." data-plan="색상 전환 옵션" data-point="전환 후에도 물리와 레이어가 자연스러운지">
             <img src="../assets/thumbs/hair-color.jpg" alt="머리 컬러 변경" loading="lazy" />
-            <span>Variation</span><strong>머리 컬러</strong>
+            <span>변경 옵션</span><strong>머리 컬러</strong>
           </button>
-          <button class="archive-card" type="button" data-category="variation" data-src="../assets/outfit-change.gif" data-title="의상 변경" data-label="Variation" data-desc="의상 전환으로 방송 상황이나 계절감에 맞는 버전을 구성합니다." data-plan="의상 전환 옵션" data-point="전환 전후 실루엣과 장식 정리">
+          <button class="archive-card" type="button" data-category="variation" data-src="../assets/outfit-change.gif" data-title="의상 변경" data-label="변경 옵션" data-desc="의상 전환으로 방송 상황이나 계절감에 맞는 버전을 구성합니다." data-plan="의상 전환 옵션" data-point="전환 전후 실루엣과 장식 정리">
             <img src="../assets/thumbs/outfit-change.jpg" alt="의상 변경" loading="lazy" />
-            <span>Variation</span><strong>의상 변경</strong>
+            <span>변경 옵션</span><strong>의상 변경</strong>
           </button>
-          <button class="archive-card" type="button" data-category="variation" data-src="../assets/hair-change.gif" data-title="헤어 변경" data-label="Variation" data-desc="헤어 스타일 변화 후에도 움직임이 자연스럽게 유지되도록 구성합니다." data-plan="헤어 전환 옵션" data-point="스타일별 머리카락 물리 차이">
+          <button class="archive-card" type="button" data-category="variation" data-src="../assets/hair-change.gif" data-title="헤어 변경" data-label="변경 옵션" data-desc="헤어 스타일 변화 후에도 움직임이 자연스럽게 유지되도록 구성합니다." data-plan="헤어 전환 옵션" data-point="스타일별 머리카락 물리 차이">
             <img src="../assets/thumbs/hair-change.jpg" alt="헤어 변경" loading="lazy" />
-            <span>Variation</span><strong>헤어 변경</strong>
+            <span>변경 옵션</span><strong>헤어 변경</strong>
           </button>
-          <button class="archive-card" type="button" data-category="arms" data-src="../assets/arm-gamepad.gif" data-title="게임기" data-label="Arm Motion" data-desc="소품을 들고 있는 손과 팔 움직임을 캐릭터 콘셉트에 맞춥니다." data-plan="팔/소품 옵션" data-point="소품 위치와 손가락 고정감">
+          <button class="archive-card" type="button" data-category="arms" data-src="../assets/arm-gamepad.gif" data-title="게임기" data-label="팔 모션" data-desc="소품을 들고 있는 손과 팔 움직임을 캐릭터 콘셉트에 맞춥니다." data-plan="팔/소품 옵션" data-point="소품 위치와 손가락 고정감">
             <img src="../assets/thumbs/arm-gamepad.jpg" alt="게임기 팔 움직임" loading="lazy" />
             <span>Arms</span><strong>게임기</strong>
           </button>
-          <button class="archive-card" type="button" data-category="arms" data-src="../assets/arm-wand.gif" data-title="마법봉" data-label="Arm Motion" data-desc="소품 모션과 캐릭터 표정이 함께 살아나는 팔 움직임 샘플입니다." data-plan="팔/소품 옵션" data-point="소품 각도와 팔 회전">
+          <button class="archive-card" type="button" data-category="arms" data-src="../assets/arm-wand.gif" data-title="마법봉" data-label="팔 모션" data-desc="소품 모션과 캐릭터 표정이 함께 살아나는 팔 움직임 샘플입니다." data-plan="팔/소품 옵션" data-point="소품 각도와 팔 회전">
             <img src="../assets/thumbs/arm-wand.jpg" alt="마법봉 팔 움직임" loading="lazy" />
             <span>Arms</span><strong>마법봉</strong>
           </button>
-          <button class="archive-card" type="button" data-category="arms" data-src="../assets/hand-wave.gif" data-title="손인사" data-label="Arm Motion" data-desc="손가락과 팔 흔들림을 활용한 인사 모션입니다." data-plan="팔 움직임 옵션" data-point="반복 모션의 자연스러운 루프감">
+          <button class="archive-card" type="button" data-category="arms" data-src="../assets/hand-wave.gif" data-title="손인사" data-label="팔 모션" data-desc="손가락과 팔 흔들림을 활용한 인사 모션입니다." data-plan="팔 움직임 옵션" data-point="반복 모션의 자연스러운 루프감">
             <img src="../assets/thumbs/hand-wave.jpg" alt="손인사" loading="lazy" />
             <span>Arms</span><strong>손인사</strong>
           </button>

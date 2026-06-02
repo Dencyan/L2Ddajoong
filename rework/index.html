@@ -3,23 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dajoong Rework | Live2D Rigging Archive</title>
-  <meta name="description" content="Dajoong Live2D rigging showroom, gallery, guide, comparison, and web model experience." />
+  <title>Dajoong | Live2D 리깅 샘플</title>
+  <meta name="description" content="다중 Live2D 리깅 샘플, 의뢰 안내, 가격 비교, 웹 모델 체험을 정리한 포트폴리오입니다." />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Dajoong Live2D Rigging Archive" />
-  <meta property="og:description" content="Live2D 쇼룸, 샘플 갤러리, 의뢰 가이드, 플랜 비교, 웹 모델 체험을 한곳에서 확인하세요." />
+  <meta property="og:title" content="Dajoong Live2D 리깅 샘플" />
+  <meta property="og:description" content="Live2D 리깅 샘플, 의뢰 안내, 가격 비교, 웹 모델 체험을 한곳에 정리했습니다." />
   <meta property="og:image" content="https://dajoong.cloud/rework/assets/og-thumbnail.jpg" />
   <meta property="og:url" content="https://dajoong.cloud/rework/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Dajoong Live2D Rigging Archive" />
-  <meta name="twitter:description" content="다중의 Live2D 리깅 샘플과 의뢰 정보를 목적별 페이지로 확인할 수 있는 리워크 아카이브입니다." />
+  <meta name="twitter:title" content="Dajoong Live2D 리깅 샘플" />
+  <meta name="twitter:description" content="다중의 Live2D 리깅 샘플과 의뢰 정보를 한곳에 정리했습니다." />
   <meta name="twitter:image" content="https://dajoong.cloud/rework/assets/og-thumbnail.jpg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+  <div class="entry-loader" id="entry-loader" role="status" aria-live="polite">
+    <div class="entry-loader-mark" aria-hidden="true">
+      <span>D</span>
+      <i></i>
+    </div>
+    <p>Dajoong</p>
+    <small>Live2D Rigging</small>
+  </div>
+
   <canvas id="motion-field" aria-hidden="true"></canvas>
 
   <header class="site-header">
@@ -28,12 +34,12 @@
       <span>Dajoong</span>
     </a>
     <nav class="top-nav" aria-label="주요 메뉴">
-      <a href="#showroom">Showroom</a>
-      <a href="./gallery/">Gallery</a>
-      <a href="./guide/">Guide</a>
-      <a href="./compare/">Compare</a>
-      <a href="./live/">Live</a>
-      <a href="#contact">Contact</a>
+      <a href="#showroom">샘플</a>
+      <a href="./gallery/">갤러리</a>
+      <a href="./guide/">안내</a>
+      <a href="./compare/">가격</a>
+      <a href="./live/">체험</a>
+      <a href="#contact">문의</a>
     </nav>
     <a class="nav-action" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">문의</a>
   </header>
@@ -41,10 +47,10 @@
   <main id="top">
     <section class="hero-section home-hero">
       <div class="hero-copy">
-        <p class="eyebrow">Live2D Rigging Archive</p>
-        <h1>움직임을 보고, 비교하고, 의뢰 흐름까지 확인하는 포트폴리오</h1>
+        <p class="eyebrow">Live2D Rigging</p>
+        <h1>다중 Live2D 리깅 샘플</h1>
         <p class="hero-lead">
-          다중의 Live2D 리깅 샘플을 쇼룸, 갤러리, 가이드북, 플랜 비교, 웹 모델 체험으로 나눠 살펴볼 수 있는 리워크 콘셉트입니다.
+          리깅 샘플, 의뢰 안내, 가격 비교, 웹 모델 체험을 한곳에 정리했습니다.
         </p>
         <div class="hero-actions">
           <a class="primary-action" href="./live/">웹 모델 체험하기</a>
@@ -60,8 +66,8 @@
       <div class="hero-stage" aria-label="Live2D 웹 모델 미리보기">
         <div class="live-card">
           <div class="live-card-head">
-            <span>Web Sample</span>
-            <a href="./live/">Open Live</a>
+            <span>웹 체험</span>
+            <a href="./live/">크게 보기</a>
           </div>
           <div class="demo-frame">
             <iframe title="Dajoong Live2D web sample" src="https://live2d-netlify-demo.netlify.app/" loading="lazy" allow="clipboard-write"></iframe>
@@ -74,25 +80,25 @@
       </div>
     </section>
 
-    <section class="home-map" aria-label="리워크 페이지 지도">
+    <section class="home-map" aria-label="페이지 안내">
       <a class="home-map-card" href="./gallery/">
-        <span>01 Gallery</span>
-        <h2>리깅 샘플 아카이브</h2>
+        <span>01 샘플</span>
+        <h2>리깅 샘플 모음</h2>
         <p>축, 눈, 입, 표정, 효과, 팔, 의상/헤어 샘플을 카테고리별로 탐색합니다.</p>
       </a>
       <a class="home-map-card" href="./guide/">
-        <span>02 Guide</span>
-        <h2>의뢰 전 가이드북</h2>
+        <span>02 안내</span>
+        <h2>의뢰 전 확인사항</h2>
         <p>PSD 준비, 작업 흐름, 컨펌, 공개, 납품 안내를 순서대로 읽습니다.</p>
       </a>
       <a class="home-map-card" href="./compare/">
-        <span>03 Compare</span>
-        <h2>플랜 선택 비교</h2>
+        <span>03 가격</span>
+        <h2>가격과 옵션 비교</h2>
         <p>베이직, 프리미엄, SD, 배경 애니메이션의 차이를 샘플과 함께 봅니다.</p>
       </a>
       <a class="home-map-card" href="./live/">
-        <span>04 Live</span>
-        <h2>웹 모델 체험</h2>
+        <span>04 체험</span>
+        <h2>웹 모델 미리보기</h2>
         <p>암호화 Netlify 샘플을 큰 화면에서 조작하며 움직임을 확인합니다.</p>
       </a>
     </section>
@@ -114,8 +120,8 @@
 
     <section id="showroom" class="section-shell">
       <div class="section-heading">
-        <p class="eyebrow">Rigging Showroom</p>
-        <h2>대표 샘플을 빠르게 바꿔보는 쇼룸</h2>
+        <p class="eyebrow">샘플 미리보기</p>
+        <h2>대표 움직임 보기</h2>
         <p>메인에서는 핵심 움직임만 먼저 보여주고, 더 많은 샘플은 갤러리에서 확인하도록 연결합니다.</p>
       </div>
 
@@ -144,25 +150,25 @@
 
     <section class="section-shell">
       <div class="section-heading">
-        <p class="eyebrow">Pick A Path</p>
+        <p class="eyebrow">바로가기</p>
         <h2>방문 목적에 맞게 바로 이동하기</h2>
       </div>
       <div class="handoff-grid">
         <article>
           <span>샘플을 더 보고 싶다면</span>
-          <h3>Gallery</h3>
+          <h3>샘플 갤러리</h3>
           <p>20개 샘플을 카테고리별로 모아둔 아카이브로 이동합니다.</p>
           <a href="./gallery/">샘플 보기</a>
         </article>
         <article>
           <span>의뢰가 처음이라면</span>
-          <h3>Guide</h3>
+          <h3>의뢰 안내</h3>
           <p>준비물, 진행 흐름, 수정 범위, 납품 안내를 차례로 확인합니다.</p>
           <a href="./guide/">가이드 읽기</a>
         </article>
         <article>
           <span>가격과 옵션이 궁금하다면</span>
-          <h3>Compare</h3>
+          <h3>가격 비교</h3>
           <p>베이직과 프리미엄, SD 리깅의 차이를 움직임 샘플과 비교합니다.</p>
           <a href="./compare/">비교하기</a>
         </article>
@@ -170,10 +176,10 @@
     </section>
 
     <section id="contact" class="contact-panel">
-      <p class="eyebrow">Commission Open</p>
+      <p class="eyebrow">문의</p>
       <h2>모델의 매력을 움직임으로 보여주세요.</h2>
       <div class="contact-actions">
-        <a href="https://x.com/_Dajoong" target="_blank" rel="noopener noreferrer">X 문의</a>
+        <a href="https://x.com/Dajoong_L2d" target="_blank" rel="noopener noreferrer">X 문의</a>
         <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer">YouTube</a>
         <a href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">ArtMug</a>
       </div>

@@ -31,6 +31,59 @@ const estimateData = {
 
 const formatWon = (value) => `${Math.max(0, value).toLocaleString("ko-KR")}원`;
 
+function mountRevealEffects() {
+  const targets = [
+    ".hero-copy",
+    ".hero-stage",
+    ".home-map-card",
+    ".notice-strip article",
+    ".section-heading",
+    ".sample-viewer",
+    ".sample-controls",
+    ".handoff-grid article",
+    ".contact-panel",
+    ".sub-hero",
+    ".gallery-preview",
+    ".archive-card",
+    ".guide-index",
+    ".guide-sheet",
+    ".compare-plan",
+    ".compare-viewer",
+    ".recommend-grid article",
+    ".price-reference-grid article",
+    ".live-theater",
+    ".live-sidebar",
+    ".live-tips article",
+  ];
+  const elements = [...document.querySelectorAll(targets.join(","))]
+    .filter((element) => !element.closest(".estimate-widget"));
+
+  if (!elements.length) return;
+
+  if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    elements.forEach((element) => element.classList.add("is-visible"));
+    return;
+  }
+
+  elements.forEach((element, index) => {
+    element.classList.add("motion-reveal");
+    element.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 55}ms`);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, {
+    threshold: .12,
+    rootMargin: "0px 0px -8% 0px",
+  });
+
+  elements.forEach((element) => observer.observe(element));
+}
+
 function createEstimateWidget() {
   const root = document.createElement("aside");
   root.className = "estimate-widget";
@@ -41,7 +94,7 @@ function createEstimateWidget() {
     </button>
     <form class="estimate-panel" id="estimate-panel" aria-hidden="true">
       <div class="estimate-head">
-        <span>Quick Estimate</span>
+        <span>간단 견적</span>
         <button class="estimate-close" type="button" aria-label="견적 닫기">×</button>
       </div>
       <label class="estimate-field">
@@ -135,7 +188,11 @@ function mountEstimateWidget() {
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", mountEstimateWidget);
+  document.addEventListener("DOMContentLoaded", () => {
+    mountRevealEffects();
+    mountEstimateWidget();
+  });
 } else {
+  mountRevealEffects();
   mountEstimateWidget();
 }
