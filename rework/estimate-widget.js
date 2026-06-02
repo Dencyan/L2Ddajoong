@@ -74,7 +74,7 @@ function createEstimateWidget() {
         <strong data-estimate-total>0원</strong>
         <p data-estimate-note>기본 리깅을 선택해 주세요.</p>
       </div>
-      <a class="estimate-submit" href="https://artmug.kr/index.php?channel=view&uid=47209" target="_blank" rel="noopener noreferrer">ArtMug 문의하기</a>
+      <a class="estimate-submit" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">ArtMug 문의하기</a>
     </form>
   `;
 
