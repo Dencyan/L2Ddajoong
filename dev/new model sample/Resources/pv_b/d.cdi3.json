@@ -1,0 +1,1267 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "ParamAngleX",
+			"GroupId": "ParamGroup",
+			"Name": "각도 X"
+		},
+		{
+			"Id": "ParamAngleY",
+			"GroupId": "ParamGroup",
+			"Name": "각도 Y"
+		},
+		{
+			"Id": "ParamAngleZ",
+			"GroupId": "ParamGroup",
+			"Name": "각도 Z"
+		},
+		{
+			"Id": "ParamEyeLOpen",
+			"GroupId": "ParamGroup2",
+			"Name": "왼쪽 눈 깜빡임"
+		},
+		{
+			"Id": "ParamEyeROpen",
+			"GroupId": "ParamGroup2",
+			"Name": "오른쪽 눈 깜빡임"
+		},
+		{
+			"Id": "ParamEyeLSmile",
+			"GroupId": "ParamGroup2",
+			"Name": "왼쪽 눈 미소"
+		},
+		{
+			"Id": "ParamEyeRSmile",
+			"GroupId": "ParamGroup2",
+			"Name": "오른쪽 눈 미소"
+		},
+		{
+			"Id": "ParamEyeBallX",
+			"GroupId": "ParamGroup2",
+			"Name": "눈 X"
+		},
+		{
+			"Id": "ParamEyeBallY",
+			"GroupId": "ParamGroup2",
+			"Name": "눈 Y"
+		},
+		{
+			"Id": "Param10",
+			"GroupId": "",
+			"Name": "R 눈 레쉬 XY"
+		},
+		{
+			"Id": "Param11",
+			"GroupId": "",
+			"Name": "L 눈 레쉬 XY"
+		},
+		{
+			"Id": "Param",
+			"GroupId": "ParamGroup7",
+			"Name": "L 눈동자 물리 1"
+		},
+		{
+			"Id": "Param2",
+			"GroupId": "ParamGroup7",
+			"Name": "L 눈동자 물리 2"
+		},
+		{
+			"Id": "Param3",
+			"GroupId": "ParamGroup7",
+			"Name": "R 눈동자 물리 1"
+		},
+		{
+			"Id": "Param4",
+			"GroupId": "ParamGroup7",
+			"Name": "R 눈동자 물리 2"
+		},
+		{
+			"Id": "Param5",
+			"GroupId": "ParamGroup8",
+			"Name": "L 속눈썹 물리 1"
+		},
+		{
+			"Id": "Param6",
+			"GroupId": "ParamGroup8",
+			"Name": "L 속눈썹 물리 2"
+		},
+		{
+			"Id": "Param7",
+			"GroupId": "ParamGroup8",
+			"Name": "R 속눈썹 물리 1"
+		},
+		{
+			"Id": "Param8",
+			"GroupId": "ParamGroup8",
+			"Name": "R 속눈썹 물리 2"
+		},
+		{
+			"Id": "ParamBrowLY",
+			"GroupId": "ParamGroup3",
+			"Name": "왼쪽 눈썹 위아래로"
+		},
+		{
+			"Id": "ParamBrowLAngle",
+			"GroupId": "ParamGroup3",
+			"Name": "왼쪽 눈썹 각도"
+		},
+		{
+			"Id": "ParamBrowLForm",
+			"GroupId": "ParamGroup3",
+			"Name": "왼쪽 눈썹 변형"
+		},
+		{
+			"Id": "ParamBrowRY",
+			"GroupId": "ParamGroup3",
+			"Name": "오른쪽 눈썹 위아래로"
+		},
+		{
+			"Id": "ParamBrowRAngle",
+			"GroupId": "ParamGroup3",
+			"Name": "오른쪽 눈썹 각도"
+		},
+		{
+			"Id": "ParamBrowRForm",
+			"GroupId": "ParamGroup3",
+			"Name": "오른쪽 눈썹 변형"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"GroupId": "ParamGroup4",
+			"Name": "입 변형"
+		},
+		{
+			"Id": "ParamMouthOpenY",
+			"GroupId": "ParamGroup4",
+			"Name": "입 여닫기"
+		},
+		{
+			"Id": "paramMouthShrug",
+			"GroupId": "ParamGroup5",
+			"Name": "mouth shrug"
+		},
+		{
+			"Id": "paramMouthpuckerWiden",
+			"GroupId": "ParamGroup5",
+			"Name": "mouth pucker Widen"
+		},
+		{
+			"Id": "paramMouthFunnel",
+			"GroupId": "ParamGroup5",
+			"Name": "Mouth Funnel"
+		},
+		{
+			"Id": "parmMouthPressLipOpen",
+			"GroupId": "ParamGroup5",
+			"Name": "mouth press LipOpen"
+		},
+		{
+			"Id": "paramJawOpen",
+			"GroupId": "ParamGroup5",
+			"Name": "Jaw open"
+		},
+		{
+			"Id": "CheekPuff",
+			"GroupId": "ParamGroup5",
+			"Name": "볼빵빵"
+		},
+		{
+			"Id": "paramMouthX",
+			"GroupId": "ParamGroup5",
+			"Name": "Mouth X"
+		},
+		{
+			"Id": "ParamCheek",
+			"GroupId": "",
+			"Name": "수줍음"
+		},
+		{
+			"Id": "ParamBodyAngleX",
+			"GroupId": "ParamGroup6",
+			"Name": "몸의 회전 X"
+		},
+		{
+			"Id": "ParamBodyAngleY",
+			"GroupId": "ParamGroup6",
+			"Name": "몸의 회전 Y"
+		},
+		{
+			"Id": "ParamBodyAngleZ",
+			"GroupId": "ParamGroup6",
+			"Name": "몸의 회전 Z"
+		},
+		{
+			"Id": "Param41",
+			"GroupId": "ParamGroup16",
+			"Name": "L 기본 팔 흔들림"
+		},
+		{
+			"Id": "Param42",
+			"GroupId": "ParamGroup16",
+			"Name": "L 기본 팔 흔들림"
+		},
+		{
+			"Id": "Param43",
+			"GroupId": "ParamGroup16",
+			"Name": "L 기본 팔 흔들림"
+		},
+		{
+			"Id": "Param44",
+			"GroupId": "ParamGroup16",
+			"Name": "L 기본 팔 흔들림"
+		},
+		{
+			"Id": "Param45",
+			"GroupId": "ParamGroup16",
+			"Name": "R 기본 팔 흔들림"
+		},
+		{
+			"Id": "Param46",
+			"GroupId": "ParamGroup16",
+			"Name": "R 기본 팔 흔들림"
+		},
+		{
+			"Id": "Param47",
+			"GroupId": "ParamGroup16",
+			"Name": "R 기본 팔 흔들림"
+		},
+		{
+			"Id": "Param48",
+			"GroupId": "ParamGroup16",
+			"Name": "R 기본 팔 흔들림"
+		},
+		{
+			"Id": "ParamBreath",
+			"GroupId": "",
+			"Name": "호흡"
+		},
+		{
+			"Id": "Param15",
+			"GroupId": "ParamGroup12",
+			"Name": "R 동물 귀"
+		},
+		{
+			"Id": "Param16",
+			"GroupId": "ParamGroup12",
+			"Name": "R 동물 귀"
+		},
+		{
+			"Id": "Param17",
+			"GroupId": "ParamGroup12",
+			"Name": "R 동물 귀"
+		},
+		{
+			"Id": "Param18",
+			"GroupId": "ParamGroup12",
+			"Name": "L 동물 귀"
+		},
+		{
+			"Id": "Param19",
+			"GroupId": "ParamGroup12",
+			"Name": "L 동물 귀"
+		},
+		{
+			"Id": "Param20",
+			"GroupId": "ParamGroup12",
+			"Name": "L 동물 귀"
+		},
+		{
+			"Id": "ParamHairFront",
+			"GroupId": "ParamGroup9",
+			"Name": "머리 흔들림 앞"
+		},
+		{
+			"Id": "ParamHairFront2",
+			"GroupId": "ParamGroup9",
+			"Name": "머리 흔들림 앞"
+		},
+		{
+			"Id": "ParamHairFront3",
+			"GroupId": "ParamGroup9",
+			"Name": "머리 흔들림 앞"
+		},
+		{
+			"Id": "ParamHairFront4",
+			"GroupId": "ParamGroup9",
+			"Name": "Y 머리 흔들림 앞"
+		},
+		{
+			"Id": "ParamHairFront5",
+			"GroupId": "ParamGroup9",
+			"Name": "Y 머리 흔들림 앞"
+		},
+		{
+			"Id": "ParamHairFront6",
+			"GroupId": "ParamGroup9",
+			"Name": "Y 머리 흔들림 앞"
+		},
+		{
+			"Id": "ParamHairSide",
+			"GroupId": "ParamGroup10",
+			"Name": "머리 흔들림 옆"
+		},
+		{
+			"Id": "ParamHairSide2",
+			"GroupId": "ParamGroup10",
+			"Name": "머리 흔들림 옆"
+		},
+		{
+			"Id": "ParamHairSide3",
+			"GroupId": "ParamGroup10",
+			"Name": "머리 흔들림 옆"
+		},
+		{
+			"Id": "ParamHairSide4",
+			"GroupId": "ParamGroup10",
+			"Name": "머리 흔들림 옆"
+		},
+		{
+			"Id": "ParamHairSide5",
+			"GroupId": "ParamGroup10",
+			"Name": "Y 머리 흔들림 옆"
+		},
+		{
+			"Id": "ParamHairSide6",
+			"GroupId": "ParamGroup10",
+			"Name": "Y 머리 흔들림 옆"
+		},
+		{
+			"Id": "ParamHairSide7",
+			"GroupId": "ParamGroup10",
+			"Name": "Y 머리 흔들림 옆"
+		},
+		{
+			"Id": "ParamHairSide8",
+			"GroupId": "ParamGroup10",
+			"Name": "Y 머리 흔들림 옆"
+		},
+		{
+			"Id": "ParamHairBack",
+			"GroupId": "ParamGroup11",
+			"Name": "X 머리 흔들림 뒤"
+		},
+		{
+			"Id": "ParamHairBack2",
+			"GroupId": "ParamGroup11",
+			"Name": "X 머리 흔들림 뒤"
+		},
+		{
+			"Id": "ParamHairBack3",
+			"GroupId": "ParamGroup11",
+			"Name": "Y 머리 흔들림 뒤"
+		},
+		{
+			"Id": "ParamHairBack4",
+			"GroupId": "ParamGroup11",
+			"Name": "Y 머리 흔들림 뒤"
+		},
+		{
+			"Id": "ParamHairBack5",
+			"GroupId": "ParamGroup11",
+			"Name": "머리 흔들림 뒤"
+		},
+		{
+			"Id": "Param_Angle_Rotation2",
+			"GroupId": "ParamGroup22",
+			"Name": "[0]L 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation3",
+			"GroupId": "ParamGroup22",
+			"Name": "[1]L 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation4",
+			"GroupId": "ParamGroup22",
+			"Name": "[2]L 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation5",
+			"GroupId": "ParamGroup22",
+			"Name": "[3]L 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation6",
+			"GroupId": "ParamGroup22",
+			"Name": "[4]L 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation7",
+			"GroupId": "ParamGroup22",
+			"Name": "[5]L 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation8",
+			"GroupId": "ParamGroup22",
+			"Name": "[6]L 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation9",
+			"GroupId": "ParamGroup22",
+			"Name": "[7]L 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation10",
+			"GroupId": "ParamGroup23",
+			"Name": "[0]R 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation11",
+			"GroupId": "ParamGroup23",
+			"Name": "[1]R 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation12",
+			"GroupId": "ParamGroup23",
+			"Name": "[2]R 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation13",
+			"GroupId": "ParamGroup23",
+			"Name": "[3]R 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation14",
+			"GroupId": "ParamGroup23",
+			"Name": "[4]R 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation15",
+			"GroupId": "ParamGroup23",
+			"Name": "[5]R 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation16",
+			"GroupId": "ParamGroup23",
+			"Name": "[6]R 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation17",
+			"GroupId": "ParamGroup23",
+			"Name": "[7]R 뒷머리 4 회전"
+		},
+		{
+			"Id": "Param9",
+			"GroupId": "ParamGroup17",
+			"Name": "X 머리카락 리본"
+		},
+		{
+			"Id": "Param12",
+			"GroupId": "ParamGroup17",
+			"Name": "X 머리카락 리본"
+		},
+		{
+			"Id": "Param13",
+			"GroupId": "ParamGroup17",
+			"Name": "Y 머리카락 리본"
+		},
+		{
+			"Id": "Param14",
+			"GroupId": "ParamGroup17",
+			"Name": "Y 머리카락 리본"
+		},
+		{
+			"Id": "Param21",
+			"GroupId": "ParamGroup13",
+			"Name": "목 리본"
+		},
+		{
+			"Id": "Param22",
+			"GroupId": "ParamGroup13",
+			"Name": "목 리본"
+		},
+		{
+			"Id": "Param23",
+			"GroupId": "ParamGroup13",
+			"Name": "목 리본"
+		},
+		{
+			"Id": "Param24",
+			"GroupId": "ParamGroup13",
+			"Name": "Y 목 리본"
+		},
+		{
+			"Id": "Param25",
+			"GroupId": "ParamGroup13",
+			"Name": "Y 목 리본"
+		},
+		{
+			"Id": "Param26",
+			"GroupId": "ParamGroup13",
+			"Name": "Y 목 리본"
+		},
+		{
+			"Id": "Param27",
+			"GroupId": "ParamGroup24",
+			"Name": "목 리본 끈"
+		},
+		{
+			"Id": "Param28",
+			"GroupId": "ParamGroup24",
+			"Name": "목 리본 끈"
+		},
+		{
+			"Id": "Param29",
+			"GroupId": "ParamGroup24",
+			"Name": "목 리본 끈"
+		},
+		{
+			"Id": "Param30",
+			"GroupId": "ParamGroup24",
+			"Name": "Y 목 리본 끈"
+		},
+		{
+			"Id": "Param31",
+			"GroupId": "ParamGroup24",
+			"Name": "Y 목 리본 끈"
+		},
+		{
+			"Id": "Param32",
+			"GroupId": "ParamGroup24",
+			"Name": "Y 목 리본 끈"
+		},
+		{
+			"Id": "Param33",
+			"GroupId": "ParamGroup14",
+			"Name": "X 팔 리본"
+		},
+		{
+			"Id": "Param34",
+			"GroupId": "ParamGroup14",
+			"Name": "X 팔 리본"
+		},
+		{
+			"Id": "Param35",
+			"GroupId": "ParamGroup14",
+			"Name": "Y 팔 리본"
+		},
+		{
+			"Id": "Param36",
+			"GroupId": "ParamGroup14",
+			"Name": "Y 팔 리본"
+		},
+		{
+			"Id": "Param37",
+			"GroupId": "ParamGroup25",
+			"Name": "악세 리본"
+		},
+		{
+			"Id": "Param38",
+			"GroupId": "ParamGroup25",
+			"Name": "악세 리본"
+		},
+		{
+			"Id": "Param39",
+			"GroupId": "ParamGroup25",
+			"Name": "Y 악세 리본"
+		},
+		{
+			"Id": "Param40",
+			"GroupId": "ParamGroup25",
+			"Name": "Y 악세 리본"
+		},
+		{
+			"Id": "Param49",
+			"GroupId": "ParamGroup15",
+			"Name": "X 바지 끈"
+		},
+		{
+			"Id": "Param50",
+			"GroupId": "ParamGroup15",
+			"Name": "X 바지 끈"
+		},
+		{
+			"Id": "Param51",
+			"GroupId": "ParamGroup15",
+			"Name": "X 바지 끈"
+		},
+		{
+			"Id": "Param52",
+			"GroupId": "ParamGroup15",
+			"Name": "Y 바지 끈"
+		},
+		{
+			"Id": "Param53",
+			"GroupId": "ParamGroup15",
+			"Name": "Y 바지 끈"
+		},
+		{
+			"Id": "Param54",
+			"GroupId": "ParamGroup15",
+			"Name": "Y 바지 끈"
+		},
+		{
+			"Id": "Param55",
+			"GroupId": "ParamGroup15",
+			"Name": "Y 바지 끈"
+		},
+		{
+			"Id": "Param60",
+			"GroupId": "ParamGroup19",
+			"Name": "X 레그삭스"
+		},
+		{
+			"Id": "Param61",
+			"GroupId": "ParamGroup19",
+			"Name": "X 레그삭스"
+		},
+		{
+			"Id": "Param62",
+			"GroupId": "ParamGroup19",
+			"Name": "Y 레그삭스"
+		},
+		{
+			"Id": "Param63",
+			"GroupId": "ParamGroup19",
+			"Name": "Y 레그삭스"
+		},
+		{
+			"Id": "Param56",
+			"GroupId": "ParamGroup18",
+			"Name": "X 신발 끈"
+		},
+		{
+			"Id": "Param57",
+			"GroupId": "ParamGroup18",
+			"Name": "X 신발 끈"
+		},
+		{
+			"Id": "Param58",
+			"GroupId": "ParamGroup18",
+			"Name": "Y 신발 끈"
+		},
+		{
+			"Id": "Param59",
+			"GroupId": "ParamGroup18",
+			"Name": "Y 신발 끈"
+		},
+		{
+			"Id": "Param64",
+			"GroupId": "ParamGroup21",
+			"Name": "오너캐 전체 흔들림"
+		},
+		{
+			"Id": "Param65",
+			"GroupId": "ParamGroup21",
+			"Name": "오너캐 전체 흔들림"
+		},
+		{
+			"Id": "Param66",
+			"GroupId": "ParamGroup21",
+			"Name": "Y 오너캐 전체 흔들림"
+		},
+		{
+			"Id": "Param67",
+			"GroupId": "ParamGroup21",
+			"Name": "Y 오너캐 전체 흔들림"
+		},
+		{
+			"Id": "Param68",
+			"GroupId": "ParamGroup20",
+			"Name": "오너캐 꼬리"
+		},
+		{
+			"Id": "Param69",
+			"GroupId": "ParamGroup20",
+			"Name": "오너캐 꼬리"
+		},
+		{
+			"Id": "Param70",
+			"GroupId": "ParamGroup20",
+			"Name": "오너캐 꼬리"
+		},
+		{
+			"Id": "Param71",
+			"GroupId": "ParamGroup20",
+			"Name": "오너캐 꼬리"
+		},
+		{
+			"Id": "Param_Angle_Rotation23",
+			"GroupId": "ParamGroup26",
+			"Name": "[0]꼬리 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation24",
+			"GroupId": "ParamGroup26",
+			"Name": "[1]꼬리 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation25",
+			"GroupId": "ParamGroup26",
+			"Name": "[2]꼬리 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation26",
+			"GroupId": "ParamGroup26",
+			"Name": "[3]꼬리 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation27",
+			"GroupId": "ParamGroup26",
+			"Name": "[4]꼬리 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation28",
+			"GroupId": "ParamGroup26",
+			"Name": "[5]꼬리 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation29",
+			"GroupId": "ParamGroup26",
+			"Name": "[6]꼬리 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation30",
+			"GroupId": "ParamGroup26",
+			"Name": "[7]꼬리 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation31",
+			"GroupId": "ParamGroup26",
+			"Name": "[8]꼬리 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation32",
+			"GroupId": "ParamGroup26",
+			"Name": "[9]꼬리 회전"
+		},
+		{
+			"Id": "Param_Angle_Rotation33",
+			"GroupId": "ParamGroup26",
+			"Name": "[10]꼬리 회전"
+		},
+		{
+			"Id": "Param72",
+			"GroupId": "ParamGroup27",
+			"Name": "눈 반짝"
+		},
+		{
+			"Id": "Param74",
+			"GroupId": "ParamGroup27",
+			"Name": "눈 hr off"
+		},
+		{
+			"Id": "Param73",
+			"GroupId": "ParamGroup27",
+			"Name": "오너캐 off"
+		}
+	],
+	"ParameterGroups": [
+		{
+			"Id": "ParamGroup",
+			"GroupId": "",
+			"Name": "XYZ"
+		},
+		{
+			"Id": "ParamGroup2",
+			"GroupId": "",
+			"Name": "눈"
+		},
+		{
+			"Id": "ParamGroup7",
+			"GroupId": "",
+			"Name": "눈동자 물리"
+		},
+		{
+			"Id": "ParamGroup8",
+			"GroupId": "",
+			"Name": "속눈썹 물리"
+		},
+		{
+			"Id": "ParamGroup3",
+			"GroupId": "",
+			"Name": "눈썹"
+		},
+		{
+			"Id": "ParamGroup4",
+			"GroupId": "",
+			"Name": "입"
+		},
+		{
+			"Id": "ParamGroup5",
+			"GroupId": "",
+			"Name": "VBridger"
+		},
+		{
+			"Id": "ParamGroup6",
+			"GroupId": "",
+			"Name": "바디 XYZ"
+		},
+		{
+			"Id": "ParamGroup16",
+			"GroupId": "",
+			"Name": "팔 흔들림"
+		},
+		{
+			"Id": "ParamGroup12",
+			"GroupId": "",
+			"Name": "동물 귀"
+		},
+		{
+			"Id": "ParamGroup9",
+			"GroupId": "",
+			"Name": "앞머리"
+		},
+		{
+			"Id": "ParamGroup10",
+			"GroupId": "",
+			"Name": "옆머리"
+		},
+		{
+			"Id": "ParamGroup11",
+			"GroupId": "",
+			"Name": "뒷머리 잔머리"
+		},
+		{
+			"Id": "ParamGroup22",
+			"GroupId": "",
+			"Name": "L 뒷머리 4 회전"
+		},
+		{
+			"Id": "ParamGroup23",
+			"GroupId": "",
+			"Name": "R 뒷머리 4 회전"
+		},
+		{
+			"Id": "ParamGroup17",
+			"GroupId": "",
+			"Name": "머리카락 리본"
+		},
+		{
+			"Id": "ParamGroup13",
+			"GroupId": "",
+			"Name": "목 리본"
+		},
+		{
+			"Id": "ParamGroup24",
+			"GroupId": "",
+			"Name": "목 리본 끈"
+		},
+		{
+			"Id": "ParamGroup14",
+			"GroupId": "",
+			"Name": "팔 리본"
+		},
+		{
+			"Id": "ParamGroup25",
+			"GroupId": "",
+			"Name": "상의 악세 리본"
+		},
+		{
+			"Id": "ParamGroup15",
+			"GroupId": "",
+			"Name": "바지 끈"
+		},
+		{
+			"Id": "ParamGroup19",
+			"GroupId": "",
+			"Name": "레그삭스"
+		},
+		{
+			"Id": "ParamGroup18",
+			"GroupId": "",
+			"Name": "신발 끈"
+		},
+		{
+			"Id": "ParamGroup21",
+			"GroupId": "",
+			"Name": "오너캐"
+		},
+		{
+			"Id": "ParamGroup20",
+			"GroupId": "",
+			"Name": "오너캐 꼬리"
+		},
+		{
+			"Id": "ParamGroup26",
+			"GroupId": "",
+			"Name": "꼬리 회전"
+		},
+		{
+			"Id": "ParamGroup27",
+			"GroupId": "",
+			"Name": "토글"
+		}
+	],
+	"Parts": [
+		{
+			"Id": "Part",
+			"Name": "液タブ-타블렉"
+		},
+		{
+			"Id": "Part4",
+			"Name": "オトモ-어깨 오너캐"
+		},
+		{
+			"Id": "Part9",
+			"Name": "キャラ"
+		},
+		{
+			"Id": "PartSketch0",
+			"Name": "[ 밑그림 ]"
+		},
+		{
+			"Id": "Part2",
+			"Name": "スタンド"
+		},
+		{
+			"Id": "Part3",
+			"Name": "タブレット"
+		},
+		{
+			"Id": "Part5",
+			"Name": "足"
+		},
+		{
+			"Id": "Part6",
+			"Name": "手"
+		},
+		{
+			"Id": "Part7",
+			"Name": "顔"
+		},
+		{
+			"Id": "Part8",
+			"Name": "しっぽ"
+		},
+		{
+			"Id": "Part10",
+			"Name": "顔-얼굴"
+		},
+		{
+			"Id": "Part36",
+			"Name": "装飾"
+		},
+		{
+			"Id": "Part40",
+			"Name": "ペン持ち腕 - 타블렛 펭 전완부"
+		},
+		{
+			"Id": "Part44",
+			"Name": "体"
+		},
+		{
+			"Id": "Part79",
+			"Name": "耳"
+		},
+		{
+			"Id": "Part82",
+			"Name": "おさげリボン"
+		},
+		{
+			"Id": "Part85",
+			"Name": "おさげ"
+		},
+		{
+			"Id": "Part88",
+			"Name": "後頭部"
+		},
+		{
+			"Id": "Part89",
+			"Name": "ほつれ毛"
+		},
+		{
+			"Id": "ArtMesh277_Skinning",
+			"Name": "しっぽ(스키닝)"
+		},
+		{
+			"Id": "Part11",
+			"Name": "前髪-앞머리"
+		},
+		{
+			"Id": "Part12",
+			"Name": "横髪右 - L 옆머리"
+		},
+		{
+			"Id": "Part13",
+			"Name": "横髪左 - R 옆머리"
+		},
+		{
+			"Id": "Part14",
+			"Name": "顔"
+		},
+		{
+			"Id": "Part34",
+			"Name": "輪郭"
+		},
+		{
+			"Id": "Part37",
+			"Name": "バッジ2"
+		},
+		{
+			"Id": "Part38",
+			"Name": "バッジ1"
+		},
+		{
+			"Id": "Part39",
+			"Name": "リボン"
+		},
+		{
+			"Id": "Part41",
+			"Name": "手前指"
+		},
+		{
+			"Id": "Part45",
+			"Name": "襟リボン"
+		},
+		{
+			"Id": "Part48",
+			"Name": "リボン影"
+		},
+		{
+			"Id": "Part49",
+			"Name": "フード"
+		},
+		{
+			"Id": "Part50",
+			"Name": "ねずみ手"
+		},
+		{
+			"Id": "Part51",
+			"Name": "ポケット"
+		},
+		{
+			"Id": "Part52",
+			"Name": "ねずみ"
+		},
+		{
+			"Id": "Part53",
+			"Name": "腕影調整用"
+		},
+		{
+			"Id": "Part54",
+			"Name": "胴"
+		},
+		{
+			"Id": "Part55",
+			"Name": "ボトムス"
+		},
+		{
+			"Id": "Part68",
+			"Name": "左腕"
+		},
+		{
+			"Id": "Part70",
+			"Name": "右腕ペン持ち - 타블렛 펜 상완근"
+		},
+		{
+			"Id": "Part71",
+			"Name": "右腕"
+		},
+		{
+			"Id": "Part73",
+			"Name": "首"
+		},
+		{
+			"Id": "Part77",
+			"Name": "フード後ろ"
+		},
+		{
+			"Id": "Part80",
+			"Name": "左"
+		},
+		{
+			"Id": "Part81",
+			"Name": "右"
+		},
+		{
+			"Id": "Part83",
+			"Name": "左"
+		},
+		{
+			"Id": "Part84",
+			"Name": "右"
+		},
+		{
+			"Id": "Part86",
+			"Name": "左"
+		},
+		{
+			"Id": "Part87",
+			"Name": "右"
+		},
+		{
+			"Id": "Part15",
+			"Name": "左目"
+		},
+		{
+			"Id": "Part21",
+			"Name": "右目"
+		},
+		{
+			"Id": "Part27",
+			"Name": "口"
+		},
+		{
+			"Id": "Part31",
+			"Name": "左眉"
+		},
+		{
+			"Id": "Part32",
+			"Name": "右眉"
+		},
+		{
+			"Id": "Part33",
+			"Name": "鼻"
+		},
+		{
+			"Id": "Part35",
+			"Name": "髪影"
+		},
+		{
+			"Id": "Part42",
+			"Name": "中指"
+		},
+		{
+			"Id": "Part43",
+			"Name": "薬指小指"
+		},
+		{
+			"Id": "Part46",
+			"Name": "ねずみ"
+		},
+		{
+			"Id": "Part47",
+			"Name": "リボン"
+		},
+		{
+			"Id": "Part56",
+			"Name": "紐"
+		},
+		{
+			"Id": "Part57",
+			"Name": "編み上げ"
+		},
+		{
+			"Id": "Part58",
+			"Name": "パンツ"
+		},
+		{
+			"Id": "Part59",
+			"Name": "左足"
+		},
+		{
+			"Id": "Part62",
+			"Name": "右足"
+		},
+		{
+			"Id": "Part69",
+			"Name": "手"
+		},
+		{
+			"Id": "Part72",
+			"Name": "右手"
+		},
+		{
+			"Id": "Part74",
+			"Name": "塗り"
+		},
+		{
+			"Id": "Part78",
+			"Name": "肩付近"
+		},
+		{
+			"Id": "ArtMesh269_Skinning",
+			"Name": "右おさげ2(스키닝)"
+		},
+		{
+			"Id": "ArtMesh270_Skinning",
+			"Name": "右おさげ1(스키닝)"
+		},
+		{
+			"Id": "Part16",
+			"Name": "左まつげ"
+		},
+		{
+			"Id": "Part17",
+			"Name": "黒目"
+		},
+		{
+			"Id": "Part18",
+			"Name": "白目"
+		},
+		{
+			"Id": "Part19",
+			"Name": "ふたえ"
+		},
+		{
+			"Id": "Part22",
+			"Name": "まつげ"
+		},
+		{
+			"Id": "Part23",
+			"Name": "黒目"
+		},
+		{
+			"Id": "Part24",
+			"Name": "白目"
+		},
+		{
+			"Id": "Part25",
+			"Name": "ふたえ"
+		},
+		{
+			"Id": "Part28",
+			"Name": "上唇"
+		},
+		{
+			"Id": "Part29",
+			"Name": "下唇"
+		},
+		{
+			"Id": "Part30",
+			"Name": "口内"
+		},
+		{
+			"Id": "Part60",
+			"Name": "ふともも"
+		},
+		{
+			"Id": "Part61",
+			"Name": "紐"
+		},
+		{
+			"Id": "Part63",
+			"Name": "ソックスガーター"
+		},
+		{
+			"Id": "Part64",
+			"Name": "ふともも"
+		},
+		{
+			"Id": "Part65",
+			"Name": "右靴"
+		},
+		{
+			"Id": "Part66",
+			"Name": "ひざ下"
+		},
+		{
+			"Id": "Part67",
+			"Name": "ソックス後ろ"
+		},
+		{
+			"Id": "Part75",
+			"Name": "シャツ"
+		},
+		{
+			"Id": "Part76",
+			"Name": "肌"
+		},
+		{
+			"Id": "Part20",
+			"Name": "アイシャドウ"
+		},
+		{
+			"Id": "Part26",
+			"Name": "アイシャドウ"
+		}
+	],
+	"CombinedParameters": [
+		[
+			"ParamEyeLSmile",
+			"ParamEyeRSmile"
+		]
+	]
+}
