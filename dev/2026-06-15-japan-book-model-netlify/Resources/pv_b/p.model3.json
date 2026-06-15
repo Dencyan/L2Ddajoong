@@ -21,7 +21,14 @@
         "Name": "owner_character_off",
         "File": "e03.exp3.json"
       }
-    ]
+    ],
+    "Motions": {
+      "Idle": [
+        {
+          "File": "i01.motion3.json"
+        }
+      ]
+    }
   },
   "Groups": [
     {
