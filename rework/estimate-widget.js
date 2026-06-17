@@ -2,7 +2,7 @@ const estimateData = {
   base: [
     { id: "", label: "기본 리깅 선택", price: 0 },
     { id: "sd-owner", label: "동물 / 오너캐릭터", price: 150000 },
-    { id: "sd", label: "SD 전신", price: 250000 },
+    { id: "sd", label: "SD 전신", price: 230000 },
     { id: "basic-half", label: "베이직 LD 반신", price: 350000 },
     { id: "basic-full", label: "베이직 LD 전신", price: 450000 },
     { id: "premium-half", label: "프리미엄 LD 반신", price: 670000 },
