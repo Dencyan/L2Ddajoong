@@ -711,6 +711,99 @@ h1 {
   background: #2c3860;
 }
 
+.video-showcase {
+  border-top: 1px solid rgba(86, 96, 150, .14);
+}
+
+.video-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.video-frame,
+.video-card iframe {
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(246,248,255,.9);
+  box-shadow: 0 12px 26px rgba(60, 70, 150, .1);
+}
+
+.video-frame {
+  aspect-ratio: 16 / 9;
+}
+
+.video-frame iframe,
+.video-card iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  padding: 26px;
+  border-top: 1px solid rgba(86, 96, 150, .2);
+}
+
+.video-copy span,
+.video-card span {
+  color: var(--violet);
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .03em;
+}
+
+.video-copy h3 {
+  margin: 18px 0 12px;
+  font-size: clamp(1.45rem, 2.2vw, 2.1rem);
+  line-height: 1.2;
+}
+
+.video-copy p {
+  color: var(--muted);
+}
+
+.video-copy a {
+  align-self: flex-start;
+  margin-top: 22px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: white;
+  background: var(--ink);
+  font-weight: 800;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.video-card {
+  min-width: 0;
+}
+
+.video-card iframe {
+  aspect-ratio: 16 / 9;
+}
+
+.video-card span {
+  display: block;
+  margin-top: 14px;
+}
+
+.video-card h3 {
+  margin-top: 6px;
+  font-size: 1.02rem;
+}
+
 .handoff-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2017,7 +2110,8 @@ h1 {
   }
 
   .hero-section,
-  .showroom {
+  .showroom,
+  .video-feature {
     grid-template-columns: 1fr;
   }
 
@@ -2037,6 +2131,7 @@ h1 {
   .price-reference-grid,
   .compare-viewer,
   .recommend-grid,
+  .video-grid,
   .live-stage,
   .live-tips,
   .handoff-grid {
@@ -2076,6 +2171,13 @@ h1 {
   .site-header {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .estimate-widget {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
   }
 
   .hero-section {

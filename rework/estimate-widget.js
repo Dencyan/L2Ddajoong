@@ -1,6 +1,7 @@
 const estimateData = {
   base: [
     { id: "", label: "기본 리깅 선택", price: 0 },
+    { id: "sd-owner", label: "동물 / 오너캐릭터", price: 150000 },
     { id: "sd", label: "SD 전신", price: 250000 },
     { id: "basic-half", label: "베이직 LD 반신", price: 350000 },
     { id: "basic-full", label: "베이직 LD 전신", price: 450000 },
@@ -8,19 +9,20 @@ const estimateData = {
     { id: "premium-full", label: "프리미엄 LD 전신", price: 780000 },
   ],
   options: [
-    { id: "expr", label: "추가 표정", price: 10000, count: true },
-    { id: "expr-anim", label: "표정 애니메이션", price: 30000, count: true, suffix: "~" },
-    { id: "acc", label: "악세서리 / 소품", price: 20000, suffix: "~" },
-    { id: "ear", label: "귀 / 꼬리", price: 35000, suffix: "~" },
-    { id: "arm-swing", label: "팔 흔들림 추가", price: 30000 },
-    { id: "mouth-x", label: "입 X", price: 20000 },
-    { id: "vbridger-a", label: "입 X + 볼빵빵 + VBridger", price: 120000 },
-    { id: "vbridger-b", label: "입 X + 볼빵빵 + 메롱 + VBridger", price: 190000 },
-  ],
-  consult: [
-    "날개 / 뿔",
-    "추가 의상",
-    "추가 헤어",
+    { id: "expr", label: "추가 표정", priceText: "+10,000원 / 개", price: 10000, count: true },
+    { id: "expr-anim", label: "표정 애니메이션", priceText: "30,000원~ / 개", price: 30000, count: true, approximate: true },
+    { id: "acc", label: "악세서리 / 소품", priceText: "20,000~40,000원", price: 0, approximate: true },
+    { id: "ear", label: "귀 / 꼬리", priceText: "35,000원~", price: 0, approximate: true },
+    { id: "wing", label: "날개 / 뿔", priceText: "금액 협의", price: 0, approximate: true },
+    { id: "arm-swing", label: "팔 흔들림 추가", priceText: "30,000원", price: 30000 },
+    { id: "arm-part", label: "팔 파츠 (마이크, 게임기 등)", priceText: "금액 협의", price: 0, approximate: true },
+    { id: "outfit", label: "추가 의상", priceText: "금액 협의", price: 0, approximate: true },
+    { id: "hair", label: "추가 헤어", priceText: "금액 협의", price: 0, approximate: true },
+    { id: "mouth-x", label: "입 X", priceText: "20,000원", price: 20000 },
+    { id: "chub", label: "볼빵빵", priceText: "20,000원", price: 20000 },
+    { id: "tongue", label: "메롱", priceText: "70,000원", price: 70000 },
+    { id: "vbridger-a", label: "입 X + 볼빵빵 + VBridger", priceText: "120,000원", price: 120000 },
+    { id: "vbridger-b", label: "입 X + 볼빵빵 + 메롱 + VBridger", priceText: "190,000원", price: 190000 },
   ],
   discounts: [
     { id: "", label: "할인 없음", price: 0 },
@@ -40,6 +42,8 @@ function mountRevealEffects() {
     ".section-heading",
     ".sample-viewer",
     ".sample-controls",
+    ".video-feature",
+    ".video-card",
     ".handoff-grid article",
     ".contact-panel",
     ".sub-hero",
@@ -107,7 +111,7 @@ function createEstimateWidget() {
         ${estimateData.options.map((item) => `
           <label class="estimate-check">
             <input type="checkbox" name="option" value="${item.id}" />
-            <span>${item.label}<small>${item.price.toLocaleString("ko-KR")}원${item.suffix || ""}</small></span>
+            <span>${item.label}<small>${item.priceText || `${item.price.toLocaleString("ko-KR")}원`}</small></span>
             ${item.count ? `<input class="estimate-count" type="number" min="1" max="20" value="1" aria-label="${item.label} 개수" disabled />` : ""}
           </label>
         `).join("")}
@@ -119,8 +123,8 @@ function createEstimateWidget() {
         </select>
       </label>
       <details class="estimate-consult">
-        <summary>금액 협의 옵션</summary>
-        <p>${estimateData.consult.join(" / ")}</p>
+        <summary>상담 옵션 안내</summary>
+        <p>범위(~) 및 금액 협의 옵션은 합계에 고정 금액으로 더하지 않고 상담 후 확정됩니다.</p>
       </details>
       <div class="estimate-result">
         <span>예상 견적</span>
@@ -168,7 +172,7 @@ function mountEstimateWidget() {
 
       const count = countInput ? Math.max(1, Number(countInput.value || 1)) : 1;
       total += option.price * count;
-      if (option.suffix) hasApprox = true;
+      if (option.approximate) hasApprox = true;
     });
 
     total += discount?.price || 0;
