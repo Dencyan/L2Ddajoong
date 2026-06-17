@@ -37,6 +37,11 @@
       gap: 14px;
     }
 
+    .showcase-shell {
+      position: relative;
+      z-index: 1;
+    }
+
     .showcase-card {
       position: relative;
       width: 100%;
@@ -50,6 +55,23 @@
       box-shadow:
         0 18px 50px rgba(79, 84, 131, 0.16),
         inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .showcase-card-watermark {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+      user-select: none;
+      color: rgba(87, 92, 143, 0.1);
+      font: 900 clamp(26px, 8vw, 52px) / 1.2 "Segoe UI", "Yu Gothic", sans-serif;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+      transform: rotate(-16deg);
+      white-space: pre-line;
     }
 
     .showcase-card.is-loading::after {
@@ -189,6 +211,28 @@
       text-transform: uppercase;
     }
 
+    .showcase-credit {
+      margin: 0;
+      padding: 8px 10px;
+      border-top: 1px solid rgba(126, 131, 197, 0.16);
+      color: #6f739f;
+      font: 700 11px/1.55 "Segoe UI", sans-serif;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .showcase-credit span {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .showcase-credit span + span::before {
+      content: " / ";
+      color: rgba(111, 115, 159, 0.48);
+      padding: 0 6px;
+    }
+
     @keyframes showcase-spin {
       from {
         transform: rotate(0deg);
@@ -216,6 +260,8 @@
   <main class="showcase-shell">
     <p class="showcase-label">Live2D 샘플</p>
     <section id="live2d-stage" class="showcase-card is-loading">
+      <div class="showcase-card-watermark" aria-hidden="true">ILLUST: しゅがお
+RIGGING: DAJOONG</div>
       <div id="showcase-loading" class="showcase-loading" aria-live="polite">
         <div class="showcase-spinner" aria-hidden="true"></div>
         <p id="showcase-loading-text" class="showcase-loading-text">
@@ -233,6 +279,10 @@
         <div id="expression-buttons"></div>
       </div>
     </section>
+    <p class="showcase-credit" aria-label="Live2D sample credits">
+      <span>Illust: しゅがお</span>
+      <span>Rigging: Dajoong</span>
+    </p>
   </main>
 </body>
 </html>
