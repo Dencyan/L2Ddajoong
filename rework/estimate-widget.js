@@ -27,7 +27,7 @@ const estimateData = {
   discounts: [
     { id: "", label: "할인 없음", price: 0 },
     { id: "collab", label: "협업 작가님 LD 할인", price: -50000 },
-    { id: "review", label: "리뷰 이벤트 할인", price: -20000 },
+    { id: "review", label: "아트머그 한정 리뷰 이벤트 할인", price: -20000 },
   ],
 };
 
