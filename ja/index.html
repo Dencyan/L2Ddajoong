@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dajoong | Live2Dリギングサンプル</title>
+  <meta name="description" content="DajoongのLive2Dリギングサンプル、ご依頼案内、料金比較、Webモデル体験をまとめたポートフォリオです。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dajoong Live2Dリギングサンプル" />
+  <meta property="og:description" content="Live2Dリギングサンプル、ご依頼案内、料金比較、Webモデル体験を一か所にまとめました。" />
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:url" content="https://dajoong.cloud/ja/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dajoong Live2Dリギングサンプル" />
+  <meta name="twitter:description" content="DajoongのLive2Dリギングサンプルとご依頼情報をまとめてご覧いただけます。" />
+  <meta name="twitter:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <link rel="canonical" href="https://dajoong.cloud/ja/" />
+  <link rel="alternate" hreflang="ko" href="https://dajoong.cloud/" />
+  <link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/" />
+  <link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/" />
+  <link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/" />
+
+  <link rel="stylesheet" href="./style.css?v=20260618" />
+</head>
+<body>
+  <div class="entry-loader" id="entry-loader" role="status" aria-live="polite">
+    <div class="entry-loader-mark" aria-hidden="true">
+      <span>D</span>
+      <i></i>
+    </div>
+    <p>Dajoong</p>
+    <small>Live2D Rigging</small>
+  </div>
+
+  <canvas id="motion-field" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Dajoong home">
+      <span class="brand-mark">D</span>
+      <span>Dajoong</span>
+    </a>
+    <nav class="top-nav" aria-label="メインメニュー">
+      <a href="#showroom">サンプル</a>
+      <a href="./gallery/">ギャラリー</a>
+      <a href="./guide/">ご案内</a>
+      <a href="./compare/">料金</a>
+      <a href="./live/">体験</a>
+    </nav>
+    <a class="nav-action" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+  </header>
+
+  <main id="top">
+    <section class="hero-section home-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Live2D Rigging</p>
+        <h1>Dajoong Live2Dリギングサンプル</h1>
+        <p class="hero-lead">
+          リギングサンプル、ご依頼案内、料金比較、Webモデル体験を一か所にまとめました。
+        </p>
+        <div class="hero-actions">
+          <a class="primary-action" href="./live/">Webモデルを体験</a>
+          <a class="secondary-action" href="./gallery/">サンプルギャラリーを見る</a>
+        </div>
+        <div class="hero-route-links" aria-label="クイックリンク">
+          <a href="./guide/">ご依頼前ガイド</a>
+          <a href="./compare/">プラン比較</a>
+          <a href="#showroom">ショールームを見る</a>
+        </div>
+      </div>
+
+      <div class="hero-stage" aria-label="Live2D Webモデルプレビュー">
+        <div class="live-card">
+          <div class="live-card-head">
+            <span>Web体験</span>
+            <a href="./live/">大きく見る</a>
+          </div>
+          <div class="demo-frame">
+            <iframe title="Dajoong Live2D web sample" src="https://live2d-netlify-demo.netlify.app/" loading="lazy" allow="clipboard-write"></iframe>
+            <button class="demo-cover" id="demo-cover" type="button">
+              <span class="cover-symbol">⌁</span>
+              <span>クリックして操作</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-map" aria-label="ページ案内">
+      <a class="home-map-card" href="./gallery/">
+        <span>01 サンプル</span>
+        <h2>リギングサンプル集</h2>
+        <p>軸、目、口、表情、エフェクト、腕、衣装・髪型のサンプルをカテゴリー別にご覧いただけます。</p>
+      </a>
+      <a class="home-map-card" href="./guide/">
+        <span>02 ご案内</span>
+        <h2>ご依頼前の確認事項</h2>
+        <p>PSDの準備、制作の流れ、確認、公開、納品について順番にご案内します。</p>
+      </a>
+      <a class="home-map-card" href="./compare/">
+        <span>03 料金</span>
+        <h2>料金とオプションを比較</h2>
+        <p>ベーシック、プレミアム、SD、背景アニメーションの違いをサンプルと一緒に比較できます。</p>
+      </a>
+      <a class="home-map-card" href="./live/">
+        <span>04 体験</span>
+        <h2>Webモデルプレビュー</h2>
+        <p>保護されたNetlifyサンプルを大きな画面で操作し、動きを確認できます。</p>
+      </a>
+    </section>
+
+    <section class="notice-strip" aria-label="制作前の確認事項">
+      <article>
+        <strong>ファイル準備</strong>
+        <span>パーツ分け済みのPSDファイルが必要です。</span>
+      </article>
+      <article>
+        <strong>納品形式</strong>
+        <span>制作完了後、アイコン画像を含む.moc3ファイル一式をお渡しします。</span>
+      </article>
+      <article>
+        <strong>制作期間</strong>
+        <span>基本モデルの平均制作期間は2～4週間です。</span>
+      </article>
+    </section>
+
+    <section id="showroom" class="section-shell">
+      <div class="section-heading">
+        <p class="eyebrow">サンプルプレビュー</p>
+        <h2>代表的な動きを見る</h2>
+        <p>トップでは代表的な動きを紹介しています。その他のサンプルはギャラリーでご覧ください。</p>
+      </div>
+
+      <div class="showroom">
+        <div class="sample-viewer">
+          <img id="sample-image" src="../assets/body-x.gif" alt="Live2D X軸モーションサンプル" />
+          <div class="sample-caption">
+            <span id="sample-kind">全身リギング</span>
+            <strong id="sample-title">X軸の動き</strong>
+            <p id="sample-desc">左右の顔の回転と体の立体感を確認できる基本軸サンプルです。</p>
+          </div>
+        </div>
+        <div class="sample-controls" aria-label="サンプル選択">
+          <button class="sample-button is-active" type="button" data-sample="body-x">X軸</button>
+          <button class="sample-button" type="button" data-sample="body-y">Y軸</button>
+          <button class="sample-button" type="button" data-sample="body-z">Z軸</button>
+          <button class="sample-button" type="button" data-sample="eyes">目の物理演算</button>
+          <button class="sample-button" type="button" data-sample="mouth">口12点</button>
+          <button class="sample-button" type="button" data-sample="heart">ハート目</button>
+          <button class="sample-button" type="button" data-sample="hair">髪型変更</button>
+          <button class="sample-button" type="button" data-sample="hand">手振り</button>
+          <a class="sample-more-link" href="./gallery/">ギャラリーをすべて見る</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell video-showcase" aria-label="映像ショーケース">
+      <div class="section-heading">
+        <p class="eyebrow">Video Showcase</p>
+        <h2>映像で見るリギング作品</h2>
+        <p>ArtMugの最新サンプルから特徴の異なる4本を選び、GIFより長い動きを確認できるようにまとめました。</p>
+      </div>
+      <div class="video-feature">
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/z4u-bGbvza0?fs=0"
+            title="LDリギング映像サンプル"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+          </iframe>
+        </div>
+        <div class="video-copy">
+          <span>LD Rigging</span>
+          <h3>全身の動きと表情演出</h3>
+          <p>基本軸、表情、物理演算が映像の中でどのようにつながるか確認できる代表的なLDサンプルです。</p>
+          <a href="./gallery/">GIFサンプルをもっと見る</a>
+        </div>
+      </div>
+      <div class="video-grid">
+        <article class="video-card">
+          <iframe src="https://www.youtube.com/embed/J45TRqBF4qA?fs=0" title="SDリギング映像サンプル" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+          <span>SD</span>
+          <h3>小さく軽快なキャラクターの動き</h3>
+        </article>
+        <article class="video-card">
+          <iframe src="https://www.youtube.com/embed/c2-ZhX-hAPI?fs=0" title="オリジナルキャラクターのリギング映像" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+          <span>Owner Character</span>
+          <h3>コンセプト重視のサンプル</h3>
+        </article>
+        <article class="video-card">
+          <iframe src="https://www.youtube.com/embed/JLTUyPkfsj0?fs=0" title="メモリアルリギング映像サンプル" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+          <span>Memorial</span>
+          <h3>雰囲気と演出を確認</h3>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell">
+      <div class="section-heading">
+        <p class="eyebrow">ショートカット</p>
+        <h2>目的に合わせてすぐに移動</h2>
+      </div>
+      <div class="handoff-grid">
+        <article>
+          <span>サンプルをもっと見たい方</span>
+          <h3>サンプルギャラリー</h3>
+          <p>20点のサンプルをカテゴリー別にまとめたアーカイブです。</p>
+          <a href="./gallery/">サンプルを見る</a>
+        </article>
+        <article>
+          <span>初めてご依頼する方</span>
+          <h3>ご依頼案内</h3>
+          <p>準備物、制作の流れ、修正範囲、納品について順番に確認できます。</p>
+          <a href="./guide/">ガイドを読む</a>
+        </article>
+        <article>
+          <span>料金とオプションを知りたい方</span>
+          <h3>料金比較</h3>
+          <p>ベーシック、プレミアム、SDリギングの違いをモーションサンプルで比較できます。</p>
+          <a href="./compare/">比較する</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-panel">
+      <p class="eyebrow">お問い合わせ</p>
+      <h2>モデルの魅力を動きで表現します。</h2>
+      <div class="contact-actions">
+        <a href="https://x.com/Dajoong_L2d" target="_blank" rel="noopener noreferrer">Xでお問い合わせ</a>
+        <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">ArtMug</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+  <script src="./estimate-widget.js"></script>
+  <script src="/language-switch.js"></script>
+</body>
+</html>

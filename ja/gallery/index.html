@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dajoong | リギングサンプルギャラリー</title>
+  <meta name="description" content="DajoongのLive2Dリギングサンプルを動き別にまとめたギャラリーです。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dajoong リギングサンプルギャラリー" />
+  <meta property="og:description" content="目、口、表情、エフェクト、腕、衣装・髪型のリギングサンプルをカテゴリー別にご覧ください。" />
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:url" content="https://dajoong.cloud/ja/gallery/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dajoong リギングサンプルギャラリー" />
+  <meta name="twitter:description" content="DajoongのLive2Dリギング作品を一覧で楽しめるギャラリーです。" />
+  <meta name="twitter:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <link rel="canonical" href="https://dajoong.cloud/ja/gallery/" />
+  <link rel="alternate" hreflang="ko" href="https://dajoong.cloud/gallery/" />
+  <link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/gallery/" />
+  <link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/gallery/" />
+  <link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/gallery/" />
+
+  <link rel="stylesheet" href="../style.css?v=20260618" />
+</head>
+<body class="sub-page gallery-page">
+  <header class="site-header">
+    <a class="brand" href="../">
+      <span class="brand-mark">D</span>
+      <span>Dajoong</span>
+    </a>
+    <nav class="top-nav" aria-label="メインメニュー">
+      <a href="../">ホーム</a>
+      <a href="./" aria-current="page">ギャラリー</a>
+      <a href="../guide/">ご案内</a>
+      <a href="../compare/">料金</a>
+      <a href="../live/">体験</a>
+    </nav>
+    <a class="nav-action" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+  </header>
+
+  <main class="sub-main">
+    <section class="sub-hero gallery-hero">
+      <p class="eyebrow">サンプルギャラリー</p>
+      <h1>動きを作品として楽しむリギングギャラリー</h1>
+      <p>サンプルGIFをカテゴリー別に整理しました。カードを選ぶと大きな画面でオプション情報と一緒に確認できます。</p>
+    </section>
+
+    <section class="gallery-workbench" aria-label="リギングサンプルギャラリー">
+      <aside class="gallery-preview">
+        <div class="gallery-preview-frame">
+          <img id="gallery-preview-image" src="../../assets/body-x.gif" alt="X軸モーションサンプル" />
+        </div>
+        <div class="gallery-preview-copy">
+          <span id="gallery-preview-category">体の軸</span>
+          <h2 id="gallery-preview-title">X軸の動き</h2>
+          <p id="gallery-preview-desc">左右の顔の回転と体の立体感を確認できる基本軸サンプルです。</p>
+          <dl>
+            <div>
+              <dt>オプション種別</dt>
+              <dd id="gallery-preview-plan">LD基本リギング</dd>
+            </div>
+            <div>
+              <dt>チェックポイント</dt>
+              <dd id="gallery-preview-point">正面から側面へ移る際の立体感</dd>
+            </div>
+          </dl>
+        </div>
+      </aside>
+
+      <div class="gallery-browser">
+        <div class="gallery-toolbar" aria-label="サンプルカテゴリー">
+          <button class="filter-button is-active" type="button" data-filter="all">All</button>
+          <button class="filter-button" type="button" data-filter="body">Body</button>
+          <button class="filter-button" type="button" data-filter="eyes">Eyes</button>
+          <button class="filter-button" type="button" data-filter="mouth">Mouth</button>
+          <button class="filter-button" type="button" data-filter="expression">表情・エフェクト</button>
+          <button class="filter-button" type="button" data-filter="variation">切り替えオプション</button>
+          <button class="filter-button" type="button" data-filter="arms">Arms</button>
+        </div>
+
+        <div class="archive-grid" id="archive-grid">
+          <button class="archive-card is-active" type="button" data-category="body" data-src="../../assets/body-x.gif" data-title="X軸の動き" data-label="体の軸" data-desc="左右の顔の回転と体の立体感を確認できる基本軸サンプルです。" data-plan="LD基本リギング" data-point="正面から側面へ移る際の立体感">
+            <img src="../../assets/thumbs/body-x.jpg" alt="X軸の動き" loading="lazy" />
+            <span>Body</span><strong>X軸の動き</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="body" data-src="../../assets/body-y.gif" data-title="Y軸の動き" data-label="体の軸" data-desc="上下の視線と顔の角度を滑らかにつなぐ軸動作です。" data-plan="LD基本リギング" data-point="視線の高さと顎ラインのつながり">
+            <img src="../../assets/thumbs/body-y.jpg" alt="Y軸の動き" loading="lazy" />
+            <span>Body</span><strong>Y軸の動き</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="body" data-src="../../assets/body-z.gif" data-title="Z軸の傾き" data-label="体の軸" data-desc="左右の傾きと装飾の物理演算のバランスを確認できます。" data-plan="LD基本リギング" data-point="傾きと髪の物理演算の反応">
+            <img src="../../assets/thumbs/body-z.jpg" alt="Z軸の傾き" loading="lazy" />
+            <span>Body</span><strong>Z軸の傾き</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="eyes" data-src="../../assets/eyes-green.gif" data-title="グリーンアイ" data-label="目の物理演算" data-desc="瞳とハイライトの細かな動きで視線を鮮明に表現します。" data-plan="目の物理演算オプション" data-point="ハイライトの揺れとまばたき">
+            <img src="../../assets/thumbs/eyes-green.jpg" alt="グリーンアイ" loading="lazy" />
+            <span>Eyes</span><strong>グリーンアイ</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="eyes" data-src="../../assets/eyes-odd.gif" data-title="オッドアイ" data-label="目の物理演算" data-desc="左右で異なる瞳の色でもハイライトと視線を安定して表現します。" data-plan="目の物理演算オプション" data-point="両目の視線バランス">
+            <img src="../../assets/thumbs/eyes-odd.jpg" alt="オッドアイ" loading="lazy" />
+            <span>Eyes</span><strong>オッドアイ</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="eyes" data-src="../../assets/eyes-red.gif" data-title="レッドアイ" data-label="目の物理演算" data-desc="鮮やかな瞳でも表情の変化が伝わるように構成します。" data-plan="目の物理演算オプション" data-point="鮮やかな色と目元の強調">
+            <img src="../../assets/thumbs/eyes-red.jpg" alt="レッドアイ" loading="lazy" />
+            <span>Eyes</span><strong>レッドアイ</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="mouth" data-src="../../assets/mouth-9.gif" data-title="口の動き9点" data-label="口リギング" data-desc="軽い会話や配信に適した基本的な発話構造です。" data-plan="基本口リギング" data-point="自然で安定した音素変化">
+            <img src="../../assets/thumbs/mouth-9.jpg" alt="口の動き9点" loading="lazy" />
+            <span>Mouth</span><strong>口9点</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="mouth" data-src="../../assets/mouth-12.gif" data-title="口の動き12点" data-label="口リギング" data-desc="台詞と感情表現を豊かにする細かな口の構造です。" data-plan="高度な口リギング" data-point="小さな口形と大きな発話の差">
+            <img src="../../assets/thumbs/mouth-12.jpg" alt="口の動き12点" loading="lazy" />
+            <span>Mouth</span><strong>口12点</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="mouth" data-src="../../assets/mouth-vbridger.gif" data-title="口12点 VBridger" data-label="口リギング" data-desc="VBridgerに対応した豊かな口形変化のサンプルです。" data-plan="VBridgerオプション" data-point="広い発話範囲と自然な切り替え">
+            <img src="../../assets/thumbs/mouth-vbridger.jpg" alt="口12点 VBridger" loading="lazy" />
+            <span>Mouth</span><strong>VBridger</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="expression" data-src="../../assets/expression-scorn.gif" data-title="軽蔑表情" data-label="表情" data-desc="キャラクター性を強く表現するショートカット表情です。" data-plan="追加表情オプション" data-point="目元と口元が同時に変わる印象">
+            <img src="../../assets/thumbs/expression-scorn.jpg" alt="軽蔑表情" loading="lazy" />
+            <span>表情</span><strong>軽蔑</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="expression" data-src="../../assets/expression-spark.gif" data-title="怒りマーク効果" data-label="表情" data-desc="怒りや動揺のリアクションに適した強調エフェクトです。" data-plan="追加表情オプション" data-point="エフェクトのタイミングと表情の組み合わせ">
+            <img src="../../assets/thumbs/expression-spark.jpg" alt="怒りマーク効果" loading="lazy" />
+            <span>表情</span><strong>怒りマーク</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="expression" data-src="../../assets/expression-heart.gif" data-title="ハート目" data-label="表情" data-desc="好意、感動、ファンサービスに使いやすい表情エフェクトです。" data-plan="追加表情オプション" data-point="目のエフェクトと顔の反応の同期">
+            <img src="../../assets/thumbs/expression-heart.jpg" alt="ハート目" loading="lazy" />
+            <span>表情</span><strong>ハート目</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="expression" data-src="../../assets/effect-omg.gif" data-title="OMGエフェクト" data-label="リアクション" data-desc="驚きやリアクションを大きく伝える配信用エフェクトです。" data-plan="追加エフェクトオプション" data-point="画面ですぐ伝わるリアクションの強さ">
+            <img src="../../assets/thumbs/effect-omg.jpg" alt="OMGエフェクト" loading="lazy" />
+            <span>Effect</span><strong>OMG</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="expression" data-src="../../assets/effect-sad.gif" data-title="Sadエフェクト" data-label="リアクション" data-desc="悲しさや落ち込んだ雰囲気を強調するサンプルです。" data-plan="追加エフェクトオプション" data-point="感情表現が過剰にならないバランス">
+            <img src="../../assets/thumbs/effect-sad.jpg" alt="Sadエフェクト" loading="lazy" />
+            <span>Effect</span><strong>Sad</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="variation" data-src="../../assets/hair-color.gif" data-title="髪色切り替え" data-label="切り替えオプション" data-desc="髪色を切り替えて同じモデルの雰囲気を変えるオプションです。" data-plan="カラー切り替えオプション" data-point="切り替え後も自然な物理演算とレイヤー">
+            <img src="../../assets/thumbs/hair-color.jpg" alt="髪色切り替え" loading="lazy" />
+            <span>切り替えオプション</span><strong>髪色</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="variation" data-src="../../assets/outfit-change.gif" data-title="衣装切り替え" data-label="切り替えオプション" data-desc="配信内容や季節に合わせて衣装を切り替えます。" data-plan="衣装切り替えオプション" data-point="切り替え前後のシルエットと装飾">
+            <img src="../../assets/thumbs/outfit-change.jpg" alt="衣装切り替え" loading="lazy" />
+            <span>切り替えオプション</span><strong>衣装切り替え</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="variation" data-src="../../assets/hair-change.gif" data-title="髪型変更" data-label="切り替えオプション" data-desc="髪型を変えても自然な動きを保つように構成します。" data-plan="髪型切り替えオプション" data-point="髪型ごとの物理演算の違い">
+            <img src="../../assets/thumbs/hair-change.jpg" alt="髪型変更" loading="lazy" />
+            <span>切り替えオプション</span><strong>髪型変更</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="arms" data-src="../../assets/arm-gamepad.gif" data-title="ゲーム機" data-label="腕モーション" data-desc="小物を持つ手と腕の動きをキャラクターのコンセプトに合わせます。" data-plan="腕・小物オプション" data-point="小物の位置と指の安定感">
+            <img src="../../assets/thumbs/arm-gamepad.jpg" alt="ゲーム機を持つ腕の動き" loading="lazy" />
+            <span>Arms</span><strong>ゲーム機</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="arms" data-src="../../assets/arm-wand.gif" data-title="魔法の杖" data-label="腕モーション" data-desc="小物の動きと表情を一緒に活かす腕モーションサンプルです。" data-plan="腕・小物オプション" data-point="小物の角度と腕の回転">
+            <img src="../../assets/thumbs/arm-wand.jpg" alt="魔法の杖を持つ腕の動き" loading="lazy" />
+            <span>Arms</span><strong>魔法の杖</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="arms" data-src="../../assets/hand-wave.gif" data-title="手振り" data-label="腕モーション" data-desc="指と腕の揺れを活用した挨拶モーションです。" data-plan="腕モーションオプション" data-point="自然にループする繰り返し動作">
+            <img src="../../assets/thumbs/hand-wave.jpg" alt="手振り" loading="lazy" />
+            <span>Arms</span><strong>手振り</strong>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./gallery.js"></script>
+  <script src="../estimate-widget.js"></script>
+  <script src="/language-switch.js"></script>
+</body>
+</html>

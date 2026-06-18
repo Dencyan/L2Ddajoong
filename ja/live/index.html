@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dajoong | Webモデル体験</title>
+  <meta name="description" content="DajoongのLive2D Webモデルサンプルをブラウザで直接体験できるページです。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dajoong Live2D Webモデル体験" />
+  <meta property="og:description" content="Live2Dモデルサンプルをブラウザで操作し、動きをご確認ください。" />
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:url" content="https://dajoong.cloud/ja/live/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dajoong Live2D Webモデル体験" />
+  <meta name="twitter:description" content="保護されたNetlifyサンプルを大画面で体験できるLive2D専用ページです。" />
+  <meta name="twitter:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <link rel="canonical" href="https://dajoong.cloud/ja/live/" />
+  <link rel="alternate" hreflang="ko" href="https://dajoong.cloud/live/" />
+  <link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/live/" />
+  <link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/live/" />
+  <link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/live/" />
+
+  <link rel="stylesheet" href="../style.css?v=20260618" />
+</head>
+<body class="sub-page live-page">
+  <header class="site-header">
+    <a class="brand" href="../">
+      <span class="brand-mark">D</span>
+      <span>Dajoong</span>
+    </a>
+    <nav class="top-nav" aria-label="メインメニュー">
+      <a href="../">ホーム</a>
+      <a href="../gallery/">ギャラリー</a>
+      <a href="../guide/">ご案内</a>
+      <a href="../compare/">料金</a>
+      <a href="./" aria-current="page">体験</a>
+    </nav>
+    <a class="nav-action" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+  </header>
+
+  <main class="sub-main live-main">
+    <section class="sub-hero live-hero">
+      <p class="eyebrow">Webモデル体験</p>
+      <h1>ブラウザで体験するLive2Dモデル</h1>
+      <p>保護されたNetlifyサンプルを体験専用の大きな画面に配置しました。マウスで操作し、動きと反応をご確認ください。</p>
+    </section>
+
+    <section class="live-stage" aria-label="Live2D体験">
+      <div class="live-theater">
+        <iframe id="live-demo-frame" title="Dajoong Live2D web sample" src="https://live2d-netlify-demo.netlify.app/" loading="lazy" allow="clipboard-write"></iframe>
+        <button class="live-gate" id="live-gate" type="button">
+          <span>⌁</span>
+          <strong>クリックして操作開始</strong>
+          <small>モデルエリア内でマウスを動かしてください。</small>
+        </button>
+      </div>
+
+      <aside class="live-sidebar">
+        <span>Preview Notes</span>
+        <h2>ご依頼前のチェックポイント</h2>
+        <p>このWebサンプルは操作感とリギングの方向性を確認するための体験版です。実際のご依頼モデルには物理演算や各種エフェクトが含まれます。</p>
+
+        <div class="live-checks" aria-label="体験チェックリスト">
+          <label><input type="checkbox" /> マウス移動に対する視線と顔の反応</label>
+          <label><input type="checkbox" /> 正面から側面へ移る際の立体感</label>
+          <label><input type="checkbox" /> 表情・モーションオプションはご依頼モデルで対応</label>
+        </div>
+
+        <div class="live-facts">
+          <div><strong>サンプルの種類</strong><span>Web体験用モデル</span></div>
+          <div><strong>ご依頼モデル</strong><span>物理演算・追加エフェクトを含む</span></div>
+          <div><strong>お問い合わせ先</strong><span>ArtMug販売ページ</span></div>
+        </div>
+
+        <div class="live-actions">
+          <a class="primary-action" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">ご依頼について問い合わせる</a>
+          <a class="secondary-action" href="../compare/">プラン比較を見る</a>
+        </div>
+      </aside>
+    </section>
+
+    <section class="live-tips" aria-label="体験ガイド">
+      <article>
+        <span>01</span>
+        <h3>まず動きを確認</h3>
+        <p>左右・上下・傾きの反応が自然につながるか確認してください。</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Webサンプルの仕様</h3>
+        <p>この体験版には物理演算がありません。実際のご依頼モデルにはさらに多くのエフェクトが含まれます。</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>必要なオプションを確認</h3>
+        <p>目の物理演算、口の構造、表情、腕モーション、髪型・衣装切り替えはギャラリーと比較ページで確認できます。</p>
+      </article>
+    </section>
+  </main>
+
+  <script src="./live.js"></script>
+  <script src="../estimate-widget.js"></script>
+  <script src="/language-switch.js"></script>
+</body>
+</html>

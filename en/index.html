@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dajoong | Live2D Rigging Samples</title>
+  <meta name="description" content="A portfolio of Dajoong's Live2D rigging samples, commission guide, pricing, and interactive web model." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dajoong Live2D Rigging Samples" />
+  <meta property="og:description" content="Explore Live2D rigging samples, commission details, pricing, and an interactive web model in one place." />
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:url" content="https://dajoong.cloud/en/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dajoong Live2D Rigging Samples" />
+  <meta name="twitter:description" content="Explore Dajoong's Live2D rigging samples and commission information in one place." />
+  <meta name="twitter:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <link rel="canonical" href="https://dajoong.cloud/en/" />
+  <link rel="alternate" hreflang="ko" href="https://dajoong.cloud/" />
+  <link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/" />
+  <link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/" />
+  <link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/" />
+
+  <link rel="stylesheet" href="./style.css?v=20260618" />
+</head>
+<body>
+  <div class="entry-loader" id="entry-loader" role="status" aria-live="polite">
+    <div class="entry-loader-mark" aria-hidden="true">
+      <span>D</span>
+      <i></i>
+    </div>
+    <p>Dajoong</p>
+    <small>Live2D Rigging</small>
+  </div>
+
+  <canvas id="motion-field" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Dajoong home">
+      <span class="brand-mark">D</span>
+      <span>Dajoong</span>
+    </a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a href="#showroom">Samples</a>
+      <a href="./gallery/">Gallery</a>
+      <a href="./guide/">Guide</a>
+      <a href="./compare/">Pricing</a>
+      <a href="./live/">Demo</a>
+    </nav>
+    <a class="nav-action" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">Contact</a>
+  </header>
+
+  <main id="top">
+    <section class="hero-section home-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Live2D Rigging</p>
+        <h1>Dajoong Live2D Rigging Samples</h1>
+        <p class="hero-lead">
+          Explore rigging samples, commission details, pricing, and an interactive web model in one place.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-action" href="./live/">Try the Web Model</a>
+          <a class="secondary-action" href="./gallery/">View Sample Gallery</a>
+        </div>
+        <div class="hero-route-links" aria-label="Quick links">
+          <a href="./guide/">Commission Guide</a>
+          <a href="./compare/">Compare Plans</a>
+          <a href="#showroom">Preview Showroom</a>
+        </div>
+      </div>
+
+      <div class="hero-stage" aria-label="Live2D Web Model Preview">
+        <div class="live-card">
+          <div class="live-card-head">
+            <span>Web Demo</span>
+            <a href="./live/">Open Full View</a>
+          </div>
+          <div class="demo-frame">
+            <iframe title="Dajoong Live2D web sample" src="https://live2d-netlify-demo.netlify.app/" loading="lazy" allow="clipboard-write"></iframe>
+            <button class="demo-cover" id="demo-cover" type="button">
+              <span class="cover-symbol">⌁</span>
+              <span>Click to Interact</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-map" aria-label="Page guide">
+      <a class="home-map-card" href="./gallery/">
+        <span>01 Samples</span>
+        <h2>Rigging Sample Collection</h2>
+        <p>Browse axis, eye, mouth, expression, effect, arm, outfit, and hair samples by category.</p>
+      </a>
+      <a class="home-map-card" href="./guide/">
+        <span>02 Guide</span>
+        <h2>Before You Commission</h2>
+        <p>Review PSD preparation, workflow, approvals, publication, and delivery information.</p>
+      </a>
+      <a class="home-map-card" href="./compare/">
+        <span>03 Pricing</span>
+        <h2>Compare Pricing and Options</h2>
+        <p>Compare Basic, Premium, SD, and animated background plans with samples.</p>
+      </a>
+      <a class="home-map-card" href="./live/">
+        <span>04 Demo</span>
+        <h2>Web Model Preview</h2>
+        <p>Interact with the protected Netlify sample in a larger view and check its motion.</p>
+      </a>
+    </section>
+
+    <section class="notice-strip" aria-label="Before Commissioning">
+      <article>
+        <strong>File Preparation</strong>
+        <span>A fully separated PSD file is required.</span>
+      </article>
+      <article>
+        <strong>Delivery Format</strong>
+        <span>After completion, you will receive the .moc3 package and an icon image.</span>
+      </article>
+      <article>
+        <strong>Turnaround</strong>
+        <span>The average turnaround for a standard model is 2 to 4 weeks.</span>
+      </article>
+    </section>
+
+    <section id="showroom" class="section-shell">
+      <div class="section-heading">
+        <p class="eyebrow">Sample Preview</p>
+        <h2>Featured Motion Samples</h2>
+        <p>The home page highlights key motions. Visit the gallery for the full collection.</p>
+      </div>
+
+      <div class="showroom">
+        <div class="sample-viewer">
+          <img id="sample-image" src="../assets/body-x.gif" alt="Live2D X-axis Motion Sample" />
+          <div class="sample-caption">
+            <span id="sample-kind">Full-body Rigging</span>
+            <strong id="sample-title">X-axis Motion</strong>
+            <p id="sample-desc">A core axis sample showing head turns and three-dimensional body volume.</p>
+          </div>
+        </div>
+        <div class="sample-controls" aria-label="Select a sample">
+          <button class="sample-button is-active" type="button" data-sample="body-x">X-axis</button>
+          <button class="sample-button" type="button" data-sample="body-y">Y-axis</button>
+          <button class="sample-button" type="button" data-sample="body-z">Z-axis</button>
+          <button class="sample-button" type="button" data-sample="eyes">Eye Physics</button>
+          <button class="sample-button" type="button" data-sample="mouth">12-point Mouth</button>
+          <button class="sample-button" type="button" data-sample="heart">Heart Eyes</button>
+          <button class="sample-button" type="button" data-sample="hair">Hair Toggle</button>
+          <button class="sample-button" type="button" data-sample="hand">Hand Wave</button>
+          <a class="sample-more-link" href="./gallery/">View Full Gallery</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell video-showcase" aria-label="Video showcase">
+      <div class="section-heading">
+        <p class="eyebrow">Video Showcase</p>
+        <h2>Rigging Results in Motion</h2>
+        <p>Four varied ArtMug videos show longer and more complete motion than the GIF previews.</p>
+      </div>
+      <div class="video-feature">
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/z4u-bGbvza0?fs=0"
+            title="LD Rigging Video Sample"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+          </iframe>
+        </div>
+        <div class="video-copy">
+          <span>LD Rigging</span>
+          <h3>Full-body Motion and Expressions</h3>
+          <p>A featured LD sample showing how axis movement, expressions, and physics work together in motion.</p>
+          <a href="./gallery/">View More GIF Samples</a>
+        </div>
+      </div>
+      <div class="video-grid">
+        <article class="video-card">
+          <iframe src="https://www.youtube.com/embed/J45TRqBF4qA?fs=0" title="SD Rigging Video Sample" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+          <span>SD</span>
+          <h3>Compact, Lively Character Motion</h3>
+        </article>
+        <article class="video-card">
+          <iframe src="https://www.youtube.com/embed/c2-ZhX-hAPI?fs=0" title="Original Character Rigging Video Sample" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+          <span>Owner Character</span>
+          <h3>Concept-focused Sample</h3>
+        </article>
+        <article class="video-card">
+          <iframe src="https://www.youtube.com/embed/JLTUyPkfsj0?fs=0" title="Memorial Rigging Video Sample" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+          <span>Memorial</span>
+          <h3>Mood and Presentation</h3>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell">
+      <div class="section-heading">
+        <p class="eyebrow">Explore</p>
+        <h2>Go Straight to What You Need</h2>
+      </div>
+      <div class="handoff-grid">
+        <article>
+          <span>See more samples</span>
+          <h3>Sample Gallery</h3>
+          <p>Browse an archive of 20 samples organized by category.</p>
+          <a href="./gallery/">View Samples</a>
+        </article>
+        <article>
+          <span>New to commissions</span>
+          <h3>Commission Guide</h3>
+          <p>Review preparation, workflow, revisions, and delivery information.</p>
+          <a href="./guide/">Read the Guide</a>
+        </article>
+        <article>
+          <span>Compare prices and options</span>
+          <h3>Pricing Comparison</h3>
+          <p>Compare Basic, Premium, and SD rigging through motion samples.</p>
+          <a href="./compare/">Compare Plans</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-panel">
+      <p class="eyebrow">Contact</p>
+      <h2>Bring Your Model's Charm to Life.</h2>
+      <div class="contact-actions">
+        <a href="https://x.com/Dajoong_L2d" target="_blank" rel="noopener noreferrer">Contact on X</a>
+        <a href="https://www.youtube.com/@Dajoong_L2d" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">ArtMug</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+  <script src="./estimate-widget.js"></script>
+  <script src="/language-switch.js"></script>
+</body>
+</html>

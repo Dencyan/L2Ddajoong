@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dajoong | Rigging Sample Gallery</title>
+  <meta name="description" content="A gallery of Dajoong's Live2D rigging samples organized by motion." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dajoong Rigging Sample Gallery" />
+  <meta property="og:description" content="Browse eye, mouth, expression, effect, arm, outfit, and hair rigging samples by category." />
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:url" content="https://dajoong.cloud/en/gallery/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dajoong Rigging Sample Gallery" />
+  <meta name="twitter:description" content="Browse Dajoong's Live2D rigging samples as a curated work archive." />
+  <meta name="twitter:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <link rel="canonical" href="https://dajoong.cloud/en/gallery/" />
+  <link rel="alternate" hreflang="ko" href="https://dajoong.cloud/gallery/" />
+  <link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/gallery/" />
+  <link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/gallery/" />
+  <link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/gallery/" />
+
+  <link rel="stylesheet" href="../style.css?v=20260618" />
+</head>
+<body class="sub-page gallery-page">
+  <header class="site-header">
+    <a class="brand" href="../">
+      <span class="brand-mark">D</span>
+      <span>Dajoong</span>
+    </a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a href="../">Home</a>
+      <a href="./" aria-current="page">Gallery</a>
+      <a href="../guide/">Guide</a>
+      <a href="../compare/">Pricing</a>
+      <a href="../live/">Demo</a>
+    </nav>
+    <a class="nav-action" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">Contact</a>
+  </header>
+
+  <main class="sub-main">
+    <section class="sub-hero gallery-hero">
+      <p class="eyebrow">Sample Gallery</p>
+      <h1>A Gallery of Rigging in Motion</h1>
+      <p>Sample GIFs are organized by category. Select a card to view it in a larger frame with option details.</p>
+    </section>
+
+    <section class="gallery-workbench" aria-label="Rigging sample gallery">
+      <aside class="gallery-preview">
+        <div class="gallery-preview-frame">
+          <img id="gallery-preview-image" src="../../assets/body-x.gif" alt="X-axis Motion Sample" />
+        </div>
+        <div class="gallery-preview-copy">
+          <span id="gallery-preview-category">Body Axis</span>
+          <h2 id="gallery-preview-title">X-axis Motion</h2>
+          <p id="gallery-preview-desc">A core axis sample showing head turns and three-dimensional body volume.</p>
+          <dl>
+            <div>
+              <dt>Option Type</dt>
+              <dd id="gallery-preview-plan">LD Base Rigging</dd>
+            </div>
+            <div>
+              <dt>What to Check</dt>
+              <dd id="gallery-preview-point">Volume while turning from front to side</dd>
+            </div>
+          </dl>
+        </div>
+      </aside>
+
+      <div class="gallery-browser">
+        <div class="gallery-toolbar" aria-label="Sample categories">
+          <button class="filter-button is-active" type="button" data-filter="all">All</button>
+          <button class="filter-button" type="button" data-filter="body">Body</button>
+          <button class="filter-button" type="button" data-filter="eyes">Eyes</button>
+          <button class="filter-button" type="button" data-filter="mouth">Mouth</button>
+          <button class="filter-button" type="button" data-filter="expression">Expressions / Effects</button>
+          <button class="filter-button" type="button" data-filter="variation">Toggle Options</button>
+          <button class="filter-button" type="button" data-filter="arms">Arms</button>
+        </div>
+
+        <div class="archive-grid" id="archive-grid">
+          <button class="archive-card is-active" type="button" data-category="body" data-src="../../assets/body-x.gif" data-title="X-axis Motion" data-label="Body Axis" data-desc="A core axis sample showing head turns and three-dimensional body volume." data-plan="LD Base Rigging" data-point="Volume while turning from front to side">
+            <img src="../../assets/thumbs/body-x.jpg" alt="X-axis Motion" loading="lazy" />
+            <span>Body</span><strong>X-axis Motion</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="body" data-src="../../assets/body-y.gif" data-title="Y-axis Motion" data-label="Body Axis" data-desc="Axis movement that smoothly connects vertical gaze and head angle." data-plan="LD Base Rigging" data-point="Changes in gaze height and jawline flow">
+            <img src="../../assets/thumbs/body-y.jpg" alt="Y-axis Motion" loading="lazy" />
+            <span>Body</span><strong>Y-axis Motion</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="body" data-src="../../assets/body-z.gif" data-title="Z-axis Tilt" data-label="Body Axis" data-desc="Shows the balance between side tilt and accessory physics." data-plan="LD Base Rigging" data-point="Tilt and hair physics response">
+            <img src="../../assets/thumbs/body-z.jpg" alt="Z-axis Tilt" loading="lazy" />
+            <span>Body</span><strong>Z-axis Tilt</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="eyes" data-src="../../assets/eyes-green.gif" data-title="Green Eyes" data-label="Eye Physics" data-desc="Subtle iris and highlight motion makes the gaze feel clear and alive." data-plan="Eye Physics Option" data-point="Highlight movement and blinking">
+            <img src="../../assets/thumbs/eyes-green.jpg" alt="Green Eyes" loading="lazy" />
+            <span>Eyes</span><strong>Green Eyes</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="eyes" data-src="../../assets/eyes-odd.gif" data-title="Heterochromia" data-label="Eye Physics" data-desc="Keeps highlights and gaze direction balanced across different eye colors." data-plan="Eye Physics Option" data-point="Gaze balance between both eyes">
+            <img src="../../assets/thumbs/eyes-odd.jpg" alt="Heterochromia" loading="lazy" />
+            <span>Eyes</span><strong>Heterochromia</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="eyes" data-src="../../assets/eyes-red.gif" data-title="Red Eyes" data-label="Eye Physics" data-desc="Keeps expressions readable even with strongly colored eyes." data-plan="Eye Physics Option" data-point="Strong color and eye-shape emphasis">
+            <img src="../../assets/thumbs/eyes-red.jpg" alt="Red Eyes" loading="lazy" />
+            <span>Eyes</span><strong>Red Eyes</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="mouth" data-src="../../assets/mouth-9.gif" data-title="9-point Mouth Movement" data-label="Mouth Rigging" data-desc="A basic speech structure suited to casual conversation and streaming." data-plan="Basic Mouth Rigging" data-point="Stable, natural phoneme transitions">
+            <img src="../../assets/thumbs/mouth-9.jpg" alt="9-point Mouth Movement" loading="lazy" />
+            <span>Mouth</span><strong>9-point Mouth</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="mouth" data-src="../../assets/mouth-12.gif" data-title="12-point Mouth Movement" data-label="Mouth Rigging" data-desc="A detailed mouth structure for richer dialogue and emotional expression." data-plan="Advanced Mouth Rigging" data-point="Range between subtle shapes and wide speech">
+            <img src="../../assets/thumbs/mouth-12.jpg" alt="12-point Mouth Movement" loading="lazy" />
+            <span>Mouth</span><strong>12-point Mouth</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="mouth" data-src="../../assets/mouth-vbridger.gif" data-title="12-point Mouth with VBridger" data-label="Mouth Rigging" data-desc="A sample with a wider range of mouth shapes designed for VBridger." data-plan="VBridger Option" data-point="Wide speech range and natural transitions">
+            <img src="../../assets/thumbs/mouth-vbridger.jpg" alt="12-point Mouth with VBridger" loading="lazy" />
+            <span>Mouth</span><strong>VBridger</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="expression" data-src="../../assets/expression-scorn.gif" data-title="Scorn Expression" data-label="Expression" data-desc="A hotkey expression that strongly communicates the character's personality." data-plan="Additional Expression Option" data-point="Coordinated changes in eyes and mouth">
+            <img src="../../assets/thumbs/expression-scorn.jpg" alt="Scorn Expression" loading="lazy" />
+            <span>Expression</span><strong>Scorn</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="expression" data-src="../../assets/expression-spark.gif" data-title="Anger Mark Effect" data-label="Expression" data-desc="An emphasis effect suited to anger or flustered reactions." data-plan="Additional Expression Option" data-point="Timing between the effect and expression">
+            <img src="../../assets/thumbs/expression-spark.jpg" alt="Anger Mark Effect" loading="lazy" />
+            <span>Expression</span><strong>Anger Mark</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="expression" data-src="../../assets/expression-heart.gif" data-title="Heart Eyes" data-label="Expression" data-desc="An expression effect for affection, excitement, and fan-service moments." data-plan="Additional Expression Option" data-point="Synchronization between eye effect and facial reaction">
+            <img src="../../assets/thumbs/expression-heart.jpg" alt="Heart Eyes" loading="lazy" />
+            <span>Expression</span><strong>Heart Eyes</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="expression" data-src="../../assets/effect-omg.gif" data-title="OMG Effect" data-label="Reaction" data-desc="A streaming effect that clearly emphasizes surprise and reactions." data-plan="Additional Effect Option" data-point="Reaction intensity that reads clearly on screen">
+            <img src="../../assets/thumbs/effect-omg.jpg" alt="OMG Effect" loading="lazy" />
+            <span>Effect</span><strong>OMG</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="expression" data-src="../../assets/effect-sad.gif" data-title="Sad Effect" data-label="Reaction" data-desc="An effect sample emphasizing sadness and a dejected mood." data-plan="Additional Effect Option" data-point="A balanced emotional tone">
+            <img src="../../assets/thumbs/effect-sad.jpg" alt="Sad Effect" loading="lazy" />
+            <span>Effect</span><strong>Sad</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="variation" data-src="../../assets/hair-color.gif" data-title="Hair Color Toggle" data-label="Toggle Options" data-desc="Changes the model's mood by switching hair color." data-plan="Color Toggle Option" data-point="Natural physics and layers after switching">
+            <img src="../../assets/thumbs/hair-color.jpg" alt="Hair Color Toggle" loading="lazy" />
+            <span>Toggle Options</span><strong>Hair Color</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="variation" data-src="../../assets/outfit-change.gif" data-title="Outfit Toggle" data-label="Toggle Options" data-desc="Switches outfits for different stream settings or seasons." data-plan="Outfit Toggle Option" data-point="Clean silhouettes and accessories before and after switching">
+            <img src="../../assets/thumbs/outfit-change.jpg" alt="Outfit Toggle" loading="lazy" />
+            <span>Toggle Options</span><strong>Outfit Toggle</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="variation" data-src="../../assets/hair-change.gif" data-title="Hair Toggle" data-label="Toggle Options" data-desc="Keeps motion natural after changing hairstyles." data-plan="Hairstyle Toggle Option" data-point="Hair physics tailored to each style">
+            <img src="../../assets/thumbs/hair-change.jpg" alt="Hair Toggle" loading="lazy" />
+            <span>Toggle Options</span><strong>Hair Toggle</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="arms" data-src="../../assets/arm-gamepad.gif" data-title="Game Controller" data-label="Arm Motion" data-desc="Matches hand and arm movement holding a prop to the character concept." data-plan="Arm / Prop Option" data-point="Prop placement and finger stability">
+            <img src="../../assets/thumbs/arm-gamepad.jpg" alt="Game controller arm motion" loading="lazy" />
+            <span>Arms</span><strong>Game Controller</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="arms" data-src="../../assets/arm-wand.gif" data-title="Magic Wand" data-label="Arm Motion" data-desc="An arm motion sample that brings prop movement and expression together." data-plan="Arm / Prop Option" data-point="Prop angle and arm rotation">
+            <img src="../../assets/thumbs/arm-wand.jpg" alt="Magic wand arm motion" loading="lazy" />
+            <span>Arms</span><strong>Magic Wand</strong>
+          </button>
+          <button class="archive-card" type="button" data-category="arms" data-src="../../assets/hand-wave.gif" data-title="Hand Wave" data-label="Arm Motion" data-desc="A greeting motion using finger and arm movement." data-plan="Arm Motion Option" data-point="A seamless repeating motion">
+            <img src="../../assets/thumbs/hand-wave.jpg" alt="Hand Wave" loading="lazy" />
+            <span>Arms</span><strong>Hand Wave</strong>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./gallery.js"></script>
+  <script src="../estimate-widget.js"></script>
+  <script src="/language-switch.js"></script>
+</body>
+</html>
