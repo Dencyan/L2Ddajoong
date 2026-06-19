@@ -1,0 +1,205 @@
+<form id="riggingForm">
+
+  <h2>Live2D 리깅 신청 양식</h2>
+
+  <!-- 기본 정보 -->
+  <fieldset>
+    <legend>기본 정보</legend>
+
+    <label>
+      닉네임 / 활동명<br>
+      <input type="text" name="nickname" required>
+    </label><br><br>
+
+    <label>
+      연락 수단 (이메일 / 디스코드 등)<br>
+      <input type="text" name="contact" required>
+    </label><br><br>
+
+    <label>
+      참고 자료 링크 (구글 드라이브 등)<br>
+      <input type="url" name="reference">
+    </label>
+  </fieldset>
+
+  <br>
+
+  <!-- 기본 리깅 선택 -->
+  <fieldset>
+    <legend>기본 리깅 선택 (필수)</legend>
+
+    <label>
+      <input type="radio" name="base_rig" required>
+      SD 전신 (250,000원)
+    </label><br>
+
+    <label>
+      <input type="radio" name="base_rig">
+      베이직 리깅 – LD 반신 (500,000원)
+    </label><br>
+
+    <label>
+      <input type="radio" name="base_rig">
+      베이직 리깅 – LD 전신 (600,000원)
+    </label><br>
+
+    <label>
+      <input type="radio" name="base_rig">
+      프리미엄 리깅 – LD 반신 (670,000원)
+    </label><br>
+
+    <label>
+      <input type="radio" name="base_rig">
+      프리미엄 리깅 – LD 전신 (780,000원)
+    </label>
+  </fieldset>
+
+  <br>
+
+  <!-- 이벤트 할인 -->
+  <fieldset>
+    <legend>이벤트 할인 (선택)</legend>
+
+    <label>
+      <input type="checkbox" name="event_basic">
+      이벤트가 적용 (베이직 LD 전신 530,000원)
+    </label><br>
+
+    <label>
+      <input type="checkbox" name="event_premium">
+      이벤트가 적용 (프리미엄 LD 전신 680,000원)
+    </label><br>
+
+    <small>※ 협업 할인과 중복 불가</small>
+  </fieldset>
+
+  <br>
+
+  <!-- 추가 옵션 -->
+  <fieldset>
+    <legend>추가 옵션</legend>
+
+    <label>
+      <input type="checkbox" name="opt_expression">
+      추가 표정 (+10,000원 / 개)
+    </label><br>
+
+    <label>
+      <input type="checkbox" name="opt_expression_anim">
+      표정 애니메이션 (30,000원~ / 개)
+    </label><br>
+
+    <label>
+      <input type="checkbox" name="opt_accessory">
+      악세서리 / 소품 (20,000~40,000원)
+    </label><br>
+
+    <label>
+      <input type="checkbox" name="opt_ear_tail">
+      귀 / 꼬리 (35,000원~)
+    </label><br>
+
+    <label>
+      <input type="checkbox" name="opt_wing">
+      날개 / 뿔 (50,000원~)
+    </label><br>
+
+    <label>
+      <input type="checkbox" name="opt_arm">
+      팔 파츠 (마이크, 게임기 등 / 금액 협의)
+    </label><br>
+
+    <label>
+      <input type="checkbox" name="opt_costume">
+      추가 의상 (금액 협의)
+    </label><br>
+
+    <label>
+      <input type="checkbox" name="opt_hair">
+      추가 헤어 (금액 협의)
+    </label>
+  </fieldset>
+
+  <br>
+
+  <!-- IOS + VBridger -->
+  <fieldset>
+    <legend>IOS / VBridger 옵션</legend>
+
+    <label>
+      <input type="checkbox" name="ios_merong">
+      메롱 (70,000원)
+    </label><br>
+
+    <label>
+      <input type="checkbox" name="vbridger">
+      VBridger (100,000원)
+    </label><br>
+
+    <label>
+      <input type="checkbox" name="ios_set">
+      메롱 + VBridger 세트 (150,000원)
+    </label>
+  </fieldset>
+
+  <br>
+
+  <!-- 협업 작가 -->
+  <fieldset>
+    <legend>협업 작가님 (해당 시)</legend>
+
+    <select name="collab_artist">
+      <option value="">선택 안 함</option>
+      <option>황구 작가님 (LD 5만원 할인)</option>
+      <option>뚱땅이 작가님 (LD 5만원 할인)</option>
+      <option>양초 작가님 (LD 5만원 할인)</option>
+      <option>하노히 작가님 (LD 5만원 할인)</option>
+      <option>피치 작가님 (LD 5만원 할인)</option>
+    </select>
+
+    <p><small>※ 일러스트 예약 완료 후 적용 가능</small></p>
+  </fieldset>
+
+  <br>
+
+  <!-- 리뷰 이벤트 -->
+  <fieldset>
+    <legend>리뷰 이벤트</legend>
+
+    <label>
+      <input type="radio" name="review">
+      2만원 할인
+    </label><br>
+
+    <label>
+      <input type="radio" name="review">
+      단순 표정 2종 추가
+    </label><br>
+
+    <label>
+      <input type="radio" name="review">
+      참여 안 함
+    </label>
+  </fieldset>
+
+  <br>
+
+  <!-- 추가 요청 -->
+  <fieldset>
+    <legend>추가 요청 사항</legend>
+    <textarea name="memo" rows="5" placeholder="특이사항, 원하는 느낌, 참고사항 등을 적어주세요."></textarea>
+  </fieldset>
+
+  <br>
+
+  <!-- 안내 -->
+  <p style="font-size: 0.9em; color: #555;">
+    ※ 범위(~) 및 문의 옵션은 작업 난이도에 따라 최종 견적이 조정됩니다.<br>
+    ※ 신청 후 상담을 통해 최종 금액 확정 안내가 진행됩니다.
+  </p>
+
+  <br>
+
+  <button type="submit">신청하기</button>
+
+</form>

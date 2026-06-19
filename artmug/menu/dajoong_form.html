@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>다중 - 작업 신청 양식</title>
+
+  <style>
+    @font-face {
+      font-family: 'Isamanru';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+      font-weight: 300; font-display: swap;
+    }
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+  </style>
+
+<style>
+/* ============================================================
+   ★ 수정 구역 — 여기만 바꾸면 됩니다
+   ============================================================ */
+:root {
+  /* 이벤트 섹션 표시 여부: 'block' = 표시, 'none' = 숨김 */
+  --event-section-display: block;
+}
+
+/*
+  ╔══════════════════════════════════════════════╗
+  ║  PRICE CONFIG  (JS 상단에서 수정)            ║
+  ║  파일 맨 아래 <script> 안의 CONFIG 객체를   ║
+  ║  수정하면 가격이 자동으로 바뀝니다           ║
+  ╚══════════════════════════════════════════════╝
+*/
+
+/* ============================================================
+   CUSTOM CURSOR
+============================================================ */
+*, *::before, *::after { cursor: none !important; box-sizing: border-box; margin: 0; padding: 0; }
+#cursor-dot {
+  position: fixed; width: 10px; height: 10px; border-radius: 50%;
+  background: #9FA8FF; pointer-events: none; z-index: 99999;
+  transform: translate(-50%,-50%);
+  transition: transform .12s ease, background .2s ease, width .2s ease, height .2s ease;
+  box-shadow: 0 0 10px rgba(159,168,255,.8), 0 0 20px rgba(159,168,255,.4);
+}
+#cursor-ring {
+  position: fixed; width: 36px; height: 36px; border-radius: 50%;
+  border: 1.5px solid rgba(159,168,255,.55); pointer-events: none; z-index: 99998;
+  transform: translate(-50%,-50%);
+  transition: width .22s ease, height .22s ease, border-color .22s ease;
+}
+body.cursor-hover #cursor-dot { width: 14px; height: 14px; background: #FFC2E3; box-shadow: 0 0 14px rgba(255,194,227,.9); }
+body.cursor-hover #cursor-ring { width: 52px; height: 52px; border-color: rgba(255,194,227,.5); }
+body.cursor-click #cursor-dot  { transform: translate(-50%,-50%) scale(.6); }
+#cursor-canvas, #bg-canvas { position: fixed; inset: 0; pointer-events: none; }
+#cursor-canvas { z-index: 99997; }
+#bg-canvas     { z-index: 0; opacity: .45; }
+
+/* ============================================================
+   THEME
+============================================================ */
+:root {
+  --primary:        #9FA8FF;
+  --primary-strong: #7C87FF;
+  --accent-pink:    #FFC2E3;
+  --accent-teal:    #9EEAE1;
+  --danger:         #ff6b6b;
+  --success:        #4fc3a1;
+  --bg:             #f2f0ff;
+  --panel:          rgba(255,255,255,.80);
+  --panel-2:        rgba(245,247,255,.88);
+  --text:           #1F2A44;
+  --text-light:     rgba(31,42,68,.58);
+  --border:         rgba(150,160,255,.22);
+  --border-strong:  rgba(150,160,255,.40);
+  --shadow-sm:      0 8px 24px rgba(40,55,140,.08);
+  --shadow-md:      0 18px 56px rgba(40,55,140,.13);
+  --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-xl: 30px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Pretendard', 'Isamanru', -apple-system, sans-serif;
+  font-weight: 400; color: var(--text); background: var(--bg);
+  overflow-x: hidden; line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   LAYOUT
+============================================================ */
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 16px 60px;
+  position: relative; z-index: 1;
+}
+
+/* ============================================================
+   PAGE HEADER
+============================================================ */
+.page-header {
+  text-align: center;
+  padding: 48px 24px 36px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(159,168,255,.18), transparent 70%);
+  pointer-events: none;
+}
+.header-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 14px; border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: rgba(159,168,255,.10);
+  font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--primary-strong); margin-bottom: 16px;
+}
+.page-title {
+  font-size: 30px; font-weight: 700; letter-spacing: -.04em;
+  background: linear-gradient(135deg, #6b7aff 0%, #c4aaff 60%, #9EEAE1 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; line-height: 1.2; margin-bottom: 12px;
+}
+.page-sub {
+  font-size: 13.5px; color: var(--text-light); line-height: 1.7; max-width: 480px; margin: 0 auto;
+}
+.page-sub strong { color: var(--primary-strong); font-weight: 600; -webkit-text-fill-color: var(--primary-strong); }
+
+/* ============================================================
+   SECTION CARD
+============================================================ */
+.form-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(8px);
+  margin-bottom: 14px;
+  overflow: hidden;
+  transition: box-shadow .25s ease;
+}
+.form-card:hover { box-shadow: var(--shadow-md); }
+
+.form-card-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 22px 14px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(159,168,255,.08), rgba(158,234,225,.04));
+}
+.form-card-num {
+  width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, rgba(159,168,255,.22), rgba(158,234,225,.14));
+  border: 1px solid rgba(150,160,255,.30);
+  font-size: 11px; font-weight: 700; color: var(--primary-strong); letter-spacing: .04em;
+}
+.form-card-title {
+  font-size: 15px; font-weight: 700; letter-spacing: -.01em;
+}
+.form-card-badge {
+  margin-left: auto;
+  font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  background: rgba(255,107,107,.10); border: 1px solid rgba(255,107,107,.22);
+  color: var(--danger); white-space: nowrap;
+}
+.form-card-badge.opt {
+  background: rgba(159,168,255,.10); border-color: rgba(159,168,255,.28); color: var(--primary-strong);
+}
+
+.form-card-body { padding: 20px 22px; }
+
+/* ============================================================
+   INPUTS
+============================================================ */
+.field { margin-bottom: 16px; }
+.field:last-child { margin-bottom: 0; }
+.field-label {
+  display: block; font-size: 12px; font-weight: 600; color: var(--text-light);
+  letter-spacing: .03em; margin-bottom: 7px;
+}
+.field-hint {
+  font-size: 11.5px; color: var(--text-light); margin-bottom: 8px; line-height: 1.5;
+}
+.field-input, .field-select, .field-textarea {
+  width: 100%; padding: 11px 15px;
+  border-radius: var(--r-sm); border: 1px solid var(--border-strong);
+  background: rgba(245,247,255,.75); font-size: 13.5px; font-family: inherit;
+  color: var(--text); outline: none;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.field-input:focus, .field-select:focus, .field-textarea:focus {
+  border-color: var(--primary); background: rgba(255,255,255,.95);
+  box-shadow: 0 0 0 3px rgba(159,168,255,.18);
+}
+.field-input::placeholder, .field-textarea::placeholder { color: rgba(31,42,68,.30); }
+.field-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239FA8FF' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
+.field-textarea { resize: vertical; min-height: 100px; line-height: 1.65; }
+
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* ============================================================
+   RADIO / CHECKBOX CARDS (기본 리깅 선택)
+============================================================ */
+.rig-grid {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.rig-option {
+  position: relative;
+}
+.rig-option input[type="radio"],
+.rig-option input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+.rig-label {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 16px; border-radius: var(--r-md);
+  border: 1.5px solid var(--border-strong);
+  background: rgba(245,247,255,.7);
+  cursor: pointer; transition: all .2s ease; user-select: none;
+}
+.rig-label:hover {
+  border-color: var(--primary); background: rgba(159,168,255,.07); transform: translateX(3px);
+}
+.rig-option input:checked + .rig-label {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, rgba(159,168,255,.15), rgba(158,234,225,.09));
+  box-shadow: 0 4px 16px rgba(159,168,255,.18);
+}
+.rig-option input:checked + .rig-label .rig-dot {
+  background: var(--primary); border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(159,168,255,.22);
+}
+.rig-dot {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--border-strong); background: transparent;
+  flex-shrink: 0; transition: all .18s ease;
+}
+.rig-dot--sq { border-radius: 5px; }
+.rig-name { flex: 1; font-size: 14px; font-weight: 600; color: var(--text); }
+.rig-sub  { font-size: 11.5px; color: var(--text-light); display: block; margin-top: 1px; }
+.rig-price {
+  font-size: 15px; font-weight: 700; color: var(--primary-strong);
+  white-space: nowrap; margin-left: auto;
+}
+.rig-price .price-old {
+  font-size: 11px; color: var(--text-light); text-decoration: line-through;
+  font-weight: 400; display: block; text-align: right;
+}
+.rig-price .price-discount {
+  font-size: 10.5px; color: var(--danger); font-weight: 600; display: block; text-align: right;
+}
+
+/* ============================================================
+   EVENT SECTION (on/off 제어)
+============================================================ */
+.event-section { display: var(--event-section-display); }
+
+/* 이벤트 배너 */
+.event-banner {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px; border-radius: var(--r-md);
+  background: linear-gradient(135deg, rgba(255,107,107,.09), rgba(255,194,227,.08));
+  border: 1px solid rgba(255,107,107,.18); margin-bottom: 14px;
+}
+.event-banner-icon { font-size: 18px; }
+.event-banner-text { font-size: 13px; font-weight: 600; color: var(--danger); }
+.event-banner-note { font-size: 11.5px; color: var(--text-light); margin-top: 2px; }
+
+/* ============================================================
+   CHIP GROUP (소형 선택)
+============================================================ */
+.chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 7px 16px; border-radius: 999px;
+  border: 1.5px solid var(--border-strong);
+  background: rgba(245,247,255,.7);
+  font-size: 13px; font-weight: 500; color: var(--text-light);
+  font-family: inherit; cursor: pointer; transition: all .18s ease; white-space: nowrap;
+}
+.chip:hover { border-color: var(--primary); color: var(--text); background: rgba(159,168,255,.08); transform: translateY(-1px); }
+.chip.selected {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, rgba(159,168,255,.20), rgba(158,234,225,.12));
+  color: var(--primary-strong); font-weight: 600;
+  box-shadow: 0 3px 10px rgba(159,168,255,.20);
+}
+
+/* ============================================================
+   COLLAB ARTIST SELECT
+============================================================ */
+.collab-note {
+  font-size: 11.5px; color: var(--text-light); margin-top: 10px; line-height: 1.6;
+  padding: 10px 14px; border-radius: var(--r-sm);
+  background: rgba(159,168,255,.07); border: 1px solid rgba(159,168,255,.16);
+}
+
+/* ============================================================
+   ESTIMATE BAR (하단 고정 견적)
+============================================================ */
+.estimate-bar {
+  position: sticky; bottom: 16px; z-index: 50;
+  margin: 20px 0 0;
+  border-radius: var(--r-xl);
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 8px 40px rgba(40,55,140,.18), 0 0 0 1px rgba(159,168,255,.12);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+}
+.estimate-inner {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 22px;
+  flex-wrap: wrap;
+}
+.estimate-label {
+  font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--text-light);
+}
+.estimate-total {
+  font-size: 22px; font-weight: 700; letter-spacing: -.03em;
+  background: linear-gradient(135deg, var(--primary-strong), #c4aaff);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.estimate-note {
+  font-size: 11px; color: var(--text-light); line-height: 1.45; flex: 1; min-width: 0;
+}
+.estimate-breakdown {
+  width: 100%; border-top: 1px solid var(--border); padding-top: 12px; margin-top: 2px;
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.estimate-breakdown:empty { display: none; }
+.est-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11.5px; padding: 3px 10px; border-radius: 999px;
+  background: rgba(159,168,255,.10); border: 1px solid rgba(159,168,255,.22); color: var(--text);
+}
+.est-tag .est-tag-price { color: var(--primary-strong); font-weight: 600; }
+.est-tag--discount { background: rgba(255,107,107,.08); border-color: rgba(255,107,107,.20); }
+.est-tag--discount .est-tag-price { color: var(--danger); }
+
+/* ============================================================
+   PREVIEW + COPY
+============================================================ */
+.preview-card {
+  background: var(--panel-2); border: 1px solid var(--border-strong);
+  border-radius: var(--r-xl); overflow: hidden; margin-top: 14px;
+  transition: all .3s ease; max-height: 0; opacity: 0;
+}
+.preview-card.visible { max-height: 800px; opacity: 1; }
+.preview-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 20px; border-bottom: 1px solid var(--border);
+  background: rgba(159,168,255,.07);
+}
+.preview-head-title { font-size: 12px; font-weight: 700; color: var(--primary-strong); letter-spacing: .04em; }
+.preview-text {
+  padding: 16px 20px; font-size: 12.5px; font-family: 'Pretendard', monospace;
+  color: var(--text); line-height: 1.8; white-space: pre-wrap; word-break: break-all;
+}
+
+.cta-area { display: flex; gap: 10px; justify-content: center; margin-top: 14px; flex-wrap: wrap; }
+.btn-reset {
+  padding: 13px 24px; border-radius: 999px;
+  border: 1.5px solid var(--border-strong); background: transparent;
+  font-size: 13px; font-weight: 600; color: var(--text-light); font-family: inherit;
+  cursor: pointer; transition: all .2s ease;
+}
+.btn-reset:hover { border-color: var(--primary); color: var(--primary-strong); background: rgba(159,168,255,.07); }
+.btn-copy {
+  display: flex; align-items: center; gap: 8px;
+  padding: 13px 34px; border-radius: 999px; border: none;
+  background: linear-gradient(135deg, var(--primary), #c4aaff);
+  color: #fff; font-size: 14px; font-weight: 700; font-family: inherit;
+  cursor: pointer; transition: all .22s ease;
+  box-shadow: 0 6px 22px rgba(159,168,255,.38); letter-spacing: -.01em;
+}
+.btn-copy:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(159,168,255,.48); filter: brightness(1.05); }
+.btn-copy:active { transform: translateY(0); }
+.btn-copy.copied { background: linear-gradient(135deg, #6dd5a5, #4fc3a1); box-shadow: 0 6px 22px rgba(79,195,161,.38); }
+
+.footer-note {
+  text-align: center; font-size: 12px; color: var(--text-light);
+  line-height: 1.7; margin-top: 16px; padding: 14px 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   LEGAL NOTICE
+============================================================ */
+.legal-box {
+  border: 1px solid rgba(255,107,107,.18); border-radius: var(--r-lg);
+  background: rgba(255,255,255,.7); overflow: hidden; margin-bottom: 14px;
+}
+.legal-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 11px 18px; border-bottom: 1px solid rgba(255,107,107,.12);
+  background: linear-gradient(135deg, rgba(255,107,107,.09), rgba(159,168,255,.06));
+}
+.legal-head-title { font-size: 13px; font-weight: 700; color: var(--danger); }
+.legal-body { padding: 14px 18px; }
+.legal-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.legal-list li {
+  font-size: 12.5px; color: var(--text); line-height: 1.6;
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.legal-list li::before { content: "·"; color: var(--danger); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.legal-list li.accent { color: var(--danger); font-weight: 500; }
+.legal-list li.accent::before { content: "⚠"; font-size: 10px; }
+
+/* ============================================================
+   REVEAL ANIMATION
+============================================================ */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s cubic-bezier(.4,0,.2,1), transform .55s cubic-bezier(.4,0,.2,1); }
+.reveal.revealed { opacity: 1; transform: none; }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 600px) {
+  .page { padding: 20px 10px 50px; }
+  .page-title { font-size: 24px; }
+  .row-2 { grid-template-columns: 1fr; }
+  .form-card-body { padding: 16px 16px; }
+  .form-card-head { padding: 13px 16px 11px; }
+  .estimate-inner { padding: 12px 16px; gap: 10px; }
+  .estimate-total { font-size: 19px; }
+  .btn-copy { padding: 13px 24px; }
+  .cta-area { flex-direction: column; align-items: stretch; }
+  .btn-copy { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<canvas id="cursor-canvas"></canvas>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="page-header reveal">
+    <div class="header-badge">✦ Live2D Rigging</div>
+    <h1 class="page-title">작업 신청 양식</h1>
+    <p class="page-sub">
+      항목을 선택하면 <strong>예상 견적</strong>이 자동으로 계산됩니다.<br>
+      작성이 끝나면 <strong>양식 복사</strong> 버튼을 눌러 DM으로 보내주세요 ✉️
+    </p>
+  </header>
+
+  <!-- ── 주의사항 ── -->
+  <div class="legal-box reveal">
+    <div class="legal-head">
+      <span style="font-size:15px">⚠️</span>
+      <span class="legal-head-title">신청 전 확인사항</span>
+    </div>
+    <div class="legal-body">
+      <ul class="legal-list">
+        <li>범위(~) 및 문의 옵션은 작업 난이도에 따라 최종 견적이 조정됩니다.</li>
+        <li>신청 후 상담을 통해 최종 금액 확정 안내가 진행됩니다.</li>
+        <li class="accent">협업 작가 할인과 이벤트 할인은 중복 적용이 불가합니다.</li>
+        <li>협업 작가 할인은 일러스트 예약 완료 후 적용 가능합니다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── 01. 기본 정보 ── -->
+  <div class="form-card reveal">
+    <div class="form-card-head">
+      <div class="form-card-num">01</div>
+      <span class="form-card-title">기본 정보</span>
+      <span class="form-card-badge">필수</span>
+    </div>
+    <div class="form-card-body">
+      <div class="row-2">
+        <div class="field">
+          <label class="field-label">닉네임 / 활동명</label>
+          <input type="text" class="field-input" id="f-nickname" placeholder="활동 닉네임">
+        </div>
+        <div class="field">
+          <label class="field-label">일러스트 작가님 닉네임</label>
+          <input type="text" class="field-input" id="f-illust" placeholder="일러스트 작가님 닉네임">
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label class="field-label">방송 플랫폼</label>
+          <div class="chip-group" id="chips-platform">
+            <button class="chip" data-value="트위치" type="button">트위치</button>
+            <button class="chip" data-value="유튜브" type="button">유튜브</button>
+            <button class="chip" data-value="아프리카" type="button">아프리카</button>
+            <button class="chip" data-value="치지직" type="button">치지직</button>
+            <button class="chip" data-value="기타" type="button">기타</button>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">데뷔 날짜 / 모델 사용 일정</label>
+          <input type="text" class="field-input" id="f-debut" placeholder="예: 2025년 6월 or 미정">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 02. 기본 리깅 선택 ── -->
+  <div class="form-card reveal">
+    <div class="form-card-head">
+      <div class="form-card-num">02</div>
+      <span class="form-card-title">기본 리깅 선택</span>
+      <span class="form-card-badge">필수</span>
+    </div>
+    <div class="form-card-body">
+      <div class="rig-grid" id="rig-base">
+        <!-- JS로 렌더링 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 03. 이벤트 할인 (event-section) ── -->
+  <div class="form-card event-section reveal" id="card-event">
+    <div class="form-card-head">
+      <div class="form-card-num">03</div>
+      <span class="form-card-title">이벤트 할인</span>
+      <span class="form-card-badge opt">현재 진행 중</span>
+    </div>
+    <div class="form-card-body">
+      <div class="event-banner">
+        <span class="event-banner-icon">🎉</span>
+        <div>
+          <div class="event-banner-text" id="event-banner-text">이벤트 진행 중!</div>
+          <div class="event-banner-note">※ 협업 작가 할인과 중복 불가</div>
+        </div>
+      </div>
+      <div class="rig-grid" id="rig-event">
+        <!-- JS로 렌더링 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 04. 추가 옵션 ── -->
+  <div class="form-card reveal">
+    <div class="form-card-head">
+      <div class="form-card-num">04</div>
+      <span class="form-card-title">추가 옵션</span>
+      <span class="form-card-badge opt">선택</span>
+    </div>
+    <div class="form-card-body">
+      <div class="rig-grid" id="rig-options">
+        <!-- JS로 렌더링 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 05. iOS / VBridger ── -->
+  <div class="form-card reveal">
+    <div class="form-card-head">
+      <div class="form-card-num">05</div>
+      <span class="form-card-title">iOS / VBridger 옵션</span>
+      <span class="form-card-badge opt">선택</span>
+    </div>
+    <div class="form-card-body">
+      <div class="rig-grid" id="rig-ios">
+        <!-- JS로 렌더링 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 06. 협업 작가 ── -->
+  <div class="form-card reveal">
+    <div class="form-card-head">
+      <div class="form-card-num">06</div>
+      <span class="form-card-title">협업 작가님 할인</span>
+      <span class="form-card-badge opt">해당 시</span>
+    </div>
+    <div class="form-card-body">
+      <div class="field">
+        <label class="field-label">협업 작가님 선택</label>
+        <select class="field-select" id="f-collab">
+          <!-- JS로 렌더링 -->
+        </select>
+      </div>
+      <div class="collab-note">
+        ※ 일러스트 예약이 완료된 경우에만 적용 가능합니다.<br>
+        ※ 이벤트 할인과 중복 적용이 불가합니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 07. 리뷰 이벤트 ── -->
+  <div class="form-card reveal">
+    <div class="form-card-head">
+      <div class="form-card-num">07</div>
+      <span class="form-card-title">리뷰 이벤트 참여</span>
+      <span class="form-card-badge opt">선택</span>
+    </div>
+    <div class="form-card-body">
+      <div class="rig-grid" id="rig-review">
+        <!-- JS로 렌더링 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 08. 사용할 캠 ── -->
+  <div class="form-card reveal">
+    <div class="form-card-head">
+      <div class="form-card-num">08</div>
+      <span class="form-card-title">사용할 캠</span>
+      <span class="form-card-badge opt">선택</span>
+    </div>
+    <div class="form-card-body">
+      <div class="chip-group" id="chips-cam">
+        <button class="chip" data-value="웹캠" type="button">웹캠</button>
+        <button class="chip" data-value="아이폰 (Face ID)" type="button">아이폰 (Face ID)</button>
+        <button class="chip" data-value="VBridger" type="button">VBridger</button>
+        <button class="chip" data-value="미정" type="button">미정</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 09. 작업 과정 공개 / 추가 요청 ── -->
+  <div class="form-card reveal">
+    <div class="form-card-head">
+      <div class="form-card-num">09</div>
+      <span class="form-card-title">기타 정보 & 요청 사항</span>
+    </div>
+    <div class="form-card-body">
+      <div class="row-2" style="margin-bottom:16px">
+        <div class="field" style="margin-bottom:0">
+          <label class="field-label">작업 과정 방송 공개 여부</label>
+          <p class="field-hint">SNS 및 유튜브에 포트폴리오로 업로드될 예정입니다</p>
+          <div class="chip-group" id="chips-broadcast">
+            <button class="chip chip--yn" data-value="공개 O" type="button">공개 O</button>
+            <button class="chip chip--yn" data-value="공개 X" type="button">공개 X</button>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label class="field-label">참고 자료 링크</label>
+          <input type="url" class="field-input" id="f-ref" placeholder="구글 드라이브 등 링크">
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">추가 요청 사항</label>
+        <textarea class="field-textarea" id="f-memo" rows="5" placeholder="특이사항, 원하는 움직임, 참고사항 등을 자유롭게 적어주세요.&#10;&#10;예) 눈 애니메이션으로 작업이 가능한가요?&#10;빛나는 눈 주변 이펙트가 깜빡일 때 움직이게 해주세요!"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 견적 바 ── -->
+  <div class="estimate-bar" id="estimateBar">
+    <div class="estimate-inner">
+      <div>
+        <div class="estimate-label">예상 견적</div>
+        <div class="estimate-total" id="estimateTotal">0원</div>
+      </div>
+      <div class="estimate-note" id="estimateNote">기본 리깅을 선택해 주세요</div>
+      <div class="estimate-breakdown" id="estimateBreakdown"></div>
+    </div>
+  </div>
+
+  <!-- ── 미리보기 ── -->
+  <div class="preview-card" id="previewCard">
+    <div class="preview-head">
+      <span style="font-size:14px">📋</span>
+      <span class="preview-head-title">작성된 양식 미리보기</span>
+    </div>
+    <pre class="preview-text" id="previewText"></pre>
+  </div>
+
+  <!-- ── CTA ── -->
+  <div class="cta-area">
+    <button class="btn-reset" id="btnReset" type="button">↺ 초기화</button>
+    <button class="btn-copy" id="btnCopy" type="button">
+      <span id="copyIcon">📋</span>
+      <span id="copyLabel">양식 복사하기</span>
+    </button>
+  </div>
+
+  <div class="footer-note">
+    신청 시 양식 사용해 주시고 그 외 문의는 편하게 주세요! 🌸
+  </div>
+
+</div><!-- /page -->
+
+<!-- ============================================================
+     ★ CONFIG — 가격/이름 수정은 여기서만!
+============================================================ -->
+<script>
+const CONFIG = {
+
+  /* ── 이벤트 섹션 표시 여부 ─────────────────── */
+  showEvent: true,    // false 로 바꾸면 이벤트 섹션 전체 숨김
+  eventBannerText: '베이직·프리미엄 LD 전신 할인 이벤트 진행 중!',
+
+  /* ── 기본 리깅 옵션 ───────────────────────── */
+  baseRigs: [
+    { id: 'sd',       name: 'SD 전신',                 price: 250000 },
+    { id: 'basic-h',  name: '베이직 리깅',              sub: 'LD 반신', price: 500000 },
+    { id: 'basic-f',  name: '베이직 리깅',              sub: 'LD 전신', price: 600000 },
+    { id: 'prem-h',   name: '프리미엄 리깅',            sub: 'LD 반신', price: 670000 },
+    { id: 'prem-f',   name: '프리미엄 리깅',            sub: 'LD 전신', price: 780000 },
+  ],
+
+  /* ── 이벤트 할인 (showEvent: false 이면 무시) ── */
+  /* 이벤트 할인은 체크하면 해당 기본 리깅으로 자동 전환 + 할인 금액 표시 */
+  eventDiscounts: [
+    {
+      id: 'ev-basic',
+      name: '베이직 LD 전신 이벤트',
+      targetRigId: 'basic-f',   // 위 baseRigs의 id
+      salePrice: 530000,         // 이벤트 적용 가격
+    },
+    {
+      id: 'ev-prem',
+      name: '프리미엄 LD 전신 이벤트',
+      targetRigId: 'prem-f',
+      salePrice: 680000,
+    },
+  ],
+
+  /* ── 추가 옵션 ────────────────────────────── */
+  /* priceText: 견적에 합산할 수 없는 옵션은 priceText만 표시 */
+  addOptions: [
+    { id: 'opt-expr',     name: '추가 표정',             priceText: '+10,000원 / 개',          price: 0 },
+    { id: 'opt-expr-anim',name: '표정 애니메이션',       priceText: '30,000원~ / 개',           price: 0 },
+    { id: 'opt-acc',      name: '악세서리 / 소품',       priceText: '20,000 ~ 40,000원',        price: 0 },
+    { id: 'opt-ear',      name: '귀 / 꼬리',             priceText: '35,000원~',                price: 0 },
+    { id: 'opt-wing',     name: '날개 / 뿔',             priceText: '50,000원~',                price: 0 },
+    { id: 'opt-arm',      name: '팔 파츠 (마이크, 게임기 등)', priceText: '금액 협의',           price: 0 },
+    { id: 'opt-cos',      name: '추가 의상',             priceText: '금액 협의',                price: 0 },
+    { id: 'opt-hair',     name: '추가 헤어',             priceText: '금액 협의',                price: 0 },
+  ],
+
+  /* ── iOS / VBridger 옵션 ─────────────────── */
+  iosOptions: [
+    { id: 'ios-mer',  name: '메롱',                 price: 70000 },
+    { id: 'ios-vb',   name: 'VBridger',             price: 100000 },
+    { id: 'ios-set',  name: '메롱 + VBridger 세트', price: 150000 },
+  ],
+
+  /* ── 협업 작가 할인 ──────────────────────── */
+  collabArtists: [
+    { value: '',       label: '선택 안 함',                        discount: 0 },
+    { value: 'hwangu', label: '황구 작가님',   note: 'LD 5만원 할인', discount: 50000 },
+    { value: 'ddung',  label: '뚱땅이 작가님', note: 'LD 5만원 할인', discount: 50000 },
+    { value: 'yangcho',label: '양초 작가님',   note: 'LD 5만원 할인', discount: 50000 },
+    { value: 'hanohi', label: '하노히 작가님', note: 'LD 5만원 할인', discount: 50000 },
+    { value: 'peach',  label: '피치 작가님',   note: 'LD 5만원 할인', discount: 50000 },
+  ],
+
+  /* ── 리뷰 이벤트 ─────────────────────────── */
+  reviewOptions: [
+    { id: 'rv-cash',  name: '2만원 할인',       price: -20000 },
+    { id: 'rv-expr',  name: '단순 표정 2종 추가', price: 0, priceText: '표정 2종 추가' },
+    { id: 'rv-none',  name: '참여 안 함',        price: 0 },
+  ],
+};
+</script>
+
+<!-- ============================================================
+     MAIN LOGIC
+============================================================ -->
+<script>
+(function() {
+
+  /* ── 이벤트 섹션 on/off ── */
+  if (!CONFIG.showEvent) {
+    document.getElementById('card-event').style.display = 'none';
+    // 섹션 숨기면 이후 번호 재정렬은 CSS var로 처리하지 않고 그냥 건너뜀
+  } else {
+    document.getElementById('event-banner-text').textContent = CONFIG.eventBannerText;
+  }
+
+  /* ─────────────────────────────────────────
+     STATE
+  ───────────────────────────────────────── */
+  const state = {
+    baseRigId: null,
+    eventId:   null,   // 선택된 이벤트 ID
+    addOpts:   new Set(),
+    iosOpts:   new Set(),
+    collabVal: '',
+    reviewId:  null,
+  };
+
+  /* ─────────────────────────────────────────
+     RENDER HELPERS
+  ───────────────────────────────────────── */
+  function fmt(n) {
+    return n.toLocaleString('ko-KR') + '원';
+  }
+
+  function makeRigOption({ id, name, sub, price, priceText, eventOriginal, isSingle = true }) {
+    const wrap = document.createElement('div');
+    wrap.className = 'rig-option';
+
+    const inputType = isSingle ? 'radio' : 'checkbox';
+    const inputName = isSingle ? 'rig' : 'opt';
+
+    const priceHTML = eventOriginal
+      ? `<div class="rig-price"><span class="price-old">${fmt(eventOriginal)}</span>${fmt(price)}<span class="price-discount">이벤트 할인</span></div>`
+      : `<div class="rig-price">${priceText || fmt(price)}</div>`;
+
+    wrap.innerHTML = `
+      <input type="${inputType}" name="${inputName}-${id}" id="${id}">
+      <label class="rig-label" for="${id}">
+        <span class="rig-dot${isSingle ? '' : ' rig-dot--sq'}"></span>
+        <span class="rig-name">${name}${sub ? `<span class="rig-sub">${sub}</span>` : ''}</span>
+        ${priceHTML}
+      </label>`;
+    return wrap;
+  }
+
+  /* ─────────────────────────────────────────
+     BUILD SECTIONS
+  ───────────────────────────────────────── */
+
+  // 기본 리깅
+  const baseGrid = document.getElementById('rig-base');
+  CONFIG.baseRigs.forEach(r => {
+    const el = makeRigOption({ ...r, isSingle: true });
+    el.querySelector('input').addEventListener('change', () => {
+      state.baseRigId = r.id;
+      state.eventId = null;   // 기본 선택 바꾸면 이벤트 해제
+      document.querySelectorAll('#rig-event input').forEach(i => i.checked = false);
+      updateAll();
+    });
+    baseGrid.appendChild(el);
+  });
+
+  // 이벤트 할인
+  const evGrid = document.getElementById('rig-event');
+  CONFIG.eventDiscounts.forEach(ev => {
+    const target = CONFIG.baseRigs.find(r => r.id === ev.targetRigId);
+    const el = makeRigOption({
+      id: ev.id, name: ev.name, price: ev.salePrice,
+      eventOriginal: target?.price, isSingle: true
+    });
+    el.querySelector('input').addEventListener('change', () => {
+      state.eventId = ev.id;
+      // 해당 기본 리깅도 자동 선택
+      state.baseRigId = ev.targetRigId;
+      const baseInput = document.getElementById(ev.targetRigId);
+      if (baseInput) baseInput.checked = true;
+      // 협업 할인 해제
+      state.collabVal = '';
+      document.getElementById('f-collab').value = '';
+      updateAll();
+    });
+    evGrid.appendChild(el);
+  });
+
+  // 추가 옵션
+  const optGrid = document.getElementById('rig-options');
+  CONFIG.addOptions.forEach(opt => {
+    const el = makeRigOption({ ...opt, isSingle: false });
+    el.querySelector('input').addEventListener('change', e => {
+      e.target.checked ? state.addOpts.add(opt.id) : state.addOpts.delete(opt.id);
+      updateAll();
+    });
+    optGrid.appendChild(el);
+  });
+
+  // iOS / VBridger
+  const iosGrid = document.getElementById('rig-ios');
+  CONFIG.iosOptions.forEach(opt => {
+    const el = makeRigOption({ ...opt, isSingle: false });
+    el.querySelector('input').addEventListener('change', e => {
+      e.target.checked ? state.iosOpts.add(opt.id) : state.iosOpts.delete(opt.id);
+      updateAll();
+    });
+    iosGrid.appendChild(el);
+  });
+
+  // 협업 작가 select
+  const collabSel = document.getElementById('f-collab');
+  CONFIG.collabArtists.forEach(a => {
+    const op = document.createElement('option');
+    op.value = a.value;
+    op.textContent = a.value ? `${a.label}${a.note ? ' (' + a.note + ')' : ''}` : a.label;
+    collabSel.appendChild(op);
+  });
+  collabSel.addEventListener('change', () => {
+    state.collabVal = collabSel.value;
+    if (collabSel.value) {
+      // 이벤트 할인 해제
+      state.eventId = null;
+      document.querySelectorAll('#rig-event input').forEach(i => i.checked = false);
+    }
+    updateAll();
+  });
+
+  // 리뷰 이벤트
+  const rvGrid = document.getElementById('rig-review');
+  CONFIG.reviewOptions.forEach(rv => {
+    const el = makeRigOption({ ...rv, isSingle: true });
+    el.querySelector('input').addEventListener('change', () => {
+      state.reviewId = rv.id;
+      updateAll();
+    });
+    rvGrid.appendChild(el);
+  });
+
+  /* ─────────────────────────────────────────
+     CHIP SINGLE-SELECT
+  ───────────────────────────────────────── */
+  document.querySelectorAll('.chip-group').forEach(group => {
+    group.addEventListener('click', e => {
+      const chip = e.target.closest('.chip');
+      if (!chip) return;
+      group.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+      updateAll();
+    });
+  });
+
+  // text inputs
+  ['f-nickname','f-illust','f-debut','f-ref','f-memo'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', updatePreview);
+  });
+
+  /* ─────────────────────────────────────────
+     CALCULATE
+  ───────────────────────────────────────── */
+  function calcEstimate() {
+    const items = [];
+    let total = 0;
+
+    // 기본 리깅
+    const baseRig = CONFIG.baseRigs.find(r => r.id === state.baseRigId);
+    if (baseRig) {
+      // 이벤트 할인 체크
+      const evDisc = state.eventId
+        ? CONFIG.eventDiscounts.find(e => e.id === state.eventId)
+        : null;
+
+      if (evDisc && evDisc.targetRigId === baseRig.id) {
+        items.push({ label: `${baseRig.name}${baseRig.sub ? ' ' + baseRig.sub : ''}`, price: evDisc.salePrice, type: 'base' });
+        total += evDisc.salePrice;
+      } else {
+        items.push({ label: `${baseRig.name}${baseRig.sub ? ' ' + baseRig.sub : ''}`, price: baseRig.price, type: 'base' });
+        total += baseRig.price;
+      }
+    }
+
+    // 추가 옵션 (price > 0 인 것만 합산)
+    state.addOpts.forEach(id => {
+      const opt = CONFIG.addOptions.find(o => o.id === id);
+      if (opt) {
+        items.push({ label: opt.name, price: opt.price, priceText: opt.priceText, type: 'add' });
+        total += opt.price;
+      }
+    });
+
+    // iOS / VBridger
+    state.iosOpts.forEach(id => {
+      const opt = CONFIG.iosOptions.find(o => o.id === id);
+      if (opt) {
+        items.push({ label: opt.name, price: opt.price, type: 'ios' });
+        total += opt.price;
+      }
+    });
+
+    // 협업 작가 할인
+    if (state.collabVal) {
+      const artist = CONFIG.collabArtists.find(a => a.value === state.collabVal);
+      if (artist && artist.discount > 0) {
+        items.push({ label: `${artist.label} 협업 할인`, price: -artist.discount, type: 'discount' });
+        total -= artist.discount;
+      }
+    }
+
+    // 리뷰 이벤트
+    if (state.reviewId) {
+      const rv = CONFIG.reviewOptions.find(r => r.id === state.reviewId);
+      if (rv && rv.price !== 0) {
+        items.push({ label: `리뷰 이벤트 (${rv.name})`, price: rv.price, type: 'discount' });
+        total += rv.price;
+      }
+    }
+
+    return { items, total: Math.max(0, total) };
+  }
+
+  /* ─────────────────────────────────────────
+     UPDATE UI
+  ───────────────────────────────────────── */
+  function updateAll() {
+    updateEstimate();
+    updatePreview();
+  }
+
+  function updateEstimate() {
+    const { items, total } = calcEstimate();
+    const totalEl = document.getElementById('estimateTotal');
+    const noteEl  = document.getElementById('estimateNote');
+    const bdEl    = document.getElementById('estimateBreakdown');
+
+    totalEl.textContent = fmt(total);
+
+    const hasNegotiate = items.some(i => i.price === 0 && i.priceText);
+    noteEl.textContent = items.length === 0
+      ? '기본 리깅을 선택해 주세요'
+      : hasNegotiate
+        ? '일부 옵션은 난이도에 따라 조정됩니다'
+        : '예상 견적 (최종 금액은 상담 후 확정)';
+
+    bdEl.innerHTML = '';
+    items.forEach(item => {
+      const tag = document.createElement('span');
+      tag.className = 'est-tag' + (item.type === 'discount' ? ' est-tag--discount' : '');
+      const priceStr = item.price > 0
+        ? `+${fmt(item.price)}`
+        : item.price < 0
+          ? `-${fmt(Math.abs(item.price))}`
+          : item.priceText || '협의';
+      tag.innerHTML = `${item.label} <span class="est-tag-price">${priceStr}</span>`;
+      bdEl.appendChild(tag);
+    });
+  }
+
+  function buildPreviewText() {
+    const { items, total } = calcEstimate();
+    const nickname  = document.getElementById('f-nickname')?.value.trim() || '';
+    const illust    = document.getElementById('f-illust')?.value.trim() || '';
+    const platform  = document.querySelector('#chips-platform .chip.selected')?.dataset.value || '';
+    const debut     = document.getElementById('f-debut')?.value.trim() || '';
+    const cam       = document.querySelector('#chips-cam .chip.selected')?.dataset.value || '';
+    const broadcast = document.querySelector('#chips-broadcast .chip.selected')?.dataset.value || '';
+    const ref       = document.getElementById('f-ref')?.value.trim() || '';
+    const memo      = document.getElementById('f-memo')?.value.trim() || '';
+
+    const baseRig   = CONFIG.baseRigs.find(r => r.id === state.baseRigId);
+    const evDisc    = state.eventId ? CONFIG.eventDiscounts.find(e => e.id === state.eventId) : null;
+    const collab    = CONFIG.collabArtists.find(a => a.value === state.collabVal);
+    const review    = CONFIG.reviewOptions.find(r => r.id === state.reviewId);
+
+    const addOptNames = [...state.addOpts].map(id => CONFIG.addOptions.find(o => o.id === id)?.name).filter(Boolean);
+    const iosOptNames = [...state.iosOpts].map(id => CONFIG.iosOptions.find(o => o.id === id)?.name).filter(Boolean);
+
+    let t = `─────────────────────────\n`;
+    t += `📋 Live2D 리깅 작업 신청\n`;
+    t += `─────────────────────────\n`;
+    t += `닉네임 : ${nickname || '(미입력)'}\n`;
+    t += `일러스트 작가님 닉네임 : ${illust || '(미입력)'}\n`;
+    t += `방송 플랫폼 : ${platform || '(미선택)'}\n`;
+    t += `데뷔 날짜 / 사용 일정 : ${debut || '(미입력)'}\n`;
+    t += `\n`;
+    t += `── 리깅 신청 ──\n`;
+
+    if (baseRig) {
+      const name = `${baseRig.name}${baseRig.sub ? ' ' + baseRig.sub : ''}`;
+      if (evDisc && evDisc.targetRigId === baseRig.id) {
+        t += `신청 타입 : ${name} (이벤트 ${fmt(evDisc.salePrice)}, 원가 ${fmt(baseRig.price)})\n`;
+      } else {
+        t += `신청 타입 : ${name} (${fmt(baseRig.price)})\n`;
+      }
+    } else {
+      t += `신청 타입 : (미선택)\n`;
+    }
+
+    t += `추가 옵션 : ${addOptNames.length ? addOptNames.join(', ') : '없음'}\n`;
+    t += `iOS/VBridger : ${iosOptNames.length ? iosOptNames.join(', ') : '없음'}\n`;
+    t += `협업 작가 할인 : ${collab && collab.value ? `${collab.label}${collab.note ? ' (' + collab.note + ')' : ''}` : '없음'}\n`;
+    t += `리뷰 이벤트 : ${review ? review.name : '(미선택)'}\n`;
+    t += `\n`;
+    t += `── 기타 정보 ──\n`;
+    t += `사용할 캠 : ${cam || '(미선택)'}\n`;
+    t += `작업 과정 공개 여부 : ${broadcast || '(미선택)'}\n`;
+    if (ref) t += `참고 자료 : ${ref}\n`;
+    t += `\n`;
+    t += `── 추가 요청 사항 ──\n`;
+    t += `${memo || '없음'}\n`;
+    t += `\n`;
+    t += `── 예상 견적 ──\n`;
+    items.forEach(item => {
+      const priceStr = item.price > 0
+        ? `+${fmt(item.price)}`
+        : item.price < 0 ? `-${fmt(Math.abs(item.price))}` : (item.priceText || '협의');
+      t += `  ${item.label} : ${priceStr}\n`;
+    });
+    t += `  합계 : ${fmt(total)} (최종 금액은 상담 후 확정)\n`;
+    t += `─────────────────────────`;
+    return t;
+  }
+
+  function updatePreview() {
+    const text = buildPreviewText();
+    const card = document.getElementById('previewCard');
+    const pre  = document.getElementById('previewText');
+    pre.textContent = text;
+    card.classList.add('visible');
+  }
+
+  /* ─────────────────────────────────────────
+     COPY BUTTON
+  ───────────────────────────────────────── */
+  document.getElementById('btnCopy').addEventListener('click', () => {
+    const text = buildPreviewText();
+    const label = document.getElementById('copyLabel');
+    const icon  = document.getElementById('copyIcon');
+    const btn   = document.getElementById('btnCopy');
+
+    const done = () => {
+      btn.classList.add('copied');
+      label.textContent = '복사 완료! ✓';
+      icon.textContent  = '✓';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        label.textContent = '양식 복사하기';
+        icon.textContent  = '📋';
+      }, 2400);
+    };
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+    } else {
+      fallbackCopy(text, done);
+    }
+  });
+
+  function fallbackCopy(text, cb) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    Object.assign(ta.style, { position: 'fixed', opacity: 0, top: 0, left: 0 });
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    cb();
+  }
+
+  /* ─────────────────────────────────────────
+     RESET BUTTON
+  ───────────────────────────────────────── */
+  document.getElementById('btnReset').addEventListener('click', () => {
+    // state
+    state.baseRigId = null;
+    state.eventId   = null;
+    state.addOpts.clear();
+    state.iosOpts.clear();
+    state.collabVal = '';
+    state.reviewId  = null;
+    // DOM
+    document.querySelectorAll('.rig-option input').forEach(i => i.checked = false);
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+    document.getElementById('f-collab').value = '';
+    ['f-nickname','f-illust','f-debut','f-ref','f-memo'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    document.getElementById('previewCard').classList.remove('visible');
+    updateEstimate();
+  });
+
+  /* ─────────────────────────────────────────
+     SCROLL REVEAL
+  ───────────────────────────────────────── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((en, i) => {
+      if (en.isIntersecting) {
+        setTimeout(() => en.target.classList.add('revealed'), i * 50);
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: .06 });
+  revealEls.forEach(el => io.observe(el));
+
+  // init
+  updateEstimate();
+
+})();
+</script>
+
+<!-- ============================================================
+     BG PARTICLES + CURSOR
+============================================================ -->
+<script>
+(function() {
+  /* BG */
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const COLORS = ['#9FA8FF','#C2CAFF','#FFC2E3','#9EEAE1','#d4b9ff'];
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  function Particle() { this.reset(true); }
+  Particle.prototype.reset = function(init) {
+    this.x = Math.random()*W; this.y = init ? Math.random()*H : H+10;
+    this.r = Math.random()*1.8+.5; this.vx = (Math.random()-.5)*.3; this.vy = -(Math.random()*.4+.1);
+    this.alpha = Math.random()*.45+.15; this.color = COLORS[Math.floor(Math.random()*COLORS.length)];
+    this.tw = Math.random()*.018+.004; this.td = Math.random()>.5?1:-1;
+  };
+  Particle.prototype.update = function() {
+    this.x+=this.vx; this.y+=this.vy; this.alpha+=this.tw*this.td;
+    if(this.alpha>.7||this.alpha<.08) this.td*=-1;
+    if(this.y<-10) this.reset(false);
+  };
+  Particle.prototype.draw = function() {
+    ctx.save(); ctx.globalAlpha=this.alpha; ctx.fillStyle=ctx.shadowColor=this.color;
+    ctx.shadowBlur=7; ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fill(); ctx.restore();
+  };
+  function init() { resize(); particles=[]; const n=Math.floor((W*H)/9000); for(let i=0;i<n;i++) particles.push(new Particle()); }
+  function loop() { ctx.clearRect(0,0,W,H); particles.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(loop); }
+  window.addEventListener('resize',init); init(); loop();
+
+  /* CURSOR */
+  const dot=document.getElementById('cursor-dot'), ring=document.getElementById('cursor-ring');
+  const cc=document.getElementById('cursor-canvas'), cctx=cc.getContext('2d');
+  let mx=-300,my=-300,rx=-300,ry=-300;
+  const SC=['#9FA8FF','#FFC2E3','#9EEAE1','#fff','#d4b9ff','#ffe0f5'];
+  function cResize(){ cc.width=window.innerWidth; cc.height=window.innerHeight; }
+  cResize(); window.addEventListener('resize',cResize);
+  document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; dot.style.left=mx+'px'; dot.style.top=my+'px'; });
+  (function rl(){ rx+=(mx-rx)*.13; ry+=(my-ry)*.13; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(rl); })();
+  const HOV='a,button,.form-card,.chip,.rig-label,.field-input,.field-select,.field-textarea,.btn-copy,.btn-reset';
+  document.addEventListener('mouseover',e=>{ if(e.target.closest(HOV)) document.body.classList.add('cursor-hover'); });
+  document.addEventListener('mouseout', e=>{ if(e.target.closest(HOV)) document.body.classList.remove('cursor-hover'); });
+  document.addEventListener('mousedown',()=>document.body.classList.add('cursor-click'));
+  document.addEventListener('mouseup',  ()=>document.body.classList.remove('cursor-click'));
+
+  function drawStar(x,y,r,alpha,color,rot){
+    cctx.save(); cctx.globalAlpha=alpha; cctx.fillStyle=cctx.shadowColor=color; cctx.shadowBlur=8;
+    cctx.translate(x,y); cctx.rotate(rot); cctx.beginPath();
+    for(let i=0;i<5;i++){const a1=(i*4*Math.PI)/5-Math.PI/2,a2=((i*4+2)*Math.PI)/5-Math.PI/2;cctx.lineTo(Math.cos(a1)*r,Math.sin(a1)*r);cctx.lineTo(Math.cos(a2)*(r*.4),Math.sin(a2)*(r*.4));}
+    cctx.closePath(); cctx.fill(); cctx.restore();
+  }
+  function mkP(x,y,burst){
+    const a=Math.random()*Math.PI*2,s=burst?(Math.random()*5+2.5):(Math.random()*1.6+.4);
+    return {x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-(burst?0:.5),r:Math.random()*(burst?4:2.5)+1.2,
+      alpha:1,decay:burst?.028:.022,color:SC[Math.floor(Math.random()*SC.length)],
+      rot:Math.random()*Math.PI*2,rotV:(Math.random()-.5)*.18,star:Math.random()>.45,gravity:.035,drag:burst?.93:1};
+  }
+  let pts=[],lx=-999,ly=-999;
+  document.addEventListener('mousemove',()=>{ const dx=mx-lx,dy=my-ly; if(dx*dx+dy*dy>100){for(let i=0;i<2;i++) pts.push(mkP(mx,my,false));lx=mx;ly=my;}});
+  document.addEventListener('click',e=>{ for(let i=0;i<16;i++) pts.push(mkP(e.clientX,e.clientY,true)); });
+  (function cloop(){
+    cctx.clearRect(0,0,cc.width,cc.height);
+    pts=pts.filter(p=>p.alpha>.01);
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.vx*=p.drag;p.vy*=p.drag;p.vy+=p.gravity;p.alpha-=p.decay;p.rot+=p.rotV;
+      if(p.star) drawStar(p.x,p.y,p.r,p.alpha,p.color,p.rot);
+      else{cctx.save();cctx.globalAlpha=p.alpha;cctx.fillStyle=cctx.shadowColor=p.color;cctx.shadowBlur=9;cctx.beginPath();cctx.arc(p.x,p.y,p.r,0,Math.PI*2);cctx.fill();cctx.restore();}
+    });
+    requestAnimationFrame(cloop);
+  })();
+})();
+</script>
+
+</body>
+</html>
