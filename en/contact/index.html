@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dajoong | Commission Inquiry</title>
+  <meta name="description" content="Send Dajoong a private inquiry about your Live2D rigging project." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dajoong Live2D Commission Inquiry" />
+  <meta property="og:description" content="Share your project details and preferred schedule, and receive a reply by email." />
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:url" content="https://dajoong.cloud/en/contact/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://dajoong.cloud/en/contact/" />
+  <link rel="alternate" hreflang="ko" href="https://dajoong.cloud/contact/" />
+  <link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/contact/" />
+  <link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/contact/" />
+  <link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/contact/" />
+  <link rel="stylesheet" href="../../style.css?v=20260620" />
+</head>
+<body class="sub-page contact-page">
+  <header class="site-header">
+    <a class="brand" href="../"><span class="brand-mark">D</span><span>Dajoong</span></a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a href="../">Home</a><a href="../gallery/">Gallery</a><a href="../guide/">Guide</a><a href="../compare/">Pricing</a><a href="../live/">Demo</a>
+    </nav>
+    <a class="nav-action" href="./" aria-current="page">Contact</a>
+  </header>
+
+  <main class="sub-main contact-main">
+    <section class="sub-hero contact-hero">
+      <p class="eyebrow">Private Commission Inquiry</p>
+      <h1>Tell Me About Your Project</h1>
+      <p>Write in English, Korean, or Japanese, whichever is most comfortable. Your inquiry is private, and you will receive a reply by email.</p>
+    </section>
+
+    <section class="inquiry-layout" aria-label="Commission inquiry">
+      <aside class="inquiry-guide">
+        <p class="eyebrow">Before You Send</p>
+        <h2>More detail helps me provide a clearer answer.</h2>
+        <ul><li>Status of your separated PSD</li><li>Intended use and reveal date</li><li>Expressions, props, and outfit options</li><li>Reference video or image links</li></ul>
+        <p class="privacy-note">Your form is delivered to Dajoong by email through Formspree. Do not include passwords or payment details.</p>
+        <div class="alternate-contact"><span>Other contact channels</span><a href="https://artmug.kr/index.php?channel=view&amp;uid=42826" target="_blank" rel="noopener noreferrer">ArtMug</a><a href="https://x.com/Dajoong_L2d" target="_blank" rel="noopener noreferrer">X</a></div>
+      </aside>
+
+      <form class="commission-form" action="https://formspree.io/f/mnjyenla" method="POST" data-contact-form data-success="Your inquiry has been sent. You will receive a reply by email after it is reviewed." data-error="The message could not be sent. Please try again shortly or use another contact channel.">
+        <input type="hidden" name="_subject" value="[Dajoong] New commission inquiry (EN)" />
+        <input type="hidden" name="language" value="English" />
+        <div class="form-row">
+          <label>Name or creator name <span aria-hidden="true">*</span><input type="text" name="name" autocomplete="name" required /></label>
+          <label>Email for replies <span aria-hidden="true">*</span><input type="email" name="email" autocomplete="email" required /></label>
+        </div>
+        <div class="form-row">
+          <label>Country / time zone<input type="text" name="country_timezone" placeholder="e.g. Canada / UTC-5" autocomplete="country-name" /></label>
+          <label>Project type <span aria-hidden="true">*</span><select name="project_type" required><option value="">Please select</option><option>Live2D rigging</option><option>Existing model update</option><option>SD / mascot rigging</option><option>Need consultation</option><option>Other</option></select></label>
+        </div>
+        <div class="form-row">
+          <label>Estimated budget<input type="text" name="budget" placeholder="Please include the currency" /></label>
+          <label>Preferred completion date<input type="text" name="preferred_deadline" placeholder="e.g. September 2026 or flexible" /></label>
+        </div>
+        <label>PSD / model status<select name="model_status"><option value="">Please select</option><option>Separated PSD is ready</option><option>Illustration in progress</option><option>I have an existing model</option><option>Not prepared yet</option></select></label>
+        <label>Reference links<textarea name="reference_links" rows="3" placeholder="Add shareable Google Drive, Dropbox, YouTube, or other links."></textarea></label>
+        <label>Project details <span aria-hidden="true">*</span><textarea name="message" rows="8" minlength="20" required placeholder="Describe your character, requested movement and options, intended use, and schedule."></textarea></label>
+        <label class="consent-field"><input type="checkbox" name="privacy_consent" value="Agreed" required /><span>I agree to send this information through Formspree so Dajoong can reply. <strong>*</strong></span></label>
+        <label class="form-honeypot" aria-hidden="true">Leave this empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+        <button class="primary-action form-submit" type="submit">Send Private Inquiry</button>
+        <p class="form-status" data-form-status aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+  <script src="../../contact.js"></script>
+  <script src="/language-switch.js"></script>
+</body>
+</html>

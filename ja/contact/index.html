@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dajoong | ご依頼・お問い合わせ</title>
+  <meta name="description" content="Live2Dモデリングのご依頼内容をDajoongへ非公開で送信できるお問い合わせフォームです。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dajoong Live2D ご依頼・お問い合わせ" />
+  <meta property="og:description" content="プロジェクト内容とご希望のスケジュールをお送りください。メールでご返信します。" />
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:url" content="https://dajoong.cloud/ja/contact/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://dajoong.cloud/ja/contact/" />
+  <link rel="alternate" hreflang="ko" href="https://dajoong.cloud/contact/" />
+  <link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/contact/" />
+  <link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/contact/" />
+  <link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/contact/" />
+  <link rel="stylesheet" href="../../style.css?v=20260620" />
+</head>
+<body class="sub-page contact-page">
+  <header class="site-header">
+    <a class="brand" href="../"><span class="brand-mark">D</span><span>Dajoong</span></a>
+    <nav class="top-nav" aria-label="メインナビゲーション">
+      <a href="../">ホーム</a><a href="../gallery/">ギャラリー</a><a href="../guide/">ガイド</a><a href="../compare/">料金比較</a><a href="../live/">デモ</a>
+    </nav>
+    <a class="nav-action" href="./" aria-current="page">お問い合わせ</a>
+  </header>
+
+  <main class="sub-main contact-main">
+    <section class="sub-hero contact-hero">
+      <p class="eyebrow">Private Commission Inquiry</p>
+      <h1>プロジェクトについてお聞かせください</h1>
+      <p>日本語・英語・韓国語のうち、書きやすい言語でご記入ください。内容は公開されず、確認後メールでご返信します。</p>
+    </section>
+
+    <section class="inquiry-layout" aria-label="ご依頼・お問い合わせ">
+      <aside class="inquiry-guide">
+        <p class="eyebrow">送信前の確認</p>
+        <h2>詳しい情報があるほど正確にご案内できます。</h2>
+        <ul><li>パーツ分けPSDの準備状況</li><li>使用目的と公開予定日</li><li>表情・小物・衣装などのオプション</li><li>参考動画や画像のリンク</li></ul>
+        <p class="privacy-note">フォームの内容はFormspreeを通じてDajoongへメールで届きます。パスワードや決済情報は入力しないでください。</p>
+        <div class="alternate-contact"><span>その他のお問い合わせ先</span><a href="https://artmug.kr/index.php?channel=view&amp;uid=42826" target="_blank" rel="noopener noreferrer">ArtMug</a><a href="https://x.com/Dajoong_L2d" target="_blank" rel="noopener noreferrer">X</a></div>
+      </aside>
+
+      <form class="commission-form" action="https://formspree.io/f/mnjyenla" method="POST" data-contact-form data-success="お問い合わせを送信しました。確認後、メールでご返信します。" data-error="送信できませんでした。しばらくしてから再度お試しいただくか、別のお問い合わせ先をご利用ください。">
+        <input type="hidden" name="_subject" value="[Dajoong] 新規ご依頼・お問い合わせ (JA)" />
+        <input type="hidden" name="language" value="Japanese" />
+        <div class="form-row">
+          <label>お名前・活動名 <span aria-hidden="true">*</span><input type="text" name="name" autocomplete="name" required /></label>
+          <label>返信先メールアドレス <span aria-hidden="true">*</span><input type="email" name="email" autocomplete="email" required /></label>
+        </div>
+        <div class="form-row">
+          <label>国 / タイムゾーン<input type="text" name="country_timezone" placeholder="例：Japan / UTC+9" autocomplete="country-name" /></label>
+          <label>ご依頼の種類 <span aria-hidden="true">*</span><select name="project_type" required><option value="">選択してください</option><option>Live2Dモデリング</option><option>既存モデルの修正</option><option>SD / マスコットモデリング</option><option>相談して決めたい</option><option>その他</option></select></label>
+        </div>
+        <div class="form-row">
+          <label>ご予算<input type="text" name="budget" placeholder="通貨単位もご記入ください" /></label>
+          <label>希望納期<input type="text" name="preferred_deadline" placeholder="例：2026年9月、または相談可能" /></label>
+        </div>
+        <label>PSD / モデルの準備状況<select name="model_status"><option value="">選択してください</option><option>パーツ分けPSD準備済み</option><option>イラスト制作中</option><option>既存モデルあり</option><option>まだ準備前</option></select></label>
+        <label>参考資料のリンク<textarea name="reference_links" rows="3" placeholder="Google Drive、Dropbox、YouTubeなど共有可能なリンクをご記入ください。"></textarea></label>
+        <label>お問い合わせ内容 <span aria-hidden="true">*</span><textarea name="message" rows="8" minlength="20" required placeholder="キャラクター、必要な動きやオプション、使用目的、スケジュールなどを詳しくお知らせください。"></textarea></label>
+        <label class="consent-field"><input type="checkbox" name="privacy_consent" value="Agreed" required /><span>返信のため、入力内容をFormspree経由で送信することに同意します。 <strong>*</strong></span></label>
+        <label class="form-honeypot" aria-hidden="true">空欄のままにしてください<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+        <button class="primary-action form-submit" type="submit">非公開で問い合わせる</button>
+        <p class="form-status" data-form-status aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+  <script src="../../contact.js"></script>
+  <script src="/language-switch.js"></script>
+</body>
+</html>

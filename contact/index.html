@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dajoong | 의뢰 문의</title>
+  <meta name="description" content="다중에게 Live2D 리깅 의뢰 내용을 비공개로 보내는 문의 폼입니다." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dajoong Live2D 의뢰 문의" />
+  <meta property="og:description" content="프로젝트 정보와 희망 일정을 남겨주시면 이메일로 답변드립니다." />
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:url" content="https://dajoong.cloud/contact/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://dajoong.cloud/contact/" />
+  <link rel="alternate" hreflang="ko" href="https://dajoong.cloud/contact/" />
+  <link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/contact/" />
+  <link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/contact/" />
+  <link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/contact/" />
+  <link rel="stylesheet" href="../style.css?v=20260620" />
+</head>
+<body class="sub-page contact-page">
+  <header class="site-header">
+    <a class="brand" href="../"><span class="brand-mark">D</span><span>Dajoong</span></a>
+    <nav class="top-nav" aria-label="주요 메뉴">
+      <a href="../">홈</a><a href="../gallery/">갤러리</a><a href="../guide/">가이드</a><a href="../compare/">가격 비교</a><a href="../live/">데모</a>
+    </nav>
+    <a class="nav-action" href="./" aria-current="page">문의</a>
+  </header>
+
+  <main class="sub-main contact-main">
+    <section class="sub-hero contact-hero">
+      <p class="eyebrow">Private Commission Inquiry</p>
+      <h1>프로젝트 이야기를 들려주세요</h1>
+      <p>한국어, 영어, 일본어 중 편한 언어로 작성해 주세요. 보내주신 내용은 공개되지 않으며 확인 후 이메일로 답변드립니다.</p>
+    </section>
+
+    <section class="inquiry-layout" aria-label="의뢰 문의">
+      <aside class="inquiry-guide">
+        <p class="eyebrow">문의 전 확인</p>
+        <h2>자세할수록 정확한 상담이 가능합니다.</h2>
+        <ul>
+          <li>분리된 PSD 준비 상태</li>
+          <li>사용 목적과 공개 예정일</li>
+          <li>원하는 표정, 소품, 의상 옵션</li>
+          <li>참고 영상 또는 이미지 링크</li>
+        </ul>
+        <p class="privacy-note">폼 내용은 Formspree를 통해 다중에게 이메일로 전달됩니다. 비밀번호나 결제 정보는 입력하지 마세요.</p>
+        <div class="alternate-contact">
+          <span>다른 문의 채널</span>
+          <a href="https://artmug.kr/index.php?channel=view&amp;uid=42826" target="_blank" rel="noopener noreferrer">ArtMug</a>
+          <a href="https://x.com/Dajoong_L2d" target="_blank" rel="noopener noreferrer">X</a>
+        </div>
+      </aside>
+
+      <form class="commission-form" action="https://formspree.io/f/mnjyenla" method="POST" data-contact-form data-success="문의가 전송되었습니다. 확인 후 이메일로 답변드리겠습니다." data-error="전송하지 못했습니다. 잠시 후 다시 시도하거나 다른 문의 채널을 이용해 주세요.">
+        <input type="hidden" name="_subject" value="[Dajoong] 새 의뢰 문의 (KO)" />
+        <input type="hidden" name="language" value="Korean" />
+        <div class="form-row">
+          <label>이름 또는 활동명 <span aria-hidden="true">*</span><input type="text" name="name" autocomplete="name" required /></label>
+          <label>답변받을 이메일 <span aria-hidden="true">*</span><input type="email" name="email" autocomplete="email" required /></label>
+        </div>
+        <div class="form-row">
+          <label>국가 / 시간대<input type="text" name="country_timezone" placeholder="예: Korea / UTC+9" autocomplete="country-name" /></label>
+          <label>의뢰 유형 <span aria-hidden="true">*</span>
+            <select name="project_type" required><option value="">선택해 주세요</option><option>Live2D 리깅</option><option>기존 모델 수정</option><option>SD / 마스코트 리깅</option><option>상담 후 결정</option><option>기타</option></select>
+          </label>
+        </div>
+        <div class="form-row">
+          <label>예상 예산<input type="text" name="budget" placeholder="통화 단위와 함께 입력" /></label>
+          <label>희망 완료일<input type="text" name="preferred_deadline" placeholder="예: 2026-09 또는 협의 가능" /></label>
+        </div>
+        <label>PSD / 모델 준비 상태
+          <select name="model_status"><option value="">선택해 주세요</option><option>분리 PSD 준비 완료</option><option>일러스트 작업 중</option><option>기존 모델 보유</option><option>아직 준비 전</option></select>
+        </label>
+        <label>참고 자료 링크<textarea name="reference_links" rows="3" placeholder="Google Drive, Dropbox, YouTube 등의 공개 또는 공유 링크를 입력해 주세요."></textarea></label>
+        <label>상세 문의 내용 <span aria-hidden="true">*</span><textarea name="message" rows="8" minlength="20" required placeholder="캐릭터, 필요한 움직임과 옵션, 사용 목적, 일정 등 프로젝트를 자세히 알려주세요."></textarea></label>
+        <label class="consent-field"><input type="checkbox" name="privacy_consent" value="Agreed" required /><span>답변을 위해 입력한 정보를 Formspree를 통해 전달하는 것에 동의합니다. <strong>*</strong></span></label>
+        <label class="form-honeypot" aria-hidden="true">비워 두세요<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+        <button class="primary-action form-submit" type="submit">비공개 문의 보내기</button>
+        <p class="form-status" data-form-status aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+  <script src="../contact.js"></script>
+  <script src="/language-switch.js"></script>
+</body>
+</html>

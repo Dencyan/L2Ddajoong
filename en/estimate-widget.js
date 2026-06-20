@@ -131,7 +131,7 @@ function createEstimateWidget() {
         <strong data-estimate-total>KRW 0</strong>
         <p data-estimate-note>Please select a base rigging plan.</p>
       </div>
-      <a class="estimate-submit" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">Contact via ArtMug</a>
+      <a class="estimate-submit" href="/en/contact/">Open the Private Inquiry Form</a>
     </form>
   `;
 

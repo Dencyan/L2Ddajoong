@@ -131,7 +131,7 @@ function createEstimateWidget() {
         <strong data-estimate-total>0ウォン</strong>
         <p data-estimate-note>基本リギングを選択してください。</p>
       </div>
-      <a class="estimate-submit" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer">ArtMugでお問い合わせ</a>
+      <a class="estimate-submit" href="/ja/contact/">非公開お問い合わせフォームを開く</a>
     </form>
   `;
 

@@ -135,4 +135,31 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://dajoong.cloud/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/contact/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/contact/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/contact/" />
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://dajoong.cloud/en/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/contact/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/contact/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/contact/" />
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://dajoong.cloud/ja/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/contact/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/contact/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/contact/" />
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>
