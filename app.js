@@ -64,6 +64,113 @@ const sampleDesc = document.querySelector("#sample-desc");
 const sampleButtons = document.querySelectorAll("[data-sample]");
 const demoCover = document.querySelector("#demo-cover");
 const entryLoader = document.querySelector("#entry-loader");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function segmentMotionText(text) {
+  if ("Segmenter" in Intl) {
+    return [...new Intl.Segmenter(document.documentElement.lang || "ko", {
+      granularity: "grapheme",
+    }).segment(text)].map(({ segment }) => segment);
+  }
+
+  return Array.from(text);
+}
+
+function prepareMotionText(element, text = element.textContent) {
+  const label = text.trim();
+  const fragment = document.createDocumentFragment();
+  let characterIndex = 0;
+
+  element.textContent = "";
+  element.setAttribute("aria-label", label);
+
+  label.split(/\s+/u).filter(Boolean).forEach((wordText) => {
+    const word = document.createElement("span");
+    word.className = "type-word";
+    word.setAttribute("aria-hidden", "true");
+
+    segmentMotionText(wordText).forEach((character) => {
+      const span = document.createElement("span");
+      span.className = "type-char";
+      span.setAttribute("aria-hidden", "true");
+      span.style.setProperty("--type-index", characterIndex);
+      span.textContent = character;
+      characterIndex += 1;
+      word.append(span);
+    });
+
+    fragment.append(word);
+  });
+
+  element.append(fragment);
+  element.classList.add("is-type-ready");
+}
+
+function playMotionText(element) {
+  element.classList.remove("is-type-visible");
+  void element.offsetWidth;
+  element.classList.add("is-type-visible");
+}
+
+function mountMotionTypography() {
+  const elements = [...document.querySelectorAll("[data-type-motion]")];
+  if (!elements.length) return;
+
+  elements.forEach((element) => prepareMotionText(element));
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    elements.forEach((element) => element.classList.add("is-type-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+
+      const show = () => playMotionText(entry.target);
+      if (
+        entry.target.dataset.typeMotion === "hero"
+        && entryLoader?.isConnected
+        && !entryLoader.classList.contains("is-done")
+      ) {
+        document.addEventListener("dajoong:loader-done", show, { once: true });
+      } else {
+        show();
+      }
+
+      observer.unobserve(entry.target);
+    });
+  }, {
+    threshold: .45,
+    rootMargin: "0px 0px -8% 0px",
+  });
+
+  elements.forEach((element) => observer.observe(element));
+}
+
+function swapSampleTitle(text) {
+  if (!sampleTitle) return;
+
+  if (reduceMotion) {
+    prepareMotionText(sampleTitle, text);
+    sampleTitle.classList.add("is-type-visible");
+    return;
+  }
+
+  const animation = sampleTitle.animate(
+    [
+      { opacity: 1, transform: "translateY(0)" },
+      { opacity: 0, transform: "translateY(-32%)" },
+    ],
+    { duration: 150, easing: "ease-in", fill: "forwards" },
+  );
+
+  animation.onfinish = () => {
+    animation.cancel();
+    prepareMotionText(sampleTitle, text);
+    playMotionText(sampleTitle);
+  };
+}
 
 if (entryLoader) {
   document.body.classList.add("is-loading");
@@ -71,6 +178,7 @@ if (entryLoader) {
   const closeEntryLoader = () => {
     entryLoader.classList.add("is-done");
     document.body.classList.remove("is-loading");
+    document.dispatchEvent(new CustomEvent("dajoong:loader-done"));
     window.setTimeout(() => entryLoader.remove(), 520);
   };
 
@@ -90,6 +198,8 @@ if (entryLoader) {
   }
 }
 
+mountMotionTypography();
+
 sampleButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const next = samples[button.dataset.sample];
@@ -106,7 +216,7 @@ sampleButtons.forEach((button) => {
       sampleImage.src = next.src;
       sampleImage.alt = next.alt;
       sampleKind.textContent = next.kind;
-      sampleTitle.textContent = next.title;
+      swapSampleTitle(next.title);
       sampleDesc.textContent = next.desc;
       sampleImage.animate(
         [

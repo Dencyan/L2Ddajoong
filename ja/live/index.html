@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dajoong | Webモデル体験</title>
-  <meta name="description" content="DajoongのLive2D Webモデルサンプルをブラウザで直接体験できるページです。" />
+  <title>Dajoong | Live2Dリギングデモ</title>
+  <meta name="description" content="DajoongのLive2Dリギング技術をブラウザで直接確認できるインタラクティブデモです。" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Dajoong Live2D Webモデル体験" />
-  <meta property="og:description" content="Live2Dモデルサンプルをブラウザで操作し、動きをご確認ください。" />
+  <meta property="og:title" content="Dajoong Live2Dリギングデモ" />
+  <meta property="og:description" content="モデルをドラッグし、顔の角度、視線、表情の変化、穏やかな呼吸表現をご確認ください。" />
   <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
   <meta property="og:url" content="https://dajoong.cloud/ja/live/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Dajoong Live2D Webモデル体験" />
-  <meta name="twitter:description" content="保護されたNetlifyサンプルを大画面で体験できるLive2D専用ページです。" />
+  <meta name="twitter:title" content="Dajoong Live2Dリギングデモ" />
+  <meta name="twitter:description" content="Dajoongのリギング技術と動きの完成度を直接確認できるLive2Dデモです。" />
   <meta name="twitter:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
   <link rel="canonical" href="https://dajoong.cloud/ja/live/" />
   <link rel="alternate" hreflang="ko" href="https://dajoong.cloud/live/" />
@@ -40,36 +40,31 @@
 
   <main class="sub-main live-main">
     <section class="sub-hero live-hero">
-      <p class="eyebrow">Webモデル体験</p>
-      <h1>ブラウザで体験するLive2Dモデル</h1>
-      <p>保護されたNetlifyサンプルを体験専用の大きな画面に配置しました。マウスで操作し、動きと反応をご確認ください。</p>
+      <p class="eyebrow">Interactive Rigging Demo</p>
+      <h1>マウスで直接確認するLive2Dリギングデモ</h1>
+      <p>書籍に収録されたサンプルイラストを使用し、Dajoongのリギング技術を紹介するポートフォリオ用モデルです。クリック後にドラッグして動きと反応をご確認ください。</p>
     </section>
 
     <section class="live-stage" aria-label="Live2D体験">
       <div class="live-theater">
-        <iframe id="live-demo-frame" title="Dajoong Live2D web sample" src="https://live2d-netlify-demo.netlify.app/" loading="lazy" allow="clipboard-write"></iframe>
-        <button class="live-gate" id="live-gate" type="button">
-          <span>⌁</span>
-          <strong>クリックして操作開始</strong>
-          <small>モデルエリア内でマウスを動かしてください。</small>
-        </button>
+        <iframe id="live-demo-frame" title="Dajoong Live2D rigging demo" src="https://dajoongsitemodel.netlify.app/?embed=1" loading="lazy" scrolling="no" allow="clipboard-write"></iframe>
       </div>
 
       <aside class="live-sidebar">
         <span>Preview Notes</span>
-        <h2>ご依頼前のチェックポイント</h2>
-        <p>このWebサンプルは操作感とリギングの方向性を確認するための体験版です。実際のご依頼モデルには物理演算や各種エフェクトが含まれます。</p>
+        <h2>リギングで確認するポイント</h2>
+        <p>販売やデータ配布を目的としたモデルではなく、顔の角度や表情の変化が自然につながる様子を紹介するための技術サンプルです。</p>
 
         <div class="live-checks" aria-label="体験チェックリスト">
-          <label><input type="checkbox" /> マウス移動に対する視線と顔の反応</label>
-          <label><input type="checkbox" /> 正面から側面へ移る際の立体感</label>
-          <label><input type="checkbox" /> 表情・モーションオプションはご依頼モデルで対応</label>
+          <label><input type="checkbox" /> ドラッグ方向に応じた視線と顔の反応</label>
+          <label><input type="checkbox" /> 正面から側面へつながる顔の立体感</label>
+          <label><input type="checkbox" /> 表情の変化と穏やかな呼吸の自然なつながり</label>
         </div>
 
         <div class="live-facts">
-          <div><strong>サンプルの種類</strong><span>Web体験用モデル</span></div>
-          <div><strong>ご依頼モデル</strong><span>物理演算・追加エフェクトを含む</span></div>
-          <div><strong>お問い合わせ先</strong><span>ArtMug販売ページ</span></div>
+          <div><strong>サンプルの目的</strong><span>Live2Dリギング技術の紹介</span></div>
+          <div><strong>クレジット</strong><span>Illust. しゅがお / Rigging. Dajoong</span></div>
+          <div><strong>参考資料</strong><span>fumi著『Live2D モデリング＆アニメーションTips』</span></div>
         </div>
 
         <div class="live-actions">
@@ -82,18 +77,18 @@
     <section class="live-tips" aria-label="体験ガイド">
       <article>
         <span>01</span>
-        <h3>まず動きを確認</h3>
-        <p>左右・上下・傾きの反応が自然につながるか確認してください。</p>
+        <h3>クリック後にドラッグ</h3>
+        <p>左右・上下・斜めへゆっくり動かし、顔と視線の反応をご確認ください。</p>
       </article>
       <article>
         <span>02</span>
-        <h3>Webサンプルの仕様</h3>
-        <p>この体験版には物理演算がありません。実際のご依頼モデルにはさらに多くのエフェクトが含まれます。</p>
+        <h3>変化の自然さを確認</h3>
+        <p>角度が変わる際に、目・口・顔の輪郭が途切れずにつながっているかご覧ください。</p>
       </article>
       <article>
         <span>03</span>
-        <h3>必要なオプションを確認</h3>
-        <p>目の物理演算、口の構造、表情、腕モーション、髪型・衣装切り替えはギャラリーと比較ページで確認できます。</p>
+        <h3>技術紹介用サンプル</h3>
+        <p>本モデルの販売・データ配布は行わず、DajoongのLive2Dリギング制作を紹介する目的で公開しています。</p>
       </article>
     </section>
   </main>

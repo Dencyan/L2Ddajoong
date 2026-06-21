@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dajoong | 웹 모델 체험</title>
-  <meta name="description" content="다중 Live2D 웹 모델 샘플을 브라우저에서 직접 확인하는 페이지입니다." />
+  <title>Dajoong | Live2D 리깅 데모</title>
+  <meta name="description" content="다중의 Live2D 리깅 기술을 브라우저에서 직접 확인하는 인터랙티브 데모입니다." />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Dajoong Live2D 웹 모델 체험" />
-  <meta property="og:description" content="브라우저에서 Live2D 판매 모델 샘플을 직접 조작하며 움직임을 확인하세요." />
+  <meta property="og:title" content="Dajoong Live2D 리깅 데모" />
+  <meta property="og:description" content="마우스로 직접 조작하며 얼굴 각도, 시선, 표정과 호흡 표현을 확인하세요." />
   <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
   <meta property="og:url" content="https://dajoong.cloud/live/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Dajoong Live2D 웹 모델 체험" />
-  <meta name="twitter:description" content="기존 암호화 Netlify 샘플을 큰 화면에서 체험하는 Live2D 전용 페이지입니다." />
+  <meta name="twitter:title" content="Dajoong Live2D 리깅 데모" />
+  <meta name="twitter:description" content="리깅 기술과 움직임의 완성도를 직접 확인할 수 있는 인터랙티브 Live2D 데모입니다." />
   <meta name="twitter:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
   <link rel="canonical" href="https://dajoong.cloud/live/" />
   <link rel="alternate" hreflang="ko" href="https://dajoong.cloud/live/" />
@@ -40,40 +40,35 @@
 
   <main class="sub-main live-main">
     <section class="sub-hero live-hero">
-      <p class="eyebrow">웹 모델 체험</p>
-      <h1>브라우저에서 직접 확인하는 Live2D 판매 모델 체험</h1>
-      <p>기존 암호화 Netlify 샘플을 체험 전용 화면으로 크게 배치했습니다. 마우스로 조작하며 움직임과 반응을 확인해보세요.</p>
+      <p class="eyebrow">Interactive Rigging Demo</p>
+      <h1>마우스로 직접 확인하는 Live2D 리깅 데모</h1>
+      <p>책에 수록된 샘플 일러스트를 활용해 다중의 리깅 기술을 보여주는 포트폴리오용 모델입니다. 클릭 후 드래그하며 움직임과 반응을 확인해보세요.</p>
     </section>
 
     <section class="live-stage" aria-label="Live2D 체험">
       <div class="live-theater">
-        <iframe id="live-demo-frame" title="Dajoong Live2D web sample" src="https://live2d-netlify-demo.netlify.app/" loading="lazy" allow="clipboard-write"></iframe>
-        <button class="live-gate" id="live-gate" type="button">
-          <span>⌁</span>
-          <strong>클릭해서 조작 시작</strong>
-          <small>모델 영역 안에서 마우스를 움직여보세요.</small>
-        </button>
+        <iframe id="live-demo-frame" title="Dajoong Live2D rigging demo" src="https://dajoongsitemodel.netlify.app/?embed=1" loading="lazy" scrolling="no" allow="clipboard-write"></iframe>
       </div>
 
       <aside class="live-sidebar">
         <span>Preview Notes</span>
-        <h2>구매 전 체크 포인트</h2>
-        <p>이 웹 샘플은 조작감과 리깅 방향을 확인하기 위한 체험판입니다. 실제 구매 모델에는 물리와 다양한 효과가 포함됩니다.</p>
+        <h2>리깅에서 확인할 포인트</h2>
+        <p>판매나 데이터 배포를 위한 모델이 아니라, 얼굴 각도와 표정 변화가 자연스럽게 연결되는지 직접 보여주기 위한 기술 샘플입니다.</p>
 
         <div class="live-checks" aria-label="체험 체크리스트">
-          <label><input type="checkbox" /> 마우스 이동에 따른 시선과 고개 반응</label>
-          <label><input type="checkbox" /> 정면에서 측면으로 넘어가는 입체감</label>
-          <label><input type="checkbox" /> 표정과 모션 옵션은 구매 모델에서 확인</label>
+          <label><input type="checkbox" /> 드래그 방향에 따른 시선과 고개 반응</label>
+          <label><input type="checkbox" /> 정면에서 측면으로 이어지는 얼굴의 입체감</label>
+          <label><input type="checkbox" /> 표정 변화와 잔잔한 호흡의 자연스러운 연결</label>
         </div>
 
         <div class="live-facts">
-          <div><strong>샘플 성격</strong><span>웹 체험용 판매 모델</span></div>
-          <div><strong>구매 모델</strong><span>물리 및 추가 효과 포함</span></div>
-          <div><strong>문의 위치</strong><span>ArtMug 판매 페이지</span></div>
+          <div><strong>샘플 목적</strong><span>Live2D 리깅 기술 시연</span></div>
+          <div><strong>제작 구분</strong><span>Illust. しゅがお / Rigging. Dajoong</span></div>
+          <div><strong>참고 자료</strong><span>fumi 저 『Live2D モデリング＆アニメーションTips』</span></div>
         </div>
 
         <div class="live-actions">
-          <a class="primary-action" href="../contact/">구매 문의하기</a>
+          <a class="primary-action" href="../contact/">리깅 문의하기</a>
           <a class="secondary-action" href="../compare/">플랜 비교 보기</a>
         </div>
       </aside>
@@ -82,18 +77,18 @@
     <section class="live-tips" aria-label="체험 안내">
       <article>
         <span>01</span>
-        <h3>움직임을 먼저 봅니다</h3>
-        <p>좌우, 상하, 기울기 반응이 자연스럽게 이어지는지 확인하세요.</p>
+        <h3>클릭 후 드래그합니다</h3>
+        <p>좌우, 상하와 대각선으로 천천히 움직이며 얼굴과 시선의 반응을 확인하세요.</p>
       </article>
       <article>
         <span>02</span>
-        <h3>웹 샘플의 한계를 구분합니다</h3>
-        <p>이 체험판은 물리 없는 웹 캐릭터이며, 실제 구매 모델은 더 많은 효과를 포함합니다.</p>
+        <h3>전환의 자연스러움을 봅니다</h3>
+        <p>각도가 바뀔 때 눈, 입과 얼굴 윤곽이 끊기지 않고 이어지는지 살펴보세요.</p>
       </article>
       <article>
         <span>03</span>
-        <h3>필요한 옵션을 메모합니다</h3>
-        <p>눈 물리, 입 구조, 표정, 팔 모션, 헤어/의상 전환은 갤러리와 비교 페이지에서 함께 확인할 수 있습니다.</p>
+        <h3>기술 시연용 샘플입니다</h3>
+        <p>본 모델은 판매하거나 데이터를 배포하지 않으며, 다중의 Live2D 리깅 작업을 소개하기 위해 공개합니다.</p>
       </article>
     </section>
   </main>
