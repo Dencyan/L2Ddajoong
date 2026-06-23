@@ -561,9 +561,7 @@ body {
   .btn-copy { justify-content: center; }
 }
 
-/* ============================================================
-   LANG SWITCHER
-============================================================ */
+/* 언어 전환 */
 .lang-switcher {
   display: flex; gap: 6px; justify-content: center; margin-bottom: 14px;
 }
@@ -745,7 +743,7 @@ body {
 
 <div class="page">
 
-  <!-- HEADER -->
+  <!-- 상단 영역 -->
   <header class="page-header reveal">
     <div class="header-badge">✦ Live2D Rigging</div>
     <div class="lang-switcher">
@@ -1013,13 +1011,8 @@ body {
     </button>
   </div>
   <div class="footer-note"><span id="footer-note">신청 시 양식 사용해 주시고 그 외 문의는 편하게 주세요! 🌸</span></div>
-<!--
-Project: DAJOONG Live2D artmug form
-Author: Den Cyan
-Version: 12
-Created: 2026-06-23
--->
-</div><!-- /page -->
+
+</div>
 
 <!-- ============================================================
   ★★★ CONFIG — 여기서만 수정하면 됩니다 ★★★
@@ -1085,9 +1078,7 @@ const CONFIG = {
 };
 </script>
 
-<!-- ============================================================
-  MAIN LOGIC
-============================================================ -->
+<!-- 주요 로직 -->
 <script>
 (function () {
 
@@ -1764,7 +1755,7 @@ const CONFIG = {
 })();
 </script>
 
-<!-- BG + CURSOR -->
+<!-- 배경 + 커서 -->
 <script>
 (function(){
   const bc=document.getElementById('bg-canvas'),bctx=bc.getContext('2d');
@@ -1802,9 +1793,7 @@ const CONFIG = {
 </script>
 
 
-<!-- ============================================================
-  LANGUAGE SWITCHER & I18N
-============================================================ -->
+<!-- 언어 전환 및 다국어 처리 -->
 <script>
 (function(){
   let lang = 'ko';

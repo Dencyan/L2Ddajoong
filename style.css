@@ -2303,7 +2303,7 @@ h1 {
   }
 }
 
-/* Motion typography */
+/* 모션 타이포그래피 */
 [data-type-motion] {
   --type-stagger: 54ms;
   position: relative;
@@ -2454,7 +2454,7 @@ h1 {
   }
 }
 
-/* Commission inquiry */
+/* 커미션 문의 */
 .contact-main {
   padding-bottom: 92px;
 }
