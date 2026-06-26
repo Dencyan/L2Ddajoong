@@ -123,6 +123,64 @@ demoCover?.addEventListener("click", () => {
   demoCover.classList.add("is-hidden");
 });
 
+const homeDemoFrame = document.querySelector("#home-demo-frame");
+const homeDemoButtons = [...document.querySelectorAll("[data-home-live2d-control]")];
+const homeDemoOrigin = homeDemoFrame ? new URL(homeDemoFrame.src).origin : "";
+
+const setHomeDemoReady = (isReady) => {
+  homeDemoButtons.forEach((button) => {
+    button.disabled = !isReady;
+    button.classList.toggle("is-waiting", !isReady);
+  });
+};
+
+setHomeDemoReady(false);
+
+homeDemoButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const id = button.dataset.homeLive2dControl;
+    if (!id || !homeDemoFrame?.contentWindow || !homeDemoOrigin) return;
+
+    homeDemoFrame.contentWindow.postMessage({
+      type: "dajoong-live2d-control",
+      id
+    }, homeDemoOrigin);
+
+    button.classList.add("is-active");
+    window.setTimeout(() => button.classList.remove("is-active"), 220);
+  });
+});
+
+window.addEventListener("message", (event) => {
+  if (!homeDemoFrame?.contentWindow || event.source !== homeDemoFrame.contentWindow || event.origin !== homeDemoOrigin) return;
+  const data = event.data;
+  if (!data || typeof data !== "object") return;
+
+  if (data.type === "dajoong-live2d-ready") {
+    setHomeDemoReady(Boolean(data.ready));
+    return;
+  }
+
+  if (data.type !== "dajoong-live2d-control-state") return;
+  const button = homeDemoButtons.find((item) => item.dataset.homeLive2dControl === data.id);
+  if (!button) return;
+
+  if (button.dataset.homeLive2dControl === "face-zoom") {
+    button.textContent = data.active ? button.dataset.resetLabel || "전체 보기" : button.dataset.defaultLabel || button.textContent;
+  }
+  button.classList.toggle("is-active", Boolean(data.active));
+});
+
+homeDemoButtons.forEach((button) => {
+  button.dataset.defaultLabel = button.textContent;
+  if (button.dataset.homeLive2dControl === "face-zoom") {
+    if (button.textContent === "Face Zoom") button.dataset.resetLabel = "Full View";
+    else if (button.textContent === "顔を拡大") button.dataset.resetLabel = "全体表示";
+    else button.dataset.resetLabel = "전체 보기";
+  }
+});
+
+
 const canvas = document.querySelector("#motion-field");
 const ctx = canvas?.getContext("2d");
 let width = 0;
