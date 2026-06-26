@@ -5,7 +5,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -14,7 +15,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -23,7 +25,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -32,7 +35,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/gallery/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/gallery/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/gallery/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/gallery/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -41,7 +45,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/gallery/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/gallery/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/gallery/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/gallery/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -50,7 +55,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/gallery/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/gallery/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/gallery/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/gallery/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -59,7 +65,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/guide/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/guide/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/guide/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -68,7 +75,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/guide/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/guide/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/guide/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -77,7 +85,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/guide/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/guide/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/guide/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -86,7 +95,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/compare/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/compare/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/compare/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/compare/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -95,7 +105,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/compare/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/compare/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/compare/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/compare/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -104,7 +115,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/compare/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/compare/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/compare/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/compare/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -113,7 +125,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/live/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/live/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/live/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/live/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -122,7 +135,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/live/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/live/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/live/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/live/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -131,7 +145,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/live/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/live/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/live/" />
-    <lastmod>2026-06-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/live/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -140,7 +155,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/contact/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/contact/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/contact/" />
-    <lastmod>2026-06-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/contact/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -149,7 +165,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/contact/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/contact/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/contact/" />
-    <lastmod>2026-06-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/contact/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -158,7 +175,8 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/contact/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/contact/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/contact/" />
-    <lastmod>2026-06-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/contact/" />
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
