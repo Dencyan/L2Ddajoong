@@ -91,6 +91,14 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://dajoong.cloud/guide/moc3-cmo3/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/guide/moc3-cmo3/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/guide/moc3-cmo3/" />
+    <lastmod>2026-07-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://dajoong.cloud/compare/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://dajoong.cloud/compare/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/compare/" />

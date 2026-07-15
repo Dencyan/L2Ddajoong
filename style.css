@@ -1327,6 +1327,8 @@ h1 {
 }
 
 .guide-tab {
+  display: flex;
+  align-items: center;
   min-height: 46px;
   padding: 0 14px;
   border: 0;
@@ -1337,6 +1339,7 @@ h1 {
   text-align: left;
   font-weight: 800;
   cursor: pointer;
+  text-decoration: none;
   transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease;
 }
 
