@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>moc3 vs cmo3 | Live2D Rigging Delivery Guide - Dajoong</title>
+  <meta name="description" content="Learn the difference between moc3 and cmo3 files before commissioning Live2D rigging, including cmo3 source-file policy, VTube Studio setup, and revision scope." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="moc3 vs cmo3 | Live2D Rigging Delivery Guide" />
+  <meta property="og:description" content="Learn the difference between moc3 and cmo3 files before commissioning Live2D rigging, including cmo3 source-file policy, VTube Studio setup, and revision scope." />
+  <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <meta property="og:url" content="https://dajoong.cloud/en/guide/moc3-cmo3/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="moc3 vs cmo3 | Live2D Rigging Delivery Guide" />
+  <meta name="twitter:description" content="Learn the difference between moc3 and cmo3 files before commissioning Live2D rigging, including cmo3 source-file policy, VTube Studio setup, and revision scope." />
+  <meta name="twitter:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
+  <link rel="canonical" href="https://dajoong.cloud/en/guide/moc3-cmo3/" />
+  <link rel="alternate" hreflang="ko" href="https://dajoong.cloud/guide/moc3-cmo3/" />
+  <link rel="alternate" hreflang="en" href="https://dajoong.cloud/en/guide/moc3-cmo3/" />
+  <link rel="alternate" hreflang="ja" href="https://dajoong.cloud/ja/guide/moc3-cmo3/" />
+  <link rel="alternate" hreflang="x-default" href="https://dajoong.cloud/en/guide/moc3-cmo3/" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://dajoong.cloud/#service",
+        "name": "Dajoong",
+        "url": "https://dajoong.cloud/",
+        "image": "https://dajoong.cloud/assets/og-thumbnail.jpg",
+        "description": "Live2D rigging portfolio and commission service for VTuber models, expressions, physics, and interactive model demos.",
+        "serviceType": [
+          "Live2D rigging",
+          "VTuber model rigging",
+          "Live2D commission"
+        ],
+        "areaServed": "Worldwide",
+        "sameAs": [
+          "https://x.com/_Dajoong",
+          "https://www.youtube.com/@Dajoong_L2d",
+          "https://artmug.kr/index.php?channel=view&uid=42826"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://dajoong.cloud/#website",
+        "name": "Dajoong",
+        "url": "https://dajoong.cloud/",
+        "inLanguage": [
+          "ko",
+          "en",
+          "ja"
+        ],
+        "publisher": {
+          "@id": "https://dajoong.cloud/#service"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://dajoong.cloud/en/guide/moc3-cmo3/#webpage",
+        "url": "https://dajoong.cloud/en/guide/moc3-cmo3/",
+        "name": "moc3 vs cmo3 | Live2D Rigging Delivery Guide",
+        "description": "Learn the difference between moc3 and cmo3 files before commissioning Live2D rigging, including cmo3 source-file policy, VTube Studio setup, and revision scope.",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@id": "https://dajoong.cloud/#website"
+        },
+        "about": {
+          "@id": "https://dajoong.cloud/#service"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://dajoong.cloud/en/guide/moc3-cmo3/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the difference between a moc3 file and a cmo3 file?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A .moc3 file can be applied in VTube Studio to run the model. A .cmo3 file is the editable source work file used to modify rigging directly in Live2D Cubism Editor."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the cmo3 source file included with a Dajoong rigging commission?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The .cmo3 source file is not included in the standard delivery scope and is not provided for general commissions. It contains editable source structure and rigging workflow details."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can a moc3 file be converted back into a cmo3 file?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For normal commission and usage purposes, a .moc3 file is not treated as something that can be restored into a .cmo3 source file for editing. If model changes are needed, please ask the rigger first."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use the model without a cmo3 file?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The .cmo3 file is needed for direct editing in Live2D, but it is not required to run the model."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can the delivered files be used in VTube Studio right away?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The delivered files are prepared so they can be applied and used in VTube Studio. Fine tracking settings may feel more natural after adjusting them to your own facial features and setup."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I edit the model myself after delivery?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Without the .cmo3 source file, the rigging cannot be directly edited in Live2D. Even if an editing method exists, unauthorized secondary modification is prohibited."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can the model be used outside VTube Studio?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Other Live2D-compatible programs may exist, but Dajoong's delivered files and setup are prepared based on VTube Studio use."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="../../../style.css?v=20260618" />
+</head>
+<body class="sub-page guide-page">
+  <header class="site-header">
+    <a class="brand" href="../../">
+      <span class="brand-mark">D</span>
+      <span>Dajoong</span>
+    </a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a href="../../">Home</a>
+      <a href="../../gallery/">Gallery</a>
+      <a href="../" aria-current="page">Guide</a>
+      <a href="../../compare/">Pricing</a>
+      <a href="../../live/">Demo</a>
+    </nav>
+    <a class="nav-action" href="../../contact/">Contact</a>
+  </header>
+
+  <main class="sub-main">
+    <section class="sub-hero guide-hero">
+      <p class="eyebrow">Delivery File Guide</p>
+      <h1>What is the difference between moc3 and cmo3 files?</h1>
+      <p>This page explains the delivery file scope and editability points that often come up before commissioning Live2D rigging.</p>
+    </section>
+
+    <section class="guide-layout" aria-label="moc3 and cmo3 file guide">
+      <aside class="guide-index">
+        <p class="eyebrow">Summary</p>
+        <a class="guide-tab is-active" href="#difference">File Difference</a>
+        <a class="guide-tab" href="#delivery">Delivery Scope</a>
+        <a class="guide-tab" href="#faq">Q&A</a>
+        <a class="guide-tab" href="../../contact/">Contact</a>
+      </aside>
+
+      <div class="guide-book">
+        <article class="guide-sheet is-active">
+          <div class="sheet-number">01</div>
+          <div>
+            <span class="sheet-label">Live2D Delivery Files</span>
+            <h2 id="difference">moc3 is for applying the model, cmo3 is the editable source file</h2>
+            <p>A Live2D model is usually used through a moc3-based file set in applications such as VTube Studio. A cmo3 file is closer to the source work file that can be opened and edited in Live2D Cubism Editor.</p>
+            <div class="guide-note-grid">
+              <article><strong>.moc3</strong><span>A file that can be applied in VTube Studio to run the model.</span></article>
+              <article><strong>.cmo3</strong><span>An editable source work file for modifying rigging in Live2D Cubism Editor.</span></article>
+              <article><strong>Runtime files</strong><span>Model files and configuration files needed for use are delivered according to the model structure and work scope.</span></article>
+              <article><strong>Source files</strong><span>Editable source files that contain the rigging workflow and structure are not included in standard delivery.</span></article>
+            </div>
+
+            <h2 id="delivery">Dajoong delivers model files prepared for VTube Studio use</h2>
+            <p>Dajoong's standard delivery is based on model files that can be applied in VTube Studio. Editable cmo3 source files are not included in the standard delivery scope and are not provided for general commissions. If rigging changes are needed, please request a revision separately.</p>
+            <div class="delivery-panel">
+              <div>
+                <strong>Standard Delivery</strong>
+                <span>Model files and configuration files needed for VTube Studio setup</span>
+              </div>
+              <div>
+                <strong>Not Included</strong>
+                <span>Editable .cmo3 source work file for Live2D Cubism Editor</span>
+              </div>
+              <div>
+                <strong>When Revisions Are Needed</strong>
+                <span>Rigging errors are checked and revised, while excessive requests or repeated reversals may incur additional fees.</span>
+              </div>
+            </div>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+            <div class="notice-accordion">
+              <button type="button" aria-expanded="true">Can a moc3 file be converted back into a cmo3 file?</button>
+              <p>For normal commission and usage purposes, a .moc3 file is not treated as something that can be restored into a .cmo3 source file for editing. If model changes are needed, please ask the rigger first.</p>
+              <button type="button" aria-expanded="true">What files are needed for VTube Studio?</button>
+              <p>The delivered files are prepared so they can be applied and used in VTube Studio. Fine tracking settings may feel more natural after adjusting them to your own facial features and setup.</p>
+              <button type="button" aria-expanded="true">Can I use the model without a cmo3 file?</button>
+              <p>Yes. The .cmo3 file is needed for direct editing in Live2D, but it is not required to run the model.</p>
+              <button type="button" aria-expanded="true">Can I edit the model myself after delivery?</button>
+              <p>Without the .cmo3 source file, the rigging cannot be directly edited in Live2D. Even if an editing method exists, unauthorized secondary modification is prohibited.</p>
+              <button type="button" aria-expanded="true">Can the model be used outside VTube Studio?</button>
+              <p>Other Live2D-compatible programs may exist, but Dajoong's delivered files and setup are prepared based on VTube Studio use.</p>
+            </div>
+
+            <a class="primary-action guide-cta" href="../../contact/">Ask About Live2D Rigging</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="../../../estimate-widget.js"></script>
+  <script src="/language-switch.js"></script>
+</body>
+</html>

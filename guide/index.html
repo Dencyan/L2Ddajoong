@@ -70,6 +70,76 @@
         "about": {
           "@id": "https://dajoong.cloud/#service"
         }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://dajoong.cloud/guide/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Live2D 리깅 의뢰 전에 PSD는 어느 정도까지 분리되어 있어야 하나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "기본적인 얼굴, 이목구비, 머리카락, 바디 파츠가 분리되어 있어야 합니다. 얼굴은 면, 선, 그림자 등이 나뉘어 있어야 하고 눈, 코, 입, 눈썹 등 주요 이목구비도 리깅이 가능하도록 분리되어 있어야 합니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "PSD 파츠 분리가 부족하면 작업이 불가능한가요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "분리 상태에 따라 달라집니다. 대부분 준비되어 있고 최소한의 추가 분리만 필요한 경우에는 추가 비용으로 진행할 수 있지만, 대부분 분리되어 있지 않은 경우에는 작업이 어렵습니다. 파츠 추가 분리가 필요한 경우 일러스트 작가님의 허가가 필요합니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Live2D 리깅 작업 기간은 어느 정도인가요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "LD 모델은 보통 2~4주, SD 모델은 보통 1~2주 정도로 안내합니다. 모델 디자인, 추가 표정, 의상, 헤어 등 작업 범위에 따라 기간은 연장될 수 있습니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "기본 컨펌과 수정은 몇 회 포함되나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "작업 기간 중 2회의 컨펌에서 각 1회씩 수정이 진행되며, 마지막 모델 파일 전달 후 최종 리깅 오류 확인을 위한 컨펌 1회가 포함됩니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "참고자료를 보내도 되나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "참고자료를 보낼 수 있습니다. 다만 참고자료는 방향을 확인하기 위한 자료이며, 캐릭터마다 어울리는 움직임과 물리가 다르기 때문에 동일하게 작업되지는 않습니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "견적 문의할 때 무엇을 첨부해야 하나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "정확한 견적을 위해서는 PSD 파일 첨부가 필요합니다. 전신 일러스트만으로도 임시 견적은 가능하지만, 상세 견적은 PSD 확인 후 안내됩니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "작업물이 포트폴리오나 SNS에 공개될 수 있나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "완성된 모델과 작업 과정은 포트폴리오, SNS, YouTube 등에 업로드될 수 있습니다. 데뷔 전 비공개가 필요한 경우 2개월까지 무료 비공개가 가능하며, 이후에는 추가금이 발생할 수 있습니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "모델 데이터의 재판매, 양도, 공유가 가능한가요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "모델 데이터의 재판매, 양도, 공유, 자작 발언은 금지됩니다. 방송이나 YouTube 등에서는 사용할 수 있으며, 굿즈 사용은 일러스트 작가님의 허가가 필요합니다."
+            }
+          }
+        ]
       }
     ]
   }
@@ -107,6 +177,7 @@
         <button class="guide-tab" type="button" data-guide-page="review">컨펌과 수정</button>
         <button class="guide-tab" type="button" data-guide-page="rights">공개와 저작권</button>
         <button class="guide-tab" type="button" data-guide-page="delivery">납품 안내</button>
+        <button class="guide-tab" type="button" data-guide-page="faq">Q&A</button>
       </aside>
 
       <div class="guide-book">
@@ -185,14 +256,14 @@
           <div>
             <span class="sheet-label">Delivery</span>
             <h2>납품 파일과 문의 채널</h2>
-            <p>작업 완료 후 전달되는 파일은 아이콘 이미지를 포함한 .moc3 파일입니다. 수정 가능한 .cmo3 원본 파일은 제공하지 않습니다.</p>
+            <p>작업 완료 후에는 VTube Studio 적용에 필요한 모델 파일과 구성 파일을 전달합니다. 수정 가능한 .cmo3 원본 파일은 기본 납품 범위에 포함되지 않으며, 일반 의뢰에서는 제공하지 않습니다.</p>
             <div class="delivery-panel">
               <div>
                 <strong>전달 파일</strong>
-                <span>.moc3 파일과 적용에 필요한 구성 파일</span>
+                <span>VTube Studio 적용에 필요한 모델 파일과 구성 파일</span>
               </div>
               <div>
-                <strong>제공하지 않는 파일</strong>
+                <strong>기본 납품 제외</strong>
                 <span>수정 가능한 .cmo3 원본 파일</span>
               </div>
               <div>
@@ -202,6 +273,34 @@
             </div>
             <a class="secondary-action guide-cta" href="./moc3-cmo3/">moc3와 cmo3 차이 자세히 보기</a>
             <a class="primary-action guide-cta" href="../contact/">비공개 문의 폼 작성하기</a>
+          </div>
+        </article>
+
+        <article class="guide-sheet" data-guide-sheet="faq">
+          <div class="sheet-number">06</div>
+          <div>
+            <span class="sheet-label">Commission Q&A</span>
+            <h2>의뢰 전 자주 묻는 질문</h2>
+            <p>리깅 작업 전에 자주 헷갈리는 준비물, 일정, 수정, 공개 범위를 정리했습니다. 가격이나 고급 옵션처럼 모델마다 크게 달라지는 항목은 문의 시 PSD 확인 후 안내됩니다.</p>
+            <div class="notice-accordion">
+              <button type="button" aria-expanded="true">PSD는 어느 정도까지 파츠 분리되어 있어야 하나요?</button>
+              <p>기본적인 얼굴, 이목구비, 머리카락, 바디 파츠가 분리되어 있어야 합니다. 얼굴은 면, 선, 그림자 등이 나뉘어 있어야 하고, 눈, 코, 입, 눈썹 등 주요 이목구비도 리깅이 가능하도록 분리되어 있어야 합니다.</p>
+              <button type="button" aria-expanded="true">파츠 분리가 부족하면 작업이 불가능한가요?</button>
+              <p>분리 상태에 따라 달라집니다. 대부분 준비되어 있고 최소한의 추가 분리만 필요한 경우에는 추가 비용으로 진행할 수 있지만, 대부분 분리되어 있지 않은 경우에는 작업이 어렵습니다. 파츠 추가 분리가 필요한 경우 일러스트 작가님의 허가가 필요합니다.</p>
+              <button type="button" aria-expanded="true">작업 기간은 어느 정도인가요?</button>
+              <p>LD 모델은 보통 2~4주, SD 모델은 보통 1~2주 정도로 안내합니다. 모델 디자인, 추가 표정, 의상, 헤어 등 작업 범위에 따라 기간은 연장될 수 있습니다.</p>
+              <button type="button" aria-expanded="true">컨펌과 수정은 몇 회 포함되나요?</button>
+              <p>작업 기간 중 2회의 컨펌에서 각 1회씩 수정이 진행되며, 마지막 모델 파일 전달 후 최종 리깅 오류 확인을 위한 컨펌 1회가 포함됩니다. 과도한 수정 요청이나 수정 후 번복은 추가금이 생길 수 있습니다.</p>
+              <button type="button" aria-expanded="true">참고자료를 보내도 되나요?</button>
+              <p>참고자료를 보낼 수 있습니다. 다만 참고자료는 방향을 확인하기 위한 자료이며, 캐릭터마다 어울리는 움직임과 물리가 다르기 때문에 동일하게 작업되지는 않습니다.</p>
+              <button type="button" aria-expanded="true">견적 문의할 때 무엇을 첨부해야 하나요?</button>
+              <p>정확한 견적을 위해서는 PSD 파일 첨부가 필요합니다. 전신 일러스트만으로도 임시 견적은 가능하지만, 상세 견적은 PSD 확인 후 안내됩니다.</p>
+              <button type="button" aria-expanded="true">작업물이 포트폴리오나 SNS에 공개될 수 있나요?</button>
+              <p>완성된 모델과 작업 과정은 포트폴리오, SNS, YouTube 등에 업로드될 수 있습니다. 데뷔 전 비공개가 필요한 경우 2개월까지 무료 비공개가 가능하며, 이후에는 추가금이 발생할 수 있습니다.</p>
+              <button type="button" aria-expanded="true">모델 데이터의 재판매, 양도, 공유가 가능한가요?</button>
+              <p>모델 데이터의 재판매, 양도, 공유, 자작 발언은 금지됩니다. 방송이나 YouTube 등에서는 사용할 수 있으며, 굿즈 사용은 일러스트 작가님의 허가가 필요합니다.</p>
+            </div>
+            <a class="primary-action guide-cta" href="../contact/">PSD와 함께 견적 문의하기</a>
           </div>
         </article>
       </div>
