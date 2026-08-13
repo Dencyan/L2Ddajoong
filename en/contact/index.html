@@ -74,7 +74,7 @@
     ]
   }
   </script>
-<link rel="stylesheet" href="../../style.css?v=20260620" />
+<link rel="stylesheet" href="../../style.css?v=20260813" />
 </head>
 <body class="sub-page contact-page">
   <header class="site-header">
@@ -101,7 +101,7 @@
         <div class="alternate-contact"><span>Other contact channels</span><a href="https://artmug.kr/index.php?channel=view&amp;uid=42826" target="_blank" rel="noopener noreferrer">ArtMug</a><a href="https://x.com/_Dajoong" target="_blank" rel="noopener noreferrer">X</a></div>
       </aside>
 
-      <form class="commission-form" action="https://formspree.io/f/mnjyenla" method="POST" data-contact-form data-success="Your inquiry has been sent. You will receive a reply by email after it is reviewed." data-error="The message could not be sent. Please try again shortly or use another contact channel.">
+      <form class="commission-form" action="https://formspree.io/f/mnjyenla" method="POST" data-contact-form data-success="Your inquiry has been sent. You will receive a reply by email after it is reviewed." data-error="The message could not be sent. Please try again shortly or use another contact channel." data-captcha-required="Please wait for the spam protection check to finish." data-captcha-expired="The spam protection check expired. Please verify again before sending." data-captcha-error="The spam protection check could not be completed. Refresh the page and try again.">
         <input type="hidden" name="_subject" value="[Dajoong] New commission inquiry (EN)" />
         <input type="hidden" name="language" value="English" />
         <div class="form-row">
@@ -121,12 +121,17 @@
         <label>Project details <span aria-hidden="true">*</span><textarea name="message" rows="8" minlength="20" required placeholder="Describe your character, requested movement and options, intended use, and schedule."></textarea></label>
         <label class="consent-field"><input type="checkbox" name="privacy_consent" value="Agreed" required /><span>I agree to send this information through Formspree so Dajoong can reply. <strong>*</strong></span></label>
         <label class="form-honeypot" aria-hidden="true">Leave this empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+        <div class="turnstile-field" data-turnstile-field hidden>
+          <div class="turnstile-widget" data-turnstile-widget></div>
+          <p>This form is protected by Cloudflare Turnstile automated spam prevention.</p>
+        </div>
         <button class="primary-action form-submit" type="submit">Send Private Inquiry</button>
-        <p class="form-status" data-form-status aria-live="polite"></p>
+        <p class="form-status" data-form-status aria-live="polite" tabindex="-1"></p>
       </form>
     </section>
   </main>
-  <script src="../../contact.js"></script>
+  <script src="../../turnstile-config.js?v=20260813"></script>
+  <script src="../../contact.js?v=20260813"></script>
   <script src="/language-switch.js"></script>
 </body>
 </html>

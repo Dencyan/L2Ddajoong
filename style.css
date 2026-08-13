@@ -2607,6 +2607,7 @@ h1 {
 
 .inquiry-guide,
 .commission-form {
+  min-width: 0;
   border: 1px solid var(--line);
   border-radius: 18px;
   background: rgba(255, 255, 255, .74);
@@ -2774,6 +2775,31 @@ h1 {
   overflow: hidden !important;
 }
 
+.turnstile-field[hidden] {
+  display: none;
+}
+
+.turnstile-field {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid rgba(86, 96, 150, .14);
+  border-radius: 12px;
+  background: rgba(238, 241, 255, .5);
+}
+
+.turnstile-widget {
+  width: 100%;
+  min-height: 65px;
+}
+
+.turnstile-field p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
 .form-submit {
   width: 100%;
   min-height: 52px;
@@ -2781,8 +2807,12 @@ h1 {
 }
 
 .form-submit:disabled {
-  cursor: wait;
+  cursor: not-allowed;
   opacity: .62;
+}
+
+.commission-form.is-sending .form-submit:disabled {
+  cursor: wait;
 }
 
 .form-status {

@@ -74,7 +74,7 @@
     ]
   }
   </script>
-<link rel="stylesheet" href="../../style.css?v=20260620" />
+<link rel="stylesheet" href="../../style.css?v=20260813" />
 </head>
 <body class="sub-page contact-page">
   <header class="site-header">
@@ -101,7 +101,7 @@
         <div class="alternate-contact"><span>その他のお問い合わせ先</span><a href="https://artmug.kr/index.php?channel=view&amp;uid=42826" target="_blank" rel="noopener noreferrer">ArtMug</a><a href="https://x.com/_Dajoong" target="_blank" rel="noopener noreferrer">X</a></div>
       </aside>
 
-      <form class="commission-form" action="https://formspree.io/f/mnjyenla" method="POST" data-contact-form data-success="お問い合わせを送信しました。確認後、メールでご返信します。" data-error="送信できませんでした。しばらくしてから再度お試しいただくか、別のお問い合わせ先をご利用ください。">
+      <form class="commission-form" action="https://formspree.io/f/mnjyenla" method="POST" data-contact-form data-success="お問い合わせを送信しました。確認後、メールでご返信します。" data-error="送信できませんでした。しばらくしてから再度お試しいただくか、別のお問い合わせ先をご利用ください。" data-captcha-required="スパム防止の確認が完了するまで、しばらくお待ちください。" data-captcha-expired="スパム防止の確認期限が切れました。もう一度確認してから送信してください。" data-captcha-error="スパム防止の確認を完了できませんでした。ページを再読み込みしてもう一度お試しください。">
         <input type="hidden" name="_subject" value="[Dajoong] 新規ご依頼・お問い合わせ (JA)" />
         <input type="hidden" name="language" value="Japanese" />
         <div class="form-row">
@@ -121,12 +121,17 @@
         <label>お問い合わせ内容 <span aria-hidden="true">*</span><textarea name="message" rows="8" minlength="20" required placeholder="キャラクター、必要な動きやオプション、使用目的、スケジュールなどを詳しくお知らせください。"></textarea></label>
         <label class="consent-field"><input type="checkbox" name="privacy_consent" value="Agreed" required /><span>返信のため、入力内容をFormspree経由で送信することに同意します。 <strong>*</strong></span></label>
         <label class="form-honeypot" aria-hidden="true">空欄のままにしてください<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+        <div class="turnstile-field" data-turnstile-field hidden>
+          <div class="turnstile-widget" data-turnstile-widget></div>
+          <p>このフォームはCloudflare Turnstileの自動スパム防止機能で保護されています。</p>
+        </div>
         <button class="primary-action form-submit" type="submit">非公開で問い合わせる</button>
-        <p class="form-status" data-form-status aria-live="polite"></p>
+        <p class="form-status" data-form-status aria-live="polite" tabindex="-1"></p>
       </form>
     </section>
   </main>
-  <script src="../../contact.js"></script>
+  <script src="../../turnstile-config.js?v=20260813"></script>
+  <script src="../../contact.js?v=20260813"></script>
   <script src="/language-switch.js"></script>
 </body>
 </html>
