@@ -40,7 +40,9 @@
   const dialog = document.createElement('dialog');
   dialog.className = 'event-dialog';
   dialog.setAttribute('aria-labelledby', 'event-title');
-  dialog.innerHTML = `<button type="button" class="event-close" aria-label="${copy.close}">×</button><p class="event-badge">${copy.badge}</p><h2 id="event-title">${copy.title}</h2><p>${copy.detail}</p><p class="event-terms">${copy.terms}</p><a class="event-cta" href="${inquiryUrl}">${copy.cta}</a>`;
+  const visualCopy = { ko: ['의뢰 총액 할인', '원', '문의로 시작하는 새로운 움직임'], en: ['OFF YOUR COMMISSION', 'KRW', 'Your next creation starts here'], ja: ['ご依頼総額から割引', 'ウォン', '新しい動きは、ご相談から'] }[locale];
+  dialog.setAttribute('aria-describedby', 'event-detail');
+  dialog.innerHTML = `<button type="button" class="event-close" aria-label="${copy.close}">×</button><div class="event-layout"><div class="event-visual"><span class="event-wordmark">DAJOONG <span>LIVE2D</span></span><div class="event-offer"><p>${visualCopy[0]}</p><div class="event-amount">50,000<span>${visualCopy[1]}</span></div><span class="event-offer-line" aria-hidden="true"></span><p class="event-caption">${visualCopy[2]}</p></div><span class="event-decoration" aria-hidden="true">✳</span></div><div class="event-content"><p class="event-badge">${copy.badge}</p><h2 id="event-title">${copy.title}</h2><p id="event-detail">${copy.detail}</p><p class="event-terms">${copy.terms}</p><a class="event-cta" href="${inquiryUrl}"><span>${copy.cta}</span><span aria-hidden="true">↗</span></a></div></div>`;
   document.body.append(dialog);
   const trigger = document.createElement('button');
   trigger.type = 'button';
