@@ -40,9 +40,26 @@
   const dialog = document.createElement('dialog');
   dialog.className = 'event-dialog';
   dialog.setAttribute('aria-labelledby', 'event-title');
-  const visualCopy = { ko: ['의뢰 총액 할인', '원', '문의로 시작하는 새로운 움직임'], en: ['OFF YOUR COMMISSION', 'KRW', 'Your next creation starts here'], ja: ['ご依頼総額から割引', 'ウォン', '新しい動きは、ご相談から'] }[locale];
+  const poster = {
+    ko: { title: 'Live2D 커미션', subtitle: '문의 할인 이벤트', unit: '원', discount: '의뢰 총액 할인', today: '오늘 하루 열지 않기', storageError: '숨김 설정을 저장할 수 없습니다. 브라우저의 사이트 저장 설정을 확인해 주세요.' },
+    en: { title: 'Live2D commission', subtitle: 'An offer for your inquiry', unit: 'KRW', discount: 'OFF YOUR COMMISSION TOTAL', today: "Don’t show again today", storageError: 'Your preference could not be saved. Please check your browser’s site storage settings.' },
+    ja: { title: 'Live2Dコミッション', subtitle: 'お問い合わせキャンペーン', unit: 'ウォン', discount: 'ご依頼総額から割引', today: '今日は表示しない', storageError: '設定を保存できませんでした。ブラウザのサイト保存設定をご確認ください。' }
+  }[locale];
   dialog.setAttribute('aria-describedby', 'event-detail');
-  dialog.innerHTML = `<button type="button" class="event-close" aria-label="${copy.close}">×</button><div class="event-layout"><div class="event-visual"><span class="event-wordmark">DAJOONG <span>LIVE2D</span></span><div class="event-offer"><p>${visualCopy[0]}</p><div class="event-amount">50,000<span>${visualCopy[1]}</span></div><span class="event-offer-line" aria-hidden="true"></span><p class="event-caption">${visualCopy[2]}</p></div><span class="event-decoration" aria-hidden="true">✳</span></div><div class="event-content"><p class="event-badge">${copy.badge}</p><h2 id="event-title">${copy.title}</h2><p id="event-detail">${copy.detail}</p><p class="event-terms">${copy.terms}</p><a class="event-cta" href="${inquiryUrl}"><span>${copy.cta}</span><span aria-hidden="true">↗</span></a></div></div>`;
+  dialog.innerHTML = `<div class="event-poster"><div class="event-masthead"><span>DAJOONG</span><span>LIVE2D / COMMISSION</span></div><h2 id="event-title">${poster.title}<span>${poster.subtitle}</span></h2><div class="event-coupon"><p>${poster.discount}</p><div class="event-amount">50,000<span>${poster.unit}</span></div><div class="event-coupon-foot"><span>INQUIRY OFFER</span><span>DAJOONG</span></div></div><p id="event-detail">${copy.detail}</p><a class="event-cta" href="${inquiryUrl}">${copy.cta}<span aria-hidden="true">→</span></a><p class="event-terms">${copy.terms}</p><p class="event-storage-error" role="status" hidden>${poster.storageError}</p></div><div class="event-controls"><button type="button" class="event-hide-today">${poster.today}</button><button type="button" class="event-close">${copy.close}<span aria-hidden="true">×</span></button></div>`;
+  // DAJOONG_POPUP_EVENT: only this preference suppresses automatic display.
+  // Midnight is evaluated in Korea time, and the preference is shared across tabs/locales.
+  const hideKey = id + ':hidden-until';
+  const nextKoreaMidnight = () => {
+    const korea = new Date(Date.now() + 9 * 60 * 60 * 1000);
+    return Date.UTC(korea.getUTCFullYear(), korea.getUTCMonth(), korea.getUTCDate() + 1) - 9 * 60 * 60 * 1000;
+  };
+  const hiddenToday = () => {
+    try {
+      const until = Number(localStorage.getItem(hideKey));
+      return Number.isFinite(until) && Date.now() < until && until <= nextKoreaMidnight();
+    } catch { return false; }
+  };
   document.body.append(dialog);
   const trigger = document.createElement('button');
   trigger.type = 'button';
@@ -54,13 +71,21 @@
   function open() {
     if (dialog.open) return;
     returnFocus = document.activeElement;
+    dialog.querySelector('.event-storage-error').hidden = true;
     dialog.showModal();
     document.body.classList.add('event-is-open');
   }
   dialog.querySelector('.event-close').addEventListener('click', () => dialog.close());
+  dialog.querySelector('.event-hide-today').addEventListener('click', () => {
+    try {
+      localStorage.setItem(hideKey, String(nextKoreaMidnight()));
+      dialog.close();
+    } catch {
+      dialog.querySelector('.event-storage-error').hidden = false;
+    }
+  });
   dialog.querySelector('a').addEventListener('click', () => write(id + ':claimed', '1'));
   dialog.addEventListener('close', () => {
-    write(id + ':dismissed', '1');
     document.body.classList.remove('event-is-open');
     if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true });
   });
@@ -100,6 +125,8 @@
     }
   }
   window.DajoongEvent = { id, amount, claimed, inquiryUrl, copy, open };
-  if (!form && !claimed && !read(id + ':dismissed')) open();
+  // The inquiry CTA lands directly on the form without another interruption.
+  // Closing or claiming an offer does not suppress future visits/reloads.
+  if (!hiddenToday() && !(form && requested)) open();
   // === DAJOONG_POPUP_EVENT END ===
 })();
