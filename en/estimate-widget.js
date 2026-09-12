@@ -112,7 +112,7 @@ function createEstimateWidget() {
           <label class="estimate-check">
             <input type="checkbox" name="option" value="${item.id}" />
             <span>${item.label}<small>${item.priceText || `${item.price.toLocaleString("en-US")} KRW`}</small></span>
-            ${item.count ? `<input class="estimate-count" type="number" min="1" max="20" value="1" aria-label="${item.label} quantity" disabled />` : ""}
+            ${item.count ? `<input class="estimate-count" type="number" min="1" max="20" step="1" value="1" aria-label="${item.label} quantity" disabled />` : ""}
           </label>
         `).join("")}
       </div>
@@ -140,6 +140,8 @@ function createEstimateWidget() {
 }
 
 function mountEstimateWidget() {
+  const promotion = window.DajoongEvent;
+  if (promotion) estimateData.discounts.push({ id: promotion.id, label: promotion.copy.option, price: -promotion.amount });
   const widget = createEstimateWidget();
   const toggle = widget.querySelector(".estimate-toggle");
   const panel = widget.querySelector(".estimate-panel");
@@ -148,16 +150,25 @@ function mountEstimateWidget() {
   const totalEl = widget.querySelector("[data-estimate-total]");
   const noteEl = widget.querySelector("[data-estimate-note]");
 
+  if (promotion?.claimed) form.querySelector('[name="discount"]').value = promotion.id;
+
   function setOpen(open) {
     widget.classList.toggle("is-open", open);
     toggle.setAttribute("aria-expanded", String(open));
     panel.setAttribute("aria-hidden", String(!open));
+    panel.inert = !open;
+    if (open) close.focus();
+    else toggle.focus();
   }
 
   function calculate() {
     const formData = new FormData(form);
     const base = estimateData.base.find((item) => item.id === formData.get("base"));
-    const discount = estimateData.discounts.find((item) => item.id === formData.get("discount"));
+    const discountSelect = form.querySelector('[name="discount"]');
+    const isLD = /^(basic|premium)-/.test(base?.id || "");
+    discountSelect.querySelector('[value="collab"]').disabled = !isLD;
+    if (!isLD && discountSelect.value === "collab") discountSelect.value = "";
+    const discount = estimateData.discounts.find((item) => item.id === discountSelect.value);
     let total = base?.price || 0;
     let hasApprox = false;
 
@@ -170,22 +181,41 @@ function mountEstimateWidget() {
       if (countInput) countInput.disabled = !checkbox.checked;
       if (!checkbox.checked || !option) return;
 
-      const count = countInput ? Math.max(1, Number(countInput.value || 1)) : 1;
+      const parsed = countInput ? Number.parseInt(countInput.value, 10) : 1;
+      const count = Math.min(20, Math.max(1, Number.isFinite(parsed) ? parsed : 1));
+      // Normalize on blur so typing a two-digit quantity remains possible.
+      if (countInput && document.activeElement !== countInput) countInput.value = String(count);
       total += option.price * count;
       if (option.approximate) hasApprox = true;
     });
 
-    total += discount?.price || 0;
+    if (base?.id) total += discount?.price || 0;
+    const eventSelected = promotion && discount?.id === promotion.id;
+    widget.querySelector('.estimate-submit').href = eventSelected ? promotion.inquiryUrl : "/en/contact/?discount=" + (discount?.id || "none");
     totalEl.textContent = formatWon(total);
     noteEl.textContent = !base?.id
       ? "Please select a base rigging plan."
-      : hasApprox
+      : eventSelected
+        ? promotion.copy.note
+        : hasApprox
         ? "Some options use starting prices. The final amount is confirmed after consultation."
         : "The final price depends on the file structure and consultation.";
   }
 
   toggle.addEventListener("click", () => setOpen(!widget.classList.contains("is-open")));
   close.addEventListener("click", () => setOpen(false));
+  document.querySelectorAll('[data-open-estimate]').forEach(button => {
+    button.addEventListener('click', () => setOpen(true));
+  });
+  panel.inert = true;
+  form.addEventListener("submit", (event) => event.preventDefault());
+  form.addEventListener("focusout", calculate);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && widget.classList.contains("is-open")) {
+      event.preventDefault();
+      setOpen(false);
+    }
+  });
   form.addEventListener("input", calculate);
   form.addEventListener("change", calculate);
   calculate();

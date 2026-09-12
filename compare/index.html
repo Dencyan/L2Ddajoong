@@ -100,10 +100,10 @@
     </section>
 
     <section class="compare-plans" aria-label="플랜 비교">
-      <article class="compare-plan">
+      <article id="basic" class="compare-plan">
         <span>Basic LD</span>
         <h2>베이직 리깅</h2>
-        <strong>전신 450,000원~</strong>
+        <strong data-event-base-price="450000" data-event-starting="true">전신 450,000원~</strong>
         <p>자연스러운 XYZ 움직임과 안정적인 기본 물리를 원하는 경우.</p>
         <ul>
           <li>얼굴/몸 XYZ 움직임</li>
@@ -112,10 +112,10 @@
           <li>최대 3단계 물리 지원</li>
         </ul>
       </article>
-      <article class="compare-plan is-featured">
+      <article id="premium" class="compare-plan is-featured">
         <span>Premium LD</span>
         <h2>프리미엄 리깅</h2>
-        <strong>전신 780,000원~</strong>
+        <strong data-event-base-price="780000" data-event-starting="true">전신 780,000원~</strong>
         <p>풍부한 표정, 눈 물리, 더 세밀한 입 구조가 필요한 경우.</p>
         <ul>
           <li>얼굴/몸 XYZ 움직임</li>
@@ -124,10 +124,10 @@
           <li>최소 3단계 물리 지원</li>
         </ul>
       </article>
-      <article class="compare-plan">
+      <article id="sd" class="compare-plan">
         <span>SD</span>
         <h2>SD 리깅</h2>
-        <strong>전신 230,000원~</strong>
+        <strong data-event-base-price="230000" data-event-starting="true">전신 230,000원~</strong>
         <p>작고 귀여운 모델을 가볍고 빠르게 움직이고 싶은 경우.</p>
         <ul>
           <li>자연스러운 XYZ 움직임</li>
@@ -136,10 +136,10 @@
           <li>예상 작업 기간 7일~14일</li>
         </ul>
       </article>
-      <article class="compare-plan">
+      <article id="animation" class="compare-plan">
         <span>Animation</span>
         <h2>배경 / 월페이퍼</h2>
-        <strong>기본 150,000원~</strong>
+        <strong data-event-base-price="150000" data-event-starting="true">기본 150,000원~</strong>
         <p>루프형 배경, 월페이퍼, 짧은 애니메이션이 필요한 경우.</p>
         <ul>
           <li>자연스러운 루프 애니메이션</li>
@@ -161,12 +161,12 @@
           <span>Base Rigging</span>
           <h3>기본 리깅</h3>
           <dl>
-            <div><dt>동물 / 오너캐릭터</dt><dd>150,000원</dd></div>
-            <div><dt>SD 전신</dt><dd>230,000원</dd></div>
-            <div><dt>베이직 LD 반신</dt><dd>350,000원</dd></div>
-            <div><dt>베이직 LD 전신</dt><dd>450,000원</dd></div>
-            <div><dt>프리미엄 LD 반신</dt><dd>670,000원</dd></div>
-            <div><dt>프리미엄 LD 전신</dt><dd>780,000원</dd></div>
+            <div><dt>동물 / 오너캐릭터</dt><dd data-event-base-price="150000">150,000원</dd></div>
+            <div><dt>SD 전신</dt><dd data-event-base-price="230000">230,000원</dd></div>
+            <div><dt>베이직 LD 반신</dt><dd data-event-base-price="350000">350,000원</dd></div>
+            <div><dt>베이직 LD 전신</dt><dd data-event-base-price="450000">450,000원</dd></div>
+            <div><dt>프리미엄 LD 반신</dt><dd data-event-base-price="670000">670,000원</dd></div>
+            <div><dt>프리미엄 LD 전신</dt><dd data-event-base-price="780000">780,000원</dd></div>
           </dl>
         </article>
         <article>
@@ -259,6 +259,9 @@
       </div>
     </section>
   </main>
+  <!-- DAJOONG_POPUP_EVENT START: 종료 설정은 event-promotion.js의 EVENT_CONFIG -->
+  <script src="/event-promotion.js"></script>
+  <!-- DAJOONG_POPUP_EVENT END -->
 
   <script src="./compare.js"></script>
   <script src="../estimate-widget.js"></script>

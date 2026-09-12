@@ -100,10 +100,10 @@
     </section>
 
     <section class="compare-plans" aria-label="プラン比較">
-      <article class="compare-plan">
+      <article id="basic" class="compare-plan">
         <span>Basic LD</span>
         <h2>ベーシックリギング</h2>
-        <strong>全身 450,000ウォン～</strong>
+        <strong data-event-base-price="450000" data-event-starting="true">全身 450,000ウォン～</strong>
         <p>自然なXYZの動きと安定した基本物理を求める場合。</p>
         <ul>
           <li>顔・体のXYZ動作</li>
@@ -112,10 +112,10 @@
           <li>最大3段階の物理演算</li>
         </ul>
       </article>
-      <article class="compare-plan is-featured">
+      <article id="premium" class="compare-plan is-featured">
         <span>Premium LD</span>
         <h2>プレミアムリギング</h2>
-        <strong>全身 780,000ウォン～</strong>
+        <strong data-event-base-price="780000" data-event-starting="true">全身 780,000ウォン～</strong>
         <p>豊かな表情、目の物理演算、より細かな口の構造が必要な場合。</p>
         <ul>
           <li>顔・体のXYZ動作</li>
@@ -124,10 +124,10 @@
           <li>3段階以上の物理演算</li>
         </ul>
       </article>
-      <article class="compare-plan">
+      <article id="sd" class="compare-plan">
         <span>SD</span>
         <h2>SDリギング</h2>
-        <strong>全身 230,000ウォン～</strong>
+        <strong data-event-base-price="230000" data-event-starting="true">全身 230,000ウォン～</strong>
         <p>小さく可愛いモデルを軽快に動かしたい場合。</p>
         <ul>
           <li>自然なXYZの動き</li>
@@ -136,10 +136,10 @@
           <li>制作期間の目安 7～14日</li>
         </ul>
       </article>
-      <article class="compare-plan">
+      <article id="animation" class="compare-plan">
         <span>Animation</span>
         <h2>背景・壁紙</h2>
-        <strong>基本 150,000ウォン～</strong>
+        <strong data-event-base-price="150000" data-event-starting="true">基本 150,000ウォン～</strong>
         <p>ループ背景、壁紙、短いアニメーションが必要な場合。</p>
         <ul>
           <li>自然なループアニメーション</li>
@@ -161,12 +161,12 @@
           <span>Base Rigging</span>
           <h3>基本リギング</h3>
           <dl>
-            <div><dt>動物・オリジナルキャラクター</dt><dd>150,000ウォン</dd></div>
-            <div><dt>SD全身</dt><dd>230,000ウォン</dd></div>
-            <div><dt>ベーシックLD半身</dt><dd>350,000ウォン</dd></div>
-            <div><dt>ベーシックLD全身</dt><dd>450,000ウォン</dd></div>
-            <div><dt>プレミアムLD半身</dt><dd>670,000ウォン</dd></div>
-            <div><dt>プレミアムLD全身</dt><dd>780,000ウォン</dd></div>
+            <div><dt>動物・オリジナルキャラクター</dt><dd data-event-base-price="150000">150,000ウォン</dd></div>
+            <div><dt>SD全身</dt><dd data-event-base-price="230000">230,000ウォン</dd></div>
+            <div><dt>ベーシックLD半身</dt><dd data-event-base-price="350000">350,000ウォン</dd></div>
+            <div><dt>ベーシックLD全身</dt><dd data-event-base-price="450000">450,000ウォン</dd></div>
+            <div><dt>プレミアムLD半身</dt><dd data-event-base-price="670000">670,000ウォン</dd></div>
+            <div><dt>プレミアムLD全身</dt><dd data-event-base-price="780000">780,000ウォン</dd></div>
           </dl>
         </article>
         <article>
@@ -259,6 +259,9 @@
       </div>
     </section>
   </main>
+  <!-- DAJOONG_POPUP_EVENT START: 종료 설정은 event-promotion.js의 EVENT_CONFIG -->
+  <script src="/event-promotion.js"></script>
+  <!-- DAJOONG_POPUP_EVENT END -->
 
   <script src="./compare.js"></script>
   <script src="../estimate-widget.js"></script>
