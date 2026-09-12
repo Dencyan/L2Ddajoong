@@ -14,7 +14,7 @@
   const amount = 50000;
   const locale = document.documentElement.lang.startsWith('ja') ? 'ja' : document.documentElement.lang.startsWith('en') ? 'en' : 'ko';
   const copy = {
-    ko: { title: '팝업으로 문의하고 5만 원 할인받으세요', badge: '문의 할인 이벤트', detail: '이 팝업의 문의 버튼으로 접수하면 의뢰 총액에서 50,000원을 할인해 드립니다.', terms: '의뢰 1건당 1회 적용 · 기존 할인과 중복 불가 · 종료일 없음. 추가 옵션마다 각각 할인되는 이벤트는 아닙니다.', cta: '5만 원 할인받고 문의하기', close: '닫기', open: '5만 원 할인 이벤트', applied: '팝업 문의 50,000원 할인이 선택되었습니다.', price: '팝업 문의 시', option: '팝업 문의 이벤트 (50,000원 할인)', note: '팝업 문의 이벤트가 적용됩니다. 다른 할인과 중복되지 않으며 최종 금액은 상담 후 확정됩니다.' },
+    ko: { title: '팝업으로 문의하고 5만 원 할인받으세요', badge: '문의 할인 이벤트', detail: '이 팝업의 문의 버튼으로 접수하면 의뢰 총액에서 50,000원을 할인해 드립니다.', terms: '의뢰 1건당 1회 적용 · 기존 할인과 중복 불가 · 종료일 없음. 추가 옵션마다 각각 할인되는 이벤트는 아닙니다.', cta: '5만 원 할인받고 문의하기', close: '닫기', open: '5만 원 할인 이벤트', applied: '팝업 문의 5만 원 할인이 선택되었습니다.', price: '팝업 문의 시', option: '팝업 문의 이벤트 (50,000원 할인)', note: '팝업 문의 이벤트가 적용됩니다. 다른 할인과 중복되지 않으며 최종 금액은 상담 후 확정됩니다.' },
     en: { title: 'Get KRW 50,000 off your commission', badge: 'Inquiry offer', detail: 'Use the inquiry button in this popup to receive KRW 50,000 off your commission total.', terms: 'Once per commission. Cannot be combined with other discounts. No end date. The discount is not applied to each add-on separately.', cta: 'Get KRW 50,000 off and inquire', close: 'Close', open: 'KRW 50,000 offer', applied: 'The KRW 50,000 popup inquiry discount is selected.', price: 'Via popup inquiry', option: 'Popup inquiry offer (KRW 50,000 off)', note: 'The popup inquiry offer applies. It cannot be combined with other discounts. The final quote is confirmed after consultation.' },
     ja: { title: 'ポップアップからのご相談で50,000ウォン割引', badge: 'お問い合わせキャンペーン', detail: 'このポップアップのお問い合わせボタンからご相談いただくと、ご依頼総額から50,000ウォンを割引します。', terms: 'ご依頼1件につき1回。他の割引との併用不可。終了日なし。追加オプションごとに割引するものではありません。', cta: '50,000ウォン割引で問い合わせる', close: '閉じる', open: '50,000ウォン割引', applied: 'ポップアップお問い合わせの50,000ウォン割引が選択されています。', price: 'ポップアップからのご相談で', option: 'ポップアップお問い合わせ（50,000ウォン割引）', note: 'ポップアップお問い合わせ割引が適用されます。他の割引との併用はできません。最終金額はご相談後に確定します。' }
   }[locale];
@@ -116,7 +116,7 @@
   if (form && claimed) {
     const notice = document.createElement('div');
     notice.className = 'event-applied';
-    notice.textContent = `${copy.applied} ${copy.terms}`;
+    notice.textContent = copy.applied;
     form.prepend(notice);
     for (const [name, value] of Object.entries({ promotion_id: id, promotion_discount_krw: String(amount), promotion_source: 'popup_inquiry', promotion_stacking: 'not_allowed' })) {
       const field = document.createElement('input');
