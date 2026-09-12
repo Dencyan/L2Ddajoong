@@ -1786,7 +1786,9 @@ h1 {
 
 .live-theater {
   position: relative;
-  min-height: 760px;
+  align-self: start;
+  height: clamp(420px, 70svh, 560px);
+  min-height: 0;
   overflow: hidden;
   border: 1px solid rgba(86, 96, 150, .12);
   border-radius: 8px;
@@ -1795,9 +1797,10 @@ h1 {
 }
 
 .live-theater iframe {
+  display: block;
   width: 100%;
   height: 100%;
-  min-height: 760px;
+  min-height: 0;
   border: 0;
 }
 
@@ -2385,9 +2388,8 @@ h1 {
     height: 500px;
   }
 
-  .live-theater,
-  .live-theater iframe {
-    min-height: 620px;
+  .live-theater {
+    height: clamp(360px, 62svh, 460px);
   }
 
   .estimate-widget {
@@ -2909,7 +2911,6 @@ body.event-is-open { overflow: hidden; }
 .event-dialog #event-detail { margin: 22px 0 18px; word-break: keep-all; overflow-wrap: anywhere; }
 .event-cta { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 54px; padding: 14px 20px; border-radius: 2px; background: #30283d; color: #fff; text-decoration: none; font-size: 16px; font-weight: 650; line-height: 1.5; }
 .event-cta:hover { background: #4c3c64; }
-.event-dialog .event-terms { margin: 16px 0 0; font-size: 12px; line-height: 1.7; color: #66646e; }
 .event-controls { position: sticky; bottom: 0; display: flex; justify-content: space-between; align-items: stretch; border-top: 1px solid #ddd9e1; background: #fff; }
 .event-controls button { min-height: 52px; padding: 13px 24px; border: 0; border-radius: 0; background: transparent; color: #4c4853; font: inherit; font-size: 14px; cursor: pointer; }
 .event-controls button:hover { background: #f0edf5; }
