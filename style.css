@@ -1787,7 +1787,7 @@ h1 {
 .live-theater {
   position: relative;
   align-self: start;
-  height: clamp(420px, 70svh, 560px);
+  height: 620px;
   min-height: 0;
   overflow: hidden;
   border: 1px solid rgba(86, 96, 150, .12);
