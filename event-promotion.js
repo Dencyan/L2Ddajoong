@@ -114,10 +114,6 @@
   }
   const form = document.querySelector('[data-contact-form]');
   if (form && claimed) {
-    const notice = document.createElement('div');
-    notice.className = 'event-applied';
-    notice.textContent = copy.applied;
-    form.prepend(notice);
     for (const [name, value] of Object.entries({ promotion_id: id, promotion_discount_krw: String(amount), promotion_source: 'popup_inquiry', promotion_stacking: 'not_allowed' })) {
       const field = document.createElement('input');
       field.type = 'hidden'; field.name = name; field.setAttribute('value', value);
