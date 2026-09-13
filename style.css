@@ -1537,12 +1537,6 @@ h1 {
   padding: 22px;
 }
 
-.compare-plan.is-featured {
-  color: white;
-  background: #747bdc;
-  border-top-color: transparent;
-  border-radius: 6px;
-}
 
 .compare-plan span,
 .recommend-grid span,
@@ -1554,12 +1548,6 @@ h1 {
   letter-spacing: .03em;
 }
 
-.compare-plan.is-featured span,
-.compare-plan.is-featured p,
-.compare-plan.is-featured li,
-.compare-plan.is-featured strong {
-  color: white;
-}
 
 .compare-plan h2 {
   margin: 14px 0 12px;
@@ -2954,7 +2942,7 @@ button, input, select, textarea { font-family: var(--font-body); }
 .home-section-intro { margin: 0 0 32px; color: var(--muted); }
 .home-price-list { border-top: 1px solid #b9b9d7; }
 .home-price-row { display: grid; grid-template-columns: 32px minmax(160px, 1.05fr) minmax(220px, 1.6fr) minmax(210px, 1fr) 18px; gap: 20px; align-items: center; min-height: 112px; padding: 22px 0; border-bottom: 1px solid #d7d8e8; }
-.home-price-row:hover { background: #ffffff80; }
+
 .home-price-row:focus-visible { outline: 3px solid var(--violet); outline-offset: 4px; }
 .home-price-number { color: #5753aa; font-size: .875rem; }
 .home-price-row h3 { font-size: 1.25rem; line-height: 1.4; margin: 0; letter-spacing: -.025em; }
@@ -2991,4 +2979,40 @@ button, input, select, textarea { font-family: var(--font-body); }
   .home-preparation { margin-top: 40px; }
   .home-preparation + .contact-panel { padding: 28px 22px; }
   .home-section-actions { gap: 12px; }
+}
+
+/* Price surfaces share the same resting appearance; emphasize the current card. */
+.compare-plan, .price-reference-grid > article, .home-price-row {
+  position: relative;
+  transition: transform .2s ease, background-color .2s ease, color .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+:is(.compare-plan, .price-reference-grid > article, .home-price-row):focus-visible {
+  z-index: 1;
+  color: #fff;
+  background: #5753aa;
+  border-color: transparent;
+  border-radius: 6px;
+  box-shadow: 0 14px 28px #37306426;
+  transform: translateY(-6px);
+  outline: 2px solid #5753aa;
+  outline-offset: 3px;
+}
+:is(.compare-plan, .price-reference-grid > article, .home-price-row):focus-visible :is(h2, h3, p, span, strong, li, dt, dd) { color: #fff; }
+.compare-plan:focus-visible li::before { background: #fff; }
+@media (hover: hover) and (pointer: fine) {
+  :is(.compare-plan, .price-reference-grid > article, .home-price-row):hover {
+    z-index: 1;
+    color: #fff;
+    background: #5753aa;
+    border-color: transparent;
+    border-radius: 6px;
+    box-shadow: 0 14px 28px #37306426;
+    transform: translateY(-6px);
+  }
+  :is(.compare-plan, .price-reference-grid > article, .home-price-row):hover :is(h2, h3, p, span, strong, li, dt, dd) { color: #fff; }
+  .compare-plan:hover li::before { background: #fff; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .compare-plan, .price-reference-grid > article, .home-price-row { transition: none; }
+  :is(.compare-plan, .price-reference-grid > article, .home-price-row):is(:hover, :focus-visible) { transform: none; }
 }
