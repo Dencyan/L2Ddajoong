@@ -2,6 +2,16 @@
 
 현재 이벤트: 팝업 문의 시 의뢰 총액에서 50,000원 할인. 기존 할인과 중복 불가. 종료일 없음.
 
+## 언어별 금액 표시
+
+`pricing-currency.js`에서 고정 환산 기준을 관리합니다. 한국어는 원화, EN은 1달러=1,500원, JP는 100엔=1,000원으로 표시합니다. 50,000원 할인은 EN에서 US$33.33, JP에서 5,000円입니다.
+
+계산기는 원화 기준으로 옵션 수량과 할인까지 계산한 최종 합계를 환산합니다. 달러는 소수점 둘째 자리, 엔화는 1엔 단위로 반올림하므로 표시된 개별 달러 가격을 더한 값과 최종 견적 사이에 센트 단위 차이가 날 수 있습니다. 가격표와 계산기에 이 기준을 안내합니다.
+
+`pricing-currency.js`는 이벤트 태그 바깥에서 불러옵니다. 이벤트를 종료하거나 제거할 때 이 스크립트는 유지하세요. 가격표의 `data-money-krw`와 `data-event-base-price`, 계산기의 `price`는 원화 기준값입니다. 환산 기준 변경 시 EN/JP HTML의 기본 표시 금액과 환산 안내도 갱신하세요.
+
+문의 폼은 기존 `promotion_discount_krw`와 함께 `promotion_currency`, `promotion_discount_display`를 전달합니다.
+
 ## 종료하는 가장 간단한 방법
 
 사이트 루트 `event-promotion.js` 상단의 `EVENT_CONFIG`에서 `enabled: true`를 `enabled: false`로 바꾸고 운영 사이트에 배포합니다.

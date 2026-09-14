@@ -1,3 +1,5 @@
+const formatMoney = window.DajoongMoney.format;
+
 const estimateData = {
   base: [
     { id: "", label: "基本リギングを選択", price: 0 },
@@ -9,20 +11,20 @@ const estimateData = {
     { id: "premium-full", label: "プレミアムLD全身", price: 780000 },
   ],
   options: [
-    { id: "expr", label: "追加表情", priceText: "+10,000ウォン／1点", price: 10000, count: true },
-    { id: "expr-anim", label: "表情アニメーション", priceText: "30,000ウォン～／1点", price: 30000, count: true, approximate: true },
-    { id: "acc", label: "アクセサリー・小物", priceText: "20,000～40,000ウォン", price: 0, approximate: true },
-    { id: "ear", label: "耳・尻尾", priceText: "35,000ウォン～", price: 0, approximate: true },
-    { id: "wing", label: "翼・角", priceText: "要相談", price: 0, approximate: true },
-    { id: "arm-swing", label: "腕揺れ追加", priceText: "30,000ウォン", price: 30000 },
-    { id: "arm-part", label: "腕パーツ（マイク、ゲーム機など）", priceText: "要相談", price: 0, approximate: true },
-    { id: "outfit", label: "追加衣装", priceText: "要相談", price: 0, approximate: true },
-    { id: "hair", label: "追加髪型", priceText: "要相談", price: 0, approximate: true },
-    { id: "mouth-x", label: "口X", priceText: "20,000ウォン", price: 20000 },
-    { id: "chub", label: "頬ぷく", priceText: "20,000ウォン", price: 20000 },
-    { id: "tongue", label: "舌出し", priceText: "70,000ウォン", price: 70000 },
-    { id: "vbridger-a", label: "口X＋頬ぷく＋VBridger", priceText: "120,000ウォン", price: 120000 },
-    { id: "vbridger-b", label: "口X＋頬ぷく＋舌出し＋VBridger", priceText: "190,000ウォン", price: 190000 },
+    { id: "expr", label: "追加表情", priceText: `+${formatMoney(10000)}／1点`, price: 10000, count: true },
+    { id: "expr-anim", label: "表情アニメーション", priceText: `${formatMoney(30000)}～／1点`, price: 30000, count: true, approximate: true },
+    { id: "acc", label: "アクセサリー・小物", priceText: `${formatMoney(20000)}～${formatMoney(40000)}`, price: 0, approximate: true },
+    { id: "ear", label: "耳・尻尾", priceText: `${formatMoney(35000)}～`, price: 0, approximate: true },
+    { id: "wing", label: "翼・角", priceText: `要相談`, price: 0, approximate: true },
+    { id: "arm-swing", label: "腕揺れ追加", priceText: `${formatMoney(30000)}`, price: 30000 },
+    { id: "arm-part", label: "腕パーツ（マイク、ゲーム機など）", priceText: `要相談`, price: 0, approximate: true },
+    { id: "outfit", label: "追加衣装", priceText: `要相談`, price: 0, approximate: true },
+    { id: "hair", label: "追加髪型", priceText: `要相談`, price: 0, approximate: true },
+    { id: "mouth-x", label: "口X", priceText: `${formatMoney(20000)}`, price: 20000 },
+    { id: "chub", label: "頬ぷく", priceText: `${formatMoney(20000)}`, price: 20000 },
+    { id: "tongue", label: "舌出し", priceText: `${formatMoney(70000)}`, price: 70000 },
+    { id: "vbridger-a", label: "口X＋頬ぷく＋VBridger", priceText: `${formatMoney(120000)}`, price: 120000 },
+    { id: "vbridger-b", label: "口X＋頬ぷく＋舌出し＋VBridger", priceText: `${formatMoney(190000)}`, price: 190000 },
   ],
   discounts: [
     { id: "", label: "割引なし", price: 0 },
@@ -31,7 +33,6 @@ const estimateData = {
   ],
 };
 
-const formatWon = (value) => `${Math.max(0, value).toLocaleString("ja-JP")}ウォン`;
 
 function mountRevealEffects() {
   const targets = [
@@ -93,7 +94,7 @@ function createEstimateWidget() {
   root.className = "estimate-widget";
   root.innerHTML = `
     <button class="estimate-toggle" type="button" aria-expanded="false" aria-controls="estimate-panel">
-      <span>₩</span>
+      <span>${window.DajoongMoney.symbol}</span>
       <strong>簡易見積り</strong>
     </button>
     <form class="estimate-panel" id="estimate-panel" aria-hidden="true">
@@ -111,7 +112,7 @@ function createEstimateWidget() {
         ${estimateData.options.map((item) => `
           <label class="estimate-check">
             <input type="checkbox" name="option" value="${item.id}" />
-            <span>${item.label}<small>${item.priceText || `${item.price.toLocaleString("ja-JP")}ウォン`}</small></span>
+            <span>${item.label}<small>${item.priceText || formatMoney(item.price)}</small></span>
             ${item.count ? `<input class="estimate-count" type="number" min="1" max="20" step="1" value="1" aria-label="${item.label}の数量" disabled />` : ""}
           </label>
         `).join("")}
@@ -128,7 +129,8 @@ function createEstimateWidget() {
       </details>
       <div class="estimate-result">
         <span>概算見積り</span>
-        <strong data-estimate-total>0ウォン</strong>
+        <strong data-estimate-total>${formatMoney(0)}</strong>
+        <p>${window.DajoongMoney.note}</p>
         <p data-estimate-note>基本リギングを選択してください。</p>
       </div>
       <a class="estimate-submit" href="/ja/contact/">非公開お問い合わせフォームを開く</a>
@@ -192,7 +194,7 @@ function mountEstimateWidget() {
     if (base?.id) total += discount?.price || 0;
     const eventSelected = promotion && discount?.id === promotion.id;
     widget.querySelector('.estimate-submit').href = eventSelected ? promotion.inquiryUrl : "/ja/contact/?discount=" + (discount?.id || "none");
-    totalEl.textContent = formatWon(total);
+    totalEl.textContent = formatMoney(total);
     noteEl.textContent = !base?.id
       ? "基本リギングを選択してください。"
       : eventSelected

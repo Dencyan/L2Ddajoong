@@ -13,10 +13,12 @@
   const id = 'popup-inquiry-50000';
   const amount = 50000;
   const locale = document.documentElement.lang.startsWith('ja') ? 'ja' : document.documentElement.lang.startsWith('en') ? 'en' : 'ko';
+  const money = window.DajoongMoney.format;
+  const discountAmount = money(amount);
   const copy = {
     ko: { title: '팝업으로 문의하고 5만 원 할인받으세요', badge: '문의 할인 이벤트', detail: '이 팝업의 문의 버튼으로 접수하면 의뢰 총액에서 50,000원을 할인해 드립니다.', terms: '의뢰 1건당 1회 적용 · 기존 할인과 중복 불가 · 종료일 없음. 추가 옵션마다 각각 할인되는 이벤트는 아닙니다.', cta: '5만 원 할인받고 문의하기', close: '닫기', open: '5만 원 할인 이벤트', applied: '팝업 문의 5만 원 할인이 선택되었습니다.', price: '팝업 문의 시', option: '팝업 문의 이벤트 (50,000원 할인)', note: '팝업 문의 이벤트가 적용됩니다. 다른 할인과 중복되지 않으며 최종 금액은 상담 후 확정됩니다.' },
-    en: { title: 'Get KRW 50,000 off your commission', badge: 'Inquiry offer', detail: 'Use the inquiry button in this popup to receive KRW 50,000 off your commission total.', terms: 'Once per commission. Cannot be combined with other discounts. No end date. The discount is not applied to each add-on separately.', cta: 'Get KRW 50,000 off and inquire', close: 'Close', open: 'KRW 50,000 offer', applied: 'The KRW 50,000 popup inquiry discount is selected.', price: 'Via popup inquiry', option: 'Popup inquiry offer (KRW 50,000 off)', note: 'The popup inquiry offer applies. It cannot be combined with other discounts. The final quote is confirmed after consultation.' },
-    ja: { title: 'ポップアップからのご相談で50,000ウォン割引', badge: 'お問い合わせキャンペーン', detail: 'このポップアップのお問い合わせボタンからご相談いただくと、ご依頼総額から50,000ウォンを割引します。', terms: 'ご依頼1件につき1回。他の割引との併用不可。終了日なし。追加オプションごとに割引するものではありません。', cta: '50,000ウォン割引で問い合わせる', close: '閉じる', open: '50,000ウォン割引', applied: 'ポップアップお問い合わせの50,000ウォン割引が選択されています。', price: 'ポップアップからのご相談で', option: 'ポップアップお問い合わせ（50,000ウォン割引）', note: 'ポップアップお問い合わせ割引が適用されます。他の割引との併用はできません。最終金額はご相談後に確定します。' }
+    en: { title: `Get ${discountAmount} off your commission`, badge: 'Inquiry offer', detail: `Use the inquiry button in this popup to receive ${discountAmount} off your commission total.`, terms: 'Once per commission. Cannot be combined with other discounts. No end date. The discount is not applied to each add-on separately.', cta: `Get ${discountAmount} off and inquire`, close: 'Close', open: `${discountAmount} offer`, applied: `The ${discountAmount} popup inquiry discount is selected.`, price: 'Via popup inquiry', option: `Popup inquiry offer (${discountAmount} off)`, note: 'The popup inquiry offer applies. It cannot be combined with other discounts. The final quote is confirmed after consultation.' },
+    ja: { title: `ポップアップからのご相談で${discountAmount}割引`, badge: 'お問い合わせキャンペーン', detail: `このポップアップのお問い合わせボタンからご相談いただくと、ご依頼総額から${discountAmount}を割引します。`, terms: 'ご依頼1件につき1回。他の割引との併用不可。終了日なし。追加オプションごとに割引するものではありません。', cta: `${discountAmount}割引で問い合わせる`, close: '閉じる', open: `${discountAmount}割引`, applied: `ポップアップお問い合わせの${discountAmount}割引が選択されています。`, price: 'ポップアップからのご相談で', option: `ポップアップお問い合わせ（${discountAmount}割引）`, note: 'ポップアップお問い合わせ割引が適用されます。他の割引との併用はできません。最終金額はご相談後に確定します。' }
   }[locale];
   if (EVENT_CONFIG.endsAt !== null) {
     const end = new Date(deadline).toLocaleString(locale === 'ko' ? 'ko-KR' : locale === 'ja' ? 'ja-JP' : 'en-GB', { timeZone: 'Asia/Seoul' });
@@ -35,18 +37,17 @@
   const query = new URLSearchParams(location.search);
   const explicitOtherDiscount = ['none', 'collab', 'review'].includes(query.get('discount'));
   const claimed = !explicitOtherDiscount && (requested || read(id + ':claimed') === '1');
-  const money = n => locale === 'ko' ? `${n.toLocaleString('ko-KR')}원` : locale === 'ja' ? `${n.toLocaleString('ja-JP')}ウォン` : `KRW ${n.toLocaleString('en-US')}`;
 
   const dialog = document.createElement('dialog');
   dialog.className = 'event-dialog';
   dialog.setAttribute('aria-labelledby', 'event-title');
   const poster = {
     ko: { title: 'Live2D 커미션', subtitle: '문의 할인 이벤트', unit: '원', discount: '의뢰 총액 할인', today: '오늘 하루 열지 않기', storageError: '숨김 설정을 저장할 수 없습니다. 브라우저의 사이트 저장 설정을 확인해 주세요.' },
-    en: { title: 'Live2D commission', subtitle: 'An offer for your inquiry', unit: 'KRW', discount: 'OFF YOUR COMMISSION TOTAL', today: "Don’t show again today", storageError: 'Your preference could not be saved. Please check your browser’s site storage settings.' },
-    ja: { title: 'Live2Dコミッション', subtitle: 'お問い合わせキャンペーン', unit: 'ウォン', discount: 'ご依頼総額から割引', today: '今日は表示しない', storageError: '設定を保存できませんでした。ブラウザのサイト保存設定をご確認ください。' }
+    en: { title: 'Live2D commission', subtitle: 'An offer for your inquiry', unit: 'USD', discount: 'OFF YOUR COMMISSION TOTAL', today: "Don’t show again today", storageError: 'Your preference could not be saved. Please check your browser’s site storage settings.' },
+    ja: { title: 'Live2Dコミッション', subtitle: 'お問い合わせキャンペーン', unit: '円', discount: 'ご依頼総額から割引', today: '今日は表示しない', storageError: '設定を保存できませんでした。ブラウザのサイト保存設定をご確認ください。' }
   }[locale];
   dialog.setAttribute('aria-describedby', 'event-detail');
-  dialog.innerHTML = `<div class="event-poster"><div class="event-masthead"><span>DAJOONG</span><span>LIVE2D / COMMISSION</span></div><h2 id="event-title">${poster.title}<span>${poster.subtitle}</span></h2><div class="event-coupon"><p>${poster.discount}</p><div class="event-amount">50,000<span>${poster.unit}</span></div><div class="event-coupon-foot"><span>INQUIRY OFFER</span><span>DAJOONG</span></div></div><p id="event-detail">${copy.detail}</p><a class="event-cta" href="${inquiryUrl}">${copy.cta}<span aria-hidden="true">→</span></a><p class="event-storage-error" role="status" hidden>${poster.storageError}</p></div><div class="event-controls"><button type="button" class="event-hide-today">${poster.today}</button><button type="button" class="event-close">${copy.close}<span aria-hidden="true">×</span></button></div>`;
+  dialog.innerHTML = `<div class="event-poster"><div class="event-masthead"><span>DAJOONG</span><span>LIVE2D / COMMISSION</span></div><h2 id="event-title">${poster.title}<span>${poster.subtitle}</span></h2><div class="event-coupon"><p>${poster.discount}</p><div class="event-amount">${window.DajoongMoney.number(amount)}<span>${poster.unit}</span></div><div class="event-coupon-foot"><span>INQUIRY OFFER</span><span>DAJOONG</span></div></div><p id="event-detail">${copy.detail}</p><a class="event-cta" href="${inquiryUrl}">${copy.cta}<span aria-hidden="true">→</span></a><p class="event-storage-error" role="status" hidden>${poster.storageError}</p></div><div class="event-controls"><button type="button" class="event-hide-today">${poster.today}</button><button type="button" class="event-close">${copy.close}<span aria-hidden="true">×</span></button></div>`;
   // DAJOONG_POPUP_EVENT: only this preference suppresses automatic display.
   // Midnight is evaluated in Korea time, and the preference is shared across tabs/locales.
   const hideKey = id + ':hidden-until';
@@ -114,7 +115,7 @@
   }
   const form = document.querySelector('[data-contact-form]');
   if (form && claimed) {
-    for (const [name, value] of Object.entries({ promotion_id: id, promotion_discount_krw: String(amount), promotion_source: 'popup_inquiry', promotion_stacking: 'not_allowed' })) {
+    for (const [name, value] of Object.entries({ promotion_id: id, promotion_discount_krw: String(amount), promotion_currency: window.DajoongMoney.code, promotion_discount_display: discountAmount, promotion_source: 'popup_inquiry', promotion_stacking: 'not_allowed' })) {
       const field = document.createElement('input');
       field.type = 'hidden'; field.name = name; field.setAttribute('value', value);
       form.append(field);

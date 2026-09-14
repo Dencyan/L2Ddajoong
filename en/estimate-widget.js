@@ -1,3 +1,5 @@
+const formatMoney = window.DajoongMoney.format;
+
 const estimateData = {
   base: [
     { id: "", label: "Select Base Rigging", price: 0 },
@@ -9,20 +11,20 @@ const estimateData = {
     { id: "premium-full", label: "Premium LD Full Body", price: 780000 },
   ],
   options: [
-    { id: "expr", label: "Additional Expression", priceText: "+KRW 10,000 each", price: 10000, count: true },
-    { id: "expr-anim", label: "Expression Animation", priceText: "From KRW 30,000 each", price: 30000, count: true, approximate: true },
-    { id: "acc", label: "Accessories / Props", priceText: "KRW 20,000-40,000", price: 0, approximate: true },
-    { id: "ear", label: "Ears / Tail", priceText: "From KRW 35,000", price: 0, approximate: true },
-    { id: "wing", label: "Wings / Horns", priceText: "Quote required", price: 0, approximate: true },
-    { id: "arm-swing", label: "Additional Arm Sway", priceText: "KRW 30,000", price: 30000 },
-    { id: "arm-part", label: "Arm Parts (microphone, controller, etc.)", priceText: "Quote required", price: 0, approximate: true },
-    { id: "outfit", label: "Additional Outfit", priceText: "Quote required", price: 0, approximate: true },
-    { id: "hair", label: "Additional Hairstyle", priceText: "Quote required", price: 0, approximate: true },
-    { id: "mouth-x", label: "Mouth X", priceText: "KRW 20,000", price: 20000 },
-    { id: "chub", label: "Puffed Cheeks", priceText: "KRW 20,000", price: 20000 },
-    { id: "tongue", label: "Tongue Out", priceText: "KRW 70,000", price: 70000 },
-    { id: "vbridger-a", label: "Mouth X + Puffed Cheeks + VBridger", priceText: "KRW 120,000", price: 120000 },
-    { id: "vbridger-b", label: "Mouth X + Puffed Cheeks + Tongue Out + VBridger", priceText: "KRW 190,000", price: 190000 },
+    { id: "expr", label: "Additional Expression", priceText: `+${formatMoney(10000)} each`, price: 10000, count: true },
+    { id: "expr-anim", label: "Expression Animation", priceText: `From ${formatMoney(30000)} each`, price: 30000, count: true, approximate: true },
+    { id: "acc", label: "Accessories / Props", priceText: `${formatMoney(20000)}–${formatMoney(40000)}`, price: 0, approximate: true },
+    { id: "ear", label: "Ears / Tail", priceText: `From ${formatMoney(35000)}`, price: 0, approximate: true },
+    { id: "wing", label: "Wings / Horns", priceText: `Quote required`, price: 0, approximate: true },
+    { id: "arm-swing", label: "Additional Arm Sway", priceText: `${formatMoney(30000)}`, price: 30000 },
+    { id: "arm-part", label: "Arm Parts (microphone, controller, etc.)", priceText: `Quote required`, price: 0, approximate: true },
+    { id: "outfit", label: "Additional Outfit", priceText: `Quote required`, price: 0, approximate: true },
+    { id: "hair", label: "Additional Hairstyle", priceText: `Quote required`, price: 0, approximate: true },
+    { id: "mouth-x", label: "Mouth X", priceText: `${formatMoney(20000)}`, price: 20000 },
+    { id: "chub", label: "Puffed Cheeks", priceText: `${formatMoney(20000)}`, price: 20000 },
+    { id: "tongue", label: "Tongue Out", priceText: `${formatMoney(70000)}`, price: 70000 },
+    { id: "vbridger-a", label: "Mouth X + Puffed Cheeks + VBridger", priceText: `${formatMoney(120000)}`, price: 120000 },
+    { id: "vbridger-b", label: "Mouth X + Puffed Cheeks + Tongue Out + VBridger", priceText: `${formatMoney(190000)}`, price: 190000 },
   ],
   discounts: [
     { id: "", label: "No Discount", price: 0 },
@@ -31,7 +33,6 @@ const estimateData = {
   ],
 };
 
-const formatWon = (value) => `${Math.max(0, value).toLocaleString("en-US")} KRW`;
 
 function mountRevealEffects() {
   const targets = [
@@ -93,7 +94,7 @@ function createEstimateWidget() {
   root.className = "estimate-widget";
   root.innerHTML = `
     <button class="estimate-toggle" type="button" aria-expanded="false" aria-controls="estimate-panel">
-      <span>₩</span>
+      <span>${window.DajoongMoney.symbol}</span>
       <strong>Quick Estimate</strong>
     </button>
     <form class="estimate-panel" id="estimate-panel" aria-hidden="true">
@@ -111,7 +112,7 @@ function createEstimateWidget() {
         ${estimateData.options.map((item) => `
           <label class="estimate-check">
             <input type="checkbox" name="option" value="${item.id}" />
-            <span>${item.label}<small>${item.priceText || `${item.price.toLocaleString("en-US")} KRW`}</small></span>
+            <span>${item.label}<small>${item.priceText || formatMoney(item.price)}</small></span>
             ${item.count ? `<input class="estimate-count" type="number" min="1" max="20" step="1" value="1" aria-label="${item.label} quantity" disabled />` : ""}
           </label>
         `).join("")}
@@ -128,7 +129,8 @@ function createEstimateWidget() {
       </details>
       <div class="estimate-result">
         <span>Estimated Total</span>
-        <strong data-estimate-total>KRW 0</strong>
+        <strong data-estimate-total>${formatMoney(0)}</strong>
+        <p>${window.DajoongMoney.note}</p>
         <p data-estimate-note>Please select a base rigging plan.</p>
       </div>
       <a class="estimate-submit" href="/en/contact/">Open the Private Inquiry Form</a>
@@ -192,7 +194,7 @@ function mountEstimateWidget() {
     if (base?.id) total += discount?.price || 0;
     const eventSelected = promotion && discount?.id === promotion.id;
     widget.querySelector('.estimate-submit').href = eventSelected ? promotion.inquiryUrl : "/en/contact/?discount=" + (discount?.id || "none");
-    totalEl.textContent = formatWon(total);
+    totalEl.textContent = formatMoney(total);
     noteEl.textContent = !base?.id
       ? "Please select a base rigging plan."
       : eventSelected
