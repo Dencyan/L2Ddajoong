@@ -1,6 +1,6 @@
 const compareData = {
   "mouth-basic": {
-    src: "../assets/mouth-9.gif",
+    src: "/assets/mouth-9.gif",
     alt: "口の動き9点サンプル",
     label: "Basic LD",
     title: "口の動き9点",
@@ -9,7 +9,7 @@ const compareData = {
     use: "自然な発話と安定した基本動作を重視する場合",
   },
   "mouth-premium": {
-    src: "../assets/mouth-12.gif",
+    src: "/assets/mouth-12.gif",
     alt: "口の動き12点サンプル",
     label: "Premium LD",
     title: "口の動き12点",
@@ -18,7 +18,7 @@ const compareData = {
     use: "会話量が多く、表情演技を重視するモデル",
   },
   vbridger: {
-    src: "../assets/mouth-vbridger.gif",
+    src: "/assets/mouth-vbridger.gif",
     alt: "VBridger口モーションサンプル",
     label: "Advanced Option",
     title: "VBridger対応",
@@ -27,7 +27,7 @@ const compareData = {
     use: "細かな発話表現を重視する場合",
   },
   eyes: {
-    src: "../assets/eyes-odd.gif",
+    src: "/assets/eyes-odd.gif",
     alt: "目の物理演算サンプル",
     label: "Premium LD",
     title: "瞳とまつ毛の物理演算",
@@ -36,7 +36,7 @@ const compareData = {
     use: "視線、ハイライト、顔のディテールを重視する場合",
   },
   body: {
-    src: "../assets/body-z.gif",
+    src: "/assets/body-z.gif",
     alt: "Z軸モーションサンプル",
     label: "Basic / Premium",
     title: "XYZ基本軸",
