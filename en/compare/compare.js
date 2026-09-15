@@ -1,6 +1,6 @@
 const compareData = {
   "mouth-basic": {
-    src: "../assets/mouth-9.gif",
+    src: "/assets/mouth-9.gif",
     alt: "9-point Mouth Movement Sample",
     label: "Basic LD",
     title: "9-point Mouth Movement",
@@ -9,7 +9,7 @@ const compareData = {
     use: "Clean speech and stable core movement",
   },
   "mouth-premium": {
-    src: "../assets/mouth-12.gif",
+    src: "/assets/mouth-12.gif",
     alt: "12-point Mouth Movement Sample",
     label: "Premium LD",
     title: "12-point Mouth Movement",
@@ -18,7 +18,7 @@ const compareData = {
     use: "Models with frequent dialogue and expressive performance",
   },
   vbridger: {
-    src: "../assets/mouth-vbridger.gif",
+    src: "/assets/mouth-vbridger.gif",
     alt: "VBridger Mouth Movement Sample",
     label: "Advanced Option",
     title: "VBridger Support",
@@ -27,7 +27,7 @@ const compareData = {
     use: "Detailed speech expression",
   },
   eyes: {
-    src: "../assets/eyes-odd.gif",
+    src: "/assets/eyes-odd.gif",
     alt: "Eye Physics Sample",
     label: "Premium LD",
     title: "Iris and Eyelash Physics",
@@ -36,7 +36,7 @@ const compareData = {
     use: "When gaze, highlights, and facial detail matter",
   },
   body: {
-    src: "../assets/body-z.gif",
+    src: "/assets/body-z.gif",
     alt: "Z-axis Motion Sample",
     label: "Basic / Premium",
     title: "Core XYZ Axes",
