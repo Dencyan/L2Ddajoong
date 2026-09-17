@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>moc3とcmo3の違い | Live2Dリギング納品ガイド - Dajoong</title>
-  <meta name="description" content="Live2Dリギング依頼前に、moc3とcmo3ファイルの違い、cmo3原本の扱い、VTube Studio導入、納品後の修正範囲を確認できます。" />
+  <title>moc3・cmo3ファイルの違いと変換・編集について | Dajoong</title>
+  <meta name="description" content="moc3とcmo3ファイルの用途、モデルの使用と原本編集の違いを解説。moc3からcmo3への変換を探す際の確認事項と、Dajoongの納品・修正方針をまとめました。" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="moc3とcmo3の違い | Live2Dリギング納品ガイド" />
-  <meta property="og:description" content="Live2Dリギング依頼前に、moc3とcmo3ファイルの違い、cmo3原本の扱い、VTube Studio導入、納品後の修正範囲を確認できます。" />
+  <meta property="og:title" content="moc3・cmo3ファイルの違いと変換・編集について | Dajoong" />
+  <meta property="og:description" content="moc3とcmo3ファイルの用途、モデルの使用と原本編集の違いを解説。moc3からcmo3への変換を探す際の確認事項と、Dajoongの納品・修正方針をまとめました。" />
   <meta property="og:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
   <meta property="og:url" content="https://dajoong.cloud/ja/guide/moc3-cmo3/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="moc3とcmo3の違い | Live2Dリギング納品ガイド" />
-  <meta name="twitter:description" content="Live2Dリギング依頼前に、moc3とcmo3ファイルの違い、cmo3原本の扱い、VTube Studio導入、納品後の修正範囲を確認できます。" />
+  <meta name="twitter:title" content="moc3・cmo3ファイルの違いと変換・編集について | Dajoong" />
+  <meta name="twitter:description" content="moc3とcmo3ファイルの用途、モデルの使用と原本編集の違いを解説。moc3からcmo3への変換を探す際の確認事項と、Dajoongの納品・修正方針をまとめました。" />
   <meta name="twitter:image" content="https://dajoong.cloud/assets/og-thumbnail.jpg" />
   <link rel="canonical" href="https://dajoong.cloud/ja/guide/moc3-cmo3/" />
   <link rel="alternate" hreflang="ko" href="https://dajoong.cloud/guide/moc3-cmo3/" />
@@ -61,8 +61,8 @@
         "@type": "WebPage",
         "@id": "https://dajoong.cloud/ja/guide/moc3-cmo3/#webpage",
         "url": "https://dajoong.cloud/ja/guide/moc3-cmo3/",
-        "name": "moc3とcmo3の違い | Live2Dリギング納品ガイド",
-        "description": "Live2Dリギング依頼前に、moc3とcmo3ファイルの違い、cmo3原本の扱い、VTube Studio導入、納品後の修正範囲を確認できます。",
+        "name": "moc3・cmo3ファイルの違いと変換・編集について | Dajoong",
+        "description": "moc3とcmo3ファイルの用途、モデルの使用と原本編集の違いを解説。moc3からcmo3への変換を探す際の確認事項と、Dajoongの納品・修正方針をまとめました。",
         "inLanguage": "ja",
         "isPartOf": {
           "@id": "https://dajoong.cloud/#website"
@@ -77,58 +77,42 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "moc3ファイルとcmo3ファイルは何が違いますか？",
+            "name": "moc3からcmo3への変換ツールは提供していますか？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": ".moc3ファイルはVTube Studioに導入してモデルを動かすためのファイルです。.cmo3ファイルはLive2D Cubism Editorでリギングを直接修正できる原本作業ファイルです。"
+              "text": "このページでは原本復元ツールや検証済みの逆変換手順を提供していません。リギングの修正が必要な場合は、元の制作者に原本の有無と修正可能な範囲を確認してください。"
             }
           },
           {
             "@type": "Question",
-            "name": "Dajoongのリギング依頼ではcmo3原本も納品されますか？",
+            "name": "VTube Studioで使うにはcmo3が必要ですか？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": ".cmo3原本ファイルは基本納品範囲に含まれず、一般のご依頼では提供していません。.cmo3には編集可能な原本構造とリギング作業の内容が含まれます。"
+              "text": "モデルの使用には、使用用モデルと構成ファイルが必要です。cmo3はリギング原本を編集するファイルであり、使用用ファイル一式が揃っていればモデル使用に必須ではありません。"
             }
           },
           {
             "@type": "Question",
-            "name": "moc3ファイルをcmo3ファイルに戻すことはできますか？",
+            "name": "Dajoongの依頼ではcmo3原本も受け取れますか？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "通常のご依頼や使用環境では、.moc3ファイルを.cmo3原本のように戻して編集するものとして案内していません。モデル修正が必要な場合は、まずリギング担当者へご相談ください。"
+              "text": "Dajoongは通常のご依頼で.cmo3原本を提供していません。基本納品はVTube Studioでの使用に必要なモデルと構成ファイルです。"
             }
           },
           {
             "@type": "Question",
-            "name": "cmo3ファイルがなくてもモデルは使用できますか？",
+            "name": "納品後は何を調整・修正できますか？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "はい。.cmo3ファイルはLive2Dで直接編集するための原本ファイルであり、モデルを動かすためには必要ありません。"
+              "text": "使用環境に合わせたトラッキング調整と、リギング原本の編集は別の作業です。リギング変更は制作者に相談し、Dajoongの制作物を許可なく二次修正しないでください。"
             }
           },
           {
             "@type": "Question",
-            "name": "納品ファイルはVTube Studioですぐ使えますか？",
+            "name": "VTube Studio以外のソフトにも対応していますか？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "納品ファイルはVTube Studioに導入して使用できる形でお渡しします。ただし、細かなトラッキング設定はご自身の顔立ちや環境に合わせて調整すると、より自然に使用できます。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "納品後に自分でモデルを修正できますか？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": ".cmo3原本ファイルがない場合、Live2Dでリギングを直接修正することはできません。仮に修正方法があったとしても、許可のない二次修正は禁止です。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "VTube Studio以外のソフトでも使えますか？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "他のLive2D対応ソフトが存在する場合もありますが、Dajoongが提供するファイルと設定はVTube Studioでの使用を基準に制作しています。"
+              "text": "Dajoongの納品ファイルと設定はVTube Studioを前提としています。他のソフトとの互換性は別途確認が必要です。"
             }
           }
         ]
@@ -156,36 +140,60 @@
 
   <main class="sub-main">
     <section class="sub-hero guide-hero">
-      <p class="eyebrow">納品ファイル案内</p>
-      <h1>moc3とcmo3ファイルは何が違いますか？</h1>
-      <p>Live2Dリギング依頼前によく確認される納品ファイルの範囲と、編集可否についてまとめました。</p>
+      <p class="eyebrow">Live2D Guide</p>
+      <h1>moc3・cmo3ファイルとは？違いと変換・編集の確認事項</h1>
+      <p>.cmo3はLive2D Cubism Editorでモデルを編集する作業ファイル、.moc3はソフトでモデルを使用するためのデータです。モデルの使用とリギング原本の編集では、必要なファイルが異なります。</p>
     </section>
-
-    <section class="guide-layout" aria-label="moc3 cmo3ファイル案内">
+    <section class="guide-layout" aria-label="moc3・cmo3ファイルとは？違いと変換・編集の確認事項">
       <aside class="guide-index">
-        <p class="eyebrow">概要</p>
-        <a class="guide-tab is-active" href="#difference">ファイルの違い</a>
-        <a class="guide-tab" href="#delivery">納品範囲</a>
-        <a class="guide-tab" href="#faq">Q&A</a>
-        <a class="guide-tab" href="../../contact/">お問い合わせ</a>
+        <p class="eyebrow">目次</p>
+        <a class="guide-tab is-active" href="#difference">moc3とcmo3の違いを一覧で確認</a>
+        <a class="guide-tab" href="#moc3-file">moc3ファイルとは？何に使うファイルですか？</a>
+        <a class="guide-tab" href="#cmo3-file">cmo3ファイルとは？どんなときに必要ですか？</a>
+        <a class="guide-tab" href="#conversion">moc3からcmo3へ：原本を編集したいときの確認事項</a>
+        <a class="guide-tab" href="#without-cmo3">cmo3がなくてもモデルを使用できますか？</a>
+        <a class="guide-tab" href="#delivery">Dajoongの納品ファイルと修正範囲</a>
+        <a class="guide-tab" href="#faq">よくある質問</a>
       </aside>
-
       <div class="guide-book">
         <article class="guide-sheet is-active">
           <div class="sheet-number">01</div>
           <div>
-            <span class="sheet-label">Live2D Delivery Files</span>
-            <h2 id="difference">moc3は導入用ファイル、cmo3は編集可能な原本ファイルです</h2>
-            <p>Live2Dモデルは通常、VTube Studioなどでmoc3ベースのファイル一式を使って読み込みます。一方、cmo3はLive2D Cubism Editorでリギング構造を開き、直接修正できる原本作業ファイルに近いものです。</p>
-            <div class="guide-note-grid">
-              <article><strong>.moc3</strong><span>VTube Studioに導入してモデルを動かすためのファイルです。</span></article>
-              <article><strong>.cmo3</strong><span>Live2D Cubism Editorでリギングを直接修正できる原本作業ファイルです。</span></article>
-              <article><strong>導入用ファイル</strong><span>モデルの構造と作業範囲に合わせて、使用に必要なモデルファイルと構成ファイルをお渡しします。</span></article>
-              <article><strong>原本ファイル</strong><span>リギングの作業方式や編集可能な構造を含む原本ファイルは、基本納品範囲に含まれません。</span></article>
-            </div>
+            <section aria-labelledby="difference">
+              <h2 id="difference">moc3とcmo3の違いを一覧で確認</h2>
+              <div class="guide-note-grid">
+              <article><strong>.moc3</strong><span>ソフトでモデルを使用するためのデータです。必要なテクスチャや設定ファイルと一緒に使用します。</span></article>
+              <article><strong>.cmo3</strong><span>Cubism Editorでリギング構造を開いて編集する原本の作業ファイルです。モデル使用用の納品ファイルとは区別します。</span></article>
+              </div>
+            </section>
 
-            <h2 id="delivery">Dajoongの基本納品はVTube Studioで使えるモデルファイルです</h2>
-            <p>Dajoongの基本納品は、VTube Studioに導入して使用できるモデルファイルを基準としています。編集可能なcmo3原本ファイルは基本納品範囲に含まれず、一般のご依頼では提供していません。リギング修正が必要な場合は、別途修正依頼として確認します。</p>
+            <section aria-labelledby="moc3-file">
+              <h2 id="moc3-file">moc3ファイルとは？何に使うファイルですか？</h2>
+              <p>.moc3は対応ソフトでモデルを読み込むためのデータです。拡張子だけでは、納品ファイル一式が揃っているかは判断できません。</p><p>モデルを使用するには、その構造とソフトに合った構成ファイルが必要です。DajoongはVTube Studioでの使用を前提にモデルと構成ファイルをお渡しします。</p>
+            </section>
+
+            <section aria-labelledby="cmo3-file">
+              <h2 id="cmo3-file">cmo3ファイルとは？どんなときに必要ですか？</h2>
+              <p>.cmo3はCubism Editorでリギングを直接編集するための作業原本です。納品されたモデルを配信で使用することとは目的が異なります。</p><p>原本の提供や編集の許可範囲は、制作者との依頼条件を確認してください。以下のDajoongの方針は、すべてのリガーに共通するルールではありません。</p>
+            </section>
+
+            <section aria-labelledby="conversion">
+              <h2 id="conversion">moc3からcmo3へ：原本を編集したいときの確認事項</h2>
+              <p>moc3からcmo3への変換を探している場合は、モデルを使用したいのか、リギング原本を編集したいのかを整理してください。拡張子を変更するだけで編集原本になるわけではありません。</p><p>この案内では、.moc3から元の.cmo3を復元するツールや、検証済みの逆変換手順は提供していません。原本の編集が必要な場合は、元の制作者に原本の保有・提供可否と修正可能な範囲を確認してください。</p><ul class="guide-checklist">
+                <li>モデルを使用したい場合は、使用用ファイル一式と対象ソフトを確認します。</li>
+                <li>リギングを編集したい場合は、.cmo3原本の有無と編集許可を確認します。</li>
+                <li>原本がない場合は、手元のファイルと希望する修正内容を元の制作者に伝えます。</li>
+              </ul>
+            </section>
+
+            <section aria-labelledby="without-cmo3">
+              <h2 id="without-cmo3">cmo3がなくてもモデルを使用できますか？</h2>
+              <p>使用用ファイル一式が揃っていれば、モデルを使うために.cmo3編集原本が必須というわけではありません。ただし、.moc3ファイル1個だけで常に使用できるという意味ではありません。</p><p>モデルを使用するファイルと、リギング構造を編集する原本を区別し、納品された構成ファイルを一緒に保管してください。</p>
+            </section>
+
+            <section aria-labelledby="delivery">
+              <h2 id="delivery">Dajoongの納品ファイルと修正範囲</h2>
+              <p>Dajoongの基本納品は、VTube Studioでの使用に必要なモデルと構成ファイルです。編集可能な.cmo3原本は基本納品に含まれず、通常のご依頼では提供していません。</p><p>リギング上の不具合は確認後に修正します。過度な修正や修正後の差し戻しには追加料金が発生する場合があります。他の制作者のモデルは、原本や編集許可などの条件を事前に確認する必要があります。</p><p><a href="../">制作の流れと修正範囲</a></p><p>新規リギングのご依頼には、<a href="../psd-preparation/">PSD準備チェックリスト</a></p>
             <div class="delivery-panel">
               <div>
                 <strong>基本納品</strong>
@@ -200,22 +208,25 @@
                 <span>リギング上の不具合は確認後に修正しますが、過度な修正依頼や差し戻しには追加料金が発生する場合があります。</span>
               </div>
             </div>
+            </section>
 
-            <h2 id="faq">よくある質問</h2>
-            <div class="notice-accordion">
-              <button type="button" aria-expanded="true">moc3をcmo3に戻すことはできますか？</button>
-              <p>通常のご依頼や使用環境では、.moc3ファイルを.cmo3原本のように戻して編集するものとして案内していません。モデル修正が必要な場合は、まずリギング担当者へご相談ください。</p>
-              <button type="button" aria-expanded="true">VTube Studio導入にはどのファイルが必要ですか？</button>
-              <p>納品ファイルはVTube Studioに導入して使用できる形でお渡しします。ただし、細かなトラッキング設定はご自身の顔立ちや環境に合わせて調整すると、より自然に使用できます。</p>
-              <button type="button" aria-expanded="true">cmo3ファイルがなくてもモデルは使えますか？</button>
-              <p>はい。.cmo3ファイルはLive2Dで直接編集するための原本ファイルであり、モデルを動かすためには必要ありません。</p>
-              <button type="button" aria-expanded="true">納品後に自分で修正できますか？</button>
-              <p>.cmo3原本ファイルがない場合、Live2Dでリギングを直接修正することはできません。仮に修正方法があったとしても、許可のない二次修正は禁止です。</p>
-              <button type="button" aria-expanded="true">VTube Studio以外でも使えますか？</button>
-              <p>他のLive2D対応ソフトが存在する場合もありますが、Dajoongが提供するファイルと設定はVTube Studioでの使用を基準に制作しています。</p>
-            </div>
-
-            <a class="primary-action guide-cta" href="../../contact/">Live2Dリギングについて相談する</a>
+            <section aria-labelledby="faq">
+              <h2 id="faq">よくある質問</h2>
+              <div class="notice-accordion">
+              <button type="button" aria-expanded="true">moc3からcmo3への変換ツールは提供していますか？</button>
+              <p>このページでは原本復元ツールや検証済みの逆変換手順を提供していません。リギングの修正が必要な場合は、元の制作者に原本の有無と修正可能な範囲を確認してください。</p>
+              <button type="button" aria-expanded="true">VTube Studioで使うにはcmo3が必要ですか？</button>
+              <p>モデルの使用には、使用用モデルと構成ファイルが必要です。cmo3はリギング原本を編集するファイルであり、使用用ファイル一式が揃っていればモデル使用に必須ではありません。</p>
+              <button type="button" aria-expanded="true">Dajoongの依頼ではcmo3原本も受け取れますか？</button>
+              <p>Dajoongは通常のご依頼で.cmo3原本を提供していません。基本納品はVTube Studioでの使用に必要なモデルと構成ファイルです。</p>
+              <button type="button" aria-expanded="true">納品後は何を調整・修正できますか？</button>
+              <p>使用環境に合わせたトラッキング調整と、リギング原本の編集は別の作業です。リギング変更は制作者に相談し、Dajoongの制作物を許可なく二次修正しないでください。</p>
+              <button type="button" aria-expanded="true">VTube Studio以外のソフトにも対応していますか？</button>
+              <p>Dajoongの納品ファイルと設定はVTube Studioを前提としています。他のソフトとの互換性は別途確認が必要です。</p>
+              </div>
+            </section>
+            <p><a href="https://docs.live2d.com/en/cubism-editor-manual/file-type-and-extension/">Live2D公式のファイル形式解説</a></p>
+            <a class="primary-action guide-cta" href="../../contact/">ファイルとご希望内容を相談する</a>
           </div>
         </article>
       </div>
