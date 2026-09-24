@@ -2007,6 +2007,11 @@ section[data-type][data-active] { display: block; }
         <p class="notice-item-desc" data-i18n="ni2_d">작업 완료 후 전달되는 파일은 아이콘 이미지를 포함한 .moc3 파일이 전달됩니다. 수정이 가능한 cmo3 파일은 제공하지 않습니다.</p>
       </div>
       <div class="notice-item">
+        <div class="notice-item-title" data-i18n="ni8_t">Live2D 파일 역복원·데이터 추출 금지</div>
+        <p class="notice-item-desc" data-i18n="ni8_d1">전달받은 모델 파일을 이용한 Live2D 역복원, .cmo3 파일 복원 등 데이터 추출을 금지합니다.</p>
+        <p class="notice-item-desc" data-i18n="ni8_d2">추출한 데이터의 수정·재가공(변형), 재판매·대여·공유·양도·배포 및 제3자에게 해당 데이터의 수정·변형 등을 추가로 의뢰하는 행위도 금지합니다.</p>
+      </div>
+      <div class="notice-item">
         <div class="notice-item-title" data-i18n="ni3_t">스트리밍 안내</div>
         <p class="notice-item-desc" data-i18n="ni3_d">스트리밍을 하고 있습니다. 방송에 송출을 원하지 않는다면 미리 말씀 부탁드립니다.</p>
       </div>
@@ -2020,7 +2025,7 @@ section[data-type][data-active] { display: block; }
       </div>
       <div class="notice-item">
         <div class="notice-item-title" data-i18n="ni6_t">저작권 안내</div>
-        <p class="notice-item-desc" data-i18n="ni6_d">리깅과 관련된 저작권은 작가(다중)에게 있습니다. 일러스트와 관련된 저작권은 일러스트 작가님에게 있습니다.</p>
+        <p class="notice-item-desc" data-i18n="ni6_d">일러스트에 대한 1차 저작권은 일러스트 작가님에게 있으며, 리깅에 대한 2차 저작권은 리거(다중)에게 있습니다.</p>
       </div>
       <div class="notice-item">
         <div class="notice-item-title" data-i18n="ni7_t">작업 일정 안내</div>
@@ -2258,7 +2263,7 @@ section[data-type][data-active] { display: block; }
       </div>
       <div class="info-block-body">
         <ul class="info-desc-list">
-          <li data-i18n="ib_c1">리깅 데이터의 저작권은 기본적으로 리거(다중)에게 귀속됩니다.</li>
+          <li data-i18n="ib_c1">일러스트에 대한 1차 저작권은 일러스트 작가님에게 있으며, 리깅에 대한 2차 저작권은 리거(다중)에게 있습니다.</li>
           <li data-i18n="ib_c2">의뢰인은 본 리깅 결과물을 방송, 영상 제작, SNS 등 목적에 한하여 이용할 수 있습니다.</li>
           <li class="warn" data-i18n="ib_c3">리깅 데이터의 재판매·양도·공유는 허용되지 않습니다.</li>
         </ul>
@@ -3024,10 +3029,13 @@ document.addEventListener('DOMContentLoaded', () => {
       notice_top_alert: '※ 작업 전 반드시 확인해주세요.<br>작업 의뢰 시 모든 내용을 확인·동의한 것으로 간주합니다.',
       ni1_t:'일러스트 작업 불가 / 파일 안내', ni1_d:'일러스트 작업은 하지 않습니다. 파츠 분리가 완료된 일러스트 PSD 파일이 필요합니다.',
       ni2_t:'납품 파일 안내', ni2_d:'작업 완료 후 전달되는 파일은 아이콘 이미지를 포함한 .moc3 파일이 전달됩니다. 수정이 가능한 cmo3 파일은 제공하지 않습니다.',
+      ni8_t:'Live2D 파일 역복원·데이터 추출 금지',
+      ni8_d1:'전달받은 모델 파일을 이용한 Live2D 역복원, .cmo3 파일 복원 등 데이터 추출을 금지합니다.',
+      ni8_d2:'추출한 데이터의 수정·재가공(변형), 재판매·대여·공유·양도·배포 및 제3자에게 해당 데이터의 수정·변형 등을 추가로 의뢰하는 행위도 금지합니다.',
       ni3_t:'스트리밍 안내', ni3_d:'스트리밍을 하고 있습니다. 방송에 송출을 원하지 않는다면 미리 말씀 부탁드립니다.',
       ni4_t:'SNS · 포트폴리오 게시 안내', ni4_d:'모든 작업물은 홍보와 포트폴리오를 위해 SNS와 유튜브에 게시됩니다. 데뷔일까지 공개 지연을 희망하시는 경우 미리 말씀 부탁드립니다.',
       ni5_t:'요청 사항 기재', ni5_d:'결제 전 요청 사항은 상세히 작성 부탁드립니다. 기재되지 않은 사항은 추가 작업 및 수정 시 작업이 어렵거나 추가금이 들 수 있습니다.',
-      ni6_t:'저작권 안내', ni6_d:'리깅과 관련된 저작권은 작가(다중)에게 있습니다. 일러스트와 관련된 저작권은 일러스트 작가님에게 있습니다.',
+      ni6_t:'저작권 안내', ni6_d:'일러스트에 대한 1차 저작권은 일러스트 작가님에게 있으며, 리깅에 대한 2차 저작권은 리거(다중)에게 있습니다.',
       ni7_t:'작업 일정 안내', ni7_d:'작업 일정은 문의 순이 아닌 결제 순으로 확정됩니다. 일정은 작업 속도에 따라 조금씩 당겨질 수 있으며, 작업이 지연될 시 사전에 미리 연락 드립니다.',
       ni7_b1:'※ 컨펌 시 연락이 지연되거나 수정 사항이 많을 시 작업 기간이 늘어날 수 있습니다.',
       ni7_b2:'※ 작업 기간은 평균 기본 모델 기준 2주~4주 정도입니다.',
@@ -3072,7 +3080,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ib_r1:'기본적인 수정 사항은 작업 기간에 진행되는 총 2회의 컨펌 및 수정 단계에서 진행됩니다.<br><span class="info-sub">동물/오너캐의 경우 최종 리깅까지 진행 후 1차 컨펌만 진행합니다.</span>',
       ib_r2:'수정 완료 후 이전 상태로 되돌리거나 과한 번복 요청 시 추가금이 청구될 수 있습니다.',
       ib_r3:'리깅 실수 및 오류가 있는 경우 무료로 수정해 드립니다. 파일 적용 후 오류 발견 시 편히 말해 주세요.',
-      ib_c1:'리깅 데이터의 저작권은 기본적으로 리거(다중)에게 귀속됩니다.',
+      ib_c1:'일러스트에 대한 1차 저작권은 일러스트 작가님에게 있으며, 리깅에 대한 2차 저작권은 리거(다중)에게 있습니다.',
       ib_c2:'의뢰인은 본 리깅 결과물을 방송, 영상 제작, SNS 등 목적에 한하여 이용할 수 있습니다.',
       ib_c3:'리깅 데이터의 재판매·양도·공유는 허용되지 않습니다.',
       // sale model
@@ -3115,10 +3123,13 @@ document.addEventListener('DOMContentLoaded', () => {
       notice_top_alert: '※ Please read carefully before placing an order.<br>By submitting a commission, you agree to all terms listed here.',
       ni1_t:'No Illustration Work / File Requirements', ni1_d:'Illustration work is not provided. Please prepare a fully separated PSD file.',
       ni2_t:'Deliverable Files', ni2_d:'After completion, you will receive a .moc3 file including an icon image. The editable .cmo3 file is not provided.',
+      ni8_t:'No Live2D Reverse Engineering or Data Extraction',
+      ni8_d1:'Extracting data from the delivered model files, including reverse engineering Live2D models or reconstructing .cmo3 files, is prohibited.',
+      ni8_d2:'Modifying, reworking, reselling, renting out, sharing, transferring, or distributing extracted data, as well as commissioning third parties to modify or rework that data, is also prohibited.',
       ni3_t:'Streaming Notice', ni3_d:'The rigging process may be streamed. Please let me know in advance if you prefer it not to be broadcast.',
       ni4_t:'SNS · Portfolio Posting', ni4_d:'All finished work will be posted on SNS and YouTube for promotion and portfolio purposes. Please notify me in advance if you need a delay until your debut.',
       ni5_t:'Requests & Notes', ni5_d:'Please describe all requests in detail before payment. Items not mentioned may be difficult to add later or may incur extra charges.',
-      ni6_t:'Copyright Notice', ni6_d:'Copyright for the rigging belongs to the rigger (Dajoong). Copyright for the illustration belongs to the illustrator.',
+      ni6_t:'Copyright Notice', ni6_d:'Copyright in the original illustration belongs to the illustrator, while copyright in the derivative rigging work belongs to the rigger (Dajoong).',
       ni7_t:'Schedule Notice', ni7_d:'Work order is determined by payment date, not inquiry date. The timeline may shift slightly based on work pace. You will be notified in advance if there is a delay.',
       ni7_b1:'※ Delays in confirmation or excessive revision requests may extend the work period.',
       ni7_b2:'※ Average work period is approximately 2–4 weeks for a standard model.',
@@ -3160,7 +3171,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ib_r1:'Basic revisions are handled in 2 review rounds during the work period.<br><span class="info-sub">For animal/OC types, only 1st review is done after final rigging is complete.</span>',
       ib_r2:'Reverting completed changes or excessive back-and-forth requests may incur extra charges.',
       ib_r3:'Any rigging mistakes or errors will be fixed for free. Please let me know if you find any after delivery.',
-      ib_c1:'Copyright for the rigging data belongs to the rigger (Dajoong) by default.',
+      ib_c1:'Copyright in the original illustration belongs to the illustrator, while copyright in the derivative rigging work belongs to the rigger (Dajoong).',
       ib_c2:'The client may use the rigging output for streaming, video production, SNS, and similar purposes.',
       ib_c3:'Resale, transfer, or sharing of the rigging data is strictly prohibited.',
       sale_badge:'🛒 On Sale', sale_title:'Sale Model', sale_sub:'Illustration by Yangcho',
@@ -3199,10 +3210,13 @@ document.addEventListener('DOMContentLoaded', () => {
       notice_top_alert: '※ ご依頼前に必ずご確認ください。<br>ご依頼いただいた時点で、すべての内容にご同意いただいたものとみなします。',
       ni1_t:'イラスト作業不可 / ファイルについて', ni1_d:'イラスト作業は承っておりません。パーツ分けが完了したイラストのPSDファイルが必要です。',
       ni2_t:'納品ファイルについて', ni2_d:'作業完了後はアイコン画像を含む.moc3ファイルをお渡しします。編集可能な.cmo3ファイルの提供は行っておりません。',
+      ni8_t:'Live2Dファイルの逆解析・データ抽出禁止',
+      ni8_d1:'納品されたモデルファイルを用いたLive2Dの逆解析、.cmo3ファイルの復元など、データの抽出を禁止します。',
+      ni8_d2:'抽出したデータの修正・再加工（改変）、転売・貸与・共有・譲渡・配布、および第三者への当該データの修正・改変等の追加依頼も禁止します。',
       ni3_t:'配信についてのご案内', ni3_d:'作業中に配信を行う場合があります。配信を希望されない場合は事前にお知らせください。',
       ni4_t:'SNS・ポートフォリオへの掲載について', ni4_d:'すべての作業物はSNSおよびYouTubeに掲載される場合があります。デビューまで公開を延期ご希望の場合は事前にご連絡ください。',
       ni5_t:'ご要望の記載について', ni5_d:'お支払い前にご要望は詳しくご記入ください。記載のない内容は後から追加が難しい場合や追加料金が発生する場合があります。',
-      ni6_t:'著作権について', ni6_d:'リギングに関する著作権はリガー（다중/Dajoong）に帰属します。イラストに関する著作権はイラストレーター様に帰属します。',
+      ni6_t:'著作権について', ni6_d:'イラストに関する一次著作権はイラストレーター様に、リギングに関する二次著作権はリガー（다중/Dajoong）に帰属します。',
       ni7_t:'作業スケジュールについて', ni7_d:'作業順はお問い合わせ順ではなくお支払い順で確定します。進捗によってスケジュールが前後する場合があり、遅延が生じる場合は事前にご連絡します。',
       ni7_b1:'※ 確認対応の遅れや修正が多い場合、作業期間が延びることがあります。',
       ni7_b2:'※ 平均作業期間はベースモデルで約2〜4週間です。',
@@ -3244,7 +3258,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ib_r1:'基本的な修正は作業期間中の計2回の確認・修正ステップで行われます。<br><span class="info-sub">動物・オーナーキャラの場合は最終リギング完了後に第1確認のみ行います。</span>',
       ib_r2:'完了後に以前の状態へ戻すリクエストや過剰な変更要求には追加料金が発生する場合があります。',
       ib_r3:'リギングのミスやエラーは無料で修正します。納品後に問題を見つけた場合はお気軽にご連絡ください。',
-      ib_c1:'リギングデータの著作権は原則としてリガー（다중/Dajoong）に帰属します。',
+      ib_c1:'イラストに関する一次著作権はイラストレーター様に、リギングに関する二次著作権はリガー（다중/Dajoong）に帰属します。',
       ib_c2:'依頼者は本リギング成果物を配信・映像制作・SNS等の目的に限り使用できます。',
       ib_c3:'リギングデータの転売・譲渡・共有は禁止されています。',
       sale_badge:'🛒 販売中', sale_title:'販売モデル', sale_sub:'イラスト - YANGCHO 様',
