@@ -68,7 +68,10 @@ const entryLoader = document.querySelector("#entry-loader");
 if (entryLoader) {
   document.body.classList.add("is-loading");
 
+  let loaderClosed = false;
   const closeEntryLoader = () => {
+    if (loaderClosed) return;
+    loaderClosed = true;
     entryLoader.classList.add("is-done");
     document.body.classList.remove("is-loading");
     window.setTimeout(() => entryLoader.remove(), 520);
@@ -81,12 +84,12 @@ if (entryLoader) {
       document.body.classList.remove("is-loading");
     } else {
       sessionStorage.setItem("dajoong-loader-seen", "1");
-      window.addEventListener("load", () => window.setTimeout(closeEntryLoader, 680), { once: true });
-      window.setTimeout(closeEntryLoader, 2200);
+      requestAnimationFrame(() => window.setTimeout(closeEntryLoader, 180));
+      window.setTimeout(closeEntryLoader, 1200);
     }
   } catch {
-    window.addEventListener("load", () => window.setTimeout(closeEntryLoader, 680), { once: true });
-    window.setTimeout(closeEntryLoader, 2200);
+    requestAnimationFrame(() => window.setTimeout(closeEntryLoader, 180));
+    window.setTimeout(closeEntryLoader, 1200);
   }
 }
 
@@ -103,6 +106,7 @@ sampleButtons.forEach((button) => {
       ],
       { duration: 120, easing: "ease-out" },
     ).onfinish = () => {
+      delete sampleImage.dataset.animatedSrc;
       sampleImage.src = next.src;
       sampleImage.alt = next.alt;
       sampleKind.textContent = next.kind;
@@ -183,45 +187,65 @@ homeDemoButtons.forEach((button) => {
 
 const canvas = document.querySelector("#motion-field");
 const ctx = canvas?.getContext("2d");
+const fieldMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 let width = 0;
 let height = 0;
 let dots = [];
+let fieldFrame = 0;
+let lastFieldTime = 0;
 
 function resizeCanvas() {
-  if (!canvas) return;
-  width = canvas.width = window.innerWidth * window.devicePixelRatio;
-  height = canvas.height = window.innerHeight * window.devicePixelRatio;
+  if (!canvas || !ctx) return;
+  const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+  width = canvas.width = Math.round(window.innerWidth * ratio);
+  height = canvas.height = Math.round(window.innerHeight * ratio);
   canvas.style.width = `${window.innerWidth}px`;
   canvas.style.height = `${window.innerHeight}px`;
   dots = Array.from({ length: Math.min(80, Math.floor(window.innerWidth / 16)) }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,
-    r: (Math.random() * 2.4 + 1.2) * window.devicePixelRatio,
-    vx: (Math.random() - .5) * .25 * window.devicePixelRatio,
-    vy: (Math.random() - .5) * .25 * window.devicePixelRatio,
+    r: (Math.random() * 2.4 + 1.2) * ratio,
+    vx: (Math.random() - .5) * .25 * ratio,
+    vy: (Math.random() - .5) * .25 * ratio,
     hue: Math.random() > .5 ? "125,135,255" : "255,149,202",
   }));
+  paintField(0);
 }
 
-function drawField() {
+function paintField(step) {
   if (!ctx) return;
   ctx.clearRect(0, 0, width, height);
   dots.forEach((dot) => {
-    dot.x += dot.vx;
-    dot.y += dot.vy;
-
+    dot.x += dot.vx * step;
+    dot.y += dot.vy * step;
     if (dot.x < 0 || dot.x > width) dot.vx *= -1;
     if (dot.y < 0 || dot.y > height) dot.vy *= -1;
-
     ctx.beginPath();
     ctx.arc(dot.x, dot.y, dot.r, 0, Math.PI * 2);
     ctx.fillStyle = `rgba(${dot.hue}, .34)`;
     ctx.fill();
   });
-
-  requestAnimationFrame(drawField);
 }
 
+function drawField(time) {
+  fieldFrame = 0;
+  if (!ctx || document.hidden || fieldMotion.matches) return;
+  const elapsed = time - lastFieldTime;
+  // Keep the same drift speed, with at most 30 canvas redraws per second.
+  if (elapsed >= 1000 / 30) {
+    paintField(Math.min(elapsed, 100) / (1000 / 60));
+    lastFieldTime = time;
+  }
+  fieldFrame = requestAnimationFrame(drawField);
+}
+
+function syncField() {
+  cancelAnimationFrame(fieldFrame);
+  lastFieldTime = performance.now();
+  if (ctx && !document.hidden && !fieldMotion.matches) fieldFrame = requestAnimationFrame(drawField);
+}
 window.addEventListener("resize", resizeCanvas);
+document.addEventListener("visibilitychange", syncField);
+fieldMotion.addEventListener("change", syncField);
 resizeCanvas();
-drawField();
+syncField();

@@ -1,5 +1,3 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
-
 :root {
   --bg: #f5f1fa;
   --panel: rgba(255, 255, 255, .64);
@@ -13,8 +11,8 @@
   --sun: #ffc65a;
   --shadow: 0 10px 24px rgba(81,50,104, .07);
   --max: 1160px;
-  --font-body: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: "GmarketSans", "Pretendard", system-ui, sans-serif;
+  --font-body: "Pretendard Variable", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "GmarketSans", "Pretendard Variable", system-ui, sans-serif;
 }
 
 * {
@@ -2406,9 +2404,7 @@ h1 {
 }
 
 [data-type-motion].is-type-ready {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: .28em;
+  display: block;
 }
 
 [data-type-motion].is-type-ready .type-word {
@@ -2899,7 +2895,7 @@ body.event-is-open { overflow: hidden; }
 .event-dialog #event-detail { margin: 22px 0 18px; word-break: keep-all; overflow-wrap: anywhere; }
 .event-cta { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 54px; padding: 14px 20px; border-radius: 2px; background: #30283d; color: #fff; text-decoration: none; font-size: 16px; font-weight: 650; line-height: 1.5; }
 .event-cta:hover { background: #4c3c64; }
-.event-controls { position: sticky; bottom: 0; display: flex; justify-content: space-between; align-items: stretch; border-top: 1px solid #ddd9e1; background: #fff; }
+.event-controls { position: sticky; bottom: 0; display: flex; justify-content: flex-end; align-items: stretch; border-top: 1px solid #ddd9e1; background: #fff; }
 .event-controls button { min-height: 52px; padding: 13px 24px; border: 0; border-radius: 0; background: transparent; color: #4c4853; font: inherit; font-size: 14px; cursor: pointer; }
 .event-controls button:hover { background: #f0edf5; }
 .event-close { display: inline-flex; align-items: center; gap: 16px; flex-shrink: 0; }
@@ -2932,7 +2928,7 @@ body:has(.estimate-widget.is-open) .event-trigger { visibility: hidden; }
 }
 
 /* Reference-led homepage pricing and preparation sections. */
-:root { --font-display: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont, sans-serif; --muted: #62556f; --violet: var(--brand-deep); }
+:root { --font-display: "Pretendard Variable", system-ui, -apple-system, BlinkMacSystemFont, sans-serif; --muted: #62556f; --violet: var(--brand-deep); }
 body { font-size: 16px; line-height: 1.65; }
 html:lang(ja) { --font-body: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif; --font-display: var(--font-body); }
 button, input, select, textarea { font-family: var(--font-body); }
@@ -3084,3 +3080,6 @@ body.event-is-open .back-to-top, body:has(.estimate-widget.is-open) .back-to-top
   .notice-accordion p:not([hidden]) { animation: none; }
   :is(.primary-action, .secondary-action, .contact-actions a, .alternate-contact a, .event-cta, .estimate-toggle, .event-trigger, .home-text-link, .back-to-top):is(:hover, :active) { transform: none; }
 }
+
+/* Full text for screen readers; animated characters remain decorative. */
+.type-accessible { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip-path: inset(50%) !important; white-space: nowrap !important; border: 0 !important; }

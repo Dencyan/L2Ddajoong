@@ -40,51 +40,31 @@
 
   const dialog = document.createElement('dialog');
   dialog.className = 'event-dialog';
+  dialog.id = 'event-dialog';
   dialog.setAttribute('aria-labelledby', 'event-title');
   const poster = {
-    ko: { title: 'Live2D 커미션', subtitle: '문의 할인 이벤트', unit: '원', discount: '의뢰 총액 할인', today: '오늘 하루 열지 않기', storageError: '숨김 설정을 저장할 수 없습니다. 브라우저의 사이트 저장 설정을 확인해 주세요.' },
-    en: { title: 'Live2D commission', subtitle: 'An offer for your inquiry', unit: 'USD', discount: 'OFF YOUR COMMISSION TOTAL', today: "Don’t show again today", storageError: 'Your preference could not be saved. Please check your browser’s site storage settings.' },
-    ja: { title: 'Live2Dコミッション', subtitle: 'お問い合わせキャンペーン', unit: '円', discount: 'ご依頼総額から割引', today: '今日は表示しない', storageError: '設定を保存できませんでした。ブラウザのサイト保存設定をご確認ください。' }
+    ko: { title: 'Live2D 커미션', subtitle: '문의 할인 이벤트', unit: '원', discount: '의뢰 총액 할인' },
+    en: { title: 'Live2D commission', subtitle: 'An offer for your inquiry', unit: 'USD', discount: 'OFF YOUR COMMISSION TOTAL' },
+    ja: { title: 'Live2Dコミッション', subtitle: 'お問い合わせキャンペーン', unit: '円', discount: 'ご依頼総額から割引' }
   }[locale];
   dialog.setAttribute('aria-describedby', 'event-detail');
-  dialog.innerHTML = `<div class="event-poster"><div class="event-masthead"><span>DAJOONG</span><span>LIVE2D / COMMISSION</span></div><h2 id="event-title">${poster.title}<span>${poster.subtitle}</span></h2><div class="event-coupon"><p>${poster.discount}</p><div class="event-amount">${window.DajoongMoney.number(amount)}<span>${poster.unit}</span></div><div class="event-coupon-foot"><span>INQUIRY OFFER</span><span>DAJOONG</span></div></div><p id="event-detail">${copy.detail}</p><a class="event-cta" href="${inquiryUrl}">${copy.cta}<span aria-hidden="true">→</span></a><p class="event-storage-error" role="status" hidden>${poster.storageError}</p></div><div class="event-controls"><button type="button" class="event-hide-today">${poster.today}</button><button type="button" class="event-close">${copy.close}<span aria-hidden="true">×</span></button></div>`;
-  // DAJOONG_POPUP_EVENT: only this preference suppresses automatic display.
-  // Midnight is evaluated in Korea time, and the preference is shared across tabs/locales.
-  const hideKey = id + ':hidden-until';
-  const nextKoreaMidnight = () => {
-    const korea = new Date(Date.now() + 9 * 60 * 60 * 1000);
-    return Date.UTC(korea.getUTCFullYear(), korea.getUTCMonth(), korea.getUTCDate() + 1) - 9 * 60 * 60 * 1000;
-  };
-  const hiddenToday = () => {
-    try {
-      const until = Number(localStorage.getItem(hideKey));
-      return Number.isFinite(until) && Date.now() < until && until <= nextKoreaMidnight();
-    } catch { return false; }
-  };
+  dialog.innerHTML = `<div class="event-poster"><div class="event-masthead"><span>DAJOONG</span><span>LIVE2D / COMMISSION</span></div><h2 id="event-title">${poster.title}<span>${poster.subtitle}</span></h2><div class="event-coupon"><p>${poster.discount}</p><div class="event-amount">${window.DajoongMoney.number(amount)}<span>${poster.unit}</span></div><div class="event-coupon-foot"><span>INQUIRY OFFER</span><span>DAJOONG</span></div></div><p id="event-detail">${copy.detail}</p><a class="event-cta" href="${inquiryUrl}">${copy.cta}<span aria-hidden="true">→</span></a></div><div class="event-controls"><button type="button" class="event-close">${copy.close}<span aria-hidden="true">×</span></button></div>`;
   document.body.append(dialog);
   const trigger = document.createElement('button');
   trigger.type = 'button';
   trigger.className = 'event-trigger';
   trigger.textContent = copy.open;
   trigger.setAttribute('aria-haspopup', 'dialog');
+  trigger.setAttribute('aria-controls', dialog.id);
   document.body.append(trigger);
   let returnFocus;
   function open() {
     if (dialog.open) return;
     returnFocus = document.activeElement;
-    dialog.querySelector('.event-storage-error').hidden = true;
     dialog.showModal();
     document.body.classList.add('event-is-open');
   }
   dialog.querySelector('.event-close').addEventListener('click', () => dialog.close());
-  dialog.querySelector('.event-hide-today').addEventListener('click', () => {
-    try {
-      localStorage.setItem(hideKey, String(nextKoreaMidnight()));
-      dialog.close();
-    } catch {
-      dialog.querySelector('.event-storage-error').hidden = false;
-    }
-  });
   dialog.querySelector('a').addEventListener('click', () => write(id + ':claimed', '1'));
   dialog.addEventListener('close', () => {
     document.body.classList.remove('event-is-open');
@@ -122,8 +102,6 @@
     }
   }
   window.DajoongEvent = { id, amount, claimed, inquiryUrl, copy, open };
-  // The inquiry CTA lands directly on the form without another interruption.
-  // Closing or claiming an offer does not suppress future visits/reloads.
-  if (!hiddenToday() && !(form && requested)) open();
+  // Keep the offer closed on every visit; only an explicit button click opens it.
   // === DAJOONG_POPUP_EVENT END ===
 })();

@@ -36,6 +36,22 @@
   window.addEventListener('pageshow', updateScroll);
   updateScroll();
 
+  // Keep a small preview until the animated sample actually enters the viewport.
+  const sample = document.querySelector('[data-animated-src]');
+  if (sample) {
+    const loadSample = () => {
+      if (!sample.dataset.animatedSrc) return;
+      sample.src = sample.dataset.animatedSrc;
+      delete sample.dataset.animatedSrc;
+    };
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting)) { loadSample(); observer.disconnect(); }
+      });
+      observer.observe(sample);
+    } else { loadSample(); }
+  }
+
   // Preserve the existing guide behavior and expose selection/expanded panels to keyboards and readers.
   const tabs = [...document.querySelectorAll('.guide-tab')];
   const syncTabs = () => tabs.forEach(tab => tab.setAttribute('aria-pressed', String(tab.classList.contains('is-active'))));
