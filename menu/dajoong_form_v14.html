@@ -113,7 +113,7 @@ body {
 }
 .form-card:hover { box-shadow: var(--shadow-md); }
 
-/* ── 이벤트 할인 카드: 상단 강조 테두리 */
+/* ── 이벤트 혜택 카드: 상단 강조 테두리 */
 .form-card--event {
   border-color: rgba(165,86,57,.30);
   box-shadow: var(--shadow-sm), 0 0 0 1px rgba(165,86,57,.12);
@@ -168,7 +168,7 @@ body {
   pointer-events: none;
 }
 .form-card--base-rig.is-dimmed .form-card-body::after {
-  content: '이벤트 할인이 적용되어 자동 선택됩니다';
+  content: '이벤트 혜택 선택으로 자동 선택됩니다';
   display: block; text-align: center;
   font-size: 12px; font-weight: 600; color: var(--primary-strong);
   margin-top: 10px; padding: 8px 14px; border-radius: var(--r-sm);
@@ -777,11 +777,11 @@ body { min-height: 100vh; }
     </div>
   </div>
 
-  <!-- 02. 이벤트 할인 (상단으로 올림) -->
+  <!-- 02. 이벤트 혜택 (상단으로 올림) -->
   <div class="form-card form-card--event event-section reveal" id="card-event">
     <div class="form-card-head">
       <div class="form-card-num">02</div>
-      <span class="form-card-title" id="card-t-02">이벤트 할인</span>
+      <span class="form-card-title" id="card-t-02">이벤트 혜택</span>
       <span class="form-card-badge event-live" id="badge-ongoing">🎉 진행 중</span>
     </div>
     <div class="form-card-body">
@@ -860,7 +860,7 @@ body { min-height: 100vh; }
       </div>
       <div class="collab-note" id="collab-note">
         ※ 일러스트 예약이 완료된 경우에만 할인이 적용됩니다.<br>
-        ※ 이벤트 할인과 중복 적용이 불가합니다.
+        ※ 이벤트 혜택과 중복 적용이 불가합니다.
       </div>
     </div>
   </div>
@@ -988,8 +988,8 @@ const CONFIG = {
 
   /* ── 이벤트 섹션 ─────────────────────────── */
   showEvent: true,           // false → 이벤트 섹션 완전 숨김
-  eventBannerText: '10~11월 가을 할인 이벤트',
-  eventBannerNote: '11월 30일까지 · LD 프리미엄 10만원 할인 · 선착순 2명 브이브릿지(메롱X) 서비스 제공 · 협업 할인과 중복 불가',
+  eventBannerText: '10~11월 가을 이벤트',
+  eventBannerNote: '11월 30일까지 · 선착순 2명 브이브릿저(메롱X) 서비스 제공 · 협업 할인과 중복 불가',
 
   /* ── 기본 리깅 ───────────────────────────── */
   baseRigs: [
@@ -1001,21 +1001,19 @@ const CONFIG = {
     { id: 'prem-f',  name: '프리미엄 리깅', sub: 'LD 전신', price: 780000 },
   ],
 
-  /* ── 이벤트 할인 ─────────────────────────── */
+  /* ── 이벤트 혜택 ─────────────────────────── */
   eventDiscounts: [
     {
       id: 'summer-prem-h',
-      name: 'LD 프리미엄 반신 · 가을 할인',
+      name: 'LD 프리미엄 반신 · 가을 이벤트',
       targetRigId: 'prem-h',
-      salePrice: 570000,
-      bonusText: '선착순 2명 브이브릿지(메롱X) 서비스 · 적용 여부 상담 확인'
+      bonusText: '선착순 2명 브이브릿저(메롱X) 서비스 · 적용 여부 상담 확인'
     },
     {
       id: 'summer-prem-f',
-      name: 'LD 프리미엄 전신 · 가을 할인',
+      name: 'LD 프리미엄 전신 · 가을 이벤트',
       targetRigId: 'prem-f',
-      salePrice: 680000,
-      bonusText: '선착순 2명 브이브릿지(메롱X) 서비스 · 적용 여부 상담 확인'
+      bonusText: '선착순 2명 브이브릿저(메롱X) 서비스 · 적용 여부 상담 확인'
     },
   ],
 
@@ -1178,14 +1176,14 @@ const CONFIG = {
   }
 
   /* ─────────────────────────────────────────
-     BUILD: 이벤트 할인 섹션
+     BUILD: 이벤트 혜택 섹션
   ───────────────────────────────────────── */
   const evGrid = document.getElementById('rig-event');
   CONFIG.eventDiscounts.forEach(ev => {
     const target = CONFIG.baseRigs.find(r => r.id === ev.targetRigId);
     const row = makeRadioRow({
-      id: ev.id, name: ev.name, price: ev.salePrice,
-      eventOriginal: target?.price, extraClass: 'rig-option--event'
+      id: ev.id, name: ev.name, price: target.price,
+      extraClass: 'rig-option--event'
     });
 
     // 클릭 시 선택 / 재클릭 시 취소
@@ -1325,7 +1323,7 @@ const CONFIG = {
     document.querySelectorAll('#chips-collab-status .chip').forEach(c => c.classList.remove('selected'));
     if (collabSel.value) {
       document.getElementById('collabReservation').style.display = 'block';
-      // 이벤트 할인 해제
+      // 이벤트 혜택 해제
       if (state.eventId) {
         clearAllRadio();
         updateAll();
@@ -1432,8 +1430,8 @@ const CONFIG = {
         : null;
       const name = `${baseRig.name}${baseRig.sub ? ' ' + baseRig.sub : ''}`;
       if (evDisc) {
-        items.push({ label: name + ' (이벤트)', price: evDisc.salePrice, type: 'base' });
-        total += evDisc.salePrice;
+        items.push({ label: name + ' (이벤트)', price: baseRig.price, type: 'base' });
+        total += baseRig.price;
         if (evDisc.bonusText) {
           items.push({ label: evDisc.bonusText, price: 0, priceText: '상담 확인', type: 'discount' });
         }
@@ -1546,10 +1544,8 @@ const CONFIG = {
     t += `\n── 리깅 신청 ──\n`;
     if (baseRig) {
       const name = `${baseRig.name}${baseRig.sub ? ' ' + baseRig.sub : ''}`;
-      t += evDisc && evDisc.targetRigId === baseRig.id
-        ? `신청 타입 : ${name} (이벤트 ${fmt(evDisc.salePrice)}, 원가 ${fmt(baseRig.price)})\n`
-        : `신청 타입 : ${name} (${fmt(baseRig.price)})\n`;
-      if (evDisc?.bonusText) t += `이벤트 추가 혜택 : ${evDisc.bonusText}\n`;
+      t += `신청 타입 : ${name} (${fmt(baseRig.price)})\n`;
+      if (evDisc?.targetRigId === baseRig.id && evDisc.bonusText) t += `이벤트 혜택 : ${evDisc.bonusText}\n`;
     } else {
       t += `신청 타입 : (미선택)\n`;
     }
@@ -1798,7 +1794,7 @@ const CONFIG = {
       legal_2: '신청 후 상담을 통해 최종 금액 확정 안내가 진행됩니다.',
       legal_3: '협업 작가 할인은 일러스트 예약 완료 후 적용 가능합니다.',
       legal_4: '협업 작가 할인은 일러스트 예약 완료 후 적용 가능합니다.',
-      card_01:'기본 정보', card_02:'이벤트 할인', card_03:'기본 리깅 선택', card_04:'추가 옵션',
+      card_01:'기본 정보', card_02:'이벤트 혜택', card_03:'기본 리깅 선택', card_04:'추가 옵션',
       card_05:'iOS / VBridger 옵션', card_06:'협업 작가님 할인', card_07:'리뷰 이벤트 참여',
       card_08:'사용할 캠', card_09:'기타 정보', card_10:'추가 요청 사항',
       badge_req:'필수', badge_ongoing:'🎉 진행 중',
@@ -1808,8 +1804,8 @@ const CONFIG = {
       hint_illust:'영어 닉네임이 있다면 같이 작성해 주세요.',
       lbl_platform:'방송 플랫폼', chip_other:'기타',
       lbl_debut:'데뷔 날짜 / 모델 사용 일정', ph_debut:'예: 2025년 6월 or 미정',
-      event_banner_text:'10~11월 가을 할인 이벤트',
-      event_banner_note:'11월 30일까지 · LD 프리미엄 10만원 할인 · 선착순 2명 브이브릿지(메롱X) 서비스 제공 · 협업 할인과 중복 불가',
+      event_banner_text:'10~11월 가을 이벤트',
+      event_banner_note:'11월 30일까지 · 선착순 2명 브이브릿저(메롱X) 서비스 제공 · 협업 할인과 중복 불가',
       lbl_collab:'협업 작가님 선택',
       collab_rsv_label:'일러스트 예약 상태',
       chip_rsv_done:'✅ 예약 완료', chip_rsv_ing:'🕐 예약 진행 중', chip_rsv_plan:'📅 예약 예정',
@@ -1838,8 +1834,8 @@ const CONFIG = {
         {name:'프리미엄 리깅',sub:'LD 반신'},{name:'프리미엄 리깅',sub:'LD 전신'},
       ],
       cfg_eventDiscounts:[
-        {name:'LD 프리미엄 반신 · 가을 할인'},
-        {name:'LD 프리미엄 전신 · 가을 할인'},
+        {name:'LD 프리미엄 반신 · 가을 이벤트'},
+        {name:'LD 프리미엄 전신 · 가을 이벤트'},
       ],
       cfg_addOptions:[
         {name:'추가 표정',priceText:'+10,000원 / 개'},{name:'표정 애니메이션',priceText:'30,000원~ / 개'},
@@ -1865,9 +1861,9 @@ const CONFIG = {
       legal_title: 'Before You Apply',
       legal_1: 'Prices marked with ~ may be adjusted based on complexity after consultation.',
       legal_2: 'Final pricing will be confirmed through a consultation after applying.',
-      legal_3: 'Collab artist discount and event discount cannot be combined.',
+      legal_3: 'Collab artist discount and event benefit cannot be combined.',
       legal_4: 'Collab artist discount is available only after the illustration booking is confirmed.',
-      card_01:'Basic Info', card_02:'Event Discount', card_03:'Base Rigging', card_04:'Add-ons',
+      card_01:'Basic Info', card_02:'Event Benefit', card_03:'Base Rigging', card_04:'Add-ons',
       card_05:'iOS / VBridger Options', card_06:'Collab Artist Discount', card_07:'Review Event',
       card_08:'Camera Type', card_09:'Other Info', card_10:'Additional Requests',
       badge_req:'Required', badge_ongoing:'🎉 Ongoing',
@@ -1877,12 +1873,12 @@ const CONFIG = {
       hint_illust:'If they have an English nickname, please include it as well.',
       lbl_platform:'Streaming Platform', chip_other:'Other',
       lbl_debut:'Debut Date / Schedule', ph_debut:'e.g. June 2025 or TBD',
-      event_banner_text:'October–November Autumn Sale',
-      event_banner_note:'Through November 30 · ₩100,000 off LD Premium · VBridger service for the first 2 clients (tongue tracking excluded; eligibility confirmed during consultation) · Cannot be combined with collab discount',
+      event_banner_text:'October–November Autumn Event',
+      event_banner_note:'Through November 30 · VBridger service for the first 2 clients (tongue tracking excluded; eligibility confirmed during consultation) · Cannot be combined with collab discount',
       lbl_collab:'Select Collab Artist',
       collab_rsv_label:'Illustration Booking Status',
       chip_rsv_done:'✅ Booked', chip_rsv_ing:'🕐 In Progress', chip_rsv_plan:'📅 Planning to Book',
-      collab_note:'※ Discount applies only when illustration booking is confirmed.<br>※ Cannot be combined with the event discount.',
+      collab_note:'※ Discount applies only when illustration booking is confirmed.<br>※ Cannot be combined with the event benefit.',
       chip_tbd:'TBD',
       lbl_broadcast:'Broadcast the Rigging Process?',
       hint_broadcast:'Select if you plan to stream your rigging process live',
@@ -1907,8 +1903,8 @@ const CONFIG = {
         {name:'Premium Rigging',sub:'LD Half Body'},{name:'Premium Rigging',sub:'LD Full Body'},
       ],
       cfg_eventDiscounts:[
-        {name:'LD Premium Half Body · Autumn Sale'},
-        {name:'LD Premium Full Body · Autumn Sale'},
+        {name:'LD Premium Half Body · Autumn Event'},
+        {name:'LD Premium Full Body · Autumn Event'},
       ],
       cfg_addOptions:[
         {name:'Extra Expressions',priceText:'+₩10,000 / ea'},{name:'Expression Animation',priceText:'₩30,000+ / ea'},
@@ -1934,9 +1930,9 @@ const CONFIG = {
       legal_title: '申請前の確認事項',
       legal_1: '範囲(~)および要相談オプションは、作業難易度により最終見積もりが変わります。',
       legal_2: '申請後、ご相談の上で最終金額をご案内いたします。',
-      legal_3: 'コラボアーティスト割引とイベント割引の併用はできません。',
+      legal_3: 'コラボアーティスト割引とイベント特典の併用はできません。',
       legal_4: 'コラボアーティスト割引はイラストのご予約完了後に適用されます。',
-      card_01:'基本情報', card_02:'イベント割引', card_03:'ベースリギング選択', card_04:'追加オプション',
+      card_01:'基本情報', card_02:'イベント特典', card_03:'ベースリギング選択', card_04:'追加オプション',
       card_05:'iOS / VBridgerオプション', card_06:'コラボアーティスト割引', card_07:'レビューイベント参加',
       card_08:'使用カメラ', card_09:'その他の情報', card_10:'追加リクエスト',
       badge_req:'必須', badge_ongoing:'🎉 開催中',
@@ -1946,12 +1942,12 @@ const CONFIG = {
       hint_illust:'英語のニックネームがあれば一緒にご記入ください。',
       lbl_platform:'配信プラットフォーム', chip_other:'その他',
       lbl_debut:'デビュー日 / モデル使用予定', ph_debut:'例: 2025年6月 or 未定',
-      event_banner_text:'10〜11月 秋割引イベント',
-      event_banner_note:'11月30日まで · LDプレミアム ₩100,000割引 · 先着2名様にVBridgerサービス（舌出し除外・適用可否は相談時に確定）· コラボ割引との併用不可',
+      event_banner_text:'10〜11月 秋イベント',
+      event_banner_note:'11月30日まで · 先着2名様にVBridgerサービス（舌出し除外・適用可否は相談時に確定）· コラボ割引との併用不可',
       lbl_collab:'コラボアーティストを選択',
       collab_rsv_label:'イラスト予約状況',
       chip_rsv_done:'✅ 予約済み', chip_rsv_ing:'🕐 予約中', chip_rsv_plan:'📅 予約予定',
-      collab_note:'※ イラストのご予約が完了した場合のみ割引が適用されます。<br>※ イベント割引との併用はできません。',
+      collab_note:'※ イラストのご予約が完了した場合のみ割引が適用されます。<br>※ イベント特典との併用はできません。',
       chip_tbd:'未定',
       lbl_broadcast:'リギング作業の配信公開設定',
       hint_broadcast:'リギング作業の様子を配信する場合はご選択ください',
@@ -1976,8 +1972,8 @@ const CONFIG = {
         {name:'プレミアムリギング',sub:'LDハーフボディ'},{name:'プレミアムリギング',sub:'LDフルボディ'},
       ],
       cfg_eventDiscounts:[
-        {name:'LDプレミアム 半身 · 秋割引'},
-        {name:'LDプレミアム 全身 · 秋割引'},
+        {name:'LDプレミアム 半身 · 秋イベント'},
+        {name:'LDプレミアム 全身 · 秋イベント'},
       ],
       cfg_addOptions:[
         {name:'追加表情',priceText:'+₩10,000 / 個'},{name:'表情アニメーション',priceText:'₩30,000〜 / 個'},
@@ -2261,9 +2257,9 @@ const CONFIG = {
   function updateDimStyle() {
     const T = LANGS[lang];
     const dimText = {
-      ko: '이벤트 할인이 적용되어 자동 선택됩니다',
-      en: 'Auto-selected by event discount',
-      ja: 'イベント割引により自動選択されます',
+      ko: '이벤트 혜택 선택으로 자동 선택됩니다',
+      en: 'Auto-selected with event benefit',
+      ja: 'イベント特典により自動選択されます',
     };
     styleEl.textContent = `.form-card--base-rig.is-dimmed .form-card-body::after { content: '${dimText[lang]}' !important; }`;
   }
